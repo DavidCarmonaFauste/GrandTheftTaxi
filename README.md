@@ -7,7 +7,7 @@
                         <p >¿La guerra en las calles toma un nuevo concepto. La era postaxi ha llegado? 
                         </p>
                     </span>
-                    <span style="font-size: 40px;font-family: fantasy;">
+                    <span style="font-size: 60px;font-family: fantasy;">
                         <p style="border: solid 5px; border-radius: 7px; margin-left: 20%; margin-right: 20%; border-color:rebeccapurple">GRAND THEFT TAXI</p>
                     </span>
                 </group>
