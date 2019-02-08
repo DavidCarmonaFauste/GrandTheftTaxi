@@ -1,10 +1,26 @@
 #pragma once
-class Game
-{
+
+#include "SDL.h"
+
+using namespace std;
+
+// Forward declarations
+class Sprite;
+
+class Game {
 public:
-	Game();
+	Game(SDL_Window *window_, SDL_Renderer *renderer_);
 	virtual ~Game();
 
 	bool update(double deltaTime);
+	void handleEvents();
+
+	static SDL_Renderer *renderer;
+	static SDL_Window *window;
+
+private:
+	Sprite *test;
+
+	bool exit = false;
 };
 

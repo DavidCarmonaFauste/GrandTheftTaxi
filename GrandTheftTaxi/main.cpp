@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 int main(int argc, char* argv[]){
 	// Initialization values
 	SDL_Window* window = nullptr;
@@ -30,12 +29,14 @@ int main(int argc, char* argv[]){
 	}
 
 	// Create and run the game
-	Game* game = new Game();
+	Game* game = new Game(window, renderer);
 	double lastTime = SDL_GetTicks();
 	double deltaTime = lastTime;
 
-	while (game->update(deltaTime)) {
+	bool exit = game->update(deltaTime);
+	while (!exit) {
 		SDL_RenderClear(renderer);
+		exit = game->update(deltaTime);
 		SDL_RenderPresent(renderer);
 		
 		// Update the delta time
