@@ -37,6 +37,12 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{e103a0ea-6323-468c-9423-64c5471996f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\observer">
+      <UniqueIdentifier>{a600bb4f-e3b6-43d4-b301-050197b93593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\observer">
+      <UniqueIdentifier>{ad5c4877-eabc-4c1b-9c5d-809b0ad46e0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +57,15 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
+    <ClCompile Include="Observable.cpp">
+      <Filter>Source Files\observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>Source Files\observer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files\managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -61,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Header Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>Header Files\observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\observer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files\managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

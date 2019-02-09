@@ -11,6 +11,8 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window = window_;
 	Game::renderer = renderer_;
 
+	GM = new GameManager();
+
 	test = new Sprite();
 }
 
