@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SDL.h"
-#include "GameManager.h"
 
 using namespace std;
 
@@ -20,12 +19,6 @@ public:
 	static SDL_Window *window;
 
 private:
-	//Managers
-	GameManager* GM;
-
-	// TESTING
-	Sprite *test;
-
 	bool exit = false;
 };
 
