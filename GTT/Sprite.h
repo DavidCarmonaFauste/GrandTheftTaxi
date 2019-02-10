@@ -42,8 +42,9 @@ private:
 
 	const float speedMultiplier = 1000;
 	float animationSpeed = 1;
-	float currentAnimationSpeed = 1;
+	bool paused = false;
 	bool animationLoop = true;
 
 	void renderAnimation(double deltaTime);
+	void resetAnimationValues();
 };

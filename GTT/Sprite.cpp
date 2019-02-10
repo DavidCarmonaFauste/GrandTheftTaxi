@@ -41,10 +41,10 @@ void Sprite::loadAnimation(string path, string name, int columns, int rows) {
 bool Sprite::playAnimation(string name, float speed, bool loop, bool reset) {
 	if (animationExists(name)) {
 		currentAnim = name;
-		currentFrame = 0;
 		animationSpeed = speed;
-		currentAnimationSpeed = speed;
 		animationLoop = loop;
+
+		resetAnimationValues();
 
 		animationColumns = animations[name].first->getW() / animations[name].second->w;
 		animationRows = animations[name].first->getH() / animations[name].second->h;
@@ -61,8 +61,7 @@ bool Sprite::isAnyAnimationPlaying() {
 
 // Checks whether the given animation is currently
 // playing
-bool Sprite::isAnimationPlaying(string name)
-{
+bool Sprite::isAnimationPlaying(string name) {
 	return currentAnim == name;
 }
 
@@ -71,7 +70,7 @@ bool Sprite::isAnimationPlaying(string name)
 bool Sprite::pauseAnimation()
 {
 	if (isAnyAnimationPlaying()) {
-		currentAnimationSpeed = 0;
+		paused = true;
 		return true;
 	}
 
@@ -82,10 +81,8 @@ bool Sprite::pauseAnimation()
 // the animation was paused, false otherwise
 bool Sprite::resumeAnimation()
 {
-	if (isAnyAnimationPlaying() &&
-			currentAnimationSpeed != animationSpeed) {
-
-		currentAnimationSpeed = animationSpeed;
+	if (isAnyAnimationPlaying() && paused) {
+		paused = false;
 		return true;
 	}
 
@@ -108,14 +105,12 @@ bool Sprite::animationExists(string name) {
 }
 
 void Sprite::renderAnimation(double deltaTime) {
-	if (elapsedTime > currentFrame * animationSpeed * speedMultiplier) {
+	if (elapsedTime > currentFrame * speedMultiplier / animationSpeed) {
 		currentFrame++;
 
 		if (currentFrame >= animationColumns * animationRows) {
-			if (animationLoop) {
-				elapsedTime = 0;
-				currentFrame = 0;
-			}
+			if (animationLoop)
+				resetAnimationValues();
 			else
 				currentAnim = "";
 		}
@@ -127,5 +122,12 @@ void Sprite::renderAnimation(double deltaTime) {
 	animTexture->renderFrame(*animRect, trunc(currentFrame / animationColumns),
 								currentFrame % animationColumns);
 
-	elapsedTime += deltaTime;
+	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
+
+void Sprite::resetAnimationValues() {
+	paused = false;
+	elapsedTime = 0;
+	currentFrame = 0;
+}
+
