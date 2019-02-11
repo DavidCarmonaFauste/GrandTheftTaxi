@@ -1,5 +1,5 @@
 #include "Game.h"
-
+#include "Sprite.h"
 
 using namespace std;
 
@@ -19,7 +19,6 @@ Game::~Game() {
 bool Game::update(double deltaTime) {
 	handleEvents();
 
-
 	return exit;
 }
 
@@ -28,5 +27,6 @@ void Game::handleEvents() {
 
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT) exit = true;
+	
 	}
 }
