@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de recursos</Filter>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Observable.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>Archivos de recursos</Filter>
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Archivos de recursos</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
