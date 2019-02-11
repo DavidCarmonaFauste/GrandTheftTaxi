@@ -12,8 +12,9 @@ public:
 	Game(SDL_Window *window_, SDL_Renderer *renderer_);
 	virtual ~Game();
 
-	bool update(double deltaTime);
-	void handleEvents();
+	bool update(Uint32 deltaTime);
+	void handleEvents(Uint32 deltaTime);
+	void render(Uint32 deltaTime);
 
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;

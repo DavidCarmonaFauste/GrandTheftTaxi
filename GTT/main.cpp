@@ -37,7 +37,12 @@ int main(int argc, char* argv[]) {
 	bool exit = game->update(deltaTime);
 	while (!exit) {
 		SDL_RenderClear(renderer_);
+
+		// Game cycle
+		game->handleEvents(deltaTime);
 		exit = game->update(deltaTime);
+		game->render(deltaTime);
+
 		SDL_RenderPresent(renderer_);
 
 		// Update the delta time

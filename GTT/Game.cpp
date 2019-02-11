@@ -16,17 +16,21 @@ Game::~Game() {
 
 }
 
-bool Game::update(double deltaTime) {
-	handleEvents();
-
-	return exit;
-}
-
-void Game::handleEvents() {
+void Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) && !exit) {
+		// LLamar a los handleEvent() de los GameObjects
 		if (event.type == SDL_QUIT) exit_ = true;
-	
 	}
+}
+
+bool Game::update(Uint32 deltaTime) {
+	// LLamar a los update() de los GameObjects
+
+	return exit_;
+}
+
+void Game::render(Uint32 deltaTime) {
+	// LLamar a los render() de los GameObjects
 }
