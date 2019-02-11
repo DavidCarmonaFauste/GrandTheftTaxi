@@ -40,8 +40,8 @@ int main(int argc, char* argv[]) {
 
 		// Game cycle
 		game->handleEvents(deltaTime);
-		exit = game->update(deltaTime);
-		game->render(deltaTime);
+		exit = game->update(deltaTime) || exit;
+		game->render(deltaTime); 
 
 		SDL_RenderPresent(renderer_);
 

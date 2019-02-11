@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "Sprite.h"
+#include <iostream>
 
 using namespace std;
 
@@ -16,18 +16,19 @@ Game::~Game() {
 
 }
 
-void Game::handleEvents(Uint32 deltaTime) {
+bool Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
-	while (SDL_PollEvent(&event) && !exit) {
+	while (SDL_PollEvent(&event) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
 		if (event.type == SDL_QUIT) exit_ = true;
 	}
+
+	return exit_;
 }
 
 bool Game::update(Uint32 deltaTime) {
 	// LLamar a los update() de los GameObjects
-
 	return exit_;
 }
 

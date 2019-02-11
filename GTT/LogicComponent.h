@@ -9,6 +9,6 @@ public:
 	LogicComponent();
 	virtual ~LogicComponent();
 
-	virtual void update(GameObject* o, Uint32 time) = 0;
+	virtual void update(GameObject* o, Uint32 deltaTime) = 0;
 };
 

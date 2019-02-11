@@ -5,7 +5,7 @@
 using namespace std;
 
 // Forward declarations
-class Sprite;
+class Animation;
 
 class Game {
 public:
@@ -13,7 +13,7 @@ public:
 	virtual ~Game();
 
 	bool update(Uint32 deltaTime);
-	void handleEvents(Uint32 deltaTime);
+	bool handleEvents(Uint32 deltaTime);
 	void render(Uint32 deltaTime);
 
 	static SDL_Renderer *renderer_;
@@ -22,7 +22,6 @@ public:
 private:
 	bool exit_ = false;
 
-	// FOR TESTING
-	Sprite *test;
+	Animation* test;
 };
 
