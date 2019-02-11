@@ -15,11 +15,11 @@ public:
 	bool update(double deltaTime);
 	void handleEvents();
 
-	static SDL_Renderer *renderer;
-	static SDL_Window *window;
+	static SDL_Renderer *renderer_;
+	static SDL_Window *window_;
 
 private:
-	bool exit = false;
+	bool exit_ = false;
 
 	// FOR TESTING
 	Sprite *test;

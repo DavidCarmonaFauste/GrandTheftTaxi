@@ -34,16 +34,16 @@ private:
 	SDL_Rect *rect;
 
 	// Animation
-	map<string, pair<Texture*, SDL_Rect*>> animations;
-	string currentAnim = "";
-	int currentFrame = 0;
-	double elapsedTime = 0;
-	int animationRows = 1, animationColumns = 1;
+	map<string, pair<Texture*, SDL_Rect*>> animations_;
+	string currentAnim_ = "";
+	int currentFrame_ = 0;
+	double elapsedTime_ = 0;
+	int animationRows_ = 1, animationColumns_ = 1;
 
-	const float speedMultiplier = 1000;
-	float animationSpeed = 1;
-	bool paused = false;
-	bool animationLoop = true;
+	const float speedMultiplier_ = 1000;
+	float animationSpeed_ = 1;
+	bool paused_ = false;
+	bool animationLoop_ = true;
 
 	void renderAnimation(double deltaTime);
 	void resetAnimationValues();
