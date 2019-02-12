@@ -19,7 +19,7 @@ public:
 	bool isAnyAnimationPlaying();
 	bool isAnimationPlaying(string name);
 
-	bool playAnimation(string name, float speed = true, bool loop = true, bool reset = true);
+	bool playAnimation(string name, float speed = true, bool loop = true);
 	bool stopAnimation();
 	bool pauseAnimation();
 	bool resumeAnimation();

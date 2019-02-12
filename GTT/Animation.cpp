@@ -29,7 +29,7 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
 }
 
-bool Animation::playAnimation(string name, float speed, bool loop, bool reset) {
+bool Animation::playAnimation(string name, float speed, bool loop) {
 	if (animationExists(name)) {
 		currentAnim = name;
 		animationSpeed = speed;
