@@ -10,7 +10,7 @@ Sprite::Sprite(string path, int w, int h, int x, int y) {
 }
 
 Sprite::~Sprite() {
-	texture->freeTexture();
+	texture->close();
 	delete texture;
 	delete rect;
 }
@@ -28,11 +28,11 @@ void Sprite::update(double deltaTime) {
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
 void Sprite::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::renderer_, path, rows, columns);
+	Texture* animTexture = new Texture(Game::renderer_, path);
 	
 	SDL_Rect* animRect = new SDL_Rect();
-	animRect->h = animTexture->getH() / rows;
-	animRect->w = animTexture->getW() / columns;
+	animRect->h = animTexture->getHeight() / rows;
+	animRect->w = animTexture->getWidth() / columns;
 	animRect->x = animRect->y = 0;
 
 	animations_[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
@@ -46,8 +46,8 @@ bool Sprite::playAnimation(string name, float speed, bool loop, bool reset) {
 
 		resetAnimationValues();
 
-		animationColumns_ = animations_[name].first->getW() / animations_[name].second->w;
-		animationRows_ = animations_[name].first->getH() / animations_[name].second->h;
+		animationColumns_ = animations_[name].first->getWidth() / animations_[name].second->w;
+		animationRows_ = animations_[name].first->getHeight() / animations_[name].second->h;
 
 		return true;
 	}
@@ -118,10 +118,9 @@ void Sprite::renderAnimation(double deltaTime) {
 
 	Texture* animTexture = animations_[currentAnim_].first;
 	SDL_Rect* animRect = animations_[currentAnim_].second;
-
-	animTexture->renderFrame(*animRect, trunc(currentFrame_ / animationColumns_),
-								currentFrame_ % animationColumns_);
-
+	
+	animTexture->render(*rect, animRect);
+	//trunc(currentFrame_ / animationColumns_),currentFrame_ % animationColumns_
 	if (isAnyAnimationPlaying() && !paused_) elapsedTime_ += deltaTime;
 }
 

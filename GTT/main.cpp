@@ -56,6 +56,6 @@ int main(int argc, char* argv[]) {
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	SDL_Quit();
-
+	
 	return 0;
 }
