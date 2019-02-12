@@ -2,10 +2,8 @@
 #include "Game.h"
 
 
-Animation::Animation()
-{
+Animation::Animation() {
 }
-
 
 Animation::~Animation() {
 	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
@@ -21,11 +19,10 @@ void Animation::render(Uint32 deltaTime) {
 	}
 }
 
-
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
 void Animation::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::renderer, path, rows, columns);
+	Texture* animTexture = new Texture(Game::renderer_, path, rows, columns);
 
 	SDL_Rect* animRect = new SDL_Rect();
 	animRect->h = animTexture->getH() / rows;
@@ -35,7 +32,7 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
 }
 
-bool Animation::playAnimation(string name, float speed, bool loop, bool reset) {
+bool Animation::playAnimation(string name, float speed, bool loop) {
 	if (animationExists(name)) {
 		currentAnim = name;
 		animationSpeed = speed;

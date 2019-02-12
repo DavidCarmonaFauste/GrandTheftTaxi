@@ -5,7 +5,7 @@
 using namespace std;
 
 // Forward declarations
-class Sprite;
+class Animation;
 
 class Game {
 public:
@@ -23,6 +23,6 @@ private:
 	bool exit_ = false;
 
 	// FOR TESTING
-	Sprite *test;
+	Animation *test;
 };
 
