@@ -7,12 +7,15 @@ Animation::Animation()
 }
 
 
-Animation::~Animation()
-{
+Animation::~Animation() {
+	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
+		delete it->second.first;
+		delete it->second.second;
+	}
+	animations.clear();
 }
 
-void Animation::update(double deltaTime) {
-	// Rendering
+void Animation::render(Uint32 deltaTime) {
 	if (currentAnim != "") {
 		renderAnimation(deltaTime);
 	}

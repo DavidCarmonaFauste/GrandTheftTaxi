@@ -15,7 +15,7 @@ public:
 		   int x = 0, int y = 0);
 	virtual ~Sprite();
 
-	void update(double deltaTime);
+	void render(Uint32 deltaTime);
 
 private:
 	Texture *texture;

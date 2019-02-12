@@ -12,10 +12,12 @@ Sprite::Sprite(string path, int w, int h, int x, int y) {
 Sprite::~Sprite() {
 	texture->freeTexture();
 	delete texture;
+	texture = nullptr;
+
 	delete rect;
+	rect = nullptr;
 }
 
-void Sprite::update(double deltaTime) {
-	// Rendering
+void Sprite::render(Uint32 deltaTime) {
 	texture->render(*rect);
 }

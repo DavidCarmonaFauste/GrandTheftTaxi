@@ -24,7 +24,7 @@ public:
 	bool pauseAnimation();
 	bool resumeAnimation();
 
-	void update(double deltaTime);
+	void render(Uint32 deltaTime);
 
 private:
 	// Animation

@@ -20,8 +20,5 @@ public:
 
 private:
 	bool exit = false;
-
-	// FOR TESTING
-	Sprite *test;
 };
 
