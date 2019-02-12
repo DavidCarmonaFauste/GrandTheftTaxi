@@ -21,7 +21,5 @@ public:
 
 private:
 	bool exit_ = false;
-
-	Animation* test;
 };
 

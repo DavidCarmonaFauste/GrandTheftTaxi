@@ -16,6 +16,5 @@ Sprite::~Sprite() {
 }
 
 void Sprite::render(GameObject * o, Uint32 deltaTime) {
-	// Rendering
 	texture->render(*rect);
 }

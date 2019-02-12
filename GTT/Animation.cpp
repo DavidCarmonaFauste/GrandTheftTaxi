@@ -8,10 +8,13 @@ Animation::Animation() {
 	destRect->x = destRect->y = 0;
 }
 
-Animation::~Animation()
-{
+Animation::~Animation() {
+	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
+		delete it->second.first;
+		delete it->second.second;
+	}
+	animations.clear();
 }
-
 
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed

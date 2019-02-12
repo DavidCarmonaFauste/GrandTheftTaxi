@@ -16,6 +16,7 @@ Game::~Game() {
 
 }
 
+
 bool Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
