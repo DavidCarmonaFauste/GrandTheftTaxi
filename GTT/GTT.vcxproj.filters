@@ -81,6 +81,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Archivos de origen\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="FollowGameObject.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowGameObject.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
