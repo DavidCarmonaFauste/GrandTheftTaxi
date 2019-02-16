@@ -11,6 +11,7 @@ using namespace std;
 typedef unsigned int uint;
 
 int main(int argc, char* argv[]) {
+
 	// Initialization values
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;

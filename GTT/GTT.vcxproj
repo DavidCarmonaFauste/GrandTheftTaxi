@@ -33,7 +33,6 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
-    <ClCompile Include="VideoState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h" />

@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "GameStateMachine.h"
 
+
 using namespace std;
 typedef unsigned int uint;
 
