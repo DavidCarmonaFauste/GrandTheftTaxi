@@ -4,6 +4,7 @@
 #include <map>
 #include "Texture.h"
 #include "RenderComponent.h"
+#include "Camera.h"
 
 using namespace std;
 
@@ -26,8 +27,10 @@ public:
 
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
 
+	void setCamera(cameraType cam);
+
 private:
-	// Animation
+	cameraType cam_ = GAME_CAMERA;
 	SDL_Rect* destRect;
 
 	map<string, pair<Texture*, SDL_Rect*>> animations;
@@ -41,7 +44,10 @@ private:
 	bool paused = false;
 	bool animationLoop = true;
 
-	void renderAnimation(Uint32 deltaTime);
+	void renderAnimation(GameObject *o, Uint32 deltaTime);
 	void resetAnimationValues();
 };
 
+void Animation::setCamera(cameraType cam) {
+	cam_ = cam;
+}

@@ -21,7 +21,8 @@ void Sprite::render(GameObject * o, Uint32 deltaTime) {
 	rect_->w = o->getWidth();
 	rect_->h = o->getHeight();
 
-	Game::cameras_[cam_]->renderTexture(texture_, *rect_);
+	Game::cameras_[cam_]->renderTexture(texture_, *rect_,
+					(SDL_Rect*)nullptr, o->getRotation());
 }
 
 void Sprite::setCamera(cameraType cam) {
