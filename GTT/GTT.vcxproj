@@ -23,6 +23,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -32,12 +33,14 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="VideoState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Container.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="Observable.h" />
@@ -46,6 +49,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="VideoState.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

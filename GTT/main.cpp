@@ -8,6 +8,8 @@
 
 using namespace std;
 
+typedef unsigned int uint;
+
 int main(int argc, char* argv[]) {
 	// Initialization values
 	SDL_Window* window_ = nullptr;
@@ -30,28 +32,33 @@ int main(int argc, char* argv[]) {
 	}
 
 	// Create and run the game
-	Game* game = new Game(window_, renderer_);
+	Game* game_ = new Game(window_, renderer_);
 	double lastTime = SDL_GetTicks();
 	double deltaTime = lastTime;
 
-	bool exit = game->update(deltaTime);
+	//bool exit = game->update(deltaTime);
+	bool exit = false;
+
 	while (!exit) {
-		SDL_RenderClear(renderer_);
-
+		//esto debería pintarlo el render del propio Game?????????
+		//SDL_RenderClear(renderer_);
 		// Game cycle
-		game->handleEvents(deltaTime);
-		exit = game->update(deltaTime);
-		game->render(deltaTime);
-
-		SDL_RenderPresent(renderer_);
-
+		//game->handleEvents(deltaTime);
+		//exit = game->update(deltaTime);
+		//game->render(deltaTime);
+		//SDL_RenderPresent(renderer_);
 		// Update the delta time
-		deltaTime = SDL_GetTicks() - lastTime;
-		lastTime = SDL_GetTicks();
+		//deltaTime = SDL_GetTicks() - lastTime;
+		//lastTime = SDL_GetTicks();
+
+		//run gestiona render, update y handleEvent dependiendo del estado. 
+		game_->run(deltaTime);
+		//la ruptura se define mediante el método propio de game_
+		exit = game_->exitGame();
 	}
 
 	// Cleaning
-	delete game;
+	delete game_;
 
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
