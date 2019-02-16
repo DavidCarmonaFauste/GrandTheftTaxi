@@ -1,11 +1,16 @@
 #pragma once
 
 #include "SDL.h"
+#include <map>
 
 using namespace std;
 
 // Forward declarations
 class Animation;
+class Camera;
+enum cameraType;
+
+class Sprite;
 
 class Game {
 public:
@@ -18,6 +23,7 @@ public:
 
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;
+	static map<cameraType, Camera*> cameras_;
 
 private:
 	bool exit_ = false;

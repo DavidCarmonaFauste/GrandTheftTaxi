@@ -2,6 +2,7 @@
 
 #include "Texture.h"
 #include "RenderComponent.h"
+#include "Camera.h"
 #include <vector>
 #include <map>
 
@@ -17,8 +18,11 @@ public:
 	virtual ~Sprite();
 
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
+	void setCamera(cameraType cam);
 
 private:
-	Texture *texture;
-	SDL_Rect *rect;
+	Texture *texture_;
+	SDL_Rect *rect_;
+
+	cameraType cam_ = GAME_CAMERA;
 };

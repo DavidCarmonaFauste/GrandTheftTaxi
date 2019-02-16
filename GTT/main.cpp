@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
 	// Initialization values
 	SDL_Window* window_ = nullptr;
 	SDL_Renderer* renderer_ = nullptr;
-	const int winWidth_ = 800;
-	const int winHeight_ = 600;
+	const int winWidth_ = 1280;
+	const int winHeight_ = 720;
 	int winX_, winY_;
 	winX_ = winY_ = SDL_WINDOWPOS_CENTERED;
 
@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 							  winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
