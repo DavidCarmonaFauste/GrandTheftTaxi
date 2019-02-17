@@ -28,9 +28,6 @@ public:
 private:
 	bool exit_ = false;
 
-	// FOR TESTING
-	Sprite *test;
-
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y hangleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;

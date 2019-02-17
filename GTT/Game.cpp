@@ -16,7 +16,6 @@ Game::~Game() {
 
 }
 
-
 /*-----------------------------------------------------------------------*/
 
 /*void Game::handleEvents(Uint32 deltaTime) {
@@ -49,7 +48,7 @@ void Game::run(uint deltaTime) {
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
 bool Game::exitGame() {
-	return exit;
+	return exit_;
 }
 
 
