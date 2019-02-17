@@ -17,7 +17,9 @@ Game::~Game() {
 }
 
 
-bool Game::handleEvents(Uint32 deltaTime) {
+/*-----------------------------------------------------------------------*/
+
+/*void Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) && !exit_) {
@@ -27,12 +29,28 @@ bool Game::handleEvents(Uint32 deltaTime) {
 
 	return exit_;
 }
-
 bool Game::update(Uint32 deltaTime) {
 	// LLamar a los update() de los GameObjects
 	return exit_;
 }
-
 void Game::render(Uint32 deltaTime) {
 	// LLamar a los render() de los GameObjects
+}*/
+
+/*-----------------------------------------------------------------------*/
+//provisonal. 
+
+//Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
+void Game::run(uint deltaTime) {
+	gmStMachine_->handleEvents(deltaTime);
+	gmStMachine_->render(deltaTime);
+	//falta gmStMachine_->update(deltaTime);
 }
+
+//exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
+bool Game::exitGame() {
+	return exit;
+}
+
+
+/*-----------------------------------------------------------------------*/
