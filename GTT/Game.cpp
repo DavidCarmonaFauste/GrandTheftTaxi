@@ -1,15 +1,20 @@
 #include "Game.h"
+#include "Camera.h"
 #include <iostream>
+#include "Sprite.h"
 
 using namespace std;
 
 // Static initializations
 SDL_Window* Game::window_ = nullptr;
 SDL_Renderer* Game::renderer_ = nullptr;
+map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
 
 Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
+
+	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 }
 
 Game::~Game() {

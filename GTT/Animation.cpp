@@ -10,10 +10,12 @@ Animation::Animation() {
 
 Animation::~Animation() {
 	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
-		delete it->second.first;
-		delete it->second.second;
+		delete it->second.first; it->second.first = nullptr;
+		delete it->second.second; it->second.second = nullptr;
 	}
 	animations.clear();
+
+	delete destRect; destRect = nullptr;
 }
 
 // Animation frames are played in order from left to right,
@@ -83,7 +85,7 @@ bool Animation::resumeAnimation()
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
 	if (currentAnim != "") {
-		renderAnimation(deltaTime);
+		renderAnimation(o, deltaTime);
 	}
 }
 
@@ -102,7 +104,7 @@ bool Animation::animationExists(string name) {
 	return animations.count(name) > 0;
 }
 
-void Animation::renderAnimation(Uint32 deltaTime) {
+void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	if (elapsedTime > currentFrame * speedMultiplier / animationSpeed) {
 		currentFrame++;
 
@@ -120,7 +122,12 @@ void Animation::renderAnimation(Uint32 deltaTime) {
 	animRect->x = currentFrame % animationColumns * animRect->w;
 	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
 
-	animTexture->render(*destRect, animRect);
+	destRect->x = o->getPosition().getX();
+	destRect->y = o->getPosition().getY();
+	destRect->w = o->getWidth();
+	destRect->h = o->getHeight();
+	
+	Game::cameras_[cam_]->renderTexture(animTexture, *destRect, animRect, o->getRotation());
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }

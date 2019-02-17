@@ -25,11 +25,20 @@
     <Filter Include="Archivos de encabezado\Core">
       <UniqueIdentifier>{86f0dd2c-aafd-41d2-a9a1-8a7449279e2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Graphics">
+      <UniqueIdentifier>{d38270f9-9f2d-40ab-abc3-b083a5608227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Graphics">
+      <UniqueIdentifier>{1ef57bc0-57bb-4f56-9d26-637c2d9f596c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\StateMachine">
+      <UniqueIdentifier>{f10b8d94-c847-4276-a84a-82a68c0dbec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\StateMachine">
+      <UniqueIdentifier>{3bec0137-91c0-45e2-8816-e220e8e1d8ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -60,23 +69,32 @@
     <ClCompile Include="Observer.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowGameObject.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sprite.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="InputComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -98,16 +116,10 @@
     <ClInclude Include="GameObject.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Observable.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
@@ -115,6 +127,27 @@
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowGameObject.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateMachine.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
