@@ -32,10 +32,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -50,10 +52,12 @@
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VideoState.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

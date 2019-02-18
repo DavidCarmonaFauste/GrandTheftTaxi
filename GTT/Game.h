@@ -3,6 +3,7 @@
 #include "SDL.h"
 #include "GameStateMachine.h"
 #include <map>
+#include <Box2D.h>
 
 using namespace std;
 typedef unsigned int uint;
@@ -29,9 +30,12 @@ public:
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;
 	static map<cameraType, Camera*> cameras_;
+	static b2World* GetWorld();
 
 private:
+
 	bool exit_ = false;
+	static b2World* world_;
 
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 

@@ -1,22 +1,17 @@
 #pragma once
+#include "Container.h"
+#include <Box2D.h>
 
 using namespace std;
 
 class Turret;
 
-class Vehicle //: public GameObject
+class Vehicle :
+	public Container
 {
 public:
 	Vehicle();
 	virtual ~Vehicle();
-
-	void Destroy();
-
 protected:
-	float maxSpeed_;
-	float maxRotationSpeed_;
-
-	Turret* primaryWeapon_, *secondaryWeapon_;
-	bool enemy_;
-	int health_;
+	b2Body* body;
 };

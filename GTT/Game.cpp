@@ -9,11 +9,13 @@ using namespace std;
 SDL_Window* Game::window_ = nullptr;
 SDL_Renderer* Game::renderer_ = nullptr;
 map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
+b2World* Game::world_ = nullptr;
 
 Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
 
+	world_ = new b2World(b2Vec2());
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 }
 
@@ -34,6 +36,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 	return exit_;
 }
 bool Game::update(Uint32 deltaTime) {
+	//Game::world_->Step((float) deltaTime / 1000, 8, 3);
 	// LLamar a los update() de los GameObjects
 	return exit_;
 }
@@ -54,6 +57,11 @@ void Game::run(uint deltaTime) {
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
 bool Game::exitGame() {
 	return exit_;
+}
+
+b2World * Game::GetWorld()
+{
+	return world_;
 }
 
 
