@@ -42,23 +42,22 @@ int main(int argc, char* argv[]) {
 	bool exit = false;
 
 	while (!exit) {
-		//esto debería pintarlo el render del propio Game?????????
-		//SDL_RenderClear(renderer_);
+		SDL_RenderClear(renderer_);
 		// Game cycle
 		
-		//game->handleEvents(deltaTime);
-		//exit = game->update(deltaTime);
-		//game->render(deltaTime);
-		//SDL_RenderPresent(renderer_);
+		game_->handleEvents(deltaTime);
+		exit = game_->update(deltaTime);
+		game_->render(deltaTime);
+		SDL_RenderPresent(renderer_);
 
 		// Update the delta time
-		//deltaTime = SDL_GetTicks() - lastTime;
-		//lastTime = SDL_GetTicks();
+		deltaTime = SDL_GetTicks() - lastTime;
+		lastTime = SDL_GetTicks();
 
 		//run gestiona render, update y handleEvent dependiendo del estado. 
-		game_->run(deltaTime);
+		//game_->run(deltaTime);
 		//la ruptura se define mediante el método propio de game_
-		exit = game_->exitGame();
+		//exit = game_->exitGame();
 	}
 
 	// Cleaning

@@ -23,7 +23,7 @@ Game::~Game() {
 
 /*-----------------------------------------------------------------------*/
 
-/*void Game::handleEvents(Uint32 deltaTime) {
+bool Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) && !exit_) {
@@ -39,7 +39,7 @@ bool Game::update(Uint32 deltaTime) {
 }
 void Game::render(Uint32 deltaTime) {
 	// LLamar a los render() de los GameObjects
-}*/
+}
 
 /*-----------------------------------------------------------------------*/
 //provisonal. 

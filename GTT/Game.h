@@ -19,9 +19,9 @@ public:
 	Game(SDL_Window *window_, SDL_Renderer *renderer_);
 	virtual ~Game();
 
-	/*bool update(Uint32 deltaTime);
-	void handleEvents(Uint32 deltaTime);
-	void render(Uint32 deltaTime);*/
+	bool update(Uint32 deltaTime);
+	bool handleEvents(Uint32 deltaTime);
+	void render(Uint32 deltaTime);
 
 	void run(uint deltaTime);
 	bool exitGame();
@@ -34,7 +34,7 @@ private:
 	bool exit_ = false;
 
 	//provisional
-	//se instancia en clase Game.h y se gestiona render, update y hangleEvent de los estados en pila 
+	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;
 };
 
