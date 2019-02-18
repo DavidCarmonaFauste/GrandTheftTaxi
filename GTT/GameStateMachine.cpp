@@ -12,42 +12,39 @@ GameStateMachine::~GameStateMachine()
 }
 
 //agrega a la pila el estado pasado por parámetro
-/*void GameStateMachine::pushState(GameState* state)
+void GameStateMachine::pushState(GameState* state)
 {
-	pila_gameStates.push(state);
-}*/
+	gameState_.push(state);
+}
 //si la pila no está vacía, se borra el estado y se elimina de la pila
-/*void GameStateMachine::popState()
+void GameStateMachine::popState()
 {
-	if (!pila_gameStates.empty())
+	if (!gameState_.empty())
 	{
-		delete pila_gameStates.top();
-		pila_gameStates.pop();
+		delete gameState_.top();
+		gameState_.pop();
 	}
-}*/
+}
 
-//busca y devuelve un elem de la pila
-/*GameState* GameStateMachine::get_nState(GameState* state) const {
-	if (!pila_gameStates.empty())
-		return pila_gameStates.nElem(state);
-	else
-		return nullptr;
-}*/
 
 //devuelve el actual estado de la pila
-/*GameState* GameStateMachine::get_CurrentState() const {
-	if (!pila_gameStates.empty())
-		return pila_gameStates.top();
+GameState* GameStateMachine::get_CurrentState() const {
+	if (!gameState_.empty())
+		return gameState_.top();
 	else
 		return nullptr;
-}*/
+}
 
-//Cominca con Aplication: HandleEvents.
-void GameStateMachine::handleEvents(uint deltaTime) {
 
+bool GameStateMachine:: handleEvents(Uint32 deltaTime, SDL_Event& event) {
+	GameState* currentState = get_CurrentState();
+	return currentState->handleEvents(deltaTime, event);
 }
 
 //comunica con el estado acutal: render; si la pila no está vacía. 
-void GameStateMachine::render(uint deltaTime) const {
-
+void GameStateMachine::render(Uint32 deltaTime) const {
+	if (!gameState_.empty()) {
+		GameState* currentState = get_CurrentState();
+		currentState->render(deltaTime);
+	}
 }

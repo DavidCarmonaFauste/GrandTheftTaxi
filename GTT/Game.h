@@ -1,7 +1,6 @@
 #pragma once
 
 #include "SDL.h"
-#include "GameStateMachine.h"
 #include <map>
 
 using namespace std;
@@ -11,6 +10,7 @@ typedef unsigned int uint;
 class Animation;
 class Camera;
 enum cameraType;
+class GameStateMachine;
 
 class Sprite;
 
@@ -23,8 +23,8 @@ public:
 	bool handleEvents(Uint32 deltaTime);
 	void render(Uint32 deltaTime);
 
-	void run(uint deltaTime);
-	bool exitGame();
+	//void run(uint deltaTime);
+	//bool exitGame();
 
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;

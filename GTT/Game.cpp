@@ -2,6 +2,8 @@
 #include "Camera.h"
 #include <iostream>
 #include "Sprite.h"
+#include "GameStateMachine.h"
+
 
 using namespace std;
 
@@ -45,16 +47,16 @@ void Game::render(Uint32 deltaTime) {
 //provisonal. 
 
 //Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
-void Game::run(uint deltaTime) {
+/*void Game::run(uint deltaTime) {
 	gmStMachine_->handleEvents(deltaTime);
 	gmStMachine_->render(deltaTime);
 	//falta gmStMachine_->update(deltaTime);
-}
+}*/
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
-bool Game::exitGame() {
+/*bool Game::exitGame() {
 	return exit_;
-}
+}*/
 
 
 /*-----------------------------------------------------------------------*/

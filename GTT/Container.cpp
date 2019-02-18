@@ -7,10 +7,13 @@ Container::Container() :
 Container::~Container() {
 }
 
-void Container::handleInput(Uint32 deltaTime, const SDL_Event& event) {
+bool Container::handleInput(Uint32 deltaTime, const SDL_Event& event) {
 	for (InputComponent* ic : inputComp_) {
-		ic->handleInput(this, deltaTime, event);
+		return ic->handleInput(this, deltaTime, event);
 	}
+
+	//PROVISIONAL 
+	//return false;
 }
 
 void Container::update(Uint32 deltaTime) {

@@ -146,8 +146,8 @@
     <ClInclude Include="GameStateMachine.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="VideoState.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

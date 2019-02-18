@@ -15,7 +15,7 @@ public:
 	Container();
 	virtual ~Container();
 
-	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event);
+	virtual bool handleInput(Uint32 deltaTime, const SDL_Event& event);
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
 
