@@ -1,7 +1,8 @@
 #include "Game.h"
 #include "Camera.h"
 #include <iostream>
-#include "Sprite.h"
+#include "Vehicle.h"
+
 
 using namespace std;
 
@@ -15,8 +16,11 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
 
-	world_ = new b2World(b2Vec2());
+	world_ = new b2World(b2Vec2(0, 9));
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	taxi_ = new Vehicle();
+	taxi_->setWidth(400);
+	taxi_->setHeight(400);
 }
 
 Game::~Game() {
@@ -36,11 +40,13 @@ bool Game::handleEvents(Uint32 deltaTime) {
 	return exit_;
 }
 bool Game::update(Uint32 deltaTime) {
+	taxi_->update(deltaTime);
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 	// LLamar a los update() de los GameObjects
 	return exit_;
 }
 void Game::render(Uint32 deltaTime) {
+	taxi_->render(deltaTime);
 	// LLamar a los render() de los GameObjects
 }
 

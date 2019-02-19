@@ -4,6 +4,7 @@
 #include "GameStateMachine.h"
 #include <map>
 #include <Box2D/Box2D.h>
+#include "CameraType.h"
 
 using namespace std;
 typedef unsigned int uint;
@@ -11,9 +12,8 @@ typedef unsigned int uint;
 // Forward declarations
 class Animation;
 class Camera;
-enum cameraType;
-
 class Sprite;
+class Vehicle;
 
 class Game {
 public:
@@ -36,7 +36,7 @@ private:
 
 	bool exit_ = false;
 	static b2World* world_;
-
+	Vehicle* taxi_;
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;

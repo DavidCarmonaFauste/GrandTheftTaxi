@@ -1,5 +1,5 @@
 #include "Camera.h"
-#include "Game.h"
+
 
 
 Camera::Camera(int width, int height, float zoom) {
@@ -23,9 +23,8 @@ void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * 
 
 	transposedRect.w = (int) ( ((float)dest.w / (float)cameraRect_->w) * width );
 	transposedRect.h = (int) ( ((float)dest.h / (float)cameraRect_->h) * height );
-	transposedRect.x -= cameraRect_->x;
-	transposedRect.y -= cameraRect_->y;
-
+	transposedRect.x = dest.x - cameraRect_->x;
+	transposedRect.y = dest.y - cameraRect_->y;
 	texture->render(transposedRect, angle, clip);
 }
 

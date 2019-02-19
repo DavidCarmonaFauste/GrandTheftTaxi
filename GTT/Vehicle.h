@@ -1,6 +1,8 @@
 #pragma once
 #include "Container.h"
+#include "PhysicObject.h"
 #include <Box2D/Box2D.h>
+#include "Animation.h"
 
 using namespace std;
 
@@ -13,5 +15,6 @@ public:
 	Vehicle();
 	virtual ~Vehicle();
 protected:
-	b2Body* body;
+	PhysicObject* phyO_;
+	Animation* sprite_;
 };
