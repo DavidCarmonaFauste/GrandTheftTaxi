@@ -36,7 +36,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 	return exit_;
 }
 bool Game::update(Uint32 deltaTime) {
-	//Game::world_->Step((float) deltaTime / 1000, 8, 3);
+	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 	// LLamar a los update() de los GameObjects
 	return exit_;
 }
