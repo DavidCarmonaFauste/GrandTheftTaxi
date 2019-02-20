@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include <iostream>
 #include "Vehicle.h"
+#include "SoundManager.h"
 
 
 using namespace std;
@@ -9,12 +10,14 @@ using namespace std;
 // Static initializations
 SDL_Window* Game::window_ = nullptr;
 SDL_Renderer* Game::renderer_ = nullptr;
+SoundManager* Game::soundManager_ = nullptr;
 map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
 b2World* Game::world_ = nullptr;
 
 Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
+	Game::soundManager_ = new SoundManager();
 
 	world_ = new b2World(b2Vec2(0, 9));
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);

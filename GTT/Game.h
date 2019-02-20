@@ -14,6 +14,8 @@ class Animation;
 class Camera;
 class Sprite;
 class Vehicle;
+class SoundManager;
+
 
 class Game {
 public:
@@ -30,12 +32,16 @@ public:
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;
 	static map<cameraType, Camera*> cameras_;
+
 	static b2World* GetWorld();
 
 private:
+	static b2World* world_;
+	static SoundManager* soundManager_;
 
 	bool exit_ = false;
-	static b2World* world_;
+
+
 	Vehicle* taxi_;
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
