@@ -42,7 +42,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 	while (SDL_PollEvent(&event) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
 		if (event.type == SDL_QUIT) exit_ = true;
-		if (event.type == SDL_KEYDOWN) Game::soundManager_->playSound("default");
+		if (event.type == SDL_KEYDOWN) Game::soundManager_->playSound("default", 0);
 	}
 
 	return exit_;

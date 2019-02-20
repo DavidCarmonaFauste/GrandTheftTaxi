@@ -28,7 +28,49 @@ bool SoundManager::loadSound(string path, string name) {
 	else return false;
 }
 
-void SoundManager::playSound(string name) {
-	Mix_PlayChannel(-1, sound_[name], 0);
+int SoundManager::playSound(string name, int loops) {
+	return Mix_PlayChannel(-1, sound_[name], loops);
 }
 
+void SoundManager::pauseSound(int channel) {
+	Mix_Pause(channel);
+}
+
+void SoundManager::resumeSound(int channel) {
+	Mix_Resume(channel);
+}
+
+bool SoundManager::isSoundPlaying(int channel) {
+	return Mix_Playing(channel);
+}
+
+bool SoundManager::soundExists(string name) {
+	return sound_.find(name) != sound_.end();
+}
+
+bool SoundManager::loadMusic(string path, string name) {
+	music_[name] = Mix_LoadMUS(path.c_str());
+
+	if (music_[name] != nullptr) return true;
+	else return false;
+}
+
+void SoundManager::playMusic(string name, int loops) {
+	Mix_PlayMusic(music_[name], loops);
+}
+
+void SoundManager::pauseMusic() {
+	Mix_PauseMusic();
+}
+
+void SoundManager::resumeMusic() {
+	Mix_ResumeMusic();
+}
+
+bool SoundManager::isMusicPlaying() {
+	return Mix_PlayingMusic();
+}
+
+bool SoundManager::musicExists(string name) {
+	return music_.find(name) != music_.end();
+}

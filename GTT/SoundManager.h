@@ -9,14 +9,15 @@ public:
 	virtual ~SoundManager();
 
 	bool loadSound(string path, string name);
-	void playSound(string name);
-	void pauseSound();
-	void resumeSound();
-	bool isSoundPlaying();
+	// Returns the channel in which the sound will be played
+	int playSound(string name, int loops);
+	void pauseSound(int channel);
+	void resumeSound(int channel);
+	bool isSoundPlaying(int channel);
 	bool soundExists(string name);
 
-	bool loadMusic();
-	void playMusic();
+	bool loadMusic(string path, string name);
+	void playMusic(string name, int loops);
 	void pauseMusic();
 	void resumeMusic();
 	bool isMusicPlaying();
