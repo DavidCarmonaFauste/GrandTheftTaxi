@@ -19,6 +19,10 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::renderer_ = renderer_;
 	Game::soundManager_ = new SoundManager();
 
+	// SOUND MANAGER TEST
+	Game::getSoundManager()->loadSound("../Assets/sounds/default.wav", "default");
+
+	// PHYSICS TEST
 	world_ = new b2World(b2Vec2(0, 9));
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 	taxi_ = new Vehicle();
@@ -38,6 +42,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 	while (SDL_PollEvent(&event) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
 		if (event.type == SDL_QUIT) exit_ = true;
+		if (event.type == SDL_KEYDOWN) Game::soundManager_->playSound("default");
 	}
 
 	return exit_;
@@ -71,6 +76,10 @@ bool Game::exitGame() {
 b2World * Game::GetWorld()
 {
 	return world_;
+}
+
+SoundManager * Game::getSoundManager() {
+	return soundManager_;
 }
 
 

@@ -34,6 +34,7 @@ public:
 	static map<cameraType, Camera*> cameras_;
 
 	static b2World* GetWorld();
+	static SoundManager* getSoundManager();
 
 private:
 	static b2World* world_;

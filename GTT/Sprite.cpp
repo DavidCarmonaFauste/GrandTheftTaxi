@@ -2,7 +2,6 @@
 #include "Game.h"
 #include <iostream>
 
-
 Sprite::Sprite(string path, int w, int h, int x, int y) {
 	texture_ = new Texture(Game::renderer_, path);
 	rect_ = new SDL_Rect();

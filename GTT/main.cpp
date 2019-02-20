@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include <SDL_mixer.h>
 #include <iostream>
 
 #include "Game.h"
@@ -26,6 +27,9 @@ int main(int argc, char* argv[]) {
 							  winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+		return -1;
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
