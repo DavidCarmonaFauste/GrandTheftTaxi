@@ -34,6 +34,7 @@
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Vector2D.h" />

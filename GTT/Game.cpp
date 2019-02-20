@@ -16,11 +16,10 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
 
-	world_ = new b2World(b2Vec2(0, 9));
+	world_ = new b2World(b2Vec2(0, 0));
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	taxi_ = new Vehicle();
-	taxi_->setWidth(400);
-	taxi_->setHeight(400);
+	taxi_ = new Vehicle(Resources::Taxi);
+
 }
 
 Game::~Game() {

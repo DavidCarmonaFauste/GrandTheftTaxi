@@ -1,13 +1,17 @@
 #include "Vehicle.h"
 
 
+Vehicle::Vehicle(Resources::VehicleId id) {
 
-Vehicle::Vehicle() {
-	phyO_ = new PhysicObject (b2_dynamicBody , 20, 40);
+	Resources::VehicleInfo& r = Resources::vehicles_[id];
+
+	this->setWidth(r.width);
+	this->setHeight(r.height);
+	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height);
 	this->addLogicComponent(phyO_);
 
 	sprite_ = new Animation();
-	sprite_->loadAnimation("../Assets/sprites/default.png", "idle");
+	sprite_->loadAnimation(r.idlePath, "idle");
 	sprite_->playAnimation("idle");
 	this->addRenderComponent(sprite_);
 }

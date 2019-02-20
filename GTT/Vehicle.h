@@ -3,6 +3,8 @@
 #include "PhysicObject.h"
 #include <Box2D/Box2D.h>
 #include "Animation.h"
+#include "Resources.h"
+#include <vector>
 
 using namespace std;
 
@@ -12,9 +14,10 @@ class Vehicle :
 	public Container
 {
 public:
-	Vehicle();
+	Vehicle( Resources::VehicleId id);
 	virtual ~Vehicle();
 protected:
+	Turret* currentTurret_;
 	PhysicObject* phyO_;
 	Animation* sprite_;
 };
