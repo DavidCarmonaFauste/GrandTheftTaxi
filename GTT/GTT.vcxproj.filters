@@ -99,14 +99,8 @@
     <ClCompile Include="PhysicObject.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,14 +161,8 @@
     <ClInclude Include="Texture.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Vehicle.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Archivos de encabezado\Core</Filter>
+    <ClInclude Include="Resources.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
