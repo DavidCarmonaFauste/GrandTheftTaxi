@@ -7,10 +7,20 @@ class Resources
 {
 
 public:
+	enum SoundId {
+		Default
+	};
+
 	enum VehicleId
 	{
 		//TAXI
 		Taxi
+	};
+
+	struct SoundInfo
+	{
+		SoundId id;
+		string path;
 	};
 
 	struct VehicleInfo
@@ -23,7 +33,8 @@ public:
 		int height;
 	};
 
-	static vector <VehicleInfo> vehicles_;
 
+	static vector <VehicleInfo> vehicles_;
+	static vector<SoundInfo> sounds_;
 };
 
