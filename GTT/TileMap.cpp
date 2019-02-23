@@ -3,12 +3,20 @@
 
 
 TileMap::TileMap() {
-
+	tmxMap = new tmx::Map();
+	tmxMap->load("../Assets/maps/test.tmx");
 }
 
 
 TileMap::~TileMap() {
+	for (int y = 0; y < tiles_.size(); y++) {
+		for (int x = 0; x < tiles_[y].size(); x++) {
+			delete tiles_[y][x];
+			tiles_[y][x] = nullptr;
+		}
+	}
 
+	delete tmxMap; tmxMap = nullptr;
 }
 
 void TileMap::handleInput(Uint32 deltaTime, const SDL_Event & event) {

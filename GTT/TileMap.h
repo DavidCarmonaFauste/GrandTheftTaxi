@@ -4,6 +4,7 @@
 
 #include "Container.h"
 #include "Tile.h"
+#include <tmxlite/Map.hpp>
 
 class TileMap :	public Container {
 public:
@@ -19,5 +20,6 @@ public:
 
 private:
 	vector<vector<Tile*>> tiles_;
+	tmx::Map* tmxMap;
 };
 
