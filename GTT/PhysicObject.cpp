@@ -27,3 +27,8 @@ void PhysicObject::update(GameObject * o, Uint32 deltaTime)
 	o->setRotation(body_->GetAngle());
 	o->setVelocity(Vector2D(body_->GetLinearVelocity().x, body_->GetLinearVelocity().y));
 }
+
+b2Body * PhysicObject::getBody()
+{
+	return body_;
+}

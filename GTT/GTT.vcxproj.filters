@@ -43,6 +43,12 @@
     <Filter Include="Archivos de origen\GameObjects">
       <UniqueIdentifier>{f8ab1f7b-e8fd-4f9e-a333-f91bf317c299}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Scene">
+      <UniqueIdentifier>{2dce42f9-bb32-4932-b8c8-6288dbff8bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Scene">
+      <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

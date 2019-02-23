@@ -38,6 +38,7 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -61,6 +62,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VideoState.h" />
