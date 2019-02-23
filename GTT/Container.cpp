@@ -7,7 +7,7 @@ Container::Container() :
 Container::~Container() {
 }
 
-bool Container::handleInput(Uint32 deltaTime, const SDL_Event& event) {
+void Container::handleInput(Uint32 deltaTime, const SDL_Event& event) {
 	for (InputComponent* ic : inputComp_) {
 		return ic->handleInput(this, deltaTime, event);
 	}

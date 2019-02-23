@@ -11,7 +11,7 @@ public:
 	GameStateMachine();
 	~GameStateMachine();
 
-	bool handleEvents(Uint32 deltaTime, SDL_Event& event);
+	void handleEvents(Uint32 deltaTime, SDL_Event& event);
 	void render(Uint32 deltaTime) const;
 	void pushState(GameState* state);
 	void popState();

@@ -47,7 +47,7 @@ public:
 	virtual void init();
 
 	// abstract methods to be implemented in sub-classes
-	virtual bool handleInput(Uint32 deltaTime, const SDL_Event& event) = 0;
+	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event) = 0;
 	virtual void update(Uint32 deltaTime) = 0;
 	virtual void render(Uint32 deltaTime) = 0;
 

@@ -36,9 +36,9 @@ GameState* GameStateMachine::get_CurrentState() const {
 }
 
 
-bool GameStateMachine:: handleEvents(Uint32 deltaTime, SDL_Event& event) {
+void GameStateMachine:: handleEvents(Uint32 deltaTime, SDL_Event& event) {
 	GameState* currentState = get_CurrentState();
-	return currentState->handleEvents(deltaTime, event);
+	currentState->handleEvents(deltaTime, event);
 }
 
 //comunica con el estado acutal: render; si la pila no está vacía. 
