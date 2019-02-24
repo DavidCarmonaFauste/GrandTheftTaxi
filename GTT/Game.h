@@ -16,6 +16,7 @@ class Camera;
 class Sprite;
 class Vehicle;
 class SoundManager;
+class TileMap;
 
 
 class Game {
@@ -45,6 +46,8 @@ private:
 
 
 	Vehicle* taxi_;
+	TileMap* tileMap_;
+
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;

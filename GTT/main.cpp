@@ -47,8 +47,8 @@ int main(int argc, char* argv[]) {
 
 	while (!exit) {
 		SDL_RenderClear(renderer_);
+
 		// Game cycle
-		
 		game_->handleEvents(deltaTime);
 		exit = game_->update(deltaTime);
 		game_->render(deltaTime);

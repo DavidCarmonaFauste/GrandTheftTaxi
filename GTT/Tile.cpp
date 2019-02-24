@@ -1,21 +1,24 @@
 #include "Tile.h"
 
-Tile::Tile(string path, int x, int y, int width, int height, bool collision) {
+Tile::Tile(Texture* texture, SDL_Rect* dest, SDL_Rect* clip, uint32_t id, bool collision) {
 	// GameObject defaults
-	setPosition(Vector2D(x, y));
-	setWidth(width);
-	setHeight(height);
+	setPosition(Vector2D(dest->x, dest->y));
+	setWidth(dest->w);
+	setHeight(dest->h);
 
 	// Sprite
-	sprite_ = new Animation();
+	sprite_ = new Sprite(texture);
+	sprite_->setClipRect(clip);
 	addRenderComponent(sprite_);
-	sprite_->loadAnimation(path, "default");
-	sprite_->playAnimation("default", 0);
 
 	// Physics object
-	phyO_ = new PhysicObject(b2_staticBody, width, height);
-	addLogicComponent(phyO_);
-	phyO_->getBody()->SetActive(collision);
+	if (collision) {
+		phyO_ = new PhysicObject(b2_staticBody, dest->w, dest->h);
+		addLogicComponent(phyO_);
+	}
+
+	// Tile
+	id_ = id;
 }
 
 
@@ -30,6 +33,10 @@ bool Tile::isBodyActive() {
 
 void Tile::setBodyActive(bool a) {
 	phyO_->getBody()->SetActive(a);
+}
+
+Sprite * Tile::getSprite() {
+	return sprite_;
 }
 
 PhysicObject* Tile::getPhysicObject() {
