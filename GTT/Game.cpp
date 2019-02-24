@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Sprite.h"
 #include "GameStateMachine.h"
+#include "VideoState.h"
 
 
 using namespace std;
@@ -12,11 +13,14 @@ SDL_Window* Game::window_ = nullptr;
 SDL_Renderer* Game::renderer_ = nullptr;
 map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
 
-Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
-	Game::window_ = window_;
-	Game::renderer_ = renderer_;
+Game::Game(SDL_Window *window, SDL_Renderer *renderer) {
+	Game::window_ = window;
+	Game::renderer_ = renderer;
 
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+
+	videoIntro_ = new VideoState(window_, "\YuzuGames_Intro.mp4.avi");
+	videoIntro_->videoInit();
 }
 
 Game::~Game() {

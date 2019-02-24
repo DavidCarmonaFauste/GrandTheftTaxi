@@ -2,6 +2,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+
 #include <iostream>
 
 #include "Game.h"
@@ -14,6 +15,8 @@ int main(int argc, char* argv[]) {
 
 	// Initialization values
 	SDL_Window* window_ = nullptr;
+
+	
 	SDL_Renderer* renderer_ = nullptr;
 	const int winWidth_ = 1280;
 	const int winHeight_ = 720;
@@ -32,6 +35,7 @@ int main(int argc, char* argv[]) {
 		cout << "SDL initialization failed\n";
 		return -1;
 	}
+
 
 	// Create and run the game
 	Game* game_ = new Game(window_, renderer_);

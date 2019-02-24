@@ -1,44 +1,90 @@
-#pragma once
-#include "GameState.h"
-#include <dshow.h> //gestiona la reproducción de vídeo y adudio para la lectrua de fichero 
 #include <string>
+#include "GameState.h"
+#include <dshow.h>
+#include <SDL_syswm.h>
 
 
+#pragma once
 
-class VideoState :
-	public GameState
+
+class VideoState : public GameState
 {
 public:
-	VideoState(string s) : s_(s) {videoInit();}
+	VideoState(SDL_Window* w, string s): w_(w), s_(s){
 
+		/*SDL_SysWMinfo sdlinfo_;
+		SDL_version sdlver_;
+		SDL_VERSION(&sdlver_);
+		sdlinfo_.version = sdlver_;
+		SDL_GetWindowWMInfo(w_, &sdlinfo_);
+		hwnd_ = sdlinfo_.info.win.window;*/
+		
+	}
 	~VideoState(){}
 
 	void videoInit() {
-		hr = CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER, IID_IGraphBuilder, (void **)& pGraph);
+		// Initialize the COM library.
+		HRESULT hr = CoInitialize(NULL);
+		if (FAILED(hr))
+		{
+			printf("ERROR - Could not initialize COM library");
+			return;
+		}
+
+		// Create the filter graph manager and query for interfaces. CLSID_FilterGraph
+		hr = CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER,
+			IID_IGraphBuilder, (void **)&pGraph);
+		if (FAILED(hr))
+		{
+			printf("ERROR - Could not create the Filter Graph Manager.");
+			return;
+		}
+
+		
 		hr = pGraph->QueryInterface(IID_IMediaControl, (void **)&pControl);
 		hr = pGraph->QueryInterface(IID_IMediaEvent, (void **)&pEvent);
-	}
 
-	int loadVideoFile(string s) {
-		wstring widestr = wstring(s.begin(), s.end());
+		//hr = windP->SetVideoClippingWindow(hwnd_);
+
+		// Build the graph. IMPORTANT: Change this string to a file on your system.
+		wstring widestr = wstring(s_.begin(), s_.end());
 		const wchar_t* szName = widestr.c_str();
-		hr = pGraph->RenderFile(szName, NULL);
 
-		if (hr != NULL) {
+		hr = pGraph->RenderFile(szName, NULL);
+		if (SUCCEEDED(hr))
+		{
+			// Run the graph.
 			hr = pControl->Run();
-			return 0;
+			
+			if (SUCCEEDED(hr))
+			{
+				// Wait for completion.
+				long evCode;
+				pEvent->WaitForCompletion(INFINITE, &evCode);
+			}
 		}
-		else { return -1; }
+
+		pControl->Release();
+		pEvent->Release();
+		pGraph->Release();
+		CoUninitialize();
 	}
 
 
+
+protected:
+	IGraphBuilder *pGraph = NULL;
+	IMediaControl *pControl = NULL;
+	IMediaEvent   *pEvent = NULL;
+
+	//IVMRWindowlessControl* windP = NULL;
+	//HWND hwnd_;
+	 
 private:
 	string s_;
-	IGraphBuilder *pGraph;
-	HRESULT hr;
+	SDL_Window* w_;
 	
-	IMediaControl *pControl;
-	IMediaEvent   *pEvent;
+
 	
 };
 

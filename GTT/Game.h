@@ -3,6 +3,9 @@
 #include "SDL.h"
 #include <map>
 
+
+
+
 using namespace std;
 typedef unsigned int uint;
 
@@ -10,8 +13,10 @@ typedef unsigned int uint;
 class Animation;
 class Camera;
 enum cameraType;
-class GameStateMachine;
 
+
+class GameStateMachine;
+class VideoState;
 class Sprite;
 
 class Game {
@@ -36,5 +41,6 @@ private:
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;
+	VideoState* videoIntro_;
 };
 
