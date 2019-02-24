@@ -20,13 +20,12 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::renderer_ = renderer_;
 	Game::soundManager_ = new SoundManager();
 
-	world_ = new b2World(b2Vec2(0, 0));
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	world_ = new b2World(b2Vec2(0, 10));
+	cameras_[GAME_CAMERA] = new Camera(1280, 720);
 	taxi_ = new Vehicle(Resources::Taxi);
 
 	// TESTING TILEMAP
 	tileMap_ = new TileMap("../Assets/maps/test.tmx");
-	cameras_[GAME_CAMERA]->setZoom(1, false);
 }
 
 Game::~Game() {

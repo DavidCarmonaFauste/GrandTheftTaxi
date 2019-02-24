@@ -35,6 +35,8 @@ public:
 
 
 	static vector <VehicleInfo> vehicles_;
-	static vector<SoundInfo> sounds_;
+	static vector <SoundInfo> sounds_;
+
+	static const bool physicsScalingFactor = 0.15;
 };
 

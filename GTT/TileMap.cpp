@@ -54,9 +54,10 @@ void TileMap::tmxToScene() {
 			cout << "Info: loading tile layer " + layer->getName() + "\n";
 
 			layers_.push_back(vector<vector<Tile*>>());
-
-			// Iterate through every tile and instantiate it in the game
 			const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
+			bool collision = tileLayer.getName() == "Collisions";
+			cout << collision;
+			// Iterate through every tile and instantiate it in the game
 			for (int y = 0; y < tmxMap_->getTileCount().y; y++) {
 				layers_.back().push_back(vector<Tile*>());
 
@@ -93,12 +94,12 @@ void TileMap::tmxToScene() {
 
 					// Set the clipping rect to use the right tile of the
 					// tileset
-					clip->w = tset_w / tileDest.w;
-					clip->h = tset_h / tileDest.h;
+					clip->w = tileDest.w;
+					clip->h = tileDest.h;
 					clip->x = (norm_gid % (tset_w / tileDest.w)) * tileDest.w;;
 					clip->y = (gid / (tset_w / tileDest.h)) * tileDest.h;
 
-					Tile* tile = new Tile(tilesets_[tset_gid], &tileDest, clip, gid, false);
+					Tile* tile = new Tile(tilesets_[tset_gid], &tileDest, clip, gid, collision);
 					layers_.back()[y].push_back(tile);
 				}
 			}

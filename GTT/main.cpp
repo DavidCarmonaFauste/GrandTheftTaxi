@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 							  winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
+	SDL_RenderSetLogicalSize(renderer_, 1280, 720);
 
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		return -1;

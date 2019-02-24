@@ -14,6 +14,8 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	sprite_->loadAnimation(r.idlePath, "idle");
 	sprite_->playAnimation("idle");
 	this->addRenderComponent(sprite_);
+
+	phyO_->getBody()->SetTransform(phyO_->getBody()->GetTransform().p, 50);
 }
 
 
