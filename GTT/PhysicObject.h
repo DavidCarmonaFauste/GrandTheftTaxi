@@ -5,7 +5,7 @@ class PhysicObject :
 	public LogicComponent
 {
 public:
-	PhysicObject(b2BodyType type, int w, int h);
+	PhysicObject(b2BodyType type, int w, int h, int x, int y);
 	virtual ~PhysicObject();
 	virtual void update(GameObject* o, Uint32 deltaTime);
 
@@ -14,6 +14,7 @@ public:
 private:
 	b2Body* body_;
 	b2BodyDef bodyDef_;
+	Vector2D visualSize_;
 
 	b2FixtureDef fixtureDef_;
 	b2PolygonShape shape_;

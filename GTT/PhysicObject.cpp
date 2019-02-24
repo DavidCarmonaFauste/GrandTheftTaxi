@@ -1,10 +1,13 @@
 #include "PhysicObject.h"
 
 
-PhysicObject::PhysicObject(b2BodyType type, int w, int h)
+PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y)
 {
+	visualSize_ = Vector2D(w, h);
+
 	bodyDef_ = b2BodyDef();
-	bodyDef_.position.Set(0,0);
+	bodyDef_.position.Set(x * Resources::physicsScalingFactor + (w / 2 * Resources::physicsScalingFactor),
+						  y * Resources::physicsScalingFactor + (h / 2 * Resources::physicsScalingFactor));
 	bodyDef_.type = type;
 	body_ = Game::GetWorld()->CreateBody(&bodyDef_);
 
@@ -18,15 +21,19 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h)
 }
 
 
-PhysicObject::~PhysicObject()
-{
+PhysicObject::~PhysicObject() {
+
 }
 
-void PhysicObject::update(GameObject * o, Uint32 deltaTime)
-{
-	o->setPosition(Vector2D(body_->GetPosition().x, body_->GetPosition().y) * Resources::physicsScalingFactor);
+void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
+	Vector2D nextPos = Vector2D(body_->GetPosition().x,
+								body_->GetPosition().y) / Resources::physicsScalingFactor;
+
+	o->setPosition(nextPos - visualSize_/2);
+
 	o->setRotation(body_->GetAngle() * 180/M_PI);
-	o->setVelocity(Vector2D(body_->GetLinearVelocity().x, body_->GetLinearVelocity().y) * Resources::physicsScalingFactor);
+	o->setVelocity(Vector2D(body_->GetLinearVelocity().x, body_->GetLinearVelocity().y)
+				   / Resources::physicsScalingFactor);
 }
 
 b2Body * PhysicObject::getBody()
