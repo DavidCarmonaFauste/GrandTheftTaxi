@@ -43,6 +43,12 @@
     <Filter Include="Archivos de origen\GameObjects">
       <UniqueIdentifier>{f8ab1f7b-e8fd-4f9e-a333-f91bf317c299}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Components\Movement">
+      <UniqueIdentifier>{fbc7d0be-b010-45c7-988b-6ddbbaf4875c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Components\Movement">
+      <UniqueIdentifier>{b80a2d93-120b-4d23-baa8-0b1709181ecb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="InputMovement.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMovement.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

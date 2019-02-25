@@ -17,6 +17,11 @@ public:
 	Vehicle( Resources::VehicleId id);
 	virtual ~Vehicle();
 protected:
+
+	double maxSpeed_;
+	double maxBackwardSpeed_;
+	double turnSpeed_;
+
 	Turret* currentTurret_;
 	PhysicObject* phyO_;
 	Animation* sprite_;

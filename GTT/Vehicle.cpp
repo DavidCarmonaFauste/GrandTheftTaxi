@@ -7,6 +7,9 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 
 	this->setWidth(r.width);
 	this->setHeight(r.height);
+	this->maxSpeed_ = r.velMax;
+	this->maxBackwardSpeed_ = r.velBackwardMax;
+	this->turnSpeed_ = r.turnSpeed;
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height);
 	this->addLogicComponent(phyO_);
 
