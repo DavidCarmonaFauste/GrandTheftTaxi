@@ -16,7 +16,7 @@ Tile::Tile(Texture* texture, SDL_Rect* dest, SDL_Rect* clip, uint32_t id, bool c
 		phyO_ = new PhysicObject(b2_staticBody, dest->w * Resources::physicsScalingFactor,
 								 dest->h * Resources::physicsScalingFactor,
 								 position_.getX(), position_.getY());
-		addLogicComponent(phyO_); // Not used unless tile update function gets called
+		addLogicComponent(phyO_); // Not used unless tile update function gets called (very inneficient)
 	}
 
 	// Tile

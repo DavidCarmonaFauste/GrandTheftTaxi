@@ -1,12 +1,15 @@
 #include "TileMap.h"
 
 TileMap::TileMap(string path) {
+	// Loads the tmx map from the given path
+	// and converts it into GameObjects
 	tmxMap_ = new tmx::Map();
 	tmxMap_->load(path);
 	tmxToScene();
 }
 
 TileMap::~TileMap() {
+	// Delete the tiles of each layer
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
 			for (int x = 0; x < layers_[layer][y].size(); x++) {
@@ -44,12 +47,12 @@ void TileMap::tmxToScene() {
 			const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 			const auto& objects = objectLayer.getObjects();
 			for (const auto& object : objects) {
-				//do stuff with object properties
+				// do stuff with object properties
+				// UNUSED !!!
 			}
 		}
 
-		//Tile layers
-
+		// Tile layers
 		else if (layer->getType() == tmx::Layer::Type::Tile) {
 			cout << "Info: loading tile layer " + layer->getName() + "\n";
 
@@ -92,7 +95,7 @@ void TileMap::tmxToScene() {
 					tileDest.x = tileDest.w * x;
 					tileDest.y = tileDest.h * y;
 
-					// Set the clipping rect to use the right tile of the
+					// Set the clipping rect to use the area of the
 					// tileset
 					clip->w = tileDest.w;
 					clip->h = tileDest.h;
@@ -106,7 +109,6 @@ void TileMap::tmxToScene() {
 
 		}
 	}
-	
 	cout << "Info: map load finished\n";
 }
 
@@ -115,6 +117,7 @@ void TileMap::handleInput(Uint32 deltaTime, const SDL_Event & event) {
 
 	// In case it's needed for every tile to handle input
 	// HEAVY PROCCESSING LOAD !!
+
 	/*
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
@@ -130,6 +133,7 @@ void TileMap::update(Uint32 deltaTime) {
 
 	// In case it's needed for every tile to update
 	// HEAVY PROCCESSING LOAD !!
+
 	/*
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
