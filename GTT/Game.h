@@ -24,12 +24,12 @@ public:
 	Game(SDL_Window *window_, SDL_Renderer *renderer_);
 	virtual ~Game();
 
-	bool update(Uint32 deltaTime);
-	bool handleEvents(Uint32 deltaTime);
-	void render(Uint32 deltaTime);
+	//bool update(Uint32 deltaTime);
+	void handleEvents(Uint32 deltaTime);
+	//void render(Uint32 deltaTime);
 
-	//void run(uint deltaTime);
-	//bool exitGame();
+	void run(uint deltaTime);
+	bool exitGame();
 
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;
@@ -42,5 +42,6 @@ private:
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;
 	VideoState* videoIntro_;
+	//*SDL_Event event; //PROVISIONAL, DEBE CAMBIRSE POR COMPONENTE FÍSICAS
 };
 

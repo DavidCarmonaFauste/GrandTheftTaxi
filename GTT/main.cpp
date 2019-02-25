@@ -49,9 +49,9 @@ int main(int argc, char* argv[]) {
 		SDL_RenderClear(renderer_);
 		// Game cycle
 		
-		game_->handleEvents(deltaTime);
-		exit = game_->update(deltaTime);
-		game_->render(deltaTime);
+		//game_->handleEvents(deltaTime);
+		//exit = game_->update(deltaTime);
+		//game_->render(deltaTime);
 		SDL_RenderPresent(renderer_);
 
 		// Update the delta time
@@ -59,9 +59,9 @@ int main(int argc, char* argv[]) {
 		lastTime = SDL_GetTicks();
 
 		//run gestiona render, update y handleEvent dependiendo del estado. 
-		//game_->run(deltaTime);
+		game_->run(deltaTime);
 		//la ruptura se define mediante el método propio de game_
-		//exit = game_->exitGame();
+		exit = game_->exitGame();
 	}
 
 	// Cleaning
