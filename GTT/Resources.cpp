@@ -7,5 +7,9 @@ vector<Resources::VehicleInfo> Resources::vehicles_{
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
-	{Default, "../Assets/sounds/default.wav"}
+	{DefaultSoundId, "../Assets/sounds/default.wav"}
+};
+
+vector<Resources::MusicInfo> Resources::music_{
+	{DefaultMusicId, "../Assets/sounds/default.wav"}
 };
