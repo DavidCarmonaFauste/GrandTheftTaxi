@@ -193,6 +193,11 @@
     </ClInclude>
     <ClInclude Include="InputMovement.h">
       <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Tile.h">
+      <Filter>Archivos de encabezado\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Archivos de encabezado\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

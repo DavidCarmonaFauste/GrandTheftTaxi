@@ -56,5 +56,7 @@ public:
 	static vector <VehicleInfo> vehicles_;
 	static vector<SoundInfo> sounds_;
 	static vector <KeyBindingsTnfo> keyBindings_;
+
+	static const double physicsScalingFactor;
 };
 

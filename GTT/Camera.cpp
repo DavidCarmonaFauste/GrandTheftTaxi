@@ -21,10 +21,10 @@ void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * 
 	int width = 0, height = 0;
 	SDL_RenderGetLogicalSize(Game::renderer_, &width, &height);
 
-	transposedRect.w = (int) ( ((float)dest.w / (float)cameraRect_->w) * width );
-	transposedRect.h = (int) ( ((float)dest.h / (float)cameraRect_->h) * height );
-	transposedRect.x = dest.x - cameraRect_->x;
-	transposedRect.y = dest.y - cameraRect_->y;
+	transposedRect.w = (int) ( ((float)dest.w / (float)cameraRect_->w) * width);
+	transposedRect.h = (int) ( ((float)dest.h / (float)cameraRect_->h) * height);
+	transposedRect.x = (double)(dest.x - cameraRect_->x) * zoom_ / (cameraRect_->w / width);
+	transposedRect.y = (double)(dest.y - cameraRect_->y) * zoom_ / (cameraRect_->h / height);
 	texture->render(transposedRect, angle, clip);
 }
 

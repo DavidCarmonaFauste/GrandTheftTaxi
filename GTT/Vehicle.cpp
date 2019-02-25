@@ -10,13 +10,16 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->maxSpeed_ = r.velMax;
 	this->maxBackwardSpeed_ = r.velBackwardMax;
 	this->turnSpeed_ = r.turnSpeed;
-	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height);
+	
+	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.getX(), position_.getY());
 	this->addLogicComponent(phyO_);
 
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
 	sprite_->playAnimation("idle");
 	this->addRenderComponent(sprite_);
+
+	phyO_->getBody()->SetTransform(phyO_->getBody()->GetTransform().p, 50);
 }
 
 
