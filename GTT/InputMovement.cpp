@@ -24,7 +24,8 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 		}
 
 		if (event.key.keysym.sym == k_->backwards) {
-			
+			if (p_->getBody()->GetLinearVelocity() > ) velocity_ = velocity_ - aceleracion_;
+
 		}
 		if (event.key.keysym.sym == SDLK_RIGHT) if (isMoving_()) steeringWheel("R");
 		if (event.key.keysym.sym == SDLK_LEFT) if (isMoving_()) steeringWheel("L");
