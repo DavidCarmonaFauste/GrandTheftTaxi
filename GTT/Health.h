@@ -4,7 +4,7 @@
 // AKA: GASOLINA
 class Health : public LogicComponent {
 public:
-	Health();
+	Health(void(*callback)() = nullptr);
 	virtual ~Health();
 
 	virtual void update(GameObject* o, Uint32 deltaTime) override;
@@ -17,7 +17,12 @@ public:
 	// 'heal()' or 'damage()'?
 	void setHealth(int health);
 
+	// The callback to be called every time the
+	// health changes
+	void setCallback(void (*callback)());
+
 private:
 	int health_;
+	void (*callback_)() = nullptr;
 };
 

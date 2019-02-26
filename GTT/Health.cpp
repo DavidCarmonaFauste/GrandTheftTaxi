@@ -1,6 +1,6 @@
 #include "Health.h"
 
-Health::Health() {
+Health::Health(void(*callback)()) {
 
 }
 
@@ -9,6 +9,7 @@ Health::~Health() {
 }
 
 void Health::update(GameObject * o, Uint32 deltaTime) {
+
 }
 
 int Health::getHealth() {
@@ -25,4 +26,8 @@ void Health::heal(int heal) {
 
 void Health::setHealth(int health) {
 	health_ = health;
+}
+
+void Health::setCallback(void(*callback)()) {
+	callback_ = callback;
 }

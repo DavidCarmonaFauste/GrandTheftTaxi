@@ -36,6 +36,7 @@
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="Respawn.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="Respawn.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
