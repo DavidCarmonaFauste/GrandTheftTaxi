@@ -5,6 +5,8 @@
 #include "Animation.h"
 #include "Resources.h"
 #include <vector>
+#include "Health.h"
+
 
 using namespace std;
 
@@ -17,7 +19,9 @@ public:
 	Vehicle( Resources::VehicleId id);
 	virtual ~Vehicle();
 protected:
-	Turret* currentTurret_;
 	PhysicObject* phyO_;
 	Animation* sprite_;
+
+	Turret* currentTurret_;
+	Health* health_;
 };
