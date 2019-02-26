@@ -23,6 +23,11 @@ public:
 protected:
 	//gestión de estados mediante pila
 	stack <GameState*> gameState_;
+
+
+	//previa inicialización de estados en un diccionario. 
+
+
 	
 
 

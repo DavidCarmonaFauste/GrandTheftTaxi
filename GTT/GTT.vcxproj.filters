@@ -93,6 +93,9 @@
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="Resources.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -150,6 +153,12 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="VideoState.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadosEnum.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
