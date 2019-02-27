@@ -26,8 +26,8 @@ void Sprite::setClipRect(SDL_Rect * clip) {
 }
 
 void Sprite::render(GameObject * o, Uint32 deltaTime) {
-	rect_->x = o->getPosition().getX();
-	rect_->y = o->getPosition().getY();
+	rect_->x = o->getPosition().x;
+	rect_->y = o->getPosition().y;
 	rect_->w = o->getWidth();
 	rect_->h = o->getHeight();
 

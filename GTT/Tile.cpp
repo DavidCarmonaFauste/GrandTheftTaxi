@@ -15,7 +15,7 @@ Tile::Tile(Texture* texture, SDL_Rect* dest, SDL_Rect* clip, uint32_t id, bool c
 	if (collision) {
 		phyO_ = new PhysicObject(b2_staticBody, dest->w * Resources::physicsScalingFactor,
 								 dest->h * Resources::physicsScalingFactor,
-								 position_.getX(), position_.getY());
+								 position_.x, position_.y);
 		addLogicComponent(phyO_); // Not used unless tile update function gets called (very inneficient)
 	}
 

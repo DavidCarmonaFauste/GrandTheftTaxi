@@ -11,7 +11,7 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->maxBackwardSpeed_ = r.velBackwardMax;
 	this->turnSpeed_ = r.turnSpeed;
 	
-	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.getX(), position_.getY());
+	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.x, position_.y);
 	this->addLogicComponent(phyO_);
 
 	sprite_ = new Animation();

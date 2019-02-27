@@ -121,8 +121,8 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	animRect->x = currentFrame % animationColumns * animRect->w;
 	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
 
-	destRect->x = o->getPosition().getX();
-	destRect->y = o->getPosition().getY();
+	destRect->x = o->getPosition().x;
+	destRect->y = o->getPosition().y;
 	destRect->w = o->getWidth();
 	destRect->h = o->getHeight();
 	

@@ -61,7 +61,7 @@ Vector2D GameObject::getPosition() const {
 }
 
 void GameObject::setPosition(const Vector2D &pos) {
-	position_.set(pos);
+	position_.Set(pos.x, pos.y);
 }
 
 Vector2D GameObject::getVelocity() const {
@@ -69,7 +69,7 @@ Vector2D GameObject::getVelocity() const {
 }
 
 void GameObject::setVelocity(const Vector2D &vel) {
-	velocity_.set(vel);
+	velocity_.Set(vel.x, vel.y);
 }
 
 Vector2D GameObject::getAcceleration() const {
@@ -82,7 +82,7 @@ void GameObject::scale(double s) {
 }
 
 void GameObject::setAcceleration(const Vector2D &vel) {
-	acceleration_.set(vel);
+	acceleration_.Set(vel.x, vel.y);
 }
 
 double GameObject::getRotation() const {
