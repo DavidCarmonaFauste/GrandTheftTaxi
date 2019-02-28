@@ -1,203 +1,210 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Components">
-      <UniqueIdentifier>{6e61dfe5-f97c-4dc5-a756-246156bd7e67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Components">
-      <UniqueIdentifier>{fd55ae11-939a-4239-b7cf-fc0dcc397971}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Core">
-      <UniqueIdentifier>{50456495-41a1-49b4-8aa9-efa0b412a9c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Core">
-      <UniqueIdentifier>{86f0dd2c-aafd-41d2-a9a1-8a7449279e2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Graphics">
-      <UniqueIdentifier>{d38270f9-9f2d-40ab-abc3-b083a5608227}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Graphics">
-      <UniqueIdentifier>{1ef57bc0-57bb-4f56-9d26-637c2d9f596c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\StateMachine">
-      <UniqueIdentifier>{f10b8d94-c847-4276-a84a-82a68c0dbec0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\StateMachine">
-      <UniqueIdentifier>{3bec0137-91c0-45e2-8816-e220e8e1d8ae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\GameObjects">
-      <UniqueIdentifier>{8b6e77f2-449a-4e3f-8649-bcd8ba0d4c7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\GameObjects">
-      <UniqueIdentifier>{f8ab1f7b-e8fd-4f9e-a333-f91bf317c299}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Components\Movement">
-      <UniqueIdentifier>{fbc7d0be-b010-45c7-988b-6ddbbaf4875c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de origen\Components\Movement">
-      <UniqueIdentifier>{b80a2d93-120b-4d23-baa8-0b1709181ecb}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="InputComponent.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicComponent.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+      <Filter>CPP files</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>CPP files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Observable.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Observer.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Archivos de origen\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Archivos de origen\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Archivos de origen\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Archivos de origen\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="FollowGameObject.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+      <Filter>CPP files\Core</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
-      <Filter>Archivos de origen\StateMachine</Filter>
+      <Filter>CPP files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicObject.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+    <ClCompile Include="Observable.cpp">
+      <Filter>CPP files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>CPP files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Resources.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>CPP files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+    <ClCompile Include="Animation.cpp">
+      <Filter>CPP files\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>CPP files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>CPP files\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>CPP files\Render</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>CPP files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>CPP files\Components</Filter>
     </ClCompile>
     <ClCompile Include="InputMovement.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>CPP files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LogicComponent.cpp">
+      <Filter>CPP files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicObject.cpp">
+      <Filter>CPP files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>CPP files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>CPP files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>CPP files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowGameObject.cpp">
+      <Filter>CPP files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>CPP files\Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>CPP files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>CPP files\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>CPP files\Aux</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderComponent.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Container.h">
-      <Filter>Archivos de encabezado\Core</Filter>
+    <ClInclude Include="VideoState.h">
+      <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Observable.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="FollowGameObject.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+      <Filter>Header files\Core</Filter>
     </ClInclude>
     <ClInclude Include="GameStateMachine.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
+      <Filter>Header files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="VideoState.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
+    <ClInclude Include="Observable.h">
+      <Filter>Header files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicObject.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="Observer.h">
+      <Filter>Header files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="CameraType.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Vehicle.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
+    <ClInclude Include="Container.h">
+      <Filter>Header files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Resources.h">
-      <Filter>Archivos de encabezado\Core</Filter>
+      <Filter>Header files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Archivos de encabezado\Core</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>Header files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraType.h">
+      <Filter>Header files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header files\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header files\Render</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>Archivos de encabezado\Core</Filter>
+      <Filter>Header files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header files\Components</Filter>
     </ClInclude>
     <ClInclude Include="InputMovement.h">
-      <Filter>Archivos de encabezado</Filter>
-    <ClInclude Include="Tile.h">
-      <Filter>Archivos de encabezado\Scene</Filter>
+      <Filter>Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="LogicComponent.h">
+      <Filter>Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicObject.h">
+      <Filter>Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header files\Components</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Archivos de encabezado\Scene</Filter>
+      <Filter>Header files\Map</Filter>
     </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Header files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowGameObject.h">
+      <Filter>Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Header files\Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Header files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header files\Aux</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{b2bd64fd-70e1-46e1-a69f-791db8832c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files">
+      <UniqueIdentifier>{9da61717-31dd-4953-a02c-80005bf0d757}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Core">
+      <UniqueIdentifier>{048cb7f6-2735-4e73-b5d0-6a645b040271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Core">
+      <UniqueIdentifier>{e50e12de-519b-40fd-bcc2-4e4578dac4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Render">
+      <UniqueIdentifier>{41076cbc-bf5b-4638-95b2-726d58cae09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Render">
+      <UniqueIdentifier>{3c18857b-23a1-4a4c-aa76-8326edb285b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Sound">
+      <UniqueIdentifier>{cb88ab39-f6e0-4861-9aa5-dffb403c702d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Sound">
+      <UniqueIdentifier>{d5f291c0-1ef9-4d31-bf77-845f8bfd7062}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Components">
+      <UniqueIdentifier>{d4353464-e0cd-4b2d-8e2d-d3393ed2f9cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Components">
+      <UniqueIdentifier>{06f2200e-aa42-47a1-8598-a5545b8d757e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Map">
+      <UniqueIdentifier>{7ebf61fd-2287-4a18-ae7b-6fe816c1b69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Map">
+      <UniqueIdentifier>{035dbdcf-f031-42bc-a29b-839a17282c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Hud">
+      <UniqueIdentifier>{81ce68af-3065-4e74-914b-b80faaf6e94d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Hud">
+      <UniqueIdentifier>{f78cd448-a81a-45f4-9737-6975cd59ede9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\GameObjects">
+      <UniqueIdentifier>{78088180-48d9-4975-98e5-2b628985a165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\GameObjects">
+      <UniqueIdentifier>{c589c96a-0a2e-4179-90d0-a17b978f1547}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Aux">
+      <UniqueIdentifier>{2c3f58e3-ed9e-4e9b-8a7e-1c37aa897efc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CPP files\Aux">
+      <UniqueIdentifier>{4b4c6a05-f371-418f-937a-51bb26c53254}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

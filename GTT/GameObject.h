@@ -29,15 +29,8 @@ public:
 	Vector2D getPosition() const;
 	void setPosition(const Vector2D &pos);
 
-	Vector2D getVelocity() const;
-	void setVelocity(const Vector2D &vel);
-
-	Vector2D getAcceleration() const;
-	void setAcceleration(const Vector2D &vel);
-
 	double getRotation() const;
 	void setRotation(double angle);
-
 
 	// some GameObjects cannot be initialized in the constructor,
 	// for example when we create them using the default constructor
@@ -60,8 +53,6 @@ protected:
 	double height_; // height
 
 	Vector2D position_; // position (suppose to be left-top corner)
-	Vector2D velocity_; // velocity
-	Vector2D acceleration_; // acceleration
 	double rotation_; // rotation (for the corresponding texture)
 };
 

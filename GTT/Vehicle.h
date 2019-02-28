@@ -16,11 +16,20 @@ class Vehicle :
 public:
 	Vehicle( Resources::VehicleId id);
 	virtual ~Vehicle();
+
+	//Get
+	PhysicObject* GetPhyO();
+	float32 GetMaxSpeed();
+	float32 GetMaxBackwardSpeed();
+	float32 GetTurnSpeed();
+	float32 GetAcceleration();
+
 protected:
 
-	double maxSpeed_;
-	double maxBackwardSpeed_;
-	double turnSpeed_;
+	float32 maxSpeed_;
+	float32 maxBackwardSpeed_;
+	float32 turnSpeed_;
+	float32 acceleration_;
 
 	Turret* currentTurret_;
 	PhysicObject* phyO_;

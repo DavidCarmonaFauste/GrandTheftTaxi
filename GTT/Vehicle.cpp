@@ -10,6 +10,7 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->maxSpeed_ = r.velMax;
 	this->maxBackwardSpeed_ = r.velBackwardMax;
 	this->turnSpeed_ = r.turnSpeed;
+	this->acceleration_ = r.acceleration;
 	
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.x, position_.y);
 	this->addLogicComponent(phyO_);
@@ -25,5 +26,30 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 
 Vehicle::~Vehicle() {
 
+}
+
+PhysicObject * Vehicle::GetPhyO()
+{
+	return phyO_;
+}
+
+float32 Vehicle::GetMaxSpeed()
+{
+	return maxSpeed_;
+}
+
+float32 Vehicle::GetMaxBackwardSpeed()
+{
+	return maxBackwardSpeed_;
+}
+
+float32 Vehicle::GetTurnSpeed()
+{
+	return turnSpeed_;
+}
+
+float32 Vehicle::GetAcceleration()
+{
+	return acceleration_;
 }
 

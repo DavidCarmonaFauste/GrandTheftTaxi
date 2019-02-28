@@ -4,14 +4,11 @@ GameObject::GameObject() :
 	GameObject(nullptr) {
 }
 
-GameObject::GameObject(Game * game): game_(game),
+GameObject::GameObject(Game * game) : game_(game),
 active_(true),
 width_(),
 height_(),
-position_(),
-velocity_(),
-acceleration_(0, 0),
-rotation_(0.0)
+position_()
 {
 }
 
@@ -64,33 +61,19 @@ void GameObject::setPosition(const Vector2D &pos) {
 	position_.Set(pos.x, pos.y);
 }
 
-Vector2D GameObject::getVelocity() const {
-	return velocity_;
+double GameObject::getRotation() const
+{
+	return rotation_;
 }
 
-void GameObject::setVelocity(const Vector2D &vel) {
-	velocity_.Set(vel.x, vel.y);
-}
-
-Vector2D GameObject::getAcceleration() const {
-	return acceleration_;
+void GameObject::setRotation(double angle)
+{
+	rotation_ = angle;
 }
 
 void GameObject::scale(double s) {
 	width_ *= s;
 	height_ *= s;
-}
-
-void GameObject::setAcceleration(const Vector2D &vel) {
-	acceleration_.Set(vel.x, vel.y);
-}
-
-double GameObject::getRotation() const {
-	return rotation_;
-}
-
-void GameObject::setRotation(double angle) {
-	rotation_ = angle;
 }
 
 void GameObject::init() {

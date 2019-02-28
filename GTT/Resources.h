@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <SDL.h>
+
 using namespace std;
 
 class Resources
@@ -47,9 +48,10 @@ public:
 		string leftTurnPath;
 		int width;
 		int height;
-		double velMax;
-		double velBackwardMax;
-		double turnSpeed;
+		float velMax;
+		float velBackwardMax;
+		float turnSpeed;
+		float acceleration;
 	};
 
 
