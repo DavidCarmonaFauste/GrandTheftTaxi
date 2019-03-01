@@ -23,7 +23,7 @@ public:
 		Taxi
 	};
 
-	struct KeyBindingsTnfo {
+	struct KeyBindingsInfo {
 		SDL_Keycode forward;
 		SDL_Keycode backwards;
 		SDL_Keycode turnRight;
@@ -57,7 +57,7 @@ public:
 
 	static vector <VehicleInfo> vehicles_;
 	static vector<SoundInfo> sounds_;
-	static vector <KeyBindingsTnfo> keyBindings_;
+	static vector <KeyBindingsInfo> keyBindings_;
 
 	static const double physicsScalingFactor;
 };

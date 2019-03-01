@@ -54,44 +54,29 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		if (isMoving()) 
 			steeringWheel('L');
 	}
-	
-	/*position_ = position_ + dir_ * velocity_;
-	// when exiting from one side appear in the other
-	if (position_.getX() >= getGame()->getWindowWidth()) {
-		position_.setX(1 - width_);
-	}
-	else if (position_.getX() + width_ <= 0) {
-		position_.setX(getGame()->getWindowWidth());
-	}
-	if (position_.getY() >= getGame()->getWindowHeight()) {
-		position_.setY(1 - height_);
-	}
-	else if (position_.getY() + height_ <= 0) {
-		position_.setY(getGame()->getWindowHeight());
-	}
 
-	if (!upPressed)
-		frictionalForce();
-	else if (velocity_ < velMax_)
-		velocity_ = velocity_ + aceleracion_;
+	if (forwardPressed_ && body->GetLinearVelocity().Length() > v_->GetMaxSpeed())
+		body->SetLinearVelocity(Vector2D(body->GetLinearVelocity()) + v_->GetAcceleration());
 
-	if (abs(velocity_) < min_Velocity) {
-		velocity_ = 0;
-	}*/
-
+	if (abs(body->GetLinearVelocity().Length()) < 0.02) {
+		body->SetLinearVelocity(Vector2D());
+	}
 }
 
 void InputMovement::steeringWheel(char d) {
 	b2Body* body = v_->GetPhyO()->getBody();
 	if (d == 'R') {
+		//Aply rotation to object
 		body->SetTransform(body->GetPosition(), (int)((int)body->GetAngle() + 360 + v_->GetTurnSpeed()) % 360);
-		//dir_ = dir_.rotate(velGiro_);
+		//Apply rotation to velocity
+		body->SetLinearVelocity(Vector2D(body->GetLinearVelocity()).ApplyRotation(v_->GetTurnSpeed()));
 	}
-	/*else if (d == 'L') {
-		rotation_ = ((int)rotation_ + 360 - velGiro_) % 360;
-		if (handBrake_) dir_ = dir_.rotate(-(velGiro_ - drift_));
-		else dir_ = dir_.rotate(-velGiro_);
-	}*/
+	else if (d == 'L') {
+		//Aply rotation to object
+		body->SetTransform(body->GetPosition(), (int)((int)body->GetAngle() + 360 - v_->GetTurnSpeed()) % 360);
+		//Apply rotation to velocity
+		body->SetLinearVelocity(Vector2D(body->GetLinearVelocity()).ApplyRotation(-v_->GetTurnSpeed()));
+	}
 }
 
 bool InputMovement::isMoving() {

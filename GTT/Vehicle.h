@@ -3,6 +3,7 @@
 #include "PhysicObject.h"
 #include <Box2D/Box2D.h>
 #include "Animation.h"
+#include "InputMovement.h"
 #include "Resources.h"
 #include <vector>
 
@@ -14,7 +15,7 @@ class Vehicle :
 	public Container
 {
 public:
-	Vehicle( Resources::VehicleId id);
+	Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk);
 	virtual ~Vehicle();
 
 	//Get

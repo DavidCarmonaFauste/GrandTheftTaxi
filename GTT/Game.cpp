@@ -22,10 +22,10 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 
 	world_ = new b2World(b2Vec2(0, 10));
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
-	taxi_ = new Vehicle(Resources::Taxi);
+	taxi_ = new Vehicle(200, 200, Resources::Taxi, Resources::DefaultKeys);
 
 	// TESTING TILEMAP
-	tileMap_ = new TileMap("../Assets/maps/test.tmx");
+	//tileMap_ = new TileMap("../Assets/maps/test.tmx");
 }
 
 Game::~Game() {
@@ -37,7 +37,7 @@ Game::~Game() {
 bool Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
-	tileMap_->handleInput(deltaTime, event);
+	//tileMap_->handleInput(deltaTime, event);
 
 
 	while (SDL_PollEvent(&event) && !exit_) {
@@ -49,7 +49,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 }
 bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
-	tileMap_->update(deltaTime);
+	//tileMap_->update(deltaTime);
 
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
@@ -58,7 +58,7 @@ bool Game::update(Uint32 deltaTime) {
 }
 void Game::render(Uint32 deltaTime) {
 	taxi_->render(deltaTime);
-	tileMap_->render(deltaTime);
+	//tileMap_->render(deltaTime);
 
 	// LLamar a los render() de los GameObjects
 }

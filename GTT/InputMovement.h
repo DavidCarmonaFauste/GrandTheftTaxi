@@ -4,7 +4,7 @@
 #include "Resources.h"
 #include "Vehicle.h"
 class InputMovement :
-	public InputComponent, public LogicComponent
+	public LogicComponent, public InputComponent
 {
 public:
 	InputMovement(Resources::KeyBindingsId id, Vehicle* v);
@@ -16,7 +16,7 @@ public:
 private:
 	Vehicle* v_;
 	bool throttle_;
-	Resources::KeyBindingsTnfo* k_;
+	Resources::KeyBindingsInfo* k_;
 
 	//Input booleans
 	bool forwardPressed_;

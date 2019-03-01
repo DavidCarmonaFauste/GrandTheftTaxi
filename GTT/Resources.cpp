@@ -10,6 +10,6 @@ vector<Resources::SoundInfo> Resources::sounds_{
 	{Default, "../Assets/sounds/default.wav"}
 };
 
-vector<Resources::KeyBindingsTnfo> Resources::keyBindings_{
+vector<Resources::KeyBindingsInfo> Resources::keyBindings_{
 	{DefaultKeys, SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE}
 };

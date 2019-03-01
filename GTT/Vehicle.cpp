@@ -1,10 +1,10 @@
 #include "Vehicle.h"
 
 
-Vehicle::Vehicle(Resources::VehicleId id) {
+Vehicle::Vehicle(int x, int y, Resources::VehicleId idv, Resources::KeyBindingsId idk) {
 
-	Resources::VehicleInfo& r = Resources::vehicles_[id];
-
+	Resources::VehicleInfo& r = Resources::vehicles_[idv];
+	this->setPosition(Vector2D(x, y));
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 	this->maxSpeed_ = r.velMax;
@@ -14,7 +14,9 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.x, position_.y);
 	this->addLogicComponent(phyO_);
-
+	//inputMov_ = new InputMovement(idk, this);
+	//this->addInputComponent(inputMov_);
+	//this->addLogicComponent(inputMov_);
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
 	sprite_->playAnimation("idle");
