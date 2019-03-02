@@ -126,8 +126,8 @@
     <ClCompile Include="Health.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Respawn.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="Respawner.cpp">
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -209,8 +209,11 @@
     <ClInclude Include="Health.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Respawn.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="Events.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Respawner.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

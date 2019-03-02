@@ -9,6 +9,7 @@ public:
 	virtual ~PhysicObject();
 	virtual void update(GameObject* o, Uint32 deltaTime);
 
+	const b2Vec2 getOrigin();
 	b2Body* getBody();
 
 private:

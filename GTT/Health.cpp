@@ -1,7 +1,8 @@
 #include "Health.h"
 
-Health::Health(void(*callback)()) {
-
+Health::Health(int maxHealth) {
+	maxHealth_ = maxHealth;
+	health_ = maxHealth;
 }
 
 Health::~Health() {
@@ -16,18 +17,33 @@ int Health::getHealth() {
 	return health_;
 }
 
-void Health::damage(int damage) {
-	health_ -= damage;
+int Health::getMaxHealth() {
+	return maxHealth_;
 }
 
-void Health::heal(int heal) {
-	health_ += heal;
+void Health::damage(int damage) {
+	setHealth(health_ - damage);
+}
+
+void Health::heal(int heal) {	
+	setHealth(health_ + heal);
+}
+
+void Health::resetHealth() {
+	health_ = maxHealth_;
 }
 
 void Health::setHealth(int health) {
+	// Send an event about the health change
+	HealthChangedEvent e(this, health, health_);
+	broadcastEvent(&e);
+
 	health_ = health;
 }
 
-void Health::setCallback(void(*callback)()) {
-	callback_ = callback;
+bool Health::receiveEvent(Event * e) {
+	if (e->type_ == RESPAWNED)
+		resetHealth();
+
+	return true;
 }

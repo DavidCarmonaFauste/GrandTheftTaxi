@@ -4,6 +4,7 @@
 #include "Vehicle.h"
 #include "SoundManager.h"
 #include "TileMap.h"
+#include "Respawner.h"
 
 
 using namespace std;
@@ -20,9 +21,20 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::renderer_ = renderer_;
 	Game::soundManager_ = new SoundManager();
 
+	// World and cameras
 	world_ = new b2World(b2Vec2(0, 10));
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
+
+	// Taxi
 	taxi_ = new Vehicle(Resources::Taxi);
+
+	// Respawn system
+	GameObject* initialRespawnPoint = new Container();
+	initialRespawnPoint->setPosition(Vector2D(0, 0));
+
+	Respawner *respawner = new Respawner(taxi_->getHealthComponent());
+	respawner->addRespawnPoint(initialRespawnPoint, "initial");
+	taxi_->addLogicComponent(respawner);
 
 	// TESTING TILEMAP
 	tileMap_ = new TileMap("../Assets/maps/test.tmx");

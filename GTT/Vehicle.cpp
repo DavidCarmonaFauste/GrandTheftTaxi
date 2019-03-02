@@ -19,7 +19,7 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->addRenderComponent(sprite_);
 
 	// Health
-	health_ = new Health();
+	health_ = new Health(100);
 	addLogicComponent(health_);
 }
 
@@ -29,5 +29,24 @@ Vehicle::~Vehicle() {
 	delete sprite_; sprite_ = nullptr;
 	delete currentTurret_; currentTurret_ = nullptr;
 	delete health_; health_ = nullptr;
+}
+
+Health * Vehicle::getHealthComponent() {
+	return health_;
+}
+
+void Vehicle::setPosition(const Vector2D & pos, bool force) {
+	GameObject::setPosition(pos);
+
+	if (force) {
+		b2Vec2 nextPos = b2Vec2(pos.getX(), pos.getY()) + 
+						 b2Vec2(phyO_->getOrigin().x * width_,
+							   phyO_->getOrigin().y * height_);
+
+		nextPos = b2Vec2(nextPos.x * Resources::physicsScalingFactor,
+						 nextPos.y * Resources::physicsScalingFactor);
+
+		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
+	}
 }
 

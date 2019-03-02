@@ -47,6 +47,10 @@ void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
 				   / Resources::physicsScalingFactor);
 }
 
+const b2Vec2 PhysicObject::getOrigin() {
+	return origin_;
+}
+
 b2Body * PhysicObject::getBody() {
 	return body_;
 }
