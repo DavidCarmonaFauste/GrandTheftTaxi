@@ -21,15 +21,18 @@ class Sprite;
 
 class Game {
 public:
-	Game(SDL_Window *window_, SDL_Renderer *renderer_);
-	virtual ~Game();
-
 	//bool update(Uint32 deltaTime);
-	void handleEvents(Uint32 deltaTime);
+	
 	//void render(Uint32 deltaTime);
 
-	void run(uint deltaTime);
+	static Game* getInstance();
+
+	void run();
 	bool exitGame();
+
+	void handleEvents(Uint32 deltaTime);
+	void update(Uint32 deltaTime);
+	void render(Uint32 deltaTime);
 
 	static SDL_Renderer *renderer_;
 	static SDL_Window *window_;
@@ -43,5 +46,9 @@ private:
 	GameStateMachine* gmStMachine_;
 	VideoState* videoIntro_;
 	//*SDL_Event event; //PROVISIONAL, DEBE CAMBIRSE POR COMPONENTE FÍSICAS
+
+	static Game* singleton;
+	Game();
+	virtual ~Game();
 };
 

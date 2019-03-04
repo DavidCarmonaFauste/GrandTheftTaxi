@@ -155,9 +155,6 @@
     <ClInclude Include="VideoState.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="EstadosEnum.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
-    </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

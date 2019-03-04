@@ -1,7 +1,11 @@
 #pragma once
 
 #include <stack>
-#include "GameState.h"
+#include "Resources.h"
+#include "VideoState.h"
+
+
+class GameState;
 
 using namespace std;
 
@@ -11,25 +15,14 @@ public:
 	GameStateMachine();
 	~GameStateMachine();
 
-	//void handleEvents(Uint32 deltaTime, SDL_Event& event);
-	void render(Uint32 deltaTime) const;
-	void pushState(GameState* state);
-	void popState();
+	void setState(const string &s);
 
+	string get_CurrentStateName() const;
 	GameState* get_CurrentState() const;
 
 
-
 protected:
-	//gestión de estados mediante pila
-	stack <GameState*> gameState_;
-
-
-	//previa inicialización de estados en un diccionario. 
-
-
-	
-
+	string currentState_;
 
 };
 

@@ -1,9 +1,12 @@
 #include "GameStateMachine.h"
+#include "GameState.h"
 
 
 
 GameStateMachine::GameStateMachine()
 {
+	Resources::getInstance()->STATES_[NAME_INTRO_STATE];
+	currentState_ = NAME_INTRO_STATE;
 }
 
 
@@ -12,34 +15,19 @@ GameStateMachine::~GameStateMachine()
 }
 
 //agrega a la pila el estado pasado por parámetro
-void GameStateMachine::pushState(GameState* state)
+void GameStateMachine::setState(const string &s)
 {
-	gameState_.push(state);
-}
-//si la pila no está vacía, se borra el estado y se elimina de la pila
-void GameStateMachine::popState()
-{
-	if (!gameState_.empty())
-	{
-		delete gameState_.top();
-		gameState_.pop();
-	}
+	//el atributo de la clase recoge el valor del nuevo estado y el update se encarga de gestionarlo 
+	currentState_ = s;
 }
 
 
 //devuelve el actual estado de la pila
-GameState* GameStateMachine::get_CurrentState() const {
-	if (!gameState_.empty())
-		return gameState_.top();
-	else
-		return nullptr;
+string GameStateMachine::get_CurrentStateName() const {
+	return currentState_;
 }
 
-
-
-//comunica con el estado acutal: render; si la pila no está vacía. 
-void GameStateMachine::render(Uint32 deltaTime) const {
-	if (!gameState_.empty()) {
-		get_CurrentState()->render(deltaTime);
-	}
+GameState * GameStateMachine::get_CurrentState() const {
+	return Resources::getInstance()->STATES_[currentState_];
 }
+
