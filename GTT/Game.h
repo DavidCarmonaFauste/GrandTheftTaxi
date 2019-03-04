@@ -7,6 +7,7 @@
 #include "CameraType.h"
 #include"Resources.h"
 
+
 using namespace std;
 typedef unsigned int uint;
 
@@ -17,6 +18,7 @@ class Sprite;
 class Vehicle;
 class SoundManager;
 class TileMap;
+class Gun;
 
 
 class Game {
@@ -47,6 +49,7 @@ private:
 
 	Vehicle* taxi_;
 	TileMap* tileMap_;
+	Gun* gun_;
 
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 

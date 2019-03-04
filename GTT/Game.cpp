@@ -5,7 +5,7 @@
 #include "SoundManager.h"
 #include "TileMap.h"
 #include "Respawner.h"
-
+#include "Gun.h"
 
 using namespace std;
 
@@ -27,6 +27,7 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 
 	// Taxi
 	taxi_ = new Vehicle(Resources::Taxi);
+	gun_ = new Gun();
 
 	// Respawn system
 	GameObject* initialRespawnPoint = new Container();
@@ -71,7 +72,7 @@ bool Game::update(Uint32 deltaTime) {
 void Game::render(Uint32 deltaTime) {
 	taxi_->render(deltaTime);
 	tileMap_->render(deltaTime);
-
+	gun_->render(deltaTime);
 	// LLamar a los render() de los GameObjects
 }
 
