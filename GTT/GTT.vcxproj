@@ -27,20 +27,27 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
+    <ClCompile Include="Health.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraType.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="Font.h" />
@@ -48,15 +55,20 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
+    <ClInclude Include="Health.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VideoState.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -117,6 +129,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>

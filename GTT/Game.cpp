@@ -11,7 +11,9 @@ using namespace std;
 // Static initializations
 SDL_Window* Game::window_ = nullptr;
 SDL_Renderer* Game::renderer_ = nullptr;
+SoundManager* Game::soundManager_ = nullptr;
 map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
+b2World* Game::world_ = nullptr;
 
 Game* Game::singleton = nullptr;
 Game::Game() {
@@ -49,13 +51,16 @@ Game::~Game() {
 
 /*-----------------------------------------------------------------------*/
 
-//los eventos los gestiona la aplicación. Conecta directamente con handleEvents del estado actual. 
+//los eventos los gestiona la aplicaciï¿½n. Conecta directamente con handleEvents del estado actual. 
  void Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
+	tileMap_->handleInput(deltaTime, event);
+
+
 	while (SDL_PollEvent(&event) && !exit_) {
 		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
-		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a través del método exitGame
+		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a travï¿½s del mï¿½todo exitGame
 	}
 }
  void Game::update(Uint32 deltaTime)

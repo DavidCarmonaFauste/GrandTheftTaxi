@@ -1,22 +1,32 @@
 #pragma once
+#include "Container.h"
+#include "PhysicObject.h"
+#include <Box2D/Box2D.h>
+#include "Animation.h"
+#include "Resources.h"
+#include <vector>
+#include "Health.h"
+
 
 using namespace std;
 
 class Turret;
 
-class Vehicle //: public GameObject
+class Vehicle :
+	public Container
 {
 public:
-	Vehicle();
+	Vehicle( Resources::VehicleId id);
 	virtual ~Vehicle();
 
-	void Destroy();
+	Health* getHealthComponent();
+
+	virtual void setPosition(const Vector2D &pos, bool force = false) override;
 
 protected:
-	float maxSpeed_;
-	float maxRotationSpeed_;
+	PhysicObject* phyO_;
+	Animation* sprite_;
 
-	Turret* primaryWeapon_, *secondaryWeapon_;
-	bool enemy_;
-	int health_;
+	Turret* currentTurret_;
+	Health* health_;
 };

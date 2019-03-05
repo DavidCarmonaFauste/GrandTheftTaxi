@@ -325,3 +325,8 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+#Debug
+bin/GTTDebug.exe
+bin/GTTDebug.ilk
+bin/GTTDebug.pdb

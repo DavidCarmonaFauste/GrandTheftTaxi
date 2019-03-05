@@ -37,6 +37,18 @@
     <Filter Include="Archivos de origen\StateMachine">
       <UniqueIdentifier>{3bec0137-91c0-45e2-8816-e220e8e1d8ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\GameObjects">
+      <UniqueIdentifier>{8b6e77f2-449a-4e3f-8649-bcd8ba0d4c7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\GameObjects">
+      <UniqueIdentifier>{f8ab1f7b-e8fd-4f9e-a333-f91bf317c299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Scene">
+      <UniqueIdentifier>{2dce42f9-bb32-4932-b8c8-6288dbff8bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Scene">
+      <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,9 +62,6 @@
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
       <Filter>Archivos de origen\Core</Filter>
@@ -93,8 +102,32 @@
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicObject.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Resources.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Archivos de origen\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Archivos de origen\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Respawner.cpp">
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Container.h">
       <Filter>Archivos de encabezado\Core</Filter>
@@ -131,9 +161,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Archivos de encabezado\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Archivos de encabezado\Graphics</Filter>
     </ClInclude>
@@ -155,8 +182,41 @@
     <ClInclude Include="VideoState.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicObject.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraType.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
     <ClInclude Include="Resources.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Archivos de encabezado\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Archivos de encabezado\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Respawner.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
