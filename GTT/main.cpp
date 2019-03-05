@@ -57,6 +57,7 @@ int main(int argc, char* argv[]) {
 		// Update the delta time
 		deltaTime = SDL_GetTicks() - lastTime;
 		lastTime = SDL_GetTicks();
+		
 
 		//run gestiona render, update y handleEvent dependiendo del estado. 
 		//game_->run(deltaTime);

@@ -6,6 +6,9 @@
 #include "TileMap.h"
 #include "Respawner.h"
 #include "Gun.h"
+#include "ShootIC.h"
+#include "ProyectilePool.h"
+
 
 using namespace std;
 
@@ -26,8 +29,11 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
 
 	// Taxi
+	bPool_ = new ProyectilePool();
 	taxi_ = new Vehicle(Resources::Taxi);
-	gun_ = new Gun(taxi_, nullptr);
+	taxi_->addInputComponent(new ShootIC());
+	gun_ = new Gun(taxi_, bPool_);
+	taxi_->EquipTurret(gun_);
 
 	// Respawn system
 	GameObject* initialRespawnPoint = new Container();
@@ -48,14 +54,15 @@ Game::~Game() {
 /*-----------------------------------------------------------------------*/
 
 bool Game::handleEvents(Uint32 deltaTime) {
-	SDL_Event event;
+	SDL_Event e;
 
-	tileMap_->handleInput(deltaTime, event);
+	tileMap_->handleInput(deltaTime, e);
 
 
-	while (SDL_PollEvent(&event) && !exit_) {
+	while (SDL_PollEvent(&e) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
-		if (event.type == SDL_QUIT) exit_ = true;
+		taxi_->handleInput(deltaTime, e);
+		if (e.type == SDL_QUIT) exit_ = true;
 	}
 
 	return exit_;
@@ -74,6 +81,7 @@ void Game::render(Uint32 deltaTime) {
 	taxi_->render(deltaTime);
 	tileMap_->render(deltaTime);
 	gun_->render(deltaTime);
+	bPool_->render(deltaTime);
 	// LLamar a los render() de los GameObjects
 }
 

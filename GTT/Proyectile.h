@@ -20,7 +20,7 @@ private:
 	Animation* animC_;
 	double damage_;
 	double lifeTime_;
-	string bulletPath_;
+	string bulletPath_= "../Assets/sprites/VTC2-cobify.png";
 	string flamePath_;
 	string strikePath_;
 };

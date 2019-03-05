@@ -11,6 +11,9 @@ Proyectile::Proyectile()
 	animC_->loadAnimation(strikePath_, "strike");
 
 	addRenderComponent(animC_);
+
+	height_ = 200;
+	width_ = 100;
 }
 
 

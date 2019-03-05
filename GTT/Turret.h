@@ -18,8 +18,8 @@ public:
 	virtual void render(Uint32 deltaTime);
 	virtual void update(Uint32 deltaTime);
 	proyectileType GetProyectileType();
-	virtual void Shoot(int deltaTime);
-	virtual void Reload(int deltaTime);
+	virtual void Shoot();
+	virtual void Reload();
 	virtual int GetSpeed();
 	virtual double GetDamage();
 	virtual int GetCadence();
@@ -33,6 +33,8 @@ protected:
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
 	int speed_;//velocidad del proyectil
+	int lastTimeReloaded_;
+	int lastTimeShot_;
 	double damage_;//daño de cada proyectil
 	double lifeTime_; //tiempo de vida del proyectil
 	proyectileType prType_;//tipo de proyectil

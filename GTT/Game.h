@@ -19,6 +19,7 @@ class Vehicle;
 class SoundManager;
 class TileMap;
 class Gun;
+class ProyectilePool;
 
 
 class Game {
@@ -50,6 +51,7 @@ private:
 	Vehicle* taxi_;
 	TileMap* tileMap_;
 	Gun* gun_;
+	ProyectilePool* bPool_;
 
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 

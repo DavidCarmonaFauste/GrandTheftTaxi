@@ -44,6 +44,7 @@
     <ClCompile Include="Respawner.cpp" />
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
+    <ClCompile Include="ShootIC.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="Respawner.h" />
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />
+    <ClInclude Include="ShootIC.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />

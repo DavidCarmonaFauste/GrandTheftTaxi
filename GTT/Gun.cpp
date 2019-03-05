@@ -6,8 +6,8 @@
 
 Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 {
-	maxAmmo_ = 7;
-	cadence_ = 100;
+	maxAmmo_ = 10;
+	cadence_ = 150;
 	reloadTime_ = 1500;
 	speed_ = 10;
 	ammo_ = maxAmmo_;

@@ -21,11 +21,14 @@ public:
 
 	Health* getHealthComponent();
 
+	virtual void Shoot();
+	virtual void EquipTurret(Turret* turret);
 	virtual void setPosition(const Vector2D &pos, bool force = false) override;
 
 protected:
 	PhysicObject* phyO_;
 	Animation* sprite_;
+
 
 	Turret* currentTurret_;
 	Health* health_;

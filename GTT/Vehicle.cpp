@@ -1,5 +1,5 @@
 #include "Vehicle.h"
-
+#include "Turret.h"
 
 Vehicle::Vehicle(Resources::VehicleId id) {
 	Resources::VehicleInfo& r = Resources::vehicles_[id];
@@ -33,6 +33,16 @@ Vehicle::~Vehicle() {
 
 Health * Vehicle::getHealthComponent() {
 	return health_;
+}
+
+void Vehicle::Shoot()
+{
+	currentTurret_->Shoot();
+}
+
+void Vehicle::EquipTurret(Turret * turret)
+{
+	currentTurret_ = turret;
 }
 
 void Vehicle::setPosition(const Vector2D & pos, bool force) {

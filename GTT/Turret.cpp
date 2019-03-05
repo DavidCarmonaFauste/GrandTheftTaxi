@@ -14,7 +14,8 @@ Turret::Turret(Vehicle* car, ProyectilePool* bPool)
 	addRenderComponent(animC_);
 	bPool_ = bPool;
 	reticule_ = new Reticule();
-		
+	lastTimeReloaded_ = -reloadTime_;
+	lastTimeShot_ = -cadence_;
 }
 
 void Turret::render(Uint32 deltaTime)
@@ -30,8 +31,18 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reticule_ != nullptr) {
 		reticule_->update(deltaTime);
-	}
+		rotation_  = asin((reticule_->getPosition().getX() - position_.getX()) /
+			sqrt(pow(reticule_->getPosition().getX() - position_.getX(), 2) + pow(reticule_->getPosition().getY() - position_.getY(), 2)));
 
+		rotation_ = rotation_ * 180.0 / PI;
+
+		if (reticule_->getPosition().getY() > position_.getY() && rotation_ < 90) {
+
+			rotation_ = 180 - rotation_;
+
+		}
+		
+	}
 		
 
 }
@@ -41,21 +52,21 @@ proyectileType Turret::GetProyectileType()
 	return prType_;
 }
 
-void Turret::Shoot(int deltaTime)//tiempo desde que se disparo la ultima bala
+void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 {
 	if (ammo_ > 0) {
-		if (deltaTime >= cadence_) {
-			//shC_->shoot();
+		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
+			shC_->shoot();
 			ammo_--;
+			cout << ammo_;
+			lastTimeShot_ = SDL_GetTicks();
 		}
 	}
 }
 
-void Turret::Reload(int deltaTime)//tiempo desde que se llamo a reload por primera vez
+void Turret::Reload()//tiempo desde que se llamo a reload por primera vez
 {
-	if (deltaTime >= reloadTime_ && maxAmmo_ > 0) {
-		ammo_ = maxAmmo_;
-	}
+	ammo_ = maxAmmo_;
 }
 
 int Turret::GetSpeed()
