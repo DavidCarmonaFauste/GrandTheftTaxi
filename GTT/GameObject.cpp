@@ -60,7 +60,7 @@ Vector2D GameObject::getPosition() const {
 	return position_;
 }
 
-void GameObject::setPosition(const Vector2D &pos) {
+void GameObject::setPosition(const Vector2D &pos, bool force) {
 	position_.set(pos);
 }
 

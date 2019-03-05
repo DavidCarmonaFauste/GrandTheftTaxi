@@ -4,12 +4,7 @@
 #include "Texture.h"
 #include "SDL.h"
 #include "Vector2D.h"
-
-enum cameraType {
-	GAME_CAMERA,
-	UI_CAMERA,
-	LENGTH
-};
+#include "CameraType.h"
 
 class Camera :
 	public Container

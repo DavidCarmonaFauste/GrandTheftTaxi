@@ -27,16 +27,19 @@ public:
 	void scale(double s);
 
 	Vector2D getPosition() const;
-	void setPosition(const Vector2D &pos);
+
+	// If force is set to true, components such as the physics one
+	// should set their positions to this
+	virtual void setPosition(const Vector2D &pos, bool force = false);
 
 	Vector2D getVelocity() const;
-	void setVelocity(const Vector2D &vel);
+	virtual void setVelocity(const Vector2D &vel);
 
 	Vector2D getAcceleration() const;
-	void setAcceleration(const Vector2D &vel);
+	virtual void setAcceleration(const Vector2D &vel);
 
 	double getRotation() const;
-	void setRotation(double angle);
+	virtual void setRotation(double angle);
 
 
 	// some GameObjects cannot be initialized in the constructor,

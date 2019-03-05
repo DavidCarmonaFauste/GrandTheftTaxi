@@ -1,6 +1,5 @@
 #include "Animation.h"
-#include "Game.h"
-
+#include "Camera.h"
 
 Animation::Animation() {
 	destRect = new SDL_Rect();
@@ -138,3 +137,6 @@ void Animation::resetAnimationValues() {
 	currentFrame = 0;
 }
 
+void Animation::setCamera(cameraType cam) {
+	cam_ = cam;
+}

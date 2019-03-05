@@ -4,9 +4,11 @@
 #include <map>
 #include "Texture.h"
 #include "RenderComponent.h"
-#include "Camera.h"
+#include "CameraType.h"
 
 using namespace std;
+
+class Camera;
 
 class Animation : public RenderComponent {
 public:
@@ -47,7 +49,3 @@ private:
 	void renderAnimation(GameObject *o, Uint32 deltaTime);
 	void resetAnimationValues();
 };
-
-void Animation::setCamera(cameraType cam) {
-	cam_ = cam;
-}
