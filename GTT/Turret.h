@@ -15,7 +15,6 @@ class Turret : public Container
 {
 public:
 	Turret(Vehicle* car, ProyectilePool* bPool);
-	Turret();
 	virtual void render(Uint32 deltaTime);
 	virtual void update(Uint32 deltaTime);
 	proyectileType GetProyectileType();

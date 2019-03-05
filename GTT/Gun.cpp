@@ -6,11 +6,6 @@
 
 Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 {
-	Gun();
-}
-
-Gun::Gun()
-{
 	maxAmmo_ = 7;
 	cadence_ = 100;
 	reloadTime_ = 1500;
@@ -25,7 +20,6 @@ Gun::Gun()
 	if (reticule_ != nullptr) {
 		reticule_->ChangeReticule("gun");
 	}
-	
 }
 
 

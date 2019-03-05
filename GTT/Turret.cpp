@@ -2,45 +2,37 @@
 #include "Animation.h"
 #include "ShootComponent.h"
 #include "Reticule.h"
+#include <math.h>
+#define PI 3.14159265359
 
 Turret::Turret(Vehicle* car, ProyectilePool* bPool)
 {
 	car_ = car;
-	//followC_ = new FollowComponent(car_);
+	followC_ = new FollowGameObject(car_);
 	animC_ = new Animation();
 	addLogicComponent(followC_);
 	addRenderComponent(animC_);
 	bPool_ = bPool;
-	//if (!car->isEnemy())
-		//reticule_ = new Reticule();
+	reticule_ = new Reticule();
 		
-}
-
-Turret::Turret()
-{
-	car_ = nullptr;
-	//followC_ = new FollowComponent(car_);
-	animC_ = new Animation();
-	addLogicComponent(followC_);
-	addRenderComponent(animC_);
-	bPool_ = nullptr;
-	//reticule_ = new Reticule();
 }
 
 void Turret::render(Uint32 deltaTime)
 {
 	Container::render(deltaTime);
-	//if (reticule_ != nullptr)
-		//reticule_->render(deltaTime);
+	if (reticule_ != nullptr)
+		reticule_->render(deltaTime);
 		
 }
 
 void Turret::update(Uint32 deltaTime)
 {
 	Container::update(deltaTime);
-	if (reticule_ != nullptr)
-		//reticule_->update(deltaTime);
-		;
+	if (reticule_ != nullptr) {
+		reticule_->update(deltaTime);
+	}
+
+		
 
 }
 

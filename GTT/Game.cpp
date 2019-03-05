@@ -27,7 +27,7 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 
 	// Taxi
 	taxi_ = new Vehicle(Resources::Taxi);
-	gun_ = new Gun();
+	gun_ = new Gun(taxi_, nullptr);
 
 	// Respawn system
 	GameObject* initialRespawnPoint = new Container();
@@ -63,6 +63,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
 	tileMap_->update(deltaTime);
+	gun_->update(deltaTime);
 
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
