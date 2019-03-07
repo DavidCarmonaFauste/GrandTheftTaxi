@@ -135,26 +135,29 @@
     <ClCompile Include="ShootComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="ProyectilePool.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Proyectile.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="CursorLC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="LinearSC.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="Reticule.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="CursorLC.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="ShootIC.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyectile.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Reticule.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectilePool.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="NaturalMove.cpp">
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,26 +251,29 @@
     <ClInclude Include="ShootComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ProyectilePool.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Proyectile.h">
-      <Filter>Archivos de encabezado</Filter>
+    <ClInclude Include="CursorLC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="LinearSC.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyectile.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectilePool.h">
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
     <ClInclude Include="Reticule.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="CursorLC.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ShootIC.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NaturalMove.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

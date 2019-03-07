@@ -7,6 +7,8 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
+	setPosition(Vector2D(100, 0));
+
 	// Physics
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height,
 							  position_.getX(), position_.getY());

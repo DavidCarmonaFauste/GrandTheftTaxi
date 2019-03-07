@@ -31,15 +31,14 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reticule_ != nullptr) {
 		reticule_->update(deltaTime);
-		rotation_  = asin((reticule_->getPosition().getX() - position_.getX()) /
-			sqrt(pow(reticule_->getPosition().getX() - position_.getX(), 2) + pow(reticule_->getPosition().getY() - position_.getY(), 2)));
+		double disX = reticule_->getPosition().getX() - position_.getX();
+		double disY = reticule_->getPosition().getY() - position_.getY();
 
+		rotation_  = acos(-disY/(sqrt(pow(disX, 2) + pow(disY, 2))));
 		rotation_ = rotation_ * 180.0 / PI;
 
-		if (reticule_->getPosition().getY() > position_.getY() && rotation_ < 90) {
-
-			rotation_ = 180 - rotation_;
-
+		if (disX < 0) {
+			rotation_ = -rotation_;
 		}
 		
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "Animation.h"
+#include "NaturalMove.h"
 
 enum proyectileType {
 	BULLET,
@@ -18,6 +19,7 @@ public:
 	virtual ~Proyectile() {};
 private:
 	Animation* animC_;
+	NaturalMove* movC_;
 	double damage_;
 	double lifeTime_;
 	string bulletPath_= "../Assets/sprites/VTC2-cobify.png";

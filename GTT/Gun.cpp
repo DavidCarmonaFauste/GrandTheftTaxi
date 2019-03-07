@@ -9,7 +9,7 @@ Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	maxAmmo_ = 10;
 	cadence_ = 150;
 	reloadTime_ = 1500;
-	speed_ = 10;
+	speed_ = 5;
 	ammo_ = maxAmmo_;
 	path_ = "../Assets/sprites/gun.png";
 	shC_ = new LinearSC(bPool_, this);

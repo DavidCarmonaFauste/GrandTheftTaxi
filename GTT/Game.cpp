@@ -71,6 +71,7 @@ bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
 	tileMap_->update(deltaTime);
 	gun_->update(deltaTime);
+	bPool_->update(deltaTime);
 
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
