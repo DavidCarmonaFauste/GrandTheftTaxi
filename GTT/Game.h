@@ -19,6 +19,7 @@ class Vehicle;
 class SoundManager;
 class TileMap;
 class Gun;
+class ShotGun;
 class ProyectilePool;
 
 
@@ -50,7 +51,7 @@ private:
 
 	Vehicle* taxi_;
 	TileMap* tileMap_;
-	Gun* gun_;
+	ShotGun* gun_;
 	ProyectilePool* bPool_;
 
 	//provisional

@@ -8,6 +8,7 @@
 #include "Gun.h"
 #include "ShootIC.h"
 #include "ProyectilePool.h"
+#include "ShotGun.h"
 
 
 using namespace std;
@@ -32,7 +33,7 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	bPool_ = new ProyectilePool();
 	taxi_ = new Vehicle(Resources::Taxi);
 	taxi_->addInputComponent(new ShootIC());
-	gun_ = new Gun(taxi_, bPool_);
+	gun_ = new ShotGun(taxi_, bPool_);
 	taxi_->EquipTurret(gun_);
 
 	// Respawn system
