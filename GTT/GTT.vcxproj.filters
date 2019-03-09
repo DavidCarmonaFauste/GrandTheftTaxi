@@ -73,6 +73,7 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>CPP files\Aux</Filter>
     </ClCompile>
+    <ClCompile Include="ControlType.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VideoState.h">
@@ -150,6 +151,7 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header files\Aux</Filter>
     </ClInclude>
+    <ClInclude Include="ControlType.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header files">

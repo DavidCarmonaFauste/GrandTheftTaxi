@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <SDL.h>
+#include <Box2D/Box2D.h>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ public:
 	};
 
 	struct KeyBindingsInfo {
+		KeyBindingsId id;
 		SDL_Keycode forward;
 		SDL_Keycode backwards;
 		SDL_Keycode turnRight;
@@ -59,6 +61,6 @@ public:
 	static vector<SoundInfo> sounds_;
 	static vector <KeyBindingsInfo> keyBindings_;
 
-	static const double physicsScalingFactor;
+	static const float physicsScalingFactor;
 };
 

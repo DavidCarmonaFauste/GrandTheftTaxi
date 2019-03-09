@@ -1,10 +1,9 @@
 #pragma once
-#include "InputComponent.h"
-#include "LogicComponent.h"
+#include "ControlType.h"
 #include "Resources.h"
 #include "Vehicle.h"
 class InputMovement :
-	public LogicComponent, public InputComponent
+	public ControlType
 {
 public:
 	InputMovement(Resources::KeyBindingsId id, Vehicle* v);

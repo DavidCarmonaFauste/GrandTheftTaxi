@@ -20,10 +20,9 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	Game::renderer_ = renderer_;
 	Game::soundManager_ = new SoundManager();
 
-	world_ = new b2World(b2Vec2(0, 10));
+	world_ = new b2World(b2Vec2(0, 0));
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
-	taxi_ = new Vehicle(200, 200, Resources::Taxi, Resources::DefaultKeys);
-
+	taxi_ = new Vehicle(200, 200, Resources::Taxi, Resources::DefaultKeys, Vector2D(0.0, -1.0));
 	// TESTING TILEMAP
 	//tileMap_ = new TileMap("../Assets/maps/test.tmx");
 }
@@ -42,6 +41,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 
 	while (SDL_PollEvent(&event) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
+		taxi_->handleInput(deltaTime, event);
 		if (event.type == SDL_QUIT) exit_ = true;
 	}
 
@@ -49,8 +49,10 @@ bool Game::handleEvents(Uint32 deltaTime) {
 }
 bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
-	//tileMap_->update(deltaTime);
+	//cout << "Gameobject pos: " << taxi_->getPosition().x << " / " << taxi_->getPosition().y << endl;
+	//cout << "Body pos: " << taxi_->GetPhyO()->getBody()->GetTransform().p.x << " / " << taxi_->GetPhyO()->getBody()->GetTransform().p.y << endl;
 
+	//tileMap_->update(deltaTime);
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
 	// LLamar a los update() de los GameObjects

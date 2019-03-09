@@ -1,9 +1,9 @@
 #include "Resources.h"
 
-const double Resources::physicsScalingFactor = 0.2;
+const float Resources::physicsScalingFactor = 0.2f;
 
 vector<Resources::VehicleInfo> Resources::vehicles_{
-	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100, 3.0f, 3.0f, 3.0f, 0.05f}
+	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100, 30.0f, 10.0f, 0.05f, 1.2f}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{
