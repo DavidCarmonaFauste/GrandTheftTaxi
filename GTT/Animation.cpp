@@ -48,7 +48,7 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 }
 
 bool Animation::isAnyAnimationPlaying() {
-	return currentAnim != "";
+	return currentAnim != "default";
 }
 
 // Checks whether the given animation is currently
@@ -92,7 +92,7 @@ void Animation::render(GameObject * o, Uint32 deltaTime) {
 // any animation is playing, false otherwise
 bool Animation::stopAnimation() {
 	if (isAnyAnimationPlaying()) {
-		currentAnim = "";
+		currentAnim = "default";
 		return true;
 	}
 
@@ -110,8 +110,9 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 		if (currentFrame >= animationColumns * animationRows) {
 			if (animationLoop)
 				resetAnimationValues();
-			else
-				currentAnim = "";
+			else {
+				playAnimation("default");
+			}
 		}
 	}
 

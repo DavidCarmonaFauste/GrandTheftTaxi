@@ -27,6 +27,7 @@ public:
 	void scale(double s);
 
 	Vector2D getPosition() const;
+	Vector2D getCenter() const;
 
 	// If force is set to true, components such as the physics one
 	// should set their positions to this

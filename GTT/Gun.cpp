@@ -12,11 +12,13 @@ Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	speed_ = 5;
 	ammo_ = maxAmmo_;
 	path_ = "../Assets/sprites/gun.png";
+	animationpath_ = "../Assets/sprites/pistola_anim.png";
 	shC_ = new LinearSC(bPool_, this);
 	height_ = 200;
 	width_ = 100;
-	animC_->loadAnimation(path_, "idle");
-	animC_->playAnimation("idle");
+	animC_->loadAnimation(animationpath_, "idle", 2, 1);
+	animC_->loadAnimation(path_, "default");
+	animC_->playAnimation("default");
 	if (reticule_ != nullptr) {
 		reticule_->ChangeReticule("gun");
 	}

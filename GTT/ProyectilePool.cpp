@@ -24,7 +24,7 @@ Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectile
 	Proyectile* e = getUnusedProyectile();
 	if (e != nullptr) {
 		e->setVelocity(vel);
-		e->setPosition(pos);
+		e->setPosition(Vector2D(pos.getX()-e->getWidth()/2, pos.getY()-e->getHeight()/2));
 		e->SetDamage(damage);
 		e->SetLifeTime(lifeTime);
 		e->SetAnimation(type);

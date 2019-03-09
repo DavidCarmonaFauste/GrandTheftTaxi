@@ -39,6 +39,7 @@ protected:
 	double lifeTime_; //tiempo de vida del proyectil
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
+	string animationpath_;
 	Reticule* reticule_=nullptr;//si el vehiculo que lleva la torreta es un NPC, no tiene reticula
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
 	

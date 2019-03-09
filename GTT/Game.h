@@ -51,7 +51,7 @@ private:
 
 	Vehicle* taxi_;
 	TileMap* tileMap_;
-	ShotGun* gun_;
+	Gun* gun_;
 	ProyectilePool* bPool_;
 
 	//provisional

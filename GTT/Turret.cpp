@@ -31,8 +31,8 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reticule_ != nullptr) {
 		reticule_->update(deltaTime);
-		double disX = reticule_->getPosition().getX() - position_.getX();
-		double disY = reticule_->getPosition().getY() - position_.getY();
+		double disX = reticule_->getCenter().getX() - getCenter().getX();
+		double disY = reticule_->getCenter().getY() - getCenter().getY();
 
 		rotation_  = acos(-disY/(sqrt(pow(disX, 2) + pow(disY, 2))));
 		rotation_ = rotation_ * 180.0 / PI;
@@ -57,8 +57,8 @@ void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
 			shC_->shoot();
 			ammo_--;
-			cout << ammo_;
 			lastTimeShot_ = SDL_GetTicks();
+			animC_->playAnimation("idle", 1.0f, false);
 		}
 	}
 }

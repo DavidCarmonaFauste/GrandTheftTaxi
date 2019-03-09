@@ -13,8 +13,8 @@ Proyectile::Proyectile()
 	addRenderComponent(animC_);
 	addLogicComponent(movC_);
 
-	height_ = 200;
-	width_ = 100;
+	height_ = 50;
+	width_ = 25;
 }
 
 
