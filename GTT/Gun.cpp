@@ -14,8 +14,8 @@ Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	path_ = "../Assets/sprites/gun.png";
 	animationpath_ = "../Assets/sprites/pistola_anim.png";
 	shC_ = new LinearSC(bPool_, this);
-	height_ = 200;
-	width_ = 100;
+	height_ = 100;
+	width_ = 50;
 	animC_->loadAnimation(animationpath_, "idle", 2, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
