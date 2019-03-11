@@ -3,7 +3,7 @@
 const double Resources::physicsScalingFactor = 0.2;
 
 vector<Resources::VehicleInfo> Resources::vehicles_{
-	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100}
+	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 100, 200}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{

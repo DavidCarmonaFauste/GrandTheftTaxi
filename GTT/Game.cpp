@@ -46,6 +46,7 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 
 	// TESTING TILEMAP
 	tileMap_ = new TileMap("../Assets/maps/test.tmx");
+	SDL_ShowCursor(0);
 }
 
 Game::~Game() {
@@ -62,6 +63,23 @@ bool Game::handleEvents(Uint32 deltaTime) {
 
 	while (SDL_PollEvent(&e) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
+			if (e.type == SDL_KEYDOWN) {
+				switch (e.key.keysym.sym) {
+				case SDLK_ESCAPE:
+					exit_ = true;
+					break;
+					// Pressing f to toggle fullscreen.
+				case SDLK_f:
+					int flags = SDL_GetWindowFlags(window_);
+					if (flags & SDL_WINDOW_FULLSCREEN) {
+						SDL_SetWindowFullscreen(window_, 0);
+					}
+					else {
+						SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
+					}
+					break;
+				}
+			}
 		taxi_->handleInput(deltaTime, e);
 		if (e.type == SDL_QUIT) exit_ = true;
 	}
@@ -76,14 +94,15 @@ bool Game::update(Uint32 deltaTime) {
 
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
+	cout << deltaTime << "   ";
 	// LLamar a los update() de los GameObjects
 	return exit_;
 }
 void Game::render(Uint32 deltaTime) {
-	taxi_->render(deltaTime);
 	tileMap_->render(deltaTime);
-	gun_->render(deltaTime);
+	taxi_->render(deltaTime);
 	bPool_->render(deltaTime);
+	gun_->render(deltaTime);
 	// LLamar a los render() de los GameObjects
 }
 
