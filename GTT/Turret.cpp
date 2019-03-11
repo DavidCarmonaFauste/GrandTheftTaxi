@@ -58,7 +58,7 @@ void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 			shC_->shoot();
 			ammo_--;
 			lastTimeShot_ = SDL_GetTicks();
-			animC_->playAnimation("idle", 3.5f, false);
+			animC_->playAnimation("idle", 1.0f, false);
 		}
 	}
 }

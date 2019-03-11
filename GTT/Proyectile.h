@@ -22,7 +22,7 @@ private:
 	NaturalMove* movC_;
 	double damage_;
 	double lifeTime_;
-	string bulletPath_= "../Assets/sprites/Ricardo.jpg";
+	string bulletPath_= "../Assets/sprites/air_strike_x.png";
 	string flamePath_;
 	string strikePath_;
 };

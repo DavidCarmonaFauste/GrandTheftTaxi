@@ -12,5 +12,5 @@ FollowGameObject::~FollowGameObject() {
 
 
 void FollowGameObject::update(GameObject * o, Uint32 deltaTime) {
-	o->setPosition(Vector2D(objectToFollow_->getCenter().getX()-o->getWidth()/2, objectToFollow_->getCenter().getY()-o->getHeight()/2));
+	o->setPosition(objectToFollow_->getPosition());
 }
