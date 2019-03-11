@@ -30,14 +30,6 @@ Game::Game() {
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
 	}
-
-	// Create the resources singleton for the first time
-	// and initialize its states
-	Resources::getInstance()->initStates();
-
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	
-	gmStMachine_ = new GameStateMachine();
 }
 
 Game::~Game() {
@@ -91,6 +83,16 @@ Game::~Game() {
 	 return cameras_[cT];
  }
 
+ void Game::init() {
+	 // Create the resources singleton for the first time
+	 // and initialize its states
+	 Resources::getInstance()->initStates();
+
+	 cameras_[GAME_CAMERA] = new Camera(1600, 900);
+
+	 gmStMachine_ = new GameStateMachine();
+ }
+
  Game * Game::getInstance() {
 	 if (singleton_ == nullptr)
 		 singleton_ = new Game();
@@ -100,6 +102,8 @@ Game::~Game() {
 
  //Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
 void Game::run() {
+	init();
+
 	double lastTime = SDL_GetTicks();
 	double deltaTime = lastTime;
 

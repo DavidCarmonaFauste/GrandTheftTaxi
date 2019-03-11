@@ -7,7 +7,7 @@ Resources* Resources::singleton_ = nullptr;
 
 Resources::Resources() {
 	//par {string, states}
-	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, mainMenuState_));
+
 
 	physicsScalingFactor = 0.2;
 
@@ -37,5 +37,6 @@ Resources * Resources::getInstance() {
 
 void Resources::initStates() {
 	mainMenuState_ = new MainMenuState();
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, mainMenuState_));
 }
 

@@ -10,7 +10,6 @@ public:
 
 
 protected:
-	Vehicle* vehicle_;
 
 private:
 

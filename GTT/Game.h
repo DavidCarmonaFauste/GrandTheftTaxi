@@ -47,7 +47,7 @@ public:
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
 
-
+	void init();
 	
 
 
