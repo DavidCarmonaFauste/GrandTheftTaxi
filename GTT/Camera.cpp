@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Game.h"
 
 
 
@@ -19,7 +20,7 @@ Camera::~Camera() {
 void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * clip, double angle) {
 	SDL_Rect transposedRect = SDL_Rect();
 	int width = 0, height = 0;
-	SDL_RenderGetLogicalSize(Game::renderer_, &width, &height);
+	SDL_RenderGetLogicalSize(Game::getInstance()->getRenderer(), &width, &height);
 
 	transposedRect.w = (int) ( ((float)dest.w / (float)cameraRect_->w) * width);
 	transposedRect.h = (int) ( ((float)dest.h / (float)cameraRect_->h) * height);

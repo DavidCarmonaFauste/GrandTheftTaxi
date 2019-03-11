@@ -3,7 +3,7 @@
 #include <iostream>
 
 Sprite::Sprite(string path, int w, int h, int x, int y) {
-	texture_ = new Texture(Game::renderer_, path);
+	texture_ = new Texture(Game::getInstance()->getRenderer(), path);
 	rect_ = new SDL_Rect();
 	rect_->h = h; rect_->w = w; rect_->x = x; rect_->y = y;
 }
@@ -31,7 +31,7 @@ void Sprite::render(GameObject * o, Uint32 deltaTime) {
 	rect_->w = o->getWidth();
 	rect_->h = o->getHeight();
 
-	Game::cameras_[cam_]->renderTexture(texture_, *rect_,
+	Game::getInstance()->getCamera(cam_)->renderTexture(texture_, *rect_,
 					clip_, o->getRotation());
 }
 

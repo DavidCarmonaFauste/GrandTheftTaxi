@@ -31,9 +31,6 @@
     <Filter Include="Archivos de encabezado\Graphics">
       <UniqueIdentifier>{1ef57bc0-57bb-4f56-9d26-637c2d9f596c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado\StateMachine">
-      <UniqueIdentifier>{f10b8d94-c847-4276-a84a-82a68c0dbec0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de origen\StateMachine">
       <UniqueIdentifier>{3bec0137-91c0-45e2-8816-e220e8e1d8ae}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,15 @@
     </Filter>
     <Filter Include="Archivos de origen\Scene">
       <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\States">
+      <UniqueIdentifier>{edf5e450-d700-4390-8271-c730bce5be6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\States">
+      <UniqueIdentifier>{dcaf7bba-8950-4095-bb12-71ddfb741e36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\StateMachine">
+      <UniqueIdentifier>{f10b8d94-c847-4276-a84a-82a68c0dbec0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +120,6 @@
     <ClCompile Include="Vehicle.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Archivos de origen\Scene</Filter>
     </ClCompile>
@@ -126,8 +129,8 @@
     <ClCompile Include="Health.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Respawner.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>Archivos de origen\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +179,6 @@
     <ClInclude Include="GameStateMachine.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="VideoState.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -200,9 +200,6 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>Archivos de encabezado\Scene</Filter>
     </ClInclude>
@@ -215,8 +212,11 @@
     <ClInclude Include="Events.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Respawner.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Archivos de encabezado\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>Archivos de encabezado\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

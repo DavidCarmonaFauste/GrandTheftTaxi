@@ -1,11 +1,9 @@
 #pragma once
+#include "GameState.h"
+#include "Resources.h"
 
 #include <stack>
-#include "Resources.h"
-#include "VideoState.h"
 
-
-class GameState;
 
 using namespace std;
 

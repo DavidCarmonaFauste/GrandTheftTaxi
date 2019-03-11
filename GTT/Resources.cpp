@@ -1,14 +1,14 @@
 #include "Resources.h"
-#include "VideoState.h"
-#include "GameState.h"
+#include "MainMenuState.h"
 
-Resources* Resources::singleton = nullptr;
+
+
+Resources* Resources::singleton_ = nullptr;
+
 Resources::Resources() {
-	//se inicializan los estados y se almacenan en el diccionario
-	introState_ = new VideoState("/YuzuGames_Intro.mp4.avi");
 	//par {string, states}
-	
-	STATES_.insert(std::pair<string, GameState*>(NAME_INTRO_STATE, introState_));
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, mainMenuState_));
+
 	physicsScalingFactor = 0.2;
 
 	vehicles_ = {
@@ -16,24 +16,26 @@ Resources::Resources() {
 	};
 
 	sounds_ = {
-		{Default, "../Assets/sounds/default.wav"}
+		{Default_Sound, "../Assets/sounds/default.wav"}
 	};
-
 }
 
+
+
 Resources::~Resources() {
-	delete introState_;
-	introState_ = nullptr;
+	//delete introState_;
+	//introState_ = nullptr;
 }
 
 Resources * Resources::getInstance() {
-	if (singleton == nullptr) {
-		singleton = new Resources();
+	if (singleton_ == nullptr) {
+		singleton_ = new Resources();
 	}
 	
-	return singleton;
+	return singleton_;
 }
 
-void Resources::freeResources() {
-
+void Resources::initStates() {
+	mainMenuState_ = new MainMenuState();
 }
+

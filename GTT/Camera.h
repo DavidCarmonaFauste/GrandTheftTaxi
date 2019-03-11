@@ -6,6 +6,8 @@
 #include "Vector2D.h"
 #include "CameraType.h"
 
+class Game;
+
 class Camera :
 	public Container
 {

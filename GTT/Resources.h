@@ -3,21 +3,23 @@
 #include <vector>
 #include <map>
 #include "GameState.h"
+
+
 using namespace std;
 
-class VideoState;
-class GameState;
 
+//static const string NAME_INTRO_STATE = "introState";
+static const string NAME_MAINMENU_STATE = "mainMenuState";
 
-static const string NAME_INTRO_STATE = "introState";
-//static const string NAME_INTRO_STATE = "introState";
-//static const string NAME_INTRO_STATE = "introState";
-//static const string NAME_INTRO_STATE = "introState";
 class Resources
 {
 public:
 	enum SoundId {
-		Default
+		Default_Sound
+	};
+
+	enum MusicId {
+		Default_Music
 	};
 
 	enum VehicleId {
@@ -42,6 +44,7 @@ public:
 	};
 
 	static Resources* getInstance();
+	void initStates();
 	
 	vector <VehicleInfo> vehicles_;
 	vector <SoundInfo> sounds_;
@@ -50,13 +53,14 @@ public:
 	map <string, GameState*> STATES_;
 	
 private:
-	Resources();
-	~Resources();
 
 	// Singleton instance
-	static Resources *singleton;
+	static Resources *singleton_;
 
-	void freeResources();
+	Resources();
+	virtual ~Resources();
 
-	VideoState *introState_ = nullptr;
+
+	//VideoState *introState_ = nullptr;
+	GameState* mainMenuState_ = nullptr;
 };

@@ -1,12 +1,12 @@
 #include "GameStateMachine.h"
-#include "GameState.h"
+
 
 
 
 GameStateMachine::GameStateMachine()
 {
-	Resources::getInstance()->STATES_[NAME_INTRO_STATE];
-	currentState_ = NAME_INTRO_STATE;
+	//Resources::getInstance()->STATES_[NAME_MAINMENU_STATE];
+	currentState_ = NAME_MAINMENU_STATE;
 }
 
 

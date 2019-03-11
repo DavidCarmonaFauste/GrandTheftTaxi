@@ -1,10 +1,10 @@
 #include "GameObject.h"
 
-GameObject::GameObject() :
+/*GameObject::GameObject() :
 	GameObject(nullptr) {
-}
-
-GameObject::GameObject(Game * game): game_(game),
+}*/
+//Game * game
+GameObject::GameObject():
 active_(true),
 width_(),
 height_(),
@@ -19,14 +19,15 @@ rotation_(0.0)
 GameObject::~GameObject() {
 }
 
-Game * GameObject::getGame() const
+//game_(game),
+/*Game * GameObject::getGame() const
 {
 	return game_;
-}
+}*/
 
-void GameObject::setGame(Game* game) {
+/*void GameObject::setGame(Game* game) {
 	game_ = game;
-}
+}*/
 
 bool GameObject::isActive() const {
 	return active_;

@@ -5,6 +5,7 @@
 #include "Texture.h"
 #include "RenderComponent.h"
 #include "CameraType.h"
+#include "Game.h"
 
 using namespace std;
 

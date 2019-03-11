@@ -2,7 +2,7 @@
 
 
 Vehicle::Vehicle(Resources::VehicleId id) {
-	Resources::VehicleInfo& r = Resources::vehicles_[id];
+	Resources::VehicleInfo& r = Resources::getInstance()->vehicles_[id];
 
 	this->setWidth(r.width);
 	this->setHeight(r.height);
@@ -43,8 +43,8 @@ void Vehicle::setPosition(const Vector2D & pos, bool force) {
 						 b2Vec2(phyO_->getOrigin().x * width_,
 							   phyO_->getOrigin().y * height_);
 
-		nextPos = b2Vec2(nextPos.x * Resources::physicsScalingFactor,
-						 nextPos.y * Resources::physicsScalingFactor);
+		nextPos = b2Vec2(nextPos.x * Resources::getInstance()->physicsScalingFactor,
+						 nextPos.y * Resources::getInstance()->physicsScalingFactor);
 
 		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
 	}
