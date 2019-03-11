@@ -14,8 +14,8 @@ Reticule::Reticule()
 		animC_->loadAnimation(o.second, o.first);//carga las distintas animaciones en el componente de render
 	}
 	
-	height_ = 50;
-	width_ = 50;
+	height_ = 75;
+	width_ = 75;
 }
 
 

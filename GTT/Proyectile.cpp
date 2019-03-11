@@ -14,7 +14,7 @@ Proyectile::Proyectile()
 	addLogicComponent(movC_);
 
 	height_ = 50;
-	width_ = 25;
+	width_ = 50;
 }
 
 

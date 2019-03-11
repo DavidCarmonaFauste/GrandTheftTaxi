@@ -21,6 +21,7 @@ map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
 b2World* Game::world_ = nullptr;
 
 Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
+
 	Game::window_ = window_;
 	Game::renderer_ = renderer_;
 	Game::soundManager_ = new SoundManager();
@@ -34,7 +35,11 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	taxi_ = new Vehicle(Resources::Taxi);
 	taxi_->addInputComponent(new ShootIC());
 	gun_ = new Gun(taxi_, bPool_);
-	taxi_->EquipTurret(gun_);
+	shotgun_ = new ShotGun(taxi_, bPool_);
+
+	taxi_->EquipTurret(shotgun_);
+
+	//taxi_->EquipTurret(gun_);
 
 	// Respawn system
 	GameObject* initialRespawnPoint = new Container();
@@ -46,6 +51,8 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 
 	// TESTING TILEMAP
 	tileMap_ = new TileMap("../Assets/maps/test.tmx");
+	SDL_ShowCursor(0);
+
 }
 
 Game::~Game() {
@@ -57,11 +64,26 @@ Game::~Game() {
 bool Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event e;
 
-	tileMap_->handleInput(deltaTime, e);
-
 
 	while (SDL_PollEvent(&e) && !exit_) {
 		// LLamar a los handleEvent() de los GameObjects
+		if (e.type == SDL_KEYDOWN) {
+			switch (e.key.keysym.sym) {
+			case SDLK_ESCAPE:
+				exit_ = true;
+				break;
+				// Pressing f to toggle fullscreen.
+			case SDLK_f:
+				int flags = SDL_GetWindowFlags(window_);
+				if (flags & SDL_WINDOW_FULLSCREEN) {
+					SDL_SetWindowFullscreen(window_, 0);
+				}
+				else {
+					SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
+				}
+				break;
+			}
+		}
 		taxi_->handleInput(deltaTime, e);
 		if (e.type == SDL_QUIT) exit_ = true;
 	}
@@ -71,7 +93,6 @@ bool Game::handleEvents(Uint32 deltaTime) {
 bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
 	tileMap_->update(deltaTime);
-	gun_->update(deltaTime);
 	bPool_->update(deltaTime);
 
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
@@ -80,10 +101,10 @@ bool Game::update(Uint32 deltaTime) {
 	return exit_;
 }
 void Game::render(Uint32 deltaTime) {
-	taxi_->render(deltaTime);
 	tileMap_->render(deltaTime);
-	gun_->render(deltaTime);
 	bPool_->render(deltaTime);
+	taxi_->render(deltaTime);
+	
 	// LLamar a los render() de los GameObjects
 }
 
