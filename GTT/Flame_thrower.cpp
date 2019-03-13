@@ -18,9 +18,7 @@ Flame_thrower::Flame_thrower(Vehicle * car, ProyectilePool * bPool):Turret(car, 
 	width_ = 100;
 	animC_->loadAnimation(path_, "idle");
 	animC_->playAnimation("idle");
-	if (reticule_ != nullptr) {
-		reticule_->ChangeReticule("flamethrower");
-	}
+	
 }
 
 

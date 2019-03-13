@@ -17,8 +17,6 @@ MachineGun::MachineGun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	width_ = 100;
 	animC_->loadAnimation(path_, "idle");
 	animC_->playAnimation("idle");
-	if (reticule_ != nullptr) {
-		reticule_->ChangeReticule("machinegun");
-	}
+	
 }
 

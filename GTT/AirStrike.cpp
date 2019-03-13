@@ -18,9 +18,7 @@ AirStrike::AirStrike(Vehicle * car, ProyectilePool * bPool):Turret(car, bPool)
 	width_ = 500;
 	animC_->loadAnimation(path_, "idle");
 	animC_->playAnimation("idle");
-	if (reticule_ != nullptr) {
-		reticule_->ChangeReticule("airstrike");
-	}
+	
 }
 
 

@@ -9,6 +9,7 @@
 #include "ShootIC.h"
 #include "ProyectilePool.h"
 #include "ShotGun.h"
+#include "Reticule.h"
 
 
 using namespace std;
@@ -94,7 +95,7 @@ bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
 	tileMap_->update(deltaTime);
 	bPool_->update(deltaTime);
-
+	Reticule::GetInstance()->update(deltaTime);
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
 	// LLamar a los update() de los GameObjects
@@ -104,6 +105,8 @@ void Game::render(Uint32 deltaTime) {
 	tileMap_->render(deltaTime);
 	bPool_->render(deltaTime);
 	taxi_->render(deltaTime);
+	Reticule::GetInstance()->render(deltaTime);
+
 	
 	// LLamar a los render() de los GameObjects
 }

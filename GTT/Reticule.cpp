@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "CursorLC.h"
 
+Reticule* Reticule::instance_ = nullptr;
 
 Reticule::Reticule()
 {

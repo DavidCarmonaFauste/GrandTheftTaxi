@@ -24,7 +24,6 @@ public:
 	virtual double GetDamage();
 	virtual int GetCadence();
 	virtual int GetAmmo();
-	virtual Reticule* GetReticule();
 	virtual double GetLifeTime();
 	virtual ~Turret();
 protected:
@@ -40,7 +39,6 @@ protected:
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
-	Reticule* reticule_=nullptr;//si el vehiculo que lleva la torreta es un NPC, no tiene reticula
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
 	
 	FollowGameObject* followC_;//componente que hace que la posicion se iguale a la de otro objeto

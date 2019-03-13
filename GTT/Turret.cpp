@@ -13,7 +13,6 @@ Turret::Turret(Vehicle* car, ProyectilePool* bPool)
 	addLogicComponent(followC_);
 	addRenderComponent(animC_);
 	bPool_ = bPool;
-	reticule_ = new Reticule();
 	lastTimeReloaded_ = -reloadTime_;
 	lastTimeShot_ = -cadence_;
 }
@@ -21,30 +20,23 @@ Turret::Turret(Vehicle* car, ProyectilePool* bPool)
 void Turret::render(Uint32 deltaTime)
 {
 	Container::render(deltaTime);
-	if (reticule_ != nullptr)
-		reticule_->render(deltaTime);
-		
 }
 
 void Turret::update(Uint32 deltaTime)
 {
 	Container::update(deltaTime);
-	if (reticule_ != nullptr) {
-		reticule_->update(deltaTime);
-		double disX = reticule_->getCenter().getX() - getCenter().getX();
-		double disY = reticule_->getCenter().getY() - getCenter().getY();
-
-		rotation_  = acos(-disY/(sqrt(pow(disX, 2) + pow(disY, 2))));
-		rotation_ = rotation_ * 180.0 / PI;
-
-		if (disX < 0) {
-			rotation_ = -rotation_;
-		}
-		
-	}
-		
-
+	Reticule* a=Reticule::GetInstance();
+	Reticule::GetInstance()->getCenter();
+	double disX = Reticule::GetInstance()->getCenter().getX() - getCenter().getX();
+	double disY = Reticule::GetInstance()->getCenter().getY() - getCenter().getY();
+	rotation_  = acos(-disY/(sqrt(pow(disX, 2) + pow(disY, 2))));
+	rotation_ = rotation_ * 180.0 / PI;
+	if (disX < 0)
+		rotation_ = -rotation_;
 }
+		
+
+
 
 proyectileType Turret::GetProyectileType()
 {
@@ -88,10 +80,6 @@ int Turret::GetAmmo()
 	return ammo_;
 }
 
-Reticule * Turret::GetReticule()
-{
-	return reticule_;
-}
 
 double Turret::GetLifeTime()
 {

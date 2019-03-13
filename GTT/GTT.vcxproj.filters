@@ -171,14 +171,14 @@
     <ClCompile Include="ShotGun.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Sniper.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
     <ClCompile Include="SpreadSC.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="StaticSC.cpp">
       <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sniper.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

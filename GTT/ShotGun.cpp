@@ -21,8 +21,7 @@ ShotGun::ShotGun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	animC_->loadAnimation(animationpath_, "idle", 3, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
-	if (reticule_ != nullptr) {
-		reticule_->ChangeReticule("gun");
-	}
+	Reticule::GetInstance()->ChangeReticule("gun");
 }
+
 
