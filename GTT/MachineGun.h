@@ -3,7 +3,7 @@
 class MachineGun :public Turret
 {
 public:
-	MachineGun(Vehicle* car, ProyectilePool* bPool);
+	MachineGun();
 	virtual ~MachineGun() {};
 };
 

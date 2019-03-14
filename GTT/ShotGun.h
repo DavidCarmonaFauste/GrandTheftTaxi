@@ -3,7 +3,7 @@
 class ShotGun :public Turret
 {
 public:
-	ShotGun(Vehicle* car, ProyectilePool* bPool);
+	ShotGun();
 	virtual ~ShotGun() {};
 protected:
 	double dispersionangle_;

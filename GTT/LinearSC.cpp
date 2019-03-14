@@ -6,7 +6,7 @@
 
 void LinearSC::shoot()
 {
-	bPool_->addProyectile(turret_->getCenter(),
+	ProyectilePool::GetInstance()->addProyectile(turret_->getCenter(),
 		Vector2D(turret_->GetSpeed()*sin(turret_->getRotation()/180.0*PI), -turret_->GetSpeed()*cos(turret_->getRotation()/180.0*PI)),
 		turret_->GetProyectileType(), turret_->GetLifeTime(), turret_->GetDamage());
 }

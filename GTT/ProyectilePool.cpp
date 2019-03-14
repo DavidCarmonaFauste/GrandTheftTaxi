@@ -1,6 +1,6 @@
 #include "ProyectilePool.h"
 
-
+ProyectilePool* ProyectilePool::instance_ = nullptr;
 
 ProyectilePool::ProyectilePool()
 {

@@ -1,9 +1,8 @@
 #include "ShootComponent.h"
 
 
-ShootComponent::ShootComponent(ProyectilePool* bPool, Turret* turret)
+ShootComponent::ShootComponent(Turret* turret)
 {
-	bPool_ = bPool;
 	turret_ = turret;
 }
 

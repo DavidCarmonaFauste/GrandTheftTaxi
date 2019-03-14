@@ -4,7 +4,7 @@
 #include "Reticule.h"
 
 
-Flame_thrower::Flame_thrower(Vehicle * car, ProyectilePool * bPool):Turret(car, bPool)
+Flame_thrower::Flame_thrower()
 {
 	maxAmmo_ = 0;
 	cadence_ = 100;
@@ -13,7 +13,7 @@ Flame_thrower::Flame_thrower(Vehicle * car, ProyectilePool * bPool):Turret(car, 
 	lifeTime_ = 300;
 	prType_ = FLAME;
 	path_ = "../Assets/sprites/flame_thrower.png";
-	shC_ = new StaticSC(bPool_, this);
+	shC_ = new StaticSC(this);
 	height_ = 200;
 	width_ = 100;
 	animC_->loadAnimation(path_, "idle");

@@ -4,7 +4,7 @@
 class AirStrike : public Turret
 {
 public:
-	AirStrike(Vehicle* car, ProyectilePool* bPool);
+	AirStrike();
 	virtual ~AirStrike() {};
 };
 

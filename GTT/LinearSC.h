@@ -7,7 +7,7 @@
 class LinearSC : public ShootComponent
 {
 public:
-	LinearSC(ProyectilePool* bPool, Turret* turret) :ShootComponent(bPool, turret) {};
+	LinearSC(Turret* turret) :ShootComponent(turret) {};
 	virtual void shoot();
 	virtual ~LinearSC() {};
 };

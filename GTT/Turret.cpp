@@ -5,14 +5,10 @@
 #include <math.h>
 #define PI 3.14159265359
 
-Turret::Turret(Vehicle* car, ProyectilePool* bPool)
+Turret::Turret()
 {
-	car_ = car;
-	followC_ = new FollowGameObject(car_);
 	animC_ = new Animation();
-	addLogicComponent(followC_);
 	addRenderComponent(animC_);
-	bPool_ = bPool;
 	lastTimeReloaded_ = -reloadTime_;
 	lastTimeShot_ = -cadence_;
 }
@@ -34,10 +30,14 @@ void Turret::update(Uint32 deltaTime)
 	if (disX < 0)
 		rotation_ = -rotation_;
 }
+
+void Turret::AttachToVehicle(Vehicle * car)
+{
+	car_ = car;
+	followC_ = new FollowGameObject(car_);
+	addLogicComponent(followC_);
+}
 		
-
-
-
 proyectileType Turret::GetProyectileType()
 {
 	return prType_;

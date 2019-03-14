@@ -4,7 +4,7 @@
 #include "Reticule.h"
 
 
-Sniper::Sniper(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
+Sniper::Sniper()
 {
 	maxAmmo_ = 4;
 	cadence_ = 600;
@@ -12,7 +12,7 @@ Sniper::Sniper(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	speed_ = 50;
 	ammo_ = maxAmmo_;
 	path_ = "../Assets/sprites/sniper.png";
-	shC_ = new LinearSC(bPool_, this);
+	shC_ = new LinearSC(this);
 	height_ = 200;
 	width_ = 100;
 	animC_->loadAnimation(path_, "idle");

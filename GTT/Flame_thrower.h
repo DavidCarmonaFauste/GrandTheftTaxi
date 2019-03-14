@@ -4,7 +4,7 @@
 class Flame_thrower : public Turret
 {
 public:
-	Flame_thrower(Vehicle* car, ProyectilePool* bPool);
+	Flame_thrower();
 	virtual ~Flame_thrower();
 };
 

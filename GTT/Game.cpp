@@ -32,11 +32,10 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
 
 	// Taxi
-	bPool_ = new ProyectilePool();
 	taxi_ = new Vehicle(Resources::Taxi);
 	taxi_->addInputComponent(new ShootIC());
-	gun_ = new Gun(taxi_, bPool_);
-	shotgun_ = new ShotGun(taxi_, bPool_);
+	gun_ = new Gun();
+	shotgun_ = new ShotGun();
 
 	taxi_->EquipTurret(shotgun_);
 
@@ -94,7 +93,7 @@ bool Game::handleEvents(Uint32 deltaTime) {
 bool Game::update(Uint32 deltaTime) {
 	taxi_->update(deltaTime);
 	tileMap_->update(deltaTime);
-	bPool_->update(deltaTime);
+	ProyectilePool::GetInstance()->update(deltaTime);
 	Reticule::GetInstance()->update(deltaTime);
 	Game::world_->Step((float) deltaTime / 1000, 8, 3);
 
@@ -103,7 +102,7 @@ bool Game::update(Uint32 deltaTime) {
 }
 void Game::render(Uint32 deltaTime) {
 	tileMap_->render(deltaTime);
-	bPool_->render(deltaTime);
+	ProyectilePool::GetInstance()->render(deltaTime);
 	taxi_->render(deltaTime);
 	Reticule::GetInstance()->render(deltaTime);
 

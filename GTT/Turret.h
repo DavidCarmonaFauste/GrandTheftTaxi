@@ -4,7 +4,6 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 
-class ProyectilePool;
 class Animation;
 class ShootComponent;
 class Reticule;
@@ -14,9 +13,10 @@ class Reticule;
 class Turret : public Container
 {
 public:
-	Turret(Vehicle* car, ProyectilePool* bPool);
+	Turret();
 	virtual void render(Uint32 deltaTime);
 	virtual void update(Uint32 deltaTime);
+	virtual void AttachToVehicle(Vehicle* car);
 	proyectileType GetProyectileType();
 	virtual void Shoot();
 	virtual void Reload();
@@ -40,9 +40,7 @@ protected:
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
-	
-	FollowGameObject* followC_;//componente que hace que la posicion se iguale a la de otro objeto
-	ProyectilePool* bPool_;
+	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta
 

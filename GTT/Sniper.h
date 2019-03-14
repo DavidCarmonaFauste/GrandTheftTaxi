@@ -3,7 +3,7 @@
 class Sniper : public Turret
 {
 public:
-	Sniper(Vehicle* car, ProyectilePool* bPool);
+	Sniper();
 	virtual ~Sniper() {};
 };
 

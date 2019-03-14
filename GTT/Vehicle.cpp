@@ -49,6 +49,7 @@ void Vehicle::Shoot()
 void Vehicle::EquipTurret(Turret * turret)
 {
 	currentTurret_ = turret;
+	currentTurret_->AttachToVehicle(this);
 }
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {

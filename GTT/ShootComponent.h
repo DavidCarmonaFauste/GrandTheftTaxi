@@ -6,11 +6,10 @@ class ProyectilePool;
 class ShootComponent
 {
 public:
-	ShootComponent(ProyectilePool* bPool, Turret* turret);
+	ShootComponent(Turret* turret);
 	virtual void shoot()=0;
 	virtual ~ShootComponent();
 protected:
-	ProyectilePool* bPool_;
 	Turret* turret_;
 };
 

@@ -3,7 +3,7 @@
 #include "Animation.h"
 #include "Reticule.h"
 
-AirStrike::AirStrike(Vehicle * car, ProyectilePool * bPool):Turret(car, bPool)
+AirStrike::AirStrike()
 {
 	maxAmmo_ = 1;
 	cadence_ = 600;
@@ -13,7 +13,7 @@ AirStrike::AirStrike(Vehicle * car, ProyectilePool * bPool):Turret(car, bPool)
 	prType_ = STRIKE;
 	ammo_ = maxAmmo_;
 	path_ = "../Assets/sprites/air_strike.png";
-	shC_ = new StaticSC(bPool_, this);
+	shC_ = new StaticSC(this);
 	height_ = 500;
 	width_ = 500;
 	animC_->loadAnimation(path_, "idle");

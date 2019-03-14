@@ -4,7 +4,7 @@
 #include "Reticule.h"
 
 
-ShotGun::ShotGun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
+ShotGun::ShotGun()
 {
 	maxAmmo_ = 6;
 	cadence_ = 900;
@@ -15,7 +15,7 @@ ShotGun::ShotGun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	path_ = "../Assets/sprites/shot_gun.png";
 	dispersionangle_ = 30;
 	numPellets_ = 3;
-	shC_ = new SpreadSC(bPool_, this, dispersionangle_, numPellets_);
+	shC_ = new SpreadSC(this, dispersionangle_, numPellets_);
 	height_ = 150;
 	width_ = 75;
 	animC_->loadAnimation(animationpath_, "idle", 3, 1);

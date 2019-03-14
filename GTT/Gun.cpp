@@ -4,7 +4,7 @@
 #include "Reticule.h"
 
 
-Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
+Gun::Gun()
 {
 	maxAmmo_ = 10;
 	cadence_ = 150;
@@ -13,7 +13,7 @@ Gun::Gun(Vehicle* car, ProyectilePool* bPool):Turret(car, bPool)
 	ammo_ = maxAmmo_;
 	path_ = "../Assets/sprites/gun.png";
 	animationpath_ = "../Assets/sprites/pistola_anim.png";
-	shC_ = new LinearSC(bPool_, this);
+	shC_ = new LinearSC(this);
 	height_ = 150;
 	width_ = 75;
 	animC_->loadAnimation(animationpath_, "idle", 2, 1);

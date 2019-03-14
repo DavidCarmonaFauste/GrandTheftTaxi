@@ -54,8 +54,6 @@ private:
 	Gun* gun_;
 	ShotGun* shotgun_;
 
-	ProyectilePool* bPool_;
-
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;
