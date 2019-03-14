@@ -11,6 +11,7 @@
 using namespace std;
 
 class Turret;
+class AimComponent;
 
 class Vehicle :
 	public Container
@@ -21,6 +22,7 @@ public:
 
 	Health* getHealthComponent();
 
+	virtual AimComponent* GetAimComponent();
 	virtual void Shoot();
 	virtual void EquipTurret(Turret* turret);
 	virtual void setPosition(const Vector2D &pos, bool force = false) override;
@@ -31,6 +33,7 @@ public:
 protected:
 	PhysicObject* phyO_;
 	Animation* sprite_;
+	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
 	double velMax_ = 4;
 	double velMaxMarchaAtras_ = -2.5;
 	double aceleracion_ = 0.1;

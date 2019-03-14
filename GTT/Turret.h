@@ -6,7 +6,7 @@
 
 class Animation;
 class ShootComponent;
-class Reticule;
+class AimComponent;
 
 
 //clase abstracta, padre de los diferentes tipos de torreta
@@ -14,8 +14,6 @@ class Turret : public Container
 {
 public:
 	Turret();
-	virtual void render(Uint32 deltaTime);
-	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
 	proyectileType GetProyectileType();
 	virtual void Shoot();
@@ -39,6 +37,7 @@ protected:
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
+	AimComponent* aimC_;//forma de apuntado, se lo pasa el vehiculo al equiparse
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
 	FollowGameObject* followC_;
 	Animation* animC_;

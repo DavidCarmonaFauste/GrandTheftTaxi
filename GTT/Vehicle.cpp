@@ -1,6 +1,7 @@
 #include "Vehicle.h"
 #include "Turret.h"
 #include "NaturalMove.h"
+#include "AimAtCursorAC.h"
 #define PI 3.14159265359
 
 Vehicle::Vehicle(Resources::VehicleId id) {
@@ -27,6 +28,8 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	// Health
 	health_ = new Health(100);
 	addLogicComponent(health_);
+
+	aimC_ = new AimAtCursorAC();
 }
 
 
@@ -39,6 +42,11 @@ Vehicle::~Vehicle() {
 
 Health * Vehicle::getHealthComponent() {
 	return health_;
+}
+
+AimComponent * Vehicle::GetAimComponent()
+{
+	return aimC_;
 }
 
 void Vehicle::Shoot()

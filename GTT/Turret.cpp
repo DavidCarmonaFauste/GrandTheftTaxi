@@ -2,6 +2,7 @@
 #include "Animation.h"
 #include "ShootComponent.h"
 #include "Reticule.h"
+#include "AimComponent.h"
 #include <math.h>
 #define PI 3.14159265359
 
@@ -13,28 +14,15 @@ Turret::Turret()
 	lastTimeShot_ = -cadence_;
 }
 
-void Turret::render(Uint32 deltaTime)
-{
-	Container::render(deltaTime);
-}
-
-void Turret::update(Uint32 deltaTime)
-{
-	Container::update(deltaTime);
-	Reticule* a=Reticule::GetInstance();
-	Reticule::GetInstance()->getCenter();
-	double disX = Reticule::GetInstance()->getCenter().getX() - getCenter().getX();
-	double disY = Reticule::GetInstance()->getCenter().getY() - getCenter().getY();
-	rotation_  = acos(-disY/(sqrt(pow(disX, 2) + pow(disY, 2))));
-	rotation_ = rotation_ * 180.0 / PI;
-	if (disX < 0)
-		rotation_ = -rotation_;
-}
 
 void Turret::AttachToVehicle(Vehicle * car)
 {
 	car_ = car;
+
 	followC_ = new FollowGameObject(car_);
+	aimC_ = car_->GetAimComponent();
+
+	addLogicComponent(aimC_);
 	addLogicComponent(followC_);
 }
 		
