@@ -38,6 +38,8 @@ protected:
 	double damage_;//daño de cada proyectil
 	double lifeTime_; //tiempo de vida del proyectil
 	bool reloading_;//indica si se esta recargando en el momento
+	double shooting_ = -1; //indica si se está disparando (para AirStrike)
+	double waitingShotTime_ = -1; //tiempo que tarda en disparar
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;

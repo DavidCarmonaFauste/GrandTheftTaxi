@@ -20,7 +20,13 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reloading_) {
 		Reload();
+	} 
+	if (shooting_ != -1 && SDL_GetTicks() > shooting_ + waitingShotTime_) {
+		Shoot();
+		cout << "shoot" << endl;
+		shooting_ = -1;
 	}
+
 }
 
 void Turret::AttachToVehicle(Vehicle * car)

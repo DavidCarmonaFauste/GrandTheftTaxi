@@ -5,6 +5,7 @@
 
 AirStrike::AirStrike()
 {
+	waitingShotTime_ = 1000; //en milisegundos
 	maxAmmo_ = 1;
 	cadence_ = 600;
 	reloadTime_ = 30000;
@@ -22,6 +23,11 @@ AirStrike::AirStrike()
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
 	
+	
 }
 
+void AirStrike::Shoot()
+{
+	shooting_ = SDL_GetTicks();
+}
 
