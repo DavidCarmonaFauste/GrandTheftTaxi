@@ -19,7 +19,6 @@ class Vehicle;
 class SoundManager;
 class TileMap;
 class Gun;
-class AirStrike;
 class ShotGun;
 class ProyectilePool;
 
@@ -53,8 +52,8 @@ private:
 	Vehicle* taxi_;
 	TileMap* tileMap_;
 	Gun* gun_;
-	//ShotGun* shotgun_;
-	AirStrike* airstrike_;
+	ShotGun* shotgun_;
+
 	//provisional
 	//se instancia en clase Game.h y se gestiona render, update y handleEvent de los estados en pila 
 	GameStateMachine* gmStMachine_;

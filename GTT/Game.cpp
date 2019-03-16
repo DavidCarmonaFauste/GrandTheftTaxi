@@ -8,7 +8,7 @@
 #include "Gun.h"
 #include "ShootIC.h"
 #include "ProyectilePool.h"
-#include "AirStrike.h"
+#include "ShotGun.h"
 #include "Reticule.h"
 #include "ReloadInputComponent.h"
 
@@ -38,9 +38,9 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	taxi_->addInputComponent(new ReloadInputComponent());
 
 	gun_ = new Gun();
-	airstrike_ = new AirStrike();
+	shotgun_ = new ShotGun();
 
-	taxi_->EquipTurret(airstrike_);
+	taxi_->EquipTurret(shotgun_);
 
 	//taxi_->EquipTurret(gun_);
 
