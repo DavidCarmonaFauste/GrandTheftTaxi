@@ -14,7 +14,7 @@ class Turret;
 class AimComponent;
 
 class Vehicle :
-	public Container
+	public Container, public Observable
 {
 public:
 	Vehicle( Resources::VehicleId id);

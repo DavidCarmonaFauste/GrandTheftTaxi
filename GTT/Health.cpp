@@ -35,7 +35,7 @@ void Health::resetHealth() {
 
 void Health::setHealth(int health) {
 	// Send an event about the health change
-	HealthChangedEvent e(this, health, health_);
+	HealthChangedEvent e(this, health, health_, maxHealth_);
 	broadcastEvent(&e);
 
 	health_ = health;

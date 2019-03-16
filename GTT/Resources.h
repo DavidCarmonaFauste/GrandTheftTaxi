@@ -10,6 +10,8 @@ using namespace std;
 
 //static const string NAME_INTRO_STATE = "introState";
 static const string NAME_MAINMENU_STATE = "mainMenuState";
+static const string NAME_MAIN_STATE = "MAIN_STATE";
+
 
 class Resources
 {
@@ -66,8 +68,4 @@ private:
 
 	Resources();
 	virtual ~Resources();
-
-
-	//VideoState *introState_ = nullptr;
-	GameState* mainMenuState_ = nullptr;
 };

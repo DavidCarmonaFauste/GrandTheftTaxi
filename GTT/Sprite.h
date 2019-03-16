@@ -26,11 +26,23 @@ public:
 
 	void setCamera(cameraType cam);
 	void setClipRect(SDL_Rect *clip);
+	const SDL_Rect* getRect();
+	const SDL_Rect* getClipRect();
+	Texture* getTexture();
+
+	void setAutoPos(bool autoPos);
+	void setAutoSize(bool autoSize);
+
+	void setPos(int x, int y);
+	void setSize(int w, int h);
 
 private:
 	Texture *texture_;
 	SDL_Rect *rect_;
 	SDL_Rect *clip_ = nullptr;
+
+	bool autoPos_ = true;
+	bool autoSize_ = true;
 
 	cameraType cam_ = GAME_CAMERA;
 };

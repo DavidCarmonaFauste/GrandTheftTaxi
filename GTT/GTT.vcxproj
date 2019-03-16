@@ -34,12 +34,14 @@
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="MainState.cpp" />
     <ClCompile Include="NaturalMove.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
@@ -63,6 +65,7 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Turret.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
@@ -85,11 +88,13 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="Health.h" />
+    <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MainState.h" />
     <ClInclude Include="NaturalMove.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
@@ -113,6 +118,7 @@
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Turret.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>

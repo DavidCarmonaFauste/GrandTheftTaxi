@@ -8,9 +8,7 @@
 
 class Game;
 
-class Camera :
-	public Container
-{
+class Camera : public Container {
 public:
 	Camera(int width, int height, float zoom = 1);
 	virtual ~Camera();

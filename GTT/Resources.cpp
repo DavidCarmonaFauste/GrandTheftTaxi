@@ -1,14 +1,13 @@
 #include "Resources.h"
-#include "MainMenuState.h"
 
+// States
+#include "MainMenuState.h"
+#include "MainState.h"
 
 
 Resources* Resources::singleton_ = nullptr;
 
 Resources::Resources() {
-	//par {string, states}
-
-
 	physicsScalingFactor = 0.2;
 
 	vehicles_ = {
@@ -17,6 +16,10 @@ Resources::Resources() {
 
 	sounds_ = {
 		{Default_Sound, "../Assets/sounds/default.wav"}
+	};
+
+	music_ = {
+		{Default_Music, "../Assets/sounds/default.wav"}
 	};
 }
 
@@ -36,7 +39,10 @@ Resources * Resources::getInstance() {
 }
 
 void Resources::initStates() {
-	mainMenuState_ = new MainMenuState();
-	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, mainMenuState_));
+	// Main menu
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
+
+	// Main game
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
 }
 

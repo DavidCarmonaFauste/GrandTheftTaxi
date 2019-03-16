@@ -1,8 +1,6 @@
 ﻿#include "Game.h"
 #include <iostream>
 
-
-
 using namespace std;
 
 
@@ -85,6 +83,7 @@ void Game::init() {
 	Resources::getInstance()->initStates();
 
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	cameras_[UI_CAMERA] = new Camera(1600, 900);
 
 	gmStMachine_ = new GameStateMachine();
 }

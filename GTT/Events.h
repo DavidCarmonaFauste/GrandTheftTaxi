@@ -23,12 +23,14 @@ struct Event {
 };
 
 struct HealthChangedEvent : public Event {
-	HealthChangedEvent(Observable* sender, int currentHealth, int previousHealth) :
+	HealthChangedEvent(Observable* sender, int currentHealth, int previousHealth, int maxHealth) :
 		Event(sender, HEALTH_CHANGED){
 		this->currentHealth_ = currentHealth;
 		this->previousHealth_ = previousHealth;
+		this->maxHealth_ = maxHealth;
 	}
 
 	int currentHealth_;
 	int previousHealth_;
+	int maxHealth_;
 };

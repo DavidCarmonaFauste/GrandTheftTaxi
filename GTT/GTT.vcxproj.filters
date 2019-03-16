@@ -49,6 +49,12 @@
     <Filter Include="Archivos de origen\Scene">
       <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\UI">
+      <UniqueIdentifier>{5bc37d18-3b38-4ca1-9e2f-225645e6fe4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\UI">
+      <UniqueIdentifier>{8a7a9918-4711-47cf-8129-29888856ed02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -190,6 +196,15 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -339,6 +354,15 @@
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthDisplay.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>

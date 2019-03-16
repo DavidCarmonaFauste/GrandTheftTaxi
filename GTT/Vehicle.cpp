@@ -14,11 +14,9 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	setPosition(Vector2D(100, 0));
 
 	// Physics
-	/*
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height,
 							  position_.getX(), position_.getY());
 	this->addLogicComponent(phyO_);
-	*/
 
 	// Sprite
 	sprite_ = new Animation();
@@ -98,8 +96,7 @@ void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 	Container::handleInput(time, event);
 }
 
-void Vehicle::update(Uint32 time)
-{
+void Vehicle::update(Uint32 time) {
 	velocity_.normalize();
 
 	if (downPressed) {
@@ -196,16 +193,16 @@ void Vehicle::update(Uint32 time)
 
 	}
 	if (currentTurret_ != nullptr)
-	currentTurret_->update(time);
+		currentTurret_->update(time);
+
 	Container::update(time);
 }
 
-void Vehicle::render(Uint32 time)
-{
-	if (currentTurret_ != nullptr)
+void Vehicle::render(Uint32 time) {
 	Container::render(time);
+
 	if (currentTurret_ != nullptr)
-	currentTurret_->render(time);
+		currentTurret_->render(time);
 }
 
 
