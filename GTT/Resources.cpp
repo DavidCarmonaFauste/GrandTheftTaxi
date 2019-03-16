@@ -3,7 +3,7 @@
 const float Resources::physicsScalingFactor = 0.2f;
 
 vector<Resources::VehicleInfo> Resources::vehicles_{
-	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100, 30.0f, 10.0f, 0.05f, 1.2f}
+	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100, 30.0f, 10.0f, 1.0f, 1.2f}
 };
 
 vector<Resources::SoundInfo> Resources::sounds_{

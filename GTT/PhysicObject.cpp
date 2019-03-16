@@ -21,6 +21,8 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	fixtureDef_.density = 1;
 	body_->CreateFixture(&fixtureDef_);
 	body_->SetLinearVelocity(Vector2D(0.0f, 0.0f));
+	body_->SetLinearDamping(2.0f);
+	body_->SetAngularDamping(2.0f);
 }
 
 
@@ -32,6 +34,14 @@ void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
 
 	Vector2D nextPos = Vector2D(body_->GetPosition().x, body_->GetPosition().y);
 	nextPos.Divide(Resources::physicsScalingFactor);
+
+	if (abs(body_->GetLinearVelocity().Length()) < 0.5) {
+		body_->SetLinearVelocity(Vector2D());
+	}
+
+	if (abs(body_->GetAngularVelocity()) < 0.5) {
+		body_->SetAngularVelocity(0);
+	}
 
 	// Set the GameObject position to the physics position
 	// Subtract the visual size multiplied by the origin to

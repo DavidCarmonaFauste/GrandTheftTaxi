@@ -41,23 +41,23 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
 	b2Body* body = v_->GetPhyO()->getBody();	
-	cout << body->GetLinearVelocity().Length() << endl;
+	cout << body->GetAngle() * 180 / M_PI << endl;
+
 	if (backwardPressed_) 
 	{
-		if (Vector2D(body->GetLinearVelocity()).AreEqual(v_->GetForwardVector()) == 0.0)
-			if (-body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()) {
-				Vector2D v = v_->GetForwardVector();
-				v.Multiply(v_->GetAcceleration());
-				body->SetLinearVelocity(body->GetLinearVelocity() - v);
-			}
-			else;
+		Vector2D v = body->GetLinearVelocity();
+		int degrees = abs(body->GetAngle() * 180 / M_PI);
+		degrees = degrees % 360;
+		if (degrees <= 180)
+			v.x -= (sin(body->GetAngle()));
 		else
-			if (body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()) {
-				Vector2D v = v_->GetForwardVector();
-				v.Multiply(v_->GetAcceleration());
-				body->SetLinearVelocity(body->GetLinearVelocity() - v);
-			}
+			v.x -= -abs(sin(body->GetAngle()));
+		if (degrees >= 90 && degrees <= 270)
+			v.y -= abs(cos(body->GetAngle()));
+		else
+			v.y -= -abs(cos(body->GetAngle()));
 
+		body->SetLinearVelocity(v);
 	}
 	if (rightTurnPressed_) {
 		if (isMoving()) 
@@ -68,18 +68,22 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 			steeringWheel('L');
 	}
 
-	if (forwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxSpeed()) {
-		Vector2D v = v_->GetForwardVector();
-		v.Multiply(v_->GetAcceleration());
-		cout << "Velocity: " << body->GetLinearVelocity().x << " / " << body->GetLinearVelocity().y << endl;
-		body->SetLinearVelocity(body->GetLinearVelocity() + v);
-		//cout << "Velocity : " << body->GetLinearVelocity().Length();
-	}
+	if (forwardPressed_ /*&& abs(body->GetLinearVelocity().Length()) < v_->GetMaxSpeed()*/) {
 
-	if (abs(body->GetLinearVelocity().Length()) < 0.02) {
-		body->SetLinearVelocity(Vector2D());
+		Vector2D v = body->GetLinearVelocity();
+		int degrees = abs(body->GetAngle() * 180 / M_PI);
+		degrees = degrees % 360;
+		if (degrees <= 180)
+			v.x = (v.x + v_->GetAcceleration()) * (sin(body->GetAngle()));
+		else
+			v.x = (v.x + v_->GetAcceleration()) * -abs(sin(body->GetAngle()));
+		if (degrees >= 90 && degrees <= 270)
+			v.y = (v.y + v_->GetAcceleration()) * abs(cos(body->GetAngle()));
+		else
+			v.y = (v.y + v_->GetAcceleration()) * -abs(cos(body->GetAngle()));
+
+		body->SetLinearVelocity(v);
 	}
-	//cout << "Pos : " << body->GetTransform().p.x << " / " << body->GetTransform().p.y << endl;
 
 }
 
@@ -87,21 +91,16 @@ void InputMovement::steeringWheel(char d) {
 	b2Body* body = v_->GetPhyO()->getBody();
 	if (d == 'R') {
 		//Aply rotation to object
-		body->SetTransform(body->GetPosition(), (int)((int)body->GetAngle() + 360 + v_->GetTurnSpeed() * 0.001) % 360);
-		//Apply rotation to velocity
-		body->SetLinearVelocity(Vector2D(body->GetLinearVelocity()).ApplyRotation(v_->GetTurnSpeed())* 0.001);
-
+		body->SetAngularVelocity(v_->GetTurnSpeed());
 	}
 	else if (d == 'L') {
 		//Aply rotation to object
-		body->SetTransform(body->GetPosition(), (int)((int)body->GetAngle() + 360 - v_->GetTurnSpeed()* 0.001) % 360);
-		//Apply rotation to velocity
-		body->SetLinearVelocity(Vector2D(body->GetLinearVelocity()).ApplyRotation(-v_->GetTurnSpeed()* 0.001));
+		body->SetAngularVelocity(- v_->GetTurnSpeed());
 	}
 }
 
 bool InputMovement::isMoving() {
-	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 0.2))
+	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length()) >= 0)
 		return true;
 	else 
 		return false;
