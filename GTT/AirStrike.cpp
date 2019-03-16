@@ -22,12 +22,11 @@ AirStrike::AirStrike()
 	width_ = 70;
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
-	
-	
 }
 
 void AirStrike::Shoot()
 {
-	shooting_ = SDL_GetTicks();
+	if(shooting_ < 0)
+		shooting_ = SDL_GetTicks();
 }
 
