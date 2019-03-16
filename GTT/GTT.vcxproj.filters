@@ -135,6 +135,66 @@
     <ClCompile Include="Button.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="Turret.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CursorLC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearSC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ShootIC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Proyectile.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Reticule.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ProyectilePool.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="NaturalMove.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AirStrike.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Flame_thrower.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MachineGun.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotGun.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpreadSC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticSC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Sniper.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AimAtCursorAC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AimComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadInputComponent.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -220,6 +280,66 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Turret.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorLC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearSC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Proyectile.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProyectilePool.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Reticule.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShootIC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="NaturalMove.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpreadSC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticSC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AirStrike.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Flame_thrower.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MachineGun.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotGun.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Sniper.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AimComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AimAtCursorAC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadInputComponent.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

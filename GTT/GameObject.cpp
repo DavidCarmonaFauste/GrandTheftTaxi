@@ -61,6 +61,12 @@ Vector2D GameObject::getPosition() const {
 	return position_;
 }
 
+Vector2D GameObject::getCenter() const
+{
+	Vector2D c = Vector2D(position_.getX() + width_ / 2, position_.getY() + height_ / 2);
+	return c;
+}
+
 void GameObject::setPosition(const Vector2D &pos, bool force) {
 	position_.set(pos);
 }
