@@ -10,7 +10,10 @@ Sniper::Sniper()
 	cadence_ = 600;
 	reloadTime_ = 3000;
 	speed_ = 50;
-	ammo_ = maxAmmo_;
+	magazine_ = new stack<double>[maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
 	path_ = "../Assets/sprites/sniper.png";
 	shC_ = new LinearSC(this);
 	height_ = 200;

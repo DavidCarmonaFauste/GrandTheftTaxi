@@ -10,6 +10,7 @@
 #include "ProyectilePool.h"
 #include "ShotGun.h"
 #include "Reticule.h"
+#include "ReloadInputComponent.h"
 
 
 using namespace std;
@@ -34,6 +35,8 @@ Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
 	// Taxi
 	taxi_ = new Vehicle(Resources::Taxi);
 	taxi_->addInputComponent(new ShootIC());
+	taxi_->addInputComponent(new ReloadInputComponent());
+
 	gun_ = new Gun();
 	shotgun_ = new ShotGun();
 

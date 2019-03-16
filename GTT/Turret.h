@@ -3,6 +3,7 @@
 #include"FollowGameObject.h"
 #include "Vehicle.h"
 #include "ProyectilePool.h"
+#include <stack>
 
 class Animation;
 class ShootComponent;
@@ -14,10 +15,12 @@ class Turret : public Container
 {
 public:
 	Turret();
+	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
 	proyectileType GetProyectileType();
 	virtual void Shoot();
 	virtual void Reload();
+	virtual void InitiateReload();
 	virtual int GetSpeed();
 	virtual double GetDamage();
 	virtual int GetCadence();
@@ -25,15 +28,16 @@ public:
 	virtual double GetLifeTime();
 	virtual ~Turret();
 protected:
-	int ammo_;//balas que quedan en el cargador
-	int maxAmmo_;//tamaño del cargador de la torreta, si es 0 la municion es infinita;
+	stack <double>* magazine_;//cargador representado como una pila
+	int maxAmmo_;//capacidad del cargador
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
 	int speed_;//velocidad del proyectil
-	int lastTimeReloaded_;
-	int lastTimeShot_;
+	int lastTimeReloaded_;//momento en el que se pulso el boton de recarga
+	int lastTimeShot_;//momento en el que se disparo la ultima bala
 	double damage_;//daño de cada proyectil
 	double lifeTime_; //tiempo de vida del proyectil
+	bool reloading_;//indica si se esta recargando en el momento
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;

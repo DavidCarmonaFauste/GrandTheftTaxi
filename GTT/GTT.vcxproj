@@ -45,6 +45,7 @@
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="Proyectile.cpp" />
     <ClCompile Include="ProyectilePool.cpp" />
+    <ClCompile Include="ReloadInputComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Respawner.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
+    <ClInclude Include="ReloadInputComponent.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Respawner.h" />

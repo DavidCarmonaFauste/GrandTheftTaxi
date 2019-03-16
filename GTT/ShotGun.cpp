@@ -10,7 +10,10 @@ ShotGun::ShotGun()
 	cadence_ = 900;
 	reloadTime_ = 4000;
 	speed_ = 1;
-	ammo_ = maxAmmo_;
+	magazine_ = new stack<double> [maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
 	animationpath_ = "../Assets/sprites/escopeta_anim.png";
 	path_ = "../Assets/sprites/shot_gun.png";
 	dispersionangle_ = 30;

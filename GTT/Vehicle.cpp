@@ -54,6 +54,11 @@ void Vehicle::Shoot()
 	currentTurret_->Shoot();
 }
 
+void Vehicle::Reload()
+{
+	currentTurret_->InitiateReload();
+}
+
 void Vehicle::EquipTurret(Turret * turret)
 {
 	currentTurret_ = turret;

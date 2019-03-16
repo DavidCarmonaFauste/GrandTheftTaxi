@@ -11,7 +11,10 @@ AirStrike::AirStrike()
 	speed_ = 0;
 	lifeTime_ = 500;
 	prType_ = STRIKE;
-	ammo_ = maxAmmo_;
+	magazine_ = new stack<double>[maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
 	path_ = "../Assets/sprites/air_strike.png";
 	shC_ = new StaticSC(this);
 	height_ = 500;

@@ -12,8 +12,16 @@ Turret::Turret()
 	addRenderComponent(animC_);
 	lastTimeReloaded_ = -reloadTime_;
 	lastTimeShot_ = -cadence_;
+	reloading_ = false;
 }
 
+void Turret::update(Uint32 deltaTime)
+{
+	Container::update(deltaTime);
+	if (reloading_) {
+		Reload();
+	}
+}
 
 void Turret::AttachToVehicle(Vehicle * car)
 {
@@ -33,20 +41,37 @@ proyectileType Turret::GetProyectileType()
 
 void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 {
-	if (ammo_ > 0) {
+	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
 			shC_->shoot();
-			ammo_--;
+			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
 		}
 	}
 }
 
-void Turret::Reload()//tiempo desde que se llamo a reload por primera vez
+void Turret::Reload()
 {
-	ammo_ = maxAmmo_;
+	cout << "reloading" << endl;
+	if (SDL_GetTicks() - lastTimeReloaded_ >= reloadTime_) {
+		cout << "reloaded" << endl;
+		while (magazine_->size() != maxAmmo_) {
+			magazine_->push(1.0);
+		}
+		reloading_ = false;
+	}
 }
+
+void Turret::InitiateReload()
+{
+	if (!reloading_) {
+		reloading_ = true;
+		lastTimeReloaded_ = SDL_GetTicks();
+	}
+}
+
+
 
 int Turret::GetSpeed()
 {
@@ -65,7 +90,7 @@ int Turret::GetCadence()
 
 int Turret::GetAmmo()
 {
-	return ammo_;
+	return magazine_->size();
 }
 
 

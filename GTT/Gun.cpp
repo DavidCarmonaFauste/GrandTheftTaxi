@@ -10,7 +10,10 @@ Gun::Gun()
 	cadence_ = 150;
 	reloadTime_ = 1500;
 	speed_ = 1;
-	ammo_ = maxAmmo_;
+	magazine_ = new stack<double>[maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
 	path_ = "../Assets/sprites/gun.png";
 	animationpath_ = "../Assets/sprites/pistola_anim.png";
 	shC_ = new LinearSC(this);

@@ -24,6 +24,7 @@ public:
 
 	virtual AimComponent* GetAimComponent();
 	virtual void Shoot();
+	virtual void Reload();
 	virtual void EquipTurret(Turret* turret);
 	virtual void setPosition(const Vector2D &pos, bool force = false) override;
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
