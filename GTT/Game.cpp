@@ -10,10 +10,6 @@ Game* Game::singleton_ = nullptr;
 
 Game::Game() {
 	// Initialization values
-	SDL_Window* window_ = nullptr;
-
-
-	SDL_Renderer* renderer_ = nullptr;
 	const int winWidth_ = 1280;
 	const int winHeight_ = 720;
 	int winX_, winY_;
@@ -26,6 +22,8 @@ Game::Game() {
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
 
+	world_ = new b2World(b2Vec2(0, 10));
+
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
@@ -35,8 +33,6 @@ Game::Game() {
 Game::~Game() {
 
 }
-
-/*-----------------------------------------------------------------------*/
 
 //los eventos los gestiona la aplicaci�n. Conecta directamente con handleEvents del estado actual. 
  void Game::handleEvents(Uint32 deltaTime) {

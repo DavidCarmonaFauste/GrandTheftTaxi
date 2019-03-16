@@ -12,7 +12,7 @@ public:
 protected:
 
 private:
-
+	Vehicle* v;
 
 };
 
