@@ -31,7 +31,7 @@ void TileMap::tmxToScene() {
 	auto& map_tilesets = tmxMap_->getTilesets();
 	for (auto& tset : map_tilesets) {
 		cout << "Info: loading tileset " + tset.getImagePath() + "\n";
-		Texture* tex = new Texture(Game::renderer_, tset.getImagePath());
+		Texture* tex = new Texture(Game::getInstance()->getRenderer(), tset.getImagePath());
 		tilesets_.insert(pair<uint32_t, Texture*>(tset.getFirstGID(), tex));
 	}
 

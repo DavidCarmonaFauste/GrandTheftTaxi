@@ -1,5 +1,8 @@
 #pragma once
 #include "LogicComponent.h"
+#include <Box2D/Box2D.h>
+#include "Resources.h"
+#include "Game.h"
 
 class PhysicObject :
 	public LogicComponent

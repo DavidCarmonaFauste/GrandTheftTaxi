@@ -22,7 +22,7 @@ void Turret::update(Uint32 deltaTime)
 		Reload();
 	} 
 	if (shooting_ != -1 && SDL_GetTicks() > shooting_ + waitingShotTime_) {
-		Turret::Shoot();
+		Shoot();
 		cout << "shoot" << endl;
 		shooting_ = -1;
 	}

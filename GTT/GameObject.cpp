@@ -1,17 +1,17 @@
 #include "GameObject.h"
 
-GameObject::GameObject() :
+/*GameObject::GameObject() :
 	GameObject(nullptr) {
-}
-
-GameObject::GameObject(Game * game): game_(game),
-active_(true),
-width_(),
-height_(),
-position_(),
-velocity_(),
-acceleration_(0, 0),
-rotation_(0.0)
+}*/
+//Game * game
+GameObject::GameObject() :
+	active_(true),
+	width_(),
+	height_(),
+	position_(),
+	velocity_(),
+	acceleration_(0, 0),
+	rotation_(0.0)
 {
 }
 
@@ -19,14 +19,15 @@ rotation_(0.0)
 GameObject::~GameObject() {
 }
 
-Game * GameObject::getGame() const
+//game_(game),
+/*Game * GameObject::getGame() const
 {
 	return game_;
-}
+}*/
 
-void GameObject::setGame(Game* game) {
+/*void GameObject::setGame(Game* game) {
 	game_ = game;
-}
+}*/
 
 bool GameObject::isActive() const {
 	return active_;
@@ -58,12 +59,6 @@ void GameObject::setHeight(double height) {
 
 Vector2D GameObject::getPosition() const {
 	return position_;
-}
-
-Vector2D GameObject::getCenter() const
-{
-	Vector2D c = Vector2D(position_.getX() + width_ / 2, position_.getY() + height_ / 2);
-	return c;
 }
 
 void GameObject::setPosition(const Vector2D &pos, bool force) {
@@ -100,4 +95,10 @@ void GameObject::setRotation(double angle) {
 }
 
 void GameObject::init() {
+}
+
+Vector2D GameObject::getCenter()
+{
+	Vector2D c = Vector2D(position_.getX() + width_ / 2, position_.getY() + height_ / 2);
+	return c;
 }

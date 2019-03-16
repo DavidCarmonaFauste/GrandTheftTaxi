@@ -1,36 +1,40 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <map>
+#include "GameState.h"
+
+
 using namespace std;
+
+
+//static const string NAME_INTRO_STATE = "introState";
+static const string NAME_MAINMENU_STATE = "mainMenuState";
 
 class Resources
 {
-
 public:
 	enum SoundId {
-		DefaultSoundId
+		Default_Sound
 	};
 
 	enum MusicId {
-		DefaultMusicId
+		Default_Music
 	};
 
 	enum VehicleId {
-		// TAXI
+		//TAXI
 		Taxi
 	};
 
-	struct SoundInfo {
+	struct SoundInfo
+	{
 		SoundId id;
 		string path;
 	};
 
-	struct MusicInfo{
-		MusicId id;
-		string path;
-	};
-
-	struct VehicleInfo {
+	struct VehicleInfo
+	{
 		VehicleId id;
 		string idlePath;
 		string rightTurnPath;
@@ -39,11 +43,31 @@ public:
 		int height;
 	};
 
+	struct MusicInfo {
+		MusicId id;
+		string path;
+	};
 
-	static vector <VehicleInfo> vehicles_;
-	static vector <SoundInfo> sounds_;
-	static vector <MusicInfo> music_;
+	static Resources* getInstance();
+	void initStates();
 
-	static const double physicsScalingFactor;
+	vector <VehicleInfo> vehicles_;
+	vector <SoundInfo> sounds_;
+	vector <MusicInfo> music_;
+
+	double physicsScalingFactor;
+
+	map <string, GameState*> STATES_;
+
+private:
+
+	// Singleton instance
+	static Resources *singleton_;
+
+	Resources();
+	virtual ~Resources();
+
+
+	//VideoState *introState_ = nullptr;
+	GameState* mainMenuState_ = nullptr;
 };
-

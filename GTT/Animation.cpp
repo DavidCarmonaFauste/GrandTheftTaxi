@@ -1,5 +1,6 @@
 #include "Animation.h"
 #include "Camera.h"
+#include "Game.h"
 
 Animation::Animation() {
 	destRect = new SDL_Rect();
@@ -20,7 +21,7 @@ Animation::~Animation() {
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
 void Animation::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::renderer_, path);
+	Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
 
 	SDL_Rect* animRect = new SDL_Rect();
 	animRect->h = animTexture->getHeight() / rows;
@@ -127,7 +128,7 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	destRect->w = o->getWidth();
 	destRect->h = o->getHeight();
 	
-	Game::cameras_[cam_]->renderTexture(animTexture, *destRect, animRect, o->getRotation());
+	Game::getInstance()->getCamera(cam_)->renderTexture(animTexture, *destRect, animRect, o->getRotation());
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }

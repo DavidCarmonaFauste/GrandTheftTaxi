@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Game.h"
 
 
 
@@ -19,10 +20,10 @@ Camera::~Camera() {
 void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * clip, double angle) {
 	SDL_Rect transposedRect = SDL_Rect();
 	int width = 0, height = 0;
-	SDL_RenderGetLogicalSize(Game::renderer_, &width, &height);
+	SDL_RenderGetLogicalSize(Game::getInstance()->getRenderer(), &width, &height);
 
-	transposedRect.w = (int) ( ((float)dest.w / (float)cameraRect_->w) * width);
-	transposedRect.h = (int) ( ((float)dest.h / (float)cameraRect_->h) * height);
+	transposedRect.w = (int)(((float)dest.w / (float)cameraRect_->w) * width);
+	transposedRect.h = (int)(((float)dest.h / (float)cameraRect_->h) * height);
 	transposedRect.x = (double)(dest.x - cameraRect_->x) * zoom_ / (cameraRect_->w / width);
 	transposedRect.y = (double)(dest.y - cameraRect_->y) * zoom_ / (cameraRect_->h / height);
 	texture->render(transposedRect, angle, clip);
@@ -59,8 +60,8 @@ Vector2D Camera::getSize()
 void Camera::setZoom(float zoom, bool center) {
 	zoom_ = zoom;
 
-	cameraRect_->w = (int) (w_ * (1/zoom_));
-	cameraRect_->h = (int) (h_ * (1/zoom_));
+	cameraRect_->w = (int)(w_ * (1 / zoom_));
+	cameraRect_->h = (int)(h_ * (1 / zoom_));
 
 	if (center) {
 		cameraRect_->x -= (cameraRect_->w - w_) / 2;

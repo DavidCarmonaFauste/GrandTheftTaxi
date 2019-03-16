@@ -1,5 +1,5 @@
 #include "Respawner.h"
-
+#include <map>
 
 
 Respawner::Respawner(Health *healthToObserve) {
@@ -34,7 +34,7 @@ void Respawner::respawn(GameObject* respawnPoint) {
 
 void Respawner::setCurrentRespawn(string name) {
 	if (!respawnPoints_.empty())
-		currentRespawnPoint_ = name != ""? name : searchNearestRespawn();
+		currentRespawnPoint_ = name != "" ? name : searchNearestRespawn();
 }
 
 string Respawner::getCurrentRespawnPoint() {

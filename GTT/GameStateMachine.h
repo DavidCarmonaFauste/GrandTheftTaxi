@@ -1,10 +1,11 @@
 #pragma once
+#include "GameState.h"
+#include "Resources.h"
 
 #include <stack>
-#include <cstdlib>
+
 
 using namespace std;
-typedef unsigned int uint;
 
 class GameStateMachine
 {
@@ -12,23 +13,14 @@ public:
 	GameStateMachine();
 	~GameStateMachine();
 
-	void handleEvents(uint deltaTime);
-	void render(uint deltaTime) const;
+	void setState(const string &s);
 
-	/*void pushState(states state);
-	void swapStates(GameState* nState);
-	void popState();
-	void pop_nStates(GameState* elem);
+	string get_CurrentStateName() const;
 	GameState* get_CurrentState() const;
-	GameState* get_PreviousState() const;
-	GameState* get_nState(GameState* state) const;*/
 
 
 protected:
-	//gestión de estados mediante pila
-	//stack <states> containerStack_;
-	
-
+	string currentState_;
 
 };
 

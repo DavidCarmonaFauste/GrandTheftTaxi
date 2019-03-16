@@ -1,15 +1,42 @@
 #include "Resources.h"
+#include "MainMenuState.h"
 
-const double Resources::physicsScalingFactor = 0.2;
 
-vector<Resources::VehicleInfo> Resources::vehicles_{
-	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 100, 200}
-};
 
-vector<Resources::SoundInfo> Resources::sounds_{
-	{DefaultSoundId, "../Assets/sounds/default.wav"}
-};
+Resources* Resources::singleton_ = nullptr;
 
-vector<Resources::MusicInfo> Resources::music_{
-	{DefaultMusicId, "../Assets/sounds/default.wav"}
-};
+Resources::Resources() {
+	//par {string, states}
+
+
+	physicsScalingFactor = 0.2;
+
+	vehicles_ = {
+		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100}
+	};
+
+	sounds_ = {
+		{Default_Sound, "../Assets/sounds/default.wav"}
+	};
+}
+
+
+
+Resources::~Resources() {
+	//delete introState_;
+	//introState_ = nullptr;
+}
+
+Resources * Resources::getInstance() {
+	if (singleton_ == nullptr) {
+		singleton_ = new Resources();
+	}
+
+	return singleton_;
+}
+
+void Resources::initStates() {
+	mainMenuState_ = new MainMenuState();
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, mainMenuState_));
+}
+

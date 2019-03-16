@@ -2,10 +2,11 @@
 #include "Turret.h"
 #include "NaturalMove.h"
 #include "AimAtCursorAC.h"
+
 #define PI 3.14159265359
 
 Vehicle::Vehicle(Resources::VehicleId id) {
-	Resources::VehicleInfo& r = Resources::vehicles_[id];
+	Resources::VehicleInfo& r = Resources::getInstance()->vehicles_[id];
 
 	this->setWidth(r.width);
 	this->setHeight(r.height);
@@ -93,7 +94,7 @@ void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 		if (event.key.keysym.sym == SDLK_SPACE) spacePressed = false;
 
 	}
-	currentTurret_->handleInput(time, event);
+	if(currentTurret_!=nullptr) currentTurret_->handleInput(time, event);
 	Container::handleInput(time, event);
 }
 
@@ -194,13 +195,16 @@ void Vehicle::update(Uint32 time)
 		speed_ = 0;
 
 	}
+	if (currentTurret_ != nullptr)
 	currentTurret_->update(time);
 	Container::update(time);
 }
 
 void Vehicle::render(Uint32 time)
 {
+	if (currentTurret_ != nullptr)
 	Container::render(time);
+	if (currentTurret_ != nullptr)
 	currentTurret_->render(time);
 }
 
@@ -260,8 +264,8 @@ void Vehicle::setPosition(const Vector2D & pos, bool force) {
 						 b2Vec2(phyO_->getOrigin().x * width_,
 							   phyO_->getOrigin().y * height_);
 
-		nextPos = b2Vec2(nextPos.x * Resources::physicsScalingFactor,
-						 nextPos.y * Resources::physicsScalingFactor);
+		nextPos = b2Vec2(nextPos.x * Resources::getInstance()->physicsScalingFactor,
+						 nextPos.y * Resources::getInstance()->physicsScalingFactor);
 
 		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
 	}

@@ -24,6 +24,6 @@ private:
 	double lifeTime_;
 	string bulletPath_= "../Assets/sprites/bullet.png";
 	string flamePath_;
-	string strikePath_ = "../Assets/sprites/air_strike_x.png";
+	string strikePath_;
 };
 

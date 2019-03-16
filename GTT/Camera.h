@@ -6,6 +6,8 @@
 #include "Vector2D.h"
 #include "CameraType.h"
 
+class Game;
+
 class Camera :
 	public Container
 {
@@ -14,7 +16,7 @@ public:
 	virtual ~Camera();
 
 	void renderTexture(Texture* texture, SDL_Rect const& dest,
-					   SDL_Rect* clip = nullptr, double angle = 0);
+		SDL_Rect* clip = nullptr, double angle = 0);
 
 	// Setters and getters
 	void setPos(int x, int y, bool center = false);

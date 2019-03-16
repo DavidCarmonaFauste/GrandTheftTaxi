@@ -4,15 +4,15 @@
 
 SoundManager::SoundManager() {
 	// Load the music files from the resources sheet
-	for (int i = 0; i < Resources::music_.size(); i++) {
-		loadMusic(Resources::music_[i].path,
-					Resources::music_[i].id);
+	for (int i = 0; i < Resources::getInstance()->music_.size(); i++) {
+		loadMusic(Resources::getInstance()->music_[i].path,
+					Resources::getInstance()->music_[i].id);
 	}
 	
 	// Load the sound files from the resources sheet
-	for (int i = 0; i < Resources::sounds_.size(); i++) {
-		loadSound(Resources::sounds_[i].path,
-					Resources::sounds_[i].id);
+	for (int i = 0; i < Resources::getInstance()->sounds_.size(); i++) {
+		loadSound(Resources::getInstance()->sounds_[i].path,
+			Resources::getInstance()->sounds_[i].id);
 	}
 }
 
