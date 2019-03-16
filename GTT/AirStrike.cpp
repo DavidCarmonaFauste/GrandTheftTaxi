@@ -17,10 +17,10 @@ AirStrike::AirStrike()
 	}
 	path_ = "../Assets/sprites/air_strike.png";
 	shC_ = new StaticSC(this);
-	height_ = 500;
-	width_ = 500;
-	animC_->loadAnimation(path_, "idle");
-	animC_->playAnimation("idle");
+	height_ = 70;
+	width_ = 70;
+	animC_->loadAnimation(path_, "default");
+	animC_->playAnimation("default");
 	
 }
 
