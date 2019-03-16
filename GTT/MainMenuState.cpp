@@ -4,8 +4,8 @@
 
 MainMenuState::MainMenuState()
 {
-
-	//stage_.push_back(nullptr);
+	v = new Vehicle(Resources::Taxi);
+	this->stage_.push_back(v);
 }
 
 

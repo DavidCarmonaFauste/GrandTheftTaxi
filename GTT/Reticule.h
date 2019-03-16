@@ -1,7 +1,6 @@
 #pragma once
 #include "Container.h"
 
-
 class CursorLC;
 class Animation;
 
