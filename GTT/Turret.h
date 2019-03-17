@@ -26,6 +26,7 @@ public:
 	virtual int GetCadence();
 	virtual int GetAmmo();
 	virtual double GetLifeTime();
+	virtual string GetReticule();
 	virtual ~Turret();
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
@@ -43,6 +44,7 @@ protected:
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
+	string reticulesprite_="";
 	AimComponent* aimC_;//forma de apuntado, se lo pasa el vehiculo al equiparse
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
 	FollowGameObject* followC_;

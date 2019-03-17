@@ -11,6 +11,7 @@ MainState::MainState() {
 
 	// Vehicles
 	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
+	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(taxi_);
 	taxi_->setPosition(Vector2D(100, 100), false);
 
@@ -20,7 +21,6 @@ MainState::MainState() {
 	stage_.push_back(UI_);
 
 	stage_.push_back(Reticule::GetInstance());
-	stage_.push_back(ProyectilePool::GetInstance());
 
 	taxi_->EquipTurret(new ShotGun());
 	taxi_->EquipTurret(new Gun());

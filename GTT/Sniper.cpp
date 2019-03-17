@@ -15,6 +15,7 @@ Sniper::Sniper()
 		magazine_->push(1.0);
 	}
 	path_ = "../Assets/sprites/sniper.png";
+	reticulesprite_ = "sniper";
 	shC_ = new LinearSC(this);
 	height_ = 200;
 	width_ = 100;

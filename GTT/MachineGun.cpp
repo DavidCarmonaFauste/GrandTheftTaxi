@@ -15,6 +15,7 @@ MachineGun::MachineGun()
 		magazine_->push(1.0);
 	}
 	path_ = "../Assets/sprites/machine_gun.png";
+	reticulesprite_ = "machinegun";
 	shC_ = new LinearSC(this);
 	height_ = 200;
 	width_ = 100;

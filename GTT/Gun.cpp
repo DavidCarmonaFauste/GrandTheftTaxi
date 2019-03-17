@@ -16,13 +16,13 @@ Gun::Gun()
 	}
 	path_ = "../Assets/sprites/gun.png";
 	animationpath_ = "../Assets/sprites/pistola_anim.png";
+	reticulesprite_ = "gun";
 	shC_ = new LinearSC(this);
 	height_ = 150;
 	width_ = 75;
 	animC_->loadAnimation(animationpath_, "idle", 2, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
-	Reticule::GetInstance()->ChangeReticule("gun");
 }
 
 

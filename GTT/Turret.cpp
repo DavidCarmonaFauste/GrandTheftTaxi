@@ -105,6 +105,11 @@ double Turret::GetLifeTime()
 	return lifeTime_;
 }
 
+string Turret::GetReticule()
+{
+	return reticulesprite_;
+}
+
 Turret::~Turret()
 {
 	delete followC_;

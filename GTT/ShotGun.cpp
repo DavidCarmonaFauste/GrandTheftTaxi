@@ -16,6 +16,7 @@ ShotGun::ShotGun()
 	}
 	animationpath_ = "../Assets/sprites/escopeta_anim.png";
 	path_ = "../Assets/sprites/shot_gun.png";
+	reticulesprite_ = "shotgun";
 	dispersionangle_ = 30;
 	numPellets_ = 3;
 	shC_ = new SpreadSC(this, dispersionangle_, numPellets_);
@@ -24,7 +25,6 @@ ShotGun::ShotGun()
 	animC_->loadAnimation(animationpath_, "idle", 3, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
-	Reticule::GetInstance()->ChangeReticule("gun");
 }
 
 

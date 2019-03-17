@@ -5,6 +5,7 @@
 #include "ShootIC.h"
 #include "ReloadInputComponent.h"
 #include "ChangeWeaponIC.h"
+#include "Reticule.h"
 
 #define PI 3.14159265359
 
@@ -75,6 +76,7 @@ void Vehicle::EquipTurret(Turret * turret)
 {
 	if (turrets_[currentTurret_] == nullptr) {
 		turrets_[currentTurret_] = turret;
+		Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 		turrets_[currentTurret_]->AttachToVehicle(this);
 
 	}
@@ -89,6 +91,7 @@ void Vehicle::EquipTurret(Turret * turret)
 void Vehicle::ChangeTurret()
 {
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
+	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 }
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {

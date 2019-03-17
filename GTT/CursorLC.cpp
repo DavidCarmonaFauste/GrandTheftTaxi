@@ -12,7 +12,6 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 	SDL_GetMouseState(&x, &y);
 	o->setPosition(Vector2D(((double)x/(double)Game::getInstance()->getWindowWidth())*(double)Game::getInstance()->getCameraWidth() - o->getWidth()/2,
 		((double)y / (double)Game::getInstance()->getWindowHeight())*(double)Game::getInstance()->getCameraHeight()- o->getHeight()/2));
-	cout << x << " " << y<< "          ";
 }
 
 
