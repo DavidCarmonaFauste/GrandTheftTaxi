@@ -26,12 +26,14 @@ public:
 	virtual void Shoot();
 	virtual void Reload();
 	virtual void EquipTurret(Turret* turret);
+	virtual void ChangeTurret();
 	virtual void setPosition(const Vector2D &pos, bool force = false) override;
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 
 protected:
+	static const int MAXTURRETS = 2;
 	PhysicObject* phyO_;
 	Animation* sprite_;
 	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
@@ -54,6 +56,8 @@ protected:
 	void frictionalForce();
 	void steeringWheel(char d);
 
-	Turret* currentTurret_;
+	Turret* turrets_[MAXTURRETS];
+
+	int currentTurret_=0;
 	Health* health_;
 };

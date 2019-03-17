@@ -8,8 +8,6 @@ Game* Game::singleton_ = nullptr;
 
 Game::Game() {
 	// Initialization values
-	const int winWidth_ = 1280;
-	const int winHeight_ = 720;
 	int winX_, winY_;
 	winX_ = winY_ = SDL_WINDOWPOS_CENTERED;
 
@@ -18,7 +16,7 @@ Game::Game() {
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
+	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 
 	world_ = new b2World(b2Vec2(0, 10));
 
@@ -26,6 +24,7 @@ Game::Game() {
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
 	}
+	SDL_ShowCursor(0);
 }
 
 Game::~Game() {
@@ -60,6 +59,26 @@ SDL_Renderer * Game::getRenderer()
 SDL_Window * Game::getWindow()
 {
 	return window_;
+}
+
+int Game::getWindowWidth()
+{
+	return winWidth_;
+}
+
+int Game::getWindowHeight()
+{
+	return winHeight_;
+}
+
+int Game::getCameraHeight()
+{
+	return cameraHeight;
+}
+
+int Game::getCameraWidth()
+{
+	return cameraWidth;
 }
 
 b2World * Game::getWorld()

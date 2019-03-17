@@ -207,6 +207,9 @@
     <ClCompile Include="MainState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="ChangeWeaponIC.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="MainState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeWeaponIC.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
