@@ -20,10 +20,10 @@ public:
 	bool toggleActive();
 
 	double getWidth() const;
-	void setWidth(double width);
+	virtual void setWidth(double width);
 
 	double getHeight() const;
-	void setHeight(double height);
+	virtual void setHeight(double height);
 
 	void scale(double s);
 

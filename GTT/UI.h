@@ -21,8 +21,6 @@ private:
 	HealthDisplay* healthDisplay_;
 	MoneyDisplay* moneyDisplay_;
 
-	cameraType cam_ = UI_CAMERA;
-
 	Font* font_;
 	SDL_Color fontColor_;
 };

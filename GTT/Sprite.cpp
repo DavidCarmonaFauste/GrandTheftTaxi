@@ -74,3 +74,11 @@ void Sprite::render(GameObject * o, Uint32 deltaTime) {
 void Sprite::setCamera(cameraType cam) {
 	cam_ = cam;
 }
+
+cameraType Sprite::getCameraType() {
+	return cam_;
+}
+
+Camera * Sprite::getCamera() {
+	return Game::getInstance()->getCamera(cam_);
+}

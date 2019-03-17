@@ -81,12 +81,12 @@ Camera * Game::getCamera(cameraType cT)
 }
 
 void Game::init() {
+	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	cameras_[UI_CAMERA] = new Camera(1600, 900);
+
 	// Create the resources singleton for the first time
 	// and initialize its states
 	Resources::getInstance()->initStates();
-
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	cameras_[UI_CAMERA] = new Camera(1600, 900);
 
 	gmStMachine_ = new GameStateMachine();
 }

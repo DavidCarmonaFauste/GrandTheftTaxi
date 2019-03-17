@@ -20,13 +20,14 @@ public:
 	void setPos(int x, int y, bool center = false);
 	Vector2D getPos();
 	void setSize(int w, int h, bool resetZoom = false);
-	Vector2D getSize();
+	virtual void setWidth(double width) override;
+	virtual void setHeight(double height) override;
+
 	void setZoom(float zoom, bool center = true);
 	float getZoom();
 
 private:
 	SDL_Rect* cameraRect_;
-	int w_, h_;
 
 	float zoom_;
 };

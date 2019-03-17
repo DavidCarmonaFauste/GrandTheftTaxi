@@ -3,6 +3,7 @@
 #include "Vehicle.h"
 #include "UI.h"
 #include "TileMap.h"
+#include "Money.h"
 
 class MainState :
 	public GameState

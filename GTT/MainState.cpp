@@ -1,5 +1,4 @@
 #include "MainState.h"
-#include "Money.h"
 
 MainState::MainState() {
 	// Tilemap
