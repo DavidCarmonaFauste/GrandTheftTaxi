@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include "GameState.h"
+#include "Font.h"
 
 
 using namespace std;
@@ -27,6 +28,10 @@ public:
 	enum VehicleId {
 		//TAXI
 		Taxi
+	};
+
+	enum FontId {
+		Default_Font
 	};
 
 	struct SoundInfo
@@ -56,6 +61,7 @@ public:
 	vector <VehicleInfo> vehicles_;
 	vector <SoundInfo> sounds_;
 	vector <MusicInfo> music_;
+	map<FontId, string> fonts_;
 
 	double physicsScalingFactor;
 

@@ -36,7 +36,7 @@ public:
 	void setPos(int x, int y);
 	void setSize(int w, int h);
 
-private:
+protected:
 	Texture *texture_;
 	SDL_Rect *rect_;
 	SDL_Rect *clip_ = nullptr;

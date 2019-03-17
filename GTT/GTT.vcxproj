@@ -42,6 +42,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MainState.cpp" />
+    <ClCompile Include="Money.cpp" />
+    <ClCompile Include="MoneyDisplay.cpp" />
     <ClCompile Include="NaturalMove.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
@@ -61,6 +63,7 @@
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticSC.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
@@ -95,6 +98,8 @@
     <ClInclude Include="MachineGun.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MainState.h" />
+    <ClInclude Include="Money.h" />
+    <ClInclude Include="MoneyDisplay.h" />
     <ClInclude Include="NaturalMove.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
@@ -114,6 +119,7 @@
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticSC.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />

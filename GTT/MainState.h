@@ -18,6 +18,9 @@ private:
 	// Vehicles
 	Vehicle* taxi_;
 
+	// Systems
+	Money* moneySystem;
+
 	// UI
 	UI* UI_;
 };

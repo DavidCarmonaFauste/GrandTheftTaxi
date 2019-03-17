@@ -207,6 +207,15 @@
     <ClCompile Include="MainState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="MoneyDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Money.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -364,6 +373,15 @@
     </ClInclude>
     <ClInclude Include="MainState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyDisplay.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Archivos de encabezado\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Money.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

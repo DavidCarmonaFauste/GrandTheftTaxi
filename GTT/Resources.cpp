@@ -21,6 +21,10 @@ Resources::Resources() {
 	music_ = {
 		{Default_Music, "../Assets/sounds/default.wav"}
 	};
+
+	fonts_ = {
+		{Default_Font, "../Assets/fonts/lato_regular.ttf"}
+	};
 }
 
 

@@ -17,8 +17,11 @@ Font::~Font() {
 
 bool Font::load(string fileName, int size) {
 	font_ = TTF_OpenFont(fileName.c_str(), size);
+	size_ = size;
+
 	if (font_ == nullptr) {
 		cout << "Couldn't load font: " << fileName << endl;
+		cout << "TTF_Error: " << TTF_GetError() << endl;
 	}
 	return font_ != nullptr;
 }
@@ -37,4 +40,8 @@ SDL_Surface* Font::renderText(string text, SDL_Color color) const {
 	else {
 		return nullptr;
 	}
+}
+
+const int Font::getSize() const {
+	return size_;
 }
