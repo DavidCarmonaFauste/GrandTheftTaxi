@@ -10,11 +10,11 @@ TileMap::TileMap(string path) {
 
 TileMap::~TileMap() {
 	// Delete the tiles of each layer
-	for (int layer = 0; layer < layers_.size(); layer++) {
-		for (int y = 0; y < layers_[layer].size(); y++) {
-			for (int x = 0; x < layers_[layer][y].size(); x++) {
-				delete layers_[layer][y][x];
-				layers_[layer][y][x] = nullptr;
+	for (auto layer : layers_) {
+		for (int y = 0; y < layer.second.size(); y++) {
+			for (int x = 0; x < layer.second[y].size(); x++) {
+				delete layer.second[y][x];
+				layer.second[y][x] = nullptr;
 			}
 		}
 	}
@@ -51,18 +51,19 @@ void TileMap::tmxToScene() {
 				// UNUSED !!!
 			}
 		}
-
+		 
 		// Tile layers
 		else if (layer->getType() == tmx::Layer::Type::Tile) {
 			cout << "Info: loading tile layer " + layer->getName() + "\n";
 
-			layers_.push_back(vector<vector<Tile*>>());
 			const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
+			string layerName = tileLayer.getName();
+			layers_[layerName] = vector<vector<Tile*>>();
 			bool collision = tileLayer.getName() == "Collisions";
 
 			// Iterate through every tile and instantiate it in the game
 			for (int y = 0; y < tmxMap_->getTileCount().y; y++) {
-				layers_.back().push_back(vector<Tile*>());
+				layers_[layerName].push_back(vector<Tile*>());
 
 				for (int x = 0; x < tmxMap_->getTileCount().x; x++) {
 					int tile_index = x + y * tmxMap_->getTileCount().x;
@@ -103,7 +104,7 @@ void TileMap::tmxToScene() {
 					clip->y = (gid / (tset_w / tileDest.h)) * tileDest.h;
 
 					Tile* tile = new Tile(tilesets_[tset_gid], &tileDest, clip, gid, collision);
-					layers_.back()[y].push_back(tile);
+					layers_[layerName][y].push_back(tile);
 				}
 			}
 
@@ -148,17 +149,30 @@ void TileMap::render(Uint32 deltaTime) {
 	Container::render(deltaTime);
 
 	// Render every tile
-	for (int layer = 0; layer < layers_.size(); layer++) {
-		for (int y = 0; y < layers_[layer].size(); y++) {
-			for (int x = 0; x < layers_[layer][y].size(); x++) {
-				layers_[layer][y][x]->render(deltaTime);
+	for (auto layer : layers_) {
+		for (int y = 0; y < layer.second.size(); y++) {
+			for (int x = 0; x < layer.second[y].size(); x++) {
+				layer.second[y][x]->render(deltaTime);
 			}
 		}
 	}
 }
 
-void TileMap::setTile(Tile * tile, int layer, int x, int y) {
-	if (layers_.size() > layer && layers_[layer].size() > 0 &&
+vector<string> TileMap::getLayerNames() {
+	vector<string> names;
+	for (auto layer : layers_) {
+		names.push_back(layer.first);
+	}
+
+	return names;
+}
+
+vector<vector<Tile*>> TileMap::getLayer(string layer) {
+	return layers_[layer];
+}
+
+void TileMap::setTile(Tile * tile, string layer, int x, int y) {
+	if (layers_.find(layer) != layers_.end() &&
 		y < layers_[layer].size() && x < layers_[layer].size()) {
 
 		delete layers_[layer][y][x];
@@ -166,8 +180,8 @@ void TileMap::setTile(Tile * tile, int layer, int x, int y) {
 	}
 }
 
-Tile * TileMap::getTile(int layer, int x, int y) {
-	if (layers_.size() > layer && layers_[layer].size() > 0 &&
+Tile * TileMap::getTile(string layer, int x, int y) {
+	if (layers_.find(layer) != layers_.end() &&
 			y < layers_[layer].size() && x < layers_[layer].size())
 		return layers_[layer][y][x];
 	else

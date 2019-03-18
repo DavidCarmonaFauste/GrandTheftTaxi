@@ -55,6 +55,12 @@
     <Filter Include="Archivos de encabezado\UI">
       <UniqueIdentifier>{8a7a9918-4711-47cf-8129-29888856ed02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\AI">
+      <UniqueIdentifier>{749c75e5-8281-4317-b950-660cd33f44cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\AI">
+      <UniqueIdentifier>{2a752a4b-9ecb-4001-9750-dcb5f6740db1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -215,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="AINode.cpp">
+      <Filter>Archivos de origen\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="Money.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AINode.h">
+      <Filter>Archivos de encabezado\AI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
