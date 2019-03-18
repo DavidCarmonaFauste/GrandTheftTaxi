@@ -9,8 +9,6 @@ GameObject::GameObject() :
 	width_(),
 	height_(),
 	position_(),
-	velocity_(),
-	acceleration_(0, 0),
 	rotation_(0.0)
 {
 }
@@ -65,25 +63,10 @@ void GameObject::setPosition(const Vector2D &pos, bool force) {
 	position_.set(pos);
 }
 
-Vector2D GameObject::getVelocity() const {
-	return velocity_;
-}
-
-void GameObject::setVelocity(const Vector2D &vel) {
-	velocity_.set(vel);
-}
-
-Vector2D GameObject::getAcceleration() const {
-	return acceleration_;
-}
 
 void GameObject::scale(double s) {
 	width_ *= s;
 	height_ *= s;
-}
-
-void GameObject::setAcceleration(const Vector2D &vel) {
-	acceleration_.set(vel);
 }
 
 double GameObject::getRotation() const {

@@ -33,12 +33,6 @@ public:
 	// should set their positions to this
 	virtual void setPosition(const Vector2D &pos, bool force = false);
 
-	Vector2D getVelocity() const;
-	virtual void setVelocity(const Vector2D &vel);
-
-	Vector2D getAcceleration() const;
-	virtual void setAcceleration(const Vector2D &vel);
-
 	double getRotation() const;
 	virtual void setRotation(double angle);
 	virtual Vector2D getCenter();
@@ -65,8 +59,6 @@ protected:
 	double height_; // height
 
 	Vector2D position_; // position (suppose to be left-top corner)
-	Vector2D velocity_; // velocity
-	Vector2D acceleration_; // acceleration
 	double rotation_; // rotation (for the corresponding texture)
 };
 

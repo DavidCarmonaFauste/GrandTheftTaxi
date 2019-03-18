@@ -3,8 +3,6 @@
 #include "ShootComponent.h"
 #include "Reticule.h"
 #include "AimComponent.h"
-#include <math.h>
-#define PI 3.14159265359
 
 Turret::Turret()
 {

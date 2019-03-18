@@ -43,8 +43,6 @@ void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
 
 
 	o->setRotation(body_->GetAngle() * 180 / M_PI);
-	o->setVelocity(Vector2D(body_->GetLinearVelocity().x, body_->GetLinearVelocity().y)
-		/ Resources::getInstance()->physicsScalingFactor);
 }
 
 const b2Vec2 PhysicObject::getOrigin() {
