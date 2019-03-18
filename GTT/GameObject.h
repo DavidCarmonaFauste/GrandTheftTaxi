@@ -3,6 +3,8 @@
 //#include "Game.h"
 #include "Vector2D.h"
 #include <SDL.h>
+#include "Constants.h"
+
 using namespace std;
 
 class GameObject {

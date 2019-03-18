@@ -2,7 +2,7 @@
 #include "Container.h"
 #include"FollowGameObject.h"
 #include "Vehicle.h"
-#include "ProyectilePool.h"
+#include "ProjectilePool.h"
 #include <stack>
 
 class Animation;
@@ -17,7 +17,7 @@ public:
 	Turret();
 	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
-	proyectileType GetProyectileType();
+	projectileType GetProjectileType();
 	virtual void Shoot();
 	virtual void Reload();
 	virtual void InitiateReload();
@@ -40,7 +40,7 @@ protected:
 	bool reloading_;//indica si se esta recargando en el momento
 	double shooting_ = -1; //indica si se está disparando (para AirStrike)
 	double waitingShotTime_ = -1; //tiempo que tarda en disparar
-	proyectileType prType_;//tipo de proyectil
+	projectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
 	AimComponent* aimC_;//forma de apuntado, se lo pasa el vehiculo al equiparse

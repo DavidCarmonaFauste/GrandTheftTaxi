@@ -40,7 +40,7 @@ void Turret::AttachToVehicle(Vehicle * car)
 	addLogicComponent(followC_);
 }
 		
-proyectileType Turret::GetProyectileType()
+projectileType Turret::GetProjectileType()
 {
 	return prType_;
 }

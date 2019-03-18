@@ -14,7 +14,7 @@ Sniper::Sniper()
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	path_ = "../Assets/sprites/sniper.png";
+	path_ = PATH_SNIPER;
 	shC_ = new LinearSC(this);
 	height_ = 200;
 	width_ = 100;

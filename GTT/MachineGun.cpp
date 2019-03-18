@@ -14,7 +14,7 @@ MachineGun::MachineGun()
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	path_ = "../Assets/sprites/machine_gun.png";
+	path_ = PATH_MACHINE_GUN;
 	shC_ = new LinearSC(this);
 	height_ = 200;
 	width_ = 100;

@@ -16,7 +16,7 @@ AirStrike::AirStrike()
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	path_ = "../Assets/sprites/air_strike.png";
+	path_ = PATH_AIR_STRIKE;
 	shC_ = new StaticSC(this);
 	height_ = 70;
 	width_ = 70;

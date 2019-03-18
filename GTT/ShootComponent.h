@@ -1,7 +1,7 @@
 #pragma once
 #include "Turret.h"
 
-class ProyectilePool;
+class ProjectilePool;
 
 class ShootComponent
 {

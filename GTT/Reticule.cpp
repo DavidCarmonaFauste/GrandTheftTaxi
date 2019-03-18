@@ -7,7 +7,7 @@ Reticule* Reticule::instance_ = nullptr;
 
 Reticule::Reticule()
 {
-	animations_["gun"] = "../Assets/sprites/gunreticule.png";//tantos como distintos sprites de reticula;
+	animations_["gun"] = PATH_RETICULE;//tantos como distintos sprites de reticula;
 	animC_ = new Animation();
 	cursorC_ = new CursorLC();
 	addRenderComponent(animC_);

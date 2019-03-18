@@ -11,15 +11,15 @@ Resources::Resources() {
 	physicsScalingFactor = 0.2;
 
 	vehicles_ = {
-		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100}
+		{Taxi, PATH_TAXI, PATH_DEFAULT_TEXTURE, PATH_DEFAULT_TEXTURE, 50, 100}
 	};
 
 	sounds_ = {
-		{Default_Sound, "../Assets/sounds/default.wav"}
+		{Default_Sound, PATH_DEFAULT_SOUND}
 	};
 
 	music_ = {
-		{Default_Music, "../Assets/sounds/default.wav"}
+		{Default_Music, PATH_DEFAULT_SOUND}
 	};
 
 	fonts_ = {

@@ -153,14 +153,8 @@
     <ClCompile Include="Gun.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Proyectile.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Reticule.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ProyectilePool.cpp">
-      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="NaturalMove.cpp">
       <Filter>Archivos de origen\Components</Filter>
@@ -215,6 +209,18 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseClickIC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectilePool.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -314,12 +320,6 @@
     <ClInclude Include="LinearSC.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Proyectile.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ProyectilePool.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Reticule.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
@@ -382,6 +382,21 @@
     </ClInclude>
     <ClInclude Include="Money.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectilePool.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseClickIC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ Flame_thrower::Flame_thrower()
 	speed_ = 0;
 	lifeTime_ = 300;
 	prType_ = FLAME;
-	path_ = "../Assets/sprites/flame_thrower.png";
+	path_ = PATH_FLAME_THROWER;
 	shC_ = new StaticSC(this);
 	height_ = 200;
 	width_ = 100;

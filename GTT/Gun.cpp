@@ -14,8 +14,8 @@ Gun::Gun()
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	path_ = "../Assets/sprites/gun.png";
-	animationpath_ = "../Assets/sprites/pistola_anim.png";
+	path_ = PATH_GUN;
+	animationpath_ = PATH_GUN_ANIM;
 	shC_ = new LinearSC(this);
 	height_ = 150;
 	width_ = 75;

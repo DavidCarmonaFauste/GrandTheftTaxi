@@ -3,18 +3,12 @@
 #include "SDL.h"
 #include <map>
 #include <Box2D/Box2D.h>
+
 #include "CameraType.h"
-
 #include "Camera.h"
-
 #include "SoundManager.h"
-
 #include "GameStateMachine.h"
-
-
-
-
-
+#include "Constants.h"
 
 
 using namespace std;
@@ -49,7 +43,9 @@ public:
 
 	void init();
 
-
+	// state setters
+	void setGameEnd () { exit_ = true; }
+	void setGameStart () { gmStMachine_->setState (NAME_MAIN_STATE); }
 
 
 private:

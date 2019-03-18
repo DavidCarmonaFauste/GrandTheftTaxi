@@ -7,8 +7,6 @@ Game* Game::singleton_ = nullptr;
 
 Game::Game() {
 	// Initialization values
-	const int winWidth_ = 1280;
-	const int winHeight_ = 720;
 	int winX_, winY_;
 	winX_ = winY_ = SDL_WINDOWPOS_CENTERED;
 
@@ -19,11 +17,11 @@ Game::Game() {
 	TTF_Init();
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
-		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
+		WIN_WIDTH, WIN_HEIGHT, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
-	SDL_RenderSetLogicalSize(renderer_, 1600, 900);
+	SDL_RenderSetLogicalSize(renderer_, CAMERA_WIDTH, CAMERA_HEIGHT);
 
-	world_ = new b2World(b2Vec2(0, 10));
+	world_ = new b2World(GRAVITY);
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
@@ -44,10 +42,12 @@ void Game::handleEvents(Uint32 deltaTime) {
 		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a trav�s del m�todo exitGame
 	}
 }
+
 void Game::update(Uint32 deltaTime)
 {
 	gmStMachine_->get_CurrentState()->update(deltaTime);
 }
+
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
@@ -81,8 +81,8 @@ Camera * Game::getCamera(cameraType cT)
 }
 
 void Game::init() {
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	cameras_[UI_CAMERA] = new Camera(1600, 900);
+	cameras_[GAME_CAMERA] = new Camera(CAMERA_WIDTH, CAMERA_HEIGHT);
+	cameras_[UI_CAMERA] = new Camera(CAMERA_WIDTH, CAMERA_HEIGHT);
 
 	// Create the resources singleton for the first time
 	// and initialize its states

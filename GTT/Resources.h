@@ -66,6 +66,8 @@ public:
 	double physicsScalingFactor;
 
 	map <string, GameState*> STATES_;
+	
+	enum ButtonTypes { MainMenuPlay, MainMenuExit }; 
 
 private:
 

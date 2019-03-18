@@ -14,8 +14,8 @@ ShotGun::ShotGun()
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	animationpath_ = "../Assets/sprites/escopeta_anim.png";
-	path_ = "../Assets/sprites/shot_gun.png";
+	animationpath_ = PATH_ESCOPETA_ANIM;
+	path_ = PATH_SHOT_GUN;
 	dispersionangle_ = 30;
 	numPellets_ = 3;
 	shC_ = new SpreadSC(this, dispersionangle_, numPellets_);
