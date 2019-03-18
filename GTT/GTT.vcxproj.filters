@@ -207,8 +207,6 @@
     <ClCompile Include="MainState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="ChangeWeaponIC.cpp">
-      <Filter>Archivos de origen</Filter>
     <ClCompile Include="MoneyDisplay.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
@@ -217,6 +215,12 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>Archivos de origen\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ChangeWeaponIC.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadingDisplay.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,8 +380,6 @@
     <ClInclude Include="MainState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeWeaponIC.h">
-      <Filter>Archivos de encabezado</Filter>
     <ClInclude Include="MoneyDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
@@ -386,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="Money.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeWeaponIC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadingDisplay.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

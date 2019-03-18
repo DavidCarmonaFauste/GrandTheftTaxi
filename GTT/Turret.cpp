@@ -99,6 +99,20 @@ int Turret::GetAmmo()
 	return magazine_->size();
 }
 
+int Turret::GetMaxAmmo()
+{
+	return maxAmmo_;
+}
+
+double Turret::GetReloadPercentage()
+{
+	if (reloading_) {
+		cout << (double)(SDL_GetTicks() - lastTimeReloaded_) / (double)reloadTime_;
+		return (double)(SDL_GetTicks() - lastTimeReloaded_) / (double)reloadTime_;
+	}
+	else return 0;
+}
+
 
 double Turret::GetLifeTime()
 {

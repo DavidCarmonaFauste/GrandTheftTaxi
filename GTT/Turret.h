@@ -25,6 +25,8 @@ public:
 	virtual double GetDamage();
 	virtual int GetCadence();
 	virtual int GetAmmo();
+	virtual int GetMaxAmmo();
+	virtual double GetReloadPercentage();
 	virtual double GetLifeTime();
 	virtual string GetReticule();
 	virtual ~Turret();

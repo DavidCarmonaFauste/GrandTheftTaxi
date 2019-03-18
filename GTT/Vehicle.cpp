@@ -95,6 +95,10 @@ void Vehicle::ChangeTurret()
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
 	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 }
+Turret * Vehicle::getCurrentTurret()
+{
+	return turrets_[currentTurret_];
+}
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {
 	if (event.type == SDL_KEYDOWN) {

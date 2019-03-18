@@ -1,3 +1,4 @@
+
 #include "UI.h"
 #include "Resources.h"
 
@@ -18,6 +19,7 @@ UI::UI() {
 	// Money
 	moneyDisplay_ = new MoneyDisplay(font_, fontColor_);
 	UIElements_.push_back(moneyDisplay_);
+
 }
 
 
@@ -32,6 +34,18 @@ void UI::render(Uint32 deltaTime) {
 	for (auto element : UIElements_) {
 		element->render(deltaTime);
 	}
+}
+
+void UI::update(Uint32 deltaTime)
+{
+	for (auto element : UIElements_) {
+		element->update(deltaTime);
+	}
+}
+
+void UI::addUIElement(Container * c)
+{
+	UIElements_.push_back(c);
 }
 
 bool UI::receiveEvent(Event * e) {

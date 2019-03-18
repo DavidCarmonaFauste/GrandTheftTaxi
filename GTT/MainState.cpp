@@ -3,6 +3,7 @@
 #include "Reticule.h"
 #include "Gun.h"
 #include "ShotGun.h"
+#include "ReloadingDisplay.h"
 
 MainState::MainState() {
 	// Tilemap
@@ -23,6 +24,7 @@ MainState::MainState() {
 	taxi_->getHealthComponent()->registerObserver(UI_);
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
+	UI_->addUIElement(new ReloadingDisplay(taxi_));
 
 	stage_.push_back(Reticule::GetInstance());
 
