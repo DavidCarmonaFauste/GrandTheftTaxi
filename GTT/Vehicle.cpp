@@ -18,9 +18,11 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	setPosition(Vector2D(400, 300));
 
 	// Physics
+	/*
 	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height,
 							  position_.getX(), position_.getY());
 	this->addLogicComponent(phyO_);
+	*/
 
 	// Sprite
 	sprite_ = new Animation();

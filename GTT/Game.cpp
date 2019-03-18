@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 Game* Game::singleton_ = nullptr;
 
 Game::Game() {
@@ -13,6 +12,10 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
+
+	// SDL_TTF initialization
+	TTF_Init();
+
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
@@ -97,12 +100,12 @@ Camera * Game::getCamera(cameraType cT)
 }
 
 void Game::init() {
+	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	cameras_[UI_CAMERA] = new Camera(1600, 900);
+
 	// Create the resources singleton for the first time
 	// and initialize its states
 	Resources::getInstance()->initStates();
-
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	cameras_[UI_CAMERA] = new Camera(1600, 900);
 
 	gmStMachine_ = new GameStateMachine();
 }

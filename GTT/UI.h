@@ -3,6 +3,7 @@
 #include "HealthDisplay.h"
 #include "CameraType.h"
 #include "Observer.h"
+#include "MoneyDisplay.h"
 
 class UI : public Container, public Observer
 {
@@ -18,7 +19,9 @@ private:
 	vector<GameObject*> UIElements_;
 
 	HealthDisplay* healthDisplay_;
+	MoneyDisplay* moneyDisplay_;
 
-	cameraType cam_ = UI_CAMERA;
+	Font* font_;
+	SDL_Color fontColor_;
 };
 

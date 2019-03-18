@@ -2,11 +2,14 @@
 
 
 HealthDisplay::HealthDisplay() {
-	setPosition(Vector2D(60, 35));
+	setPosition(Vector2D(35, 35));
 	setWidth(200); setHeight(50);
 
 	background = new Sprite("./../Assets/sprites/health_background.png");
+	background->setCamera(UI_CAMERA);
+
 	bar = new Sprite("./../Assets/sprites/health_bar.png");
+	bar->setCamera(UI_CAMERA);
 	bar->setAutoSize(false);
 	bar->setSize(getWidth(), getHeight());
 

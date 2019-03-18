@@ -13,11 +13,15 @@ MainState::MainState() {
 	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(taxi_);
-	taxi_->setPosition(Vector2D(100, 100), false);
+
+	// Systems
+	moneySystem = new Money();
+	stage_.push_back(moneySystem);
 
 	// UI
 	UI_ = new UI();
 	taxi_->getHealthComponent()->registerObserver(UI_);
+	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
 
 	stage_.push_back(Reticule::GetInstance());
@@ -29,6 +33,9 @@ MainState::MainState() {
 
 
 MainState::~MainState() {
-
+	for (auto o : stage_) {
+		delete o; o = nullptr;
+	}
+	stage_.clear();
 }
 

@@ -13,6 +13,10 @@ public:
 	bool load(string fileName, int size);
 	void close();
 	SDL_Surface* renderText(string text, SDL_Color color) const;
+
+	const int getSize() const;
+
 private:
 	TTF_Font *font_;
+	int size_;
 };

@@ -7,6 +7,7 @@ enum event_type {
 	GAME_END,
 
 	HEALTH_CHANGED,
+	MONEY_CHANGED,
 	RESPAWNED,
 
 	EVENTS_LENGTH
@@ -33,4 +34,15 @@ struct HealthChangedEvent : public Event {
 	int currentHealth_;
 	int previousHealth_;
 	int maxHealth_;
+};
+
+struct MoneyChangedEvent : public Event {
+	MoneyChangedEvent(Observable* sender, int currentMoney, int previousMoney) :
+		Event(sender, MONEY_CHANGED) {
+		this->currentMoney_ = currentMoney;
+		this->previousMoney_ = previousMoney;
+	}
+
+	int currentMoney_;
+	int previousMoney_;
 };

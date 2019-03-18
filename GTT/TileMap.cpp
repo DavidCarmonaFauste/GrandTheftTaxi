@@ -59,7 +59,7 @@ void TileMap::tmxToScene() {
 			layers_.push_back(vector<vector<Tile*>>());
 			const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
 			bool collision = tileLayer.getName() == "Collisions";
-			cout << collision;
+
 			// Iterate through every tile and instantiate it in the game
 			for (int y = 0; y < tmxMap_->getTileCount().y; y++) {
 				layers_.back().push_back(vector<Tile*>());
