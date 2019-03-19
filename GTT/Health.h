@@ -24,7 +24,7 @@ public:
 	// 'heal()' or 'damage()'?
 	void setHealth(int health);
 
-	virtual bool receiveEvent(Event *e) override;
+	virtual bool receiveEvent(Event &e) override;
 
 private:
 	int maxHealth_;

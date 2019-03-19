@@ -53,8 +53,8 @@ bool UI::receiveEvent(Event * e) {
 		HealthChangedEvent* he = static_cast<HealthChangedEvent*>(e);
 		healthDisplay_->setHealthPercentage((float) he->currentHealth_/he->maxHealth_);
 	}
-	else if (e->type_ == MONEY_CHANGED) {
-		moneyDisplay_->setMoney(static_cast<MoneyChangedEvent*>(e)->currentMoney_);
+	else if (e.type_ == MONEY_CHANGED) {
+		moneyDisplay_->setMoney(static_cast<MoneyChangedEvent*>(&e)->currentMoney_);
 	}
 
 	return true;

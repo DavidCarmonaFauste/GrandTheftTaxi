@@ -10,14 +10,23 @@ TileMap::TileMap(string path) {
 
 TileMap::~TileMap() {
 	// Delete the tiles of each layer
-	for (int layer = 0; layer < layers_.size(); layer++) {
+
+	for (auto layer : layers_) {
+		for (auto row : layer) {
+			for (auto col : row) {
+				delete col;
+			}
+		}
+	}
+
+	/*for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
 			for (int x = 0; x < layers_[layer][y].size(); x++) {
 				delete layers_[layer][y][x];
 				layers_[layer][y][x] = nullptr;
 			}
 		}
-	}
+	}*/
 
 	delete tmxMap_; tmxMap_ = nullptr;
 }
@@ -118,6 +127,13 @@ void TileMap::handleInput(Uint32 deltaTime, const SDL_Event & event) {
 	// In case it's needed for every tile to handle input
 	// HEAVY PROCCESSING LOAD !!
 
+	/*for (auto layer : layers_) {
+		for (auto row : layer) {
+			for (auto col : row) {
+				col->handleInput(deltaTime, event);
+			}
+		}
+	}*/
 	/*
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
@@ -133,7 +149,13 @@ void TileMap::update(Uint32 deltaTime) {
 
 	// In case it's needed for every tile to update
 	// HEAVY PROCCESSING LOAD !!
-
+	//for (auto layer : layers_) {
+	//	for (auto row : layer) {
+	//		for (auto col : row) {
+	//			col->update(deltaTime);
+	//		}
+	//	}
+	//}
 	/*
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
@@ -147,14 +169,21 @@ void TileMap::update(Uint32 deltaTime) {
 void TileMap::render(Uint32 deltaTime) {
 	Container::render(deltaTime);
 
+	for (auto layer : layers_) {
+		for (auto row : layer) {
+			for (auto col : row) {
+				col->render(deltaTime);
+			}
+		}
+	}
 	// Render every tile
-	for (int layer = 0; layer < layers_.size(); layer++) {
+	/*for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
 			for (int x = 0; x < layers_[layer][y].size(); x++) {
 				layers_[layer][y][x]->render(deltaTime);
 			}
 		}
-	}
+	}*/
 }
 
 void TileMap::setTile(Tile * tile, int layer, int x, int y) {

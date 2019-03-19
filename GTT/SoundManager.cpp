@@ -4,29 +4,27 @@
 
 SoundManager::SoundManager() {
 	// Load the music files from the resources sheet
-	for (int i = 0; i < Resources::getInstance()->music_.size(); i++) {
-		loadMusic(Resources::getInstance()->music_[i].path,
-					Resources::getInstance()->music_[i].id);
+	for (auto music:Resources::getInstance()->music_) {
+		loadMusic(music.path, music.id);
 	}
 	
 	// Load the sound files from the resources sheet
-	for (int i = 0; i < Resources::getInstance()->sounds_.size(); i++) {
-		loadSound(Resources::getInstance()->sounds_[i].path,
-			Resources::getInstance()->sounds_[i].id);
+	for (auto sound : Resources::getInstance()->sounds_) {
+		loadSound(sound.path, sound.id);
 	}
 }
 
 
 SoundManager::~SoundManager() {
-	for (map<Resources::MusicId, Mix_Music*>::iterator it = music_.begin(); it != music_.end(); it++) {
-		Mix_FreeMusic(it->second);
-		it->second = nullptr;
+	for (auto music:music_) {
+		Mix_FreeMusic(music.second);
+		music.second = nullptr;
 	}
 	music_.clear();
 
-	for (map<Resources::SoundId, Mix_Chunk*>::iterator it = sound_.begin(); it != sound_.end(); it++) {
-		Mix_FreeChunk(it->second);
-		it->second = nullptr;
+	for (auto sound:sound_) {
+		Mix_FreeChunk(sound.second);
+		sound.second = nullptr;
 	}
 	sound_.clear();
 }

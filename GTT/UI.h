@@ -16,7 +16,7 @@ public:
 	virtual void update(Uint32 deltaTime) override;
 	virtual void addUIElement(Container* c);
 
-	virtual bool receiveEvent(Event* e) override;
+	virtual bool receiveEvent(Event& e) override;
 
 private:
 	vector<GameObject*> UIElements_;
