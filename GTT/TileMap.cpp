@@ -70,7 +70,10 @@ void TileMap::tmxToScene() {
 					uint32_t gid = tileLayer.getTiles()[tile_index].ID;
 
 					// Empty tile
-					if (gid == 0) continue;
+					if (gid == 0) {
+						layers_[layerName][y].push_back(nullptr);
+						continue;
+					}
 
 					// Look for the tileset that this tile uses
 					// TILESET MUST BE ORDERED FROM LOWER TO HIGHER !
@@ -83,7 +86,10 @@ void TileMap::tmxToScene() {
 					}
 
 					// Tileset not found
-					if (tset_gid == -1) continue;
+					if (tset_gid == -1) {
+						layers_[layerName][y].push_back(nullptr);
+						continue;
+					}
 
 					// Normalize the gid
 					uint32_t norm_gid = gid - tset_gid;
@@ -123,7 +129,7 @@ void TileMap::handleInput(Uint32 deltaTime, const SDL_Event & event) {
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
 			for (int x = 0; x < layers_[layer][y].size(); x++)
-				layers_[layer][y][x]->handleInput(deltaTime, event);
+				if (layer.second[y][x] != nullptr) layers_[layer][y][x]->handleInput(deltaTime, event);
 		}
 	}
 	*/
@@ -139,7 +145,7 @@ void TileMap::update(Uint32 deltaTime) {
 	for (int layer = 0; layer < layers_.size(); layer++) {
 		for (int y = 0; y < layers_[layer].size(); y++) {
 			for (int x = 0; x < layers_[layer][y].size(); x++)
-				layers_[layer][y][x]->update(deltaTime);
+				if (layer.second[y][x] != nullptr) layers_[layer][y][x]->update(deltaTime);
 		}
 	}
 	*/
@@ -152,7 +158,7 @@ void TileMap::render(Uint32 deltaTime) {
 	for (auto layer : layers_) {
 		for (int y = 0; y < layer.second.size(); y++) {
 			for (int x = 0; x < layer.second[y].size(); x++) {
-				layer.second[y][x]->render(deltaTime);
+				if (layer.second[y][x] != nullptr) layer.second[y][x]->render(deltaTime);
 			}
 		}
 	}

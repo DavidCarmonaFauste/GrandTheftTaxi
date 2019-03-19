@@ -1,4 +1,5 @@
 #include "MainState.h"
+#include "AINode.h"
 
 MainState::MainState() {
 	// Tilemap
@@ -18,6 +19,9 @@ MainState::MainState() {
 	taxi_->getHealthComponent()->registerObserver(UI_);
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
+
+	// AI
+	AINode::getNodesFromTilelayer(tilemap_);
 }
 
 

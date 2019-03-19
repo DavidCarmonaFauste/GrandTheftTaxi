@@ -225,6 +225,9 @@
     <ClCompile Include="AINode.cpp">
       <Filter>Archivos de origen\AI</Filter>
     </ClCompile>
+    <ClCompile Include="AStar.cpp">
+      <Filter>Archivos de origen\AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -393,6 +396,9 @@
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="AINode.h">
+      <Filter>Archivos de encabezado\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar.h">
       <Filter>Archivos de encabezado\AI</Filter>
     </ClInclude>
   </ItemGroup>

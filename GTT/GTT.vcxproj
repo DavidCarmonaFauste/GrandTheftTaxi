@@ -24,6 +24,7 @@
     <ClCompile Include="AINode.cpp" />
     <ClCompile Include="AirStrike.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AStar.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CursorLC.cpp" />
     <ClCompile Include="Flame_thrower.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="AINode.h" />
     <ClInclude Include="AirStrike.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AStar.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
     <ClInclude Include="CursorLC.h" />
