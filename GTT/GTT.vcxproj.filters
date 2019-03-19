@@ -19,9 +19,6 @@
     <Filter Include="Archivos de origen\Components">
       <UniqueIdentifier>{fd55ae11-939a-4239-b7cf-fc0dcc397971}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Core">
-      <UniqueIdentifier>{50456495-41a1-49b4-8aa9-efa0b412a9c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\Core">
       <UniqueIdentifier>{86f0dd2c-aafd-41d2-a9a1-8a7449279e2d}</UniqueIdentifier>
     </Filter>
@@ -55,6 +52,9 @@
     <Filter Include="Archivos de encabezado\UI">
       <UniqueIdentifier>{8a7a9918-4711-47cf-8129-29888856ed02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Components\Core">
+      <UniqueIdentifier>{50456495-41a1-49b4-8aa9-efa0b412a9c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -70,19 +70,19 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Observable.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen\Components</Filter>
@@ -112,16 +112,16 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="Resources.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Vector2D.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Vehicle.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Archivos de origen\Scene</Filter>
@@ -160,7 +160,7 @@
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ProyectilePool.cpp">
-      <Filter>Archivos de origen\Core</Filter>
+      <Filter>Archivos de origen\Components\Core</Filter>
     </ClCompile>
     <ClCompile Include="AirStrike.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>

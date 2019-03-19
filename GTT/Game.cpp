@@ -21,7 +21,7 @@ Game::Game() {
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 
-	world_ = new b2World(b2Vec2(0, 10));
+	world_ = new b2World(b2Vec2(0, 0));
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
@@ -45,6 +45,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 }
 void Game::update(Uint32 deltaTime)
 {
+	world_->Step((float)deltaTime / 1000, 8, 3);
 	gmStMachine_->get_CurrentState()->update(deltaTime);
 }
 void Game::render(Uint32 deltaTime)

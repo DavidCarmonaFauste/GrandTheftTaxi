@@ -29,18 +29,39 @@ PhysicObject::~PhysicObject() {
 }
 
 void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
-	Vector2D nextPos = Vector2D(body_->GetPosition().x,
-		body_->GetPosition().y) / Resources::getInstance()->physicsScalingFactor;
+	Vector2D nextPos = Vector2D(body_->GetPosition().x, body_->GetPosition().y);
+
+	nextPos.Divide(Resources::getInstance()->physicsScalingFactor);
+
+
+
+	if (abs(body_->GetLinearVelocity().Length()) < 0.5) {
+
+		body_->SetLinearVelocity(Vector2D());
+
+	}
+
+
+
+	if (abs(body_->GetAngularVelocity()) < 0.5) {
+
+		body_->SetAngularVelocity(0);
+
+	}
+
 
 
 	// Set the GameObject position to the physics position
-	// Subtract the visual size multiplied by the origin to
-	// fix the difference between coordinate system origins
-	// (those being the top left corner for SDL and the origin
-	// defined by the user for the box2D shape).
-	o->setPosition(nextPos - (Vector2D(visualSize_.x * origin_.x,
-		visualSize_.y * origin_.y)));
 
+	// Subtract the visual size multiplied by the origin to
+
+	// fix the difference between coordinate system origins
+
+	// (those being the top left corner for SDL and the origin
+
+	// defined by the user for the box2D shape	
+
+	o->setPosition(nextPos - (Vector2D(visualSize_.x * origin_.x, visualSize_.y * origin_.y)));
 
 	o->setRotation(body_->GetAngle() * 180 / M_PI);
 }

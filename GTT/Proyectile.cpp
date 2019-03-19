@@ -11,7 +11,7 @@ Proyectile::Proyectile()
 	height_ = 50;
 	width_ = 50;
 
-	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.getX(), position_.getY());
+	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
 	addLogicComponent(phyO_);
 	addRenderComponent(animC_);
 }

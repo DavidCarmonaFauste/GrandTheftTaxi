@@ -19,7 +19,7 @@ void SpreadSC::shoot()
 	
 	for (int i = 1; i < numPellets_; i++) {
 		ProyectilePool::GetInstance()->addProyectile(turret_->getCenter(),
-			Vector2D(turret_->GetSpeed()*sin(ang), -turret_->GetSpeed()*cos(ang)), turret_->GetProyectileType(), turret_->GetLifeTime(), turret_->GetDamage());
+			Vector2D((turret_->GetSpeed()*sin(ang)), (-turret_->GetSpeed()*cos(ang))), turret_->GetProyectileType(), turret_->GetLifeTime(), turret_->GetDamage());
 		ang += incrang;
 	}
 }
