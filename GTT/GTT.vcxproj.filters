@@ -52,7 +52,7 @@
     <Filter Include="Archivos de encabezado\UI">
       <UniqueIdentifier>{8a7a9918-4711-47cf-8129-29888856ed02}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Components\Core">
+    <Filter Include="Archivos de origen\Core">
       <UniqueIdentifier>{50456495-41a1-49b4-8aa9-efa0b412a9c0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -70,19 +70,19 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Observable.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Archivos de origen\Components</Filter>
@@ -112,16 +112,16 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="Resources.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Vector2D.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Vehicle.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Archivos de origen\Scene</Filter>
@@ -160,7 +160,7 @@
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ProyectilePool.cpp">
-      <Filter>Archivos de origen\Components\Core</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="AirStrike.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
@@ -217,7 +217,7 @@
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="ReloadingDisplay.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,7 +387,7 @@
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="ReloadingDisplay.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

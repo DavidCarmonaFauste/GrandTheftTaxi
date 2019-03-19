@@ -36,13 +36,11 @@ protected:
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
 	int speed_;//velocidad del proyectil
-	int lastTimeReloaded_;//momento en el que se pulso el boton de recarga
+	int reloadpressedTime_;//momento en el que se pulso el boton de recarga
 	int lastTimeShot_;//momento en el que se disparo la ultima bala
 	double damage_;//daño de cada proyectil
 	double lifeTime_; //tiempo de vida del proyectil
 	bool reloading_;//indica si se esta recargando en el momento
-	double shooting_ = -1; //indica si se está disparando (para AirStrike)
-	double waitingShotTime_ = -1; //tiempo que tarda en disparar
 	proyectileType prType_;//tipo de proyectil
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;

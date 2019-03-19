@@ -48,9 +48,9 @@ void UI::addUIElement(Container * c)
 	UIElements_.push_back(c);
 }
 
-bool UI::receiveEvent(Event * e) {
-	if (e->type_ == HEALTH_CHANGED) {
-		HealthChangedEvent* he = static_cast<HealthChangedEvent*>(e);
+bool UI::receiveEvent(Event& e) {
+	if (e.type_ == HEALTH_CHANGED) {
+		HealthChangedEvent* he = static_cast<HealthChangedEvent*>(&e);
 		healthDisplay_->setHealthPercentage((float) he->currentHealth_/he->maxHealth_);
 	}
 	else if (e.type_ == MONEY_CHANGED) {

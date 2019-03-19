@@ -8,8 +8,7 @@ Turret::Turret()
 {
 	animC_ = new Animation();
 	addRenderComponent(animC_);
-	lastTimeReloaded_ = -reloadTime_;
-	lastTimeShot_ = -cadence_;
+	lastTimeShot_ = -1000;
 	reloading_ = false;
 }
 
@@ -19,12 +18,6 @@ void Turret::update(Uint32 deltaTime)
 	if (reloading_) {
 		Reload();
 	} 
-	if (shooting_ != -1 && SDL_GetTicks() > shooting_ + waitingShotTime_) {
-		Shoot();
-		cout << "shoot" << endl;
-		shooting_ = -1;
-	}
-
 }
 
 void Turret::AttachToVehicle(Vehicle * car)
@@ -58,7 +51,7 @@ void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 void Turret::Reload()
 {
 	cout << "reloading" << endl;
-	if (SDL_GetTicks() - lastTimeReloaded_ >= reloadTime_) {
+	if (SDL_GetTicks() - reloadpressedTime_ >= reloadTime_) {
 		cout << "reloaded" << endl;
 		while (magazine_->size() != maxAmmo_) {
 			magazine_->push(1.0);
@@ -71,7 +64,7 @@ void Turret::InitiateReload()
 {
 	if (!reloading_) {
 		reloading_ = true;
-		lastTimeReloaded_ = SDL_GetTicks();
+		reloadpressedTime_ = SDL_GetTicks();
 	}
 }
 
@@ -105,8 +98,8 @@ int Turret::GetMaxAmmo()
 double Turret::GetReloadPercentage()
 {
 	if (reloading_) {
-		cout << (double)(SDL_GetTicks() - lastTimeReloaded_) / (double)reloadTime_;
-		return (double)(SDL_GetTicks() - lastTimeReloaded_) / (double)reloadTime_;
+		cout << (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
+		return (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
 	}
 	else return 0;
 }
