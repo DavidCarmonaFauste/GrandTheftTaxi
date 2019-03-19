@@ -4,14 +4,12 @@
 
 Proyectile::Proyectile()
 {
-	movC_ = new NaturalMove();
 	animC_ = new Animation();
 	animC_->loadAnimation(bulletPath_, "bullet");
 	animC_->loadAnimation(flamePath_, "flame");//spritesheet (poner columnas y filas)
 	animC_->loadAnimation(strikePath_, "strike");
 
 	addRenderComponent(animC_);
-	addLogicComponent(movC_);
 
 	height_ = 50;
 	width_ = 50;

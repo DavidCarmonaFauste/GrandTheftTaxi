@@ -45,7 +45,6 @@
     <ClCompile Include="MainState.cpp" />
     <ClCompile Include="Money.cpp" />
     <ClCompile Include="MoneyDisplay.cpp" />
-    <ClCompile Include="NaturalMove.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
@@ -103,7 +102,6 @@
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Money.h" />
     <ClInclude Include="MoneyDisplay.h" />
-    <ClInclude Include="NaturalMove.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicObject.h" />

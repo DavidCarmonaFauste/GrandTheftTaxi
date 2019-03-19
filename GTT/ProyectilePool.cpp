@@ -23,7 +23,6 @@ void ProyectilePool::render(Uint32 time) {
 Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectileType type, double lifeTime, double damage) {
 	Proyectile* e = getUnusedProyectile();
 	if (e != nullptr) {
-		e->setVelocity(vel);
 		e->setPosition(Vector2D(pos.getX()-e->getWidth()/2, pos.getY()-e->getHeight()/2));
 		e->SetDamage(damage);
 		e->SetLifeTime(lifeTime);
