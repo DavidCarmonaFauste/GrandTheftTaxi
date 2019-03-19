@@ -13,7 +13,7 @@ public:
 
 	virtual void render(Uint32 deltaTime) override;
 
-	virtual bool receiveEvent(Event* e) override;
+	virtual bool receiveEvent(Event& e) override;
 
 private:
 	vector<GameObject*> UIElements_;

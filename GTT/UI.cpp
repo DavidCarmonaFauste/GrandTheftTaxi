@@ -34,13 +34,13 @@ void UI::render(Uint32 deltaTime) {
 	}
 }
 
-bool UI::receiveEvent(Event * e) {
-	if (e->type_ == HEALTH_CHANGED) {
-		HealthChangedEvent* he = static_cast<HealthChangedEvent*>(e);
+bool UI::receiveEvent(Event& e) {
+	if (e.type_ == HEALTH_CHANGED) {
+		HealthChangedEvent* he = static_cast<HealthChangedEvent*>(&e);
 		healthDisplay_->setHealthPercentage((float) he->currentHealth_/he->maxHealth_);
 	}
-	else if (e->type_ == MONEY_CHANGED) {
-		moneyDisplay_->setMoney(static_cast<MoneyChangedEvent*>(e)->currentMoney_);
+	else if (e.type_ == MONEY_CHANGED) {
+		moneyDisplay_->setMoney(static_cast<MoneyChangedEvent*>(&e)->currentMoney_);
 	}
 
 	return true;

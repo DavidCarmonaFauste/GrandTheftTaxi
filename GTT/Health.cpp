@@ -36,13 +36,13 @@ void Health::resetHealth() {
 void Health::setHealth(int health) {
 	// Send an event about the health change
 	HealthChangedEvent e(this, health, health_, maxHealth_);
-	broadcastEvent(&e);
+	broadcastEvent(e);
 
 	health_ = health;
 }
 
-bool Health::receiveEvent(Event * e) {
-	if (e->type_ == RESPAWNED)
+bool Health::receiveEvent(Event& e) {
+	if (e.type_ == RESPAWNED)
 		resetHealth();
 
 	return true;

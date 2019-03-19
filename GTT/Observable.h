@@ -19,7 +19,7 @@ public:
 	void cleanObservers();
 
 protected:
-	void broadcastEvent(Event *e);
+	void broadcastEvent(Event& e);
 
 private:
 	vector<Observer*> observers;

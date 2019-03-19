@@ -4,21 +4,35 @@ ProyectilePool* ProyectilePool::instance_ = nullptr;
 
 ProyectilePool::ProyectilePool()
 {
-	for (int i = 0; i < MAX_PROYECTILES; i++) {
-		proyectiles_[i].setActive(false);
+	for (auto proyectile : proyectiles_) {
+		proyectile.setActive(false);
 	}
+	/*for (int i = 0; i < MAX_PROYECTILES; i++) {
+		proyectiles_[i].setActive(false);
+	}*/
 }
 void ProyectilePool::update(Uint32 time) {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
+	for (auto proyectile : proyectiles_) {
+		if (proyectile.isActive()) {
+			proyectile.update(time);
+		}
+	}
+	/*for (int i = 0; i < MAX_PROYECTILES; i++)
 		if (proyectiles_[i].isActive()) {
 			proyectiles_[i].update(time);
-		}
+		}*/
 }
 void ProyectilePool::render(Uint32 time) {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
+	for (auto proyectile : proyectiles_)
+	{
+		if (proyectile.isActive()) {
+			proyectile.update(time);
+		}
+	}
+	/*for (int i = 0; i < MAX_PROYECTILES; i++)
 		if (proyectiles_[i].isActive()) {
 			proyectiles_[i].render(time);
-		}
+		}*/
 }
 Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectileType type, double lifeTime, double damage) {
 	Proyectile* e = getUnusedProyectile();
@@ -33,10 +47,16 @@ Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectile
 }
 
 Proyectile* ProyectilePool::getUnusedProyectile() {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
+
+	for (auto proyectile : proyectiles_) {
+		if (!proyectile.isActive()) {
+			return &proyectile;
+		}
+	}
+	/*for (int i = 0; i < MAX_PROYECTILES; i++)
 		if (!proyectiles_[i].isActive()) {
 			return &proyectiles_[i];
-		}
+		}*/
 
 	return nullptr;
 }

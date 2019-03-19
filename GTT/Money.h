@@ -8,7 +8,7 @@ public:
 	Money();
 	virtual ~Money();
 
-	virtual bool receiveEvent(Event* e) override;
+	virtual bool receiveEvent(Event& e) override;
 
 	void setCurrentMoney(int money);
 	void setMinMoney(int money);

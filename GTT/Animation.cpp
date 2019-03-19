@@ -9,9 +9,9 @@ Animation::Animation() {
 }
 
 Animation::~Animation() {
-	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
-		delete it->second.first; it->second.first = nullptr;
-		delete it->second.second; it->second.second = nullptr;
+	for (auto animation:animations) {
+		delete animation.second.first;
+		delete animation.second.second;
 	}
 	animations.clear();
 
