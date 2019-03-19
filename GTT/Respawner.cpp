@@ -91,7 +91,7 @@ string Respawner::searchNearestRespawn() {
 
 	for (it = respawnPoints_.begin(); it != respawnPoints_.end(); it++) {
 		if (closestGameObject == "" ||
-			(*it).second->getPosition().magnitude() < respawnPoints_[closestGameObject]->getPosition().magnitude())
+			(*it).second->getPosition().Length() < respawnPoints_[closestGameObject]->getPosition().Length())
 
 			closestGameObject = (*it).first;
 	}

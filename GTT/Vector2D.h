@@ -1,34 +1,30 @@
 #pragma once
 #define _USE_MATH_DEFINES
+#include <Box2D/Box2D.h>
 #include <iostream>
 #include <cmath>
 
 using namespace std;
 
-class Vector2D {
-	double x_;  // first coordinate
-	double y_;  // second coordinate
-public:
-	Vector2D();
-	Vector2D(const Vector2D &v);
-	Vector2D(double x, double y);
-	virtual ~Vector2D();
-	double getX() const;
-	double getY() const;
-	void setX(double x);
-	void setY(double y);
-	void set(const Vector2D &v);
-	void set(double x, double y);
-	double magnitude() const;
-	Vector2D rotate(double degrees);
-	double angle(const Vector2D& v) const;
-	Vector2D normalize();
+class Vector2D: public b2Vec2{
 
-	Vector2D operator-(const Vector2D& v) const;
-	Vector2D operator+(const Vector2D& v) const;
-	Vector2D operator*(double d) const;
-	double operator *(const Vector2D& d) const;
-	Vector2D operator/(double d) const;
-	friend ostream& operator<<(ostream& os, const Vector2D &v);
+public:
+	Vector2D() :b2Vec2(0.0f, 0.0f) {};
+	Vector2D(b2Vec2 v) :b2Vec2(v) {};
+	Vector2D(float32 x, float32 y) : b2Vec2(x, y) {};
+	virtual ~Vector2D() {};
+
+	Vector2D ApplyRotation(float32 rotation);
+
+	void Divide(float f);
+	void Multiply(float f);
+	float AreEqual(Vector2D vy);
+
+	Vector2D operator/(float32 d) const;
+	Vector2D operator*(float32 d) const;
+	Vector2D operator+(float32 d) const;
+	Vector2D operator-(float32 d) const;
+	/*double operator *(const Vector2D& d) const;
+	friend ostream& operator<<(ostream& os, const Vector2D &v);*/
 };
 

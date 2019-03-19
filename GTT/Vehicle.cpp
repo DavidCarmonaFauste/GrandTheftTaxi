@@ -94,7 +94,7 @@ void Vehicle::setPosition(const Vector2D & pos, bool force) {
 	GameObject::setPosition(pos);
 
 	if (force) {
-		b2Vec2 nextPos = b2Vec2(pos.getX(), pos.getY()) +
+		b2Vec2 nextPos = b2Vec2(pos.x, pos.y) +
 			b2Vec2(phyO_->getOrigin().x * width_,
 				phyO_->getOrigin().y * height_);
 

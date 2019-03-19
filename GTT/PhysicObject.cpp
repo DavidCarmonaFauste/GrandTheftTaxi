@@ -38,8 +38,8 @@ void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
 	// fix the difference between coordinate system origins
 	// (those being the top left corner for SDL and the origin
 	// defined by the user for the box2D shape).
-	o->setPosition(nextPos - (Vector2D(visualSize_.getX() * origin_.x,
-		visualSize_.getY() * origin_.y)));
+	o->setPosition(nextPos - (Vector2D(visualSize_.x * origin_.x,
+		visualSize_.y * origin_.y)));
 
 
 	o->setRotation(body_->GetAngle() * 180 / M_PI);

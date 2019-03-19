@@ -9,11 +9,8 @@ class GameObject {
 
 public:
 	GameObject();
-	//GameObject(Game* game);
 	virtual ~GameObject();
 
-	//Game* getGame() const;
-	//void setGame(Game* game);
 
 	bool isActive() const;
 	void setActive(bool active);
@@ -51,8 +48,6 @@ public:
 	virtual void render(Uint32 deltaTime) = 0;
 
 protected:
-	//Game* game_; // pointer to the game
-
 	bool active_;   // indicates if the object is active
 
 	double width_;  // width
