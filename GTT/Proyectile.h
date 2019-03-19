@@ -1,6 +1,9 @@
 #pragma once
 #include "Container.h"
 #include "Animation.h"
+#include "PhysicObject.h"
+
+
 
 enum proyectileType {
 	BULLET,
@@ -15,9 +18,11 @@ public:
 	virtual void SetDamage(double damage);
 	virtual void SetLifeTime(double lifeTime);
 	virtual void SetAnimation(proyectileType type);
+	PhysicObject* GetPhyO();
 	virtual ~Proyectile() {};
 private:
 	Animation* animC_;
+	PhysicObject* phyO_;
 	double damage_;
 	double lifeTime_;
 	string bulletPath_= "../Assets/sprites/bullet.png";

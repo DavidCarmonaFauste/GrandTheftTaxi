@@ -1,7 +1,6 @@
 #include "Proyectile.h"
 
 
-
 Proyectile::Proyectile()
 {
 	animC_ = new Animation();
@@ -9,10 +8,12 @@ Proyectile::Proyectile()
 	animC_->loadAnimation(flamePath_, "flame");//spritesheet (poner columnas y filas)
 	animC_->loadAnimation(strikePath_, "strike");
 
-	addRenderComponent(animC_);
-
 	height_ = 50;
 	width_ = 50;
+
+	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.getX(), position_.getY());
+	addLogicComponent(phyO_);
+	addRenderComponent(animC_);
 }
 
 
@@ -46,5 +47,10 @@ void Proyectile::SetAnimation(proyectileType type)
 	default:
 		break;
 	}
+}
+
+PhysicObject * Proyectile::GetPhyO()
+{
+	return phyO_;
 }
 

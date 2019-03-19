@@ -107,13 +107,13 @@ void Vehicle::setPosition(const Vector2D & pos, bool force) {
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {	
-	if(currentTurret_!=nullptr) currentTurret_->handleInput(time, event);
+	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
 	Container::handleInput(time, event);
 }
 
 void Vehicle::update(Uint32 time) {	
-	if (currentTurret_ != nullptr)
-		currentTurret_->update(time);
+	if (turrets_[currentTurret_] != nullptr)
+		turrets_[currentTurret_]->update(time);
 
 	Container::update(time);
 }
