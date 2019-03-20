@@ -20,6 +20,8 @@ public:
 	proyectileType GetProyectileType();
 	virtual void Shoot();
 	virtual void Reload();
+	virtual void PerfectReload();
+	virtual void CancelReload();
 	virtual void InitiateReload();
 	virtual int GetSpeed();
 	virtual double GetDamage();
@@ -27,8 +29,11 @@ public:
 	virtual int GetAmmo();
 	virtual int GetMaxAmmo();
 	virtual double GetReloadPercentage();
+	virtual double GetPerfReloadSeg();
+	virtual double GetPerfReloadIni();
 	virtual double GetLifeTime();
 	virtual string GetReticule();
+	virtual bool isReloading();
 	virtual ~Turret();
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
@@ -38,6 +43,8 @@ protected:
 	int speed_;//velocidad del proyectil
 	int reloadpressedTime_;//momento en el que se pulso el boton de recarga
 	int lastTimeShot_;//momento en el que se disparo la ultima bala
+	double perfRelSeg_;//segmento del tiempo de recarga en el que entra en accion la recarga perfecta (en tanto por 1)
+	double perfRelIni_;//momento dentro del tiempo de recarga en el que empieza el segmento de recarga perfecta (en tanto por 1)
 	double damage_;//daño de cada proyectil
 	double lifeTime_; //tiempo de vida del proyectil
 	bool reloading_;//indica si se esta recargando en el momento

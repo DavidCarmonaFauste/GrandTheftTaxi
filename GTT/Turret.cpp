@@ -50,15 +50,28 @@ void Turret::Shoot()//tiempo desde que se disparo la ultima bala
 
 void Turret::Reload()
 {
-	cout << "reloading" << endl;
 	if (SDL_GetTicks() - reloadpressedTime_ >= reloadTime_) {
-		cout << "reloaded" << endl;
 		while (magazine_->size() != maxAmmo_) {
 			magazine_->push(1.0);
 		}
 		reloading_ = false;
 	}
 }
+
+void Turret::PerfectReload()
+{
+	while (magazine_->size() != maxAmmo_) {
+		magazine_->push(2.0);
+	}
+	reloading_ = false;
+}
+
+void Turret::CancelReload()
+{
+	reloading_ = false;
+}
+
+
 
 void Turret::InitiateReload()
 {
@@ -98,10 +111,19 @@ int Turret::GetMaxAmmo()
 double Turret::GetReloadPercentage()
 {
 	if (reloading_) {
-		cout << (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
 		return (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
 	}
 	else return 0;
+}
+
+double Turret::GetPerfReloadSeg()
+{
+	return perfRelSeg_;
+}
+
+double Turret::GetPerfReloadIni()
+{
+	return perfRelIni_;
 }
 
 
@@ -113,6 +135,11 @@ double Turret::GetLifeTime()
 string Turret::GetReticule()
 {
 	return reticulesprite_;
+}
+
+bool Turret::isReloading()
+{
+	return reloading_;
 }
 
 Turret::~Turret()
