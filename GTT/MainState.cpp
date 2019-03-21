@@ -12,7 +12,6 @@ MainState::MainState() {
 
 	// Vehicles
 	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
-	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(taxi_);
 
 	// Systems
@@ -26,6 +25,7 @@ MainState::MainState() {
 	stage_.push_back(UI_);
 	UI_->addUIElement(new ReloadingDisplay(taxi_));
 
+	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
 
 	taxi_->EquipTurret(new ShotGun());

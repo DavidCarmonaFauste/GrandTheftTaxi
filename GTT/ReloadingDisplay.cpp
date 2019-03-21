@@ -6,19 +6,19 @@
 ReloadingDisplay::ReloadingDisplay(Vehicle* vehicle)
 {
 	vehicle_ = vehicle;
-	setPosition(Vector2D(Game::getInstance()->getWindowWidth()-50, Game::getInstance()->getWindowHeight() -50));
+	setPosition(Vector2D(Game::getInstance()->getWindowWidth()-40, 30));
 	setWidth(200); setHeight(50);
 
-	background = new Sprite("./../Assets/sprites/health_background.png");
+	background = new Sprite("./../Assets/sprites/ReloadBarBackground.png");
 	background->setCamera(UI_CAMERA);
 
-	bar = new Sprite("./../Assets/sprites/health_bar.png");
+	bar = new Sprite("./../Assets/sprites/ReloadBar.png");
 	bar->setCamera(UI_CAMERA);
 	bar->setAutoSize(false);
 	bar->setSize(getWidth(), getHeight());
 
-	addRenderComponent(background);
 	addRenderComponent(bar);
+	addRenderComponent(background);
 
 	bar_clip = new SDL_Rect();
 }

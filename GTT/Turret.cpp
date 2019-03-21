@@ -36,7 +36,7 @@ proyectileType Turret::GetProyectileType()
 	return prType_;
 }
 
-void Turret::Shoot()//tiempo desde que se disparo la ultima bala
+void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
@@ -79,6 +79,13 @@ void Turret::InitiateReload()
 		reloading_ = true;
 		reloadpressedTime_ = SDL_GetTicks();
 	}
+	else {
+		if (GetReloadPercentage() >= perfRelIni_ && GetReloadPercentage() <= perfRelIni_ + perfRelSeg_)
+			PerfectReload();
+		else
+			CancelReload();
+	}
+	
 }
 
 
@@ -113,7 +120,7 @@ double Turret::GetReloadPercentage()
 	if (reloading_) {
 		return (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
 	}
-	else return 0;
+	else return 1;
 }
 
 double Turret::GetPerfReloadSeg()

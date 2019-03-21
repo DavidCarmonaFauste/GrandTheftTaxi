@@ -12,7 +12,7 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
-	setPosition(Vector2D(400, 300));
+	setPosition(Vector2D(600, 300));
 
 	// Sprite
 	sprite_ = new Animation();

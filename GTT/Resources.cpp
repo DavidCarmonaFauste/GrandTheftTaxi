@@ -11,7 +11,7 @@ Resources::Resources() {
 	physicsScalingFactor = 0.2;
 
 	vehicles_ = {
-		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 50, 100}
+		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 400}
 	};
 
 	sounds_ = {
