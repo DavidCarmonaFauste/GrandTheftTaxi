@@ -3,6 +3,8 @@
 #include "ShootComponent.h"
 #include "Reticule.h"
 #include "AimComponent.h"
+#include "ShootIC.h"
+#include "ReloadInputComponent.h"
 
 Turret::Turret()
 {
@@ -25,9 +27,10 @@ void Turret::AttachToVehicle(Vehicle * car)
 	car_ = car;
 
 	followC_ = new FollowGameObject(car_);
-	aimC_ = car_->GetAimComponent();
 
-	addLogicComponent(aimC_);
+	addLogicComponent(car_->GetAimComponent());
+	addInputComponent(car_->GetReloadIC());
+	addInputComponent(car_->GetShootIC());
 	addLogicComponent(followC_);
 }
 		
@@ -75,7 +78,7 @@ void Turret::CancelReload()
 
 void Turret::InitiateReload()
 {
-	if (!reloading_) {
+	if (!reloading_ && magazine_->size()!=maxAmmo_) {
 		reloading_ = true;
 		reloadpressedTime_ = SDL_GetTicks();
 	}

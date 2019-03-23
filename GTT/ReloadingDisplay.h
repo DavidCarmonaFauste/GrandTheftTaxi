@@ -9,7 +9,6 @@ class ReloadingDisplay :
 public:
 	ReloadingDisplay(Vehicle* vehicle);
 	void setReloadingPercentage();
-	int getReloadingPercentage();
 	virtual ~ReloadingDisplay();
 	virtual void update(Uint32 deltaTime);
 
@@ -17,7 +16,9 @@ public:
 private:
 	Sprite* background;
 	Sprite* bar;
+	Sprite* perfReSegment;
 	SDL_Rect* bar_clip;
+	double barWidth;
 
 	Vehicle* vehicle_;
 };

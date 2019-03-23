@@ -15,10 +15,21 @@ ReloadingDisplay::ReloadingDisplay(Vehicle* vehicle)
 	bar = new Sprite("./../Assets/sprites/ReloadBar.png");
 	bar->setCamera(UI_CAMERA);
 	bar->setAutoSize(false);
-	bar->setSize(getWidth(), getHeight());
+	bar->setAutoPos(false);
+	
+	bar->setSize(getWidth()*0.875, getHeight());
+	bar->setPos(getPosition().x+0.0625*getWidth(), getPosition().y);
+	barWidth = bar->getRect()->w;
+
+	perfReSegment = new Sprite("./../Assets/sprites/PerfReInd.png");
+	perfReSegment->setCamera(UI_CAMERA);
+	perfReSegment->setAutoSize(false);
+	perfReSegment->setAutoPos(false);
+
 
 	addRenderComponent(bar);
 	addRenderComponent(background);
+	addRenderComponent(perfReSegment);
 
 	bar_clip = new SDL_Rect();
 }
@@ -30,18 +41,17 @@ void ReloadingDisplay::setReloadingPercentage()
 	bar_clip->w = tex->getWidth() * vehicle_->getCurrentTurret()->GetReloadPercentage();
 	bar_clip->h = tex->getHeight();
 
-	bar->setSize(getWidth() *  vehicle_->getCurrentTurret()->GetReloadPercentage(), getHeight());
+	bar->setSize(barWidth *  vehicle_->getCurrentTurret()->GetReloadPercentage(), getHeight());
 	bar->setClipRect(bar_clip);
+	perfReSegment->setSize(barWidth*vehicle_->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
+	perfReSegment->setPos(bar->getRect()->x + barWidth*vehicle_->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
 }
-
-int ReloadingDisplay::getReloadingPercentage()
-{
-	return  vehicle_->getCurrentTurret()->GetReloadPercentage();
-}
-
 
 ReloadingDisplay::~ReloadingDisplay()
 {
+	delete bar;
+	delete background;
+	delete perfReSegment;
 }
 
 void ReloadingDisplay::update(Uint32 deltaTime)

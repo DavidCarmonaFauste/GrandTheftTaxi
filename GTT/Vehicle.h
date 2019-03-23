@@ -12,6 +12,8 @@ using namespace std;
 
 class Turret;
 class AimComponent;
+class ReloadInputComponent;
+class ShootIC;
 
 class Vehicle :
 	public Container, public Observable
@@ -23,8 +25,8 @@ public:
 	Health* getHealthComponent();
 
 	virtual AimComponent* GetAimComponent();
-	virtual void Shoot();
-	virtual void Reload();
+	virtual ReloadInputComponent* GetReloadIC();
+	virtual ShootIC* GetShootIC();
 	virtual void EquipTurret(Turret* turret);
 	virtual void ChangeTurret();
 	Turret* getCurrentTurret();
@@ -35,10 +37,12 @@ public:
 
 protected:
 	static const int MAXTURRETS = 2;
+
 	PhysicObject* phyO_;
 	Animation* sprite_;
 	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)	
-
+	ReloadInputComponent* reIC_;
+	ShootIC* shIC_;
 	Turret* turrets_[MAXTURRETS];
 
 	int currentTurret_=0;

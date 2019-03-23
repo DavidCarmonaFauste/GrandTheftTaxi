@@ -33,6 +33,7 @@ Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectile
 		e->SetDamage(damage);
 		e->SetLifeTime(lifeTime);
 		e->SetAnimation(type);
+		e->SetBirth(SDL_GetTicks());
 		e->setActive(true);
 	}
 	return e;

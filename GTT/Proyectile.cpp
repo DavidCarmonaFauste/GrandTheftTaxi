@@ -32,6 +32,11 @@ void Proyectile::SetLifeTime(double lifeTime)
 	lifeTime_ = lifeTime;
 }
 
+void Proyectile::SetBirth(double birthTime)
+{
+	birthTime_ = birthTime;
+}
+
 void Proyectile::SetAnimation(proyectileType type)
 {
 	switch (type) {
@@ -47,6 +52,14 @@ void Proyectile::SetAnimation(proyectileType type)
 	default:
 		break;
 	}
+}
+
+void Proyectile::update(Uint32 time)
+{
+	if (SDL_GetTicks() - birthTime_ >= lifeTime_) {
+		setActive(false);
+	}
+	Container::update(time);
 }
 
 PhysicObject * Proyectile::GetPhyO()

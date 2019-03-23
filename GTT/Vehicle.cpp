@@ -24,9 +24,9 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	health_ = new Health(100);
 	addLogicComponent(health_);
 
+	shIC_ = new ShootIC();
+	reIC_ = new ReloadInputComponent();
 	aimC_ = new AimAtCursorAC();
-	addInputComponent(new ShootIC());
-	addInputComponent(new ReloadInputComponent());
 	addInputComponent(new ChangeWeaponIC());
 
 	for (int i = 0; i < MAXTURRETS; i++) {
@@ -54,14 +54,14 @@ AimComponent * Vehicle::GetAimComponent()
 	return aimC_;
 }
 
-void Vehicle::Shoot()
+ReloadInputComponent * Vehicle::GetReloadIC()
 {
-	turrets_[currentTurret_]->Shoot();
+	return reIC_;
 }
 
-void Vehicle::Reload()
+ShootIC * Vehicle::GetShootIC()
 {
-	turrets_[currentTurret_]->InitiateReload();
+	return shIC_;
 }
 
 void Vehicle::EquipTurret(Turret * turret)
