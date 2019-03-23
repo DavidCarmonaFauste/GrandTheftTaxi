@@ -27,76 +27,62 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 		if (event.key.keysym.sym == k_->backwards) backwardPressed_ = true;
 		if (event.key.keysym.sym == k_->turnRight) rightTurnPressed_ = true;
 		if (event.key.keysym.sym == k_->turnLeft) leftTurnPressed_ = true;
-		//if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
+		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 	}
 	else if (event.type == SDL_KEYUP) {
 		if (event.key.keysym.sym == k_->forward) forwardPressed_ = false;
 		if (event.key.keysym.sym == k_->backwards) backwardPressed_ = false;
 		if (event.key.keysym.sym == k_->turnRight) rightTurnPressed_ = false;
 		if (event.key.keysym.sym == k_->turnLeft) leftTurnPressed_ = false;
-		//if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
+		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
 	}
 }
 
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
-	b2Body* body = v_->GetPhyO()->getBody();	
-	cout << body->GetAngle() * 180 / M_PI << endl;
+	b2Body* body = v_->GetPhyO()->getBody();
+	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 
-	if (backwardPressed_) 
-	{
-		Vector2D v = body->GetLinearVelocity();
-		int degrees = abs(body->GetAngle() * 180 / M_PI);
-		degrees = degrees % 360;
-		if (degrees <= 180)
-			v.x -= (sin(body->GetAngle()));
-		else
-			v.x -= -abs(sin(body->GetAngle()));
-		if (degrees >= 90 && degrees <= 270)
-			v.y -= abs(cos(body->GetAngle()));
-		else
-			v.y -= -abs(cos(body->GetAngle()));
-
-		body->SetLinearVelocity(v);
+	// Forward and backward acceleration
+	if (forwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxSpeed()) {
+		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
+		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
-	if (rightTurnPressed_) {
-		if (isMoving()) 
-			steeringWheel('R');
-	}
-	if (leftTurnPressed_) {
-		if (isMoving()) 
-			steeringWheel('L');
+	else if (backwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()) {
+		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
+		body->ApplyLinearImpulse(-1 * impulse, body->GetWorldCenter(), true);
 	}
 
-	if (forwardPressed_ /*&& abs(body->GetLinearVelocity().Length()) < v_->GetMaxSpeed()*/) {
+	// Handle rotation
+	steeringWheel();
 
-		Vector2D v = body->GetLinearVelocity();
-		int degrees = abs(body->GetAngle() * 180 / M_PI);
-		degrees = degrees % 360;
-		if (degrees <= 180)
-			v.x = (v.x + v_->GetAcceleration()) * (sin(body->GetAngle()));
-		else
-			v.x = (v.x + v_->GetAcceleration()) * -abs(sin(body->GetAngle()));
-		if (degrees >= 90 && degrees <= 270)
-			v.y = (v.y + v_->GetAcceleration()) * abs(cos(body->GetAngle()));
-		else
-			v.y = (v.y + v_->GetAcceleration()) * -abs(cos(body->GetAngle()));
-
-		body->SetLinearVelocity(v);
+	// Handbrake
+	if (!handBrakePressed_) {
+		body->SetLinearDamping(1);
+		Vector2D lateralImpulse = body->GetMass() * getLateralVelocity().Multiply(-1);
+		body->ApplyLinearImpulse(lateralImpulse, body->GetWorldCenter(), true);
 	}
-
+	else
+		body->SetLinearDamping(1.5);
 }
 
-void InputMovement::steeringWheel(char d) {
+void InputMovement::steeringWheel() {
 	b2Body* body = v_->GetPhyO()->getBody();
-	if (d == 'R') {
-		//Aply rotation to object
-		body->SetAngularVelocity(v_->GetTurnSpeed());
+
+	float turnSpeed = 0;
+	if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
+	else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+
+	if (turnSpeed != 0) {
+		turnSpeed *= body->GetLinearVelocity().Length() / v_->GetMaxSpeed();
+		body->SetAngularVelocity(turnSpeed);
 	}
-	else if (d == 'L') {
-		//Aply rotation to object
-		body->SetAngularVelocity(- v_->GetTurnSpeed());
-	}
+}
+
+Vector2D InputMovement::getLateralVelocity() {
+	b2Body* body = v_->GetPhyO()->getBody();
+	Vector2D normal = body->GetWorldVector(Vector2D(0, 1));
+	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
 bool InputMovement::isMoving() {

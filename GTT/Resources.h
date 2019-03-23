@@ -18,8 +18,7 @@ public:
 		DefaultKeys
 	};
 
-	enum VehicleId
-	{
+	enum VehicleId {
 		//TAXI
 		Taxi
 	};

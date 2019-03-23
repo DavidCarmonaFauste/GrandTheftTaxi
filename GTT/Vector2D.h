@@ -13,8 +13,8 @@ public:
 
 	Vector2D ApplyRotation( float32 rotation);
 
-	void Divide(float f);
-	void Multiply(float f);
+	Vector2D Divide(float f);
+	Vector2D Multiply(float f);
 	float AreEqual(Vector2D vy);
 
 	Vector2D operator/(float32 d) const;

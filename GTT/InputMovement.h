@@ -24,7 +24,8 @@ private:
 	bool leftTurnPressed_;
 	bool handBrakePressed_;
 
-	void steeringWheel(char d);
+	void steeringWheel();
 	bool isMoving();
+	Vector2D getLateralVelocity();
 };
 
