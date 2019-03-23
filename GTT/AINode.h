@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "TileMap.h"
+#include <map>
 
 using namespace std;
 
@@ -9,8 +10,9 @@ enum NodeType {
 	COLLISION_NODE
 };
 
-map<NodeType, int> costs{
-	0, 999
+static map<NodeType, int> costs{
+	{EMPTY_NODE, 0},
+	{COLLISION_NODE, 999}
 };
 
 // Struct of directions the path can take
@@ -24,7 +26,7 @@ public:
 	int z;
 };
 
-dir dirs[] = { dir(1, 0), dir(-1, 0), dir(0, 1), dir(0, -1) };
+static dir dirs[] = { dir(1, 0), dir(-1, 0), dir(0, 1), dir(0, -1) };
 
 class AINode {
 public:
