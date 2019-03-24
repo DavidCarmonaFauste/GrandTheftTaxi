@@ -10,8 +10,10 @@ Gun::Gun()
 	cadence_ = 150;
 	reloadTime_ = 1500;
 	speed_ = 100;
-	perfRelIni_ = 0.3;
-	perfRelSeg_ = 0.3;
+	lifeTime_ = 1000;
+	damage_ = 5;
+	perfRelIni_ = 0.45;
+	perfRelSeg_ = 0.1;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);

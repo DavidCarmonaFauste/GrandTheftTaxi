@@ -52,7 +52,6 @@ protected:
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
 	string reticulesprite_="";
-	AimComponent* aimC_;//forma de apuntado, se lo pasa el vehiculo al equiparse
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
 	FollowGameObject* followC_;
 	Animation* animC_;

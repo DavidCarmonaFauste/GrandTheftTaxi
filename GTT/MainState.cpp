@@ -23,13 +23,14 @@ MainState::MainState() {
 	taxi_->getHealthComponent()->registerObserver(UI_);
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
-	UI_->addUIElement(new ReloadingDisplay(taxi_));
 
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
 
 	taxi_->EquipTurret(new ShotGun());
 	taxi_->EquipTurret(new Gun());
+
+	UI_->addUIElement(new ReloadingDisplay(taxi_));
 
 }
 
