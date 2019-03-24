@@ -1,18 +1,19 @@
 #include "InputMovement.h"
-
-
+#include "Resources.h"
 
 InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
 {
 	v_ = v;
 	k_ = &Resources::keyBindings_[id];
-	throttle_ = false;
 
 	//Input booleans
 	forwardPressed_ = false;
 	backwardPressed_ = false;
 	rightTurnPressed_ = false;
 	leftTurnPressed_ = false;
+
+	targetDamping = Resources::defaultDamping;
+	targetLateralVelocity = Resources::defaultLateralVelocity;
 }
 
 
@@ -42,13 +43,20 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
 	b2Body* body = v_->GetPhyO()->getBody();
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
+	Vector2D vel = body->GetLinearVelocity();
+
+	// Check the difference beetween car and speed direction to see
+	// if it's going forward
+	bool isGoingForward = abs(currentDir.Angle(vel)) < M_PI / 2;
 
 	// Forward and backward acceleration
 	if (forwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxSpeed()) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
-	else if (backwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()) {
+	else if (backwardPressed_ && 
+			 (body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()
+			  || isGoingForward)) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(-1 * impulse, body->GetWorldCenter(), true);
 	}
@@ -58,12 +66,16 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 
 	// Handbrake
 	if (!handBrakePressed_) {
-		body->SetLinearDamping(1);
-		Vector2D lateralImpulse = body->GetMass() * getLateralVelocity().Multiply(-1);
-		body->ApplyLinearImpulse(lateralImpulse, body->GetWorldCenter(), true);
+		targetDamping = Resources::defaultDamping;
+		targetLateralVelocity = Resources::defaultLateralVelocity;
 	}
-	else
-		body->SetLinearDamping(1.5);
+	else {
+		targetDamping = Resources::handbrakeDamping;
+		targetLateralVelocity = Resources::handbrakeLateralVelocity;
+	}
+
+	// Update frictions
+	updateFriction();
 }
 
 void InputMovement::steeringWheel() {
@@ -74,6 +86,7 @@ void InputMovement::steeringWheel() {
 	else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
 
 	if (turnSpeed != 0) {
+		// Provisional way of limiting rotation when not moving
 		turnSpeed *= body->GetLinearVelocity().Length() / v_->GetMaxSpeed();
 		body->SetAngularVelocity(turnSpeed);
 	}
@@ -85,8 +98,18 @@ Vector2D InputMovement::getLateralVelocity() {
 	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
+void InputMovement::updateFriction() {
+	b2Body* body = v_->GetPhyO()->getBody();
+
+	body->SetLinearDamping(targetDamping);
+
+	double lateralImpulseModifier = 1 - targetLateralVelocity;
+	Vector2D lateralImpulse = lateralImpulseModifier * body->GetMass() * getLateralVelocity().Multiply(-1);
+	body->ApplyLinearImpulse(lateralImpulse, body->GetWorldCenter(), false);
+} 
+
 bool InputMovement::isMoving() {
-	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length()) >= 0)
+	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
 	else 
 		return false;

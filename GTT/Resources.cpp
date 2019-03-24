@@ -2,6 +2,12 @@
 
 const float Resources::physicsScalingFactor = 0.2f;
 
+const float Resources::defaultDamping = 1.3f;
+const float Resources::handbrakeDamping = 1.7f;
+const float Resources::defaultLateralVelocity = 0;
+const float Resources::handbrakeLateralVelocity = 0.9999f;
+
+
 vector<Resources::VehicleInfo> Resources::vehicles_{
 	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 100, 50, 120.0f, 30.0f, 3.0f, 0.8f}
 };

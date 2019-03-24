@@ -14,7 +14,6 @@ public:
 
 private:
 	Vehicle* v_;
-	bool throttle_;
 	Resources::KeyBindingsInfo* k_;
 
 	//Input booleans
@@ -24,8 +23,13 @@ private:
 	bool leftTurnPressed_;
 	bool handBrakePressed_;
 
+	float targetLateralVelocity = 0;
+	float targetDamping = 1;
+
 	void steeringWheel();
 	bool isMoving();
 	Vector2D getLateralVelocity();
+
+	void updateFriction();
 };
 

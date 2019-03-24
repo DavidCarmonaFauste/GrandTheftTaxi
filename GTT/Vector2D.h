@@ -21,6 +21,13 @@ public:
 	Vector2D operator*(float32 d) const;
 	Vector2D operator+(float32 d) const;
 	Vector2D operator-(float32 d) const;
+
+	// Returns the clockwise angle of this vector in radians (right is 0)
+	double Angle() const;
+
+	// Returns the angle between this and the given vector in radians
+	double Angle(Vector2D b) const;
+
 	/*double operator *(const Vector2D& d) const;
 	friend ostream& operator<<(ostream& os, const Vector2D &v);*/
 };

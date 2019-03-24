@@ -65,3 +65,13 @@ Vector2D Vector2D::operator-(float32 d) const
 	v.y = v.y - d;
 	return v;
 }
+
+double Vector2D::Angle() const {
+	return atan(y/x);
+}
+
+double Vector2D::Angle(Vector2D b) const {
+	double dot = x * b.x + y * b.y;
+	double det = x * b.y - y * b.x;
+	return atan2(det, dot);
+}

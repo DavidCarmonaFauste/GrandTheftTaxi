@@ -61,5 +61,11 @@ public:
 	static vector <KeyBindingsInfo> keyBindings_;
 
 	static const float physicsScalingFactor;
+
+	// Taxi movement variables
+	static const float defaultDamping;
+	static const float handbrakeDamping;
+	static const float defaultLateralVelocity;
+	static const float handbrakeLateralVelocity;
 };
 
