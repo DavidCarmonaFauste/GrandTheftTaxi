@@ -45,7 +45,13 @@ void Game::handleEvents(Uint32 deltaTime) {
 }
 void Game::update(Uint32 deltaTime)
 {
-	world_->Step((float)deltaTime / 1000.0, 8, 3);
+	accumulator_ += deltaTime;
+	cout << step_ << endl;
+	while (accumulator_ >= step_*1000) {
+		world_->Step(step_, velIterations_, posIterations_);
+		accumulator_ -= step_*1000;
+	}
+
 	gmStMachine_->get_CurrentState()->update(deltaTime);
 }
 void Game::render(Uint32 deltaTime)

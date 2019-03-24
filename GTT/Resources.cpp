@@ -8,7 +8,7 @@
 Resources* Resources::singleton_ = nullptr;
 
 Resources::Resources() {
-	physicsScalingFactor = 0.2f;
+	physicsScalingFactor = 0.02f;
 	handbrakeDamping = 0.7f;
 	defaultLateralVelocity = 0;
 	handbrakeLateralVelocity = 0.9999f;
@@ -17,7 +17,7 @@ Resources::Resources() {
 	defaultDamping = 1.3f;
 
 	vehicles_ = {
-		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 120, 40, 3, 0.8f}
+		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 100, 35, 15, 0.8f}
 	};
 
 	sounds_ = {
