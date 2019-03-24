@@ -219,6 +219,12 @@
     <ClCompile Include="ReloadingDisplay.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
+    <ClCompile Include="InputMovement.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ControlType.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -388,6 +394,12 @@
     </ClInclude>
     <ClInclude Include="ReloadingDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InputMovement.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ControlType.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

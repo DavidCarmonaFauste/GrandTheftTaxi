@@ -11,7 +11,7 @@ MainState::MainState() {
 	stage_.push_back(tilemap_);
 
 	// Vehicles
-	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
+	taxi_ = new Vehicle(100, 100, Resources::getInstance()->Taxi, Resources::DefaultKeys);
 	stage_.push_back(taxi_);
 
 	// Systems

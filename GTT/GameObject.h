@@ -34,7 +34,6 @@ public:
 	virtual void setRotation(double angle);
 	virtual Vector2D getCenter();
 
-
 	// some GameObjects cannot be initialized in the constructor,
 	// for example when we create them using the default constructor
 	// and without passing the game. This method is supposed to

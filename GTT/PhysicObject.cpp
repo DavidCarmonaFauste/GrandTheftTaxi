@@ -1,7 +1,7 @@
 #include "PhysicObject.h"
 
 
-PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, b2Vec2 origin) {
+PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, Vector2D origin) {
 	visualSize_ = Vector2D(w, h);
 	origin_ = origin;
 

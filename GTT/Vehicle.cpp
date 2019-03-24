@@ -5,14 +5,15 @@
 #include "ReloadInputComponent.h"
 #include "ChangeWeaponIC.h"
 #include "Reticule.h"
+#include "InputMovement.h"
 
-Vehicle::Vehicle(Resources::VehicleId id) {
+Vehicle::Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk) {
 	Resources::VehicleInfo& r = Resources::getInstance()->vehicles_[id];
 
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
-	setPosition(Vector2D(600, 300));
+	this->setPosition(Vector2D(x, y));
 
 	// Sprite
 	sprite_ = new Animation();
@@ -32,6 +33,21 @@ Vehicle::Vehicle(Resources::VehicleId id) {
 	for (int i = 0; i < MAXTURRETS; i++) {
 		turrets_[i]=nullptr;
 	}
+	
+	// Movement
+	this->maxSpeed_ = r.velMax;
+	this->maxBackwardSpeed_ = r.velBackwardMax;
+	this->turnSpeed_ = r.turnSpeed;
+	this->acceleration_ = r.acceleration;
+	
+	// Physics
+	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.x, position_.y);
+	this->addLogicComponent(phyO_);
+	
+	// Control
+	control_ = new InputMovement(idk, this);
+	this->addInputComponent(control_);
+	this->addLogicComponent(control_);
 }
 
 
@@ -125,3 +141,28 @@ void Vehicle::render(Uint32 time) {
 		turrets_[currentTurret_]->render(time);
 }
 
+
+PhysicObject * Vehicle::GetPhyO()
+{
+	return phyO_;
+}
+
+float32 Vehicle::GetMaxSpeed()
+{
+	return maxSpeed_;
+}
+
+float32 Vehicle::GetMaxBackwardSpeed()
+{
+	return maxBackwardSpeed_;
+}
+
+float32 Vehicle::GetTurnSpeed()
+{
+	return turnSpeed_;
+}
+
+float32 Vehicle::GetAcceleration()
+{
+	return acceleration_;
+}
