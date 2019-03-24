@@ -1,78 +1,143 @@
-#include "Game.h"
-#include "Camera.h"
+﻿#include "Game.h"
 #include <iostream>
-#include "Vehicle.h"
-#include "SoundManager.h"
-#include "TileMap.h"
-
 
 using namespace std;
 
-// Static initializations
-SDL_Window* Game::window_ = nullptr;
-SDL_Renderer* Game::renderer_ = nullptr;
-SoundManager* Game::soundManager_ = nullptr;
-map<cameraType, Camera*> Game::cameras_ = map<cameraType, Camera*>();
-b2World* Game::world_ = nullptr;
+Game* Game::singleton_ = nullptr;
 
-Game::Game(SDL_Window *window_, SDL_Renderer *renderer_) {
-	Game::window_ = window_;
-	Game::renderer_ = renderer_;
-	Game::soundManager_ = new SoundManager();
+Game::Game() {
+	// Initialization values
+	int winX_, winY_;
+	winX_ = winY_ = SDL_WINDOWPOS_CENTERED;
+
+	// SDL initialization
+	SDL_Init(SDL_INIT_EVERYTHING);
+
+	// SDL_TTF initialization
+	TTF_Init();
+
+	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
+		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
+	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 
 	world_ = new b2World(b2Vec2(0, 0));
-	cameras_[GAME_CAMERA] = new Camera(1280, 720);
-	taxi_ = new Vehicle(200, 200, Resources::Taxi, Resources::DefaultKeys, Vector2D(0.0, -1.0));
-	// TESTING TILEMAP
-	//tileMap_ = new TileMap("../Assets/maps/test.tmx");
+
+	// Check for errors
+	if (window_ == nullptr || renderer_ == nullptr) {
+		cout << "SDL initialization failed\n";
+	}
+	SDL_ShowCursor(0);
 }
 
 Game::~Game() {
 
 }
 
-/*-----------------------------------------------------------------------*/
-
-bool Game::handleEvents(Uint32 deltaTime) {
+//los eventos los gestiona la aplicaci�n. Conecta directamente con handleEvents del estado actual. 
+void Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
-	//tileMap_->handleInput(deltaTime, event);
-
-
 	while (SDL_PollEvent(&event) && !exit_) {
-		// LLamar a los handleEvent() de los GameObjects
-		taxi_->handleInput(deltaTime, event);
-		if (event.type == SDL_QUIT) exit_ = true;
+		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
+		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a trav�s del m�todo exitGame
 	}
-
-	return exit_;
 }
-bool Game::update(Uint32 deltaTime) {
-	taxi_->update(deltaTime);
-	//cout << "Gameobject pos: " << taxi_->getPosition().x << " / " << taxi_->getPosition().y << endl;
-	//cout << "Body pos: " << taxi_->GetPhyO()->getBody()->GetTransform().p.x << " / " << taxi_->GetPhyO()->getBody()->GetTransform().p.y << endl;
-
-	//tileMap_->update(deltaTime);
-	Game::world_->Step((float) deltaTime / 1000, 8, 3);
-
-	// LLamar a los update() de los GameObjects
-	return exit_;
+void Game::update(Uint32 deltaTime)
+{
+	world_->Step((float)deltaTime / 1000.0, 8, 3);
+	gmStMachine_->get_CurrentState()->update(deltaTime);
 }
-void Game::render(Uint32 deltaTime) {
-	taxi_->render(deltaTime);
-	//tileMap_->render(deltaTime);
-
-	// LLamar a los render() de los GameObjects
+void Game::render(Uint32 deltaTime)
+{
+	SDL_RenderClear(renderer_);
+	gmStMachine_->get_CurrentState()->render(deltaTime);
+	SDL_RenderPresent(renderer_);
 }
 
-/*-----------------------------------------------------------------------*/
-//provisonal. 
+SDL_Renderer * Game::getRenderer()
+{
+	return renderer_;
+}
+
+SDL_Window * Game::getWindow()
+{
+	return window_;
+}
+
+int Game::getWindowWidth()
+{
+	return winWidth_;
+}
+
+int Game::getWindowHeight()
+{
+	return winHeight_;
+}
+
+int Game::getCameraHeight()
+{
+	return cameraHeight;
+}
+
+int Game::getCameraWidth()
+{
+	return cameraWidth;
+}
+
+b2World * Game::getWorld()
+{
+	return world_;
+}
+
+SoundManager * Game::getSoundManager()
+{
+	return soundManager_;
+}
+
+Camera * Game::getCamera(cameraType cT)
+{
+	return cameras_[cT];
+}
+
+void Game::init() {
+	cameras_[GAME_CAMERA] = new Camera(1600, 900);
+	cameras_[UI_CAMERA] = new Camera(1600, 900);
+
+	// Create the resources singleton for the first time
+	// and initialize its states
+	Resources::getInstance()->initStates();
+
+	gmStMachine_ = new GameStateMachine();
+}
+
+Game * Game::getInstance() {
+	if (singleton_ == nullptr)
+		singleton_ = new Game();
+
+	return singleton_;
+}
 
 //Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
-void Game::run(uint deltaTime) {
-	gmStMachine_->handleEvents(deltaTime);
-	gmStMachine_->render(deltaTime);
-	//falta gmStMachine_->update(deltaTime);
+void Game::run() {
+	init();
+
+	double lastTime = SDL_GetTicks();
+	double deltaTime = lastTime;
+
+	while (!exit_) {
+		handleEvents(deltaTime);
+		update(deltaTime);
+		render(deltaTime);
+
+		// Update the delta time
+		deltaTime = SDL_GetTicks() - lastTime;
+		lastTime = SDL_GetTicks();
+	}
+
+	SDL_DestroyRenderer(renderer_);
+	SDL_DestroyWindow(window_);
+	SDL_Quit();
 }
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
@@ -80,14 +145,4 @@ bool Game::exitGame() {
 	return exit_;
 }
 
-b2World * Game::GetWorld()
-{
-	return world_;
-}
 
-SoundManager * Game::getSoundManager() {
-	return soundManager_;
-}
-
-
-/*-----------------------------------------------------------------------*/

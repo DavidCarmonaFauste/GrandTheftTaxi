@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 class Sprite : public RenderComponent {
 
 public:
@@ -25,12 +24,27 @@ public:
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
 
 	void setCamera(cameraType cam);
-	void setClipRect(SDL_Rect *clip);
+	cameraType getCameraType();
+	Camera* getCamera();
 
-private:
+	void setClipRect(SDL_Rect *clip);
+	const SDL_Rect* getRect();
+	const SDL_Rect* getClipRect();
+	Texture* getTexture();
+
+	void setAutoPos(bool autoPos);
+	void setAutoSize(bool autoSize);
+
+	void setPos(int x, int y);
+	void setSize(int w, int h);
+
+protected:
 	Texture *texture_;
 	SDL_Rect *rect_;
 	SDL_Rect *clip_ = nullptr;
+
+	bool autoPos_ = true;
+	bool autoSize_ = true;
 
 	cameraType cam_ = GAME_CAMERA;
 };

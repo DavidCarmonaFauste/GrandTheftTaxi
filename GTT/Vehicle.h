@@ -6,16 +6,21 @@
 #include "ControlType.h"
 #include "Resources.h"
 #include <vector>
+#include "Health.h"
+#include <cmath> 
 
 using namespace std;
 
 class Turret;
+class AimComponent;
+class ReloadInputComponent;
+class ShootIC;
 
 class Vehicle :
-	public Container
+	public Container, public Observable
 {
 public:
-	Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk, Vector2D forwardVector);
+	Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk);
 	virtual ~Vehicle();
 
 	//Get
@@ -24,18 +29,35 @@ public:
 	float32 GetMaxBackwardSpeed();
 	float32 GetTurnSpeed();
 	float32 GetAcceleration();
-	Vector2D GetForwardVector();
-	void SetForwardVector(Vector2D forwardVector);
+	
+	Health* getHealthComponent();
+
+	virtual AimComponent* GetAimComponent();
+	virtual void Shoot();
+	virtual void Reload();
+	virtual void EquipTurret(Turret* turret);
+	virtual void ChangeTurret();
+	Turret* getCurrentTurret();
+	virtual void setPosition(const Vector2D &pos, bool force = false) override;
+	virtual void handleInput(Uint32 time, const SDL_Event& event);
+	virtual void render(Uint32 time);
+	virtual void update(Uint32 time);
 
 protected:
-	Vector2D forwardVector_;
 	float32 maxSpeed_;
 	float32 maxBackwardSpeed_;
 	float32 turnSpeed_;
 	float32 acceleration_;
 
 	ControlType* control_;
-	Turret* currentTurret_;
+
+	static const int MAXTURRETS = 2;
 	PhysicObject* phyO_;
 	Animation* sprite_;
+	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)	
+
+	Turret* turrets_[MAXTURRETS];
+
+	int currentTurret_=0;
+	Health* health_;
 };

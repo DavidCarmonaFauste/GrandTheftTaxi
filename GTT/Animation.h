@@ -28,7 +28,7 @@ public:
 	bool resumeAnimation();
 
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
-
+	
 	void setCamera(cameraType cam);
 
 private:

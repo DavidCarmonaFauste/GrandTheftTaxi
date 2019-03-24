@@ -9,6 +9,6 @@ public:
 
 	// Returns false only if it wants to cut off
 	// the event broadcasting
-	virtual bool receiveEvent(Event *e) = 0;
+	virtual bool receiveEvent(Event& e) = 0;
 };
 

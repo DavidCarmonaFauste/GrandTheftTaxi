@@ -1,36 +1,38 @@
+
 #pragma once
-#include "Game.h"
+//#include "Game.h"
 #include "Vector2D.h"
 #include <SDL.h>
 using namespace std;
 
-class GameObject	{
+class GameObject {
 
 public:
 	GameObject();
-	GameObject(Game* game);
 	virtual ~GameObject();
 
-	Game* getGame() const;
-	void setGame(Game* game);
 
 	bool isActive() const;
 	void setActive(bool active);
 	bool toggleActive();
 
 	double getWidth() const;
-	void setWidth(double width);
+	virtual void setWidth(double width);
 
 	double getHeight() const;
-	void setHeight(double height);
+	virtual void setHeight(double height);
 
 	void scale(double s);
 
 	Vector2D getPosition() const;
-	void setPosition(const Vector2D &pos);
+
+	// If force is set to true, components such as the physics one
+	// should set their positions to this
+	virtual void setPosition(const Vector2D &pos, bool force = false);
 
 	double getRotation() const;
-	void setRotation(double angle);
+	virtual void setRotation(double angle);
+	virtual Vector2D getCenter();
 
 	// some GameObjects cannot be initialized in the constructor,
 	// for example when we create them using the default constructor
@@ -45,8 +47,6 @@ public:
 	virtual void render(Uint32 deltaTime) = 0;
 
 protected:
-	Game* game_; // pointer to the game
-
 	bool active_;   // indicates if the object is active
 
 	double width_;  // width
@@ -55,4 +55,5 @@ protected:
 	Vector2D position_; // position (suppose to be left-top corner)
 	double rotation_; // rotation (for the corresponding texture)
 };
+
 

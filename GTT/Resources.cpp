@@ -1,22 +1,61 @@
 #include "Resources.h"
 
-const float Resources::physicsScalingFactor = 0.2f;
-
-const float Resources::defaultDamping = 1.3f;
-const float Resources::handbrakeDamping = 0.7f;
-const float Resources::defaultLateralVelocity = 0;
-const float Resources::handbrakeLateralVelocity = 0.9999f;
-const float Resources::handbrakeSpeedDecay = 0.0004f;
+// States
+#include "MainMenuState.h"
+#include "MainState.h"
 
 
-vector<Resources::VehicleInfo> Resources::vehicles_{
-	{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 100, 50, 120.0f, 30.0f, 3.0f, 0.8f}
-};
+Resources* Resources::singleton_ = nullptr;
 
-vector<Resources::SoundInfo> Resources::sounds_{
-	{Default, "../Assets/sounds/default.wav"}
-};
+Resources::Resources() {
+	physicsScalingFactor = 0.2f;
+	handbrakeDamping = 0.7f;
+	defaultLateralVelocity = 0;
+	handbrakeLateralVelocity = 0.9999f;
+	handbrakeSpeedDecay = 0.0004f;
 
-vector<Resources::KeyBindingsInfo> Resources::keyBindings_{
-	{DefaultKeys, SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE}
-};
+	defaultDamping = 1.3f;
+
+	vehicles_ = {
+		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 100, 50, 120, 40, 3, 0.8f}
+	};
+
+	sounds_ = {
+		{Default_Sound, "../Assets/sounds/default.wav"}
+	};
+
+	music_ = {
+		{Default_Music, "../Assets/sounds/default.wav"}
+	};
+
+	fonts_ = {
+		{Default_Font, "../Assets/fonts/lato_regular.ttf"}
+	};
+
+	keyBindings_ = {
+		{DefaultKeys, SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE}
+	};
+}
+
+
+
+Resources::~Resources() {
+	//delete introState_;
+	//introState_ = nullptr;
+}
+
+Resources * Resources::getInstance() {
+	if (singleton_ == nullptr) {
+		singleton_ = new Resources();
+	}
+
+	return singleton_;
+}
+
+void Resources::initStates() {
+	// Main menu
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
+
+	// Main game
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+}

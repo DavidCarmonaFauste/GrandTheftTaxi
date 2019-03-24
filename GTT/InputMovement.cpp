@@ -4,7 +4,7 @@
 InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
 {
 	v_ = v;
-	k_ = &Resources::keyBindings_[id];
+	k_ = &Resources::getInstance()->keyBindings_[id];
 
 	//Input booleans
 	forwardPressed_ = false;
@@ -12,8 +12,8 @@ InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
 	rightTurnPressed_ = false;
 	leftTurnPressed_ = false;
 
-	targetDamping = Resources::defaultDamping;
-	targetLateralVelocity = Resources::defaultLateralVelocity;
+	targetDamping = Resources::getInstance()->defaultDamping;
+	targetLateralVelocity = Resources::getInstance()->defaultLateralVelocity;
 
 	targetMaxSpeed = v_->GetMaxSpeed();
 	v_->GetPhyO()->getBody()->SetAngularDamping(4);
@@ -69,14 +69,14 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 
 	// Handbrake
 	if (!handBrakePressed_) {
-		targetDamping = Resources::defaultDamping;
-		targetLateralVelocity = Resources::defaultLateralVelocity;
+		targetDamping = Resources::getInstance()->defaultDamping;
+		targetLateralVelocity = Resources::getInstance()->defaultLateralVelocity;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
-		targetDamping = Resources::handbrakeDamping;
-		targetLateralVelocity = Resources::handbrakeLateralVelocity;
-		targetMaxSpeed -= deltaTime * v_->GetMaxSpeed()*Resources::handbrakeSpeedDecay;
+		targetDamping = Resources::getInstance()->handbrakeDamping;
+		targetLateralVelocity = Resources::getInstance()->handbrakeLateralVelocity;
+		targetMaxSpeed -= deltaTime * v_->GetMaxSpeed()*Resources::getInstance()->handbrakeSpeedDecay;
 	}
 
 	// Update frictions

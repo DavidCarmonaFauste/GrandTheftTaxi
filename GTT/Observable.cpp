@@ -37,9 +37,9 @@ void Observable::cleanObservers() {
 	observers.clear();
 }
 
-void Observable::broadcastEvent(Event *e) {
-	for (int i = 0; i < observers.size(); i++) {
-		if (!observers[i]->receiveEvent(e))
+void Observable::broadcastEvent(Event& e) {
+	for (auto observer:observers) {
+		if (!observer->receiveEvent(e))
 			break;
 	}
 }

@@ -3,19 +3,30 @@
 #include <vector>
 #include <SDL.h>
 #include <Box2D/Box2D.h>
+#include <map>
+#include "GameState.h"
+#include "Font.h"
 
 using namespace std;
 
+
+//static const string NAME_INTRO_STATE = "introState";
+static const string NAME_MAINMENU_STATE = "mainMenuState";
+static const string NAME_MAIN_STATE = "MAIN_STATE";
+
 class Resources
 {
-
 public:
 	enum SoundId {
-		Default
+		Default_Sound
 	};
-
+	
 	enum KeyBindingsId {
 		DefaultKeys
+	};
+	
+	enum MusicId {
+		Default_Music
 	};
 
 	enum VehicleId {
@@ -33,6 +44,10 @@ public:
 		SDL_MouseButtonEvent swapWeapon;
 		SDL_Keycode openMap;
 		SDL_Keycode mainMenu;
+	};
+	
+	enum FontId {
+		Default_Font
 	};
 
 	struct SoundInfo
@@ -55,18 +70,35 @@ public:
 		float acceleration;
 	};
 
+	struct MusicInfo {
+		MusicId id;
+		string path;
+	};
+	
+	static Resources* getInstance();
+	void initStates();
 
-	static vector <VehicleInfo> vehicles_;
-	static vector<SoundInfo> sounds_;
-	static vector <KeyBindingsInfo> keyBindings_;
+	vector <VehicleInfo> vehicles_;
+	vector <SoundInfo> sounds_;
+	vector <MusicInfo> music_;
+	vector <KeyBindingsInfo> keyBindings_;
+	map<FontId, string> fonts_;
 
-	static const float physicsScalingFactor;
+	double physicsScalingFactor;
+
+	map <string, GameState*> STATES_;
 
 	// Taxi movement variables
-	static const float defaultDamping;
-	static const float handbrakeDamping;
-	static const float defaultLateralVelocity;
-	static const float handbrakeLateralVelocity;
-	static const float handbrakeSpeedDecay;
-};
+	float defaultDamping;
+	float handbrakeDamping;
+	float defaultLateralVelocity;
+	float handbrakeLateralVelocity;
+	float handbrakeSpeedDecay;
 
+private:
+	// Singleton instance
+	static Resources *singleton_;
+
+	Resources();
+	virtual ~Resources();
+};

@@ -1,10 +1,12 @@
 #pragma once
-#include <iostream>
+#define _USE_MATH_DEFINES
 #include <Box2D/Box2D.h>
+#include <iostream>
+#include <cmath>
 
 using namespace std;
 
-class Vector2D: public b2Vec2 {
+class Vector2D: public b2Vec2{
 public:
 	Vector2D() :b2Vec2(0.0f, 0.0f) {};
 	Vector2D(b2Vec2 v) :b2Vec2(v) {};
@@ -27,7 +29,6 @@ public:
 
 	// Returns the angle between this and the given vector in radians
 	double Angle(Vector2D b) const;
-
 	/*double operator *(const Vector2D& d) const;
 	friend ostream& operator<<(ostream& os, const Vector2D &v);*/
 };

@@ -1,21 +1,11 @@
 #pragma once
 
 #include <vector>
+#include "Events.h"
 
 using namespace std;
 
 class Observer;
-
-enum event_type {
-	GAME_START,
-	GAME_END,
-	LENGTH
-};
-
-struct Event {
-	event_type type;
-};
-
 
 class Observable
 {
@@ -29,7 +19,7 @@ public:
 	void cleanObservers();
 
 protected:
-	void broadcastEvent(Event *e);
+	void broadcastEvent(Event& e);
 
 private:
 	vector<Observer*> observers;

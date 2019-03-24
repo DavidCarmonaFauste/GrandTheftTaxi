@@ -2,6 +2,7 @@
 #include "ControlType.h"
 #include "Resources.h"
 #include "Vehicle.h"
+
 class InputMovement :
 	public ControlType
 {

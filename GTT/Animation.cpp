@@ -1,5 +1,6 @@
 #include "Animation.h"
 #include "Camera.h"
+#include "Game.h"
 
 Animation::Animation() {
 	destRect = new SDL_Rect();
@@ -8,9 +9,9 @@ Animation::Animation() {
 }
 
 Animation::~Animation() {
-	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
-		delete it->second.first; it->second.first = nullptr;
-		delete it->second.second; it->second.second = nullptr;
+	for (auto animation:animations) {
+		delete animation.second.first;
+		delete animation.second.second;
 	}
 	animations.clear();
 
@@ -20,7 +21,7 @@ Animation::~Animation() {
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
 void Animation::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::renderer_, path);
+	Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
 
 	SDL_Rect* animRect = new SDL_Rect();
 	animRect->h = animTexture->getHeight() / rows;
@@ -48,7 +49,7 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 }
 
 bool Animation::isAnyAnimationPlaying() {
-	return currentAnim != "";
+	return currentAnim != "default";
 }
 
 // Checks whether the given animation is currently
@@ -92,7 +93,7 @@ void Animation::render(GameObject * o, Uint32 deltaTime) {
 // any animation is playing, false otherwise
 bool Animation::stopAnimation() {
 	if (isAnyAnimationPlaying()) {
-		currentAnim = "";
+		currentAnim = "default";
 		return true;
 	}
 
@@ -110,8 +111,9 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 		if (currentFrame >= animationColumns * animationRows) {
 			if (animationLoop)
 				resetAnimationValues();
-			else
-				currentAnim = "";
+			else {
+				playAnimation("default");
+			}
 		}
 	}
 
@@ -126,7 +128,7 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	destRect->w = o->getWidth();
 	destRect->h = o->getHeight();
 	
-	Game::cameras_[cam_]->renderTexture(animTexture, *destRect, animRect, o->getRotation());
+	Game::getInstance()->getCamera(cam_)->renderTexture(animTexture, *destRect, animRect, o->getRotation());
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
