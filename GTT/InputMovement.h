@@ -25,6 +25,7 @@ private:
 
 	float targetLateralVelocity = 0;
 	float targetDamping = 1;
+	float targetMaxSpeed;
 
 	void steeringWheel();
 	bool isMoving();

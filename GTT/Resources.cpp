@@ -3,9 +3,10 @@
 const float Resources::physicsScalingFactor = 0.2f;
 
 const float Resources::defaultDamping = 1.3f;
-const float Resources::handbrakeDamping = 1.7f;
+const float Resources::handbrakeDamping = 0.7f;
 const float Resources::defaultLateralVelocity = 0;
 const float Resources::handbrakeLateralVelocity = 0.9999f;
+const float Resources::handbrakeSpeedDecay = 0.0004f;
 
 
 vector<Resources::VehicleInfo> Resources::vehicles_{

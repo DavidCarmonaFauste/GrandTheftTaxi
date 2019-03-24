@@ -14,6 +14,9 @@ InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
 
 	targetDamping = Resources::defaultDamping;
 	targetLateralVelocity = Resources::defaultLateralVelocity;
+
+	targetMaxSpeed = v_->GetMaxSpeed();
+	v_->GetPhyO()->getBody()->SetAngularDamping(4);
 }
 
 
@@ -50,7 +53,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	bool isGoingForward = abs(currentDir.Angle(vel)) < M_PI / 2;
 
 	// Forward and backward acceleration
-	if (forwardPressed_ && body->GetLinearVelocity().Length() < v_->GetMaxSpeed()) {
+	if (forwardPressed_ && body->GetLinearVelocity().Length() < targetMaxSpeed) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
@@ -68,10 +71,12 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	if (!handBrakePressed_) {
 		targetDamping = Resources::defaultDamping;
 		targetLateralVelocity = Resources::defaultLateralVelocity;
+		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
 		targetDamping = Resources::handbrakeDamping;
 		targetLateralVelocity = Resources::handbrakeLateralVelocity;
+		targetMaxSpeed -= deltaTime * v_->GetMaxSpeed()*Resources::handbrakeSpeedDecay;
 	}
 
 	// Update frictions
@@ -86,7 +91,6 @@ void InputMovement::steeringWheel() {
 	else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
 
 	if (turnSpeed != 0) {
-		// Provisional way of limiting rotation when not moving
 		turnSpeed *= body->GetLinearVelocity().Length() / v_->GetMaxSpeed();
 		body->SetAngularVelocity(turnSpeed);
 	}

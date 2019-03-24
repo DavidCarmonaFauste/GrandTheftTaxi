@@ -67,5 +67,6 @@ public:
 	static const float handbrakeDamping;
 	static const float defaultLateralVelocity;
 	static const float handbrakeLateralVelocity;
+	static const float handbrakeSpeedDecay;
 };
 
