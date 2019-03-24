@@ -17,8 +17,8 @@ public:
 		SDL_Rect* clip = nullptr, double angle = 0);
 
 	// Setters and getters
-	void setPos(int x, int y, bool center = false);
-	Vector2D getPos();
+	virtual void setPosition(const Vector2D &pos, bool force = false) override;
+	Vector2D getPosition() const override;
 	void setSize(int w, int h, bool resetZoom = false);
 	virtual void setWidth(double width) override;
 	virtual void setHeight(double height) override;

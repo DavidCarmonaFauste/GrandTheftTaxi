@@ -39,6 +39,8 @@ void Game::handleEvents(Uint32 deltaTime) {
 	SDL_Event event;
 
 	while (SDL_PollEvent(&event) && !exit_) {
+		// Call the handleEvents of the cameras and the state
+		for (auto cam : cameras_) cam.second->handleInput(deltaTime, event);
 		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
 		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a trav�s del m�todo exitGame
 	}
@@ -52,12 +54,18 @@ void Game::update(Uint32 deltaTime)
 		accumulator_ -= step_*1000;
 	}
 
+	// Update the cameras and the state
 	gmStMachine_->get_CurrentState()->update(deltaTime);
+	for (auto cam : cameras_) cam.second->update(deltaTime);
 }
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
+
+	// Render the cameras and the state
+	for (auto cam : cameras_) cam.second->render(deltaTime);
 	gmStMachine_->get_CurrentState()->render(deltaTime);
+
 	SDL_RenderPresent(renderer_);
 }
 

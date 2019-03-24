@@ -4,6 +4,7 @@
 #include "UI.h"
 #include "TileMap.h"
 #include "Money.h"
+#include "FollowGameObject.h"
 
 class MainState :
 	public GameState
@@ -18,6 +19,7 @@ private:
 
 	// Vehicles
 	Vehicle* taxi_;
+	FollowGameObject* cameraFollow;
 
 	// Systems
 	Money* moneySystem;
