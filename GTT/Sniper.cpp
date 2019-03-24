@@ -9,7 +9,6 @@ Sniper::Sniper()
 	maxAmmo_ = 4;
 	cadence_ = 600;
 	reloadTime_ = 3000;
-	speed_ = 50;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);

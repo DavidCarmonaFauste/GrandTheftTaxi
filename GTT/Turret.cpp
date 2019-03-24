@@ -34,10 +34,7 @@ void Turret::AttachToVehicle(Vehicle * car)
 	addLogicComponent(followC_);
 }
 		
-proyectileType Turret::GetProyectileType()
-{
-	return prType_;
-}
+
 
 void Turret::Shoot()
 {
@@ -92,17 +89,6 @@ void Turret::InitiateReload()
 }
 
 
-
-int Turret::GetSpeed()
-{
-	return this->speed_;
-}
-
-double Turret::GetDamage()
-{
-	return damage_;
-}
-
 int Turret::GetCadence()
 {
 	return cadence_;
@@ -134,12 +120,6 @@ double Turret::GetPerfReloadSeg()
 double Turret::GetPerfReloadIni()
 {
 	return perfRelIni_;
-}
-
-
-double Turret::GetLifeTime()
-{
-	return lifeTime_;
 }
 
 string Turret::GetReticule()

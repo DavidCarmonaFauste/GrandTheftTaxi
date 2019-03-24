@@ -11,15 +11,14 @@ void SpreadSC::shoot()
 {
 	double ang = turret_->getRotation() / 180.0 * M_PI - (dispersionAngle_ / 180.0*M_PI / 2);
 
-	ProyectilePool::GetInstance()->addProyectile(turret_->getCenter(),
-		Vector2D(turret_->GetSpeed()*sin(ang), -turret_->GetSpeed()*cos(ang)),
-		turret_->GetProyectileType(), turret_->GetLifeTime(), turret_->GetDamage());
+	ProyectilePool::GetInstance()->addShotgunB(turret_->getCenter(),
+		Vector2D(sin(ang), -cos(ang)));
 	double incrang = dispersionAngle_ / 180.0*M_PI / (numPellets_-1);
 	ang += incrang;
 	
 	for (int i = 1; i < numPellets_; i++) {
-		ProyectilePool::GetInstance()->addProyectile(turret_->getCenter(),
-			Vector2D((turret_->GetSpeed()*sin(ang)), (-turret_->GetSpeed()*cos(ang))), turret_->GetProyectileType(), turret_->GetLifeTime(), turret_->GetDamage());
+		ProyectilePool::GetInstance()->addShotgunB(turret_->getCenter(),
+			Vector2D((sin(ang)), (-cos(ang))));
 		ang += incrang;
 	}
 }

@@ -9,9 +9,6 @@ ShotGun::ShotGun()
 	maxAmmo_ = 6;
 	cadence_ = 900;
 	reloadTime_ = 4000;
-	lifeTime_ = 1000;
-	damage_ = 10;
-	speed_ = 100;
 	perfRelIni_ = 0.6;
 	perfRelSeg_ = 0.2;
 	magazine_ = new stack<double> [maxAmmo_];
