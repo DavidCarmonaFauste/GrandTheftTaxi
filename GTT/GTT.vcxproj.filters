@@ -219,16 +219,17 @@
     <ClCompile Include="ReloadingDisplay.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
-    <ClCompile Include="GunProyectile.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotGunProyectile.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
     <ClCompile Include="InputMovement.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="ControlType.cpp">
       <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GunProyectile.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotGunProyectile.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -400,16 +401,17 @@
     <ClInclude Include="ReloadingDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
-    <ClInclude Include="GunProyectile.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotGunProyectile.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
     <ClInclude Include="InputMovement.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
     <ClInclude Include="ControlType.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GunProyectile.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotGunProyectile.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
