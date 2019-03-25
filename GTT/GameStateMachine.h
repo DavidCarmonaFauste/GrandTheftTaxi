@@ -1,7 +1,6 @@
 #pragma once
 #include "GameState.h"
 #include "Resources.h"
-
 #include <stack>
 
 

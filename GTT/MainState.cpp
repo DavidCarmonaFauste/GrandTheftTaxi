@@ -11,7 +11,7 @@ MainState::MainState() {
 	stage_.push_back(tilemap_);
 
 	// Vehicles
-	taxi_ = new Vehicle(100, 100, Resources::getInstance()->Taxi, Resources::DefaultKeys);
+	taxi_ = new Vehicle(100, 100, TAXI, DEFAULT_KEYS);
 	stage_.push_back(taxi_);
 	cameraFollow = new FollowGameObject(taxi_);
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);

@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AimAtCursorAC.cpp" />
-    <ClCompile Include="AimComponent.cpp" />
     <ClCompile Include="AirStrike.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -83,6 +82,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
     <ClInclude Include="ChangeWeaponIC.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="Events.h" />

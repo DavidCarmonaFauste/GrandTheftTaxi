@@ -1,13 +1,13 @@
 #pragma once
 #include "ControlType.h"
-#include "Resources.h"
+#include "Constants.h"
 #include "Vehicle.h"
 
 class InputMovement :
 	public ControlType
 {
 public:
-	InputMovement(Resources::KeyBindingsId id, Vehicle* v);
+	InputMovement(KeysScheme k , Vehicle* v);
 	virtual ~InputMovement();
 
 	virtual void handleInput(GameObject* o, Uint32 deltaTime, const SDL_Event& event);
@@ -15,7 +15,7 @@ public:
 
 private:
 	Vehicle* v_;
-	Resources::KeyBindingsInfo* k_;
+	KeysScheme k_;
 
 	//Input booleans
 	bool forwardPressed_;

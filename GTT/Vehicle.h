@@ -4,7 +4,7 @@
 #include <Box2D/Box2D.h>
 #include "Animation.h"
 #include "ControlType.h"
-#include "Resources.h"
+#include "Constants.h"
 #include <vector>
 #include "Health.h"
 #include <cmath> 
@@ -20,7 +20,7 @@ class Vehicle :
 	public Container, public Observable
 {
 public:
-	Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk);
+	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
 	virtual ~Vehicle();
 
 	//Get

@@ -1,6 +1,6 @@
 #pragma once
 #include "Container.h"
-#include "Resources.h"
+#include "Constants.h"
 #include <SDL_mixer.h>
 #include <map>
 
@@ -11,28 +11,28 @@ public:
 
 	// DON'T USE THIS DIRECTLY,
 	// USE THE RESOURCES SHEET INSTEAD !!!
-	bool loadSound(string path, Resources::SoundId id);
+	bool loadSound(string path, soundId id);
 
 	// Returns the channel in which the sound will be played
-	int playSound(Resources::SoundId id, int loops);
+	int playSound(soundId id, int loops);
 	void pauseSound(int channel);
 	void resumeSound(int channel);
 	bool isSoundPlaying(int channel);
-	bool soundExists(Resources::SoundId id);
+	bool soundExists(soundId id);
 
 	
 	// DON'T USE THIS DIRECTLY,
 	// USE THE RESOURCES SHEET INSTEAD !!!
-	bool loadMusic(string path, Resources::MusicId id);
+	bool loadMusic(string path, musicId id);
 
-	void playMusic(Resources::MusicId id, int loops);
+	void playMusic(musicId id, int loops);
 	void pauseMusic();
 	void resumeMusic();
 	bool isMusicPlaying();
-	bool musicExists(Resources::MusicId id);
+	bool musicExists(musicId id);
 
 private:
-	map<Resources::MusicId, Mix_Music*> music_;
-	map<Resources::SoundId, Mix_Chunk*> sound_;
+	map<musicId, Mix_Music*> loadedMusic_;
+	map<soundId, Mix_Chunk*> loadedSounds_;
 };
 

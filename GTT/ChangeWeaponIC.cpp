@@ -6,10 +6,6 @@ ChangeWeaponIC::ChangeWeaponIC(SDL_Keycode changekey)
 	changekey_ = changekey;
 }
 
-ChangeWeaponIC::~ChangeWeaponIC()
-{
-}
-
 void ChangeWeaponIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event)
 {
 

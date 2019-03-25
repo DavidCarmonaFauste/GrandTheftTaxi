@@ -186,9 +186,6 @@
     <ClCompile Include="AimAtCursorAC.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="AimComponent.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
     <ClCompile Include="ReloadInputComponent.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
@@ -400,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="ControlType.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

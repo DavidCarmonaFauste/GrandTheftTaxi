@@ -28,7 +28,7 @@ void ProyectilePool::render(Uint32 time) {
 Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectileType type, double lifeTime, double damage) {
 	Proyectile* e = getUnusedProyectile();
 	if (e != nullptr) {
-		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*Resources::getInstance()->physicsScalingFactor, pos.y*Resources::getInstance()->physicsScalingFactor), 0);
+		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*PHYSICS_SCALING_FACTOR, pos.y*PHYSICS_SCALING_FACTOR), 0);
 		e->GetPhyO()->getBody()->SetLinearVelocity(vel);
 		e->SetDamage(damage);
 		e->SetLifeTime(lifeTime);
