@@ -30,7 +30,6 @@ void MoneyDisplay::reposition() {
 	// Reposition
 	Vector2D pos;
 	pos.x = (textSprite_->getCamera()->getWidth() - width_ - textSprite_->getFont()->getSize()/2);
-	cout << pos.x;
 	pos.y = (textSprite_->getFont()->getSize()*0.5);
 	setPosition(pos);
 }

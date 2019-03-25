@@ -48,7 +48,6 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
-	cout << step_ << endl;
 	while (accumulator_ >= step_*1000) {
 		world_->Step(step_, velIterations_, posIterations_);
 		accumulator_ -= step_*1000;
