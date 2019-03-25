@@ -3,6 +3,11 @@
 #include "Proyectile.h"
 #include <vector>
 
+enum ProyectileType {
+	GUNB,
+	SHOTGUNB,
+};
+
 class ProyectilePool :public GameObject
 {
 public:
@@ -18,9 +23,7 @@ public:
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
-	virtual Proyectile* addStandardB(Vector2D pos, Vector2D vel);
-	virtual Proyectile* addShotgunB(Vector2D pos, Vector2D vel);
-
+	virtual Proyectile* addProyectile(Vector2D pos, Vector2D vel, ProyectileType prType);
 	virtual ~ProyectilePool();
 private:
 	ProyectilePool();

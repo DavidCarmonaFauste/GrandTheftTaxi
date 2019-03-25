@@ -8,7 +8,7 @@ class LinearSC : public ShootComponent
 {
 public:
 	LinearSC(Turret* turret) :ShootComponent(turret) {};
-	virtual void shoot();
+	virtual void shoot(ProyectileType prType);
 	virtual ~LinearSC() {};
 };
 

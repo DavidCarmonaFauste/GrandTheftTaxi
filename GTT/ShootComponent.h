@@ -7,7 +7,7 @@ class ShootComponent
 {
 public:
 	ShootComponent(Turret* turret);
-	virtual void shoot()=0;
+	virtual void shoot(ProyectileType prType)=0;
 	virtual ~ShootComponent();
 protected:
 	Turret* turret_;

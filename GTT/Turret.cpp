@@ -40,7 +40,7 @@ void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
-			shC_->shoot();
+			shC_->shoot(normalB);
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);

@@ -48,6 +48,8 @@ protected:
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta
+	ProyectileType normalB;
+	ProyectileType specialB;
 
 };
 

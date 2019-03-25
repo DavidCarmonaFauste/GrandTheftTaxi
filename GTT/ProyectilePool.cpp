@@ -37,9 +37,21 @@ void ProyectilePool::render(Uint32 time) {
 	}
 }
 
-Proyectile * ProyectilePool::addStandardB(Vector2D pos, Vector2D vel)
+Proyectile * ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, ProyectileType prType)
 {
-	Proyectile* e = getUnusedStandardB();
+	Proyectile* e;
+	switch (prType) {
+	case GUNB:
+		e = getUnusedStandardB();
+		break;
+	case SHOTGUNB:
+		e = getUnusedShotGunB();
+		break;
+	default:
+		e = getUnusedStandardB();
+		break;
+	}
+	 
 	if (e != nullptr) {
 		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*Resources::getInstance()->physicsScalingFactor, pos.y*Resources::getInstance()->physicsScalingFactor), 0);
 		e->GetPhyO()->getBody()->SetLinearVelocity(Vector2D(vel.x * e->GetSpeed(), vel.y* e->GetSpeed()));
@@ -49,17 +61,6 @@ Proyectile * ProyectilePool::addStandardB(Vector2D pos, Vector2D vel)
 	return e;
 }
 
-Proyectile * ProyectilePool::addShotgunB(Vector2D pos, Vector2D vel)
-{
-	Proyectile* e = getUnusedShotGunB();
-	if (e != nullptr) {
-		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*Resources::getInstance()->physicsScalingFactor, pos.y*Resources::getInstance()->physicsScalingFactor), 0);
-		e->GetPhyO()->getBody()->SetLinearVelocity(Vector2D(vel.x * e->GetSpeed(), vel.y* e->GetSpeed()));
-		e->SetBirth(SDL_GetTicks());
-		e->setActive(true);
-	}
-	return e;
-}
 
 Proyectile * ProyectilePool::getUnusedStandardB()
 {
