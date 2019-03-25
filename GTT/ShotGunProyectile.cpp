@@ -9,7 +9,7 @@ ShotGunProyectile::ShotGunProyectile()
 	width_ = 50;
 	height_ = 50;
 	speed_ = 25;
-	lifeTime_ = 1000;
+	lifeTime_ = 500;
 	damage_ = 10;
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
 	addLogicComponent(phyO_);
