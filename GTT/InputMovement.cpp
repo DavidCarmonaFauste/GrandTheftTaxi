@@ -53,7 +53,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	bool isGoingForward = abs(currentDir.Angle(vel)) < M_PI / 2;
 
 	// Forward and backward acceleration
-	if (forwardPressed_ && body->GetLinearVelocity().Length() < targetMaxSpeed) {
+	if (forwardPressed_ && body->GetLinearVelocity().Length() < (targetMaxSpeed)) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
