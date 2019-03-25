@@ -14,6 +14,7 @@ Reticule::Reticule()
 
 	animC_ = new Animation();
 	cursorC_ = new CursorLC();
+	animC_->setCamera(UI_CAMERA);
 	addRenderComponent(animC_);
 	addLogicComponent(cursorC_);
 	for (auto o : animations_) {
