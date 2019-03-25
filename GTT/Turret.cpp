@@ -34,16 +34,13 @@ void Turret::AttachToVehicle(Vehicle * car)
 	addLogicComponent(followC_);
 }
 		
-proyectileType Turret::GetProyectileType()
-{
-	return prType_;
-}
+
 
 void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
-			shC_->shoot();
+			shC_->shoot(normalB);
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
@@ -92,17 +89,6 @@ void Turret::InitiateReload()
 }
 
 
-
-int Turret::GetSpeed()
-{
-	return this->speed_;
-}
-
-double Turret::GetDamage()
-{
-	return damage_;
-}
-
 int Turret::GetCadence()
 {
 	return cadence_;
@@ -134,12 +120,6 @@ double Turret::GetPerfReloadSeg()
 double Turret::GetPerfReloadIni()
 {
 	return perfRelIni_;
-}
-
-
-double Turret::GetLifeTime()
-{
-	return lifeTime_;
 }
 
 string Turret::GetReticule()

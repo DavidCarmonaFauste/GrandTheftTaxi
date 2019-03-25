@@ -9,7 +9,6 @@ MachineGun::MachineGun()
 	maxAmmo_ = 25;
 	cadence_ = 50;
 	reloadTime_ = 3000;
-	speed_ = 10;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
