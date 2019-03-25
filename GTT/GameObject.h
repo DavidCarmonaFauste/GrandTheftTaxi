@@ -24,7 +24,7 @@ public:
 
 	void scale(double s);
 
-	Vector2D getPosition() const;
+	virtual Vector2D getPosition() const;
 
 	// If force is set to true, components such as the physics one
 	// should set their positions to this
@@ -33,7 +33,6 @@ public:
 	double getRotation() const;
 	virtual void setRotation(double angle);
 	virtual Vector2D getCenter();
-
 
 	// some GameObjects cannot be initialized in the constructor,
 	// for example when we create them using the default constructor

@@ -68,7 +68,6 @@ void Sprite::render(GameObject * o, Uint32 deltaTime) {
 	}
 
 	Game::getInstance()->getCamera(cam_)->renderTexture(texture_, *rect_, clip_, o->getRotation());
-					
 }
 
 void Sprite::setCamera(cameraType cam) {

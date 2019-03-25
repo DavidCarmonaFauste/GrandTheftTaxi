@@ -25,6 +25,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChangeWeaponIC.cpp" />
+    <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
     <ClCompile Include="Flame_thrower.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
@@ -38,6 +39,7 @@
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InputMovement.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="MachineGun.cpp" />
@@ -83,6 +85,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
     <ClInclude Include="ChangeWeaponIC.h" />
+    <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Flame_thrower.h" />
@@ -98,6 +101,7 @@
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputMovement.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MachineGun.h" />

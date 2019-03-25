@@ -29,18 +29,14 @@ void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * 
 	texture->render(transposedRect, angle, clip);
 }
 
-void Camera::setPos(int x, int y, bool center) {
-	cameraRect_->x = x;
-	cameraRect_->y = y;
+void Camera::setPosition(const Vector2D &pos, bool force) {
+	cameraRect_->x = pos.x;
+	cameraRect_->y = pos.y;
 
-	if (center) {
-		cameraRect_->x -= cameraRect_->w / 2;
-		cameraRect_->y -= cameraRect_->h / 2;
-	}
+	GameObject::setPosition(Vector2D(cameraRect_->x, cameraRect_->y));
 }
 
-Vector2D Camera::getPos()
-{
+Vector2D Camera::getPosition() const {
 	return Vector2D(cameraRect_->x, cameraRect_->y);
 }
 

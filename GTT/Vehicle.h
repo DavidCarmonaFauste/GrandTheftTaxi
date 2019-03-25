@@ -3,6 +3,7 @@
 #include "PhysicObject.h"
 #include <Box2D/Box2D.h>
 #include "Animation.h"
+#include "ControlType.h"
 #include "Resources.h"
 #include <vector>
 #include "Health.h"
@@ -19,9 +20,16 @@ class Vehicle :
 	public Container, public Observable
 {
 public:
-	Vehicle( Resources::VehicleId id);
+	Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk);
 	virtual ~Vehicle();
 
+	//Get
+	PhysicObject* GetPhyO();
+	float32 GetMaxSpeed();
+	float32 GetMaxBackwardSpeed();
+	float32 GetTurnSpeed();
+	float32 GetAcceleration();
+	
 	Health* getHealthComponent();
 
 	virtual AimComponent* GetAimComponent();
@@ -36,6 +44,13 @@ public:
 	virtual void update(Uint32 time);
 
 protected:
+	float32 maxSpeed_;
+	float32 maxBackwardSpeed_;
+	float32 turnSpeed_;
+	float32 acceleration_;
+
+	ControlType* control_;
+
 	static const int MAXTURRETS = 2;
 
 	PhysicObject* phyO_;

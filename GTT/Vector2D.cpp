@@ -1,7 +1,7 @@
 #include "Vector2D.h"
 #include <SDL_assert.h>
 
-Vector2D Vector2D::ApplyRotation(float32 rotation)
+Vector2D Vector2D::ApplyRotation( float32 rotation)
 {
 	Vector2D v;
 	float32 rad = rotation * M_PI / 180;
@@ -9,17 +9,19 @@ Vector2D Vector2D::ApplyRotation(float32 rotation)
 	v.y = v.x * sin(rad) + v.y * cos(rad);
 	return v;
 }
-void Vector2D::Divide(float f)
+Vector2D Vector2D::Divide( float f)
 {
 	x = x / f;
 	y = y / f;
+	return *this;
 }
-void Vector2D::Multiply(float f)
+Vector2D Vector2D::Multiply(float f)
 {
 	x = x * f;
 	y = y * f;
+	return *this;
 }
-float Vector2D::AreEqual(Vector2D vy)
+float Vector2D::AreEqual( Vector2D vy)
 {
 	float xy = x * vy.x + y * vy.y;
 	float modxy = Length() * vy.Length();
@@ -48,7 +50,7 @@ Vector2D Vector2D::operator+(float32 d) const
 	Vector2D v;
 	v.x = v.x + d;
 	v.y = v.y + d;
-	return v;;
+	return v;
 }
 
 Vector2D Vector2D::operator-(float32 d) const
@@ -57,4 +59,14 @@ Vector2D Vector2D::operator-(float32 d) const
 	v.x = v.x - d;
 	v.y = v.y - d;
 	return v;
+}
+
+double Vector2D::Angle() const {
+	return atan(y/x);
+}
+
+double Vector2D::Angle(Vector2D b) const {
+	double dot = x * b.x + y * b.y;
+	double det = x * b.y - y * b.x;
+	return atan2(det, dot);
 }

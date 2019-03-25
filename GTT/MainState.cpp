@@ -11,8 +11,10 @@ MainState::MainState() {
 	stage_.push_back(tilemap_);
 
 	// Vehicles
-	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
+	taxi_ = new Vehicle(100, 100, Resources::getInstance()->Taxi, Resources::DefaultKeys);
 	stage_.push_back(taxi_);
+	cameraFollow = new FollowGameObject(taxi_);
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);
 
 	// Systems
 	moneySystem = new Money();
@@ -31,7 +33,6 @@ MainState::MainState() {
 	taxi_->EquipTurret(new Gun());
 
 	UI_->addUIElement(new ReloadingDisplay(taxi_));
-
 }
 
 

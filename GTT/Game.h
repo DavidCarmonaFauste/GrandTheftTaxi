@@ -11,21 +11,11 @@
 
 #include "GameStateMachine.h"
 
-
-
-
-
-
-
 using namespace std;
 typedef unsigned int uint;
 
-
-
 class Game {
 public:
-
-
 	static Game* getInstance();
 
 	void run();
@@ -36,7 +26,6 @@ public:
 	void update(Uint32 deltaTime);
 	void render(Uint32 deltaTime);
 
-
 	//get Game SDL attributes
 	SDL_Renderer* getRenderer();
 	SDL_Window* getWindow();
@@ -46,7 +35,6 @@ public:
 	int getCameraHeight();
 	int getCameraWidth();
 
-
 	//get Game private attributes
 	b2World* getWorld();
 	SoundManager* getSoundManager();
@@ -54,11 +42,7 @@ public:
 
 	void init();
 
-
-
-
 private:
-
 	static Game* singleton_; //unique instance
 
 	Game();
@@ -70,11 +54,9 @@ private:
 	const int cameraWidth = 1600;
 	const int cameraHeight = 900;
 
-
 	//SDL Elements
 	SDL_Renderer *renderer_;
 	SDL_Window *window_;
-
 
 	//Phsysics
 	b2World* world_;
@@ -86,10 +68,11 @@ private:
 	//states
 	GameStateMachine* gmStMachine_;
 
-
 	bool exit_ = false;
 
-
-
+	// Delta time and physics time management
+	double accumulator_;
+	double step_ = 1.0f / 60.0f;
+	int velIterations_ = 8, posIterations_ = 3;
 };
 
