@@ -11,6 +11,7 @@ Turret::Turret()
 	animC_ = new Animation();
 	addRenderComponent(animC_);
 	lastTimeShot_ = -1000;
+	chargeprogress_ = SDL_GetTicks();
 	reloading_ = false;
 }
 
@@ -19,6 +20,7 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reloading_) {
 		Reload();
+		chargeprogress_ = SDL_GetTicks();
 	} 
 }
 
@@ -40,10 +42,14 @@ void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
-			shC_->shoot(normalB);
+			if(SDL_GetTicks()- chargeprogress_ >= chargeTime_)
+				shC_->shoot(specialB);
+			else
+				shC_->shoot(normalB);
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
+			chargeprogress_ = SDL_GetTicks();
 		}
 	}
 }
