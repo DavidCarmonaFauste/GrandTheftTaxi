@@ -77,7 +77,6 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed -= deltaTime * HBRK_SPEED_DECAY;
 	}
-	cout << targetLateralVelocity << endl;
 	// Update frictions
 	updateFriction();
 }
