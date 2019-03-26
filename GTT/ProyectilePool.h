@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Proyectile.h"
 #include <vector>
+#include "Constants.h"
 
 enum ProyectileType {
 	GUNB,
