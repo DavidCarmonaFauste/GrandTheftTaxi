@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <map>
 #include "Texture.h"
 #include "RenderComponent.h"
 #include "CameraType.h"

@@ -4,7 +4,6 @@
 #include <Box2D/Box2D.h>
 #include "Animation.h"
 #include "ControlType.h"
-#include "Constants.h"
 #include <vector>
 #include "Health.h"
 #include <cmath> 

@@ -3,8 +3,6 @@
 #include "Texture.h"
 #include "RenderComponent.h"
 #include "Camera.h"
-#include <vector>
-#include <map>
 
 using namespace std;
 

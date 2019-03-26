@@ -1,10 +1,7 @@
 #pragma once
-#include "ControlType.h"
-#include "Constants.h"
 #include "Vehicle.h"
 
-class InputMovement :
-	public ControlType
+class InputMovement : public ControlType
 {
 public:
 	InputMovement(KeysScheme k , Vehicle* v);
