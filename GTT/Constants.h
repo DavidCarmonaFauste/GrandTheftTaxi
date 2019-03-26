@@ -3,9 +3,11 @@
 #include <SDL.h>
 #include <map>
 
+#ifndef constants_define
+#define constants_define
 using namespace std;
 
-//DO NOT EDIT ------------------------------------------------------------------------------------------------------
+//DO NOT EDIT ---------------------------------------------------------------------------------------------------------------
 const struct KeysScheme {
 	SDL_Keycode forward;
 	SDL_Keycode backwards;
@@ -41,12 +43,15 @@ const float DFLT_LATERAL_VELOCITY = 0.0f;
 const float HBRK_LATERAL_VELOCITY = 0.9999f;
 const float HBRK_SPEED_DECAY = 0.0004f;
 
+//States
+const string NAME_MAINMENU_STATE = "mainMenuState";
+const string NAME_MAIN_STATE = "MAIN_STATE";
 
 //SOUNDS
 const enum soundId {
 	DEFAULT_SOUND,
 };
-map<soundId, string> SOUND = {
+const map<soundId, string> SOUND = {
 	{DEFAULT_SOUND, "../Assets/sounds/default.wav"}
 };
 
@@ -55,7 +60,7 @@ const enum musicId {
 	DEFAULT_MUSIC,
 };
 
-map<musicId, string> MUSIC = {
+const map<musicId, string> MUSIC = {
 	{DEFAULT_MUSIC, "../Assets/sounds/default.wav"}
 };
 
@@ -68,3 +73,5 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 100.0f, 35.0f, 15.0f, 0.8f };
+
+#endif // !constants_define

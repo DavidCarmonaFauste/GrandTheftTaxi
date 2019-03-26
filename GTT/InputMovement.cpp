@@ -1,5 +1,4 @@
 #include "InputMovement.h"
-#include "Resources.h"
 
 InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {

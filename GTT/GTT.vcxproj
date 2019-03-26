@@ -54,7 +54,6 @@
     <ClCompile Include="ReloadingDisplay.cpp" />
     <ClCompile Include="ReloadInputComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Respawner.cpp" />
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
@@ -114,7 +113,6 @@
     <ClInclude Include="ReloadingDisplay.h" />
     <ClInclude Include="ReloadInputComponent.h" />
     <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="Resources.h" />
     <ClInclude Include="Respawner.h" />
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />

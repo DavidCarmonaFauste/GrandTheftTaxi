@@ -1,5 +1,4 @@
 #include "ProyectilePool.h"
-#include "Resources.h"
 
 ProyectilePool* ProyectilePool::instance_ = nullptr;
 

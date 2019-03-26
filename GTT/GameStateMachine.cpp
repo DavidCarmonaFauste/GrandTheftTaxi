@@ -1,5 +1,6 @@
 #include "GameStateMachine.h"
-
+#include "MainMenuState.h"
+#include "MainState.h"
 
 
 
@@ -25,7 +26,14 @@ string GameStateMachine::get_CurrentStateName() const {
 	return currentState_;
 }
 
-GameState * GameStateMachine::get_CurrentState() const {
-	return Resources::getInstance()->STATES_[currentState_];
+GameState * GameStateMachine::get_CurrentState()  {
+	return STATES_[currentState_];
 }
 
+void GameStateMachine::initStates() {
+	// Main menu
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
+
+	// Main game
+	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+}
