@@ -20,6 +20,7 @@ Game::Game() {
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	world_ = new b2World(b2Vec2(0, 0));
 
@@ -40,6 +41,11 @@ void Game::handleEvents(Uint32 deltaTime) {
 
 	while (SDL_PollEvent(&event) && !exit_) {
 		// Call the handleEvents of the cameras and the state
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_ESCAPE) {
+				exit_ = true;
+			}
+		}
 		for (auto cam : cameras_) cam.second->handleInput(deltaTime, event);
 		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
 		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a trav�s del m�todo exitGame

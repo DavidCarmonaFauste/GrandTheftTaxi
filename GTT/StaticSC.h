@@ -5,7 +5,7 @@ class StaticSC : public ShootComponent
 {
 public:
 	StaticSC(Turret* turret) :ShootComponent(turret) {};
-	virtual void shoot() {};
+	virtual void shoot(ProyectileType prType) {};
 	virtual ~StaticSC() {};
 };
 
