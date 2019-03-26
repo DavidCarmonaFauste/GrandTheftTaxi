@@ -11,7 +11,9 @@ Gun::Gun()
 	reloadTime_ = 1500;
 	perfRelIni_ = 0.45;
 	perfRelSeg_ = 0.1;
+	chargeTime_ = 1000;
 	normalB = GUNB;
+	specialB = SHOTGUNB;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);

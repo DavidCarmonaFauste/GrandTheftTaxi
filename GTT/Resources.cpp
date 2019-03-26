@@ -17,7 +17,7 @@ Resources::Resources() {
 	defaultDamping = 1.3f;
 
 	vehicles_ = {
-		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5, 3.5, 2, 0.5f}
+		{Taxi, "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5, 3.5, 1, 0.5f}
 	};
 
 	sounds_ = {

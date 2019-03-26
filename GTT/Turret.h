@@ -38,6 +38,8 @@ protected:
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
 	int reloadpressedTime_;//momento en el que se pulso el boton de recarga
 	int lastTimeShot_;//momento en el que se disparo la ultima bala
+	int chargeTime_;//tiempo que tarda en cargar una bala mas potente
+	int chargeprogress_;//tiempo desde que se dejo de usar la torreta (recargar o disparar)
 	double perfRelSeg_;//segmento del tiempo de recarga en el que entra en accion la recarga perfecta (en tanto por 1)
 	double perfRelIni_;//momento dentro del tiempo de recarga en el que empieza el segmento de recarga perfecta (en tanto por 1)
 	bool reloading_;//indica si se esta recargando en el momento
