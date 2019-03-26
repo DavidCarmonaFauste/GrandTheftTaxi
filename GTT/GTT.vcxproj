@@ -27,6 +27,7 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="EnemyVehicle.cpp" />
     <ClCompile Include="Flame_thrower.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="ChangeWeaponIC.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="EnemyVehicle.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="Flame_thrower.h" />
     <ClInclude Include="FollowGameObject.h" />
