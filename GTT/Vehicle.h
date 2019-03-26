@@ -55,7 +55,7 @@ protected:
 
 	PhysicObject* phyO_;
 	Animation* sprite_;
-	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)	
+	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
 	Turret* turrets_[MAXTURRETS];

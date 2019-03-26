@@ -19,7 +19,6 @@ public:
 	//Get
 	PhysicObject* GetPhyO();
 	float32 GetMaxSpeed();
-	float32 GetMaxBackwardSpeed();
 	float32 GetTurnSpeed();
 	float32 GetAcceleration();
 
@@ -28,7 +27,7 @@ public:
 	
 	virtual void EquipTurret(Turret* turret);
 	Turret* getCurrentTurret();
-	virtual void setPosition(const Vector2D &pos, bool force = false) override;
+	virtual void setPosition(const Vector2D &pos);
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void render(Uint32 time);
 	virtual void update(Uint32 time);
@@ -46,5 +45,6 @@ protected:
 	Animation* sprite_;
 	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
 	Health* health_;
+	Turret* gun_;
 };
 
