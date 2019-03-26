@@ -402,10 +402,10 @@
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
     <ClInclude Include="GunProyectile.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="ShotGunProyectile.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

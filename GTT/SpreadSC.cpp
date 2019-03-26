@@ -25,3 +25,9 @@ void SpreadSC::shoot(ProyectileType prType)
 		ang += incrang;
 	}
 }
+
+void SpreadSC::changeProperties(double prop1, int prop2)
+{
+	dispersionAngle_ = prop1;
+	numPellets_ = prop2;
+}
