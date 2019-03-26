@@ -401,5 +401,11 @@
     <ClInclude Include="Constants.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
+    <ClInclude Include="GunProyectile.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotGunProyectile.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

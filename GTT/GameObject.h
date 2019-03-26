@@ -1,16 +1,16 @@
-
 #pragma once
-//#include "Game.h"
 #include "Vector2D.h"
 #include <SDL.h>
+#include <map>
+#include <vector>
+#include "Constants.h"
+
 using namespace std;
 
 class GameObject {
-
 public:
 	GameObject();
 	virtual ~GameObject();
-
 
 	bool isActive() const;
 	void setActive(bool active);

@@ -1,6 +1,5 @@
 #pragma once
 #include "SDL.h"
-#include <map>
 #include <Box2D/Box2D.h>
 #include "CameraType.h"
 #include "Camera.h"

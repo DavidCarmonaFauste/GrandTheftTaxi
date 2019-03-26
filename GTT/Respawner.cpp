@@ -1,6 +1,4 @@
 #include "Respawner.h"
-#include <map>
-
 
 Respawner::Respawner(Health *healthToObserve) {
 	healthToObserve->registerObserver(this);

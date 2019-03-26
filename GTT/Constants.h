@@ -1,10 +1,9 @@
 #pragma once
-#include <string>
 #include <SDL.h>
-#include <map>
 
 #ifndef constants_define
 #define constants_define
+
 using namespace std;
 
 //DO NOT EDIT ---------------------------------------------------------------------------------------------------------------
