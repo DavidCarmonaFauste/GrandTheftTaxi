@@ -72,6 +72,6 @@ const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, 
 const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 
 //Vehicles
-const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 100.0f, 35.0f, 15.0f, 0.8f };
+const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.5f };
 
 #endif // !constants_define
