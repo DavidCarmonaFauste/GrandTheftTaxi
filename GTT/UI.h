@@ -5,6 +5,7 @@
 #include "Observer.h"
 #include "MoneyDisplay.h"
 #include "ReloadingDisplay.h"
+#include "Constants.h"
 
 class UI : public Container, public Observer
 {

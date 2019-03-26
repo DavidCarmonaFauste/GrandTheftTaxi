@@ -1,12 +1,11 @@
 
 #include "UI.h"
-#include "Resources.h"
 
 UI::UI() {
 	UIElements_ = vector<GameObject*>();
 
 	// Common font for all UI elements
-	font_ = new Font(Resources::getInstance()->fonts_[Resources::Default_Font], 60);
+	font_ = new Font(FONT_LATO, 60);
 	fontColor_ = SDL_Color();
 	fontColor_.r = 255; fontColor_.g = 255; fontColor_.b = 255;
 

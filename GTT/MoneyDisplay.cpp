@@ -1,5 +1,4 @@
 #include "MoneyDisplay.h"
-#include "Resources.h"
 #include "Events.h"
 
 

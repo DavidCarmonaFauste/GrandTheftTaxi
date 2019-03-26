@@ -1,15 +1,12 @@
 #pragma once
-
 #include "SDL.h"
 #include <map>
 #include <Box2D/Box2D.h>
 #include "CameraType.h"
-
 #include "Camera.h"
-
 #include "SoundManager.h"
-
 #include "GameStateMachine.h"
+
 
 using namespace std;
 typedef unsigned int uint;
@@ -20,6 +17,7 @@ public:
 
 	void run();
 	bool exitGame();
+
 
 	//main methods
 	void handleEvents(Uint32 deltaTime);
@@ -67,7 +65,6 @@ private:
 
 	//states
 	GameStateMachine* gmStMachine_;
-
 	bool exit_ = false;
 
 	// Delta time and physics time management

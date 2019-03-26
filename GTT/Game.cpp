@@ -125,9 +125,8 @@ void Game::init() {
 
 	// Create the resources singleton for the first time
 	// and initialize its states
-	Resources::getInstance()->initStates();
-
 	gmStMachine_ = new GameStateMachine();
+	gmStMachine_->initStates();
 }
 
 Game * Game::getInstance() {

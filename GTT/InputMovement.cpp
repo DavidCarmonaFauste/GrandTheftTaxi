@@ -1,10 +1,9 @@
 #include "InputMovement.h"
-#include "Resources.h"
 
-InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
+InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
 	v_ = v;
-	k_ = &Resources::getInstance()->keyBindings_[id];
+	k_ = k;
 
 	//Input booleans
 	forwardPressed_ = false;
@@ -12,11 +11,11 @@ InputMovement::InputMovement(Resources::KeyBindingsId id, Vehicle* v)
 	rightTurnPressed_ = false;
 	leftTurnPressed_ = false;
 
-	targetDamping = Resources::getInstance()->defaultDamping;
-	targetLateralVelocity = Resources::getInstance()->defaultLateralVelocity;
+	targetDamping = DFLT_DAMPING;
+	targetLateralVelocity = DFLT_LATERAL_VELOCITY;
 
 	targetMaxSpeed = v_->GetMaxSpeed();
-	v_->GetPhyO()->getBody()->SetAngularDamping(4);
+	v_->GetPhyO()->getBody()->SetAngularDamping(DFLT_ANG_DAMPING);
 }
 
 
@@ -27,17 +26,17 @@ InputMovement::~InputMovement()
 void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event)
 {
 	if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.sym == k_->forward) forwardPressed_ = true;
-		if (event.key.keysym.sym == k_->backwards) backwardPressed_ = true;
-		if (event.key.keysym.sym == k_->turnRight) rightTurnPressed_ = true;
-		if (event.key.keysym.sym == k_->turnLeft) leftTurnPressed_ = true;
+		if (event.key.keysym.sym == k_.forward) forwardPressed_ = true;
+		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = true;
+		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
+		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 	}
 	else if (event.type == SDL_KEYUP) {
-		if (event.key.keysym.sym == k_->forward) forwardPressed_ = false;
-		if (event.key.keysym.sym == k_->backwards) backwardPressed_ = false;
-		if (event.key.keysym.sym == k_->turnRight) rightTurnPressed_ = false;
-		if (event.key.keysym.sym == k_->turnLeft) leftTurnPressed_ = false;
+		if (event.key.keysym.sym == k_.forward) forwardPressed_ = false;
+		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = false;
+		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
+		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
 	}
 }
@@ -69,14 +68,14 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 
 	// Handbrake
 	if (!handBrakePressed_) {
-		targetDamping = Resources::getInstance()->defaultDamping;
-		targetLateralVelocity = Resources::getInstance()->defaultLateralVelocity;
+		targetDamping = DFLT_DAMPING;
+		targetLateralVelocity = DFLT_LATERAL_VELOCITY;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
-		targetDamping = Resources::getInstance()->handbrakeDamping;
-		targetLateralVelocity = Resources::getInstance()->handbrakeLateralVelocity;
-		targetMaxSpeed -= deltaTime * v_->GetMaxSpeed()*Resources::getInstance()->handbrakeSpeedDecay;
+		targetDamping = HBRK_DAMPING;
+		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
+		targetMaxSpeed -= deltaTime * HBRK_SPEED_DECAY;
 	}
 
 	// Update frictions

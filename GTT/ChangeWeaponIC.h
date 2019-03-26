@@ -5,7 +5,7 @@ class ChangeWeaponIC :
 {
 public:
 	ChangeWeaponIC(SDL_Keycode changekey=SDLK_q);
-	virtual ~ChangeWeaponIC();
+	virtual ~ChangeWeaponIC() {};
 	virtual void handleInput(GameObject* o, Uint32 deltaTime, const SDL_Event& event);
 
 private:

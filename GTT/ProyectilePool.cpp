@@ -1,5 +1,4 @@
 #include "ProyectilePool.h"
-#include "Resources.h"
 #include "GunProyectile.h"
 #include "ShotGunProyectile.h"
 
@@ -53,7 +52,7 @@ Proyectile * ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, Proyectil
 	}
 	 
 	if (e != nullptr) {
-		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*Resources::getInstance()->physicsScalingFactor, pos.y*Resources::getInstance()->physicsScalingFactor), 0);
+		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*PHYSICS_SCALING_FACTOR, pos.y*PHYSICS_SCALING_FACTOR), 0);
 		e->GetPhyO()->getBody()->SetLinearVelocity(Vector2D(vel.x * e->GetSpeed(), vel.y* e->GetSpeed()));
 		e->SetBirth(SDL_GetTicks());
 		e->setActive(true);

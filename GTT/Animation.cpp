@@ -84,7 +84,7 @@ bool Animation::resumeAnimation()
 
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
-	if (currentAnim != "") {
+	if (currentAnim != "-1") {
 		renderAnimation(o, deltaTime);
 	}
 }

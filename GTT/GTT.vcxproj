@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AimAtCursorAC.cpp" />
-    <ClCompile Include="AimComponent.cpp" />
     <ClCompile Include="AirStrike.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -56,7 +55,6 @@
     <ClCompile Include="ReloadingDisplay.cpp" />
     <ClCompile Include="ReloadInputComponent.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Respawner.cpp" />
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
@@ -85,6 +83,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
     <ClInclude Include="ChangeWeaponIC.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="Events.h" />
@@ -117,7 +116,6 @@
     <ClInclude Include="ReloadingDisplay.h" />
     <ClInclude Include="ReloadInputComponent.h" />
     <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="Resources.h" />
     <ClInclude Include="Respawner.h" />
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />

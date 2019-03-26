@@ -7,8 +7,7 @@
 #include "Reticule.h"
 #include "InputMovement.h"
 
-Vehicle::Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId idk) {
-	Resources::VehicleInfo& r = Resources::getInstance()->vehicles_[id];
+Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
 
 	this->setWidth(r.width);
 	this->setHeight(r.height);
@@ -45,7 +44,7 @@ Vehicle::Vehicle(int x, int y, Resources::VehicleId id, Resources::KeyBindingsId
 	this->addLogicComponent(phyO_);
 	
 	// Control
-	control_ = new InputMovement(idk, this);
+	control_ = new InputMovement(k, this);
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 }
@@ -114,8 +113,8 @@ void Vehicle::setPosition(const Vector2D & pos, bool force) {
 			b2Vec2(phyO_->getOrigin().x * width_,
 				phyO_->getOrigin().y * height_);
 
-		nextPos = b2Vec2(nextPos.x * Resources::getInstance()->physicsScalingFactor,
-			nextPos.y * Resources::getInstance()->physicsScalingFactor);
+		nextPos = b2Vec2(nextPos.x * PHYSICS_SCALING_FACTOR,
+			nextPos.y * PHYSICS_SCALING_FACTOR);
 
 		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
 	}
