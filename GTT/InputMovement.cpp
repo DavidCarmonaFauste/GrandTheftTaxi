@@ -69,7 +69,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	// Handbrake
 	if (!handBrakePressed_) {
 		targetDamping = DFLT_DAMPING;
-		targetLateralVelocity = DFLT_LATERAL_VELOCITY;
+		if (targetLateralVelocity > 0)targetLateralVelocity -= (DFLT_LATERAL_VELOCITY * deltaTime / 100);
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
@@ -77,7 +77,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed -= deltaTime * HBRK_SPEED_DECAY;
 	}
-
+	cout << targetLateralVelocity << endl;
 	// Update frictions
 	updateFriction();
 }

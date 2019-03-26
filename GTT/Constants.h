@@ -39,8 +39,8 @@ const float PHYSICS_SCALING_FACTOR = 0.02f;
 const float DFLT_DAMPING = 1.5f;
 const float DFLT_ANG_DAMPING = 1.5f;
 const float HBRK_DAMPING = 0.7f;
-const float DFLT_LATERAL_VELOCITY = 0.0f;
-const float HBRK_LATERAL_VELOCITY = 0.9999f;
+const float DFLT_LATERAL_VELOCITY = 0.1f;
+const float HBRK_LATERAL_VELOCITY = 1.01f;
 const float HBRK_SPEED_DECAY = 0.0004f;
 
 //States
@@ -72,6 +72,6 @@ const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, 
 const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 
 //Vehicles
-const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.5f };
+const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
 
 #endif // !constants_define
