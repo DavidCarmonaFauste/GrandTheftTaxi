@@ -3,7 +3,6 @@
 #include "Health.h"
 #include "GameObject.h"
 #include "Observer.h"
-#include <map>
 
 class Respawner : public LogicComponent,
 	public Observer,

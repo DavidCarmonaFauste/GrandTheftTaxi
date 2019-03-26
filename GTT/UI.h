@@ -1,11 +1,9 @@
 #pragma once
-#include "Container.h"
 #include "HealthDisplay.h"
 #include "CameraType.h"
 #include "Observer.h"
 #include "MoneyDisplay.h"
 #include "ReloadingDisplay.h"
-#include "Constants.h"
 
 class UI : public Container, public Observer
 {

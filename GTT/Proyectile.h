@@ -3,15 +3,13 @@
 #include "Animation.h"
 #include "PhysicObject.h"
 
-
-
 enum proyectileType {
 	BULLET,
 	FLAME,
 	STRIKE
 };
-class Proyectile : public Container
-{
+
+class Proyectile : public Container {
 public:
 	Proyectile();
 	virtual void Impact();
@@ -20,6 +18,7 @@ public:
 	PhysicObject* GetPhyO();
 	double GetSpeed();
 	virtual ~Proyectile() {};
+
 protected:
 	Animation* animC_;
 	PhysicObject* phyO_;

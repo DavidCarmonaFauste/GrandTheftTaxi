@@ -5,8 +5,8 @@
 
 
 GameStateMachine::GameStateMachine() {
-	// currentState_ = NAME_MAINMENU_STATE;
-	currentState_ = NAME_MAIN_STATE;
+	currentState_ = NAME_MAINMENU_STATE;
+	//currentState_ = NAME_MAIN_STATE;
 }
 
 

@@ -1,8 +1,6 @@
 #pragma once
 #include "Container.h"
-#include "Constants.h"
 #include <SDL_mixer.h>
-#include <map>
 
 class SoundManager {
 public:
@@ -19,7 +17,6 @@ public:
 	void resumeSound(int channel);
 	bool isSoundPlaying(int channel);
 	bool soundExists(soundId id);
-
 	
 	// DON'T USE THIS DIRECTLY,
 	// USE THE RESOURCES SHEET INSTEAD !!!
