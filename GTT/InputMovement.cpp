@@ -77,7 +77,6 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed -= deltaTime * HBRK_SPEED_DECAY;
 	}
-	cout << targetLateralVelocity << endl;
 	// Update frictions
 	updateFriction();
 }
@@ -86,8 +85,14 @@ void InputMovement::steeringWheel() {
 	b2Body* body = v_->GetPhyO()->getBody();
 
 	float turnSpeed = 0;
-	if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
-	else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+	if (backwardPressed_) {
+		if (leftTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+		else if (rightTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
+	}
+	else {
+		if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
+		else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+	}
 
 	if (turnSpeed != 0) {
 		turnSpeed *= body->GetLinearVelocity().Length() / v_->GetMaxSpeed();
