@@ -9,7 +9,6 @@ GameStateMachine::GameStateMachine() {
 	currentState_ = NAME_MAIN_STATE;
 }
 
-
 GameStateMachine::~GameStateMachine() {
 	
 }
