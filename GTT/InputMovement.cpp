@@ -90,8 +90,14 @@ void InputMovement::steeringWheel() {
 		else if (rightTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
 	}
 	else {
-		if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
-		else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+		if (handBrakePressed_) {
+			if (leftTurnPressed_) turnSpeed = -2*v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 2*v_->GetTurnSpeed();
+		}
+		else {
+			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+		}
 	}
 
 	if (turnSpeed != 0) {
