@@ -100,6 +100,7 @@ void Vehicle::ChangeTurret()
 {
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
 	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
+	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 }
 Turret * Vehicle::getCurrentTurret()
 {

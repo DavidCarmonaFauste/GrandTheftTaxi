@@ -13,6 +13,7 @@ Turret::Turret()
 	lastTimeShot_ = -1000;
 	chargeprogress_ = SDL_GetTicks();
 	reloading_ = false;
+	automatic_ = false;
 }
 
 void Turret::update(Uint32 deltaTime)
@@ -34,6 +35,8 @@ void Turret::AttachToVehicle(Vehicle * car)
 	addInputComponent(car_->GetReloadIC());
 	addInputComponent(car_->GetShootIC());
 	addLogicComponent(followC_);
+	addLogicComponent(car_->GetShootIC());
+
 }
 		
 
@@ -136,6 +139,11 @@ string Turret::GetReticule()
 bool Turret::isReloading()
 {
 	return reloading_;
+}
+
+bool Turret::isAutomatic()
+{
+	return automatic_;
 }
 
 Turret::~Turret()

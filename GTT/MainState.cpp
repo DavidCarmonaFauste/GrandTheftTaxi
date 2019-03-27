@@ -3,6 +3,7 @@
 #include "Reticule.h"
 #include "Gun.h"
 #include "ShotGun.h"
+#include "MachineGun.h"
 #include "ReloadingDisplay.h"
 
 MainState::MainState() {
@@ -30,7 +31,7 @@ MainState::MainState() {
 	stage_.push_back(Reticule::GetInstance());
 
 	taxi_->EquipTurret(new ShotGun());
-	taxi_->EquipTurret(new Gun());
+	taxi_->EquipTurret(new MachineGun());
 
 	UI_->addUIElement(new ReloadingDisplay(taxi_));
 }

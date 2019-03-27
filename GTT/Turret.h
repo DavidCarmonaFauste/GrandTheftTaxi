@@ -30,6 +30,7 @@ public:
 	virtual double GetPerfReloadIni();
 	virtual string GetReticule();
 	virtual bool isReloading();
+	virtual bool isAutomatic();
 	virtual ~Turret();
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
@@ -43,6 +44,7 @@ protected:
 	double perfRelSeg_;//segmento del tiempo de recarga en el que entra en accion la recarga perfecta (en tanto por 1)
 	double perfRelIni_;//momento dentro del tiempo de recarga en el que empieza el segmento de recarga perfecta (en tanto por 1)
 	bool reloading_;//indica si se esta recargando en el momento
+	bool automatic_;//indica si la torreta es de disparo automatico
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
 	string reticulesprite_="";
