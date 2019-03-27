@@ -10,7 +10,7 @@ Health::~Health() {
 }
 
 void Health::update(GameObject * o, Uint32 deltaTime) {
-
+	damageOverTime(deltaTime);
 }
 
 int Health::getHealth() {
@@ -27,6 +27,11 @@ void Health::damage(int damage) {
 
 void Health::heal(int heal) {	
 	setHealth(health_ + heal);
+}
+
+void Health::setDamageOverTime(int damage, int frequency) {
+	damageOverTimeValue_ = damage;
+	damageFrequency_ = frequency;
 }
 
 void Health::resetHealth() {
@@ -46,4 +51,15 @@ bool Health::receiveEvent(Event& e) {
 		resetHealth();
 
 	return true;
+}
+
+void Health::damageOverTime(Uint32 deltaTime) {
+	if (damageFrequency_ <= 0 && damageOverTimeValue_ == 0)
+		return;
+
+	damageTimer_ += deltaTime;
+	while (damageTimer_ >= damageFrequency_) {
+		damage(damageOverTimeValue_);
+		damageTimer_ -= damageFrequency_;
+	}
 }

@@ -21,7 +21,8 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
 	this->addRenderComponent(sprite_);
 
 	// Health
-	health_ = new Health(100);
+	health_ = new Health(TAXI_HP);
+	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
 
 	shIC_ = new ShootIC();
