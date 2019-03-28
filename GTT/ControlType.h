@@ -3,7 +3,7 @@
 #include "LogicComponent.h"
 
 class ControlType :
-	public InputComponent, public LogicComponent
+	public InputComponent, public LogicComponent, public Observable
 {
 public:
 	ControlType();

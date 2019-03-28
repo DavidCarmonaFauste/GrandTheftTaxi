@@ -16,7 +16,7 @@ class ReloadInputComponent;
 class ShootIC;
 
 class Vehicle :
-	public Container, public Observable
+	public Container, public Observable, public Observer
 {
 public:
 	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
@@ -41,6 +41,8 @@ public:
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void render(Uint32 time);
 	virtual void update(Uint32 time);
+
+	virtual bool receiveEvent(Event& e);
 
 protected:
 	float32 maxSpeed_;

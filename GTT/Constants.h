@@ -44,7 +44,7 @@ const float HBRK_SPEED_DECAY = 0.0004f;
 
 const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
-const int DMG_OVER_TIME_MOVING = 10;
+const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
 
 //States

@@ -8,7 +8,6 @@
 #include "InputMovement.h"
 
 Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
-
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
@@ -48,6 +47,7 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
 	control_ = new InputMovement(k, this);
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
+	control_->registerObserver(this);
 }
 
 
@@ -133,6 +133,13 @@ void Vehicle::update(Uint32 time) {
 
 	if (turrets_[currentTurret_] != nullptr)
 		turrets_[currentTurret_]->update(time);
+}
+
+bool Vehicle::receiveEvent(Event & e) {
+	if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+
+	return false;
 }
 
 void Vehicle::render(Uint32 time) {

@@ -4,6 +4,7 @@
 #include <map>
 #include <vector>
 #include "Constants.h"
+#include "Observer.h"
 
 using namespace std;
 
