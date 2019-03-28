@@ -26,14 +26,22 @@ InputMovement::~InputMovement()
 void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event)
 {
 	if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.sym == k_.forward) forwardPressed_ = true;
+		if (event.key.keysym.sym == k_.forward) {
+			forwardPressed_ = true;
+			Event e(this, STARTED_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = true;
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 	}
-	else if (event.type == SDL_KEYUP) {
-		if (event.key.keysym.sym == k_.forward) forwardPressed_ = false;
+	else if (event.type == SDL_KEYUP) {	
+		if (event.key.keysym.sym == k_.forward) {
+			forwardPressed_ = false;
+			Event e(this, STOPPED_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = false;
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
