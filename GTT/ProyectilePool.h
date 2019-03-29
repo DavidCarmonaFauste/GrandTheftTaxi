@@ -3,11 +3,6 @@
 #include "Proyectile.h"
 #include <vector>
 
-enum ProyectileType {
-	GUNB,
-	SHOTGUNB,
-};
-
 class ProyectilePool :public GameObject
 {
 public:

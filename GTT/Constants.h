@@ -7,6 +7,10 @@
 using namespace std;
 
 //DO NOT EDIT ---------------------------------------------------------------------------------------------------------------
+enum ProyectileType {
+	GUNB,
+	SHOTGUNB,
+};
 const struct KeysScheme {
 	SDL_Keycode forward;
 	SDL_Keycode backwards;
@@ -29,6 +33,26 @@ const struct VehicleInfo{
 	float velBackwardMax;
 	float turnSpeed;
 	float acceleration;
+};
+
+const struct WeaponInfo {
+	string idlePath;
+	string shootPath;
+	string reticuleSprite;
+	int width;
+	int height;
+	int maxAmmo;
+	int cadence;
+	int reloadTime;
+	double perfRelIni;
+	double perfRelSeg;
+	int chargeTime;
+	ProyectileType normalB;
+	ProyectileType specialB;
+	bool automatic;
+	double prop1;
+	int prop2;
+
 };
 
 //EDITABLE ----------------------------------------------------------------------------------------------------------
@@ -77,5 +101,12 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
+
+//Weapons
+const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png", "gun", 75, 150, 10, 150, 1500, 0.45, 0.1, 1000, GUNB, SHOTGUNB, false};
+const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png", "shotgun", 75, 150, 6, 900, 4000, 0.6, 0.2, 2000, SHOTGUNB, GUNB, false, 30.0, 3};
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/machine_gun.png", "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNB, SHOTGUNB, true};
+const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/sniper.png", "sniper", 75, 150, 4, 1000, 2000, 0.3, 0.2, 5000, GUNB, SHOTGUNB, false };
+
 
 #endif // !constants_define

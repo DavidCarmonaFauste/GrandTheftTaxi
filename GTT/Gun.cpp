@@ -6,27 +6,32 @@
 
 Gun::Gun()
 {
-	maxAmmo_ = 10;
-	cadence_ = 150;
-	reloadTime_ = 1500;
-	perfRelIni_ = 0.45;
-	perfRelSeg_ = 0.1;
-	chargeTime_ = 1000;
-	normalB = GUNB;
-	specialB = SHOTGUNB;
+	WeaponInfo w = GUN;
+
+	maxAmmo_ = w.maxAmmo;
+	cadence_ = w.cadence;
+	reloadTime_ = w.reloadTime;
+	perfRelIni_ = w.perfRelIni;
+	perfRelSeg_ = w.perfRelSeg;
+	chargeTime_ = w.chargeTime;
+	normalB = w.normalB;
+	specialB = w.specialB;
+	path_ = w.idlePath;
+	animationpath_ = w.shootPath;
+	reticulesprite_ = w.reticuleSprite;
+	height_ = w.height;
+	width_ = w.width;
+	automatic_ = w.automatic;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-	path_ = "../Assets/sprites/gun.png";
-	animationpath_ = "../Assets/sprites/pistola_anim.png";
-	reticulesprite_ = "gun";
-	shC_ = new LinearSC(this);
-	height_ = 150;
-	width_ = 75;
+	
+
 	animC_->loadAnimation(animationpath_, "idle", 2, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
+	shC_ = new LinearSC(this);
 }
 
 

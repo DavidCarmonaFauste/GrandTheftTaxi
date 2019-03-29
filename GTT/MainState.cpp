@@ -5,6 +5,7 @@
 #include "ShotGun.h"
 #include "MachineGun.h"
 #include "ReloadingDisplay.h"
+#include "Sniper.h"
 
 MainState::MainState() {
 	// Tilemap
@@ -30,8 +31,8 @@ MainState::MainState() {
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
 
-	taxi_->EquipTurret(new ShotGun());
-	taxi_->EquipTurret(new MachineGun());
+	taxi_->EquipTurret(new Gun());
+	taxi_->EquipTurret(new Sniper());
 
 	UI_->addUIElement(new ReloadingDisplay(taxi_));
 }
