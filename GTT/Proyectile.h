@@ -15,6 +15,7 @@ public:
 	virtual void Impact();
 	virtual void SetBirth(double birthTime);
 	virtual void update(Uint32 time);
+	virtual void ChangeBulletType(ProyectileInfo p);
 	PhysicObject* GetPhyO();
 	double GetSpeed();
 	virtual ~Proyectile() {};

@@ -21,7 +21,7 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reloading_) {
 		Reload();
-		chargeprogress_ = SDL_GetTicks();
+		ResetChargeProgress();
 	} 
 }
 
@@ -29,7 +29,8 @@ void Turret::AttachToVehicle(Vehicle * car)
 {
 	car_ = car;
 
-	followC_ = new FollowGameObject(car_);
+	followC_ = new FollowGameObject(car_);;
+	car->GetShootIC()->ChangeInputMode(automatic_);
 
 	addLogicComponent(car_->GetAimComponent());
 	addInputComponent(car_->GetReloadIC());
@@ -52,7 +53,7 @@ void Turret::Shoot()
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
-			chargeprogress_ = SDL_GetTicks();
+			ResetChargeProgress();
 		}
 	}
 }
@@ -118,7 +119,8 @@ double Turret::GetReloadPercentage()
 	if (reloading_) {
 		return (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
 	}
-	else return 1;
+	else if(GetAmmo()>0) return 1;
+	else return 0;
 }
 
 double Turret::GetPerfReloadSeg()
@@ -129,6 +131,11 @@ double Turret::GetPerfReloadSeg()
 double Turret::GetPerfReloadIni()
 {
 	return perfRelIni_;
+}
+
+void Turret::ResetChargeProgress()
+{
+	chargeprogress_ = SDL_GetTicks();
 }
 
 string Turret::GetReticule()

@@ -34,7 +34,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Gun.cpp" />
-    <ClCompile Include="GunProyectile.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
@@ -60,7 +59,6 @@
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
     <ClCompile Include="ShotGun.cpp" />
-    <ClCompile Include="ShotGunProyectile.cpp" />
     <ClCompile Include="Sniper.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpreadSC.cpp" />
@@ -96,7 +94,6 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Gun.h" />
-    <ClInclude Include="GunProyectile.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
@@ -121,7 +118,6 @@
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
     <ClInclude Include="ShotGun.h" />
-    <ClInclude Include="ShotGunProyectile.h" />
     <ClInclude Include="Sniper.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpreadSC.h" />

@@ -7,7 +7,7 @@ SpreadSC::SpreadSC(Turret * turret, double dispersionAngle, int numPellets) :Sho
 	numPellets_ = numPellets;
 }
 
-void SpreadSC::shoot(ProyectileType prType)
+void SpreadSC::shoot(ProyectileInfo prType)
 {
 	double ang = turret_->getRotation() / 180.0 * M_PI - (dispersionAngle_ / 180.0*M_PI / 2);
 

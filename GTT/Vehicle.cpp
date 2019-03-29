@@ -89,8 +89,9 @@ void Vehicle::EquipTurret(Turret * turret)
 
 	}
 	else if (currentTurret_ < MAXTURRETS - 1 && turrets_[currentTurret_ + 1] == nullptr) {
-		turrets_[currentTurret_+1] = turret;
-		turrets_[currentTurret_+1]->AttachToVehicle(this);
+		currentTurret_++;
+		turrets_[currentTurret_] = turret;
+		turrets_[currentTurret_]->AttachToVehicle(this);
 	}
 	else {
 		cout << "maximo numero de torretas alcanzado" << endl;
@@ -101,6 +102,7 @@ void Vehicle::ChangeTurret()
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
 	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
+	turrets_[currentTurret_]->ResetChargeProgress();
 }
 Turret * Vehicle::getCurrentTurret()
 {

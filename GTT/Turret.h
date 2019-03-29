@@ -28,6 +28,7 @@ public:
 	virtual double GetReloadPercentage();
 	virtual double GetPerfReloadSeg();
 	virtual double GetPerfReloadIni();
+	virtual void ResetChargeProgress();
 	virtual string GetReticule();
 	virtual bool isReloading();
 	virtual bool isAutomatic();
@@ -52,8 +53,8 @@ protected:
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta
-	ProyectileType normalB;
-	ProyectileType specialB;
+	ProyectileInfo normalB;
+	ProyectileInfo specialB;
 
 };
 

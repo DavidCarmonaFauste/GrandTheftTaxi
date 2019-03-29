@@ -51,7 +51,7 @@ void ShotGun::Shoot()
 				magazine_->pop();
 				lastTimeShot_ = SDL_GetTicks();
 				animC_->playAnimation("idle", 3.5f, false);
-				chargeprogress_ = SDL_GetTicks();
+				ResetChargeProgress();
 			}
 		}
 }

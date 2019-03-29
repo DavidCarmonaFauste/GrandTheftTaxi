@@ -219,12 +219,6 @@
     <ClCompile Include="ControlType.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GunProyectile.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotGunProyectile.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -400,12 +394,6 @@
     </ClInclude>
     <ClInclude Include="Constants.h">
       <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="GunProyectile.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotGunProyectile.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "LinearSC.h"
 #include "ProyectilePool.h"
 
-void LinearSC::shoot(ProyectileType prType)
+void LinearSC::shoot(ProyectileInfo prType)
 {
 	Vector2D spawndir(sin(turret_->getRotation() / 180.0*M_PI) * 100, -cos(turret_->getRotation() / 180.0*M_PI) * 100);
 	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x, turret_->getCenter().y + spawndir.y);
