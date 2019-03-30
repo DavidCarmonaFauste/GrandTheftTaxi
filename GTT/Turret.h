@@ -14,7 +14,7 @@ class AimComponent;
 class Turret : public Container
 {
 public:
-	Turret();
+	Turret(WeaponInfo w);
 	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
 	virtual void Shoot();
@@ -50,6 +50,7 @@ protected:
 	string animationpath_;
 	string reticulesprite_="";
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
+	ShootComponent* SPshC_;//codigo de disparo (disparo cargado)
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta

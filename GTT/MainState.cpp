@@ -1,11 +1,9 @@
 #include "MainState.h"
 #include "ProyectilePool.h"
 #include "Reticule.h"
-#include "Gun.h"
-#include "ShotGun.h"
-#include "MachineGun.h"
+#include "Turret.h"
 #include "ReloadingDisplay.h"
-#include "Sniper.h"
+
 
 MainState::MainState() {
 	// Tilemap
@@ -13,7 +11,7 @@ MainState::MainState() {
 	stage_.push_back(tilemap_);
 
 	// Vehicles
-	taxi_ = new Vehicle(100, 100, TAXI, DEFAULT_KEYS);
+	taxi_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
 	stage_.push_back(taxi_);
 	cameraFollow = new FollowGameObject(taxi_);
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);
@@ -31,8 +29,8 @@ MainState::MainState() {
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
 
-	taxi_->EquipTurret(new MachineGun());
-	taxi_->EquipTurret(new Sniper());
+	taxi_->EquipTurret(new Turret(MACHINEGUN));
+	taxi_->EquipTurret(new Turret(SNIPER));
 
 	UI_->addUIElement(new ReloadingDisplay(taxi_));
 }

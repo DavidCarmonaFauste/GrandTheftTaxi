@@ -5,15 +5,56 @@
 #include "AimComponent.h"
 #include "ShootIC.h"
 #include "ReloadInputComponent.h"
+#include "LinearSC.h"
+#include "SpreadSC.h"
 
-Turret::Turret()
+Turret::Turret(WeaponInfo w)
 {
 	animC_ = new Animation();
 	addRenderComponent(animC_);
 	lastTimeShot_ = -1000;
 	chargeprogress_ = SDL_GetTicks();
 	reloading_ = false;
-	automatic_ = false;
+
+	maxAmmo_ = w.maxAmmo;
+	cadence_ = w.cadence;
+	reloadTime_ = w.reloadTime;
+	perfRelIni_ = w.perfRelIni;
+	perfRelSeg_ = w.perfRelSeg;
+	chargeTime_ = w.chargeTime;
+	normalB = w.normalB;
+	specialB = w.specialB;
+	path_ = w.idlePath;
+	animationpath_ = w.shootPath;
+	reticulesprite_ = w.reticuleSprite;
+	height_ = w.height;
+	width_ = w.width;
+	automatic_ = w.automatic;
+	magazine_ = new stack<double>[maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
+
+
+	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
+	animC_->loadAnimation(path_, "default");
+	animC_->playAnimation("default");
+	switch (w.fireMode1) {
+		case LINEAR:
+			shC_ = new LinearSC(this);
+			break;
+		case SPREAD:
+			shC_ = new SpreadSC(this, w.prop1, w.prop2);
+			break;
+	}
+	switch (w.fireMode2) {
+	case LINEAR:
+		SPshC_ = new LinearSC(this);
+		break;
+	case SPREAD:
+		SPshC_ = new SpreadSC(this, w.prop1, w.prop2);
+		break;
+	}
 }
 
 void Turret::update(Uint32 deltaTime)
@@ -45,11 +86,13 @@ void Turret::AttachToVehicle(Vehicle * car)
 void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
-		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
-			if(SDL_GetTicks()- chargeprogress_ >= chargeTime_)
-				shC_->shoot(specialB);
-			else
+		if (SDL_GetTicks() - lastTimeShot_ >= cadence_) {
+			if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
+				SPshC_->shoot(specialB);
+			}
+			else {
 				shC_->shoot(normalB);
+			}
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
@@ -157,5 +200,7 @@ Turret::~Turret()
 {
 	delete followC_;
 	delete shC_;
+	delete SPshC_;
 	delete animC_;
+	delete magazine_;
 }
