@@ -11,6 +11,8 @@ public:
 	void setReloadingPercentage();
 	virtual ~ReloadingDisplay();
 	virtual void update(Uint32 deltaTime);
+	virtual void render(Uint32 deltaTime);
+	virtual bool isReloading();
 
 
 private:
