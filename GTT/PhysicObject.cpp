@@ -20,7 +20,6 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	fixtureDef_.shape = &shape_;
 	fixtureDef_.density = 1;
 	body_->CreateFixture(&fixtureDef_);
-
 }
 
 
@@ -59,4 +58,12 @@ const b2Vec2 PhysicObject::getOrigin() {
 
 b2Body * PhysicObject::getBody() {
 	return body_;
+}
+
+void PhysicObject::setSensor(bool sensor) {
+	body_->GetFixtureList()->SetSensor(sensor);
+}
+
+bool PhysicObject::isSensor() {
+	return body_->GetFixtureList()->IsSensor();
 }

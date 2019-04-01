@@ -13,17 +13,20 @@ MainState::MainState() {
 	// Vehicles
 	taxi_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
 	stage_.push_back(taxi_);
-	cameraFollow = new FollowGameObject(taxi_);
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);
+	cameraFollow_ = new FollowGameObject(taxi_);
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow_);
 
 	// Systems
-	moneySystem = new Money();
-	stage_.push_back(moneySystem);
+	moneySystem_ = new Money();
+	stage_.push_back(moneySystem_);
+	respawner_ = new Respawner(taxi_->getHealthComponent());
+	taxi_->addLogicComponent(respawner_);
+	Shop::getInstance();
 
 	// UI
 	UI_ = new UI();
 	taxi_->getHealthComponent()->registerObserver(UI_);
-	moneySystem->registerObserver(UI_);
+	moneySystem_->registerObserver(UI_);
 	stage_.push_back(UI_);
 
 	stage_.push_back(ProyectilePool::GetInstance());

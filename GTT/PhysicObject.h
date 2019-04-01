@@ -14,6 +14,9 @@ public:
 	const b2Vec2 getOrigin();
 	b2Body* getBody();
 
+	void setSensor(bool sensor);
+	bool isSensor();
+
 private:
 	b2Body* body_;
 	b2BodyDef bodyDef_;
