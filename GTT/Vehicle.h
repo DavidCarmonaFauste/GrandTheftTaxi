@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ControlType.h"
-
 #include "Car.h"
+#include "TaxiSoundManagerCP.h"
 
 using namespace std;
 
@@ -29,6 +29,7 @@ public:
 	
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
+	virtual TaxiSoundManagerCP* GetTxSoundManager();
 	virtual void EquipTurret(Turret* turret);
 	virtual void ChangeTurret();
 	Turret* getCurrentTurret();
@@ -48,11 +49,14 @@ protected:
 
 	ControlType* control_;
 
+	TaxiSoundManagerCP* smLC_;
+
 	static const int MAXTURRETS = 2;
 
 	
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
+
 	Turret* turrets_[MAXTURRETS];
 
 	int currentTurret_=0;

@@ -48,6 +48,10 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
+
+	//Sound
+	smLC_ = new TaxiSoundManagerCP(this);
+	this->addLogicComponent(smLC_);
 }
 
 
@@ -71,6 +75,11 @@ ReloadInputComponent * Vehicle::GetReloadIC()
 ShootIC * Vehicle::GetShootIC()
 {
 	return shIC_;
+}
+
+TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
+{
+	return smLC_;
 }
 
 void Vehicle::EquipTurret(Turret * turret)

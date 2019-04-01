@@ -36,6 +36,8 @@ MainState::MainState() {
 
 	taxi_->EquipTurret(new Turret(MACHINEGUN));
 	taxi_->EquipTurret(new Turret(SNIPER));
+
+
 }
 
 

@@ -62,6 +62,7 @@
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticSC.cpp" />
+    <ClCompile Include="TaxiSoundManagerCP.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticSC.h" />
+    <ClInclude Include="TaxiSoundManagerCP.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
