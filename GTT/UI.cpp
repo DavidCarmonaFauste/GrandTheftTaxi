@@ -37,6 +37,8 @@ void UI::render(Uint32 deltaTime) {
 
 void UI::update(Uint32 deltaTime)
 {
+	if (reloadDisplay_ != nullptr)
+		reloadDisplay_->setActive(reloadDisplay_->isReloading());
 	for (auto element : UIElements_) {
 		element->update(deltaTime);
 	}
@@ -45,6 +47,12 @@ void UI::update(Uint32 deltaTime)
 void UI::addUIElement(Container * c)
 {
 	UIElements_.push_back(c);
+}
+
+void UI::SetReloadingDisplay(ReloadingDisplay * r)
+{
+	reloadDisplay_ = r;
+	UIElements_.push_back(reloadDisplay_);
 }
 
 bool UI::receiveEvent(Event& e) {

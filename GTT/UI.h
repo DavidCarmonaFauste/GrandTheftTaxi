@@ -14,6 +14,7 @@ public:
 	virtual void render(Uint32 deltaTime) override;
 	virtual void update(Uint32 deltaTime) override;
 	virtual void addUIElement(Container* c);
+	virtual void SetReloadingDisplay(ReloadingDisplay* r);
 
 	virtual bool receiveEvent(Event& e) override;
 
