@@ -88,6 +88,9 @@ const int DMG_FREQUENCY = 1000;
 const double BUTTON_X_POSITION = 500.0;
 const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 
+//Enemy 1
+const int ENEMY_HP = 500;
+
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MAIN_STATE";
@@ -95,9 +98,20 @@ const string NAME_MAIN_STATE = "MAIN_STATE";
 //SOUNDS
 const enum soundId {
 	DEFAULT_SOUND,
+	TAXI_START,	//TAXI MOVEMENT
+	TAXI_IDLE,
+	TAXI_ACCELERATE_01,
+	TAXI_1,
+	TAXI_DECELERATE_10
 };
 const map<soundId, string> SOUND = {
-	{DEFAULT_SOUND, "../Assets/sounds/default.wav"}
+	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
+	{TAXI_START, "../Assets/sounds/Arranque.wav"},
+	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
+	{TAXI_1, "../Assets/sounds/Running1.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"}
+
 };
 
 //MUSIC
@@ -119,6 +133,7 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/bullet.png" , 25, 25, 10, 500, 50 };

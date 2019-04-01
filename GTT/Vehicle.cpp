@@ -7,11 +7,11 @@
 #include "Reticule.h"
 #include "InputMovement.h"
 
-Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
+Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
-	this->setPosition(Vector2D(x, y));
+	
 
 	// Sprite
 	sprite_ = new Animation();
@@ -61,14 +61,7 @@ Vehicle::~Vehicle() {
 	delete[]turrets_;
 }
 
-Health * Vehicle::getHealthComponent() {
-	return health_;
-}
 
-AimComponent * Vehicle::GetAimComponent()
-{
-	return aimC_;
-}
 
 ReloadInputComponent * Vehicle::GetReloadIC()
 {
@@ -109,20 +102,7 @@ Turret * Vehicle::getCurrentTurret()
 	return turrets_[currentTurret_];
 }
 
-void Vehicle::setPosition(const Vector2D & pos, bool force) {
-	GameObject::setPosition(pos);
 
-	if (force) {
-		b2Vec2 nextPos = b2Vec2(pos.x, pos.y) +
-			b2Vec2(phyO_->getOrigin().x * width_,
-				phyO_->getOrigin().y * height_);
-
-		nextPos = b2Vec2(nextPos.x * PHYSICS_SCALING_FACTOR,
-			nextPos.y * PHYSICS_SCALING_FACTOR);
-
-		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
-	}
-}
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {	
@@ -152,25 +132,14 @@ void Vehicle::render(Uint32 time) {
 }
 
 
-PhysicObject * Vehicle::GetPhyO()
-{
-	return phyO_;
-}
 
-float32 Vehicle::GetMaxSpeed()
-{
-	return maxSpeed_;
-}
 
 float32 Vehicle::GetMaxBackwardSpeed()
 {
 	return maxBackwardSpeed_;
 }
 
-float32 Vehicle::GetTurnSpeed()
-{
-	return turnSpeed_;
-}
+
 
 float32 Vehicle::GetAcceleration()
 {
