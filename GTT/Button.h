@@ -1,7 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "Sprite.h"
-#include "Resources.h"
+#include "Constants.h"
 
 class MouseClickIC;
 
@@ -11,7 +11,7 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	Button (CallBackOnClick cb, Resources::ButtonTypes buttonType);
+	Button (CallBackOnClick cb, ButtonTypes buttonType);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;

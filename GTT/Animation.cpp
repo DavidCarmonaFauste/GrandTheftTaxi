@@ -9,9 +9,9 @@ Animation::Animation() {
 }
 
 Animation::~Animation() {
-	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
-		delete it->second.first; it->second.first = nullptr;
-		delete it->second.second; it->second.second = nullptr;
+	for (auto animation:animations) {
+		delete animation.second.first;
+		delete animation.second.second;
 	}
 	animations.clear();
 
@@ -84,7 +84,7 @@ bool Animation::resumeAnimation()
 
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
-	if (currentAnim != "") {
+	if (currentAnim != "-1") {
 		renderAnimation(o, deltaTime);
 	}
 }
@@ -123,8 +123,8 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	animRect->x = currentFrame % animationColumns * animRect->w;
 	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
 
-	destRect->x = o->getPosition().getX();
-	destRect->y = o->getPosition().getY();
+	destRect->x = o->getPosition().x;
+	destRect->y = o->getPosition().y;
 	destRect->w = o->getWidth();
 	destRect->h = o->getHeight();
 	

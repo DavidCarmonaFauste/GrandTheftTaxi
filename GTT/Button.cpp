@@ -2,7 +2,7 @@
 #include "MouseClickIC.h"
 
 
-Button::Button (CallBackOnClick cb, Resources::ButtonTypes buttonType) {
+Button::Button (CallBackOnClick cb, ButtonTypes buttonType) {
 	callback = cb;
 
 	setPosition (Vector2D (BUTTON_X_POSITION, BUTTON_Y_POSITIONS[int (buttonType)]));

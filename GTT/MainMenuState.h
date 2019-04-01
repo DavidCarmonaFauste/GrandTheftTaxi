@@ -25,5 +25,6 @@ public:
 	MainMenuState();
 	virtual ~MainMenuState();
 
+	virtual void update (Uint32 deltaTime);
 };
 

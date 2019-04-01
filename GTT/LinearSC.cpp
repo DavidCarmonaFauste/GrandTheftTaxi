@@ -1,13 +1,12 @@
 #include "LinearSC.h"
-#include "ProjectilePool.h"
+#include "ProyectilePool.h"
 
-#define PI 3.14159265359
-
-
-void LinearSC::shoot()
+void LinearSC::shoot(ProyectileInfo prType)
 {
-	ProjectilePool::GetInstance()->addProjectile(turret_->getCenter(),
-		Vector2D(turret_->GetSpeed()*sin(turret_->getRotation()/180.0*PI), -turret_->GetSpeed()*cos(turret_->getRotation()/180.0*PI)),
-		turret_->GetProjectileType(), turret_->GetLifeTime(), turret_->GetDamage());
+	Vector2D spawndir(sin(turret_->getRotation() / 180.0*M_PI) * 100, -cos(turret_->getRotation() / 180.0*M_PI) * 100);
+	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x, turret_->getCenter().y + spawndir.y);
+
+	ProyectilePool::GetInstance()->addProyectile(spawnpoint,
+		Vector2D(sin(turret_->getRotation()/180.0*M_PI), -cos(turret_->getRotation()/180.0*M_PI)), prType);
 }
 

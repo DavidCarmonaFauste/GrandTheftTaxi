@@ -330,3 +330,5 @@ ASALocalRun/
 bin/GTTDebug.exe
 bin/GTTDebug.ilk
 bin/GTTDebug.pdb
+bin/GTTDebug.lib
+bin/GTTDebug.bsc

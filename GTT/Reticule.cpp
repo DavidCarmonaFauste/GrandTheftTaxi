@@ -1,15 +1,19 @@
 #include "Reticule.h"
 #include "Animation.h"
 #include "CursorLC.h"
-#include <map>
 
 Reticule* Reticule::instance_ = nullptr;
 
 Reticule::Reticule()
 {
-	animations_["gun"] = PATH_RETICULE;//tantos como distintos sprites de reticula;
+	animations_["gun"] = "../Assets/sprites/gunreticule.png";//tantos como distintos sprites de reticula;
+	animations_["shotgun"] = "../Assets/sprites/shotgunreticule.png";
+	animations_["machinegun"] = "../Assets/sprites/machinegunreticule.png";
+	animations_["sniper"]= "../Assets/sprites/sniperreticule.png";
+
 	animC_ = new Animation();
 	cursorC_ = new CursorLC();
+	animC_->setCamera(UI_CAMERA);
 	addRenderComponent(animC_);
 	addLogicComponent(cursorC_);
 	for (auto o : animations_) {
@@ -30,4 +34,9 @@ Reticule::~Reticule()
 void Reticule::ChangeReticule(string ret)
 {
 	if (!animC_->playAnimation(ret)) cout << "ChangeReticule error, reticule: " + ret + " doesnt exist";
+}
+
+void Reticule::update(Uint32 time)
+{
+	Container::update(time);
 }

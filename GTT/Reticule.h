@@ -1,6 +1,5 @@
 #pragma once
 #include "Container.h"
-#include <map>
 
 class CursorLC;
 class Animation;
@@ -19,6 +18,8 @@ public:
 	}
 	virtual ~Reticule();
 	virtual void ChangeReticule(string ret);
+	virtual void update(Uint32 time);
+
 
 private:
 	Reticule();

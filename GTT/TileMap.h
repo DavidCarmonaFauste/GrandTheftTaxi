@@ -1,8 +1,5 @@
 #pragma once
 
-#include <vector>
-#include <map>
-
 #include "Container.h"
 #include "Tile.h"
 #include <tmxlite/Map.hpp>

@@ -4,8 +4,11 @@
 
 MainMenuState::MainMenuState()
 {
-	stage_.push_back (new Button (mainStateCallback, Resources::MainMenuPlay));
-	stage_.push_back (new Button (exitGameCallback, Resources::MainMenuExit));
+	Game::getInstance ()->getCamera (GAME_CAMERA)->setZoom (1.0, false);
+	Game::getInstance ()->getCamera (UI_CAMERA)->setZoom (1.0, false);
+
+	stage_.push_back (new Button (mainStateCallback, MainMenuPlay));
+	stage_.push_back (new Button (exitGameCallback, MainMenuExit));
 }
 
 
@@ -17,4 +20,11 @@ MainMenuState::~MainMenuState()
 		stage_.pop_back ();
 	}
 
+}
+
+void MainMenuState::update (Uint32 deltaTime) {
+	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (false);
+	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
+
+	GameState::update (deltaTime);
 }

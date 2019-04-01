@@ -1,48 +1,42 @@
 #include "SoundManager.h"
 
-
-
 SoundManager::SoundManager() {
 	// Load the music files from the resources sheet
-	for (int i = 0; i < Resources::getInstance()->music_.size(); i++) {
-		loadMusic(Resources::getInstance()->music_[i].path,
-					Resources::getInstance()->music_[i].id);
+	for (auto music : MUSIC) {
+		loadMusic(music.second, music.first);
 	}
 	
 	// Load the sound files from the resources sheet
-	for (int i = 0; i < Resources::getInstance()->sounds_.size(); i++) {
-		loadSound(Resources::getInstance()->sounds_[i].path,
-			Resources::getInstance()->sounds_[i].id);
+	for (auto sound : SOUND) {
+		loadSound(sound.second, sound.first);
 	}
 }
 
-
 SoundManager::~SoundManager() {
-	for (map<Resources::MusicId, Mix_Music*>::iterator it = music_.begin(); it != music_.end(); it++) {
-		Mix_FreeMusic(it->second);
-		it->second = nullptr;
+	for (auto music : loadedMusic_) {
+		Mix_FreeMusic(music.second);
+		music.second = nullptr;
 	}
-	music_.clear();
+	loadedMusic_.clear();
 
-	for (map<Resources::SoundId, Mix_Chunk*>::iterator it = sound_.begin(); it != sound_.end(); it++) {
-		Mix_FreeChunk(it->second);
-		it->second = nullptr;
+	for (auto sound : loadedSounds_) {
+		Mix_FreeChunk(sound.second);
+		sound.second = nullptr;
 	}
-	sound_.clear();
+	loadedSounds_.clear();
 }
 
 
 // NO NEED TO USE THIS DIRECTLY,
 // USE THE RESOURCES SHEET INSTEAD !!!
-bool SoundManager::loadSound(string path, Resources::SoundId id) {
-	sound_[id] = Mix_LoadWAV(path.c_str());
+bool SoundManager::loadSound(string path, soundId id) {
+	loadedSounds_[id] = Mix_LoadWAV(path.c_str());
 
-	if (sound_[id] != nullptr) return true;
-	else return false;
+	return loadedSounds_[id] != nullptr;
 }
 
-int SoundManager::playSound(Resources::SoundId id, int loops) {
-	return Mix_PlayChannel(-1, sound_[id], loops);
+int SoundManager::playSound(soundId id, int loops) {
+	return Mix_PlayChannel(-1, loadedSounds_[id], loops);
 }
 
 void SoundManager::pauseSound(int channel) {
@@ -57,19 +51,18 @@ bool SoundManager::isSoundPlaying(int channel) {
 	return Mix_Playing(channel);
 }
 
-bool SoundManager::soundExists(Resources::SoundId id) {
-	return sound_.find(id) != sound_.end();
+bool SoundManager::soundExists(soundId id) {
+	return loadedSounds_.find(id) != loadedSounds_.end();
 }
 
-bool SoundManager::loadMusic(string path, Resources::MusicId id) {
-	music_[id] = Mix_LoadMUS(path.c_str());
+bool SoundManager::loadMusic(string path, musicId id) {
+	loadedMusic_[id] = Mix_LoadMUS(path.c_str());
 
-	if (music_[id] != nullptr) return true;
-	else return false;
+	return loadedMusic_[id] != nullptr;
 }
 
-void SoundManager::playMusic(Resources::MusicId id, int loops) {
-	Mix_PlayMusic(music_[id], loops);
+void SoundManager::playMusic(musicId id, int loops) {
+	Mix_PlayMusic(loadedMusic_[id], loops);
 }
 
 void SoundManager::pauseMusic() {
@@ -84,6 +77,6 @@ bool SoundManager::isMusicPlaying() {
 	return Mix_PlayingMusic();
 }
 
-bool SoundManager::musicExists(Resources::MusicId id) {
-	return music_.find(id) != music_.end();
+bool SoundManager::musicExists(musicId id) {
+	return loadedMusic_.find(id) != loadedMusic_.end();
 }

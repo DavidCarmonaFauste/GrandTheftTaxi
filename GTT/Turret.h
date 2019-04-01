@@ -2,7 +2,7 @@
 #include "Container.h"
 #include"FollowGameObject.h"
 #include "Vehicle.h"
-#include "ProjectilePool.h"
+#include "ProyectilePool.h"
 #include <stack>
 
 class Animation;
@@ -14,40 +14,48 @@ class AimComponent;
 class Turret : public Container
 {
 public:
-	Turret();
+	Turret(WeaponInfo w);
 	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
-	projectileType GetProjectileType();
 	virtual void Shoot();
 	virtual void Reload();
+	virtual void PerfectReload();
+	virtual void CancelReload();
 	virtual void InitiateReload();
-	virtual int GetSpeed();
-	virtual double GetDamage();
 	virtual int GetCadence();
 	virtual int GetAmmo();
-	virtual double GetLifeTime();
+	virtual int GetMaxAmmo();
+	virtual double GetReloadPercentage();
+	virtual double GetPerfReloadSeg();
+	virtual double GetPerfReloadIni();
+	virtual void ResetChargeProgress();
+	virtual string GetReticule();
+	virtual bool isReloading();
+	virtual bool isAutomatic();
 	virtual ~Turret();
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
 	int maxAmmo_;//capacidad del cargador
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
-	int speed_;//velocidad del proyectil
-	int lastTimeReloaded_;//momento en el que se pulso el boton de recarga
+	int reloadpressedTime_;//momento en el que se pulso el boton de recarga
 	int lastTimeShot_;//momento en el que se disparo la ultima bala
-	double damage_;//daño de cada proyectil
-	double lifeTime_; //tiempo de vida del proyectil
+	int chargeTime_;//tiempo que tarda en cargar una bala mas potente
+	int chargeprogress_;//tiempo desde que se dejo de usar la torreta (recargar o disparar)
+	double perfRelSeg_;//segmento del tiempo de recarga en el que entra en accion la recarga perfecta (en tanto por 1)
+	double perfRelIni_;//momento dentro del tiempo de recarga en el que empieza el segmento de recarga perfecta (en tanto por 1)
 	bool reloading_;//indica si se esta recargando en el momento
-	double shooting_ = -1; //indica si se está disparando (para AirStrike)
-	double waitingShotTime_ = -1; //tiempo que tarda en disparar
-	projectileType prType_;//tipo de proyectil
+	bool automatic_;//indica si la torreta es de disparo automatico
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
-	AimComponent* aimC_;//forma de apuntado, se lo pasa el vehiculo al equiparse
+	string reticulesprite_="";
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
+	ShootComponent* SPshC_;//codigo de disparo (disparo cargado)
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta
+	ProyectileInfo normalB;
+	ProyectileInfo specialB;
 
 };
 

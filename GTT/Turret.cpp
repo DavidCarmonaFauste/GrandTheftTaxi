@@ -3,16 +3,58 @@
 #include "ShootComponent.h"
 #include "Reticule.h"
 #include "AimComponent.h"
-#include <math.h>
-#define PI 3.14159265359
+#include "ShootIC.h"
+#include "ReloadInputComponent.h"
+#include "LinearSC.h"
+#include "SpreadSC.h"
 
-Turret::Turret()
+Turret::Turret(WeaponInfo w)
 {
 	animC_ = new Animation();
 	addRenderComponent(animC_);
-	lastTimeReloaded_ = -reloadTime_;
-	lastTimeShot_ = -cadence_;
+	lastTimeShot_ = -1000;
+	chargeprogress_ = SDL_GetTicks();
 	reloading_ = false;
+
+	maxAmmo_ = w.maxAmmo;
+	cadence_ = w.cadence;
+	reloadTime_ = w.reloadTime;
+	perfRelIni_ = w.perfRelIni;
+	perfRelSeg_ = w.perfRelSeg;
+	chargeTime_ = w.chargeTime;
+	normalB = w.normalB;
+	specialB = w.specialB;
+	path_ = w.idlePath;
+	animationpath_ = w.shootPath;
+	reticulesprite_ = w.reticuleSprite;
+	height_ = w.height;
+	width_ = w.width;
+	automatic_ = w.automatic;
+	magazine_ = new stack<double>[maxAmmo_];
+	for (int i = 0; i < maxAmmo_; i++) {
+		magazine_->push(1.0);
+	}
+
+
+	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
+	animC_->loadAnimation(path_, "default");
+	animC_->playAnimation("default");
+	switch (w.fireMode1) {
+		case LINEAR:
+			shC_ = new LinearSC(this);
+			break;
+		case SPREAD:
+			shC_ = new SpreadSC(this, w.prop1, w.prop2);
+			break;
+	}
+	switch (w.fireMode2) {
+	case LINEAR:
+		SPshC_ = new LinearSC(this);
+		break;
+	case SPREAD:
+		SPshC_ = new SpreadSC(this, w.prop1, w.prop2);
+		break;
+	}
 }
 
 void Turret::update(Uint32 deltaTime)
@@ -20,48 +62,48 @@ void Turret::update(Uint32 deltaTime)
 	Container::update(deltaTime);
 	if (reloading_) {
 		Reload();
+		ResetChargeProgress();
 	} 
-	if (shooting_ != -1 && SDL_GetTicks() > shooting_ + waitingShotTime_) {
-		Shoot();
-		cout << "shoot" << endl;
-		shooting_ = -1;
-	}
-
 }
 
 void Turret::AttachToVehicle(Vehicle * car)
 {
 	car_ = car;
 
-	followC_ = new FollowGameObject(car_);
-	aimC_ = car_->GetAimComponent();
+	followC_ = new FollowGameObject(car_);;
+	car->GetShootIC()->ChangeInputMode(automatic_);
 
-	addLogicComponent(aimC_);
+	addLogicComponent(car_->GetAimComponent());
+	addInputComponent(car_->GetReloadIC());
+	addInputComponent(car_->GetShootIC());
 	addLogicComponent(followC_);
+	addLogicComponent(car_->GetShootIC());
+
 }
 		
-projectileType Turret::GetProjectileType()
-{
-	return prType_;
-}
 
-void Turret::Shoot()//tiempo desde que se disparo la ultima bala
+
+void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
-		if (SDL_GetTicks()-lastTimeShot_ >= cadence_) {
-			shC_->shoot();
+		if (SDL_GetTicks() - lastTimeShot_ >= cadence_) {
+			if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
+				SPshC_->shoot(specialB);
+			}
+			else {
+				shC_->shoot(normalB);
+			}
 			magazine_->pop();
 			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
+			ResetChargeProgress();
 		}
 	}
 }
 
 void Turret::Reload()
 {
-	cout << "reloading" << endl;
-	if (SDL_GetTicks() - lastTimeReloaded_ >= reloadTime_) {
-		cout << "reloaded" << endl;
+	if (SDL_GetTicks() - reloadpressedTime_ >= reloadTime_) {
 		while (magazine_->size() != maxAmmo_) {
 			magazine_->push(1.0);
 		}
@@ -69,25 +111,36 @@ void Turret::Reload()
 	}
 }
 
+void Turret::PerfectReload()
+{
+	while (magazine_->size() != maxAmmo_) {
+		magazine_->push(2.0);
+	}
+	reloading_ = false;
+}
+
+void Turret::CancelReload()
+{
+	reloading_ = false;
+}
+
+
+
 void Turret::InitiateReload()
 {
-	if (!reloading_) {
+	if (!reloading_ && magazine_->size()!=maxAmmo_) {
 		reloading_ = true;
-		lastTimeReloaded_ = SDL_GetTicks();
+		reloadpressedTime_ = SDL_GetTicks();
 	}
+	else {
+		if (GetReloadPercentage() >= perfRelIni_ && GetReloadPercentage() <= perfRelIni_ + perfRelSeg_)
+			PerfectReload();
+		else
+			CancelReload();
+	}
+	
 }
 
-
-
-int Turret::GetSpeed()
-{
-	return this->speed_;
-}
-
-double Turret::GetDamage()
-{
-	return damage_;
-}
 
 int Turret::GetCadence()
 {
@@ -99,15 +152,55 @@ int Turret::GetAmmo()
 	return magazine_->size();
 }
 
-
-double Turret::GetLifeTime()
+int Turret::GetMaxAmmo()
 {
-	return lifeTime_;
+	return maxAmmo_;
+}
+
+double Turret::GetReloadPercentage()
+{
+	if (reloading_) {
+		return (double)(SDL_GetTicks() - reloadpressedTime_) / (double)reloadTime_;
+	}
+	else if(GetAmmo()>0) return 1;
+	else return 0;
+}
+
+double Turret::GetPerfReloadSeg()
+{
+	return perfRelSeg_;
+}
+
+double Turret::GetPerfReloadIni()
+{
+	return perfRelIni_;
+}
+
+void Turret::ResetChargeProgress()
+{
+	chargeprogress_ = SDL_GetTicks();
+}
+
+string Turret::GetReticule()
+{
+	return reticulesprite_;
+}
+
+bool Turret::isReloading()
+{
+	return reloading_;
+}
+
+bool Turret::isAutomatic()
+{
+	return automatic_;
 }
 
 Turret::~Turret()
 {
 	delete followC_;
 	delete shC_;
+	delete SPshC_;
 	delete animC_;
+	delete magazine_;
 }

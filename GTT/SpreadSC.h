@@ -8,7 +8,8 @@ class SpreadSC : public ShootComponent
 {
 public:
 	SpreadSC(Turret* turret, double dispersionAngle, int pellets);
-	virtual void shoot();
+	virtual void shoot(ProyectileInfo prType);
+	virtual void changeProperties(double prop1, int prop2);
 	virtual ~SpreadSC() {};
 protected:
 	double dispersionAngle_;

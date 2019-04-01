@@ -58,8 +58,8 @@ const SDL_Rect * Sprite::getClipRect() {
 
 void Sprite::render(GameObject * o, Uint32 deltaTime) {
 	if (autoPos_) {
-		rect_->x = o->getPosition().getX();
-		rect_->y = o->getPosition().getY();
+		rect_->x = o->getPosition().x;
+		rect_->y = o->getPosition().y;
 	}
 
 	if (autoSize_) {
@@ -68,7 +68,6 @@ void Sprite::render(GameObject * o, Uint32 deltaTime) {
 	}
 
 	Game::getInstance()->getCamera(cam_)->renderTexture(texture_, *rect_, clip_, o->getRotation());
-					
 }
 
 void Sprite::setCamera(cameraType cam) {
