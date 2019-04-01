@@ -13,6 +13,7 @@ public:
 	MainState();
 	virtual ~MainState();
 
+	virtual void update (Uint32 deltaTime);
 private:
 	// Tilemap
 	TileMap *tilemap_;

@@ -66,6 +66,7 @@ const struct WeaponInfo {
 
 };
 
+enum ButtonTypes { MainMenuPlay, MainMenuExit }; 
 
 
 //EDITABLE ----------------------------------------------------------------------------------------------------------
@@ -83,6 +84,9 @@ const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
+
+const double BUTTON_X_POSITION = 500.0;
+const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
@@ -128,6 +132,9 @@ const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/e
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,LINEAR, LINEAR, true};
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, LINEAR, LINEAR, false };
 
+//Buttons  ---- to be used along with the ButtonType enum to pick texture
+const string PATH_BUTTONS[] = { "../Assets/sprites/button-play.png",
+								"../Assets/sprites/button-exit.png"};
 
 
 

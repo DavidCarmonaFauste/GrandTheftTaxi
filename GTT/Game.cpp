@@ -20,7 +20,7 @@ Game::Game() {
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
 

@@ -21,13 +21,19 @@ void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * 
 	SDL_Rect transposedRect = SDL_Rect();
 	int width = 0, height = 0;
 	SDL_RenderGetLogicalSize(Game::getInstance()->getRenderer(), &width, &height);
-
-	transposedRect.w = (int)(((double)dest.w / (double)cameraRect_->w) * width);
-	transposedRect.h = (int)(((double)dest.h / (double)cameraRect_->h) * height);
-	transposedRect.x = (double)(dest.x - cameraRect_->x) * zoom_ / ((double)cameraRect_->w / width);
-	transposedRect.y = (double)(dest.y - cameraRect_->y) * zoom_ / ((double)cameraRect_->h / height);
-	texture->render(transposedRect, angle, clip);
+	
+	if (!centered) {
+		texture->render (dest, angle, clip);
+	}
+	else {
+		transposedRect.w = (int)(((double)dest.w / (double)cameraRect_->w) * width);
+		transposedRect.h = (int)(((double)dest.h / (double)cameraRect_->h) * height);
+		transposedRect.x = (double)(dest.x - cameraRect_->x) * zoom_ / ((double)cameraRect_->w / width);
+		transposedRect.y = (double)(dest.y - cameraRect_->y) * zoom_ / ((double)cameraRect_->h / height);
+		texture->render(transposedRect, angle, clip);
+	}
 }
+	
 
 void Camera::setPosition(const Vector2D &pos, bool force) {
 	cameraRect_->x = pos.x;
@@ -58,6 +64,7 @@ void Camera::setHeight(double height) {
 
 void Camera::setZoom(float zoom, bool center) {
 	zoom_ = zoom;
+	centered = center;
 
 	cameraRect_->w = (int)(width_ * (1 / zoom_));
 	cameraRect_->h = (int)(height_ * (1 / zoom_));
@@ -66,8 +73,20 @@ void Camera::setZoom(float zoom, bool center) {
 		cameraRect_->x -= (cameraRect_->w - width_) / 2;
 		cameraRect_->y -= (cameraRect_->h - height_) / 2;
 	}
+	else {
+		cameraRect_->x = 0;
+		cameraRect_->y = 0;
+	}
+}
+
+void Camera::setCentered (bool center) {
+	centered = center;
 }
 
 float Camera::getZoom() {
 	return zoom_;
+}
+
+bool Camera::getCentered () {
+	return centered;
 }
