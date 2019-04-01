@@ -118,7 +118,7 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 5.0f, 1.0f, 0.8f };
 
 //Proyectiles
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/bullet.png" , 25, 25, 10, 500, 50 };

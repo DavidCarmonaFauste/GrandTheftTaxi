@@ -3,6 +3,7 @@
 #include "Reticule.h"
 #include "Turret.h"
 #include "ReloadingDisplay.h"
+#include "AmmoDisplay.h"
 
 
 MainState::MainState() {
@@ -26,6 +27,7 @@ MainState::MainState() {
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
 	UI_->SetReloadingDisplay(new ReloadingDisplay(taxi_));
+	UI_->addUIElement(new AmmoDisplay(taxi_));
 
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
