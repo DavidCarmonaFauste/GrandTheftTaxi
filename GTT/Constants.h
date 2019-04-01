@@ -88,6 +88,9 @@ const int DMG_FREQUENCY = 1000;
 const double BUTTON_X_POSITION = 500.0;
 const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 
+//Enemy 1
+const int ENEMY_HP = 500;
+
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MAIN_STATE";
@@ -119,6 +122,7 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/bullet.png" , 25, 25, 10, 500, 50 };

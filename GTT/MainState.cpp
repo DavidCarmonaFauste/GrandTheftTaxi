@@ -10,11 +10,15 @@ MainState::MainState() {
 	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
 	stage_.push_back(tilemap_);
 
-	// Vehicles
+	// Taxi
 	taxi_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
 	stage_.push_back(taxi_);
 	cameraFollow = new FollowGameObject(taxi_);
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);
+	// Enemy1
+	enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
+	stage_.push_back(enemy1_);
+
 
 	// Systems
 	moneySystem = new Money();
