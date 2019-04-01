@@ -95,9 +95,20 @@ const string NAME_MAIN_STATE = "MAIN_STATE";
 //SOUNDS
 const enum soundId {
 	DEFAULT_SOUND,
+	TAXI_START,	//TAXI MOVEMENT
+	TAXI_IDLE,
+	TAXI_ACCELERATE_01,
+	TAXI_1,
+	TAXI_DECELERATE_10
 };
 const map<soundId, string> SOUND = {
-	{DEFAULT_SOUND, "../Assets/sounds/default.wav"}
+	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
+	{TAXI_START, "../Assets/sounds/Arranque.wav"},
+	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
+	{TAXI_1, "../Assets/sounds/Running1.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"}
+
 };
 
 //MUSIC
