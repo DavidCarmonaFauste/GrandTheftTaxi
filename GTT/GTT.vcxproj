@@ -24,9 +24,11 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Font.cpp" />
@@ -61,6 +63,7 @@
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticSC.cpp" />
+    <ClCompile Include="TaxiSoundManagerCP.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -78,10 +81,12 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
+    <ClInclude Include="Car.h" />
     <ClInclude Include="ChangeWeaponIC.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
@@ -117,6 +122,7 @@
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticSC.h" />
+    <ClInclude Include="TaxiSoundManagerCP.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />

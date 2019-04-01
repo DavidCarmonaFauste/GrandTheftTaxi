@@ -39,7 +39,7 @@ public:
 
 	// state setters
 	void setGameEnd () { exit_ = true; }
-	void setGameStart () { gmStMachine_->setState (NAME_MAIN_STATE); }
+	void setGameStart () { gmStMachine_->setState (NAME_MAIN_STATE);}
 
 	void init();
 
