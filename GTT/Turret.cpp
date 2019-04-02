@@ -70,7 +70,7 @@ void Turret::AttachToVehicle(Vehicle * car)
 {
 	car_ = car;
 
-	followC_ = new FollowGameObject(car_);;
+	followC_ = new FollowGameObject(car_);
 	car->GetShootIC()->ChangeInputMode(automatic_);
 
 	addLogicComponent(car_->GetAimComponent());

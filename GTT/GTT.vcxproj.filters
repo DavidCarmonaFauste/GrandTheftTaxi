@@ -213,9 +213,6 @@
     <ClCompile Include="MpegState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="AmmoDisplay.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="TaxiSoundManagerCP.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -224,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="AmmoDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

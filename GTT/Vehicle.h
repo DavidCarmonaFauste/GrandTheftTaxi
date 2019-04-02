@@ -51,7 +51,7 @@ protected:
 
 	TaxiSoundManagerCP* smLC_;
 
-	static const int MAXTURRETS = 2;
+	static const int MAXTURRETS = 4;
 
 	
 	ReloadInputComponent* reIC_;

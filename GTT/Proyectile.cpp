@@ -42,6 +42,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 	animC_->loadAnimation(p.idlePath, "default");
 	animC_->playAnimation("default");
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
+	phyO_->getBody()->GetFixtureList()->SetSensor(true);
 	addLogicComponent(phyO_);
 }
 

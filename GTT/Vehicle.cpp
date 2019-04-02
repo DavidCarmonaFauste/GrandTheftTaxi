@@ -84,15 +84,13 @@ TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
 
 void Vehicle::EquipTurret(Turret * turret)
 {
-	if (turrets_[currentTurret_] == nullptr) {
+	int i = 0;
+	while (i<MAXTURRETS && turrets_[i] != nullptr)
+		i++;
+	if (i < MAXTURRETS) {
+		currentTurret_ = i;
 		turrets_[currentTurret_] = turret;
 		Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
-		turrets_[currentTurret_]->AttachToVehicle(this);
-
-	}
-	else if (currentTurret_ < MAXTURRETS - 1 && turrets_[currentTurret_ + 1] == nullptr) {
-		currentTurret_++;
-		turrets_[currentTurret_] = turret;
 		turrets_[currentTurret_]->AttachToVehicle(this);
 	}
 	else {
@@ -101,7 +99,11 @@ void Vehicle::EquipTurret(Turret * turret)
 }
 void Vehicle::ChangeTurret()
 {
+	turrets_[currentTurret_]->CancelReload();
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
+	while (turrets_[currentTurret_] == nullptr) {
+		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
+	}
 	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 	turrets_[currentTurret_]->ResetChargeProgress();

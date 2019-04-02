@@ -40,8 +40,8 @@ void GameStateMachine::initStates() {
 
 	MpegState* intro = static_cast<MpegState*>(STATES_[NAME_MPEG_STATE]);
 	intro->setVideoId(INTRO_VIDEO);
-	setState(NAME_MPEG_STATE);
+	//setState(NAME_MPEG_STATE);
 
 	//setState(NAME_MAINMENU_STATE);
-	//setState(NAME_MAIN_STATE);
+	setState(NAME_MAIN_STATE);
 }
