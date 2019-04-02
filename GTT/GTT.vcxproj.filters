@@ -213,11 +213,14 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="TaxiSoundManagerCP.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+    <ClCompile Include="VideoManager.cpp">
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
-    <ClCompile Include="AmmoDisplay.cpp">
-      <Filter>Archivos de origen\UI</Filter>
+    <ClCompile Include="MpegState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,11 +392,14 @@
     <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="TaxiSoundManagerCP.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="VideoManager.h">
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="AmmoDisplay.h">
-      <Filter>Archivos de encabezado\UI</Filter>
+    <ClInclude Include="MpegState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

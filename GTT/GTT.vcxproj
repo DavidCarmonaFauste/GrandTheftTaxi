@@ -39,6 +39,7 @@
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -46,7 +47,7 @@
     <ClCompile Include="MainState.cpp" />
     <ClCompile Include="Money.cpp" />
     <ClCompile Include="MoneyDisplay.cpp" />
-    <ClCompile Include="MouseClickIC.cpp" />
+    <ClCompile Include="MpegState.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
@@ -72,6 +73,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AimAtCursorAC.h" />
@@ -99,13 +101,14 @@
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Money.h" />
     <ClInclude Include="MoneyDisplay.h" />
-    <ClInclude Include="MouseClickIC.h" />
+    <ClInclude Include="MpegState.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicObject.h" />
@@ -131,6 +134,7 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -190,8 +194,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)ffmpeg\include\libswscale;$(SolutionDir)ffmpeg\include\libswresample;$(SolutionDir)ffmpeg\include\libpostproc;$(SolutionDir)ffmpeg\include\libavutil;$(SolutionDir)ffmpeg\include\libavformat;$(SolutionDir)ffmpeg\include\libavfilter;$(SolutionDir)ffmpeg\include\libavdevice;$(SolutionDir)ffmpeg\include\libavcodec;D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)ffmpeg\lib;D:\Sergio\Projects\OPENED - Grand Theft Taxi\tmxlite\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -211,10 +215,12 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <BrowseInformation>true</BrowseInformation>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;Strmiids.lib;Quartz.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Bscmake>
       <PreserveSbr>true</PreserveSbr>

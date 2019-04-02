@@ -96,7 +96,16 @@ const int ENEMY_HP = 500;
 
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
-const string NAME_MAIN_STATE = "MAIN_STATE";
+const string NAME_MAIN_STATE = "MainState";
+//const string NAME_INTRO_STATE = "IntroState";
+
+//VIDEOS
+const enum videoId {
+	INTRO_STATE
+};
+const map <videoId, string> VIDEOS{
+	{INTRO_STATE, "../Assets/videos/YuzuGames_Intro.mpg"}
+};
 
 //SOUNDS
 const enum soundId {
