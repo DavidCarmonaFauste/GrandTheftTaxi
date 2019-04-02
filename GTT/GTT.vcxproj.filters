@@ -401,11 +401,11 @@
     <ClInclude Include="AmmoDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
-    <ClInclude Include="IntroState.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
-    </ClInclude>
     <ClInclude Include="MouseClickIC.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TaxiSoundManagerCP.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
