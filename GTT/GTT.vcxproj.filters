@@ -147,9 +147,6 @@
     <ClCompile Include="ShootIC.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Proyectile.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
@@ -159,26 +156,11 @@
     <ClCompile Include="ProyectilePool.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
-    <ClCompile Include="AirStrike.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Flame_thrower.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="MachineGun.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotGun.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="SpreadSC.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
     <ClCompile Include="StaticSC.cpp">
       <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Sniper.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="AimAtCursorAC.cpp">
       <Filter>Archivos de origen\Components</Filter>
@@ -219,10 +201,16 @@
     <ClCompile Include="ControlType.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GunProyectile.cpp">
+    <ClCompile Include="Button.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="ShotGunProyectile.cpp">
+    <ClCompile Include="MouseClickIC.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="VideoManager.cpp">
@@ -323,9 +311,6 @@
     <ClInclude Include="CursorLC.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="LinearSC.h">
       <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
@@ -346,21 +331,6 @@
     </ClInclude>
     <ClInclude Include="StaticSC.h">
       <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="AirStrike.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Flame_thrower.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="MachineGun.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotGun.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="Sniper.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="AimComponent.h">
       <Filter>Archivos de encabezado\Components</Filter>
@@ -410,10 +380,16 @@
     <ClInclude Include="Constants.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="GunProyectile.h">
+    <ClInclude Include="Button.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="ShotGunProyectile.h">
+    <ClInclude Include="MouseClickIC.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="VideoManager.h">

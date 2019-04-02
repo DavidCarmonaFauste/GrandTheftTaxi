@@ -37,6 +37,10 @@ public:
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
 
+	// state setters
+	void setGameEnd () { exit_ = true; }
+	void setGameStart () { gmStMachine_->setState (NAME_MAIN_STATE);}
+
 	void init();
 
 private:

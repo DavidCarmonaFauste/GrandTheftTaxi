@@ -20,21 +20,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AimAtCursorAC.cpp" />
-    <ClCompile Include="AirStrike.cpp" />
+    <ClCompile Include="AmmoDisplay.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
-    <ClCompile Include="Flame_thrower.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
-    <ClCompile Include="Gun.cpp" />
-    <ClCompile Include="GunProyectile.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
@@ -42,7 +42,6 @@
     <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
-    <ClCompile Include="MachineGun.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MainState.cpp" />
@@ -61,13 +60,11 @@
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
-    <ClCompile Include="ShotGun.cpp" />
-    <ClCompile Include="ShotGunProyectile.cpp" />
-    <ClCompile Include="Sniper.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StaticSC.cpp" />
+    <ClCompile Include="TaxiSoundManagerCP.cpp" />
     <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -81,16 +78,18 @@
   <ItemGroup>
     <ClInclude Include="AimAtCursorAC.h" />
     <ClInclude Include="AimComponent.h" />
-    <ClInclude Include="AirStrike.h" />
+    <ClInclude Include="AmmoDisplay.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
+    <ClInclude Include="Car.h" />
     <ClInclude Include="ChangeWeaponIC.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Events.h" />
-    <ClInclude Include="Flame_thrower.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="Font.h" />
@@ -98,8 +97,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
-    <ClInclude Include="Gun.h" />
-    <ClInclude Include="GunProyectile.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
@@ -107,7 +104,6 @@
     <ClInclude Include="IntroState.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
-    <ClInclude Include="MachineGun.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MainState.h" />
     <ClInclude Include="Money.h" />
@@ -125,13 +121,11 @@
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
-    <ClInclude Include="ShotGun.h" />
-    <ClInclude Include="ShotGunProyectile.h" />
-    <ClInclude Include="Sniper.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StaticSC.h" />
+    <ClInclude Include="TaxiSoundManagerCP.h" />
     <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
@@ -147,7 +141,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

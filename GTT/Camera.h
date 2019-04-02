@@ -24,11 +24,14 @@ public:
 	virtual void setHeight(double height) override;
 
 	void setZoom(float zoom, bool center = true);
+	void setCentered (bool center);
 	float getZoom();
+	bool getCentered ();
 
 private:
 	SDL_Rect* cameraRect_;
 
 	float zoom_;
+	bool centered = true;
 };
 

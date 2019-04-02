@@ -49,7 +49,6 @@ void HealthDisplay::setHealthPercentage(float healthPercentage) {
 
 	bar->setSize(getWidth() * healthPercentage_, getHeight());
 	bar->setClipRect(bar_clip);
-	cout << healthPercentage_ << endl;
 	
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");
 }

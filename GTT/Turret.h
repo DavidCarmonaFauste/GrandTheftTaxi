@@ -14,7 +14,7 @@ class AimComponent;
 class Turret : public Container
 {
 public:
-	Turret();
+	Turret(WeaponInfo w);
 	virtual void update(Uint32 deltaTime);
 	virtual void AttachToVehicle(Vehicle* car);
 	virtual void Shoot();
@@ -28,6 +28,7 @@ public:
 	virtual double GetReloadPercentage();
 	virtual double GetPerfReloadSeg();
 	virtual double GetPerfReloadIni();
+	virtual void ResetChargeProgress();
 	virtual string GetReticule();
 	virtual bool isReloading();
 	virtual bool isAutomatic();
@@ -49,11 +50,12 @@ protected:
 	string animationpath_;
 	string reticulesprite_="";
 	ShootComponent* shC_;//codigo de disparo (en que forma dispara)
+	ShootComponent* SPshC_;//codigo de disparo (disparo cargado)
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Vehicle* car_;//coche al que esta pegada la torreta
-	ProyectileType normalB;
-	ProyectileType specialB;
+	ProyectileInfo normalB;
+	ProyectileInfo specialB;
 
 };
 

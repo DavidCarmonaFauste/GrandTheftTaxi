@@ -25,7 +25,8 @@ void ShootIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & ev
 
 void ShootIC::update(GameObject * o, Uint32 deltaTime)
 {
-	if (holdToShoot_&& held_) static_cast<Turret*>(o)->Shoot();
+	if (holdToShoot_&& held_) 
+		static_cast<Turret*>(o)->Shoot();
 }
 
 void ShootIC::ChangeInputMode(bool hold)

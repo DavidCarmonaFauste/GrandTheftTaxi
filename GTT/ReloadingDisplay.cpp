@@ -26,7 +26,6 @@ ReloadingDisplay::ReloadingDisplay(Vehicle* vehicle)
 	perfReSegment->setAutoSize(false);
 	perfReSegment->setAutoPos(false);
 
-
 	addRenderComponent(bar);
 	addRenderComponent(background);
 	addRenderComponent(perfReSegment);
@@ -56,5 +55,17 @@ ReloadingDisplay::~ReloadingDisplay()
 
 void ReloadingDisplay::update(Uint32 deltaTime)
 {
-	setReloadingPercentage();
+	if(active_)
+		setReloadingPercentage();
+}
+
+void ReloadingDisplay::render(Uint32 deltaTime)
+{
+	if (active_)
+		Container::render(deltaTime);
+}
+
+bool ReloadingDisplay::isReloading()
+{
+	return vehicle_->getCurrentTurret()->isReloading();
 }
