@@ -14,7 +14,7 @@ static void exitGameCallback () {
 
 static void mainStateCallback () {
 	cout << "button pushed\n"; 
-	Game::getInstance ()->setGameStart ();
+	Game::getInstance()->setState(NAME_MAIN_STATE);
 }
 
 
