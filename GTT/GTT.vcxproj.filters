@@ -207,6 +207,18 @@
     <ClCompile Include="MouseClickIC.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="TaxiSoundManagerCP.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AmmoDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -370,6 +382,18 @@
     </ClInclude>
     <ClInclude Include="MouseClickIC.h">
       <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="TaxiSoundManagerCP.h">
+      <Filter>Archivos de encabezado\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AmmoDisplay.h">
+      <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

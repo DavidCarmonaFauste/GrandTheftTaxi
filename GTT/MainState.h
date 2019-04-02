@@ -1,6 +1,7 @@
 #pragma once
 #include "GameState.h"
 #include "Vehicle.h"
+#include "Enemy.h"
 #include "UI.h"
 #include "TileMap.h"
 #include "Money.h"
@@ -20,6 +21,7 @@ private:
 
 	// Vehicles
 	Vehicle* taxi_;
+	Enemy* enemy1_;
 	FollowGameObject* cameraFollow;
 
 	// Systems

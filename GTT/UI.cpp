@@ -1,7 +1,7 @@
 
 #include "UI.h"
 
-UI::UI() {
+UI::UI(Vehicle* v) {
 	UIElements_ = vector<GameObject*>();
 
 	// Common font for all UI elements
@@ -18,6 +18,14 @@ UI::UI() {
 	// Money
 	moneyDisplay_ = new MoneyDisplay(font_, fontColor_);
 	UIElements_.push_back(moneyDisplay_);
+
+	//Ammo
+	ammoDisplay_ = new AmmoDisplay(v);
+	UIElements_.push_back(ammoDisplay_);
+
+	//Reload
+	reloadDisplay_ = new ReloadingDisplay(v);
+	UIElements_.push_back(reloadDisplay_);
 
 }
 
@@ -49,11 +57,6 @@ void UI::addUIElement(Container * c)
 	UIElements_.push_back(c);
 }
 
-void UI::SetReloadingDisplay(ReloadingDisplay * r)
-{
-	reloadDisplay_ = r;
-	UIElements_.push_back(reloadDisplay_);
-}
 
 bool UI::receiveEvent(Event& e) {
 	if (e.type_ == HEALTH_CHANGED) {
