@@ -39,6 +39,7 @@
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="MachineGun.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MachineGun.h" />

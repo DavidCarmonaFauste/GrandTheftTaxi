@@ -14,7 +14,8 @@ MpegState::~MpegState()
 }
 
 
-void MpegState::playSequence(string s) {
+void MpegState::playSequence(const string s) {
+
 
 	videoManager_->PlayVideoSequence(s);
 }

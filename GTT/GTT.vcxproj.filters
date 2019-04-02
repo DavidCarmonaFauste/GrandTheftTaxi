@@ -231,6 +231,9 @@
     <ClCompile Include="MpegState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -418,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="MpegState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include "VideoManager.h"
 
 
+
 class MpegState :
 	public GameState
 {
@@ -19,10 +20,9 @@ public:
 	virtual void handleEvents(Uint32 deltaTime, SDL_Event& event) {}
 	virtual void render(Uint32 deltaTime) const {}
 
-	virtual void playSequence(string s);
+	virtual void playSequence(const string s);
 
 private:
 	VideoManager* videoManager_ = nullptr;
-
 };
 
