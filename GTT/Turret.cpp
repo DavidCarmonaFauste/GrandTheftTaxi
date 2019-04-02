@@ -39,20 +39,20 @@ Turret::Turret(WeaponInfo w)
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
-	switch (w.fireMode1) {
+	switch (w.shootMode1.firemode) {
 		case LINEAR:
 			shC_ = new LinearSC(this);
 			break;
 		case SPREAD:
-			shC_ = new SpreadSC(this, w.prop1, w.prop2);
+			shC_ = new SpreadSC(this, w.shootMode1.prop1, w.shootMode1.prop2);
 			break;
 	}
-	switch (w.fireMode2) {
+	switch (w.shootMode2.firemode) {
 	case LINEAR:
 		SPshC_ = new LinearSC(this);
 		break;
 	case SPREAD:
-		SPshC_ = new SpreadSC(this, w.prop1, w.prop2);
+		SPshC_ = new SpreadSC(this, w.shootMode2.prop1, w.shootMode2.prop2);
 		break;
 	}
 }
