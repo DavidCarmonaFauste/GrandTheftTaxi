@@ -2,7 +2,7 @@
 
 
 
-Enemy::Enemy(int x, int y, VehicleInfo r, KeysScheme k) :Car(x, y) {
+Enemy::Enemy(int x, int y, EnemyInfo r, KeysScheme k) :Car(x, y) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
@@ -34,9 +34,9 @@ Enemy::Enemy(int x, int y, VehicleInfo r, KeysScheme k) :Car(x, y) {
 	
 
 	// Physics
+	cout << "phy"<< endl;
 	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
 	this->addLogicComponent(phyO_);
-
 	
 }
 

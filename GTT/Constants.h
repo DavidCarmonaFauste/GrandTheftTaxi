@@ -65,6 +65,33 @@ const struct WeaponInfo {
 	int prop2;
 
 };
+const enum EnemyBehaviour {
+	PATROL,
+	CHASE
+};
+const struct EnemyInfo {
+	WeaponInfo weapon;
+	EnemyBehaviour behaviour;
+	string idlePath;
+	string shootPath;
+	int animationFrames;
+	string reticuleSprite;
+	int width;
+	int height;
+	int maxAmmo;
+	int cadence;
+	int reloadTime;
+	double perfRelIni;
+	double perfRelSeg;
+	int chargeTime;
+	ProyectileInfo normalB;
+	ProyectileInfo specialB;
+	FireMode fireMode1;
+	FireMode fireMode2;
+	bool automatic;
+	double prop1;
+	int prop2;
+};
 
 enum ButtonTypes { MainMenuPlay, MainMenuExit }; 
 
@@ -133,7 +160,6 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 //Vehicles
 const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/bullet.png" , 25, 25, 10, 500, 50 };
@@ -151,7 +177,7 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 const string PATH_BUTTONS[] = { "../Assets/sprites/button-play.png",
 								"../Assets/sprites/button-exit.png"};
 
-
-
+//Enemy
+const EnemyInfo ENEMY{ GUN, PATROL,  "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", 1, "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
 
 #endif // !constants_define

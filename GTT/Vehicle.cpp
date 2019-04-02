@@ -7,6 +7,9 @@
 #include "Reticule.h"
 #include "InputMovement.h"
 
+
+Vehicle* Vehicle::instance_ = nullptr;
+
 Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);

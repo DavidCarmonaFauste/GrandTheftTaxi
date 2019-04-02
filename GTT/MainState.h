@@ -20,7 +20,6 @@ private:
 	TileMap *tilemap_;
 
 	// Vehicles
-	Vehicle* taxi_;
 	Enemy* enemy1_;
 	FollowGameObject* cameraFollow;
 

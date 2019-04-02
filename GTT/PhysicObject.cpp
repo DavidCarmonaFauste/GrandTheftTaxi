@@ -21,6 +21,7 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	fixtureDef_.density = 1;
 	body_->CreateFixture(&fixtureDef_);
 
+	cout << shape_.e_polygon;
 }
 
 
