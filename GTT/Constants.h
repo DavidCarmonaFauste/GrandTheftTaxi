@@ -117,7 +117,8 @@ const enum soundId {
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
 	TAXI_1,
-	TAXI_DECELERATE_10
+	TAXI_DECELERATE_10,
+	SHOOTGUN
 };
 const map<soundId, string> SOUND = {
 	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
@@ -125,7 +126,9 @@ const map<soundId, string> SOUND = {
 	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
 	{TAXI_1, "../Assets/sounds/Running1.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"}
+	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"},
+	{SHOOTGUN, "../Assets/sounds/shootGun.wav"},
+
 
 };
 
