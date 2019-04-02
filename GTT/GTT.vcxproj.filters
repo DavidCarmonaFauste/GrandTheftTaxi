@@ -213,20 +213,20 @@
     <ClCompile Include="MpegState.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="IntroState.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="AmmoDisplay.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="TaxiSoundManagerCP.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\Graphics\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="AmmoDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
     <ClCompile Include="MouseClickIC.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -401,17 +401,17 @@
     <ClInclude Include="MpegState.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="IntroState.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="AmmoDisplay.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="AmmoDisplay.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
     <ClInclude Include="MouseClickIC.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
