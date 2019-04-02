@@ -39,7 +39,6 @@
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
-    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -102,7 +101,6 @@
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
-    <ClInclude Include="IntroState.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MainMenuState.h" />
@@ -143,7 +141,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

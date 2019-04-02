@@ -97,14 +97,14 @@ const int ENEMY_HP = 500;
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MainState";
-//const string NAME_INTRO_STATE = "IntroState";
+const string NAME_MPEG_STATE = "MpegState";
 
 //VIDEOS
 const enum videoId {
-	INTRO_STATE
+	INTRO_VIDEO
 };
-const map <videoId, string> VIDEOS{
-	{INTRO_STATE, "../Assets/videos/YuzuGames_Intro.mpg"}
+const map <videoId, string> VIDEOS = {
+	{INTRO_VIDEO, "../Assets/videos/YuzuGames_Intro.mpg"}
 };
 
 //SOUNDS

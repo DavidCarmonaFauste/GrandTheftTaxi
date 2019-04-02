@@ -16,6 +16,9 @@ public:
 	GameState(){}
 	~GameState(){}
 
+	virtual void start() {}
+	virtual void end() {}
+
 	virtual void update(Uint32 deltaTime) { for (GameObject* o : stage_) o->update(deltaTime); }
 
 	virtual void handleEvents(Uint32 deltaTime, SDL_Event& event) {
