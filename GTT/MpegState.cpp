@@ -1,5 +1,5 @@
 #include "MpegState.h"
-
+#include "Game.h"
 
 
 MpegState::MpegState(SDL_Window* win, SDL_Renderer* rend)
@@ -13,9 +13,18 @@ MpegState::~MpegState()
 	delete videoManager_; videoManager_ = nullptr;
 }
 
+void MpegState::start() {
+	playSequence();
 
-void MpegState::playSequence(const string s) {
+	if (VIDEO_NEXTSTATE.find(videoId_) != VIDEO_NEXTSTATE.end())
+		Game::getInstance()->setState(VIDEO_NEXTSTATE.at(videoId_));
+}
 
 
-	videoManager_->PlayVideoSequence(s);
+void MpegState::setVideoId(videoId videoId) {
+	videoId_ = videoId;
+}
+
+void MpegState::playSequence() {
+	videoManager_->PlayVideoSequence(VIDEOS.at(videoId_));
 }

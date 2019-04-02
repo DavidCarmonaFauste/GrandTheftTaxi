@@ -36,10 +36,11 @@ public:
 	b2World* getWorld();
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
+	void setState(string state);
 
 	// state setters
 	void setGameEnd () { exit_ = true; }
-	void setGameStart () { gmStMachine_->setState (NAME_MAIN_STATE);}
+	//void setGameStart () { gmStMachine_->setState();}
 
 	void init();
 
