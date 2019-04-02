@@ -119,6 +119,10 @@ Camera * Game::getCamera(cameraType cT)
 	return cameras_[cT];
 }
 
+void Game::setState(string state){
+	gmStMachine_->setState(state);
+}
+
 void Game::init() {
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 	cameras_[UI_CAMERA] = new Camera(1600, 900);

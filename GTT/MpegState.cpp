@@ -1,5 +1,5 @@
 #include "MpegState.h"
-
+#include "Game.h"
 
 
 MpegState::MpegState(SDL_Window* win, SDL_Renderer* rend)
@@ -15,6 +15,9 @@ MpegState::~MpegState()
 
 void MpegState::start() {
 	playSequence();
+
+	if (VIDEO_NEXTSTATE.find(videoId_) != VIDEO_NEXTSTATE.end())
+		Game::getInstance()->setState(VIDEO_NEXTSTATE.at(videoId_));
 }
 
 

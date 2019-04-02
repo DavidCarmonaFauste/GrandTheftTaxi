@@ -106,6 +106,9 @@ const enum videoId {
 const map <videoId, string> VIDEOS = {
 	{INTRO_VIDEO, "../Assets/videos/YuzuGames_Intro.mpg"}
 };
+const map <videoId, string> VIDEO_NEXTSTATE = {
+	{INTRO_VIDEO, NAME_MAINMENU_STATE}
+};
 
 //SOUNDS
 const enum soundId {

@@ -36,6 +36,7 @@ public:
 	b2World* getWorld();
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
+	void setState(string state);
 
 	// state setters
 	void setGameEnd () { exit_ = true; }
