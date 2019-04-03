@@ -113,15 +113,6 @@ const string NAME_MAIN_STATE = "MainState";
 const string NAME_MPEG_STATE = "MpegState";
 
 
-//BUTTONS
-//const string NAME_NEWGAME_BUTTON = "newGameButton";
-//const enum ButtonId { MainMenuPlay, MainMenuExit };
-/*const map <ButtonId, string> ButtonsNames_ = {
-	{MainMenuPlay, NAME_NEWGAME_BUTTON}
-};*/
-
-//const double BUTTON_X_POSITION = 500.0;
-//const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 
 //VIDEOS
 const enum videoId {
@@ -191,9 +182,6 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 const ButtonInfo NEW_GAME_BUTTON{ "../Assets/sprites/buttons/NewGameButton.png", "newGameButton", 10, 4, {500.0, 150.0}, {1, 0}, {0, 1} };
 const ButtonInfo EXIT_GAME_BUTTON{ "../Assets/sprites/button-exit.png", "ExitGameButton", 1, 1, {500.0, 500.0}, {0, 0}, {0, 0} };
 
-
-//esto dejará de estar en uso
-//const string PATH_BUTTONS[] = { "../Assets/sprites/buttons/NewGameButton.png", "../Assets/sprites/button-exit.png"};
 
 
 

@@ -180,3 +180,13 @@ void Animation::setCurrentFrame(const int frame)
 {
 	currentFrame = frame;
 }
+
+void Animation::setAnimationRow(const int row)
+{
+	animationRows = row;
+}
+
+void Animation::setAnimationCol(const int col)
+{
+	animationColumns = col;
+}

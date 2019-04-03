@@ -31,6 +31,8 @@ public:
 	void setCamera(cameraType cam);
 
 	void setCurrentFrame(const int frame);
+	void setAnimationRow(const int row);
+	void setAnimationCol(const int col);
 
 private:
 
