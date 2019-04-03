@@ -7,9 +7,13 @@
 class LinearSC : public ShootComponent
 {
 public:
-	LinearSC(Turret* turret) :ShootComponent(turret) {};
+	LinearSC(Turret* turret, double innac=0, int prob=0);
 	virtual void shoot(ProyectileInfo prType);
 	virtual void changeProperties(double prop1, int prop2) {};
 	virtual ~LinearSC() {};
+
+private:
+	double innacuracy_;//grado de imprecision
+	int probab_;//probabilidad con la que el arma es imprecisa en %
 };
 
