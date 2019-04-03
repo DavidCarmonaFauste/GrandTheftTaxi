@@ -14,14 +14,16 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	Button (CallBackOnClick cb, ButtonId  buttonType);
-	Button(CallBackOnClick cb, ButtonId  buttonType, const int col, const int row);
+	//Button (CallBackOnClick cb, ButtonInfo  buttonType);
+	Button(CallBackOnClick cb, ButtonInfo  buttonType, const int col = 1, const int row = 1);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;
 
+	Animation* getButtonAnimacion();
+
 private:
-	Sprite* buttonSprite = nullptr;
+	//Sprite* buttonSprite = nullptr;
 	Animation* buttonAnimation_ = nullptr;
 	MouseClickIC* mouseClickIC = nullptr;
 	MouseOverObject* mouseOverObj_ = nullptr;

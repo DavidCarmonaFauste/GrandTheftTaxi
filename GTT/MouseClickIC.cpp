@@ -31,6 +31,10 @@ void MouseClickIC::handleInput (GameObject * o, Uint32 deltaTime, const SDL_Even
 			mouseX < int (objPosition.x + o->getWidth()) &&
 			mouseY > int (objPosition.y) &&
 			mouseY < int (objPosition.y + o->getHeight())) {
+
+				if (static_cast<Button*>(o)->getButtonAnimacion() != nullptr) {
+					//implementar el cambio de frames para la animacion
+				}
 				static_cast<Button*>(o)->callback ();
 			}
 		}
