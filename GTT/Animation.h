@@ -30,6 +30,8 @@ public:
 	
 	void setCamera(cameraType cam);
 
+	void setCurrentFrame(const int frame);
+
 private:
 
 	bool reproduciendo_; //provisional

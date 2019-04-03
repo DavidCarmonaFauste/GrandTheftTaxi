@@ -4,7 +4,9 @@
 #include "Animation.h"
 #include "Constants.h"
 
+
 class MouseClickIC;
+class MouseOverObject;
 
 // --------- C A L L B A C K S ---------------
 using CallBackOnClick = void ();
@@ -22,5 +24,6 @@ private:
 	Sprite* buttonSprite = nullptr;
 	Animation* buttonAnimation_ = nullptr;
 	MouseClickIC* mouseClickIC = nullptr;
+	MouseOverObject* mouseOverObj_ = nullptr;
 };
 

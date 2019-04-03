@@ -225,6 +225,9 @@
     <ClCompile Include="AmmoDisplay.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
+    <ClCompile Include="MouseOverObject.cpp">
+      <Filter>Archivos de origen\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -406,6 +409,9 @@
     </ClInclude>
     <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseOverObject.h">
+      <Filter>Archivos de encabezado\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

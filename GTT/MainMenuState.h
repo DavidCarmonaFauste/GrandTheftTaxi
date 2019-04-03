@@ -27,5 +27,9 @@ public:
 	virtual ~MainMenuState();
 
 	virtual void update (Uint32 deltaTime);
+	
+
+private:
+	Button* newGameButton_ = nullptr;
 };
 

@@ -93,6 +93,8 @@ void Animation::render(GameObject * o, Uint32 deltaTime) {
 	/*if (currentAnim != "-1") {
 		renderAnimation(o, deltaTime);
 	}*/
+
+	//provisional. if flag = true, ejecuta la animación, else renderiza la textura según currentFrame
 	if (currentAnim != "-1") {
 		if (reproduciendo_) {
 			renderAnimation(o, deltaTime);
@@ -147,6 +149,7 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
 
+//provisional
 void Animation::renderPusedAnimation(GameObject* o) {
 	
 	Texture* animTexture = animations[currentAnim].first;
@@ -171,4 +174,9 @@ void Animation::resetAnimationValues() {
 
 void Animation::setCamera(cameraType cam) {
 	cam_ = cam;
+}
+
+void Animation::setCurrentFrame(const int frame)
+{
+	currentFrame = frame;
 }

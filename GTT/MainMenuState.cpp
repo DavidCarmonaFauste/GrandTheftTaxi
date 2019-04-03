@@ -8,10 +8,14 @@ MainMenuState::MainMenuState()
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setZoom (1.0, false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setZoom (1.0, false);
 
-	//stage_.push_back (new Button (mainStateCallback, MainMenuPlay));
-	stage_.push_back(new Button(mainStateCallback, MainMenuPlay, 10, 4));
+
+	//inicialización buttons
+	newGameButton_ = new Button(mainStateCallback, MainMenuPlay, 10, 4);
+	stage_.push_back(newGameButton_);
 
 	stage_.push_back (new Button (exitGameCallback, MainMenuExit));
+
+	//reticule
 	Reticule::GetInstance()->ChangeReticule("gun");
 	stage_.push_back(Reticule::GetInstance());
 }
