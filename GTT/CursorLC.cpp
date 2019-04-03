@@ -23,8 +23,9 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 		std::list<Vector2D> open;
 		std::list<Vector2D> close;
 		cout << "\n -List created...\n" ;
-		Vector2D final = Vector2D(340, 400);
+		Vector2D final = Vector2D(310, 605);
 		cout << "\n -Point created...\n";
+		cout << "\n Final = (" + to_string(final.x) + "," + to_string(final.y) + ")\n";
 		if (!creating)
 		{
 			creating = true;
@@ -35,27 +36,9 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 		cout << "\n -Distance calculated...\n";
 		Vector2D distance = Vector2D(enemy_position.x - final.x, enemy_position.y - final.y);
 		cout << "\n X = " + std::to_string(distance.x)  + "\n Y = " + std::to_string(distance.y)  + "\n";
-		/*char direcction;
-		if (abs(distance.x) > abs(distance.y))
-		{
-			if (distance.x > 0) direcction = 'r';
-			else direcction = 'l';
-		}
-		else
-		{
-			if (distance.y > 0) direcction = 'u';
-			else direcction = 'd';
-		}
-		cout << "\n -Direcction calculated...\n";
-		string d;
-		d.push_back(direcction);
-		cout << "\nDirecction = " + d + "\n";*/
+
 		while (!finish)
 		{
-			
-
-			
-
 			push(open, Vector2D(enemy_position.x + 32, enemy_position.y - 32), "open list"); //right-up -> 0
 			push(open, Vector2D(enemy_position.x + 32, enemy_position.y), "open list"); //right-middle -> 1
 			push(open, Vector2D(enemy_position.x + 32, enemy_position.y + 32), "open list"); //right-down -> 2
@@ -82,19 +65,42 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 				}
 			}
 
-			/*
-			if (abs(distance.x) > abs(distance.y))
+			switch (vec_to_close)
 			{
-				if (distance.x > 0) direcction = 'r';
-				else direcction = 'l';
+			case 0:
+				cout << "\nGo to righ-up \n";
+				break;
+			case 1:
+				cout << "\nGo to righ-middle \n";
+				break;
+			case 2:
+				cout << "\nGo to righ-down \n";
+				break;
+			case 3:
+				cout << "\nGo to middle-up \n";
+				break;
+			case 4:
+				cout << "\nGo to middle-down \n";
+				break;
+			case 5:
+				cout << "\nGo to left-up \n";
+				break;
+			case 6:
+				cout << "\nGo to left-middle \n";
+				break;
+			case 7:
+				cout << "\nGo to left-down \n";
+				break;
 			}
-			else
-			{
-				if (distance.y > 0) direcction = 'u';
-				else direcction = 'd';
-			}*/
-			finish = true;
+
+			push(close, find(open, vec_to_close), "close list");
+			enemy_position = find(open, vec_to_close);
+
+			open.clear();
+
+			if((enemy_position.x < (final.x + 32) && enemy_position.x > (final.x - 32)) && (enemy_position.y < (final.y + 32) && enemy_position.y > (final.y - 32))) finish = true;
 		}
+		cout << "\n\n		THE END \n";
 	}
 	o->setPosition(Vector2D(((double)x/(double)Game::getInstance()->getWindowWidth())*(double)Game::getInstance()->getCameraWidth() - o->getWidth()/2,
 		((double)y / (double)Game::getInstance()->getWindowHeight())*(double)Game::getInstance()->getCameraHeight()- o->getHeight()/2));
@@ -103,7 +109,7 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 void CursorLC::push(std::list<Vector2D> &l, Vector2D v, string t)
 {
 	l.push_back(v);
-	cout << "\nPushed x=" + std::to_string(v.x) + " y=" + std::to_string(v.y) + " at " + t + '\n';
+	if(t == "close list")cout << "\nPushed x=" + std::to_string(v.x) + " y=" + std::to_string(v.y) + " at " + t + '\n';
 }
 
 Vector2D CursorLC::find(std::list<Vector2D> l, int c)
