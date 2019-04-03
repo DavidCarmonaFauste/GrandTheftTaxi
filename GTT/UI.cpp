@@ -1,7 +1,7 @@
 
 #include "UI.h"
 
-UI::UI(Vehicle* v) {
+UI::UI() {
 	UIElements_ = vector<GameObject*>();
 
 	// Common font for all UI elements
@@ -20,11 +20,11 @@ UI::UI(Vehicle* v) {
 	UIElements_.push_back(moneyDisplay_);
 
 	//Ammo
-	ammoDisplay_ = new AmmoDisplay(v);
+	ammoDisplay_ = new AmmoDisplay();
 	UIElements_.push_back(ammoDisplay_);
 
 	//Reload
-	reloadDisplay_ = new ReloadingDisplay(v);
+	reloadDisplay_ = new ReloadingDisplay();
 	UIElements_.push_back(reloadDisplay_);
 
 }

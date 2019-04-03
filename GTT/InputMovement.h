@@ -4,16 +4,15 @@
 class InputMovement : public ControlType
 {
 public:
-	InputMovement(KeysScheme k , Vehicle* v);
+	InputMovement(KeysScheme k, Vehicle* v);
 	virtual ~InputMovement();
 
 	virtual void handleInput(GameObject* o, Uint32 deltaTime, const SDL_Event& event);
 	virtual void update(GameObject* o, Uint32 deltaTime);
 
 private:
-	Vehicle* v_;
 	KeysScheme k_;
-
+	Vehicle* v_;
 	//Input booleans
 	bool forwardPressed_;
 	bool backwardPressed_;

@@ -2,9 +2,8 @@
 
 InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
-	v_ = v;
 	k_ = k;
-
+	v_ = v;
 	//Input booleans
 	forwardPressed_ = false;
 	backwardPressed_ = false;
@@ -51,7 +50,7 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
-	b2Body* body = v_->GetPhyO()->getBody();
+	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 	Vector2D vel = body->GetLinearVelocity();
 
@@ -90,7 +89,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 }
 
 void InputMovement::steeringWheel() {
-	b2Body* body = v_->GetPhyO()->getBody();
+	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
 
 	float turnSpeed = 0;
 	if (backwardPressed_) {
@@ -99,8 +98,8 @@ void InputMovement::steeringWheel() {
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -2*v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 2*v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -2* v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 2* v_->GetTurnSpeed();
 		}
 		else {
 			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
@@ -115,13 +114,13 @@ void InputMovement::steeringWheel() {
 }
 
 Vector2D InputMovement::getLateralVelocity() {
-	b2Body* body = v_->GetPhyO()->getBody();
+	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
 	Vector2D normal = body->GetWorldVector(Vector2D(0, 1));
 	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
 void InputMovement::updateFriction() {
-	b2Body* body = v_->GetPhyO()->getBody();
+	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
 
 	body->SetLinearDamping(targetDamping);
 
@@ -131,7 +130,7 @@ void InputMovement::updateFriction() {
 } 
 
 bool InputMovement::isMoving() {
-	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
+	if (abs(Vehicle::GetInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
 	else 
 		return false;

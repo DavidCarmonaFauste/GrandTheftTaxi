@@ -66,18 +66,22 @@ void Turret::update(Uint32 deltaTime)
 	} 
 }
 
-void Turret::AttachToVehicle(Vehicle * car)
+void Turret::AttachToVehicle(Car * car)
 {
 	car_ = car;
 
 	followC_ = new FollowGameObject(car_);
-	car->GetShootIC()->ChangeInputMode(automatic_);
-
+	
 	addLogicComponent(car_->GetAimComponent());
-	addInputComponent(car_->GetReloadIC());
-	addInputComponent(car_->GetShootIC());
 	addLogicComponent(followC_);
-	addLogicComponent(car_->GetShootIC());
+
+	if (dynamic_cast<Vehicle*>(car_)!=nullptr) {
+		Vehicle::GetInstance()->GetShootIC()->ChangeInputMode(automatic_);
+		addInputComponent(Vehicle::GetInstance()->GetReloadIC());
+		addInputComponent(Vehicle::GetInstance()->GetShootIC());
+		addLogicComponent(Vehicle::GetInstance()->GetShootIC());
+	}
+	
 
 }
 		

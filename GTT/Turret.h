@@ -16,7 +16,7 @@ class Turret : public Container
 public:
 	Turret(WeaponInfo w);
 	virtual void update(Uint32 deltaTime);
-	virtual void AttachToVehicle(Vehicle* car);
+	virtual void AttachToVehicle(Car* car);
 	virtual void Shoot();
 	virtual void Reload();
 	virtual void PerfectReload();
@@ -53,7 +53,7 @@ protected:
 	ShootComponent* SPshC_;//codigo de disparo (disparo cargado)
 	FollowGameObject* followC_;
 	Animation* animC_;
-	Vehicle* car_;//coche al que esta pegada la torreta
+	Car* car_;//coche al que esta pegada la torreta
 	ProyectileInfo normalB;
 	ProyectileInfo specialB;
 
