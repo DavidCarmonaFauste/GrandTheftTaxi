@@ -42,6 +42,6 @@ void GameStateMachine::initStates() {
 	intro->setVideoId(INTRO_VIDEO);
 	//setState(NAME_MPEG_STATE);
 
-	//setState(NAME_MAINMENU_STATE);
-	setState(NAME_MAIN_STATE);
+	setState(NAME_MAINMENU_STATE);
+	//setState(NAME_MAIN_STATE);
 }

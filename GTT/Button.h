@@ -1,6 +1,7 @@
 #pragma once
 #include "Container.h"
 #include "Sprite.h"
+#include "Animation.h"
 #include "Constants.h"
 
 class MouseClickIC;
@@ -11,13 +12,15 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	Button (CallBackOnClick cb, ButtonTypes buttonType);
+	Button (CallBackOnClick cb, ButtonId  buttonType);
+	Button(CallBackOnClick cb, ButtonId  buttonType, const int col, const int row);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;
 
 private:
 	Sprite* buttonSprite = nullptr;
+	Animation* buttonAnimation_ = nullptr;
 	MouseClickIC* mouseClickIC = nullptr;
 };
 

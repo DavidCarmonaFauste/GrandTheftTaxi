@@ -69,7 +69,6 @@ const struct WeaponInfo {
 	bool automatic;
 };
 
-enum ButtonTypes { MainMenuPlay, MainMenuExit }; 
 
 
 //EDITABLE ----------------------------------------------------------------------------------------------------------
@@ -94,10 +93,19 @@ const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 //Enemy 1
 const int ENEMY_HP = 500;
 
-//States
+//NAMES
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MainState";
 const string NAME_MPEG_STATE = "MpegState";
+
+const string NAME_NEWGAME_BUTTON = "newGameButton";
+
+//BUTTONS
+const enum ButtonId { MainMenuPlay, MainMenuExit };
+
+const map <ButtonId, string> ButtonsNames_ = {
+	{MainMenuPlay, NAME_NEWGAME_BUTTON}
+};
 
 //VIDEOS
 const enum videoId {
@@ -164,7 +172,7 @@ const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/spr
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
 
 //Buttons  ---- to be used along with the ButtonType enum to pick texture
-const string PATH_BUTTONS[] = { "../Assets/sprites/button-play.png",
+const string PATH_BUTTONS[] = { "../Assets/sprites/buttons/NewGameButton.png",
 								"../Assets/sprites/button-exit.png"};
 
 

@@ -6,6 +6,8 @@ Animation::Animation() {
 	destRect = new SDL_Rect();
 	destRect->w = destRect->h = 100;
 	destRect->x = destRect->y = 0;
+
+	reproduciendo_ = false; //provisional
 }
 
 Animation::~Animation() {
@@ -29,6 +31,8 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 	animRect->x = animRect->y = 0;
 
 	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+
+	currentAnim = name;
 }
 
 bool Animation::playAnimation(string name, float speed, bool loop) {
@@ -41,6 +45,8 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 
 		animationColumns = animations[name].first->getWidth() / animations[name].second->w;
 		animationRows = animations[name].first->getHeight() / animations[name].second->h;
+
+		reproduciendo_ = true; //provisional
 
 		return true;
 	}
@@ -84,8 +90,16 @@ bool Animation::resumeAnimation()
 
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
-	if (currentAnim != "-1") {
+	/*if (currentAnim != "-1") {
 		renderAnimation(o, deltaTime);
+	}*/
+	if (currentAnim != "-1") {
+		if (reproduciendo_) {
+			renderAnimation(o, deltaTime);
+		}
+		else {
+			renderPusedAnimation(o);
+		}
 	}
 }
 
@@ -131,6 +145,22 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	Game::getInstance()->getCamera(cam_)->renderTexture(animTexture, *destRect, animRect, o->getRotation());
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
+}
+
+void Animation::renderPusedAnimation(GameObject* o) {
+	
+	Texture* animTexture = animations[currentAnim].first;
+	SDL_Rect* animRect = animations[currentAnim].second;
+
+	animRect->x = currentFrame % animationColumns * animRect->w;
+	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
+
+	destRect->x = o->getPosition().x;
+	destRect->y = o->getPosition().y;
+	destRect->w = o->getWidth();
+	destRect->h = o->getHeight();
+
+	Game::getInstance()->getCamera(cam_)->renderTexture(animTexture, *destRect, animRect, o->getRotation());
 }
 
 void Animation::resetAnimationValues() {
