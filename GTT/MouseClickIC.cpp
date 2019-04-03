@@ -33,14 +33,15 @@ void MouseClickIC::handleInput (GameObject * o, Uint32 deltaTime, const SDL_Even
 			mouseY < int (objPosition.y + o->getHeight())) {
 
 				if (static_cast<Button*>(o)->getButtonAnimacion() != nullptr) {
-					//static_cast<Button*>(o)->getButtonAnimacion()->setAnimationCol(NEW_GAME_BUTTON.anim_click_frame.col);
-					//static_cast<Button*>(o)->getButtonAnimacion()->setAnimationRow(NEW_GAME_BUTTON.anim_click_frame.row);
-					static_cast<Button*>(o)->getButtonAnimacion()->setCurrentFrame(1);
-					static_cast<Button*>(o)->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON.name);
-					SDL_Delay(2000);
+					static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(NEW_GAME_BUTTON.idlePath[clickButton], NEW_GAME_BUTTON.name, NEW_GAME_BUTTON.frAnm[clickButton].cols, NEW_GAME_BUTTON.frAnm[clickButton].rows);
+					static_cast<Button*>(o)->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON.name, 0.1, false);
 
+					//intervalo de tiempo antes de la transición de estado
+					SDL_Delay(2000);
+					//llamada al callBack para el cambio de estado
+					static_cast<Button*>(o)->callback();
 				}
-				static_cast<Button*>(o)->callback ();
+				
 			}
 		}
 	}

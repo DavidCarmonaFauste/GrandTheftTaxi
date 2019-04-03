@@ -7,7 +7,7 @@ Animation::Animation() {
 	destRect->w = destRect->h = 100;
 	destRect->x = destRect->y = 0;
 
-	reproduciendo_ = false; //provisional
+	//reproduciendo_ = false; //provisional
 }
 
 Animation::~Animation() {
@@ -45,8 +45,6 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 
 		animationColumns = animations[name].first->getWidth() / animations[name].second->w;
 		animationRows = animations[name].first->getHeight() / animations[name].second->h;
-
-		reproduciendo_ = true; //provisional
 
 		return true;
 	}
@@ -90,18 +88,8 @@ bool Animation::resumeAnimation()
 
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
-	/*if (currentAnim != "-1") {
-		renderAnimation(o, deltaTime);
-	}*/
-
-	//provisional. if flag = true, ejecuta la animación, else renderiza la textura según currentFrame
 	if (currentAnim != "-1") {
-		if (reproduciendo_) {
-			renderAnimation(o, deltaTime);
-		}
-		else {
-			renderPusedAnimation(o);
-		}
+		renderAnimation(o, deltaTime);
 	}
 }
 
@@ -149,22 +137,6 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
 
-//provisional
-void Animation::renderPusedAnimation(GameObject* o) {
-	
-	Texture* animTexture = animations[currentAnim].first;
-	SDL_Rect* animRect = animations[currentAnim].second;
-
-	animRect->x = currentFrame % animationColumns * animRect->w;
-	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
-
-	destRect->x = o->getPosition().x;
-	destRect->y = o->getPosition().y;
-	destRect->w = o->getWidth();
-	destRect->h = o->getHeight();
-
-	Game::getInstance()->getCamera(cam_)->renderTexture(animTexture, *destRect, animRect, o->getRotation());
-}
 
 void Animation::resetAnimationValues() {
 	paused = false;
@@ -174,19 +146,4 @@ void Animation::resetAnimationValues() {
 
 void Animation::setCamera(cameraType cam) {
 	cam_ = cam;
-}
-
-void Animation::setCurrentFrame(const int frame)
-{
-	currentFrame = frame;
-}
-
-void Animation::setAnimationRow(const int row)
-{
-	animationRows = row;
-}
-
-void Animation::setAnimationCol(const int col)
-{
-	animationColumns = col;
 }

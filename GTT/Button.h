@@ -14,8 +14,7 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	//Button (CallBackOnClick cb, ButtonInfo  buttonType);
-	Button(CallBackOnClick cb, ButtonInfo  buttonType, const int col = 1, const int row = 1);
+	Button(CallBackOnClick cb, ButtonInfo  buttonType);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;

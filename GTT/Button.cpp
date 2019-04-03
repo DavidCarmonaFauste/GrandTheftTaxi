@@ -17,7 +17,7 @@
 }*/
 
 //spriteSheet
-Button::Button(CallBackOnClick cb, ButtonInfo  buttonType, const int cols, const int rows)
+Button::Button(CallBackOnClick cb, ButtonInfo  buttonType)
 {
 	callback = cb;
 
@@ -28,8 +28,8 @@ Button::Button(CallBackOnClick cb, ButtonInfo  buttonType, const int cols, const
 	mouseOverObj_ = new MouseOverObject();
 
 	buttonAnimation_ = new Animation();
-	buttonAnimation_->loadAnimation(buttonType.idlePath, buttonType.name, cols, rows);
-
+	buttonAnimation_->loadAnimation(buttonType.idlePath[defaultFrameButton], buttonType.name, buttonType.frAnm[defaultFrameButton].cols, buttonType.frAnm[defaultFrameButton].rows);
+	buttonAnimation_->playAnimation(buttonType.name);
 	addRenderComponent(buttonAnimation_);
 
 	addInputComponent(mouseClickIC);

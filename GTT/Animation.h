@@ -30,13 +30,9 @@ public:
 	
 	void setCamera(cameraType cam);
 
-	void setCurrentFrame(const int frame);
-	void setAnimationRow(const int row);
-	void setAnimationCol(const int col);
 
 private:
 
-	bool reproduciendo_; //provisional
 
 	cameraType cam_ = GAME_CAMERA;
 	SDL_Rect* destRect;
@@ -53,6 +49,6 @@ private:
 	bool animationLoop = true;
 
 	void renderAnimation(GameObject *o, Uint32 deltaTime);
-	void renderPusedAnimation(GameObject* o);
 	void resetAnimationValues();
+
 };

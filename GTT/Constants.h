@@ -70,18 +70,15 @@ const struct WeaponInfo {
 };
 
 const struct frameAnimation {
-	int col;
-	int row;
-};
-const struct ButtonInfo {
-	string idlePath;
-	string name;
 	int cols;
 	int rows;
-	Vector2D pos;
-	frameAnimation anim_over_frame;
-	frameAnimation anim_click_frame;
+};
 
+const struct ButtonInfo {
+	string idlePath[3]; 
+	string name;
+	frameAnimation frAnm[3];
+	Vector2D pos;
 };
 
 
@@ -103,6 +100,12 @@ const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
 
 
+//Buttons //se usa para acceder a la posición del array de idPath del struct ButtonInfo
+const enum newGameButtonPaths {
+	defaultFrameButton,
+	clickButton,
+	overButton
+};
 
 //Enemy 1
 const int ENEMY_HP = 500;
@@ -179,8 +182,10 @@ const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/spr
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
 
 //Buttons  ---- to be used along with the ButtonType enum to pick texture
-const ButtonInfo NEW_GAME_BUTTON{ "../Assets/sprites/buttons/NewGameButton.png", "newGameButton", 10, 4, {500.0, 150.0}, {1, 0}, {0, 1} };
-const ButtonInfo EXIT_GAME_BUTTON{ "../Assets/sprites/button-exit.png", "ExitGameButton", 1, 1, {500.0, 500.0}, {0, 0}, {0, 0} };
+const ButtonInfo NEW_GAME_BUTTON{ {"../Assets/sprites/buttons/NewGameButton_0.png", "../Assets/sprites/buttons/NewGameButton_clickAnimation.png", "../Assets/sprites/buttons/NewGameButton_over_0.png"}, 
+"newGameButton", 
+{ {1 , 1}, {30, 1}, {1 , 1} }, {500.0, 150.0} };
+//const ButtonInfo EXIT_GAME_BUTTON{ "../Assets/sprites/button-exit.png", "ExitGameButton", 1, 1, {500.0, 500.0}};
 
 
 
