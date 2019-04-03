@@ -8,6 +8,8 @@ bool creating = false;
 bool finish = false;
 Vector2D enemy_position = Vector2D(0, 0);
 Vector2D start_position = enemy_position;
+Vector2D wall[2] = { Vector2D(32, 32), Vector2D(320, 320) };
+
 CursorLC::CursorLC()
 {
 }
@@ -23,7 +25,7 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 		std::list<Vector2D> open;
 		std::list<Vector2D> close;
 		cout << "\n -List created...\n" ;
-		Vector2D final = Vector2D(310, 605);
+		Vector2D final = Vector2D(320, 640);
 		cout << "\n -Point created...\n";
 		cout << "\n Final = (" + to_string(final.x) + "," + to_string(final.y) + ")\n";
 		if (!creating)
@@ -39,14 +41,29 @@ void CursorLC::update(GameObject * o, Uint32 deltaTime)
 
 		while (!finish)
 		{
-			push(open, Vector2D(enemy_position.x + 32, enemy_position.y - 32), "open list"); //right-up -> 0
-			push(open, Vector2D(enemy_position.x + 32, enemy_position.y), "open list"); //right-middle -> 1
-			push(open, Vector2D(enemy_position.x + 32, enemy_position.y + 32), "open list"); //right-down -> 2
-			push(open, Vector2D(enemy_position.x, enemy_position.y - 32), "open list"); //middle-up -> 3
-			push(open, Vector2D(enemy_position.x, enemy_position.y + 32), "open list"); //middle-down -> 4
-			push(open, Vector2D(enemy_position.x - 32, enemy_position.y - 32), "open list"); //left-up -> 5
-			push(open, Vector2D(enemy_position.x - 32, enemy_position.y), "open list"); //left-middle -> 6
-			push(open, Vector2D(enemy_position.x - 32, enemy_position.y + 32), "open list"); //left-down -> 7
+			if(!(((enemy_position.x + 32) >= wall[0].x) && ((enemy_position.x + 32) <= wall[1].x) && ((enemy_position.y - 32) >= wall[0].y) && ((enemy_position.y - 32) <= wall[1].y)) && !search(close, Vector2D(enemy_position.x + 32, enemy_position.y - 32)))
+				push(open, Vector2D(enemy_position.x + 32, enemy_position.y - 32), "open list"); //right-up -> 0
+
+			if (!(((enemy_position.x + 32) >= wall[0].x) && ((enemy_position.x + 32) <= wall[1].x) && (enemy_position.y >= wall[0].y) && (enemy_position.y <= wall[1].y)) && !search(close, Vector2D(enemy_position.x + 32, enemy_position.y)))
+				push(open, Vector2D(enemy_position.x + 32, enemy_position.y), "open list"); //right-middle -> 1
+
+			if (!(((enemy_position.x + 32) >= wall[0].x) && ((enemy_position.x + 32) <= wall[1].x) && ((enemy_position.y + 32) >= wall[0].y) && ((enemy_position.y + 32) <= wall[1].y) && !search(close, Vector2D(enemy_position.x + 32, enemy_position.y + 32))))
+				push(open, Vector2D(enemy_position.x + 32, enemy_position.y + 32), "open list"); //right-down -> 2
+
+			if (!((enemy_position.x >= wall[0].x) && (enemy_position.x <= wall[1].x) && ((enemy_position.y - 32) >= wall[0].y) && ((enemy_position.y - 32) <= wall[1].y)) && !search(close, Vector2D(enemy_position.x, enemy_position.y - 32)))
+				push(open, Vector2D(enemy_position.x, enemy_position.y - 32), "open list"); //middle-up -> 3
+
+			if (!((enemy_position.x >= wall[0].x) && (enemy_position.x <= wall[1].x) && ((enemy_position.y + 32) >= wall[0].y) && ((enemy_position.y + 32) <= wall[1].y)) && !search(close, Vector2D(enemy_position.x, enemy_position.y + 32)))
+				push(open, Vector2D(enemy_position.x, enemy_position.y + 32), "open list"); //middle-down -> 4
+
+			if (!(((enemy_position.x - 32) >= wall[0].x) && ((enemy_position.x - 32) <= wall[1].x) && ((enemy_position.y - 32) >= wall[0].y) && ((enemy_position.y - 32) <= wall[1].y)) && !search(close, Vector2D(enemy_position.x - 32, enemy_position.y - 32)))
+				push(open, Vector2D(enemy_position.x - 32, enemy_position.y - 32), "open list"); //left-up -> 5
+
+			if (!(((enemy_position.x - 32) >= wall[0].x) && ((enemy_position.x - 32) <= wall[1].x) && (enemy_position.y >= wall[0].y) && (enemy_position.y <= wall[1].y)) && !search(close, Vector2D(enemy_position.x - 32, enemy_position.y)))
+				push(open, Vector2D(enemy_position.x - 32, enemy_position.y), "open list"); //left-middle -> 6
+
+			if (!(((enemy_position.x - 32) >= wall[0].x) && ((enemy_position.x - 32) <= wall[1].x) && ((enemy_position.y + 32) >= wall[0].y) && ((enemy_position.y + 32) <= wall[1].y)) && !search(close, Vector2D(enemy_position.x - 32, enemy_position.y + 32)))
+				push(open, Vector2D(enemy_position.x - 32, enemy_position.y + 32), "open list"); //left-down -> 7
 
 			int minum = 999;
 			int vec_to_close = -1;
@@ -122,6 +139,13 @@ Vector2D CursorLC::find(std::list<Vector2D> l, int c)
 	}
 
 	return Vector2D(-999,-999);
+}
+
+bool CursorLC::search(std::list<Vector2D> l, Vector2D v)
+{
+	std::list<Vector2D>::iterator findIter = std::find(l.begin(), l.end(), v);
+	if (findIter == l.end()) return false;
+	else return true;
 }
 
 CursorLC::~CursorLC()
