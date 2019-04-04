@@ -76,7 +76,7 @@ const struct frameAnimation {
 
 const struct ButtonInfo {
 	string idlePath[3]; 
-	string name;
+	string name[3];
 	frameAnimation frAnm[3];
 	Vector2D pos;
 };
@@ -102,7 +102,7 @@ const int DMG_FREQUENCY = 1000;
 
 //Buttons //se usa para acceder a la posición del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {
-	defaultFrameButton,
+	defaultAnm,    //la animación por defecto tiene que llamarse defaultAnm para su correcta gestión en la clase Animation
 	clickButton,
 	overButton
 };
@@ -182,8 +182,8 @@ const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/spr
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
 
 //Buttons  ---- to be used along with the ButtonType enum to pick texture
-const ButtonInfo NEW_GAME_BUTTON{ {"../Assets/sprites/buttons/NewGameButton_0.png", "../Assets/sprites/buttons/NewGameButton_clickAnimation.png", "../Assets/sprites/buttons/NewGameButton_over_0.png"}, 
-"newGameButton", 
+const ButtonInfo NEW_GAME_BUTTON{ {"../Assets/sprites/buttons/NewGameButton/default.png", "../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png"}, 
+{"default","clickButton", "overButton"},
 { {1 , 1}, {30, 1}, {1 , 1} }, {500.0, 150.0} };
 //const ButtonInfo EXIT_GAME_BUTTON{ "../Assets/sprites/button-exit.png", "ExitGameButton", 1, 1, {500.0, 500.0}};
 

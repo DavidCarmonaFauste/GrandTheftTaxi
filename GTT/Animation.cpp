@@ -7,7 +7,6 @@ Animation::Animation() {
 	destRect->w = destRect->h = 100;
 	destRect->x = destRect->y = 0;
 
-	//reproduciendo_ = false; //provisional
 }
 
 Animation::~Animation() {
@@ -33,6 +32,8 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
 
 	currentAnim = name;
+
+	
 }
 
 bool Animation::playAnimation(string name, float speed, bool loop) {
@@ -54,6 +55,7 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 
 bool Animation::isAnyAnimationPlaying() {
 	return currentAnim != "default";
+
 }
 
 // Checks whether the given animation is currently

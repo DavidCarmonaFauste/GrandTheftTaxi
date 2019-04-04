@@ -35,5 +35,9 @@ void MainMenuState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
 
+	/*if (!newGameButton_->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON.name[clickButton])) {
+		mainStateCallback();
+	}*/
+
 	GameState::update (deltaTime);
 }

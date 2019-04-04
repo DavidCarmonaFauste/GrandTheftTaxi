@@ -28,8 +28,8 @@ Button::Button(CallBackOnClick cb, ButtonInfo  buttonType)
 	mouseOverObj_ = new MouseOverObject();
 
 	buttonAnimation_ = new Animation();
-	buttonAnimation_->loadAnimation(buttonType.idlePath[defaultFrameButton], buttonType.name, buttonType.frAnm[defaultFrameButton].cols, buttonType.frAnm[defaultFrameButton].rows);
-	buttonAnimation_->playAnimation(buttonType.name);
+	buttonAnimation_->loadAnimation(buttonType.idlePath[defaultAnm], buttonType.name[defaultAnm], buttonType.frAnm[defaultAnm].cols, buttonType.frAnm[defaultAnm].rows);
+	
 	addRenderComponent(buttonAnimation_);
 
 	addInputComponent(mouseClickIC);

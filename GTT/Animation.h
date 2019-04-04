@@ -31,6 +31,7 @@ public:
 	void setCamera(cameraType cam);
 
 
+
 private:
 
 
