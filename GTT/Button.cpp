@@ -49,3 +49,8 @@ Animation * Button::getButtonAnimacion()
 {
 	return buttonAnimation_;
 }
+
+bool  Button:: isMouseClickICEvent()
+{
+	return mouseClickIC->isClickEvent();
+}

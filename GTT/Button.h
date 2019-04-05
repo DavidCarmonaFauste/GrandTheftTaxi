@@ -18,8 +18,11 @@ public:
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;
-
+	
 	Animation* getButtonAnimacion();
+	bool isMouseClickICEvent();
+
+
 
 private:
 	//Sprite* buttonSprite = nullptr;

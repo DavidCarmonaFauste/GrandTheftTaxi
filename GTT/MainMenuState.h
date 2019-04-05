@@ -24,6 +24,7 @@ class MainMenuState :
 	public GameState
 {
 public:
+
 	MainMenuState();
 	virtual ~MainMenuState();
 

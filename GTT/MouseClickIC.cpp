@@ -4,6 +4,7 @@
 
 MouseClickIC::MouseClickIC (int key) {
 	mouseClickKey_ = key;
+	clickEvent_ = false;
 }
 
 
@@ -37,7 +38,13 @@ void MouseClickIC::handleInput (GameObject * o, Uint32 deltaTime, const SDL_Even
 					static_cast<Button*>(o)->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON.name[clickButton], 24.0f, false);
 					//static_cast<Button*>(o)->callback();
 				}	
+				clickEvent_ = true;
 			}
 		}
 	}
+}
+
+bool MouseClickIC:: isClickEvent()
+{
+	return clickEvent_;
 }
