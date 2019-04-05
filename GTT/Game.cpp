@@ -123,6 +123,11 @@ Camera * Game::getCamera(cameraType cT)
 	return cameras_[cT];
 }
 
+GameStateMachine * Game::getGameStateMachine()
+{
+	return gmStMachine_;
+}
+
 void Game::setState(string state){
 	gmStMachine_->setState(state);
 }

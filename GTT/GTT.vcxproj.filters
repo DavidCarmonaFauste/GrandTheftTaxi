@@ -55,6 +55,12 @@
     <Filter Include="Archivos de origen\Graphics\Scene">
       <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de encabezado\Components\InputC">
+      <UniqueIdentifier>{c5c0a038-c44d-4a34-b961-27597f9df4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Components\InputC">
+      <UniqueIdentifier>{98c30347-1263-40e1-9398-a12c980600fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -198,9 +204,6 @@
     <ClCompile Include="ControlType.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Car.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
@@ -216,17 +219,17 @@
     <ClCompile Include="TaxiSoundManagerCP.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="MouseClickIC.cpp">
-      <Filter>Archivos de origen\Components</Filter>
-    </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
     <ClCompile Include="AmmoDisplay.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
-    <ClCompile Include="MouseOverObject.cpp">
-      <Filter>Archivos de origen\Components</Filter>
+    <ClCompile Include="Button.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseClickIC.cpp">
+      <Filter>Archivos de origen\Components\InputC</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -386,9 +389,6 @@
     <ClInclude Include="Constants.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
@@ -404,14 +404,14 @@
     <ClInclude Include="AmmoDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MouseClickIC.h">
-      <Filter>Archivos de encabezado\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="MouseOverObject.h">
-      <Filter>Archivos de encabezado\Components</Filter>
+    <ClInclude Include="Button.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseClickIC.h">
+      <Filter>Archivos de encabezado\Components\InputC</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

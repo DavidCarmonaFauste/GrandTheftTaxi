@@ -9,10 +9,13 @@ MainMenuState::MainMenuState()
 	Game::getInstance ()->getCamera (UI_CAMERA)->setZoom (1.0, false);
 
 
-	//inicialización buttons
-	newGameButton_ = new Button(mainStateCallback, NEW_GAME_BUTTON);
-	stage_.push_back(newGameButton_);
+	//inicialización buttons - se insertan en el map
+	buttons_["newGameButton"] = new Button(mainStateCallback, NEW_GAME_BUTTON);
 
+	//se añade el container a la lista de GO
+	stage_.push_back(buttons_["newGameButton"]);
+
+	//newGameButton_ = new Button(mainStateCallback, NEW_GAME_BUTTON);
 	//stage_.push_back (new Button (exitGameCallback, EXIT_GAME_BUTTON));
 
 	//reticule
@@ -35,7 +38,8 @@ void MainMenuState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
 	
-	if (!newGameButton_->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON.name[clickButton]) && newGameButton_->isMouseClickICEvent()) {
+	if (!(buttons_["newGameButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON.name[clickButton])) && buttons_["newGameButton"]->isMouseClickICEvent()) {
+		int i = 0;
 		mainStateCallback();
 	}
 

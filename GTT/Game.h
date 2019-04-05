@@ -36,6 +36,7 @@ public:
 	b2World* getWorld();
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
+	GameStateMachine* getGameStateMachine();
 	void setState(string state);
 
 	// state setters

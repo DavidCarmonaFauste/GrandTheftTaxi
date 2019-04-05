@@ -1,6 +1,5 @@
 #include "Button.h"
 #include "MouseClickIC.h"
-#include "MouseOverObject.h"
 
 //sprite
 /*Button::Button (CallBackOnClick cb, ButtonInfo  buttonType) {
@@ -25,7 +24,6 @@ Button::Button(CallBackOnClick cb, ButtonInfo  buttonType)
 	setWidth(500); setHeight(200);
 
 	mouseClickIC = new MouseClickIC();
-	mouseOverObj_ = new MouseOverObject();
 
 	buttonAnimation_ = new Animation();
 	buttonAnimation_->loadAnimation(buttonType.idlePath[defaultAnm], buttonType.name[defaultAnm], buttonType.frAnm[defaultAnm].cols, buttonType.frAnm[defaultAnm].rows);
@@ -33,7 +31,6 @@ Button::Button(CallBackOnClick cb, ButtonInfo  buttonType)
 	addRenderComponent(buttonAnimation_);
 
 	addInputComponent(mouseClickIC);
-	addInputComponent(mouseOverObj_);
 
 }
 
@@ -42,7 +39,6 @@ Button::~Button () {
 	//delete buttonSprite; buttonSprite = nullptr;
 	delete buttonAnimation_; buttonAnimation_ = nullptr;
 	delete mouseClickIC; mouseClickIC = nullptr;
-	delete mouseOverObj_; mouseOverObj_ = nullptr;
 }
 
 Animation * Button::getButtonAnimacion()

@@ -47,7 +47,6 @@
     <ClCompile Include="Money.cpp" />
     <ClCompile Include="MoneyDisplay.cpp" />
     <ClCompile Include="MouseClickIC.cpp" />
-    <ClCompile Include="MouseOverObject.cpp" />
     <ClCompile Include="MpegState.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
@@ -109,7 +108,6 @@
     <ClInclude Include="Money.h" />
     <ClInclude Include="MoneyDisplay.h" />
     <ClInclude Include="MouseClickIC.h" />
-    <ClInclude Include="MouseOverObject.h" />
     <ClInclude Include="MpegState.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
