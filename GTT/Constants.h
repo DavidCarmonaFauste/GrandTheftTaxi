@@ -167,7 +167,7 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 const string PATH_BUTTONS[] = { "../Assets/sprites/button-play.png",
 								"../Assets/sprites/button-exit.png"};
 
-
+const string MAINMENURETICULE = "gun";
 
 
 #endif // !constants_define
