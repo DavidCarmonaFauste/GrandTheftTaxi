@@ -58,6 +58,11 @@ bool Animation::isAnimationPlaying(string name) {
 	return currentAnim == name;
 }
 
+string Animation::getCurrentAnimation()
+{
+	return currentAnim;
+}
+
 
 // Pauses the current animation
 bool Animation::pauseAnimation()

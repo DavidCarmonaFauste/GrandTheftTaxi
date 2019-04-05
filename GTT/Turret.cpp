@@ -23,7 +23,9 @@ Turret::Turret(WeaponInfo w)
 	perfRelSeg_ = w.perfRelSeg;
 	chargeTime_ = w.chargeTime;
 	normalB = w.normalB;
+	defaultNormalDMG_ = normalB.damage;
 	specialB = w.specialB;
+	defaultSpecialDMG_ = specialB.damage;
 	path_ = w.idlePath;
 	animationpath_ = w.shootPath;
 	reticulesprite_ = w.reticuleSprite;
@@ -59,6 +61,8 @@ Turret::Turret(WeaponInfo w)
 
 void Turret::update(Uint32 deltaTime)
 {
+	if (Reticule::GetInstance()->GetCurrentSprite() != reticulesprite_)
+		Reticule::GetInstance()->ChangeReticule(reticulesprite_);
 	Container::update(deltaTime);
 	if (reloading_) {
 		Reload();
@@ -92,9 +96,11 @@ void Turret::Shoot()
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks() - lastTimeShot_ >= cadence_) {
 			if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
+				specialB.damage = magazine_->top()*defaultSpecialDMG_;
 				SPshC_->shoot(specialB);
 			}
 			else {
+				normalB.damage = magazine_->top()*defaultNormalDMG_;
 				shC_->shoot(normalB);
 			}
 			magazine_->pop();

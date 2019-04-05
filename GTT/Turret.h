@@ -55,7 +55,9 @@ protected:
 	Animation* animC_;
 	Car* car_;//coche al que esta pegada la torreta
 	ProyectileInfo normalB;
+	int defaultNormalDMG_;
 	ProyectileInfo specialB;
+	int defaultSpecialDMG_;
 
 };
 
