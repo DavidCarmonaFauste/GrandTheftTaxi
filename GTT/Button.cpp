@@ -16,17 +16,17 @@
 }*/
 
 //spriteSheet
-Button::Button(CallBackOnClick cb, ButtonInfo  buttonType)
+Button::Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType)
 {
 	callback = cb;
 
-	setPosition(Vector2D(buttonType.pos.x, buttonType.pos.y));
+	setPosition(Vector2D(buttonType[defaultAnm].pos.x, buttonType[defaultAnm].pos.y));
 	setWidth(500); setHeight(200);
 
-	mouseClickIC = new MouseClickIC();
+	mouseClickIC = new MouseClickIC(buttonType);
 
 	buttonAnimation_ = new Animation();
-	buttonAnimation_->loadAnimation(buttonType.idlePath[defaultAnm], buttonType.name[defaultAnm], buttonType.frAnm[defaultAnm].cols, buttonType.frAnm[defaultAnm].rows);
+	buttonAnimation_->loadAnimation(buttonType[defaultAnm].idlePath, buttonType[defaultAnm].name, buttonType[defaultAnm].frAnm.cols, buttonType[defaultAnm].frAnm.rows);
 	
 	addRenderComponent(buttonAnimation_);
 

@@ -75,9 +75,9 @@ const struct frameAnimation {
 };
 
 const struct ButtonInfo {
-	string idlePath[3]; 
-	string name[3];
-	frameAnimation frAnm[3];
+	string idlePath; 
+	string name; //alberga un array de nombres, porque Animation.h inserta las correspondientes rutas en atributo privado tipo map< >
+	frameAnimation frAnm;
 	Vector2D pos;
 };
 
@@ -103,8 +103,8 @@ const int DMG_FREQUENCY = 1000;
 //Buttons //se usa para acceder a la posición del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {
 	defaultAnm,    //la animación por defecto tiene que llamarse defaultAnm para su correcta gestión en la clase Animation
-	clickButton,
-	overButton
+	overButton,
+	clickButton
 };
 
 //Enemy 1
@@ -181,13 +181,17 @@ const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/e
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 1, 1}, {LINEAR, 1, 1}, true};
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
 
-//Buttons  ---- to be used along with the ButtonType enum to pick texture
-const ButtonInfo NEW_GAME_BUTTON{ {"../Assets/sprites/buttons/NewGameButton/default.png", "../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png"}, 
-{"default","clickButton", "overButton"},
-{ {1 , 1}, {30, 1}, {1 , 1} }, {500.0, 150.0} };
-//const ButtonInfo EXIT_GAME_BUTTON{ "../Assets/sprites/button-exit.png", "ExitGameButton", 1, 1, {500.0, 500.0}};
+;
 
+//Buttons
+//siempre tienen que ser un vector, como mínimo con un componente default animation. 
+const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {500.0, 150.0}}, 
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {500.0, 150.0}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {500.0, 150.0}}
+};
 
+const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {500.0, 500.0}},
+{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {500.0, 500.0}} };
 
 
 

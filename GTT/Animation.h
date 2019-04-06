@@ -15,7 +15,7 @@ public:
 	virtual ~Animation();
 
 	// Animation
-	void loadAnimation(string path, string name, int columns = 1, int rows = 1);
+	void loadAnimation(string path, string name = "-1", int columns = 1, int rows = 1);
 	bool animationExists(string name);
 
 	bool isAnyAnimationPlaying();

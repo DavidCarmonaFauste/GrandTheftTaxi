@@ -13,7 +13,7 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	Button(CallBackOnClick cb, ButtonInfo  buttonType);
+	Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;

@@ -2,9 +2,10 @@
 #include "Button.h"
 #include "Game.h"
 
-MouseClickIC::MouseClickIC (int key) {
+MouseClickIC::MouseClickIC (const vector<ButtonInfo> bType, int key) {
 	mouseClickKey_ = key;
 	clickEvent_ = false;
+	buttonType_ = bType; buttonTypeSize_ = (buttonType_.size() -1);
 }
 
 
@@ -38,8 +39,12 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 			//si se produce el evento de input leftMouse
 			if (event.button.button == mouseClickKey_) {
 				if (static_cast<Button*>(o)->getButtonAnimacion() != nullptr) {
-					static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(NEW_GAME_BUTTON.idlePath[clickButton], NEW_GAME_BUTTON.name[clickButton], NEW_GAME_BUTTON.frAnm[clickButton].cols, NEW_GAME_BUTTON.frAnm[clickButton].rows);
-					static_cast<Button*>(o)->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON.name[clickButton], 24.0f, false);
+					//asegura que el vector de struc buttonInfo tiene una componente para la animación 
+					if (buttonTypeSize_ >= (int)clickButton) {
+						static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(buttonType_[clickButton].idlePath, buttonType_[clickButton].name, buttonType_[clickButton].frAnm.cols, buttonType_[clickButton].frAnm.rows);
+							static_cast<Button*>(o)->getButtonAnimacion()->playAnimation(buttonType_[clickButton].name, 24.0f, false);
+					}
+					
 				}
 				//notifica al update del Estado que el evento se ha producido. y el estado llama a su callback
 				clickEvent_ = true;
@@ -57,12 +62,15 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 					mouseY > int(objPosition.y) &&
 					mouseY < int(objPosition.y + o->getHeight())) {
 					if (static_cast<Button*>(o)->getButtonAnimacion() != nullptr) {
-						static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(NEW_GAME_BUTTON.idlePath[overButton], NEW_GAME_BUTTON.name[overButton], NEW_GAME_BUTTON.frAnm[overButton].cols, NEW_GAME_BUTTON.frAnm[overButton].rows);
+						if (buttonTypeSize_ >= (int)overButton) {
+							static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(buttonType_[overButton].idlePath, buttonType_[overButton].name, buttonType_[overButton].frAnm.cols, buttonType_[overButton].frAnm.rows);
+						}
+						
 					}
 				}
 				else {
 					if (static_cast<Button*>(o)->getButtonAnimacion() != nullptr) {
-						static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(NEW_GAME_BUTTON.idlePath[defaultAnm], NEW_GAME_BUTTON.name[defaultAnm], NEW_GAME_BUTTON.frAnm[defaultAnm].cols, NEW_GAME_BUTTON.frAnm[defaultAnm].rows);
+						static_cast<Button*>(o)->getButtonAnimacion()->loadAnimation(buttonType_[defaultAnm].idlePath, buttonType_[defaultAnm].name, buttonType_[defaultAnm].frAnm.cols, buttonType_[defaultAnm].frAnm.rows);
 					}
 				}
 			}//SDL_MOUSEMOTION
