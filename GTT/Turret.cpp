@@ -15,6 +15,7 @@ Turret::Turret(WeaponInfo w)
 	lastTimeShot_ = -1000;
 	chargeprogress_ = SDL_GetTicks();
 	reloading_ = false;
+	charged_ = false;
 
 	maxAmmo_ = w.maxAmmo;
 	cadence_ = w.cadence;
@@ -36,7 +37,12 @@ Turret::Turret(WeaponInfo w)
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
 	}
-
+	sparkleanim_ = new Animation();
+	sparkleEffect_.setWidth(50);
+	sparkleEffect_.setHeight(50);
+	sparkleEffect_.addRenderComponent(sparkleanim_);
+	sparkleanim_->loadAnimation("../Assets/sprites/sparkle_anim.png", "sparkle", 3);
+	sparkleEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
 	animC_->loadAnimation(path_, "default");
@@ -61,13 +67,33 @@ Turret::Turret(WeaponInfo w)
 
 void Turret::update(Uint32 deltaTime)
 {
+	if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
+		if (!charged_ && !magazine_->empty()) {
+			sparkleanim_->playAnimation("sparkle", 6.0f, false);
+			charged_ = true;
+		}
+	}
+		
+
+	sparkleEffect_.update(deltaTime);
+	
 	if (Reticule::GetInstance()->GetCurrentSprite() != reticulesprite_)
 		Reticule::GetInstance()->ChangeReticule(reticulesprite_);
+
+
 	Container::update(deltaTime);
+
+
 	if (reloading_) {
 		Reload();
 		ResetChargeProgress();
 	} 
+}
+
+void Turret::render(Uint32 deltaTime)
+{
+	Container::render(deltaTime);
+	sparkleEffect_.render(deltaTime);
 }
 
 void Turret::AttachToVehicle(Car * car)
@@ -95,9 +121,10 @@ void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
 		if (SDL_GetTicks() - lastTimeShot_ >= cadence_) {
-			if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
+			if (charged_) {
 				specialB.damage = magazine_->top()*defaultSpecialDMG_;
 				SPshC_->shoot(specialB);
+				charged_ = false;
 			}
 			else {
 				normalB.damage = magazine_->top()*defaultNormalDMG_;

@@ -16,6 +16,7 @@ class Turret : public Container
 public:
 	Turret(WeaponInfo w);
 	virtual void update(Uint32 deltaTime);
+	virtual void render(Uint32 deltaTime);
 	virtual void AttachToVehicle(Car* car);
 	virtual void Shoot();
 	virtual void Reload();
@@ -45,6 +46,7 @@ protected:
 	double perfRelSeg_;//segmento del tiempo de recarga en el que entra en accion la recarga perfecta (en tanto por 1)
 	double perfRelIni_;//momento dentro del tiempo de recarga en el que empieza el segmento de recarga perfecta (en tanto por 1)
 	bool reloading_;//indica si se esta recargando en el momento
+	bool charged_;//indica si esta cargado el disparo
 	bool automatic_;//indica si la torreta es de disparo automatico
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
@@ -58,6 +60,7 @@ protected:
 	int defaultNormalDMG_;
 	ProyectileInfo specialB;
 	int defaultSpecialDMG_;
-
+	Container sparkleEffect_;
+	Animation* sparkleanim_;
 };
 
