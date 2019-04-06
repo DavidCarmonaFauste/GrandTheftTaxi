@@ -67,6 +67,7 @@ const struct WeaponInfo {
 	ShootMode shootMode1;
 	ShootMode shootMode2;
 	bool automatic;
+	int chargedShotDelay;
 };
 
 enum ButtonTypes { MainMenuPlay, MainMenuExit }; 
@@ -158,10 +159,10 @@ const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 5
 const ProyectileInfo MACHINEGUNBULLET{};
 
 //Weapons
-const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 150, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false };
-const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 900, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false };
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true};
-const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false };
+const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};
+const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100};
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
+const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
 //Buttons  ---- to be used along with the ButtonType enum to pick texture
 const string PATH_BUTTONS[] = { "../Assets/sprites/button-play.png",

@@ -33,6 +33,7 @@ Turret::Turret(WeaponInfo w)
 	height_ = w.height;
 	width_ = w.width;
 	automatic_ = w.automatic;
+	chargedShotDelay_ = w.chargedShotDelay;
 	magazine_ = new stack<double>[maxAmmo_];
 	for (int i = 0; i < maxAmmo_; i++) {
 		magazine_->push(1.0);
@@ -120,18 +121,21 @@ void Turret::AttachToVehicle(Car * car)
 void Turret::Shoot()
 {
 	if (!magazine_->empty() && !reloading_) {
-		if (SDL_GetTicks() - lastTimeShot_ >= cadence_) {
+		int a = SDL_GetTicks() - lastTimeShot_;
+		if (a >= cadence_) {
 			if (charged_) {
 				specialB.damage = magazine_->top()*defaultSpecialDMG_;
 				SPshC_->shoot(specialB);
+				lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 				charged_ = false;
 			}
 			else {
 				normalB.damage = magazine_->top()*defaultNormalDMG_;
 				shC_->shoot(normalB);
+				lastTimeShot_ = SDL_GetTicks();
 			}
+			
 			magazine_->pop();
-			lastTimeShot_ = SDL_GetTicks();
 			animC_->playAnimation("idle", 3.5f, false);
 			ResetChargeProgress();
 		}

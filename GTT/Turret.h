@@ -48,6 +48,7 @@ protected:
 	bool reloading_;//indica si se esta recargando en el momento
 	bool charged_;//indica si esta cargado el disparo
 	bool automatic_;//indica si la torreta es de disparo automatico
+	int chargedShotDelay_;//tiempo de espera añadido a la cadencia para poder disparar otra bala tras un disparo cargado
 	string path_;//direccion del sprite de la torreta
 	string animationpath_;
 	string reticulesprite_="";
