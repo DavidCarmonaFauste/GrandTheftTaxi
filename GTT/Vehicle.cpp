@@ -44,7 +44,7 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
 	this->addLogicComponent(phyO_);
 	
 	// Control
-	control_ = new InputMovement(k, this);
+	control_ = new InputMovement(k, this, false);
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
