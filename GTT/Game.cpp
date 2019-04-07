@@ -12,6 +12,10 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
+	
+	// SDL_Mixer initialization
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+		cout << "SDL Mixer initialization failed";
 
 	// SDL_TTF initialization
 	TTF_Init();
@@ -23,6 +27,7 @@ Game::Game() {
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
+	soundManager_ = new SoundManager();
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
