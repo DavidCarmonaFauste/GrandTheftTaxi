@@ -8,9 +8,11 @@ MainMenuState::MainMenuState()
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setZoom (1.0, false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setZoom (1.0, false);
 
+	//inicialiacio id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
+	Sound_NewGameButton_ = TAXI_START;
 
 	//inicialización buttons - se insertan en el map
-	buttons_["newGameButton"] = new Button(mainStateCallback, (NEW_GAME_BUTTON));
+	buttons_["newGameButton"] = new Button(mainStateCallback, (NEW_GAME_BUTTON), Sound_NewGameButton_);
 	buttons_["extiButton"] = new Button(exitGameCallback, (EXIT_BUTTON));
 
 	//se añade el container a la lista de GO
@@ -21,6 +23,7 @@ MainMenuState::MainMenuState()
 	//reticule
 	Reticule::GetInstance()->ChangeReticule("gun");
 	stage_.push_back(Reticule::GetInstance());
+
 }
 
 

@@ -140,6 +140,9 @@ void Game::init() {
 	// and initialize its states
 	gmStMachine_ = new GameStateMachine();
 	gmStMachine_->initStates();
+
+	//initialize SoundManager
+	soundManager_ = new SoundManager();
 }
 
 Game * Game::getInstance() {

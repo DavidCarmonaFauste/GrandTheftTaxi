@@ -1,6 +1,10 @@
 #include "SoundManager.h"
 
 SoundManager::SoundManager() {
+
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+		cout << "Error" << Mix_GetError() << endl;
+
 	// Load the music files from the resources sheet
 	for (auto music : MUSIC) {
 		loadMusic(music.second, music.first);
@@ -31,7 +35,6 @@ SoundManager::~SoundManager() {
 // USE THE RESOURCES SHEET INSTEAD !!!
 bool SoundManager::loadSound(string path, soundId id) {
 	loadedSounds_[id] = Mix_LoadWAV(path.c_str());
-
 	return loadedSounds_[id] != nullptr;
 }
 

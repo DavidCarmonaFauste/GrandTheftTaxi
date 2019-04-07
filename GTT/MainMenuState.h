@@ -32,5 +32,6 @@ public:
 
 private:
 	map<string, Button*> buttons_;
+	soundId Sound_NewGameButton_;
 };
 

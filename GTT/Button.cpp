@@ -16,7 +16,7 @@
 }*/
 
 //spriteSheet
-Button::Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType)
+Button::Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType, const soundId sound)
 {
 	callback = cb;
 
@@ -31,6 +31,8 @@ Button::Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType)
 	addRenderComponent(buttonAnimation_);
 
 	addInputComponent(mouseClickIC);
+
+	clickSound_ = sound;
 
 }
 
@@ -49,4 +51,12 @@ Animation * Button::getButtonAnimacion()
 bool  Button:: isMouseClickICEvent()
 {
 	return mouseClickIC->isClickEvent();
+}
+
+const soundId Button::getSound()
+{
+	if (clickSound_ != (int)-1)
+		return clickSound_;
+	else
+		return (soundId)-1;
 }
