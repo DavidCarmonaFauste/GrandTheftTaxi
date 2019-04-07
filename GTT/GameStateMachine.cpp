@@ -1,6 +1,7 @@
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
 #include "MainState.h"
+#include "ShopState.h"
 
 
 
@@ -35,4 +36,7 @@ void GameStateMachine::initStates() {
 
 	// Main game
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+
+	// Shop state
+	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
 }

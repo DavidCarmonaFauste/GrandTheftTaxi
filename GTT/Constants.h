@@ -91,6 +91,7 @@ const double BUTTON_Y_POSITIONS[2] = { 150.0, 500.0 };
 //States
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MAIN_STATE";
+const string NAME_SHOP_STATE = "SHOP_STATE";
 
 //SOUNDS
 const enum soundId {

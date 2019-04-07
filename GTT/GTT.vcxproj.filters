@@ -216,6 +216,9 @@
     <ClCompile Include="CustomContactListener.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
+    <ClCompile Include="ShopState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -388,6 +391,9 @@
     </ClInclude>
     <ClInclude Include="CustomContactListener.h">
       <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
