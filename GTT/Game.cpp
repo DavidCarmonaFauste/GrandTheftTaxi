@@ -24,6 +24,8 @@ Game::Game() {
 
 	world_ = new b2World(b2Vec2(0, 0));
 
+	world_->SetContactListener(CustomContactListener::getInstance());
+	
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";

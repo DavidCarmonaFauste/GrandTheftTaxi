@@ -26,6 +26,7 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="Font.cpp" />

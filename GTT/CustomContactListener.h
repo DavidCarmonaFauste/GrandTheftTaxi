@@ -1,26 +1,48 @@
 #pragma once
 #include <Box2D/Box2D.h>
+#include <vector>
+
+using namespace std;
+
+typedef void *(contactCallback)(b2Contact* contact);
 
 class CustomContactListener : public b2ContactListener {
 public:
-	CustomContactListener() {};
-	~CustomContactListener() {};
+	static CustomContactListener* getInstance();
 
 	// DO NOT CALL, THIS IS ONLY USED BY BOX2D TO FIRE EVENTS
 	virtual void BeginContact(b2Contact* contact) override {
-		beginCallback_(contact);
+		for (auto cb : beginCallbacks_)
+			cb(contact);
 	}
 
 	// DO NOT CALL, THIS IS ONLY USED BY BOX2D TO FIRE EVENTS
 	virtual void EndContact(b2Contact* contact) override {
-		endCallback_(contact);
+		for (auto cb : endCallbacks_)
+			cb(contact);
 	}
 
-	void setBeginCallback(void(*beginCallback)(b2Contact* contact)) { beginCallback_ = beginCallback; };
-	void setEndCallback(void(*endCallback)(b2Contact* contact)) { endCallback_ = endCallback; };
+	// Returns the id assigned to the callback (used later
+	// if you need to remove the callback)
+	int addBeginCallback(contactCallback cb);
+
+	// Returns the id assigned to the callback (used later
+	// if you need to remove the callback)
+	int addEndCallback(contactCallback cb);
+
+	// Returns whether the callback with the given id could be deleted
+	bool removeBeginCallback(int id);
+
+	// Returns whether the callback with the given id could be deleted
+	bool removeEndCallback(int id);
 
 private:
-	void (*beginCallback_)(b2Contact* contact);
-	void (*endCallback_)(b2Contact* contact);
+	static CustomContactListener *singleton_;
+
+	CustomContactListener() {};
+	~CustomContactListener() {};
+
+	vector<contactCallback*> beginCallbacks_;
+	vector<contactCallback*> endCallbacks_;
 };
 

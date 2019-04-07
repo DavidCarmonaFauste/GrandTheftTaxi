@@ -213,6 +213,9 @@
     <ClCompile Include="Trigger.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="CustomContactListener.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
