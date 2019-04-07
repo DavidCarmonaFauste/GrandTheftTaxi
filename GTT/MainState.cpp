@@ -15,8 +15,9 @@ MainState::MainState() {
 	// Taxi
 	
 	stage_.push_back(Vehicle::GetInstance());
-	//cameraFollow = new FollowGameObject(Vehicle::GetInstance());
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.25));
+	Reticule::GetInstance()->setPosition(Vehicle::GetInstance()->getPosition());
+	cameraFollow = new FollowGameObject(Vehicle::GetInstance());
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 	// Enemy1
 	enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
 	stage_.push_back(enemy1_);
@@ -37,6 +38,7 @@ MainState::MainState() {
 
 	Vehicle::GetInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::GetInstance()->EquipTurret(new Turret(GUN));
+
 
 
 }

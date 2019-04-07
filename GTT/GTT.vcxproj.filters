@@ -231,6 +231,9 @@
     <ClCompile Include="MouseClickIC.cpp">
       <Filter>Archivos de origen\Components\InputC</Filter>
     </ClCompile>
+    <ClCompile Include="FollowMiddlePoint.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -412,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="MouseClickIC.h">
       <Filter>Archivos de encabezado\Components\InputC</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowMiddlePoint.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
