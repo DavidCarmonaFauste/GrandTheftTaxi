@@ -9,7 +9,7 @@ MainMenuState::MainMenuState()
 	Game::getInstance ()->getCamera (UI_CAMERA)->setZoom (1.0, false);
 
 	//inicialiacio id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
-	Sound_NewGameButton_ = TAXI_ACCELERATE_01;
+	Sound_NewGameButton_ = CLIC_BUTTON_NEWGAME;
 
 	//inicializaci�n buttons - se insertan en el map
 	buttons_["newGameButton"] = new Button(mainStateCallback, (NEW_GAME_BUTTON), Sound_NewGameButton_);
