@@ -48,7 +48,7 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 						
 						//accede al SoundManager y reproduce el sonido
 						if (button->getSound() != -1) {
-							Game::getInstance()->getSoundManager()->playSound(TAXI_START, 20);
+							Game::getInstance()->getSoundManager()->playSound(button->getSound(), 0);
 						}
 						
 					}
