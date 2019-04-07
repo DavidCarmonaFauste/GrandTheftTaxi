@@ -15,7 +15,7 @@ Game::Game() {
 	
 	// SDL_Mixer initialization
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
-		cout << "SDL Mixer initialization failed";
+		cout << "Error" << Mix_GetError() << endl;
 
 	// SDL_TTF initialization
 	TTF_Init();
