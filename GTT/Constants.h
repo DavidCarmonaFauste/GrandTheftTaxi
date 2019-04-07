@@ -13,7 +13,7 @@ const struct KeysScheme {
 	SDL_Keycode turnRight;
 	SDL_Keycode turnLeft;
 	SDL_Keycode mainAction;
-	SDL_MouseButtonEvent swapWeapon;
+	SDL_Keycode swapWeapon;
 	SDL_Keycode openMap;
 	SDL_Keycode mainMenu;
 };
@@ -160,7 +160,7 @@ const map<musicId, string> MUSIC = {
 
 
 //KeyBindings
-const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE };
+const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDLK_q, SDL_BUTTON_LEFT, SDLK_m, SDLK_ESCAPE };
 
 //Fonts
 const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";

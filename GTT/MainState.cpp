@@ -21,18 +21,17 @@ MainState::MainState() {
 	stage_.push_back(enemy1_);
 
 	// Systems
-	moneySystem_ = new Money();
-	stage_.push_back(moneySystem_);
+	stage_.push_back(Money::getInstance());
 	respawner_ = new Respawner(Vehicle::GetInstance()->getHealthComponent());
 	Vehicle::GetInstance()->addLogicComponent(respawner_);
 
-	// UI
-	UI_ = new UI();
+	// TESTING THE SHOP TRIGGER
+	new Shop(100, 100, 500, 0);
 
-	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI_);
-	moneySystem_->registerObserver(UI_);
-	
-	stage_.push_back(UI_);
+	// UI
+	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI::getInstance());
+	Money::getInstance()->registerObserver(UI::getInstance());
+	stage_.push_back(UI::getInstance());
 
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());

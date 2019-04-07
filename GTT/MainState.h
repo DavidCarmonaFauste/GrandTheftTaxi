@@ -27,10 +27,6 @@ private:
 	FollowGameObject* cameraFollow;
 
 	// Systems
-	Money* moneySystem_;
 	Respawner* respawner_;
-
-	// UI
-	UI* UI_;
 };
 
