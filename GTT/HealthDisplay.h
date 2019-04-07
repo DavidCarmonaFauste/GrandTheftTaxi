@@ -15,6 +15,7 @@ private:
 	Sprite* background;
 	Sprite* bar;
 	SDL_Rect* bar_clip;
+	float bardefaultwidth;
 
 	Text* fuhealthAmount_;
 

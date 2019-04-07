@@ -15,11 +15,13 @@ public:
 	virtual ~Animation();
 
 	// Animation
-	void loadAnimation(string path, string name, int columns = 1, int rows = 1);
+	void loadAnimation(string path, string name = "-1", int columns = 1, int rows = 1);
 	bool animationExists(string name);
 
 	bool isAnyAnimationPlaying();
 	bool isAnimationPlaying(string name);
+
+	string getCurrentAnimation();
 
 	bool playAnimation(string name, float speed = true, bool loop = true);
 	bool stopAnimation();
@@ -30,7 +32,11 @@ public:
 	
 	void setCamera(cameraType cam);
 
+
+
 private:
+
+
 	cameraType cam_ = GAME_CAMERA;
 	SDL_Rect* destRect;
 
@@ -47,4 +53,5 @@ private:
 
 	void renderAnimation(GameObject *o, Uint32 deltaTime);
 	void resetAnimationValues();
+
 };

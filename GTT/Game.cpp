@@ -12,17 +12,22 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
+	
+	// SDL_Mixer initialization
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+		cout << "Error" << Mix_GetError() << endl;
 
 	// SDL_TTF initialization
 	TTF_Init();
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
-	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
+	soundManager_ = new SoundManager();
 
 	world_->SetContactListener(CustomContactListener::getInstance());
 	
@@ -46,6 +51,10 @@ void Game::handleEvents(Uint32 deltaTime) {
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
+			}
+			
+			else if (event.key.keysym.sym == SDLK_f) {
+				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
 		}
 		for (auto cam : cameras_) cam.second->handleInput(deltaTime, event);
@@ -121,6 +130,15 @@ Camera * Game::getCamera(cameraType cT)
 	return cameras_[cT];
 }
 
+GameStateMachine * Game::getGameStateMachine()
+{
+	return gmStMachine_;
+}
+
+void Game::setState(string state){
+	gmStMachine_->setState(state);
+}
+
 void Game::init() {
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 	cameras_[UI_CAMERA] = new Camera(1600, 900);
@@ -129,6 +147,9 @@ void Game::init() {
 	// and initialize its states
 	gmStMachine_ = new GameStateMachine();
 	gmStMachine_->initStates();
+
+	//initialize SoundManager
+	soundManager_ = new SoundManager();
 }
 
 Game * Game::getInstance() {

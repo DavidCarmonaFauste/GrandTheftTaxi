@@ -4,6 +4,7 @@
 #include "Observer.h"
 #include "MoneyDisplay.h"
 #include "ReloadingDisplay.h"
+#include "AmmoDisplay.h"
 
 class UI : public Container, public Observer
 {
@@ -23,6 +24,7 @@ private:
 	HealthDisplay* healthDisplay_;
 	MoneyDisplay* moneyDisplay_;
 	ReloadingDisplay* reloadDisplay_;
+	AmmoDisplay* ammoDisplay_;
 
 	Font* font_;
 	SDL_Color fontColor_;

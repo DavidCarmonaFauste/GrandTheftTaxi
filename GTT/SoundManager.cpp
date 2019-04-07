@@ -1,6 +1,7 @@
 #include "SoundManager.h"
 
 SoundManager::SoundManager() {
+
 	// Load the music files from the resources sheet
 	for (auto music : MUSIC) {
 		loadMusic(music.second, music.first);
@@ -31,7 +32,6 @@ SoundManager::~SoundManager() {
 // USE THE RESOURCES SHEET INSTEAD !!!
 bool SoundManager::loadSound(string path, soundId id) {
 	loadedSounds_[id] = Mix_LoadWAV(path.c_str());
-
 	return loadedSounds_[id] != nullptr;
 }
 

@@ -43,9 +43,6 @@
     <Filter Include="Archivos de encabezado\Scene">
       <UniqueIdentifier>{2dce42f9-bb32-4932-b8c8-6288dbff8bb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de origen\Scene">
-      <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de origen\UI">
       <UniqueIdentifier>{5bc37d18-3b38-4ca1-9e2f-225645e6fe4d}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,15 @@
     </Filter>
     <Filter Include="Archivos de origen\Core">
       <UniqueIdentifier>{50456495-41a1-49b4-8aa9-efa0b412a9c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Graphics\Scene">
+      <UniqueIdentifier>{77c503a7-e48d-4eaf-b2e0-7773ce3b134c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Components\InputC">
+      <UniqueIdentifier>{c5c0a038-c44d-4a34-b961-27597f9df4bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Components\InputC">
+      <UniqueIdentifier>{98c30347-1263-40e1-9398-a12c980600fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +111,6 @@
     <ClCompile Include="FollowGameObject.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateMachine.cpp">
-      <Filter>Archivos de origen\StateMachine</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicObject.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
@@ -121,10 +124,10 @@
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Archivos de origen\Scene</Filter>
+      <Filter>Archivos de origen\Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Archivos de origen\Scene</Filter>
+      <Filter>Archivos de origen\Graphics\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Health.cpp">
       <Filter>Archivos de origen\Components</Filter>
@@ -201,23 +204,47 @@
     <ClCompile Include="ControlType.cpp">
       <Filter>Archivos de origen\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Car.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="VideoManager.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="MpegState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="TaxiSoundManagerCP.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="AmmoDisplay.cpp">
+      <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
     <ClCompile Include="MouseClickIC.cpp">
+      <Filter>Archivos de origen\Components\InputC</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowMiddlePoint.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopState.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Shop.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Trigger.cpp">
-      <Filter>Archivos de origen\GameObjects</Filter>
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="CustomContactListener.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ShopState.cpp">
-      <Filter>Archivos de origen\StateMachine</Filter>
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,23 +404,44 @@
     <ClInclude Include="Constants.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Car.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="VideoManager.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MpegState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="AmmoDisplay.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
     <ClInclude Include="MouseClickIC.h">
+      <Filter>Archivos de encabezado\Components\InputC</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowMiddlePoint.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopState.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Shop.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Trigger.h">
-      <Filter>Archivos de encabezado\GameObjects</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="CustomContactListener.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ShopState.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

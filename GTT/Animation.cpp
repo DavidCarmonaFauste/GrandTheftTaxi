@@ -6,6 +6,7 @@ Animation::Animation() {
 	destRect = new SDL_Rect();
 	destRect->w = destRect->h = 100;
 	destRect->x = destRect->y = 0;
+
 }
 
 Animation::~Animation() {
@@ -21,14 +22,19 @@ Animation::~Animation() {
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
 void Animation::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
 
-	SDL_Rect* animRect = new SDL_Rect();
-	animRect->h = animTexture->getHeight() / rows;
-	animRect->w = animTexture->getWidth() / columns;
-	animRect->x = animRect->y = 0;
+	if (path != "-1") {
+		Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
 
-	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+		SDL_Rect* animRect = new SDL_Rect();
+		animRect->h = animTexture->getHeight() / rows;
+		animRect->w = animTexture->getWidth() / columns;
+		animRect->x = animRect->y = 0;
+
+		animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+
+		currentAnim = name;
+	}
 }
 
 bool Animation::playAnimation(string name, float speed, bool loop) {
@@ -50,12 +56,18 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 
 bool Animation::isAnyAnimationPlaying() {
 	return currentAnim != "default";
+
 }
 
 // Checks whether the given animation is currently
 // playing
 bool Animation::isAnimationPlaying(string name) {
 	return currentAnim == name;
+}
+
+string Animation::getCurrentAnimation()
+{
+	return currentAnim;
 }
 
 
@@ -132,6 +144,7 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
+
 
 void Animation::resetAnimationValues() {
 	paused = false;

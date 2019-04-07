@@ -7,10 +7,12 @@ class ReloadingDisplay :
 	public Container
 {
 public:
-	ReloadingDisplay(Vehicle* vehicle);
+	ReloadingDisplay();
 	void setReloadingPercentage();
 	virtual ~ReloadingDisplay();
 	virtual void update(Uint32 deltaTime);
+	virtual void render(Uint32 deltaTime);
+	virtual bool isReloading();
 
 
 private:
@@ -20,6 +22,5 @@ private:
 	SDL_Rect* bar_clip;
 	double barWidth;
 
-	Vehicle* vehicle_;
 };
 

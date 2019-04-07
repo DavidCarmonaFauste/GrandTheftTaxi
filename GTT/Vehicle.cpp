@@ -7,11 +7,11 @@
 #include "Reticule.h"
 #include "InputMovement.h"
 
-Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
+Vehicle* Vehicle::instance_ = nullptr;
+
+Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
-
-	this->setPosition(Vector2D(x, y));
 
 	// Sprite
 	sprite_ = new Animation();
@@ -48,6 +48,10 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k) {
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
+
+	//Sound
+	smLC_ = new TaxiSoundManagerCP();
+	this->addLogicComponent(smLC_);
 }
 
 
@@ -61,14 +65,7 @@ Vehicle::~Vehicle() {
 	delete[]turrets_;
 }
 
-Health * Vehicle::getHealthComponent() {
-	return health_;
-}
 
-AimComponent * Vehicle::GetAimComponent()
-{
-	return aimC_;
-}
 
 ReloadInputComponent * Vehicle::GetReloadIC()
 {
@@ -80,17 +77,20 @@ ShootIC * Vehicle::GetShootIC()
 	return shIC_;
 }
 
+TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
+{
+	return smLC_;
+}
+
 void Vehicle::EquipTurret(Turret * turret)
 {
-	if (turrets_[currentTurret_] == nullptr) {
+	int i = 0;
+	while (i<MAXTURRETS && turrets_[i] != nullptr)
+		i++;
+	if (i < MAXTURRETS) {
+		currentTurret_ = i;
 		turrets_[currentTurret_] = turret;
 		Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
-		turrets_[currentTurret_]->AttachToVehicle(this);
-
-	}
-	else if (currentTurret_ < MAXTURRETS - 1 && turrets_[currentTurret_ + 1] == nullptr) {
-		currentTurret_++;
-		turrets_[currentTurret_] = turret;
 		turrets_[currentTurret_]->AttachToVehicle(this);
 	}
 	else {
@@ -99,7 +99,11 @@ void Vehicle::EquipTurret(Turret * turret)
 }
 void Vehicle::ChangeTurret()
 {
+	turrets_[currentTurret_]->CancelReload();
 	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
+	while (turrets_[currentTurret_] == nullptr) {
+		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
+	}
 	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 	turrets_[currentTurret_]->ResetChargeProgress();
@@ -109,20 +113,7 @@ Turret * Vehicle::getCurrentTurret()
 	return turrets_[currentTurret_];
 }
 
-void Vehicle::setPosition(const Vector2D & pos, bool force) {
-	GameObject::setPosition(pos);
 
-	if (force) {
-		b2Vec2 nextPos = b2Vec2(pos.x, pos.y) +
-			b2Vec2(phyO_->getOrigin().x * width_,
-				phyO_->getOrigin().y * height_);
-
-		nextPos = b2Vec2(nextPos.x * PHYSICS_SCALING_FACTOR,
-			nextPos.y * PHYSICS_SCALING_FACTOR);
-
-		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
-	}
-}
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {	
@@ -152,25 +143,14 @@ void Vehicle::render(Uint32 time) {
 }
 
 
-PhysicObject * Vehicle::GetPhyO()
-{
-	return phyO_;
-}
 
-float32 Vehicle::GetMaxSpeed()
-{
-	return maxSpeed_;
-}
 
 float32 Vehicle::GetMaxBackwardSpeed()
 {
 	return maxBackwardSpeed_;
 }
 
-float32 Vehicle::GetTurnSpeed()
-{
-	return turnSpeed_;
-}
+
 
 float32 Vehicle::GetAcceleration()
 {

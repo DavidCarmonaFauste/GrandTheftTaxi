@@ -19,6 +19,14 @@ UI::UI() {
 	moneyDisplay_ = new MoneyDisplay(font_, fontColor_);
 	UIElements_.push_back(moneyDisplay_);
 
+	//Ammo
+	ammoDisplay_ = new AmmoDisplay();
+	UIElements_.push_back(ammoDisplay_);
+
+	//Reload
+	reloadDisplay_ = new ReloadingDisplay();
+	UIElements_.push_back(reloadDisplay_);
+
 }
 
 
@@ -37,6 +45,8 @@ void UI::render(Uint32 deltaTime) {
 
 void UI::update(Uint32 deltaTime)
 {
+	if (reloadDisplay_ != nullptr)
+		reloadDisplay_->setActive(reloadDisplay_->isReloading());
 	for (auto element : UIElements_) {
 		element->update(deltaTime);
 	}
@@ -46,6 +56,7 @@ void UI::addUIElement(Container * c)
 {
 	UIElements_.push_back(c);
 }
+
 
 bool UI::receiveEvent(Event& e) {
 	if (e.type_ == HEALTH_CHANGED) {

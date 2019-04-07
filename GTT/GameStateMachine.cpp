@@ -2,26 +2,26 @@
 #include "MainMenuState.h"
 #include "MainState.h"
 #include "ShopState.h"
+#include "MpegState.h"
+#include "Reticule.h"
 
 
 
 GameStateMachine::GameStateMachine() {
-	currentState_ = NAME_MAINMENU_STATE;
-	//currentState_ = NAME_MAIN_STATE;
+
 }
 
 GameStateMachine::~GameStateMachine() {
 	
 }
 
-//agrega a la pila el estado pasado por parámetro
 void GameStateMachine::setState(const string &s) {
-	//el atributo de la clase recoge el valor del nuevo estado y el update se encarga de gestionarlo 
+	if (currentState_ != "") STATES_[currentState_]->end();
 	currentState_ = s;
+	STATES_[currentState_]->start();
 }
 
 
-//devuelve el actual estado de la pila
 string GameStateMachine::get_CurrentStateName() const {
 	return currentState_;
 }
@@ -39,4 +39,14 @@ void GameStateMachine::initStates() {
 
 	// Shop state
 	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
+
+	// Mpeg state
+	STATES_.insert(std::pair<string, GameState*>(NAME_MPEG_STATE, new MpegState(Game::getInstance()->getWindow(), Game::getInstance()->getRenderer())));
+
+	MpegState* intro = static_cast<MpegState*>(STATES_[NAME_MPEG_STATE]);
+	intro->setVideoId(INTRO_VIDEO);
+	//setState(NAME_MPEG_STATE);
+
+	setState(NAME_MAINMENU_STATE);
+	//setState(NAME_MAIN_STATE);
 }
