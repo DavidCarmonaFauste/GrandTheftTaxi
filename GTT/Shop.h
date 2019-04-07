@@ -1,18 +1,13 @@
 #pragma once
-#include "Container.h"
+#include "Trigger.h"
 
-class Shop : public Container {
+class Shop : public Trigger {
 public:
-	static Shop* getInstance();
-
-	vector<Container*> getTriggers();
-
-private:
-	static Shop* singleton_;
-
-	Shop();
+	Shop(int w, int h, int x, int y);
 	virtual ~Shop();
 
-	vector<Container*> triggers_;
+protected:
+	virtual void beginCallback(b2Contact *contact) override;
+	virtual void endCallback(b2Contact *contact) override;
 };
 

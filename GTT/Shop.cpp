@@ -1,20 +1,17 @@
 #include "Shop.h"
 
-Shop* Shop::singleton_ = nullptr;
-Shop * Shop::getInstance() {
-	if (singleton_ == nullptr)
-		singleton_ = new Shop();
-	return singleton_;
-}
-
-vector<Container*> Shop::getTriggers() {
-	return triggers_;
-}
-
-Shop::Shop() {
+Shop::Shop(int w, int h, int x, int y) : Trigger(w, h, x, y) {
 
 }
 
 Shop::~Shop() {
 
+}
+
+void Shop::beginCallback(b2Contact * contact) {
+	
+}
+
+void Shop::endCallback(b2Contact * contact){
+	
 }

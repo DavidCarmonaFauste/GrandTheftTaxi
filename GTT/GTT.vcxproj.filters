@@ -214,7 +214,7 @@
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="CustomContactListener.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -387,7 +387,7 @@
       <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="CustomContactListener.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

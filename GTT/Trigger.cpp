@@ -1,4 +1,5 @@
 #include "Trigger.h"
+#include <functional>
 
 Trigger::Trigger(int w, int h, int x, int y) {
 	width_ = w; height_ = h;
@@ -7,6 +8,10 @@ Trigger::Trigger(int w, int h, int x, int y) {
 	phyO_ = new PhysicObject(b2_kinematicBody, w, h, x, y);
 	phyO_->setSensor(true);
 	addLogicComponent(phyO_);
+
+	// Set the callbacks
+	CustomContactListener::getInstance()->addBeginCallback(bind(&Trigger::beginCallbackHelper, this, std::placeholders::_1));
+	CustomContactListener::getInstance()->addEndCallback(bind(&Trigger::endCallbackHelper, this, std::placeholders::_1));
 }
 
 
@@ -19,6 +24,10 @@ PhysicObject * Trigger::getPhysicsObject() {
 	return phyO_;
 }
 
-void callback() {
+void Trigger::beginCallbackHelper(b2Contact * contact) {
+	beginCallback(contact);
+}
 
+void Trigger::endCallbackHelper(b2Contact * contact) {
+	endCallback(contact);
 }

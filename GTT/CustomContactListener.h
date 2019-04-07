@@ -1,10 +1,11 @@
 #pragma once
 #include <Box2D/Box2D.h>
 #include <vector>
+#include <functional>
 
 using namespace std;
 
-typedef void *(contactCallback)(b2Contact* contact);
+typedef function<void (b2Contact* contact)> contactCallback;
 
 class CustomContactListener : public b2ContactListener {
 public:
@@ -24,11 +25,11 @@ public:
 
 	// Returns the id assigned to the callback (used later
 	// if you need to remove the callback)
-	int addBeginCallback(contactCallback cb);
+	int addBeginCallback(const contactCallback &cb);
 
 	// Returns the id assigned to the callback (used later
 	// if you need to remove the callback)
-	int addEndCallback(contactCallback cb);
+	int addEndCallback(const contactCallback &cb);
 
 	// Returns whether the callback with the given id could be deleted
 	bool removeBeginCallback(int id);
@@ -42,7 +43,7 @@ private:
 	CustomContactListener() {};
 	~CustomContactListener() {};
 
-	vector<contactCallback*> beginCallbacks_;
-	vector<contactCallback*> endCallbacks_;
+	vector<contactCallback> beginCallbacks_;
+	vector<contactCallback> endCallbacks_;
 };
 

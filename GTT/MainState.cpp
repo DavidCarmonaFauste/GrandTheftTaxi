@@ -21,7 +21,7 @@ MainState::MainState() {
 	stage_.push_back(moneySystem_);
 	respawner_ = new Respawner(taxi_->getHealthComponent());
 	taxi_->addLogicComponent(respawner_);
-	Shop::getInstance();
+	new Shop(50, 50, 300, 300);
 
 	// UI
 	UI_ = new UI();
