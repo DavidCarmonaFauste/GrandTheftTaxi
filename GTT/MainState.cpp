@@ -26,9 +26,6 @@ MainState::MainState() {
 	respawner_ = new Respawner(Vehicle::GetInstance()->getHealthComponent());
 	Vehicle::GetInstance()->addLogicComponent(respawner_);
 
-	// TESTING SHOP
-	new Shop(80, 80, 300, 0);
-
 	// UI
 	UI_ = new UI();
 
