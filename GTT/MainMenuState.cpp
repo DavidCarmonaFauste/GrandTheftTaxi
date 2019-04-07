@@ -10,7 +10,6 @@ MainMenuState::MainMenuState()
 
 	stage_.push_back (new Button (mainStateCallback, MainMenuPlay));
 	stage_.push_back (new Button (exitGameCallback, MainMenuExit));
-	Reticule::GetInstance()->ChangeReticule("gun");
 	stage_.push_back(Reticule::GetInstance());
 }
 

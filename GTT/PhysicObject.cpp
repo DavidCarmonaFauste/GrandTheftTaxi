@@ -20,7 +20,6 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	fixtureDef_.shape = &shape_;
 	fixtureDef_.density = 1;
 	body_->CreateFixture(&fixtureDef_);
-
 }
 
 

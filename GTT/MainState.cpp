@@ -4,6 +4,7 @@
 #include "Turret.h"
 #include "ReloadingDisplay.h"
 #include "AmmoDisplay.h"
+#include "FollowMiddlePoint.h"
 
 
 MainState::MainState() {
@@ -12,10 +13,10 @@ MainState::MainState() {
 	stage_.push_back(tilemap_);
 
 	// Taxi
-	taxi_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
-	stage_.push_back(taxi_);
-	cameraFollow = new FollowGameObject(taxi_);
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow);
+	
+	stage_.push_back(Vehicle::GetInstance());
+	//cameraFollow = new FollowGameObject(Vehicle::GetInstance());
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.25));
 	// Enemy1
 	enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
 	stage_.push_back(enemy1_);
@@ -26,16 +27,16 @@ MainState::MainState() {
 	stage_.push_back(moneySystem);
 
 	// UI
-	UI_ = new UI(taxi_);
-	taxi_->getHealthComponent()->registerObserver(UI_);
+	UI_ = new UI();
+	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI_);
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
 
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());
 
-	taxi_->EquipTurret(new Turret(MACHINEGUN));
-	taxi_->EquipTurret(new Turret(SHOTGUN));
+	Vehicle::GetInstance()->EquipTurret(new Turret(MACHINEGUN));
+	Vehicle::GetInstance()->EquipTurret(new Turret(GUN));
 
 
 }

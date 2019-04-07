@@ -4,9 +4,8 @@
 #include "Vehicle.h"
 
 
-TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
+TaxiSoundManagerCP::TaxiSoundManagerCP()
 {
-	v_ = v;
 }
 
 void TaxiSoundManagerCP::Start()

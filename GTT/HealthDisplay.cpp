@@ -3,18 +3,22 @@
 
 HealthDisplay::HealthDisplay() {
 	setPosition(Vector2D(35, 35));
-	setWidth(200); setHeight(50);
+	setWidth(300); setHeight(75);
 	
 	//fuHealth  display background
-	background = new Sprite("./../Assets/sprites/health_background.png");
+	background = new Sprite("./../Assets/sprites/healthMeter-empty.png");
 	background->setCamera(UI_CAMERA);
 
 	//fuHealth  display foreground
-	bar = new Sprite("./../Assets/sprites/health_bar.png");
+	bar = new Sprite("./../Assets/sprites/healthMeter-bar.png");
 	bar->setCamera(UI_CAMERA);
 	bar->setAutoSize(false);
-	bar->setSize(getWidth(), getHeight());
+	bar->setSize(getWidth()*0.633, getHeight()*0.409);//size and position relative to background sprite do not change
+	bar->setAutoPos(false);
+	bar->setPos(position_.x + getWidth()*0.267, position_.y + getHeight()*0.284);
 
+	bardefaultwidth = getWidth()*0.633;
+	
 	addRenderComponent(background);
 	addRenderComponent(bar);
 
@@ -23,13 +27,13 @@ HealthDisplay::HealthDisplay() {
 	//Percentage of current fuHealth
 	SDL_Color fontColor = SDL_Color();
 	fontColor.r = 255; fontColor.g = 255; fontColor.b = 255;
-	Font* f = new Font(FONT_LATO, 60);
+	Font* f = new Font(FONT_COOLFONT, 60);
 	fuhealthAmount_ = new Text(f, "", fontColor);
 	fuhealthAmount_->setCamera(UI_CAMERA);
 	addRenderComponent(fuhealthAmount_);
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");
 	fuhealthAmount_->setAutoPos(false);
-	fuhealthAmount_->setPos(getPosition().x + 200, getPosition().y + 4);
+	fuhealthAmount_->setPos(getPosition().x + getWidth(), getPosition().y + getHeight()*0.1);
 	fuhealthAmount_->setAutoSize(false);
 	fuhealthAmount_->setSize(90, 40);
 }
@@ -47,7 +51,7 @@ void HealthDisplay::setHealthPercentage(float healthPercentage) {
 	bar_clip->w = tex->getWidth() * healthPercentage_;
 	bar_clip->h = tex->getHeight();
 
-	bar->setSize(getWidth() * healthPercentage_, getHeight());
+	bar->setSize(bardefaultwidth * healthPercentage_, bar->getRect()->h);
 	bar->setClipRect(bar_clip);
 	
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");

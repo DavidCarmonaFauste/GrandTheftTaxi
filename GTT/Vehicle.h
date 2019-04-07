@@ -11,11 +11,12 @@ class Turret;
 class ReloadInputComponent;
 class ShootIC;
 
-class Vehicle :
-	public Car
+class Vehicle : public Car
 {
 public:
-	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
+	Vehicle(Vehicle&) = delete;
+	Vehicle& operator=(const Vehicle&) = delete;
+
 	virtual ~Vehicle();
 
 	//Get
@@ -24,9 +25,14 @@ public:
 	
 	float32 GetAcceleration();
 	
-	
 
-	
+	static Vehicle* GetInstance() {
+		if (instance_ == nullptr) {
+			instance_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
+		}
+		return instance_;
+	}
+
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
 	virtual TaxiSoundManagerCP* GetTxSoundManager();
@@ -41,8 +47,12 @@ public:
 	virtual bool receiveEvent(Event& e);
 	
 
-protected:
-	
+	private:
+
+	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
+
+	static Vehicle* instance_;
+
 	float32 maxBackwardSpeed_;
 	
 	float32 acceleration_;
@@ -51,7 +61,7 @@ protected:
 
 	TaxiSoundManagerCP* smLC_;
 
-	static const int MAXTURRETS = 2;
+	static const int MAXTURRETS = 4;
 
 	
 	ReloadInputComponent* reIC_;

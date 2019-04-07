@@ -36,6 +36,11 @@ void Reticule::ChangeReticule(string ret)
 	if (!animC_->playAnimation(ret)) cout << "ChangeReticule error, reticule: " + ret + " doesnt exist";
 }
 
+string Reticule::GetCurrentSprite()
+{
+	return animC_->getCurrentAnimation();
+}
+
 void Reticule::update(Uint32 time)
 {
 	Container::update(time);

@@ -22,7 +22,7 @@ Game::Game() {
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
-	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
@@ -49,6 +49,10 @@ void Game::handleEvents(Uint32 deltaTime) {
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
+			}
+			
+			else if (event.key.keysym.sym == SDLK_f) {
+				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
 		}
 		for (auto cam : cameras_) cam.second->handleInput(deltaTime, event);
@@ -122,6 +126,10 @@ SoundManager * Game::getSoundManager()
 Camera * Game::getCamera(cameraType cT)
 {
 	return cameras_[cT];
+}
+
+void Game::setState(string state){
+	gmStMachine_->setState(state);
 }
 
 void Game::init() {
