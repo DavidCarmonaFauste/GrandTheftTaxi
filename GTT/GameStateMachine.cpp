@@ -2,6 +2,7 @@
 #include "MainMenuState.h"
 #include "MainState.h"
 #include "MpegState.h"
+#include "Reticule.h"
 
 
 

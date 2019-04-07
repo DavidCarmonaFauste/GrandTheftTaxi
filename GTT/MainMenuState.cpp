@@ -11,11 +11,11 @@ MainMenuState::MainMenuState()
 	//inicialiacio id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
 	Sound_NewGameButton_ = TAXI_ACCELERATE_01;
 
-	//inicialización buttons - se insertan en el map
+	//inicializaciï¿½n buttons - se insertan en el map
 	buttons_["newGameButton"] = new Button(mainStateCallback, (NEW_GAME_BUTTON), Sound_NewGameButton_);
 	buttons_["extiButton"] = new Button(exitGameCallback, (EXIT_BUTTON));
 
-	//se añade el container a la lista de GO
+	//se aï¿½ade el container a la lista de GO
 	stage_.push_back(buttons_["newGameButton"]);
 	stage_.push_back(buttons_["extiButton"]);
 

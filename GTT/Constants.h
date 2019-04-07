@@ -67,6 +67,7 @@ const struct WeaponInfo {
 	ShootMode shootMode1;
 	ShootMode shootMode2;
 	bool automatic;
+	int chargedShotDelay;
 };
 
 const struct frameAnimation {
@@ -100,9 +101,9 @@ const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
 
 
-//Buttons //se usa para acceder a la posición del array de idPath del struct ButtonInfo
+//Buttons //se usa para acceder a la posiciï¿½n del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {
-	defaultAnm,    //la animación por defecto tiene que llamarse defaultAnm para su correcta gestión en la clase Animation
+	defaultAnm,    //la animaciï¿½n por defecto tiene que llamarse defaultAnm para su correcta gestiï¿½n en la clase Animation
 	overButton,
 	clickButton
 };
@@ -176,15 +177,15 @@ const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 5
 const ProyectileInfo MACHINEGUNBULLET{};
 
 //Weapons
-const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 150, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
-const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 900, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false };
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 1, 1}, {LINEAR, 1, 1}, true};
-const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 1, 1}, {LINEAR, 1, 1}, false };
+const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};
+const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100};
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
+const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
 ;
 
 //Buttons
-//siempre tienen que ser un vector, como mínimo con un componente default animation. 
+//siempre tienen que ser un vector, como mï¿½nimo con un componente default animation. 
 const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {500.0, 150.0}}, 
 {"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {500.0, 150.0}},
 {"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {500.0, 150.0}}
@@ -193,6 +194,7 @@ const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGam
 const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {500.0, 500.0}},
 {"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {500.0, 500.0}} };
 
+const string MAINMENURETICULE = "gun";
 
 
 #endif // !constants_define

@@ -31,6 +31,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
+    <ClCompile Include="FollowMiddlePoint.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
+    <ClInclude Include="FollowMiddlePoint.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

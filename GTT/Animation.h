@@ -21,6 +21,8 @@ public:
 	bool isAnyAnimationPlaying();
 	bool isAnimationPlaying(string name);
 
+	string getCurrentAnimation();
+
 	bool playAnimation(string name, float speed = true, bool loop = true);
 	bool stopAnimation();
 	bool pauseAnimation();

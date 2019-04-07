@@ -9,7 +9,7 @@
 class UI : public Container, public Observer
 {
 public:
-	UI(Vehicle* v);
+	UI();
 	virtual ~UI();
 
 	virtual void render(Uint32 deltaTime) override;

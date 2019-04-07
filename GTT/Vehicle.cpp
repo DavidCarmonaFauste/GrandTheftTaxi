@@ -7,11 +7,11 @@
 #include "Reticule.h"
 #include "InputMovement.h"
 
+Vehicle* Vehicle::instance_ = nullptr;
+
 Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->setWidth(r.width);
 	this->setHeight(r.height);
-
-	
 
 	// Sprite
 	sprite_ = new Animation();
@@ -50,7 +50,7 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	control_->registerObserver(this);
 
 	//Sound
-	smLC_ = new TaxiSoundManagerCP(this);
+	smLC_ = new TaxiSoundManagerCP();
 	this->addLogicComponent(smLC_);
 }
 

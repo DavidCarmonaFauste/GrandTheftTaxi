@@ -7,12 +7,11 @@ class AmmoDisplay :
 	public Container
 {
 public:
-	AmmoDisplay(Vehicle* v);
+	AmmoDisplay();
 	virtual void update(Uint32 deltaTime);
 	virtual ~AmmoDisplay();
 
 private:
 	Text* currentAmmo_;
-	Vehicle* vehicle_;
 };
 
