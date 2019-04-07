@@ -66,22 +66,41 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	if (!MovementType_ && close[0] != Vector2D(-999, -999))
 	{
 		if (((v_->getPosition().x < (close[positionNow_].x + 10) && v_->getPosition().x >(close[positionNow_].x - 10)) && (v_->getPosition().y < (close[positionNow_].y + 10) && v_->getPosition().y >(close[positionNow_].y - 10)))) positionNow_++;
-		if (v_->getPosition().y > close[positionNow_].y)
+
+		forwardPressed_ = true;
+		Event e(this, STARTED_MOVING_FORWARD);
+		broadcastEvent(e);
+
+		Vector2D distance = Vector2D(abs(close[positionNow_ - 1].x - close[positionNow_].x), abs(close[positionNow_ - 1].y - close[positionNow_].y));
+		int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
+
+		if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
 		{
-			forwardPressed_ = true;
-			Event e(this, STARTED_MOVING_FORWARD);
-			broadcastEvent(e);
-			if (v_->getPosition().x < close[positionNow_].x) rightTurnPressed_ = true;
-			if (v_->getPosition().x < close[positionNow_].x) leftTurnPressed_ = true;
+			if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 0; //Primer cuadrante
+			else angle += 90; //Segundo cuadrante
 		}
-		else if (v_->getPosition().y > close[positionNow_].y)
+		else
 		{
-			forwardPressed_ = false;
-			Event e(this, STOPPED_MOVING_FORWARD);
-			broadcastEvent(e);
-			if (v_->getPosition().x < close[positionNow_].x) rightTurnPressed_ = false;
-			if (v_->getPosition().x < close[positionNow_].x) leftTurnPressed_ = false;
+			if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 270; //Cuarto cuadrante
+			else angle += 180; //Tercer cuadrante
 		}
+
+		if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = true;
+
+			rightTurnPressed_ = false;
+			leftTurnPressed_ = false;
+
+		if (body->GetAngle() * 180 / 3.14159265359 < angle - 20) rightTurnPressed_ = true;
+		if (body->GetAngle() * 180 / 3.14159265359 > angle + 20) leftTurnPressed_ = true;
+
+		if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = false;
+
+		if(!rightTurnPressed_ && !leftTurnPressed_)	cout << "	" << body->GetAngle() * 180 / 3.14159265359 << "	";
+
+
+	//		forwardPressed_ = false;
+	//		Event e(this, STOPPED_MOVING_FORWARD);
+	//		broadcastEvent(e);
 	}
 	// Check the difference beetween car and speed direction to see
 	// if it's going forward
@@ -119,7 +138,6 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 
 void InputMovement::pathfinding()
 {
-	timer = 200;
 //	Vector2D vPosition = v_->getPosition();
 //	Vector2D close[20];
 //	
@@ -135,7 +153,7 @@ void InputMovement::pathfinding()
 		Vector2D vPosition = v_->getPosition();
 		close[i] = vPosition;
 
-		Vector2D final = Vector2D(vPosition.x - 1000, vPosition.y - 500);
+		Vector2D final = Vector2D(vPosition.x - 1000, vPosition.y - 1000);
 		Vector2D distance = Vector2D(vPosition.x - final.x, vPosition.y - final.y);
 
 		while (!finish && i < 20)
@@ -193,6 +211,7 @@ void InputMovement::pathfinding()
 		}
 	//	this_thread::sleep_for(chrono::seconds(2));
 //	}).detach();
+		timer = 200;
 }
 
 bool InputMovement::search(Vector2D l[], Vector2D v)
