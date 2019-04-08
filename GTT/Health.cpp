@@ -35,7 +35,7 @@ void Health::setDamageOverTime(int damage, int frequency) {
 }
 
 void Health::resetHealth() {
-	health_ = maxHealth_;
+	setHealth(maxHealth_);
 }
 
 void Health::setHealth(int health) {

@@ -100,6 +100,7 @@ const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
 
+const float FUEL_VALUE = 0.15f;
 
 //Buttons //se usa para acceder a la posici�n del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {

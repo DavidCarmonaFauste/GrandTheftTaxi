@@ -54,6 +54,7 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 					}
 					//notifica al update del Estado que el evento se ha producido. y el estado llama a su callback
 					clickEvent_ = true;
+					button->callback();
 				}
 			}
 		}//SDL_MOUSEBUTTONUP
