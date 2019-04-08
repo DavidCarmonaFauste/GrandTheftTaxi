@@ -1,7 +1,7 @@
 #include "Proyectile.h"
+#include "Enemy.h"
 
-
-Proyectile::Proyectile()
+Proyectile::Proyectile():Trigger(0,0,0,0)
 {
 	setActive(false);
 }
@@ -55,4 +55,19 @@ double Proyectile::GetSpeed()
 {
 	return speed_;
 }
+
+void Proyectile::beginCallback(b2Contact * contact) {
+	b2Body* body = phyO_->getBody();
+	b2Body* enemyBody = Enemy::GetPhyO()->getBody();
+
+	if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() = enemyBody)
+		&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() == taxiBody)) {
+		Game::getInstance()->setState(NAME_SHOP_STATE);
+	}
+}
+
+void Proyectile::endCallback(b2Contact * contact) {
+
+}
+
 

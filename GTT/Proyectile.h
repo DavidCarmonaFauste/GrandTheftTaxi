@@ -2,6 +2,7 @@
 #include "Container.h"
 #include "Animation.h"
 #include "PhysicObject.h"
+#include "Trigger.h"
 
 enum proyectileType {
 	BULLET,
@@ -9,7 +10,7 @@ enum proyectileType {
 	STRIKE
 };
 
-class Proyectile : public Container {
+class Proyectile : public Trigger {
 public:
 	Proyectile();
 	virtual void Impact();
@@ -18,6 +19,8 @@ public:
 	virtual void ChangeBulletType(ProyectileInfo p);
 	PhysicObject* GetPhyO();
 	double GetSpeed();
+	virtual void beginCallback(b2Contact * contact);
+	virtual void endCallback(b2Contact * contact);
 	virtual ~Proyectile() {};
 
 protected:
