@@ -65,14 +65,24 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	timer -= 1.0 * (deltaTime/100.0);
 	if (!MovementType_ && close[0] != Vector2D(-999, -999))
 	{
-		if (((v_->getPosition().x < (close[positionNow_].x + 10) && v_->getPosition().x >(close[positionNow_].x - 10)) && (v_->getPosition().y < (close[positionNow_].y + 10) && v_->getPosition().y >(close[positionNow_].y - 10)))) positionNow_++;
+		if (((v_->getPosition().x < (close[positionNow_].x + 10) && v_->getPosition().x >(close[positionNow_].x - 10)) && (v_->getPosition().y < (close[positionNow_].y + 10) && v_->getPosition().y >(close[positionNow_].y - 10))))
+		{
+			positionNow_++;
+		}
 
 		forwardPressed_ = true;
 		Event e(this, STARTED_MOVING_FORWARD);
 		broadcastEvent(e);
 
+		int angleNow = body->GetAngle() * 180 / 3.14159265359;
 		Vector2D distance = Vector2D(abs(close[positionNow_ - 1].x - close[positionNow_].x), abs(close[positionNow_ - 1].y - close[positionNow_].y));
 		int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
+
+		if (angleNow < 0) angleNow += 360;
+		while (angleNow > 360) angleNow -= 360;
+
+		rightTurnPressed_ = false;
+		leftTurnPressed_ = false;
 
 		if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
 		{
@@ -85,17 +95,65 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 			else angle += 180; //Tercer cuadrante
 		}
 
-		if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = true;
+		if (!(angleNow < angle + 10 && angleNow > angle - 10))
+		{
+			if (angleNow <= 90 && angleNow >= 0) //Cuarto Cuadrante
+			{
+				if (angleNow < angle && angle < 180) rightTurnPressed_ = true;
+				else leftTurnPressed_ = true;
+			}
+			else if (angleNow <= 180 && angleNow > 90) //Tercer Cuadrante
+			{
+				if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
+				else leftTurnPressed_ = true;
+			}
+			else if (angleNow <= 270 && angleNow > 180) //Segundo Cuadrante
+			{
+				if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
+				else leftTurnPressed_ = true;
+			}
+			else if (angleNow <= 360 && angleNow > 270) //Primer Cuadrante
+			{
+				if (angleNow > angle && angle < 180) rightTurnPressed_ = true;
+				else leftTurnPressed_ = true;
+			}
+		}
 
-			rightTurnPressed_ = false;
-			leftTurnPressed_ = false;
-
-		if (body->GetAngle() * 180 / 3.14159265359 < angle - 20) rightTurnPressed_ = true;
-		if (body->GetAngle() * 180 / 3.14159265359 > angle + 20) leftTurnPressed_ = true;
-
-		if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = false;
-
-		if(!rightTurnPressed_ && !leftTurnPressed_)	cout << "	" << body->GetAngle() * 180 / 3.14159265359 << "	";
+		//v_->setRotation(angle);
+		//if (body->GetAngle() < angle)
+		//{
+		//	body->SetAngularVelocity(angle);
+		//}
+		//v_->GetPhyO()->getBody().;
+		
+		//if (angleNow < 0) angleNow += 360;
+		//while (angleNow > 360) angleNow -= 360;
+		//
+		//Vector2D distance = Vector2D(abs(close[positionNow_ - 1].x - close[positionNow_].x), abs(close[positionNow_ - 1].y - close[positionNow_].y));
+		//int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
+		//
+		//if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
+		//{
+		//	if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 0; //Primer cuadrante
+		//	else angle += 90; //Segundo cuadrante
+		//}
+		//else
+		//{
+		//	if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 270; //Cuarto cuadrante
+		//	else angle += 180; //Tercer cuadrante
+		//}
+		//
+		//if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = true;
+		//
+		//	rightTurnPressed_ = false;
+		//	leftTurnPressed_ = false;
+		//
+		//if (angleNow < angle - 20 && angle < 180 + angleNow) rightTurnPressed_ = true;
+		//if (angleNow < angle - 20 && angle >= 180 + angleNow) leftTurnPressed_ = true;
+		//
+		//if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = false;
+		//
+		//if(!rightTurnPressed_ && !leftTurnPressed_)	cout << "	" << angleNow << "	";
 
 
 	//		forwardPressed_ = false;
@@ -153,7 +211,7 @@ void InputMovement::pathfinding()
 		Vector2D vPosition = v_->getPosition();
 		close[i] = vPosition;
 
-		Vector2D final = Vector2D(vPosition.x - 1000, vPosition.y - 1000);
+		Vector2D final = Vector2D(1000, 1000);
 		Vector2D distance = Vector2D(vPosition.x - final.x, vPosition.y - final.y);
 
 		while (!finish && i < 20)
@@ -211,7 +269,7 @@ void InputMovement::pathfinding()
 		}
 	//	this_thread::sleep_for(chrono::seconds(2));
 //	}).detach();
-		timer = 200;
+		timer = 100;
 }
 
 bool InputMovement::search(Vector2D l[], Vector2D v)
