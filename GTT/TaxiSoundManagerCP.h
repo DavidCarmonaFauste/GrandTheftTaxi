@@ -13,6 +13,8 @@ public:
 	virtual void update(GameObject* o, Uint32 deltaTime);
 	virtual bool receiveEvent(Event& e);
 	virtual ~TaxiSoundManagerCP();
+
+	void PlaySound(soundId id);
 private:
 	SoundManager* s_;
 	Vehicle* v_;

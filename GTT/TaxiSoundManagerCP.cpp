@@ -40,7 +40,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 	}
 	return true;
 }
-
+ 
 
 TaxiSoundManagerCP::~TaxiSoundManagerCP()
 {
