@@ -15,9 +15,9 @@ MpegState::~MpegState()
 
 void MpegState::start() {
 	playSequence();
+	/*if (VIDEO_NEXTSTATE.find(videoId_) != VIDEO_NEXTSTATE.end())
+		Game::getInstance()->setState(VIDEO_NEXTSTATE.at(videoId_));*/
 
-	if (VIDEO_NEXTSTATE.find(videoId_) != VIDEO_NEXTSTATE.end())
-		Game::getInstance()->setState(VIDEO_NEXTSTATE.at(videoId_));
 }
 
 
@@ -27,4 +27,5 @@ void MpegState::setVideoId(videoId videoId) {
 
 void MpegState::playSequence() {
 	videoManager_->PlayVideoSequence(VIDEOS.at(videoId_));
+	Game::getInstance()->getGameStateMachine()->setState(NAME_MAINMENU_STATE);
 }

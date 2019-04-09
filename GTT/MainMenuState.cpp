@@ -11,6 +11,21 @@ MainMenuState::MainMenuState()
 	//inicialiacion id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
 	Sound_NewGameButton_ = CLIC_BUTTON_NEWGAME;
 
+}
+
+
+MainMenuState::~MainMenuState()
+{
+	while (!stage_.empty ()) {
+		delete stage_.back (); 
+		stage_.back () = nullptr;
+		stage_.pop_back ();
+	}
+
+}
+
+void MainMenuState::start()
+{
 	//MAIN MENU TITLE
 	mainBackground_ = new Container();
 	mainBackground_->setPosition(Vector2D(MAIN_TITLE[texAnm].pos.x, MAIN_TITLE[texAnm].pos.y));
@@ -21,14 +36,14 @@ MainMenuState::MainMenuState()
 	mainTitleAnm_->loadAnimation(MAIN_TITLE[title_defaultAnm].idlePath, MAIN_TITLE[title_defaultAnm].name, MAIN_TITLE[title_defaultAnm].frAnm.cols, MAIN_TITLE[title_defaultAnm].frAnm.rows);
 	mainTitleAnm_->loadAnimation(MAIN_TITLE[texAnm].idlePath, MAIN_TITLE[texAnm].name, MAIN_TITLE[texAnm].frAnm.cols, MAIN_TITLE[texAnm].frAnm.rows);
 	mainBackground_->addRenderComponent(mainTitleAnm_);
-	
+
 
 	//BUTTONS
 	buttons_["newGameButton"] = new Button(mainStateCallback, (NEW_GAME_BUTTON), Sound_NewGameButton_);
 	buttons_["extiButton"] = new Button(exitGameCallback, (EXIT_BUTTON));
 
 	buttons_["newGameButton"]->setPosition(Vector2D(NEW_GAME_BUTTON[defaultAnm].pos.x, NEW_GAME_BUTTON[defaultAnm].pos.y));
-	buttons_["newGameButton"]->setWidth(500); 
+	buttons_["newGameButton"]->setWidth(500);
 	buttons_["newGameButton"]->setHeight(200);
 	buttons_["extiButton"]->setPosition(Vector2D(EXIT_BUTTON[defaultAnm].pos.x, EXIT_BUTTON[defaultAnm].pos.y));
 	buttons_["extiButton"]->setWidth(250);
@@ -53,17 +68,6 @@ MainMenuState::MainMenuState()
 	Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);
 }
 
-
-MainMenuState::~MainMenuState()
-{
-	while (!stage_.empty ()) {
-		delete stage_.back (); 
-		stage_.back () = nullptr;
-		stage_.pop_back ();
-	}
-
-}
-
 void MainMenuState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
@@ -85,6 +89,8 @@ void MainMenuState::update (Uint32 deltaTime) {
 	}
 
 	GameState::update (deltaTime);
+
+
 }
 
 
