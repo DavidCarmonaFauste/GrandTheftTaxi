@@ -4,21 +4,43 @@
 #include "Vehicle.h"
 
 
-TaxiSoundManagerCP::TaxiSoundManagerCP()
+TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 {
-}
-
-void TaxiSoundManagerCP::Start()
-{
+	v_ = v;
 	s_ = Game::getInstance()->getSoundManager();
-	s_->playSound(TAXI_START,0);
 }
 
 void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 {
-
+	if (!s_->isSoundPlaying(channel_) && v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 0.5)
+	{
+		cout << "idle" << endl;
+		channel_ = s_->playSound(TAXI_IDLE, 0);
+	}
 }
 
+bool TaxiSoundManagerCP::receiveEvent(Event & e)
+{
+	switch (e.type_)
+	{
+	case STARTED_MOVING_FORWARD:
+		if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 0.5)
+		{
+			if (s_->isSoundPlaying(channel_))
+			{
+				s_->pauseSound(channel_);
+			}
+			s_->playSound(TAXI_ACCELERATE_01, 0);
+		}
+			break;
+	case STOPPED_MOVING_FORWARD:
+		break;
+	default:
+		break;
+	}
+	return true;
+}
+ 
 
 TaxiSoundManagerCP::~TaxiSoundManagerCP()
 {

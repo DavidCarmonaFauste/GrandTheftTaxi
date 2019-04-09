@@ -29,6 +29,7 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	aimC_ = new AimAtCursorAC();
 	addInputComponent(new ChangeWeaponIC());
 
+
 	for (int i = 0; i < MAXTURRETS; i++) {
 		turrets_[i]=nullptr;
 	}
@@ -48,10 +49,11 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
-
 	//Sound
-	smLC_ = new TaxiSoundManagerCP();
+	smLC_ = new TaxiSoundManagerCP(this);
 	this->addLogicComponent(smLC_);
+
+	control_->registerObserver(smLC_);
 }
 
 
@@ -132,7 +134,7 @@ bool Vehicle::receiveEvent(Event & e) {
 	if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
 	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 
-	return false;
+	return true;
 }
 
 void Vehicle::render(Uint32 time) {
