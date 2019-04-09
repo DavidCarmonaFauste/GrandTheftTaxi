@@ -20,8 +20,6 @@ Button::Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType, const 
 {
 	callback = cb;
 
-	setPosition(Vector2D(buttonType[defaultAnm].pos.x, buttonType[defaultAnm].pos.y));
-	setWidth(500); setHeight(200);
 
 	mouseClickIC = new MouseClickIC(buttonType);
 

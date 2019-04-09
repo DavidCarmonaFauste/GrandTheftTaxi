@@ -77,11 +77,17 @@ const struct frameAnimation {
 
 const struct ButtonInfo {
 	string idlePath; 
-	string name; //alberga un array de nombres, porque Animation.h inserta las correspondientes rutas en atributo privado tipo map< >
+	string name; 
 	frameAnimation frAnm;
 	Vector2D pos;
 };
 
+const struct mainTitleInfo {
+	string idlePath;
+	string name;
+	frameAnimation frAnm;
+	Vector2D pos;
+};
 
 
 //EDITABLE ----------------------------------------------------------------------------------------------------------
@@ -106,6 +112,12 @@ const enum newGameButtonPaths {
 	defaultAnm,    //la animaci�n por defecto tiene que llamarse defaultAnm para su correcta gesti�n en la clase Animation
 	overButton,
 	clickButton
+};
+
+//MainTitle
+const enum mainTitlePaths {
+	title_defaultAnm,
+	texAnm,
 };
 
 //Enemy 1
@@ -154,10 +166,12 @@ const map<soundId, string> SOUND = {
 //MUSIC
 const enum musicId {
 	DEFAULT_MUSIC,
+	MAIN_THEME_MUSIC
 };
 
 const map<musicId, string> MUSIC = {
-	{DEFAULT_MUSIC, "../Assets/sounds/default.wav"}
+	{DEFAULT_MUSIC, "../Assets/sounds/default.wav"},
+	{MAIN_THEME_MUSIC, "../Assets/sounds/MainTheme/Grove.wav"}
 };
 
 
@@ -189,15 +203,24 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 
 //Buttons
 //siempre tienen que ser un vector, como m�nimo con un componente default animation. 
-const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {500.0, 150.0}}, 
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {500.0, 150.0}},
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {500.0, 150.0}}
+const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {550.0, 660.0}}, 
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {550.0, 660.0}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {550.0, 660.0}}
 };
 
-const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {500.0, 500.0}},
-{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {500.0, 500.0}} };
+const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {1000.0, 700.0}},
+{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {1000.0, 700.0}} };
 
 const string MAINMENURETICULE = "gun";
+
+const vector<mainTitleInfo>MAIN_TITLE = { {"../Assets/sprites/MainTitle/default.png", "default", {1, 1}, {0.0, 0.0} }, 
+{"../Assets/sprites/MainTitle/animacion_MainMenu.png", "animation", {5,8}, {0.0, 0.0} }, 
+};
+
+
+
+
+
 
 
 #endif // !constants_define
