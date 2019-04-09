@@ -40,7 +40,7 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
 			if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 		}
-		else if (event.type == SDL_KEYUP) {	
+		else if (event.type == SDL_KEYUP) {
 			if (event.key.keysym.sym == k_.forward) {
 				forwardPressed_ = false;
 				Event e(this, STOPPED_MOVING_FORWARD);
@@ -61,105 +61,75 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 	Vector2D vel = body->GetLinearVelocity();
 
-	if(timer <= 0) pathfinding();
-	timer -= 1.0 * (deltaTime/100.0);
+	if (timer <= 0) pathfinding();
+	timer += 1.0 * (deltaTime / 100.0);
 	if (!MovementType_ && close[0] != Vector2D(-999, -999))
 	{
-		if (((v_->getPosition().x < (close[positionNow_].x + 10) && v_->getPosition().x >(close[positionNow_].x - 10)) && (v_->getPosition().y < (close[positionNow_].y + 10) && v_->getPosition().y >(close[positionNow_].y - 10))))
+		if (positionNow_ <= length)
 		{
-			positionNow_++;
-		}
+			if (((v_->getPosition().x < (close[positionNow_].x + 100) && v_->getPosition().x >(close[positionNow_].x - 100)) && (v_->getPosition().y < (close[positionNow_].y + 100) && v_->getPosition().y >(close[positionNow_].y - 100))))
+			{
+				positionNow_++;
+			}
 
-		forwardPressed_ = true;
-		Event e(this, STARTED_MOVING_FORWARD);
-		broadcastEvent(e);
+			forwardPressed_ = true;
+			Event e(this, STARTED_MOVING_FORWARD);
+			broadcastEvent(e);
 
-		int angleNow = body->GetAngle() * 180 / 3.14159265359;
-		Vector2D distance = Vector2D(abs(close[positionNow_ - 1].x - close[positionNow_].x), abs(close[positionNow_ - 1].y - close[positionNow_].y));
-		int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
+			int angleNow = body->GetAngle() * 180 / 3.14159265359;
+			Vector2D distance = Vector2D(abs(v_->getPosition().x - close[positionNow_].x), abs(v_->getPosition().y - close[positionNow_].y));
+			int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
 
-		if (angleNow < 0) angleNow += 360;
-		while (angleNow > 360) angleNow -= 360;
+			while (angleNow < 0) angleNow += 360;
+			while (angleNow > 360) angleNow -= 360;
 
-		rightTurnPressed_ = false;
-		leftTurnPressed_ = false;
+			rightTurnPressed_ = false;
+			leftTurnPressed_ = false;
 
-		if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
-		{
-			if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 0; //Primer cuadrante
-			else angle += 90; //Segundo cuadrante
+			if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
+			{
+				if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 0; //Primer cuadrante
+				else angle += 90; //Segundo cuadrante
+			}
+			else
+			{
+				if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 270; //Cuarto cuadrante
+				else angle += 180; //Tercer cuadrante
+			}
+
+			if (!(angleNow < angle + 10 && angleNow > angle - 10))
+			{
+				if (angleNow <= 90 && angleNow >= 0) //Cuarto Cuadrante
+				{
+					if (angleNow < angle && angle < 180) rightTurnPressed_ = true;
+					else leftTurnPressed_ = true;
+				}
+				else if (angleNow <= 180 && angleNow > 90) //Tercer Cuadrante
+				{
+					if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
+					else leftTurnPressed_ = true;
+				}
+				else if (angleNow <= 270 && angleNow > 180) //Segundo Cuadrante
+				{
+					if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
+					else leftTurnPressed_ = true;
+				}
+				else if (angleNow <= 360 && angleNow > 270) //Primer Cuadrante
+				{
+					if (angleNow > angle && angle < 180) rightTurnPressed_ = true;
+					else leftTurnPressed_ = true;
+				}
+			}
 		}
 		else
 		{
-			if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 270; //Cuarto cuadrante
-			else angle += 180; //Tercer cuadrante
+			forwardPressed_ = false;
+			Event e(this, STOPPED_MOVING_FORWARD);
+			broadcastEvent(e);
 		}
-
-		if (!(angleNow < angle + 10 && angleNow > angle - 10))
-		{
-			if (angleNow <= 90 && angleNow >= 0) //Cuarto Cuadrante
-			{
-				if (angleNow < angle && angle < 180) rightTurnPressed_ = true;
-				else leftTurnPressed_ = true;
-			}
-			else if (angleNow <= 180 && angleNow > 90) //Tercer Cuadrante
-			{
-				if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
-				else leftTurnPressed_ = true;
-			}
-			else if (angleNow <= 270 && angleNow > 180) //Segundo Cuadrante
-			{
-				if (angleNow < angle && angle < 270 && angle > 90) rightTurnPressed_ = true;
-				else leftTurnPressed_ = true;
-			}
-			else if (angleNow <= 360 && angleNow > 270) //Primer Cuadrante
-			{
-				if (angleNow > angle && angle < 180) rightTurnPressed_ = true;
-				else leftTurnPressed_ = true;
-			}
-		}
-
-		//v_->setRotation(angle);
-		//if (body->GetAngle() < angle)
-		//{
-		//	body->SetAngularVelocity(angle);
-		//}
-		//v_->GetPhyO()->getBody().;
-		
-		//if (angleNow < 0) angleNow += 360;
-		//while (angleNow > 360) angleNow -= 360;
-		//
-		//Vector2D distance = Vector2D(abs(close[positionNow_ - 1].x - close[positionNow_].x), abs(close[positionNow_ - 1].y - close[positionNow_].y));
-		//int angle = asin(((distance.y / sqrt(pow(distance.x, 2) + pow(distance.y, 2))))) * 180 / 3.14159265359;
-		//
-		//if (close[positionNow_].y - close[positionNow_ - 1].y > 0)
-		//{
-		//	if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 0; //Primer cuadrante
-		//	else angle += 90; //Segundo cuadrante
-		//}
-		//else
-		//{
-		//	if (close[positionNow_].x - close[positionNow_ - 1].x > 0) angle += 270; //Cuarto cuadrante
-		//	else angle += 180; //Tercer cuadrante
-		//}
-		//
-		//if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = true;
-		//
-		//	rightTurnPressed_ = false;
-		//	leftTurnPressed_ = false;
-		//
-		//if (angleNow < angle - 20 && angle < 180 + angleNow) rightTurnPressed_ = true;
-		//if (angleNow < angle - 20 && angle >= 180 + angleNow) leftTurnPressed_ = true;
-		//
-		//if (v_->getPosition().y > close[positionNow_].y) backwardPressed_ = false;
-		//
-		//if(!rightTurnPressed_ && !leftTurnPressed_)	cout << "	" << angleNow << "	";
-
-
-	//		forwardPressed_ = false;
-	//		Event e(this, STOPPED_MOVING_FORWARD);
-	//		broadcastEvent(e);
 	}
+
+
 	// Check the difference beetween car and speed direction to see
 	// if it's going forward
 	bool isGoingForward = abs(currentDir.Angle(vel)) < M_PI / 2;
@@ -169,9 +139,9 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
-	else if (backwardPressed_ && 
-			 (body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()
-			  || isGoingForward)) {
+	else if (backwardPressed_ &&
+		(body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()
+			|| isGoingForward)) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(-1 * impulse, body->GetWorldCenter(), true);
 	}
@@ -196,80 +166,82 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 
 void InputMovement::pathfinding()
 {
-//	Vector2D vPosition = v_->getPosition();
-//	Vector2D close[20];
-//	
-//	thread([close, vPosition, ] {
-		bool finish = false;
+	bool finish = false;
 
-		Vector2D wall[2] = { Vector2D(320, 320), Vector2D(320, 320) };
+	Vector2D wall[2] = { Vector2D(1320, 1320), Vector2D(2420, 2420) };
 
-		int i = 0;
+	int tiles = 100;
 
-		std::list<Vector2D> open;
+	int i = 0;
 
-		Vector2D vPosition = v_->getPosition();
-		close[i] = vPosition;
+	positionNow_ = 0;
 
-		Vector2D final = Vector2D(1000, 1000);
-		Vector2D distance = Vector2D(vPosition.x - final.x, vPosition.y - final.y);
+	std::list<Vector2D> open;
 
-		while (!finish && i < 20)
+	Vector2D vPosition = v_->getPosition();
+	close[i] = vPosition;
+
+	Vector2D final = Vector2D(5000, 5000);
+	v_->GetAimComponent();
+	Vector2D distance = Vector2D(vPosition.x - final.x, vPosition.y - final.y);
+
+	while (!finish)
+	{
+
+		if (!(((vPosition.x + tiles) >= wall[0].x) && ((vPosition.x + tiles) <= wall[1].x) && ((vPosition.y - tiles) >= wall[0].y) && ((vPosition.y - tiles) <= wall[1].y)) && !search(close, Vector2D(vPosition.x + tiles, vPosition.y - tiles)))
+			open.push_back(Vector2D(vPosition.x + tiles, vPosition.y - tiles)); //right-up -> 0
+
+		if (!(((vPosition.x + tiles) >= wall[0].x) && ((vPosition.x + tiles) <= wall[1].x) && (vPosition.y >= wall[0].y) && (vPosition.y <= wall[1].y)) && !search(close, Vector2D(vPosition.x + tiles, vPosition.y)))
+			open.push_back(Vector2D(vPosition.x + tiles, vPosition.y)); //right-middle -> 1
+
+		if (!(((vPosition.x + tiles) >= wall[0].x) && ((vPosition.x + tiles) <= wall[1].x) && ((vPosition.y + tiles) >= wall[0].y) && ((vPosition.y + tiles) <= wall[1].y) && !search(close, Vector2D(vPosition.x + tiles, vPosition.y + tiles))))
+			open.push_back(Vector2D(vPosition.x + tiles, vPosition.y + tiles)); //right-down -> 2
+
+		if (!((vPosition.x >= wall[0].x) && (vPosition.x <= wall[1].x) && ((vPosition.y - tiles) >= wall[0].y) && ((vPosition.y - tiles) <= wall[1].y)) && !search(close, Vector2D(vPosition.x, vPosition.y - tiles)))
+			open.push_back(Vector2D(vPosition.x, vPosition.y - tiles)); //middle-up -> 3
+
+		if (!((vPosition.x >= wall[0].x) && (vPosition.x <= wall[1].x) && ((vPosition.y + tiles) >= wall[0].y) && ((vPosition.y + tiles) <= wall[1].y)) && !search(close, Vector2D(vPosition.x, vPosition.y + tiles)))
+			open.push_back(Vector2D(vPosition.x, vPosition.y + tiles)); //middle-down -> 4
+
+		if (!(((vPosition.x - tiles) >= wall[0].x) && ((vPosition.x - tiles) <= wall[1].x) && ((vPosition.y - tiles) >= wall[0].y) && ((vPosition.y - tiles) <= wall[1].y)) && !search(close, Vector2D(vPosition.x - tiles, vPosition.y - tiles)))
+			open.push_back(Vector2D(vPosition.x - tiles, vPosition.y - tiles)); //left-up -> 5
+
+		if (!(((vPosition.x - tiles) >= wall[0].x) && ((vPosition.x - tiles) <= wall[1].x) && (vPosition.y >= wall[0].y) && (vPosition.y <= wall[1].y)) && !search(close, Vector2D(vPosition.x - tiles, vPosition.y)))
+			open.push_back(Vector2D(vPosition.x - tiles, vPosition.y)); //left-middle -> 6
+
+		if (!(((vPosition.x - tiles) >= wall[0].x) && ((vPosition.x - tiles) <= wall[1].x) && ((vPosition.y + tiles) >= wall[0].y) && ((vPosition.y + tiles) <= wall[1].y)) && !search(close, Vector2D(vPosition.x - tiles, vPosition.y + tiles)))
+			open.push_back(Vector2D(vPosition.x - tiles, vPosition.y + tiles)); //left-down -> 7
+
+
+		int minum = 99999;
+		int vec_to_close = -1;
+		for (int i = 0; i < 8; i++)
 		{
+			Vector2D actual_Vect = find(open, i);
 
-			if (!(((vPosition.x + 32) >= wall[0].x) && ((vPosition.x + 32) <= wall[1].x) && ((vPosition.y - 32) >= wall[0].y) && ((vPosition.y - 32) <= wall[1].y)) && !search(close, Vector2D(vPosition.x + 32, vPosition.y - 32)))
-				open.push_back(Vector2D(vPosition.x + 32, vPosition.y - 32)); //right-up -> 0
+			int h = abs(actual_Vect.x - final.x) + abs(actual_Vect.y - final.y);
+			int g = sqrtf(abs(vPosition.x - actual_Vect.x) + abs(vPosition.y - actual_Vect.y));
+			int f = h + g;
 
-			if (!(((vPosition.x + 32) >= wall[0].x) && ((vPosition.x + 32) <= wall[1].x) && (vPosition.y >= wall[0].y) && (vPosition.y <= wall[1].y)) && !search(close, Vector2D(vPosition.x + 32, vPosition.y)))
-				open.push_back(Vector2D(vPosition.x + 32, vPosition.y)); //right-middle -> 1
-
-			if (!(((vPosition.x + 32) >= wall[0].x) && ((vPosition.x + 32) <= wall[1].x) && ((vPosition.y + 32) >= wall[0].y) && ((vPosition.y + 32) <= wall[1].y) && !search(close, Vector2D(vPosition.x + 32, vPosition.y + 32))))
-				open.push_back(Vector2D(vPosition.x + 32, vPosition.y + 32)); //right-down -> 2
-
-			if (!((vPosition.x >= wall[0].x) && (vPosition.x <= wall[1].x) && ((vPosition.y - 32) >= wall[0].y) && ((vPosition.y - 32) <= wall[1].y)) && !search(close, Vector2D(vPosition.x, vPosition.y - 32)))
-				open.push_back(Vector2D(vPosition.x, vPosition.y - 32)); //middle-up -> 3
-
-			if (!((vPosition.x >= wall[0].x) && (vPosition.x <= wall[1].x) && ((vPosition.y + 32) >= wall[0].y) && ((vPosition.y + 32) <= wall[1].y)) && !search(close, Vector2D(vPosition.x, vPosition.y + 32)))
-				open.push_back(Vector2D(vPosition.x, vPosition.y + 32)); //middle-down -> 4
-
-			if (!(((vPosition.x - 32) >= wall[0].x) && ((vPosition.x - 32) <= wall[1].x) && ((vPosition.y - 32) >= wall[0].y) && ((vPosition.y - 32) <= wall[1].y)) && !search(close, Vector2D(vPosition.x - 32, vPosition.y - 32)))
-				open.push_back(Vector2D(vPosition.x - 32, vPosition.y - 32)); //left-up -> 5
-
-			if (!(((vPosition.x - 32) >= wall[0].x) && ((vPosition.x - 32) <= wall[1].x) && (vPosition.y >= wall[0].y) && (vPosition.y <= wall[1].y)) && !search(close, Vector2D(vPosition.x - 32, vPosition.y)))
-				open.push_back(Vector2D(vPosition.x - 32, vPosition.y)); //left-middle -> 6
-
-			if (!(((vPosition.x - 32) >= wall[0].x) && ((vPosition.x - 32) <= wall[1].x) && ((vPosition.y + 32) >= wall[0].y) && ((vPosition.y + 32) <= wall[1].y)) && !search(close, Vector2D(vPosition.x - 32, vPosition.y + 32)))
-				open.push_back(Vector2D(vPosition.x - 32, vPosition.y + 32)); //left-down -> 7
-
-
-			int minum = 99999;
-			int vec_to_close = -1;
-			for (int i = 0; i < 8; i++)
+			if (f < minum)
 			{
-				Vector2D actual_Vect = find(open, i);
-
-				int h = abs(actual_Vect.x - final.x) + abs(actual_Vect.y - final.y);
-				int g = sqrtf(abs(vPosition.x - actual_Vect.x) + abs(vPosition.y - actual_Vect.y));
-				int f = h + g;
-
-				if (f < minum)
-				{
-					minum = f;
-					vec_to_close = i;
-				}
+				minum = f;
+				vec_to_close = i;
 			}
-			i++;
-			close[i] = find(open, vec_to_close);
-			vPosition = close[i];
-
-			open.clear();
-
-			if ((vPosition.x < (final.x + 32) && vPosition.x >(final.x - 32)) && (vPosition.y < (final.y + 32) && vPosition.y >(final.y - 32))) finish = true;
-
 		}
-	//	this_thread::sleep_for(chrono::seconds(2));
-//	}).detach();
-		timer = 100;
+		i++;
+		close[i] = find(open, vec_to_close);
+		vPosition = close[i];
+
+		open.clear();
+
+		if (((vPosition.x < (final.x + tiles) && vPosition.x >(final.x - tiles)) && (vPosition.y < (final.y + tiles) && vPosition.y >(final.y - tiles))) || i > 19)
+		{
+			length = i;
+			finish = true;
+		}
+	}
+	timer = 100;
 }
 
 bool InputMovement::search(Vector2D l[], Vector2D v)
@@ -303,8 +275,8 @@ void InputMovement::steeringWheel() {
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -2*v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 2*v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -2 * v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 2 * v_->GetTurnSpeed();
 		}
 		else {
 			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
@@ -314,7 +286,8 @@ void InputMovement::steeringWheel() {
 
 	if (turnSpeed != 0) {
 		turnSpeed *= body->GetLinearVelocity().Length() / v_->GetMaxSpeed();
-		body->SetAngularVelocity(turnSpeed);
+		if (MovementType_) body->SetAngularVelocity(turnSpeed);
+		else body->SetAngularVelocity(turnSpeed * 4);
 	}
 }
 
@@ -332,11 +305,11 @@ void InputMovement::updateFriction() {
 	double lateralImpulseModifier = 1 - targetLateralVelocity;
 	Vector2D lateralImpulse = lateralImpulseModifier * body->GetMass() * getLateralVelocity().Multiply(-1);
 	body->ApplyLinearImpulse(lateralImpulse, body->GetWorldCenter(), false);
-} 
+}
 
 bool InputMovement::isMoving() {
 	if (abs(v_->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
-	else 
+	else
 		return false;
 }

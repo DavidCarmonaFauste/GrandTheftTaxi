@@ -39,6 +39,7 @@ private:
 	Vector2D getLateralVelocity();
 
 	bool search(Vector2D l[], Vector2D v);
+	int length = 0;
 	Vector2D close[20];
 	int positionNow_ = 0;
 	float timer = 0;
