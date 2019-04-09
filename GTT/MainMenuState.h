@@ -5,16 +5,13 @@
 
 
 static void mockCallback () {
-	cout << "button pushed\n";
 }
 
 static void exitGameCallback () {
-	cout << "button pushed\n"; 
 	Game::getInstance ()->setGameEnd ();
 }
 
 static void mainStateCallback () {
-	cout << "button pushed\n"; 
 	Game::getInstance()->setState(NAME_MAIN_STATE);
 }
 
