@@ -37,6 +37,12 @@ Game::Game() {
 }
 
 Game::~Game() {
+	//se debe borrar en orden de: último a primero de creación
+	delete gmStMachine_; gmStMachine_ = nullptr;
+	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
+		delete (*it).second; (*it).second = nullptr;
+	}
+	delete soundManager_; soundManager_ = nullptr;
 
 }
 
@@ -176,6 +182,7 @@ void Game::run() {
 
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
+	Mix_Quit();
 	SDL_Quit();
 }
 
