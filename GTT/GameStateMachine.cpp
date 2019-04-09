@@ -42,10 +42,10 @@ void GameStateMachine::initStates() {
 	
 	
 	//primer estado al ejectuar app
-	setState(NAME_MPEG_STATE);
+	//setState(NAME_MPEG_STATE);
 
 
 	//DEPURACION
-	//setState(NAME_MAINMENU_STATE);
+	setState(NAME_MAINMENU_STATE);
 	//setState(NAME_MAIN_STATE);
 }

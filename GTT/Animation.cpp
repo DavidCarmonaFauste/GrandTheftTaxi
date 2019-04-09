@@ -155,3 +155,8 @@ void Animation::resetAnimationValues() {
 void Animation::setCamera(cameraType cam) {
 	cam_ = cam;
 }
+
+void Animation::setAnimation(string s)
+{
+	currentAnim = s;
+}

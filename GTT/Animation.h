@@ -32,6 +32,8 @@ public:
 	
 	void setCamera(cameraType cam);
 
+	void setAnimation(string s);
+
 
 
 private:
