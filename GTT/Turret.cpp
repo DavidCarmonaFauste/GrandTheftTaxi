@@ -45,6 +45,13 @@ Turret::Turret(WeaponInfo w)
 	sparkleanim_->loadAnimation("../Assets/sprites/sparkle_anim.png", "sparkle", 3);
 	sparkleEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
+	shotanim_ = new Animation();
+	shotEffect_.setWidth(50);
+	shotEffect_.setHeight(50);
+	shotEffect_.addRenderComponent(shotanim_);
+	shotanim_->loadAnimation("../Assets/sprites/shot_effect.png", "shot");
+	shotEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
+
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
 	animC_->loadAnimation(path_, "default");
 	animC_->playAnimation("default");
@@ -77,6 +84,8 @@ void Turret::update(Uint32 deltaTime)
 		
 
 	sparkleEffect_.update(deltaTime);
+	shotEffect_.update(deltaTime);
+
 	
 	if (Reticule::GetInstance()->GetCurrentSprite() != reticulesprite_)
 		Reticule::GetInstance()->ChangeReticule(reticulesprite_);
@@ -95,6 +104,7 @@ void Turret::render(Uint32 deltaTime)
 {
 	Container::render(deltaTime);
 	sparkleEffect_.render(deltaTime);
+	shotEffect_.render(deltaTime);
 }
 
 void Turret::AttachToVehicle(Car * car)
@@ -134,6 +144,9 @@ void Turret::Shoot()
 				shC_->shoot(normalB);
 				lastTimeShot_ = SDL_GetTicks();
 			}
+
+			if(!shotanim_->isAnimationPlaying("shot"))
+				shotanim_->playAnimation("shot", 3.0f, false);
 			
 			magazine_->pop();
 			animC_->playAnimation("idle", 3.5f, false);
