@@ -11,9 +11,8 @@ MainState::MainState() {
 	// Tilemap
 	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
 	stage_.push_back(tilemap_);
-
-	// Taxi
 	
+	// Taxi
 	stage_.push_back(Vehicle::GetInstance());
 	Reticule::GetInstance()->setPosition(Vehicle::GetInstance()->getPosition());
 	cameraFollow = new FollowGameObject(Vehicle::GetInstance());
@@ -22,16 +21,18 @@ MainState::MainState() {
 	enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
 	stage_.push_back(enemy1_);
 
-
 	// Systems
-	moneySystem = new Money();
-	stage_.push_back(moneySystem);
+	stage_.push_back(Money::getInstance());
+	respawner_ = new Respawner(Vehicle::GetInstance()->getHealthComponent());
+	Vehicle::GetInstance()->addLogicComponent(respawner_);
+
+	// TESTING THE SHOP TRIGGER
+	new Shop(100, 100, 500, 0);
 
 	// UI
-	UI_ = new UI();
-	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI_);
-	moneySystem->registerObserver(UI_);
-	stage_.push_back(UI_);
+	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI::getInstance());
+	Money::getInstance()->registerObserver(UI::getInstance());
+	stage_.push_back(UI::getInstance());
 
 	stage_.push_back(ProyectilePool::GetInstance());
 	stage_.push_back(Reticule::GetInstance());

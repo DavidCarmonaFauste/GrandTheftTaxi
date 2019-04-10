@@ -28,6 +28,7 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -61,6 +62,8 @@
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
+    <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopState.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -70,6 +73,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Turret.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -89,6 +93,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
@@ -123,6 +128,8 @@
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
+    <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopState.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
@@ -132,6 +139,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />

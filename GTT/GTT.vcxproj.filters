@@ -233,6 +233,19 @@
     </ClCompile>
     <ClCompile Include="TaxiSoundManagerCP.cpp">
       <Filter>Archivos de origen\Components</Filter>
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopState.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomContactListener.cpp">
+      <Filter>Archivos de origen\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Shop.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Trigger.cpp">
+      <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -418,6 +431,19 @@
     </ClInclude>
     <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado\Components</Filter>
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomContactListener.h">
+      <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shop.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Trigger.h">
+      <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

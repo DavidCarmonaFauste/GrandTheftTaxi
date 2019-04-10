@@ -59,3 +59,11 @@ const b2Vec2 PhysicObject::getOrigin() {
 b2Body * PhysicObject::getBody() {
 	return body_;
 }
+
+void PhysicObject::setSensor(bool sensor) {
+	body_->GetFixtureList()->SetSensor(sensor);
+}
+
+bool PhysicObject::isSensor() {
+	return body_->GetFixtureList()->IsSensor();
+}

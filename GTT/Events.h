@@ -1,6 +1,7 @@
 #pragma once
 
 class Observable;
+class b2Body;
 
 enum event_type {
 	GAME_START,
@@ -11,6 +12,8 @@ enum event_type {
 	RESPAWNED,
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
+
+	TRIGGER_EVENT,
 
 	EVENTS_LENGTH
 };
@@ -47,4 +50,15 @@ struct MoneyChangedEvent : public Event {
 
 	int currentMoney_;
 	int previousMoney_;
+};
+
+struct TriggerEvent : public Event {
+	TriggerEvent(Observable* sender, b2Body* detected, bool leaving) :
+		Event(sender, TRIGGER_EVENT) {
+		detected_ = detected;
+		leaving_ = leaving;
+	}
+
+	b2Body* detected_;
+	bool leaving_;
 };
