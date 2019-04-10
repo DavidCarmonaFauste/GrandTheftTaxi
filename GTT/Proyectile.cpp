@@ -1,7 +1,7 @@
 #include "Proyectile.h"
+#include "Vehicle.h"
 
-
-Proyectile::Proyectile()
+Proyectile::Proyectile():Trigger(0,0,0,0)
 {
 	setActive(false);
 }
@@ -44,6 +44,24 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
 	phyO_->getBody()->GetFixtureList()->SetSensor(true);
 	addLogicComponent(phyO_);
+}
+
+void Proyectile::beginCallback(b2Contact * contact)
+{
+	if (phyO_ != nullptr) {
+		b2Body* body = phyO_->getBody();
+		b2Body* taxiBody = Vehicle::GetInstance()->GetPhyO()->getBody();
+
+		if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() != taxiBody)
+			&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() != taxiBody)) {
+			Impact();
+		}
+	}
+}
+
+void Proyectile::endCallback(b2Contact * contact)
+{
+
 }
 
 PhysicObject * Proyectile::GetPhyO()

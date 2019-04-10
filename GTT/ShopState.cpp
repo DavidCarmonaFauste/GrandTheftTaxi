@@ -8,7 +8,7 @@ ShopState::ShopState() {
 	UI::getInstance()->setAmmoActive(false);
 	stage_.push_back(UI::getInstance());
 
-	refillButton_ = new Button(refillCallback, (NEW_GAME_BUTTON), TAXI_START);
+	refillButton_ = new Button(refillCallback);
 	stage_.push_back(refillButton_);
 
 	Money::getInstance()->setCurrentMoney(100);
