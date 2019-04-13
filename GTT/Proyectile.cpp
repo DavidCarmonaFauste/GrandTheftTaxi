@@ -4,9 +4,13 @@
 #include "ExplosiveImC.h"
 #include "ImpactComponent.h"
 
+
+b2Filter Proyectile::colFilter = b2Filter();
+
 Proyectile::Proyectile():Trigger(0,0,0,0)
 {
 	setActive(false);
+	colFilter.groupIndex = BULLETS_GROUP;
 }
 
 
@@ -48,7 +52,10 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 	addRenderComponent(animC_);
 	animC_->loadAnimation(p.idlePath, "default");
 	animC_->playAnimation("default");
+
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
+	phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | TAXI_CATEGORY) );
+
 	switch (p.imp) {
 	case STANDARD:
 		phyO_->getBody()->GetFixtureList()->SetSensor(true);

@@ -25,5 +25,7 @@ protected:
 	double lifeTime_;//tiempo de vida hasta volver a desactivarse
 	double birthTime_;//tiempo en el que se activo el objeto
 	double speed_;
+
+	static b2Filter colFilter;
 };
 

@@ -183,6 +183,18 @@ const map<musicId, string> MUSIC = {
 };
 
 
+// PHYSICS
+const enum COLLISION_GROUP {
+	TILES_GROUP = -1,
+	BULLETS_GROUP = -2,
+};
+
+const enum COLLISION_CATEGORY {
+	TILE_CATEGORY = 0x0001,
+	TAXI_CATEGORY = 0x0002,
+	BULLET_CATEGORY = 0X0004,
+};
+
 //KeyBindings
 const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDLK_q, SDL_BUTTON_LEFT, SDLK_m, SDLK_ESCAPE };
 
@@ -225,12 +237,6 @@ const string MAINMENURETICULE = "gun";
 const vector<mainTitleInfo>MAIN_TITLE = { {"../Assets/sprites/MainTitle/default.png", "default", {1, 1}, {0.0, 0.0} }, 
 {"../Assets/sprites/MainTitle/animacion_MainMenu.png", "animation", {5,8}, {0.0, 0.0} }, 
 };
-
-
-
-
-
-
 
 #endif // !constants_define
 

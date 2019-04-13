@@ -17,6 +17,8 @@ public:
 	void setSensor(bool sensor);
 	bool isSensor();
 
+	void setCollisions(int16 groupIndex = 0, uint16 category = 0x0000, uint16 mask = 0xFFFF);
+
 private:
 	b2Body* body_;
 	b2BodyDef bodyDef_;

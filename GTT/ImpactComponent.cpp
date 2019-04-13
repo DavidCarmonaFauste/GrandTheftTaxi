@@ -12,8 +12,7 @@ void ImpactComponent::Impact(b2Contact * contact)
 		b2Body* body = o_->getPhysicsObject()->getBody();
 		b2Body* taxiBody = Vehicle::GetInstance()->GetPhyO()->getBody();
 
-		if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() != taxiBody)
-			&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() != taxiBody)) {
+		if (contact->GetFixtureA()->GetBody() == body || contact->GetFixtureB()->GetBody() == body) {
 			o_->setActive(false);
 		}
 	}

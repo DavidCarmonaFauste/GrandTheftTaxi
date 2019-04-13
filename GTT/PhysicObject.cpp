@@ -67,3 +67,14 @@ void PhysicObject::setSensor(bool sensor) {
 bool PhysicObject::isSensor() {
 	return body_->GetFixtureList()->IsSensor();
 }
+
+// The category bits are all set to 0 by default (no group)
+// The mask bits are all set to 1 by default (collides with everything)
+void PhysicObject::setCollisions(int16 groupIndex, uint16 category, uint16 mask) {
+	b2Filter data;
+	data.groupIndex = groupIndex;
+	data.categoryBits = category;
+	data.maskBits = mask;
+
+	body_->GetFixtureList()->SetFilterData(data);
+}

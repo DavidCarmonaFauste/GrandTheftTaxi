@@ -25,9 +25,11 @@ PhysicObject * Trigger::getPhysicsObject() {
 }
 
 void Trigger::beginCallbackHelper(b2Contact * contact) {
-	beginCallback(contact);
+	if (active_)
+		beginCallback(contact);
 }
 
 void Trigger::endCallbackHelper(b2Contact * contact) {
-	endCallback(contact);
+	if (active_)
+		endCallback(contact);
 }
