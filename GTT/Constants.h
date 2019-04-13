@@ -114,11 +114,6 @@ const enum newGameButtonPaths {
 	clickButton
 };
 
-//MainTitle
-const enum mainTitlePaths {
-	title_defaultAnm,
-	texAnm,
-};
 
 //Enemy 1
 const int ENEMY_HP = 500;
@@ -213,9 +208,7 @@ const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton
 
 const string MAINMENURETICULE = "gun";
 
-const vector<mainTitleInfo>MAIN_TITLE = { {"../Assets/sprites/MainTitle/default.png", "default", {1, 1}, {0.0, 0.0} }, 
-{"../Assets/sprites/MainTitle/animacion_MainMenu.png", "animation", {5,8}, {0.0, 0.0} }, 
-};
+const mainTitleInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0} };
 
 
 

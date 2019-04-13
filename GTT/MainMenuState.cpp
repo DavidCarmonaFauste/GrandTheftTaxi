@@ -30,14 +30,14 @@ void MainMenuState::start()
 
 	//MAIN MENU TITLE
 	mainBackground_ = new Container();
-	mainBackground_->setPosition(Vector2D(MAIN_TITLE[texAnm].pos.x, MAIN_TITLE[texAnm].pos.y));
+	mainBackground_->setPosition(Vector2D(MAIN_TITLE.pos.x, MAIN_TITLE.pos.y));
 	mainBackground_->setWidth(Game::getInstance()->getCameraWidth());
 	mainBackground_->setHeight(Game::getInstance()->getCameraHeight());
 	//animation
 	mainTitleAnm_ = new Animation();
-	mainTitleAnm_->loadAnimation(MAIN_TITLE[title_defaultAnm].idlePath, MAIN_TITLE[title_defaultAnm].name, MAIN_TITLE[title_defaultAnm].frAnm.cols, MAIN_TITLE[title_defaultAnm].frAnm.rows);
-	mainTitleAnm_->loadAnimation(MAIN_TITLE[texAnm].idlePath, MAIN_TITLE[texAnm].name, MAIN_TITLE[texAnm].frAnm.cols, MAIN_TITLE[texAnm].frAnm.rows);
+	mainTitleAnm_->loadAnimation(MAIN_TITLE.idlePath, MAIN_TITLE.name, MAIN_TITLE.frAnm.cols, MAIN_TITLE.frAnm.rows);
 	mainBackground_->addRenderComponent(mainTitleAnm_);
+	mainTitleAnm_->setAnimation(MAIN_TITLE.name);
 
 
 	//BUTTONS
@@ -94,9 +94,7 @@ void MainMenuState::start()
 
 
 	//gestion de la escena
-	//buttons_["newGameButton"]->setActive(false);
-	//buttons_["extiButton"]->setActive(false);
-	mainTitleAnm_->playAnimation(MAIN_TITLE[texAnm].name, 6.0f, false);
+
 	Game::getInstance()->getSoundManager()->playMusic(MAIN_THEME_MUSIC, -1);
 	Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);
 }
@@ -105,10 +103,6 @@ void MainMenuState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (false);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
 
-
-	if (!mainTitleAnm_->isAnimationPlaying(MAIN_TITLE[texAnm].name)) {
-		mainTitleAnm_->stopAnimation();
-	}
 	
 	if (!(buttons_["newGameButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["newGameButton"]->isMouseClickICEvent()) {
 		Game::getInstance()->getSoundManager()->pauseMusic();
