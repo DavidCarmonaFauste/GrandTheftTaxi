@@ -5,7 +5,7 @@
 
 ShopState::ShopState() {
 	// UI
-	UI::getInstance()->setAmmoActive(false);
+	//UI::getInstance()->setAmmoActive(false);
 	stage_.push_back(UI::getInstance());
 
 	refillButton_ = new Button(refillCallback);

@@ -34,18 +34,12 @@ Enemy::Enemy(int x, int y, VehicleInfo r, KeysScheme k) :Car(x, y) {
 	
 
 	// Physics
-	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
-	this->addLogicComponent(phyO_);
+	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
+	addLogicComponent(phyO_);
 
 	
 }
 
-
 Enemy::~Enemy()
 {
-}
-
- void Enemy::render(Uint32 deltatime)
-{
-	Container::render(deltatime);
 }

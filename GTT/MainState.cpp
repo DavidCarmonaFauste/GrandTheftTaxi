@@ -38,9 +38,7 @@ MainState::MainState() {
 	stage_.push_back(Reticule::GetInstance());
 
 	Vehicle::GetInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::GetInstance()->EquipTurret(new Turret(GUN));
-
-
+	Vehicle::GetInstance()->EquipTurret(new Turret(SHOTGUN));
 
 }
 
