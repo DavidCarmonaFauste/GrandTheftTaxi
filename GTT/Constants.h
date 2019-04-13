@@ -31,6 +31,11 @@ const struct VehicleInfo{
 	float acceleration;
 };
 
+const enum ImpactMode {
+	STANDARD,
+	BOUNCE,
+	EXPLOSIVE
+};
 const struct ProyectileInfo {
 	string idlePath;
 	int width;
@@ -38,6 +43,7 @@ const struct ProyectileInfo {
 	double damage;
 	double lifeTime;
 	double speed;
+	ImpactMode imp = STANDARD;
 };
 
 const enum FireMode {
@@ -194,14 +200,15 @@ const ProyectileInfo GUNBULLET{ "../Assets/sprites/BlueProyectile.png" , 25, 25,
 const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/bullet.png" , 50, 50, 20, 500, 25 };
 const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 500, 100};
 const ProyectileInfo MACHINEGUNBULLET{};
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE};
 
 //Weapons
 const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};
 const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100};
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
-;
+
 
 //Buttons
 //siempre tienen que ser un vector, como m�nimo con un componente default animation. 

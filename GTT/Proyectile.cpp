@@ -1,15 +1,14 @@
 #include "Proyectile.h"
 #include "Vehicle.h"
+#include "BounceImC.h"
+#include "ExplosiveImC.h"
+#include "ImpactComponent.h"
 
 Proyectile::Proyectile():Trigger(0,0,0,0)
 {
 	setActive(false);
 }
 
-void Proyectile::Impact()//que hacer cuando el proyectil colisiona con algo
-{
-	active_ = false;
-}
 
 void Proyectile::SetBirth(double birthTime)
 {
@@ -27,10 +26,18 @@ void Proyectile::update(Uint32 time)
 
 void Proyectile::ChangeBulletType(ProyectileInfo p)
 {
-	if (phyO_ != nullptr)
+	if (phyO_ != nullptr) {
 		delLogicComponent(phyO_);
-	if (animC_ != nullptr)
+		phyO_ = nullptr;
+	}
+	if (animC_ != nullptr) {
 		delRenderComponent(animC_);
+		animC_ = nullptr;
+	}
+	if (impC_ != nullptr) {
+		delete impC_;
+		impC_ = nullptr;
+	}
 	
 	width_ = p.width;
 	height_ = p.height;
@@ -42,21 +49,30 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 	animC_->loadAnimation(p.idlePath, "default");
 	animC_->playAnimation("default");
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
-	phyO_->getBody()->GetFixtureList()->SetSensor(true);
+	switch (p.imp) {
+	case STANDARD:
+		phyO_->getBody()->GetFixtureList()->SetSensor(true);
+		impC_ = new ImpactComponent(this);
+		break;
+	case BOUNCE:
+		impC_ = new BounceImC(this);
+		break;
+	case EXPLOSIVE:
+		phyO_->getBody()->GetFixtureList()->SetSensor(true);
+		impC_ = new ExplosiveImC(this);
+		break;
+	default:
+		break;
+	}
 	addLogicComponent(phyO_);
 }
 
 void Proyectile::beginCallback(b2Contact * contact)
 {
-	if (phyO_ != nullptr) {
-		b2Body* body = phyO_->getBody();
-		b2Body* taxiBody = Vehicle::GetInstance()->GetPhyO()->getBody();
-
-		if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() != taxiBody)
-			&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() != taxiBody)) {
-			Impact();
-		}
-	}
+	if(contact!=nullptr)
+		if (this != nullptr)
+			if (impC_ != nullptr)
+				impC_->Impact(contact);
 }
 
 void Proyectile::endCallback(b2Contact * contact)

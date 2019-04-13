@@ -4,11 +4,11 @@
 #include "PhysicObject.h"
 #include "Trigger.h"
 
+class ImpactComponent;
 
 class Proyectile : public Trigger {
 public:
 	Proyectile();
-	virtual void Impact();
 	virtual void SetBirth(double birthTime);
 	virtual void update(Uint32 time);
 	virtual void ChangeBulletType(ProyectileInfo p);
@@ -19,7 +19,8 @@ public:
 	virtual ~Proyectile() {};
 
 protected:
-	Animation* animC_;
+	Animation* animC_=nullptr;
+	ImpactComponent* impC_=nullptr;
 	double damage_;
 	double lifeTime_;//tiempo de vida hasta volver a desactivarse
 	double birthTime_;//tiempo en el que se activo el objeto
