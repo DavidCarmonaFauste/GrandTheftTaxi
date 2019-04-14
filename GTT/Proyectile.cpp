@@ -9,6 +9,11 @@ b2Filter Proyectile::colFilter = b2Filter();
 
 Proyectile::Proyectile():Trigger(0,0,0,0)
 {
+	delLogicComponent(phyO_);
+	delete phyO_;
+	phyO_ = nullptr;
+
+	bodyReadyToDestroy_ = false;
 	setActive(false);
 	colFilter.groupIndex = BULLETS_GROUP;
 }
@@ -23,7 +28,13 @@ void Proyectile::SetBirth(double birthTime)
 void Proyectile::update(Uint32 time)
 {
 	if (SDL_GetTicks() - birthTime_ >= lifeTime_) {
-		setActive(false);
+		DeactivateBullet();
+	}
+	if (bodyReadyToDestroy_) {
+		delLogicComponent(phyO_);
+		delete phyO_;
+		phyO_ = nullptr;
+		active_ = false;
 	}
 	Container::update(time);
 }
@@ -32,6 +43,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 {
 	if (phyO_ != nullptr) {
 		delLogicComponent(phyO_);
+		delete phyO_;
 		phyO_ = nullptr;
 	}
 	if (animC_ != nullptr) {
@@ -42,7 +54,8 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 		delete impC_;
 		impC_ = nullptr;
 	}
-	
+
+	bodyReadyToDestroy_ = false;
 	width_ = p.width;
 	height_ = p.height;
 	speed_ = p.speed;
@@ -92,8 +105,18 @@ PhysicObject * Proyectile::GetPhyO()
 	return phyO_;
 }
 
+double Proyectile::GetDamage()
+{
+	return damage_;
+}
+
 double Proyectile::GetSpeed()
 {
 	return speed_;
+}
+
+void Proyectile::DeactivateBullet()
+{
+	bodyReadyToDestroy_ = true;
 }
 

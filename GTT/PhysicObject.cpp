@@ -24,7 +24,8 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 
 
 PhysicObject::~PhysicObject() {
-	Game::getInstance()->getWorld()->DestroyBody(body_); body_ = nullptr;
+	Game::getInstance()->getWorld()->DestroyBody(body_); 
+	body_ = nullptr;
 }
 
 void PhysicObject::update(GameObject * o, Uint32 deltaTime) {

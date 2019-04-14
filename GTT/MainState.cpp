@@ -9,8 +9,8 @@
 
 MainState::MainState() {
 	// Tilemap
-	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
-	stage_.push_back(tilemap_);
+	//tilemap_ = new TileMap("./../Assets/maps/test.tmx");
+	//stage_.push_back(tilemap_);
 	
 	// Taxi
 	stage_.push_back(Vehicle::GetInstance());
@@ -27,7 +27,7 @@ MainState::MainState() {
 	Vehicle::GetInstance()->addLogicComponent(respawner_);
 
 	// TESTING THE SHOP TRIGGER
-	new Shop(100, 100, 500, 0);
+	//new Shop(100, 100, 500, 0);
 
 	// UI
 	Vehicle::GetInstance()->getHealthComponent()->registerObserver(UI::getInstance());
@@ -54,6 +54,7 @@ void MainState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (true);
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (true);
 
+	cout << Game::getInstance()->getWorld()->GetBodyCount() << endl;
 	GameState::update (deltaTime);
 }
 

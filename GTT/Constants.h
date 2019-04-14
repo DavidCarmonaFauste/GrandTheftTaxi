@@ -128,7 +128,7 @@ const enum mainTitlePaths {
 };
 
 //Enemy 1
-const int ENEMY_HP = 500;
+const int ENEMY_HP = 10;
 
 //NAMES
 const string NAME_MAINMENU_STATE = "mainMenuState";
@@ -209,10 +209,10 @@ const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprite
 
 //Proyectiles
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/BlueProyectile.png" , 25, 25, 10, 500, 50 };
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/bullet.png" , 50, 50, 20, 500, 25 };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/bullet.png" , 50, 50, 20, 500, 25};
 const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 500, 100};
 const ProyectileInfo MACHINEGUNBULLET{};
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/BlueProyectile.png", 50, 50, 10, 5000, 20};
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE};
 
 //Weapons
 const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};

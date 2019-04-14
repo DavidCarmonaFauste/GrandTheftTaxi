@@ -15,7 +15,9 @@ public:
 	virtual void beginCallback(b2Contact *contact) override;
 	virtual void endCallback(b2Contact *contact) override;
 	PhysicObject* GetPhyO();
+	double GetDamage();
 	double GetSpeed();
+	void DeactivateBullet();
 	virtual ~Proyectile() {};
 
 protected:
@@ -25,6 +27,8 @@ protected:
 	double lifeTime_;//tiempo de vida hasta volver a desactivarse
 	double birthTime_;//tiempo en el que se activo el objeto
 	double speed_;
+	bool bodyReadyToDestroy_;
+
 
 	static b2Filter colFilter;
 };

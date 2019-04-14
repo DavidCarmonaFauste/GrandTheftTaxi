@@ -71,6 +71,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
+	
 	while (accumulator_ >= step_*1000) {
 		world_->Step(step_, velIterations_, posIterations_);
 		accumulator_ -= step_*1000;
@@ -83,7 +84,6 @@ void Game::update(Uint32 deltaTime)
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
-
 	// Render the cameras and the state
 	for (auto cam : cameras_) cam.second->render(deltaTime);
 	gmStMachine_->get_CurrentState()->render(deltaTime);

@@ -18,7 +18,7 @@ void BounceImC::Impact(b2Contact* contact)
 			if (bounces_ < maxBounces_)
 				bounces_++;
 			else {
-				o_->setActive(false);
+				//o_->setActive(false);
 				bounces_ = 0;
 			}
 		}
