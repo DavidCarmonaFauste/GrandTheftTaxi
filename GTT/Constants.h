@@ -95,7 +95,7 @@ const struct mainTitleInfo {
 //Constants Data
 const float PHYSICS_SCALING_FACTOR = 0.02f;
 const float DFLT_DAMPING = 1.5f;
-const float DFLT_ANG_DAMPING = 1.5f;
+const float DFLT_ANG_DAMPING = 2.0f;
 const float HBRK_DAMPING = 0.7f;
 const float DFLT_LATERAL_VELOCITY = 0.1f;
 const float HBRK_LATERAL_VELOCITY = 1.01f;
@@ -178,8 +178,8 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
-const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 5.0f, 1.0f, 0.8f };
+const VehicleInfo TAXI { "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 9.5f, 5.0f, 2.5f, 0.8f };
 const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 200, 100, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
@@ -189,12 +189,13 @@ const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 5
 const ProyectileInfo MACHINEGUNBULLET{};
 
 //Weapons
-const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 75, 150, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};
+const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 24, 48, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300};
 const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 50, 100, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100};
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, SHOTGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
-;
+//Maps
+const string PATH_LEVEL_1 = "../Assets/maps/taxiMap.tmx";
 
 
 //Reticule

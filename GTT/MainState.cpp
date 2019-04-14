@@ -9,12 +9,13 @@
 
 MainState::MainState() {
 	// Tilemap
-	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
+	tilemap_ = new TileMap(PATH_LEVEL_1);
 	stage_.push_back(tilemap_);
 
 	// Taxi
 	
 	stage_.push_back(Vehicle::GetInstance());
+	Vehicle::GetInstance ()->setPosition (Vector2D (3200, 2432));
 	Reticule::GetInstance()->setPosition(Vehicle::GetInstance()->getPosition());
 	cameraFollow = new FollowGameObject(Vehicle::GetInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));

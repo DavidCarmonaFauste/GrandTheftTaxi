@@ -28,7 +28,7 @@ public:
 
 	static Vehicle* GetInstance() {
 		if (instance_ == nullptr) {
-			instance_ = new Vehicle(100, 100, THECOOLERTAXI, DEFAULT_KEYS);
+			instance_ = new Vehicle(3200, 2432, THECOOLERTAXI, DEFAULT_KEYS);
 		}
 		return instance_;
 	}
