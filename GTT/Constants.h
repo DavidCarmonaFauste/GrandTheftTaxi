@@ -215,7 +215,8 @@ const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton
 //Taxi animation
 const mainTitleInfo MAIN_TITLE_TAXI = { "../Assets/sprites/MainTitle/mainTitle_taxi_default.png", "default", {1, 1}, {680, 365} };
 const mainTitleInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle_taxi_animation.png", "animation", {1, 1}, {680, 365} };
-
+//Title animation
+const mainTitleInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9}, {450, 200} };
 
 
 

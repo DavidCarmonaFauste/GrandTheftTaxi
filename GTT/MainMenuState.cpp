@@ -87,19 +87,34 @@ void MainMenuState::start()
 
 	
 	//Taxi
-	mainTitle_Taxi_ = new Container();
-	mainTitle_Taxi_->setPosition(Vector2D(MAIN_TITLE_TAXI.pos.x, MAIN_TITLE_TAXI.pos.y));
-	mainTitle_Taxi_->setWidth(293);
-	mainTitle_Taxi_->setHeight(244);
+	Taxi_ = new Container();
+	Taxi_->setPosition(Vector2D(MAIN_TITLE_TAXI.pos.x, MAIN_TITLE_TAXI.pos.y));
+	Taxi_->setWidth(293);
+	Taxi_->setHeight(244);
 		//animation
-	mainTitle_Taxi_anm = new Animation();
+	Taxi_anm = new Animation();
 		//taxAnm
-	mainTitle_Taxi_anm->loadAnimation(MAIN_TITLE_TAXI_ANM.idlePath, MAIN_TITLE_TAXI_ANM.name, MAIN_TITLE_TAXI_ANM.frAnm.cols, MAIN_TITLE_TAXI_ANM.frAnm.rows);
+	Taxi_anm->loadAnimation(MAIN_TITLE_TAXI_ANM.idlePath, MAIN_TITLE_TAXI_ANM.name, MAIN_TITLE_TAXI_ANM.frAnm.cols, MAIN_TITLE_TAXI_ANM.frAnm.rows);
 		//default
-	mainTitle_Taxi_anm->loadAnimation(MAIN_TITLE_TAXI.idlePath, MAIN_TITLE_TAXI.name, MAIN_TITLE_TAXI.frAnm.cols, MAIN_TITLE_TAXI.frAnm.rows);
+	Taxi_anm->loadAnimation(MAIN_TITLE_TAXI.idlePath, MAIN_TITLE_TAXI.name, MAIN_TITLE_TAXI.frAnm.cols, MAIN_TITLE_TAXI.frAnm.rows);
 		//add and set renderC
-	mainTitle_Taxi_->addRenderComponent(mainTitle_Taxi_anm);
-	mainTitle_Taxi_anm->setAnimation(MAIN_TITLE_TAXI.name);
+	Taxi_->addRenderComponent(Taxi_anm);
+	Taxi_anm->setAnimation(MAIN_TITLE_TAXI.name);
+
+	//Title
+	Title_ = new Container();
+	Title_->setPosition(Vector2D(MAIN_TITLE_TITLE.pos.x, MAIN_TITLE_TITLE.pos.y));
+	Title_->setWidth(700);
+	Title_->setHeight(200);
+	//animation
+	Title_anm = new Animation();
+	//taxAnm
+	Title_anm->loadAnimation(MAIN_TITLE_TITLE.idlePath, MAIN_TITLE_TITLE.name, MAIN_TITLE_TITLE.frAnm.cols, MAIN_TITLE_TITLE.frAnm.rows);
+	//add and set renderC
+	Title_->addRenderComponent(Title_anm);
+	Title_anm->setAnimation(MAIN_TITLE_TITLE.name);
+
+
 
 
 	//Container to GameObj list
@@ -107,12 +122,14 @@ void MainMenuState::start()
 	stage_.push_back(buttons_["newGameButton"]);
 	stage_.push_back(buttons_["extiButton"]);
 	stage_.push_back(Reticule::GetInstance());
-	stage_.push_back(mainTitle_Taxi_);
+	stage_.push_back(Taxi_); 
+	stage_.push_back(Title_);
 
 
 	//scene management
 	Game::getInstance()->getSoundManager()->playMusic(MAIN_THEME_MUSIC, -1); //MainTitle Theme
 	Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);	//vehicle start sound
+	Title_->setActive(false);
 }
 
 void MainMenuState::update (Uint32 deltaTime) {
@@ -121,7 +138,13 @@ void MainMenuState::update (Uint32 deltaTime) {
 
 	//!vehicle start sound
 	if (cont_1 == -1 && !(Game::getInstance()->getSoundManager()->isSoundPlaying(-1))) {
-		mainTitle_Taxi_anm->setAnimation(MAIN_TITLE_TAXI_ANM.name);
+		//taxi lights
+		Taxi_anm->setAnimation(MAIN_TITLE_TAXI_ANM.name);
+		//Title active
+		Title_->setActive(true);
+		Title_anm->playAnimation(MAIN_TITLE_TITLE.name, 6.0);
+
+
 		cont_1 = 1;
 	}
 	

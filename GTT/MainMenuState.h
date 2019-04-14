@@ -37,8 +37,11 @@ private:
 	map<string, Button*> buttons_;
 	soundId Sound_NewGameButton_;
 	//taxi
-	Container* mainTitle_Taxi_ = nullptr;
-	Animation* mainTitle_Taxi_anm; //necesary for set in this Update
+	Container* Taxi_ = nullptr;
+	Animation* Taxi_anm; //necesary for set in this Update
+	//title
+	Container* Title_ = nullptr;
+	Animation* Title_anm; //necesary for set in this Update
 
 	//scene management
 	int cont_1;
