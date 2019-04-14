@@ -196,20 +196,25 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 
 ;
 
-//Buttons
-//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
-const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {550.0, 660.0}}, 
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {550.0, 660.0}},
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {550.0, 660.0}}
-};
 
-const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {1000.0, 700.0}},
-{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {1000.0, 700.0}} };
-
+//Reticule
 const string MAINMENURETICULE = "gun";
 
+//MAIN MENU STATE
+//Background
 const mainTitleInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0} };
+//Buttons
+	//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
+const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {700, 600}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {700, 600}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {700, 600}}
+};
+const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {700, 700}},
+{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {700, 700}} };
 
+//Taxi animation
+const mainTitleInfo MAIN_TITLE_TAXI = { "../Assets/sprites/MainTitle/mainTitle_taxi_default.png", "default", {1, 1}, {680, 365} };
+const mainTitleInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle_taxi_animation.png", "animation", {1, 1}, {680, 365} };
 
 
 
