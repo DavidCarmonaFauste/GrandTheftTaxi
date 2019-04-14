@@ -130,6 +130,8 @@ void MainMenuState::start()
 	Game::getInstance()->getSoundManager()->playMusic(MAIN_THEME_MUSIC, -1); //MainTitle Theme
 	Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);	//vehicle start sound
 	Title_->setActive(false);
+	buttons_["newGameButton"]->setActive(false);
+	buttons_["extiButton"]->setActive(false);
 }
 
 void MainMenuState::update (Uint32 deltaTime) {
@@ -142,10 +144,12 @@ void MainMenuState::update (Uint32 deltaTime) {
 		Taxi_anm->setAnimation(MAIN_TITLE_TAXI_ANM.name);
 		//Title active
 		Title_->setActive(true);
-		Title_anm->playAnimation(MAIN_TITLE_TITLE.name, 6.0);
+		Title_anm->playAnimation(MAIN_TITLE_TITLE.name, 9.0);
+		//buttons active
+		buttons_["newGameButton"]->setActive(true);
+		buttons_["extiButton"]->setActive(true);
 
-
-		cont_1 = 1;
+		cont_1 = 1; //if control
 	}
 	
 	if (!(buttons_["newGameButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["newGameButton"]->isMouseClickICEvent()) {
