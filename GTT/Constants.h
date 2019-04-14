@@ -77,11 +77,17 @@ const struct frameAnimation {
 
 const struct ButtonInfo {
 	string idlePath; 
-	string name; //alberga un array de nombres, porque Animation.h inserta las correspondientes rutas en atributo privado tipo map< >
+	string name; 
 	frameAnimation frAnm;
 	Vector2D pos;
 };
 
+const struct mainTitleInfo {
+	string idlePath;
+	string name;
+	frameAnimation frAnm;
+	Vector2D pos;
+};
 
 
 //EDITABLE ----------------------------------------------------------------------------------------------------------
@@ -89,7 +95,7 @@ const struct ButtonInfo {
 //Constants Data
 const float PHYSICS_SCALING_FACTOR = 0.02f;
 const float DFLT_DAMPING = 1.5f;
-const float DFLT_ANG_DAMPING = 1.5f;
+const float DFLT_ANG_DAMPING = 2.0f;
 const float HBRK_DAMPING = 0.7f;
 const float DFLT_LATERAL_VELOCITY = 0.1f;
 const float HBRK_LATERAL_VELOCITY = 1.01f;
@@ -107,6 +113,7 @@ const enum newGameButtonPaths {
 	overButton,
 	clickButton
 };
+
 
 //Enemy 1
 const int ENEMY_HP = 500;
@@ -136,7 +143,9 @@ const enum soundId {
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
 	TAXI_1,
-	TAXI_DECELERATE_10
+	TAXI_DECELERATE_10,
+	//buttons
+	CLIC_BUTTON_NEWGAME
 };
 const map<soundId, string> SOUND = {
 	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
@@ -144,17 +153,20 @@ const map<soundId, string> SOUND = {
 	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
 	{TAXI_1, "../Assets/sounds/Running1.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"}
-
+	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"},
+	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
 };
+
 
 //MUSIC
 const enum musicId {
 	DEFAULT_MUSIC,
+	MAIN_THEME_MUSIC
 };
 
 const map<musicId, string> MUSIC = {
-	{DEFAULT_MUSIC, "../Assets/sounds/default.wav"}
+	{DEFAULT_MUSIC, "../Assets/sounds/default.wav"},
+	{MAIN_THEME_MUSIC, "../Assets/sounds/MainTheme/Grove.wav"}
 };
 
 
@@ -185,17 +197,30 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/taxiMap.tmx";
 
-//Buttons
-//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
-const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {500.0, 150.0}}, 
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {500.0, 150.0}},
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {500.0, 150.0}}
-};
 
-const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {500.0, 500.0}},
-{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {500.0, 500.0}} };
-
+//Reticule
 const string MAINMENURETICULE = "gun";
+
+//MAIN MENU STATE
+//Background
+const mainTitleInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0} };
+//Buttons
+	//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
+const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {700, 600}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {700, 600}},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {700, 600}}
+};
+const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {700, 700}},
+{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {700, 700}} };
+
+//Taxi animation
+const mainTitleInfo MAIN_TITLE_TAXI = { "../Assets/sprites/MainTitle/mainTitle_taxi_default.png", "default", {1, 1}, {680, 365} };
+const mainTitleInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle_taxi_animation.png", "animation", {1, 1}, {680, 365} };
+//Title animation
+const mainTitleInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9}, {500, 255} };
+
+
+
 
 
 #endif // !constants_define

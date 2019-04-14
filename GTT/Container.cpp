@@ -8,18 +8,27 @@ Container::~Container() {
 }
 
 void Container::handleInput(Uint32 deltaTime, const SDL_Event& event) {
+	if (!active_)
+		return;
+
 	for (InputComponent* ic : inputComp_) {
 		ic->handleInput(this, deltaTime, event);
 	}
 }
 
 void Container::update(Uint32 deltaTime) {
+	if (!active_)
+		return;
+
 	for (LogicComponent* pc : logicComp_) {
 		pc->update(this, deltaTime);
 	}
 }
 
 void Container::render(Uint32 deltaTime) {
+	if (!active_)
+		return;
+
 	for (RenderComponent* rc : renderComp_) {
 		rc->render(this, deltaTime);
 	}

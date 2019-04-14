@@ -33,7 +33,7 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 
 		animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
 
-		currentAnim = name;
+		//currentAnim = name;
 	}
 }
 
@@ -124,7 +124,10 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 			if (animationLoop)
 				resetAnimationValues();
 			else {
-				playAnimation("default");
+				if (!playAnimation("default")) {
+					currentAnim = "-1";
+					return;
+				}
 			}
 		}
 	}
@@ -154,4 +157,9 @@ void Animation::resetAnimationValues() {
 
 void Animation::setCamera(cameraType cam) {
 	cam_ = cam;
+}
+
+void Animation::setAnimation(string s)
+{
+	currentAnim = s;
 }

@@ -63,5 +63,7 @@ protected:
 	int defaultSpecialDMG_;
 	Container sparkleEffect_;
 	Animation* sparkleanim_;
+	Container shotEffect_;
+	Animation* shotanim_;
 };
 

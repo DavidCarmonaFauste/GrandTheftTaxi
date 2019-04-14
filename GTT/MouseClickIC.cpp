@@ -43,7 +43,6 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 				if (event.button.button == mouseClickKey_) {
 					//asegura que el vector de struc buttonInfo tiene una componente para la animación 
 					if (buttonTypeSize_ >= (int)clickButton) {
-						button->getButtonAnimacion()->loadAnimation(buttonType_[clickButton].idlePath, buttonType_[clickButton].name, buttonType_[clickButton].frAnm.cols, buttonType_[clickButton].frAnm.rows);
 						button->getButtonAnimacion()->playAnimation(buttonType_[clickButton].name, 24.0f, false);
 						
 						//accede al SoundManager y reproduce el sonido
@@ -68,13 +67,12 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 						mouseY < int(objPosition.y + o->getHeight())) {
 
 						if (buttonTypeSize_ >= (int)overButton) {
-							button->getButtonAnimacion()->loadAnimation(buttonType_[overButton].idlePath, buttonType_[overButton].name, buttonType_[overButton].frAnm.cols, buttonType_[overButton].frAnm.rows);
+							button->getButtonAnimacion()->setAnimation(buttonType_[overButton].name);
 						}
 
 					}
 					else {
-
-						button->getButtonAnimacion()->loadAnimation(buttonType_[defaultAnm].idlePath, buttonType_[defaultAnm].name, buttonType_[defaultAnm].frAnm.cols, buttonType_[defaultAnm].frAnm.rows);
+						button->getButtonAnimacion()->stopAnimation();
 					}
 				}//SDL_MOUSEMOTION
 			}

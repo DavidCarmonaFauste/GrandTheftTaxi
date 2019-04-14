@@ -33,7 +33,7 @@ HealthDisplay::HealthDisplay() {
 	addRenderComponent(fuhealthAmount_);
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");
 	fuhealthAmount_->setAutoPos(false);
-	fuhealthAmount_->setPos(getPosition().x + getWidth(), getPosition().y + getHeight()*0.1);
+	fuhealthAmount_->setPos(getPosition().x + 5 + getWidth(), getPosition().y + getHeight() * 0.23);
 	fuhealthAmount_->setAutoSize(false);
 	fuhealthAmount_->setSize(90, 40);
 }

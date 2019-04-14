@@ -13,11 +13,15 @@ using CallBackOnClick = void ();
 
 class Button : public Container {
 public:
-	Button(CallBackOnClick cb, const vector <ButtonInfo>  buttonType, const soundId sound = (soundId)-1);
+	Button(CallBackOnClick cb);
 	virtual ~Button ();
 
 	CallBackOnClick *callback = nullptr;
 	
+	void setButtonAnimation(Animation* anm);
+	void setMouseClickIC(MouseClickIC* mCIc);
+	void setClickSound(soundId = (soundId)-1);
+
 	Animation* getButtonAnimacion();
 	bool isMouseClickICEvent();
 
@@ -25,9 +29,9 @@ public:
 
 
 private:
-	//Sprite* buttonSprite = nullptr;
+	Sprite* buttonSprite_ = nullptr;
 	Animation* buttonAnimation_ = nullptr;
-	MouseClickIC* mouseClickIC = nullptr;
+	MouseClickIC* mouseClickIC_ = nullptr;
 
 	soundId clickSound_;
 };

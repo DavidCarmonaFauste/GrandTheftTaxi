@@ -5,16 +5,13 @@
 
 
 static void mockCallback () {
-	cout << "button pushed\n";
 }
 
 static void exitGameCallback () {
-	cout << "button pushed\n"; 
 	Game::getInstance ()->setGameEnd ();
 }
 
 static void mainStateCallback () {
-	cout << "button pushed\n"; 
 	Game::getInstance()->setState(NAME_MAIN_STATE);
 }
 
@@ -27,11 +24,27 @@ public:
 	MainMenuState();
 	virtual ~MainMenuState();
 
+	virtual void start();
+
 	virtual void update (Uint32 deltaTime);
 	
 
 private:
+	
+	//Background
+	Container* mainBackground_ = nullptr;
+	//Buttons
 	map<string, Button*> buttons_;
 	soundId Sound_NewGameButton_;
+	//taxi
+	Container* Taxi_ = nullptr;
+	Animation* Taxi_anm; //necesary for set in this Update
+	//title
+	Container* Title_ = nullptr;
+	Animation* Title_anm; //necesary for set in this Update
+
+	//scene management
+	int cont_1;
+	
 };
 
