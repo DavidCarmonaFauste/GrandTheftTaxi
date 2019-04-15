@@ -75,18 +75,14 @@ const struct frameAnimation {
 	int rows;
 };
 
-const struct ButtonInfo {
-	string idlePath; 
-	string name; 
-	frameAnimation frAnm;
-	Vector2D pos;
-};
 
-const struct mainTitleInfo {
+const struct textureInfo {
 	string idlePath;
 	string name;
 	frameAnimation frAnm;
 	Vector2D pos;
+	int width;
+	int height;
 };
 
 
@@ -201,24 +197,48 @@ const string PATH_LEVEL_1 = "../Assets/maps/taxiMap.tmx";
 //Reticule
 const string MAINMENURETICULE = "gun";
 
+/**************************************/
 //MAIN MENU STATE
+
+//atributos para gestionar propiedades de los estruct. Evitar redundancia
+//background
+const int backGround_widht = 1900; //se está usando el tamaño de la cam. MainMenuState.cpp
+const int backGround_height = 900;
+//Buttons
+const Vector2D NG_Button_position_ = { 700.0, 600.0 };
+const Vector2D EG_Button_position_ = { 700.0, 700.0 };
+const int Button_Width_ = 250; 
+const int Button_Height_ = 150;
+//taxi
+const Vector2D Taxi_position_ = { 650, 345 };
+const int Taxi_Width_ = 350;
+const int Taxi_Height_ = 300;
+//Game title
+const Vector2D title_position_ = { 500, 200 };
+const int title_Width_ = 700;
+const int title_Height_ = 200; 
+
 //Background
-const mainTitleInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0} };
+const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, 1900, 900 };
 //Buttons
 	//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
-const vector <ButtonInfo> NEW_GAME_BUTTON = { {"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, {700, 600}},
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, {700, 600}},
-{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, {700, 600}}
+const vector <textureInfo> NEW_GAME_BUTTON = {
+{"../Assets/sprites/buttons/NewGameButton/default.png", "default", {1 , 1}, NG_Button_position_, Button_Width_, Button_Height_},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_over_0.png", "overButton", {1 , 1}, NG_Button_position_, Button_Width_, Button_Height_},
+{"../Assets/sprites/buttons/NewGameButton/NewGameButton_clickAnimation.png", "clickButton", {30, 1}, NG_Button_position_, Button_Width_, Button_Height_}
 };
-const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, {700, 700}},
-{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {700, 700}} };
+
+const vector <textureInfo> EXIT_BUTTON = { 
+{"../Assets/sprites/buttons/ExitButton/ExitButton_default.png", "default", {1 , 1}, EG_Button_position_, Button_Width_, Button_Height_},
+{"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, EG_Button_position_, Button_Width_, Button_Height_}
+};
 
 //Taxi animation
-const mainTitleInfo MAIN_TITLE_TAXI = { "../Assets/sprites/MainTitle/mainTitle_taxi_default.png", "default", {1, 1}, {680, 365} };
-const mainTitleInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle_taxi_animation.png", "animation", {1, 1}, {680, 365} };
+const textureInfo MAIN_TITLE_TAXI = { "../Assets/sprites/MainTitle/mainTitle_taxi_default.png", "default", {1, 1}, Taxi_position_ , Taxi_Width_, Taxi_Height_ };
+const textureInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle_taxi_animation.png", "animation", {1, 1}, Taxi_position_ , Taxi_Width_, Taxi_Height_};
 //Title animation
-const mainTitleInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9}, {500, 255} };
-
+const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9},  title_position_, title_Width_, title_Height_ };
+/**************************************/
 
 
 

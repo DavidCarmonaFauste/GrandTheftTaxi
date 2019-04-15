@@ -45,11 +45,11 @@ void MainMenuState::start()
 	buttons_["extiButton"] = new Button(exitGameCallback);
 		//set atributtes
 	buttons_["newGameButton"]->setPosition(Vector2D(NEW_GAME_BUTTON[defaultAnm].pos.x, NEW_GAME_BUTTON[defaultAnm].pos.y));
-	buttons_["newGameButton"]->setWidth(250);
-	buttons_["newGameButton"]->setHeight(150);
+	buttons_["newGameButton"]->setWidth(NEW_GAME_BUTTON[defaultAnm].width);
+	buttons_["newGameButton"]->setHeight(NEW_GAME_BUTTON[defaultAnm].height);
 	buttons_["extiButton"]->setPosition(Vector2D(EXIT_BUTTON[defaultAnm].pos.x, EXIT_BUTTON[defaultAnm].pos.y));
-	buttons_["extiButton"]->setWidth(250);
-	buttons_["extiButton"]->setHeight(150);
+	buttons_["extiButton"]->setWidth(EXIT_BUTTON[defaultAnm].width);
+	buttons_["extiButton"]->setHeight(EXIT_BUTTON[defaultAnm].height);
 		//build and set private components
 			//inputC
 	MouseClickIC* mCIc = new MouseClickIC(NEW_GAME_BUTTON); //NEW GAME BUTTON
@@ -89,8 +89,8 @@ void MainMenuState::start()
 	//Taxi
 	Taxi_ = new Container();
 	Taxi_->setPosition(Vector2D(MAIN_TITLE_TAXI.pos.x, MAIN_TITLE_TAXI.pos.y));
-	Taxi_->setWidth(293);
-	Taxi_->setHeight(244);
+	Taxi_->setWidth(MAIN_TITLE_TAXI.width);
+	Taxi_->setHeight(MAIN_TITLE_TAXI.height);
 		//animation
 	Taxi_anm = new Animation();
 		//taxAnm
@@ -104,8 +104,8 @@ void MainMenuState::start()
 	//Title
 	Title_ = new Container();
 	Title_->setPosition(Vector2D(MAIN_TITLE_TITLE.pos.x, MAIN_TITLE_TITLE.pos.y));
-	Title_->setWidth(700);
-	Title_->setHeight(200);
+	Title_->setWidth(MAIN_TITLE_TITLE.width);
+	Title_->setHeight(MAIN_TITLE_TITLE.height);
 	//animation
 	Title_anm = new Animation();
 	//taxAnm

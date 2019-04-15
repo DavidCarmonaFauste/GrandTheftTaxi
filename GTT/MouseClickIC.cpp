@@ -2,7 +2,7 @@
 #include "Button.h"
 #include "Game.h"
 
-MouseClickIC::MouseClickIC (const vector<ButtonInfo> bType, int key) {
+MouseClickIC::MouseClickIC (const vector<textureInfo> bType, int key) {
 	mouseClickKey_ = key;
 	clickEvent_ = false;
 	buttonType_ = bType; buttonTypeSize_ = (buttonType_.size() -1);
