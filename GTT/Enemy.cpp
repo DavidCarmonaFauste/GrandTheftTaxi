@@ -24,7 +24,7 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	
 
 	// Physics
-	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
+	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
 	phyO_->getBody()->SetUserData(this);
 	//phyO_->getBody()->SetLinearDamping(2.0f);
 	//phyO_->getBody()->SetAngularDamping(2.0f);
