@@ -30,10 +30,21 @@ public:
 	
 
 private:
+	
+	//Background
+	Container* mainBackground_ = nullptr;
+	//Buttons
 	map<string, Button*> buttons_;
 	soundId Sound_NewGameButton_;
+	//taxi
+	Container* Taxi_ = nullptr;
+	Animation* Taxi_anm; //necesary for set in this Update
+	//title
+	Container* Title_ = nullptr;
+	Animation* Title_anm; //necesary for set in this Update
 
-	Container* mainBackground_;
-	Animation* mainTitleAnm_;
+	//scene management
+	int cont_1;
+	
 };
 
