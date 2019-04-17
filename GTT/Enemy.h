@@ -16,10 +16,10 @@ public:
 private:
 	bool bodyReadyToDestroy_;
 	bool destinated_;
+	bool finished_;
 	Vector2D destination_;
 	Vector2D direction_;
 	NodeMap routemap_;
-	Vector2D route[4] = {Vector2D(0,0), Vector2D(400,0), Vector2D(400, 400), Vector2D(0, 400)};
 	Node* node=nullptr;
 	int speed_;
 };

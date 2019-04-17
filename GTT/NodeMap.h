@@ -9,22 +9,29 @@ enum Connections {
 };
 class Node {
 public:
-	Node(Vector2D pos, Node* north, Node* south, Node* east, Node* west) {
+	Node(Vector2D pos) {
 		position_ = pos;
-		connections_[NORTH] = north;
-		connections_[SOUTH] = south;
-		connections_[EAST] = east;
-		connections_[WEST] = west;
+		for (int i = 0; i < 4; i++) {
+			connections_[i] = nullptr;
+		}
 	}
 	Vector2D position_;
 	Node* connections_[4];
-	
+	bool isConnected() {
+		for (int i = 0; i < 4; i++) {
+			if (connections_[i] != nullptr) {
+				return true;
+			}
+		}
+		return false;
+	}
 };
 class NodeMap
 {
 public:
 	NodeMap();
 	void addNode(Node* n);
+	void connectNodes(Node* n1, Node* n2);
 	bool nodeExists(Node* node);
 	Node* getNearestNode(Vector2D position);
 	vector<Node*> getNodes();

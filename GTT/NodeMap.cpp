@@ -8,25 +8,37 @@ NodeMap::NodeMap()
 
 void NodeMap::addNode(Node* n)
 {
-	nodes.push_back(n);
-	for (int i = 0; i < 4; i++) {
-		if (n->connections_[i] != nullptr) {
-			switch (i) {
-				case NORTH:
-					if(nodeExists(n->connections_[i]))
-					n->connections_[i]->connections_[SOUTH] = n;
-					break;
-				case SOUTH:
-					n->connections_[i]->connections_[NORTH] = n;
-					break;
-				case EAST:
-					n->connections_[i]->connections_[WEST] = n;
-					break;
-				case WEST:
-					n->connections_[i]->connections_[EAST] = n;
-					break;
+	if(!nodeExists(n))
+		nodes.push_back(n);
+
+	cout<<nodes.size()<< endl;
+}
+
+void NodeMap::connectNodes(Node * n1, Node * n2)
+{
+	if (nodeExists(n1) && nodeExists(n2)) {
+		if (n2->position_.x == n1->position_.x) {
+			if (n2->position_.y < n1->position_.y) {
+				n1->connections_[NORTH] = n2;
+				n2->connections_[SOUTH] = n1;
+			}
+			else if (n2->position_.y > n1->position_.y) {
+				n1->connections_[SOUTH] = n2;
+				n2->connections_[NORTH] = n1;
 			}
 		}
+		else if (n2->position_.y == n1->position_.y) {
+			if (n2->position_.x > n1->position_.x) {
+				n1->connections_[EAST] = n2;
+				n2->connections_[WEST] = n1;
+			}
+			else if (n2->position_.x < n1->position_.x) {
+				n1->connections_[WEST] = n2;
+				n2->connections_[EAST] = n1;
+			}
+		}
+		else
+			cout << "incompatible nodes: " << "n1= (" << n1->position_.x << ", " << n1->position_.y << ") " << "n2= (" << n2->position_.x << ", " << n2->position_.y << ")" << endl;
 	}
 }
 

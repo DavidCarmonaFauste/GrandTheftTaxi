@@ -21,19 +21,22 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	//Movement
 	speed_ = 5;
 	//IA
-	Node* a = nullptr;
-	Node* b = nullptr;
-	Node* c = nullptr;
-	Node* d = nullptr;
-	a = new Node(Vector2D(0, 0), nullptr, d, b, nullptr);
-	b = new Node(Vector2D(400, 0), nullptr, c, nullptr, a);
-	c = new Node(Vector2D(400, 400), b, nullptr, nullptr, d);
-	d = new Node(Vector2D(0, 400), a, nullptr, nullptr, c);
+	finished_ = false;
+	Node* a = new Node(Vector2D(0, 0));
+	Node* b = new Node(Vector2D(400, 0));
+	Node* c = new Node(Vector2D(400, 400));
+	Node* d = new Node(Vector2D(0, 400));
 
 	routemap_.addNode(a);
 	routemap_.addNode(b);
 	routemap_.addNode(c);
 	routemap_.addNode(d);
+
+	routemap_.connectNodes(a, b);
+	routemap_.connectNodes(b, c);
+	routemap_.connectNodes(c, d);
+	routemap_.connectNodes(d, a);
+
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
@@ -57,61 +60,68 @@ void Enemy::Die()
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
-		if (destinated_) {
-			if (direction_.x < 0) {
-				if (getCenter().x < destination_.x) {
-					phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-					destinated_ = false;
-					return;
+		if (!finished_) {
+			if (destinated_) {
+				if (direction_.x < 0) {
+					if (getCenter().x < destination_.x) {
+						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
+						destinated_ = false;
+						return;
+					}
 				}
-			}
-			else if (direction_.x > 0) {
-				if (getCenter().x > destination_.x) {
-					phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-					destinated_ = false;
-					return;
+				else if (direction_.x > 0) {
+					if (getCenter().x > destination_.x) {
+						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
+						destinated_ = false;
+						return;
+					}
 				}
-			}
-			else if (direction_.y < 0) {
-				if (getCenter().y < destination_.y) {
-					phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-					destinated_ = false;
-					return;
+				else if (direction_.y < 0) {
+					if (getCenter().y < destination_.y) {
+						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
+						destinated_ = false;
+						return;
+					}
 				}
-			}
-			else if (direction_.y > 0) {
-				if (getCenter().y > destination_.y) {
-					phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-					destinated_ = false;
-					return;
+				else if (direction_.y > 0) {
+					if (getCenter().y > destination_.y) {
+						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
+						destinated_ = false;
+						return;
+					}
 				}
-			}
-			direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
-			direction_.Normalize();
-			float angle = atan2f(-direction_.x, direction_.y);
-			angle += 90.0 / 180.0*M_PI;
-			phyO_->getBody()->SetTransform(phyO_->getBody()->GetPosition(), angle);
-			phyO_->getBody()->SetLinearVelocity(Vector2D(direction_.x * speed_, direction_.y * speed_));
-		}
-		else {
-			destinated_ = true;
-			if (node==nullptr) {
-				node = routemap_.getNodes()[0];
-				destination_ = node->position_;
+				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
+				direction_.Normalize();
+				float angle = atan2f(-direction_.x, direction_.y);
+				angle += 90.0 / 180.0*M_PI;
+				phyO_->getBody()->SetTransform(phyO_->getBody()->GetPosition(), angle);
+				phyO_->getBody()->SetLinearVelocity(Vector2D(direction_.x * speed_, direction_.y * speed_));
 			}
 			else {
-				double a = rand() % 100;
-				int c = a * 4 / 100.0;
-				while (node->connections_[c] == nullptr) {
-					a = rand() % 100;
-					c = a * 4 / 100.0;
+				destinated_ = true;
+				if (node == nullptr) {
+					node = routemap_.getNodes()[0];
+					destination_ = node->position_;
 				}
-				node = node->connections_[c];
-				destination_ =node->position_;
+				else {
+					if (node->isConnected()) {
+						double a = rand() % 100;
+						int c = a * 4 / 100.0;
+						while (node->connections_[c] == nullptr) {
+							a = rand() % 100;
+							c = a * 4 / 100.0;
+						}
+						node = node->connections_[c];
+						destination_ = node->position_;
+					}
+					else finished_ = true;
+				}
+				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
+				direction_.Normalize();
 			}
-			direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
-			direction_.Normalize();
 		}
+		else phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
+
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;
