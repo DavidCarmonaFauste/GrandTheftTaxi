@@ -9,7 +9,7 @@ enum Connections {
 };
 class Node {
 public:
-	Node(Vector2D pos, Node* north=nullptr, Node* south = nullptr, Node* east = nullptr, Node* west = nullptr) {
+	Node(Vector2D pos, Node* north, Node* south, Node* east, Node* west) {
 		position_ = pos;
 		connections_[NORTH] = north;
 		connections_[SOUTH] = south;
@@ -18,14 +18,16 @@ public:
 	}
 	Vector2D position_;
 	Node* connections_[4];
+	
 };
 class NodeMap
 {
 public:
 	NodeMap();
-	void addNode(Node* node);
+	void addNode(Node* n);
 	bool nodeExists(Node* node);
 	Node* getNearestNode(Vector2D position);
+	vector<Node*> getNodes();
 	virtual ~NodeMap();
 private:
 	vector<Node*>nodes;

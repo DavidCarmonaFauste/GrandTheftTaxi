@@ -6,31 +6,30 @@ NodeMap::NodeMap()
 {
 }
 
-void NodeMap::addNode(Node* node)
+void NodeMap::addNode(Node* n)
 {
-	if (!nodeExists(node)) {
-		nodes.push_back(node);
-		for (int i = 0; i < 4; i++) {
-			if (node->connections_[i] != nullptr) {
-				switch (i) {
-					case NORTH:
-						node->connections_[i]->connections_[SOUTH] = node;
-						break;
-					case SOUTH:
-						node->connections_[i]->connections_[NORTH] = node;
-						break;
-					case EAST:
-						node->connections_[i]->connections_[WEST] = node;
-						break;
-					case WEST:
-						node->connections_[i]->connections_[EAST] = node;
-						break;
-				}
-				addNode(node->connections_[i]);
+	nodes.push_back(n);
+	for (int i = 0; i < 4; i++) {
+		if (n->connections_[i] != nullptr) {
+			switch (i) {
+				case NORTH:
+					if(nodeExists(n->connections_[i]))
+					n->connections_[i]->connections_[SOUTH] = n;
+					break;
+				case SOUTH:
+					n->connections_[i]->connections_[NORTH] = n;
+					break;
+				case EAST:
+					n->connections_[i]->connections_[WEST] = n;
+					break;
+				case WEST:
+					n->connections_[i]->connections_[EAST] = n;
+					break;
 			}
 		}
 	}
 }
+
 
 bool NodeMap::nodeExists(Node * node)
 {
@@ -45,7 +44,13 @@ Node * NodeMap::getNearestNode(Vector2D position)
 	return nullptr;
 }
 
+vector<Node*> NodeMap::getNodes()
+{
+	return nodes;
+}
+
 
 NodeMap::~NodeMap()
 {
 }
+

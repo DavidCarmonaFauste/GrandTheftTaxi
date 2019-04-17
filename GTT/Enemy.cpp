@@ -21,7 +21,19 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	//Movement
 	speed_ = 5;
 	//IA
-	
+	Node* a = nullptr;
+	Node* b = nullptr;
+	Node* c = nullptr;
+	Node* d = nullptr;
+	a = new Node(Vector2D(0, 0), nullptr, d, b, nullptr);
+	b = new Node(Vector2D(400, 0), nullptr, c, nullptr, a);
+	c = new Node(Vector2D(400, 400), b, nullptr, nullptr, d);
+	d = new Node(Vector2D(0, 400), a, nullptr, nullptr, c);
+
+	routemap_.addNode(a);
+	routemap_.addNode(b);
+	routemap_.addNode(c);
+	routemap_.addNode(d);
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
@@ -83,7 +95,20 @@ void Enemy::update(Uint32 deltaTime)
 		}
 		else {
 			destinated_ = true;
-			destination_ = route[node++%4];
+			if (node==nullptr) {
+				node = routemap_.getNodes()[0];
+				destination_ = node->position_;
+			}
+			else {
+				double a = rand() % 100;
+				int c = a * 4 / 100.0;
+				while (node->connections_[c] == nullptr) {
+					a = rand() % 100;
+					c = a * 4 / 100.0;
+				}
+				node = node->connections_[c];
+				destination_ =node->position_;
+			}
 			direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
 			direction_.Normalize();
 		}
@@ -100,7 +125,7 @@ void Enemy::update(Uint32 deltaTime)
 void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
 {
 	if (active_) {
-		if (event.type == SDL_MOUSEBUTTONDOWN) {
+		/*if (event.type == SDL_MOUSEBUTTONDOWN) {
 			if (event.button.button == SDL_BUTTON_RIGHT) {
 				destinated_ = true;
 				destination_ = Vector2D(Reticule::GetInstance()->getCenter().x + Game::getInstance()->getCamera(GAME_CAMERA)->getPosition().x,
@@ -109,6 +134,7 @@ void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
 				direction_.Normalize();
 			}
 		}
+		*/
 		Car::handleInput(deltaTime, event);
 	}
 }

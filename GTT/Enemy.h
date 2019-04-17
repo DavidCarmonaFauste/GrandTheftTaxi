@@ -1,6 +1,7 @@
 #pragma once
 #include "Car.h"
 #include "Trigger.h"
+#include "NodeMap.h"
 
 class Enemy :public Car
 {
@@ -17,8 +18,9 @@ private:
 	bool destinated_;
 	Vector2D destination_;
 	Vector2D direction_;
+	NodeMap routemap_;
 	Vector2D route[4] = {Vector2D(0,0), Vector2D(400,0), Vector2D(400, 400), Vector2D(0, 400)};
-	int node = -1;
+	Node* node=nullptr;
 	int speed_;
 };
 
