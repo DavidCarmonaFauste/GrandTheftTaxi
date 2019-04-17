@@ -2,9 +2,9 @@
 #include "AimComponent.h"
 
 
-Car::Car(int x, int y)
+Car::Car()
 {
-	this->setPosition(Vector2D(x, y));
+	//this->setPosition(Vector2D(x, y));
 }
 
 

@@ -15,7 +15,7 @@ class Car :
 	public Container, public Observable, public Observer
 {
 public:
-	Car(int x, int y);
+	Car();
 	~Car();
 
 	//get

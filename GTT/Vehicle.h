@@ -19,16 +19,14 @@ public:
 
 	virtual ~Vehicle();
 
-	//Get
-	
-	float32 GetMaxBackwardSpeed();
-	
+	//Get	
+	float32 GetMaxBackwardSpeed();	
 	float32 GetAcceleration();
 	
 
 	static Vehicle* GetInstance() {
 		if (instance_ == nullptr) {
-			instance_ = new Vehicle(3200, 2432, THECOOLERTAXI, DEFAULT_KEYS);
+			instance_ = new Vehicle(THECOOLERTAXI, DEFAULT_KEYS);
 		}
 		return instance_;
 	}
@@ -49,7 +47,7 @@ public:
 
 	private:
 
-	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
+	Vehicle(VehicleInfo r, KeysScheme k);
 
 	static Vehicle* instance_;
 

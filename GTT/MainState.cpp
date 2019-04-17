@@ -7,21 +7,49 @@
 #include "FollowMiddlePoint.h"
 
 
+//al iniciar la aplicación GameStateMachine construye los estados, por eso no puede iniciar en su constructora.
+//se debe llamar a start al cambiar estado
 MainState::MainState() {
+	
+
+}
+
+
+MainState::~MainState() {
+	for (auto o : stage_) {
+		delete o; o = nullptr;
+	}
+	stage_.clear();
+}
+
+//start es llamado cuando se cambia de estado.
+void MainState::start()
+{
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
 	stage_.push_back(tilemap_);
 
-	// Taxi
-	
+	// Taxi	
+	Vehicle::GetInstance()->setPosition(Vector2D(1500, 1000)); //Set position
 	stage_.push_back(Vehicle::GetInstance());
-	Vehicle::GetInstance ()->setPosition (Vector2D (3200, 2432));
-	Reticule::GetInstance()->setPosition(Vehicle::GetInstance()->getPosition());
+	
+	
 	cameraFollow = new FollowGameObject(Vehicle::GetInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
+	
+	Vehicle::GetInstance()->EquipTurret(new Turret(MACHINEGUN));
+	Vehicle::GetInstance()->EquipTurret(new Turret(GUN));
+	
+
+	stage_.push_back(ProyectilePool::GetInstance());
+	
+	//Reticule
+	Reticule::GetInstance()->setPosition(Vehicle::GetInstance()->getPosition());
+	stage_.push_back(Reticule::GetInstance());
+
 	// Enemy1
-	enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
-	stage_.push_back(enemy1_);
+	//enemy1_ = new Enemy(100, 100, ENEMY1, DEFAULT_KEYS);
+	//stage_.push_back(enemy1_);
 
 
 	// Systems
@@ -34,22 +62,6 @@ MainState::MainState() {
 	moneySystem->registerObserver(UI_);
 	stage_.push_back(UI_);
 
-	stage_.push_back(ProyectilePool::GetInstance());
-	stage_.push_back(Reticule::GetInstance());
-
-	Vehicle::GetInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::GetInstance()->EquipTurret(new Turret(GUN));
-
-
-
-}
-
-
-MainState::~MainState() {
-	for (auto o : stage_) {
-		delete o; o = nullptr;
-	}
-	stage_.clear();
 }
 
 void MainState::update (Uint32 deltaTime) {

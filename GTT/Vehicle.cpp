@@ -9,15 +9,15 @@
 
 Vehicle* Vehicle::instance_ = nullptr;
 
-Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
+Vehicle::Vehicle(VehicleInfo r, KeysScheme k){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
 	// Sprite
 	sprite_ = new Animation();
-	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->playAnimation("idle");
+	sprite_->loadAnimation(r.idlePath, "default");
 	this->addRenderComponent(sprite_);
+	sprite_->setAnimation("default");
 
 	// Health
 	health_ = new Health(TAXI_HP);
@@ -49,6 +49,7 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
+
 	//Sound
 	smLC_ = new TaxiSoundManagerCP(this);
 	this->addLogicComponent(smLC_);
