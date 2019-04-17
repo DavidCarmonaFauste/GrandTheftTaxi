@@ -28,6 +28,7 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="Dialogues.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
