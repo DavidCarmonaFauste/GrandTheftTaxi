@@ -1,8 +1,13 @@
 #include "SoundManager.h"
+#include <functional>
+
+SoundManager* SoundManager::singleton_ = nullptr;
 
 SoundManager::SoundManager() {
 
 	volume_ = 0.0;
+
+	Mix_ChannelFinished(&SoundManager::channelDone);
 
 	//use 3 channel for deffect
 	//setAlloctaedChannels(3);
@@ -32,6 +37,12 @@ SoundManager::~SoundManager() {
 	loadedSounds_.clear();
 }
 
+
+SoundManager * SoundManager::getInstance() {
+	if (singleton_ == nullptr)
+		singleton_ = new SoundManager();
+	return singleton_;
+}
 
 int SoundManager::setAlloctaedChannels(int n)
 {
@@ -103,4 +114,9 @@ bool SoundManager::isMusicPlaying() {
 
 bool SoundManager::musicExists(musicId id) {
 	return loadedMusic_.find(id) != loadedMusic_.end();
+}
+
+void SoundManager::channelDone(int channel) {
+	Event e = ChannelStoppedPlaying(singleton_, channel);
+	singleton_->broadcastEvent(e);
 }

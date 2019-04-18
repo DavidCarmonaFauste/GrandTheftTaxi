@@ -27,7 +27,7 @@ Game::Game() {
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
-	soundManager_ = new SoundManager();
+	SoundManager::getInstance();
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
@@ -42,7 +42,6 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
-	delete soundManager_; soundManager_ = nullptr;
 
 }
 
@@ -126,7 +125,7 @@ b2World * Game::getWorld()
 
 SoundManager * Game::getSoundManager()
 {
-	return soundManager_;
+	return SoundManager::getInstance();
 }
 
 Camera * Game::getCamera(cameraType cT)
@@ -151,9 +150,6 @@ void Game::init() {
 	// and initialize its states
 	gmStMachine_ = new GameStateMachine();
 	gmStMachine_->initStates();
-
-	//initialize SoundManager
-	soundManager_ = new SoundManager();
 }
 
 Game * Game::getInstance() {

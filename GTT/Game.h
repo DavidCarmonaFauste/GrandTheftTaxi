@@ -65,7 +65,6 @@ private:
 	b2World* world_;
 
 	//Media
-	SoundManager* soundManager_;
 	map<cameraType, Camera*> cameras_;
 
 	//states

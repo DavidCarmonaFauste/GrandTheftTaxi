@@ -1,11 +1,11 @@
 #pragma once
 #include "Container.h"
 #include <SDL_mixer.h>
+#include "Observable.h"
 
-class SoundManager {
+class SoundManager: public Observable {
 public:
-	SoundManager();
-	virtual ~SoundManager();
+	static SoundManager *getInstance();
 
 	//For pause all channels use -1 to parametre
 	//loops: -1: infinite loops; 0: only once; >=1: twice or more
@@ -30,7 +30,6 @@ public:
 	//stop and Channel
 	int stopSound(int channel);
 
-
 	bool isSoundPlaying(int channel);
 	bool soundExists(soundId id);
 	
@@ -44,9 +43,17 @@ public:
 	bool isMusicPlaying();
 	bool musicExists(musicId id);
 
+
 private:
+	static SoundManager *singleton_;
+
+	SoundManager();
+	virtual ~SoundManager();
+
 	map<musicId, Mix_Music*> loadedMusic_;
 	map<soundId, Mix_Chunk*> loadedSounds_;
+
+	static void channelDone(int channel);
 
 	float volume_;
 };

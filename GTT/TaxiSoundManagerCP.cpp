@@ -9,6 +9,8 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	v_ = v;
 	s_ = Game::getInstance()->getSoundManager();
 
+	s_->registerObserver(this);
+
 	//initialize count management
 	count_1 = -1;
 
@@ -57,6 +59,12 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 	case STOPPED_MOVING_FORWARD:
 
 		break;
+
+	case CHANNEL_STOPPED_PLAYING: {
+		ChannelStoppedPlaying channelEvent = static_cast<ChannelStoppedPlaying&>(e);
+		cout << "Channel " << channelEvent.channel_ << " stopped playing.";
+		break;
+		}
 
 	default:
 	

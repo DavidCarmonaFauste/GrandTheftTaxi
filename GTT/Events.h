@@ -12,6 +12,8 @@ enum event_type {
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
 
+	CHANNEL_STOPPED_PLAYING,
+
 	EVENTS_LENGTH
 };
 
@@ -47,4 +49,12 @@ struct MoneyChangedEvent : public Event {
 
 	int currentMoney_;
 	int previousMoney_;
+};
+
+struct ChannelStoppedPlaying : public Event {
+	ChannelStoppedPlaying(Observable* sender, int channel) : Event(sender, CHANNEL_STOPPED_PLAYING) {
+		channel_ = channel;
+	}
+
+	int channel_;
 };
