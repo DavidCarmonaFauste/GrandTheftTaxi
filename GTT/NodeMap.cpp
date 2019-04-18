@@ -51,7 +51,17 @@ bool NodeMap::nodeExists(Node * node)
 
 Node * NodeMap::getNearestNode(Vector2D position)
 {
-	return nullptr;
+	Node* ret=nodes[0];
+	int minDistance = -1;
+	int distance = 0;
+	for (auto n : nodes) {
+		distance = (pow(n->position_.x - position.x, 2) + pow(n->position_.y - position.y, 2));
+		if (minDistance == -1 || distance < minDistance) {
+			minDistance =distance;
+			ret = n;
+		}
+	}
+	return ret;
 }
 
 vector<Node*> NodeMap::getNodes()

@@ -18,7 +18,7 @@ MainState::MainState() {
 	cameraFollow = new FollowGameObject(Vehicle::GetInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::GetInstance(), Reticule::GetInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 	// Enemy1
-	enemy1_ = new Enemy(100, 100, ENEMY1);
+	enemy1_ = new Enemy(-500, 0, ENEMY1);
 	stage_.push_back(enemy1_);
 
 	// Systems

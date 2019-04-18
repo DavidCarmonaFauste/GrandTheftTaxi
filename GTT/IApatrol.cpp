@@ -18,10 +18,10 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 	if (!paused_) {
 		if (destinated_) {
 			if (arrivedAtDestination(o))
-				setNextDestination();
+				setNextDestination(o);
 		}
 		else 
-			setNextDestination();
+			setNextDestination(o);
 
 		Go(o);
 	}
@@ -50,22 +50,23 @@ void IApatrol::Go(GameObject * o)
 
 bool IApatrol::arrivedAtDestination(GameObject* o)
 {
-	return ((direction_.x < 0 && o->getCenter().x < destination_.x)
-		|| (direction_.x > 0 && o->getCenter().x > destination_.x)
-		|| (direction_.y < 0 && o->getCenter().y < destination_.y)
-		|| (direction_.y > 0 && o->getCenter().y > destination_.y));
+	return ((direction_.x < 0 && o->getCenter().x <= destination_.x)
+		|| (direction_.x > 0 && o->getCenter().x >= destination_.x)
+		|| (direction_.y < 0 && o->getCenter().y <= destination_.y)
+		|| (direction_.y > 0 && o->getCenter().y >= destination_.y));
 }
 
-void IApatrol::setNextDestination()
+void IApatrol::setNextDestination(GameObject* o)
 {
 	if (currentNode_ == nullptr) {//beggining node
-		currentNode_ = districtMap_->getNodes()[0];
+		currentNode_ = districtMap_->getNearestNode(o->getCenter());
 		lastNode_ = currentNode_;
 		destination_ = currentNode_->position_;
 		destinated_ = true;
+		//setNextDestination(o);
 	}
 	else {//decide next node
-		if (!currentNode_->isDeadEnd()) {
+		if (!currentNode_->isDeadEnd() || lastNode_==currentNode_) {
 			double a = rand() % 100;
 			int c = a * 4 / 100.0;
 			while (currentNode_->connections_[c] == nullptr || currentNode_->connections_[c]==lastNode_) {

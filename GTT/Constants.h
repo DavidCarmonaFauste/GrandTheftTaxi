@@ -128,7 +128,7 @@ const enum mainTitlePaths {
 };
 
 //Enemy 1
-const int ENEMY_HP = 10;
+const int ENEMY_HP = 100;
 
 //NAMES
 const string NAME_MAINMENU_STATE = "mainMenuState";

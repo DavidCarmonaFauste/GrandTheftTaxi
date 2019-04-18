@@ -17,7 +17,7 @@ public:
 private:
 	void Go(GameObject* o);
 	bool arrivedAtDestination(GameObject* o);
-	void setNextDestination();
+	void setNextDestination(GameObject* o);
 	NodeMap* districtMap_;
 	vector<Node*>* route_;
 	Node* currentNode_;
