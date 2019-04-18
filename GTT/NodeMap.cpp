@@ -10,8 +10,6 @@ void NodeMap::addNode(Node* n)
 {
 	if(!nodeExists(n))
 		nodes.push_back(n);
-
-	cout<<nodes.size()<< endl;
 }
 
 void NodeMap::connectNodes(Node * n1, Node * n2)

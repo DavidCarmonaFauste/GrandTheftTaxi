@@ -20,23 +20,6 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 
 	//Movement
 	speed_ = 5;
-	//IA
-	finished_ = false;
-	Node* a = new Node(Vector2D(0, 0));
-	Node* b = new Node(Vector2D(400, 0));
-	Node* c = new Node(Vector2D(400, 400));
-	Node* d = new Node(Vector2D(0, 400));
-
-	routemap_.addNode(a);
-	routemap_.addNode(b);
-	routemap_.addNode(c);
-	routemap_.addNode(d);
-
-	routemap_.connectNodes(a, b);
-	routemap_.connectNodes(b, c);
-	routemap_.connectNodes(c, d);
-	routemap_.connectNodes(d, a);
-
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
@@ -44,6 +27,33 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	//phyO_->getBody()->SetLinearDamping(2.0f);
 	//phyO_->getBody()->SetAngularDamping(2.0f);
 	addLogicComponent(phyO_);
+
+	//IA
+	
+	paused_ = false;
+	Node* a = new Node(Vector2D(0, 0), "a");
+	Node* b = new Node(Vector2D(400, 0), "b");
+	Node* c = new Node(Vector2D(400, 400), "c");
+	Node* d = new Node(Vector2D(0, 400), "d");
+	Node* e = new Node(Vector2D(800, 0), "e");
+	Node* f = new Node(Vector2D(-400, 0), "f");
+
+	routemap_.addNode(a);
+	routemap_.addNode(b);
+	routemap_.addNode(c);
+	routemap_.addNode(d);
+	routemap_.addNode(e);
+	routemap_.addNode(f);
+
+	routemap_.connectNodes(a, b);
+	routemap_.connectNodes(b, c);
+	routemap_.connectNodes(c, d);
+	routemap_.connectNodes(d, a);
+	routemap_.connectNodes(f, a);
+	routemap_.connectNodes(b, e);
+	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
+	addLogicComponent(patrolBehaviour_);
+	
 }
 
 void Enemy::Damage(double damage)
@@ -60,7 +70,8 @@ void Enemy::Die()
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
-		if (!finished_) {
+		/*
+		if (!paused_) {
 			if (destinated_) {
 				if (direction_.x < 0) {
 					if (getCenter().x < destination_.x) {
@@ -114,14 +125,14 @@ void Enemy::update(Uint32 deltaTime)
 						node = node->connections_[c];
 						destination_ = node->position_;
 					}
-					else finished_ = true;
+					else paused_ = true;
 				}
 				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
 				direction_.Normalize();
 			}
 		}
 		else phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-
+		*/
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;
@@ -135,16 +146,6 @@ void Enemy::update(Uint32 deltaTime)
 void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
 {
 	if (active_) {
-		/*if (event.type == SDL_MOUSEBUTTONDOWN) {
-			if (event.button.button == SDL_BUTTON_RIGHT) {
-				destinated_ = true;
-				destination_ = Vector2D(Reticule::GetInstance()->getCenter().x + Game::getInstance()->getCamera(GAME_CAMERA)->getPosition().x,
-					Reticule::GetInstance()->getCenter().y + Game::getInstance()->getCamera(GAME_CAMERA)->getPosition().y);
-				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
-				direction_.Normalize();
-			}
-		}
-		*/
 		Car::handleInput(deltaTime, event);
 	}
 }

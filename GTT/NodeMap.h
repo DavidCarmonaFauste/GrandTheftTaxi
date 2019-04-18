@@ -9,21 +9,25 @@ enum Connections {
 };
 class Node {
 public:
-	Node(Vector2D pos) {
+	Node(Vector2D pos, string id) {
+		id_ = id;
 		position_ = pos;
 		for (int i = 0; i < 4; i++) {
 			connections_[i] = nullptr;
 		}
 	}
 	Vector2D position_;
+	string id_;
 	Node* connections_[4];
-	bool isConnected() {
+	bool isDeadEnd() {
+		int count = 0;
 		for (int i = 0; i < 4; i++) {
 			if (connections_[i] != nullptr) {
-				return true;
+				count++;
+				if (count > 1) return false;
 			}
 		}
-		return false;
+		return true;
 	}
 };
 class NodeMap

@@ -14,7 +14,6 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 {
 	if (!s_->isSoundPlaying(channel_) && v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 0.5)
 	{
-		cout << "idle" << endl;
 		channel_ = s_->playSound(TAXI_IDLE, 0);
 	}
 }

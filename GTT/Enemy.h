@@ -2,6 +2,7 @@
 #include "Car.h"
 #include "Trigger.h"
 #include "NodeMap.h"
+#include "IApatrol.h"
 
 class Enemy :public Car
 {
@@ -11,12 +12,12 @@ public:
 	virtual void Die();
 	virtual void update(Uint32 deltaTime);
 	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event);
-
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
 	bool destinated_;
-	bool finished_;
+	bool paused_;
+	IApatrol* patrolBehaviour_;
 	Vector2D destination_;
 	Vector2D direction_;
 	NodeMap routemap_;

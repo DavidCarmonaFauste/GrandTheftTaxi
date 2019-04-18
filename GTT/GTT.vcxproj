@@ -41,6 +41,7 @@
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
+    <ClCompile Include="IApatrol.cpp" />
     <ClCompile Include="ImpactComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
+    <ClInclude Include="IApatrol.h" />
     <ClInclude Include="ImpactComponent.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
