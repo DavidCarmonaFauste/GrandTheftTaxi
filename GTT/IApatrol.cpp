@@ -1,27 +1,34 @@
 #include "IApatrol.h"
 #include "PhysicObject.h"
 
-IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed)
+IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, vector<Node*>* route)
 {
 	phyO_ = ph;
 	districtMap_ = districtMap;
-	route_ = nullptr;
+	route_ = route;
 	currentNode_ = nullptr;
 	lastNode_ = nullptr;
 	destinated_ = false;
 	paused_ = false;
 	patrolSpeed_ = patrolSpeed;
+	patrolProgress_ = 0;
+	patrol_ = !(route_ == nullptr);
 }
 
 void IApatrol::update(GameObject* o, Uint32 deltaTime)
 {
 	if (!paused_) {
-		if (destinated_) {
-			if (arrivedAtDestination(o))
-				setNextDestination(o);
+		if (patrol_) {
+			if(arrivedAtDestination(o)) {
+				if (currentNode_ != nullptr) lastNode_ = currentNode_;
+				currentNode_ = (*route_)[patrolProgress_];
+				destination_ = currentNode_->position_;
+				patrolProgress_ = (patrolProgress_ + 1) % (*route_).size();
+				destinated_ = true;
+			}
 		}
-		else 
-			setNextDestination(o);
+		else if(arrivedAtDestination(o))
+			setNextDestination(o); 
 
 		Go(o);
 	}
@@ -53,7 +60,8 @@ bool IApatrol::arrivedAtDestination(GameObject* o)
 	return ((direction_.x < 0 && o->getCenter().x <= destination_.x)
 		|| (direction_.x > 0 && o->getCenter().x >= destination_.x)
 		|| (direction_.y < 0 && o->getCenter().y <= destination_.y)
-		|| (direction_.y > 0 && o->getCenter().y >= destination_.y));
+		|| (direction_.y > 0 && o->getCenter().y >= destination_.y)) 
+		|| !destinated_;
 }
 
 void IApatrol::setNextDestination(GameObject* o)

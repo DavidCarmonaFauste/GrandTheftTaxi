@@ -38,6 +38,13 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	Node* e = new Node(Vector2D(800, 0), "e");
 	Node* f = new Node(Vector2D(-400, 0), "f");
 
+	vector<Node*>* route= new vector<Node*>;
+
+	route->push_back(a);
+	route->push_back(b);
+	route->push_back(c);
+
+
 	routemap_.addNode(a);
 	routemap_.addNode(b);
 	routemap_.addNode(c);
@@ -51,7 +58,7 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	routemap_.connectNodes(d, a);
 	routemap_.connectNodes(f, a);
 	routemap_.connectNodes(b, e);
-	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
+	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 	
 }
