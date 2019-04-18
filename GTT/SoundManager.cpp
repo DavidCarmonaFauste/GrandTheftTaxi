@@ -2,6 +2,11 @@
 
 SoundManager::SoundManager() {
 
+	volume_ = 0.0;
+
+	//use 3 channel for deffect
+	//setAlloctaedChannels(3);
+
 	// Load the music files from the resources sheet
 	for (auto music : MUSIC) {
 		loadMusic(music.second, music.first);
@@ -28,6 +33,11 @@ SoundManager::~SoundManager() {
 }
 
 
+int SoundManager::setAlloctaedChannels(int n)
+{
+	return Mix_AllocateChannels(n);	
+}
+
 // NO NEED TO USE THIS DIRECTLY,
 // USE THE RESOURCES SHEET INSTEAD !!!
 bool SoundManager::loadSound(string path, soundId id) {
@@ -35,6 +45,11 @@ bool SoundManager::loadSound(string path, soundId id) {
 	return loadedSounds_[id] != nullptr;
 }
 
+//secundary method
+int SoundManager::playSound_Ch(int channel, soundId id, int loops) {
+	return Mix_PlayChannel(channel, loadedSounds_[id], loops);
+}
+//primary method
 int SoundManager::playSound(soundId id, int loops) {
 	return Mix_PlayChannel(-1, loadedSounds_[id], loops);
 }
@@ -46,6 +61,15 @@ void SoundManager::pauseSound(int channel) {
 void SoundManager::resumeSound(int channel) {
 	Mix_Resume(channel);
 }
+
+
+
+int SoundManager::stopSound(int channel)
+{
+	return Mix_HaltChannel(channel);
+}
+
+
 
 bool SoundManager::isSoundPlaying(int channel) {
 	return Mix_Playing(channel);

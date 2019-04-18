@@ -128,7 +128,7 @@ void MainMenuState::start()
 
 	//scene management
 	Game::getInstance()->getSoundManager()->playMusic(MAIN_THEME_MUSIC, -1); //MainTitle Theme
-	Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);	//vehicle start sound
+	channel_ = Game::getInstance()->getSoundManager()->playSound(TAXI_START, 0);	//vehicle start sound
 	Title_->setActive(false);
 	buttons_["newGameButton"]->setActive(false);
 	buttons_["extiButton"]->setActive(false);
@@ -139,7 +139,7 @@ void MainMenuState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (false);
 
 	//!vehicle start sound
-	if (cont_1 == -1 && !(Game::getInstance()->getSoundManager()->isSoundPlaying(-1))) {
+	if (cont_1 == -1 && !(Game::getInstance()->getSoundManager()->isSoundPlaying(channel_))) {
 		//taxi lights
 		Taxi_anm->setAnimation(MAIN_TITLE_TAXI_ANM.name);
 		//Title active
@@ -154,12 +154,12 @@ void MainMenuState::update (Uint32 deltaTime) {
 	
 	if (!(buttons_["newGameButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["newGameButton"]->isMouseClickICEvent()) {
 		Game::getInstance()->getSoundManager()->pauseMusic();
-		Game::getInstance()->getSoundManager()->pauseSound(-1);
+		Game::getInstance()->getSoundManager()->pauseSound(channel_); 
 		mainStateCallback();
 	}
 	else if (!(buttons_["extiButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["extiButton"]->isMouseClickICEvent()) {
 		Game::getInstance()->getSoundManager()->pauseMusic();
-		Game::getInstance()->getSoundManager()->pauseSound(-1);
+		Game::getInstance()->getSoundManager()->pauseSound(channel_);
 		exitGameCallback();
 	}
 

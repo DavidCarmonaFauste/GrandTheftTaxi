@@ -21,14 +21,13 @@ private:
 	SoundManager* s_;
 	Vehicle* v_;
 
-	int channel_; //workSound
-	//int channel_2; //acelerationSound
-	
+	int channel_1; //workSound
+	int channel_2; //acelerationSound
+	int channel_3; //running speed
 
-	//count management
-	int count_1; //start sound 
-	int count_2; //gestion eventos 
-	int count_3; // deceleration mode
+	int count_1;
+
+
 	
 };
 

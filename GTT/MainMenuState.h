@@ -45,6 +45,9 @@ private:
 
 	//scene management
 	int cont_1;
+
+	//channels 
+	int channel_;
 	
 };
 
