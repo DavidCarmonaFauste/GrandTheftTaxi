@@ -14,6 +14,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	channel_2 = 2;
 	channel_3 = 3;
 	channel_4 = 4;
+	channel_5 = 5;
 
 	//ch_3MaxVel = false;
 	ch_3KeyDown = false;
@@ -41,25 +42,18 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 	//el vehículo no sobrepasa la velocidad de 8.4 según conf. por defecto
 
 	//if have considerable velocity and Taxi_acelerate is playing
-	/*if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(channel_3))) {
+	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(channel_3))) {
 		s_->stopSound(channel_3);
 		cout << "alcanza velocidad de aceleracion: " << endl;
 		cout << "Taxi Velocity: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
 
-	}*/
+	}
 
-	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 1.2 && (s_->isSoundPlaying(channel_4))) {
+	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 1.2 && (s_->isSoundPlaying(channel_4))) {
 		s_->stopSound(channel_4);
 		cout << "alcanza velocidad reducida por defecto: " << endl;
 		cout << "Taxi Velocity: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
 	}
-
-	//decreases decelerate sound until it reaches reduced speed
-	/*if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 3.0 && (s_->isSoundPlaying(channel_4)))
-	{
-		ch_4_Vol_ -= 2;
-		s_->setVolumeSound(channel_4, ch_4_Vol_);
-	}*/
 
 	//Volume Management
 	//increase the volume of the acceleration until max aceleration velocity
@@ -87,23 +81,33 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 	switch (e.type_)
 	{
 	case STARTED_MOVING_FORWARD:
-		if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 1.5 && !(s_->isSoundPlaying(channel_3)))
+
+		if (!(s_->isSoundPlaying(channel_3)))
 		{
 			ch_3KeyDown = true;
 
-			if(s_->isSoundPlaying(channel_2))
+			if (s_->isSoundPlaying(channel_2))
 				s_->stopSound(channel_2); //stop regular engine sound
 
 			else if (s_->isSoundPlaying(channel_4))
 				s_->stopSound(channel_4); //stop regular engine sound			
 		}
-			break;
+		break;
 
 	case STOPPED_MOVING_FORWARD:
+		
+
 		if (s_->isSoundPlaying(channel_3)) {
 			ch_3KeyUp = true;
 			s_->stopSound(channel_3);
 		}
+			
+
+		else if (s_->isSoundPlaying(channel_5)) {
+			ch_5KeyUp = true;
+			s_->stopSound(channel_5);
+		}
+			
 			
 		break;
 
@@ -144,6 +148,11 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				ch_3KeyUp = false;
 				ch_3_Vol_ = 68; //el valor por defecto que ponerlo como sonst global
 			}
+			//max speed
+			else {	
+				s_->playSound_Ch(channel_5, TAXI_FASTDRIVE, -1);
+				s_->setVolumeSound(channel_5, s_->getMIX_MAX_VOLUME());
+			}
 		}
 
 		//channel 4 = engine decelerate 
@@ -159,6 +168,16 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				s_->setVolumeSound(channel_2, 70);
 			}
 		
+		}
+
+		else if (channelEvent.channel_ == 5) {
+			if (ch_5KeyUp) {
+				ch_3KeyDown = false;
+				s_->playSound_Ch(channel_4, TAXI_DECELERATE_10, -1);
+				ch_4_Vol_ = s_->getMIX_MAX_VOLUME(); //recoge el valor del estado de aceleración actual
+				s_->setVolumeSound(channel_4, ch_4_Vol_);	
+				ch_5KeyUp = false;
+			}
 		}
 
 		break;

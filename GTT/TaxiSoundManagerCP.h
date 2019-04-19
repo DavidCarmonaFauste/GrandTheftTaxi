@@ -21,15 +21,19 @@ private:
 	SoundManager* s_;
 	Vehicle* v_;
 
-	int channel_1; //workSound
-	int channel_2; //acelerationSound
-	int channel_3; //running speed
+	//Channels 
+	int channel_1; //start engine
+	int channel_2; //regular engine
+	int channel_3; //aceleration 
 	int channel_4; //deceleration 
+	int channel_5; //fast drive
 
 	int ch_3_Vol_;
 	bool ch_3MaxVel;
 	bool ch_3KeyDown;
 	bool ch_3KeyUp;
+
+	bool ch_5KeyUp;
 
 	int ch_4_Vol_;
 
