@@ -24,6 +24,14 @@ private:
 	int channel_1; //workSound
 	int channel_2; //acelerationSound
 	int channel_3; //running speed
+	int channel_4; //deceleration 
+
+	int ch_3_Vol_;
+	bool ch_3MaxVel;
+	bool ch_3KeyDown;
+	bool ch_3KeyUp;
+
+	int ch_4_Vol_;
 
 };
 

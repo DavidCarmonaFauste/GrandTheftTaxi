@@ -5,8 +5,6 @@ SoundManager* SoundManager::singleton_ = nullptr;
 
 SoundManager::SoundManager() {
 
-	volume_ = 0.0;
-
 	Mix_ChannelFinished(&SoundManager::channelDone); //dont touch
 
 	// Load the music files from the resources sheet
@@ -111,6 +109,23 @@ bool SoundManager::isMusicPlaying() {
 
 bool SoundManager::musicExists(musicId id) {
 	return loadedMusic_.find(id) != loadedMusic_.end();
+}
+
+
+void SoundManager::setVolumeSound(int& channel, const int& v)
+{
+	Mix_Volume(channel, v);
+}
+
+int SoundManager::getVolumeSound(int & channel, const int & v)
+{
+	return Mix_Volume(channel, v);
+}
+
+int SoundManager::getMIX_MAX_VOLUME()
+{
+	return MIX_MAX_VOLUME;
+
 }
 
 void SoundManager::channelDone(int channel) {

@@ -147,9 +147,9 @@ const map<soundId, string> SOUND = {
 	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
 	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
-	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
 	{TAXI_1, "../Assets/sounds/Running1.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
 };
 

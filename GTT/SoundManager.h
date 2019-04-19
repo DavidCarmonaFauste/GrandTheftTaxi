@@ -39,6 +39,14 @@ public:
 	bool isMusicPlaying();
 	bool musicExists(musicId id);
 
+	//Mix_Volume sets the volume of a channel specified. The amount passed to volume can be between 0 and MIX_MAX_VOLUME which equals 128.
+	void setVolumeSound(int& channel, const int& v);
+	//channel -1: set volume in all channels
+	//especified -1 in volume parameter for return current volume value of channel
+	int getVolumeSound(int& channel, const int& v = -1);
+
+	int getMIX_MAX_VOLUME();
+
 
 private:
 	static SoundManager *singleton_;
@@ -51,6 +59,5 @@ private:
 
 	static void channelDone(int channel);
 
-	float volume_;
 };
 
