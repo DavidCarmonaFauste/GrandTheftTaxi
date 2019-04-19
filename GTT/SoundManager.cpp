@@ -114,6 +114,6 @@ bool SoundManager::musicExists(musicId id) {
 }
 
 void SoundManager::channelDone(int channel) {
-	Event e = ChannelStoppedPlaying(singleton_, channel);
+	ChannelStoppedPlaying e = ChannelStoppedPlaying(singleton_, channel);
 	singleton_->broadcastEvent(e);
 }
