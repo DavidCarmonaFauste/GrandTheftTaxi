@@ -7,10 +7,7 @@ SoundManager::SoundManager() {
 
 	volume_ = 0.0;
 
-	Mix_ChannelFinished(&SoundManager::channelDone);
-
-	//use 3 channel for deffect
-	//setAlloctaedChannels(3);
+	Mix_ChannelFinished(&SoundManager::channelDone); //dont touch
 
 	// Load the music files from the resources sheet
 	for (auto music : MUSIC) {

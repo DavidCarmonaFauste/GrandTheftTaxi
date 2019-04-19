@@ -25,9 +25,5 @@ private:
 	int channel_2; //acelerationSound
 	int channel_3; //running speed
 
-	int count_1;
-
-
-	
 };
 

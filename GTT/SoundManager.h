@@ -7,10 +7,6 @@ class SoundManager: public Observable {
 public:
 	static SoundManager *getInstance();
 
-	//For pause all channels use -1 to parametre
-	//loops: -1: infinite loops; 0: only once; >=1: twice or more
-	//we working with somes channels. 
-
 	//Methods to define how many channels we can use
 	int setAlloctaedChannels(int n);
 

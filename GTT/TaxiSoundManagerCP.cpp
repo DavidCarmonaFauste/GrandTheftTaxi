@@ -8,11 +8,11 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 {
 	v_ = v;
 	s_ = Game::getInstance()->getSoundManager();
-
 	s_->registerObserver(this);
 
-	//initialize count management
-	count_1 = -1;
+	channel_1 = 1;
+	channel_2 = 2;
+	channel_3 = 3;
 
 	start();
 }
@@ -22,9 +22,8 @@ void TaxiSoundManagerCP::start()
 	//play first sound
 	if (s_ != nullptr)
 	{
+		s_->playSound_Ch(channel_1, TAXI_START, 0);
 		cout << "Play start sound" << endl;
-		//channel_1 = s_->playSound(TAXI_START, 0);
-	
 	}
 }
 
@@ -46,13 +45,10 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 	case STARTED_MOVING_FORWARD:
 		if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 0.6)
 		{
-			
-
-	
+				
 		}
 		else {
-		
-				
+						
 		}
 			break;
 
@@ -62,6 +58,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 
 	case CHANNEL_STOPPED_PLAYING: {
 		ChannelStoppedPlaying channelEvent = static_cast<ChannelStoppedPlaying&>(e);
+	
 		cout << "Channel " << channelEvent.channel_ << " stopped playing.";
 		break;
 		}
