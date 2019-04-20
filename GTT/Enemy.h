@@ -15,13 +15,8 @@ public:
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
-	bool destinated_;
-	bool paused_;
 	IApatrol* patrolBehaviour_;
-	Vector2D destination_;
-	Vector2D direction_;
 	NodeMap routemap_;
-	Node* node=nullptr;
 	int speed_;
 };
 

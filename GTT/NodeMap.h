@@ -38,9 +38,12 @@ public:
 	void connectNodes(Node* n1, Node* n2);
 	bool nodeExists(Node* node);
 	Node* getNearestNode(Vector2D position);
+	void FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	vector<Node*> getNodes();
 	virtual ~NodeMap();
 private:
 	vector<Node*>nodes;
+	bool hasNode(vector<Node*>&v, Node* n);
+	int getDistance(Node* a, Node* b);
 };
 

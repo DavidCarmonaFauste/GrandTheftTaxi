@@ -64,6 +64,31 @@ Node * NodeMap::getNearestNode(Vector2D position)
 	return ret;
 }
 
+void NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)
+{
+	for (auto c : current->connections_) {
+		if (c != nullptr && !hasNode(currentroute, c)) {
+			distance += getDistance(current, c);
+			if (minDistance==-1 || distance<minDistance) {//la ruta aun no es mas larga de la ultima ruta valida
+				if (c==destiny) {
+					minDistance = distance;
+					route = currentroute;
+					route.push_back(c);
+				}
+				else {
+					currentroute.push_back(c);
+					FindRoute(c, destiny, route, currentroute, distance, minDistance);
+					currentroute.pop_back();
+					distance -= getDistance(current, c);
+				}
+			}
+			else {
+				distance -= getDistance(current, c);
+			}
+		}
+	}
+}
+
 vector<Node*> NodeMap::getNodes()
 {
 	return nodes;
@@ -72,5 +97,21 @@ vector<Node*> NodeMap::getNodes()
 
 NodeMap::~NodeMap()
 {
+}
+
+bool NodeMap::hasNode(vector<Node*>& v, Node* n)
+{
+	for (auto i : v) {
+		if (i == n) return true;
+	}
+	return false;
+}
+
+int NodeMap::getDistance(Node * a, Node * b)
+{
+	double disX = a->position_.x - b->position_.x;
+	double disY = a->position_.y - b->position_.y;
+
+	return sqrt(pow(disX, 2) + pow(disY, 2));
 }
 

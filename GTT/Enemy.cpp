@@ -30,7 +30,6 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 
 	//IA
 	
-	paused_ = false;
 	Node* a = new Node(Vector2D(0, 0), "a");
 	Node* b = new Node(Vector2D(400, 0), "b");
 	Node* c = new Node(Vector2D(400, 400), "c");
@@ -58,6 +57,14 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	routemap_.connectNodes(d, a);
 	routemap_.connectNodes(f, a);
 	routemap_.connectNodes(b, e);
+
+	vector<Node*>procRoute;
+	vector<Node*>currentRoute;
+
+	int minDistance = -1;
+	routemap_.FindRoute(a, e, procRoute, currentRoute, 0, minDistance);
+	procRoute;
+
 	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 	
