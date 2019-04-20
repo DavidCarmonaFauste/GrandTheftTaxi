@@ -23,7 +23,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 
 
 	ch_3KeyDown = ch_3KeyUp = ch_5KeyUp = ch_6_KeyDown = ch_6_KeyUp = keyBackDown_ = false;
-	
+
 	ch_2_Vol_ = VOL_CHANNEL_2;
 	ch_3_Vol_ = VOL_CHANNEL_3;
 	ch_6_Vol_ = VOL_CHANNEL_6;
@@ -103,7 +103,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 {
 	switch (e.type_)
 	{
-	case STARTED_MOVING_FORWARD:
+	case STARTED_MOVING_FORWARD: {
 
 		if (!(s_->isSoundPlaying(Channels_["Aceleration"])))
 		{
@@ -119,10 +119,12 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				s_->stopSound(Channels_["BackForward"]); //stop backforward sound
 		}
 		break;
+	}
 
-		//----------------------------------------------------//
 
-	case STOPPED_MOVING_FORWARD:
+								 //----------------------------------------------------//
+
+	case STOPPED_MOVING_FORWARD: {
 		if (s_->isSoundPlaying(Channels_["Aceleration"])) {
 			ch_3KeyUp = true;
 			ch_3KeyDown = false;
@@ -134,10 +136,12 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 			s_->stopSound(Channels_["Fast"]);
 		}
 		break;
+	}
 
-		//----------------------------------------------------//
 
-	case BACK_MOVING_FORWARD:
+								 //----------------------------------------------------//
+
+	case BACK_MOVING_FORWARD: {
 		keyBackDown_ = true;
 
 		//cuando se pulsa freno y que suene Frenada, puede estar sonando: aceleracion, maxVelEngine, Deceleration
@@ -160,16 +164,19 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				ch_6_KeyDown = false;
 		}
 		break;
+	}
 
-		//----------------------------------------------------//
 
-	case STOPPED_BACK_MOVING_FORWARD:
+							  //----------------------------------------------------//
+
+	case STOPPED_BACK_MOVING_FORWARD: {
 		keyBackDown_ = false;
 		break;
+	}
 
-		//callback receive from SoundManager when channel is stopped
-	case CHANNEL_STOPPED_PLAYING:
 
+									  //callback receive from SoundManager when channel is stopped
+	case CHANNEL_STOPPED_PLAYING: {
 		ChannelStoppedPlaying channelEvent = static_cast<ChannelStoppedPlaying&>(e);
 		if (DEBUG_)
 			cout << "Channel " << channelEvent.channel_ << " stopped playing." << endl;
@@ -269,6 +276,12 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 
 		}
 
+		break;
+	}
+
+
+
+	default:
 		break;
 
 	}

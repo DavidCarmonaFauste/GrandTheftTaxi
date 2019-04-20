@@ -17,7 +17,9 @@ enum event_type {
 
 	CHANNEL_STOPPED_PLAYING,
 
-	EVENTS_LENGTH
+	EVENTS_LENGTH,
+
+	CLICK_BUTTON
 };
 
 struct Event {
@@ -60,4 +62,12 @@ struct ChannelStoppedPlaying : public Event {
 	}
 
 	int channel_;
+};
+
+struct MouseClickLeft : public Event {
+	MouseClickLeft(Observable* sender, int button) : Event(sender, CLICK_BUTTON) {
+		button_ = button;
+	}
+
+	int button_;
 };

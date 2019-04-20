@@ -2,15 +2,12 @@
 #include "Button.h"
 #include "Game.h"
 
-MouseClickIC::MouseClickIC (const vector<textureInfo> bType, int key) {
-	mouseClickKey_ = key;
-	clickEvent_ = false;
-	buttonType_ = bType; buttonTypeSize_ = (buttonType_.size() -1);
+MouseClickIC::MouseClickIC(int key) {
+	mouseClickKey_ = key;	
 }
 
 
-MouseClickIC::~MouseClickIC () {
-}
+MouseClickIC::~MouseClickIC () {}
 
 
 void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event) {
@@ -41,23 +38,13 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 
 				//si se produce el evento de input leftMouse
 				if (event.button.button == mouseClickKey_) {
-					//asegura que el vector de struc buttonInfo tiene una componente para la animación 
-					if (buttonTypeSize_ >= (int)clickButton) {
-						button->getButtonAnimacion()->playAnimation(buttonType_[clickButton].name, 24.0f, false);
-						
-						//accede al SoundManager y reproduce el sonido
-						if (button->getSound() != -1) {
-							Game::getInstance()->getSoundManager()->playSound(button->getSound(), 0);
-						}
-						
-					}
-					//notifica al update del Estado que el evento se ha producido. y el estado llama a su callback
-					clickEvent_ = true;
+					MouseClickLeft e(this, button->getIndex());
+					broadcastEvent(e);									
 				}
 			}
 		}//SDL_MOUSEBUTTONUP
 
-		else {
+		/*else {
 			if (!clickEvent_) {
 				if (event.type == SDL_MOUSEMOTION) {
 					//si el puntero se encuentra dentro del rango del GO
@@ -76,7 +63,7 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 					}
 				}//SDL_MOUSEMOTION
 			}
-		}
+		}*/
 	}
 }
 
@@ -84,5 +71,6 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 
 bool MouseClickIC:: isClickEvent()
 {
-	return clickEvent_;
+	//return clickEvent_;
+	return false;
 }
