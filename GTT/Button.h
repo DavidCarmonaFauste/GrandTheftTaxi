@@ -2,10 +2,8 @@
 #include "Container.h"
 #include "Sprite.h"
 #include "Animation.h"
-#include "Constants.h"
+#include "MouseClickIC.h"
 
-
-class MouseClickIC;
 
 
 class Button : public Container {

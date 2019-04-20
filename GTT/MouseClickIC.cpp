@@ -44,33 +44,24 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 			}
 		}//SDL_MOUSEBUTTONUP
 
-		/*else {
-			if (!clickEvent_) {
-				if (event.type == SDL_MOUSEMOTION) {
-					//si el puntero se encuentra dentro del rango del GO
-					if (mouseX > int(objPosition.x) &&
-						mouseX < int(objPosition.x + o->getWidth()) &&
-						mouseY > int(objPosition.y) &&
-						mouseY < int(objPosition.y + o->getHeight())) {
+		else {
+			if (event.type == SDL_MOUSEMOTION) {
+				//si el puntero se encuentra dentro del rango del GO
+				if (mouseX > int(objPosition.x) &&
+					mouseX < int(objPosition.x + o->getWidth()) &&
+					mouseY > int(objPosition.y) &&
+					mouseY < int(objPosition.y + o->getHeight())) {
 
-						if (buttonTypeSize_ >= (int)overButton) {
-							button->getButtonAnimacion()->setAnimation(buttonType_[overButton].name);
-						}
+					MouseOverObj e(this, button->getIndex());
+					broadcastEvent(e);
 
-					}
-					else {
-						button->getButtonAnimacion()->stopAnimation();
-					}
-				}//SDL_MOUSEMOTION
-			}
-		}*/
+				}
+				else {
+					NotMouseOverObj e(this, button->getIndex());
+					broadcastEvent(e);
+				}
+			}//SDL_MOUSEMOTION
+		}
 	}
 }
 
-
-
-bool MouseClickIC:: isClickEvent()
-{
-	//return clickEvent_;
-	return false;
-}

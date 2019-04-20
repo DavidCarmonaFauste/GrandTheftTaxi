@@ -1,14 +1,8 @@
 #pragma once
 #include "GameState.h"
-#include "Vehicle.h"
 #include "Button.h"
 #include "Observer.h"
-
-
-
-/*static void exitGameCallback () {
-	Game::getInstance ()->setGameEnd ();
-}*/
+#include "SoundManager.h"
 
 
 

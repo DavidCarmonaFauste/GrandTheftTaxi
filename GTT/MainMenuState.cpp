@@ -1,6 +1,6 @@
 #include "MainMenuState.h"
 #include "Reticule.h"
-#include "MouseClickIC.h"
+#include "Game.h"
 
 
 MainMenuState::MainMenuState()
@@ -14,12 +14,14 @@ MainMenuState::MainMenuState()
 
 MainMenuState::~MainMenuState()
 {
+	delete Title_anm; Title_anm = nullptr;
+	delete Taxi_anm; Taxi_anm = nullptr;
+
 	while (!stage_.empty()) {
 		delete stage_.back();
 		stage_.back() = nullptr;
 		stage_.pop_back();
 	}
-
 }
 
 void MainMenuState::start()
@@ -144,22 +146,7 @@ void MainMenuState::update(Uint32 deltaTime) {
 	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(false);
 
-
-	/*if (!(buttons_["newGameButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["newGameButton"]->isMouseClickICEvent()) {
-		//s_->
-		//Game::getInstance()->getSoundManager()->pauseMusic();
-		//Game::getInstance()->getSoundManager()->pauseSound(channel_); 
-		//mainStateCallback();
-	}*/
-	/*else if (!(buttons_["exitButton"]->getButtonAnimacion()->isAnimationPlaying(NEW_GAME_BUTTON[clickButton].name)) && buttons_["exitButton"]->isMouseClickICEvent()) {
-		//Game::getInstance()->getSoundManager()->pauseMusic();
-		//Game::getInstance()->getSoundManager()->pauseSound(channel_);
-		//exitGameCallback();
-	}*/
-
 	GameState::update(deltaTime);
-
-
 }
 
 bool MainMenuState::receiveEvent(Event & e)
@@ -200,9 +187,35 @@ bool MainMenuState::receiveEvent(Event & e)
 			}
 		}
 
-		else if (MouseClickLeft_.button_ == 2) {
+		else if (MouseClickLeft_.button_ == buttons_["exitButton"]->getIndex())
+			Game::getInstance()->setGameEnd();
 
+		break;
+	}
+	case NOT_OVER_OBJECT: {
+		NotMouseOverObj NotMouseOverObj_ = static_cast<NotMouseOverObj&>(e);
+
+		if (!s_->isSoundPlaying(Channels_["NG"])) {
+			if (NotMouseOverObj_.objIndex_ == buttons_["newGameButton"]->getIndex())
+				buttons_["newGameButton"]->getButtonAnimacion()->stopAnimation();
+
+			else if (NotMouseOverObj_.objIndex_ == buttons_["exitButton"]->getIndex())
+				buttons_["exitButton"]->getButtonAnimacion()->stopAnimation();
+		}		
+		break;
+	}
+
+	case OVER_OBJECT: {
+		MouseOverObj MouseOverObj_ = static_cast<MouseOverObj&>(e);
+
+		if (!s_->isSoundPlaying(Channels_["NG"])) {
+			if (MouseOverObj_.objIndex_ == buttons_["newGameButton"]->getIndex())
+				buttons_["newGameButton"]->getButtonAnimacion()->setAnimation(NEW_GAME_BUTTON[overButton].name);
+
+			else if (MouseOverObj_.objIndex_ == buttons_["exitButton"]->getIndex())
+				buttons_["exitButton"]->getButtonAnimacion()->setAnimation(EXIT_BUTTON[overButton].name);
 		}
+		
 		break;
 	}
 

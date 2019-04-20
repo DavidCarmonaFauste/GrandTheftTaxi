@@ -19,7 +19,9 @@ enum event_type {
 
 	EVENTS_LENGTH,
 
-	CLICK_BUTTON
+	CLICK_BUTTON,
+	OVER_OBJECT,
+	NOT_OVER_OBJECT
 };
 
 struct Event {
@@ -71,3 +73,19 @@ struct MouseClickLeft : public Event {
 
 	int button_;
 };
+
+struct MouseOverObj : public Event {
+	MouseOverObj(Observable* sender, int objIndex) : Event(sender, OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+struct NotMouseOverObj : public Event {
+	NotMouseOverObj(Observable* sender, int objIndex) : Event(sender, NOT_OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+
