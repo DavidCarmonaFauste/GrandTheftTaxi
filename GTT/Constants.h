@@ -151,7 +151,7 @@ const map<soundId, string> SOUND = {
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
 	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
-	{TAXI_BACK_MOVING_FORWARD, ".. / Assets / sounds /Taxi_frenazo.wav"}, 
+	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
 };
 
@@ -241,6 +241,12 @@ const textureInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle
 //Title animation
 const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9},  title_position_, title_Width_, title_Height_ };
 /**************************************/
+
+
+//TAXI SOUND MANAGER
+const int VOL_CHANNEL_2 = 90; //regular engine
+const int VOL_CHANNEL_3 = 40; //aceleration
+const int VOL_CHANNEL_6 = 60; //BackForward
 
 
 

@@ -23,15 +23,9 @@ private:
 	SoundManager* s_;
 	Vehicle* v_;
 
-	//Channels 
-	int channel_1; //start engine
-	int channel_2; //regular engine
-	int channel_3; //aceleration 
-	int channel_4; //deceleration 
-	int channel_5; //fast drive
-	int channel_6; //drift
+	//Max SDL_Mixer channels: 8
+	map <string, int> Channels_;
 	
-
 	int ch_2_Vol_; 
 	int ch_3_Vol_;
 	int ch_4_Vol_;
@@ -42,6 +36,8 @@ private:
 	bool ch_5KeyUp;
 	bool ch_6_KeyDown;
 	bool ch_6_KeyUp;
+
+	bool keyBackDown_;
 
 	bool DEBUG_;
 
