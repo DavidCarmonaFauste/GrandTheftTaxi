@@ -7,8 +7,8 @@
 
 
 class Button : public Container {
+
 public:
-	//Button(CallBackOnClick cb);
 	Button();
 	virtual ~Button ();
 

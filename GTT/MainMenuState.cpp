@@ -7,7 +7,6 @@ MainMenuState::MainMenuState()
 {
 	//inicialiacion id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
 	Sound_NewGameButton_ = CLIC_BUTTON_NEWGAME;
-	cont_1 = -1;
 	DEBUG_ = false;
 }
 

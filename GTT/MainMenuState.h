@@ -42,9 +42,6 @@ private:
 	Container* Title_ = nullptr;
 	Animation* Title_anm; //necesary for set in this Update
 
-	//scene management
-	int cont_1;
-
 	bool DEBUG_;
 
 	
