@@ -15,6 +15,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	channel_3 = 3;
 	channel_4 = 4;
 	channel_5 = 5;
+	channel_6 = 6;
 
 	//ch_3MaxVel = false;
 	ch_3KeyDown = false;
@@ -23,7 +24,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	start();
 
 	ch_3_Vol_ = 68; //el valor de la variable por defecto hay que establecerlo como const global
-	//ch_4_Vol_ = s_->getMIX_MAX_VOLUME();
+
 }
 
 void TaxiSoundManagerCP::start()
@@ -95,20 +96,19 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		break;
 
 	case STOPPED_MOVING_FORWARD:
-		
-
 		if (s_->isSoundPlaying(channel_3)) {
 			ch_3KeyUp = true;
 			s_->stopSound(channel_3);
 		}
 			
-
 		else if (s_->isSoundPlaying(channel_5)) {
 			ch_5KeyUp = true;
 			s_->stopSound(channel_5);
-		}
-			
-			
+		}			
+		break;
+
+	case BACK_MOVING_FORWARD:
+
 		break;
 
 	//callback receive from SoundManager when channel is stopped

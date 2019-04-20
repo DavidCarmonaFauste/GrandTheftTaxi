@@ -3,6 +3,8 @@
 #include "SoundManager.h"
 #include "Observer.h"
 
+#include <map>
+
 class Vehicle;
 
 class TaxiSoundManagerCP :
@@ -27,6 +29,10 @@ private:
 	int channel_3; //aceleration 
 	int channel_4; //deceleration 
 	int channel_5; //fast drive
+	int channel_6; //drift
+	
+	vector <int> channels_;
+	int NUM_CHANNELS_; //hay que pasarla como const global
 
 	int ch_3_Vol_;
 	bool ch_3MaxVel;
