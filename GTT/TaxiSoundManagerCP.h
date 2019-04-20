@@ -31,17 +31,21 @@ private:
 	int channel_5; //fast drive
 	int channel_6; //drift
 	
-	vector <int> channels_;
-	int NUM_CHANNELS_; //hay que pasarla como const global
 
+	int ch_2_Vol_; 
 	int ch_3_Vol_;
-	bool ch_3MaxVel;
+	int ch_4_Vol_;
+	int ch_6_Vol_;
+
 	bool ch_3KeyDown;
 	bool ch_3KeyUp;
-
 	bool ch_5KeyUp;
+	bool ch_6_KeyDown;
+	bool ch_6_KeyUp;
 
-	int ch_4_Vol_;
+	bool DEBUG_;
+
+	
 
 };
 

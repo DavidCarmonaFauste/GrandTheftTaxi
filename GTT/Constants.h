@@ -140,6 +140,7 @@ const enum soundId {
 	TAXI_ACCELERATE_01,
 	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
+	TAXI_BACK_MOVING_FORWARD,
 	//buttons
 	CLIC_BUTTON_NEWGAME
 };
@@ -150,6 +151,7 @@ const map<soundId, string> SOUND = {
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
 	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
+	{TAXI_BACK_MOVING_FORWARD, ".. / Assets / sounds /Taxi_frenazo.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
 };
 
