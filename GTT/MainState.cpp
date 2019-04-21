@@ -9,8 +9,8 @@
 
 MainState::MainState() {
 	// Tilemap
-	//tilemap_ = new TileMap("./../Assets/maps/test.tmx");
-	//stage_.push_back(tilemap_);
+	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
+	stage_.push_back(tilemap_);
 	
 	// Taxi
 	stage_.push_back(Vehicle::GetInstance());

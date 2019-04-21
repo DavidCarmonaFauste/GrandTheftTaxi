@@ -9,7 +9,6 @@ IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, ve
 	patrolRoute_ = route;
 	currentNode_ = nullptr;
 	lastNode_ = nullptr;
-	destinated_ = false;
 	paused_ = false;
 	patrolSpeed_ = patrolSpeed;
 	patrolProgress_ = 0;
@@ -19,17 +18,18 @@ IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, ve
 void IApatrol::update(GameObject* o, Uint32 deltaTime)
 {
 	if (!paused_) {
-		if (patrol_) {
-			if (arrivedAtDestination(o)) {
-				if (currentNode_ != nullptr) lastNode_ = currentNode_;
-				currentNode_ = (*patrolRoute_)[patrolProgress_];
-				destination_ = currentNode_->position_;
-				patrolProgress_ = (patrolProgress_ + 1) % (*patrolRoute_).size();
-				destinated_ = true;
+		if (currentNode_ != nullptr) {
+			if (patrol_) {
+				if (arrivedAtDestination(o)) {
+					FollowRoute();
+				}
 			}
+			else if (arrivedAtDestination(o))
+				FollowPlayer(o);
 		}
-		else if (arrivedAtDestination(o))
-			FollowPlayer(o);
+		else 			
+			setNextDestination((districtMap_->getNearestNode(o->getCenter())));
+
 		Go(o);
 	}
 	else phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
@@ -38,6 +38,13 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 void IApatrol::setPause(bool pause)
 {
 	paused_ = pause;
+}
+
+void IApatrol::setPatrol(bool patrol)
+{
+	patrol_ = patrol;
+	patrolProgress_ = 0;
+	followProgress_ = 0;
 }
 
 
@@ -60,13 +67,16 @@ bool IApatrol::arrivedAtDestination(GameObject* o)
 	return ((direction_.x < 0 && o->getCenter().x <= destination_.x)
 		|| (direction_.x > 0 && o->getCenter().x >= destination_.x)
 		|| (direction_.y < 0 && o->getCenter().y <= destination_.y)
-		|| (direction_.y > 0 && o->getCenter().y >= destination_.y)) 
-		|| !destinated_;
+		|| (direction_.y > 0 && o->getCenter().y >= destination_.y));
 }
 
-void IApatrol::setNextDestination(GameObject* o)
+void IApatrol::setNextDestination(Node* n)
 {
-	if (currentNode_ == nullptr) {//beggining node
+	destination_ = n->position_;
+	if(currentNode_!=nullptr) lastNode_ = currentNode_;
+	currentNode_ = n;
+
+	/*if (currentNode_ == nullptr) {//beggining node
 		currentNode_ = districtMap_->getNearestNode(o->getCenter());
 		lastNode_ = currentNode_;
 		destination_ = currentNode_->position_;
@@ -93,23 +103,43 @@ void IApatrol::setNextDestination(GameObject* o)
 			
 		}
 	}
+	*/
+
+}
+
+void IApatrol::AssignPlayerRoute(GameObject * o)
+{
+	vector<Node*>route;
+	int minDistance = -1;
+	Node* taxiNode = districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
+	districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
+	followProgress_ = 0;
 }
 
 void IApatrol::FollowPlayer(GameObject * o)
 {
-	if (!followRoute_.empty()&& followProgress_<followRoute_.size()) {
-		if (currentNode_ != nullptr) lastNode_ = currentNode_;
-		currentNode_ = followRoute_[followProgress_];
-		destination_ = currentNode_->position_;
-		followProgress_++;
-		destinated_ = true;
+	if (followRoute_.empty() ||
+		(!followRoute_.empty() && (VehiclePosChanged() || OutOfRoute(followRoute_, followProgress_)))) {
+		AssignPlayerRoute(o);
 	}
 	else {
-		if (currentNode_ == nullptr) currentNode_ = districtMap_->getNearestNode(o->getCenter());
-		vector<Node*>route;
-		int minDistance = -1;
-		Node* taxiNode = districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
-		districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
-		followProgress_ = 0;
+		setNextDestination(followRoute_[followProgress_]);
+		followProgress_++;
 	}
+}
+
+void IApatrol::FollowRoute()
+{
+	setNextDestination((*patrolRoute_)[patrolProgress_]);
+	patrolProgress_ = (patrolProgress_ + 1) % (*patrolRoute_).size();
+}
+
+bool IApatrol::VehiclePosChanged()
+{
+	return followRoute_.back() != districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
+}
+
+bool IApatrol::OutOfRoute(vector<Node*> route, int progress)
+{
+	return(progress >= route.size() || (progress!=0 && route[progress] != currentNode_));
 }
