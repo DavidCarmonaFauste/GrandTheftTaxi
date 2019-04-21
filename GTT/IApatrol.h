@@ -18,8 +18,11 @@ private:
 	void Go(GameObject* o);
 	bool arrivedAtDestination(GameObject* o);
 	void setNextDestination(GameObject* o);
+	void FollowPlayer(GameObject* o);
 	NodeMap* districtMap_;
-	vector<Node*>* route_;
+	vector<Node*>* patrolRoute_;
+	vector<Node*> followRoute_;
+	int followProgress_;
 	int patrolProgress_;
 	Node* currentNode_;
 	Node* lastNode_;

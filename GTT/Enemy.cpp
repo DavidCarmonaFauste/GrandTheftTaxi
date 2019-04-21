@@ -36,6 +36,10 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	Node* d = new Node(Vector2D(0, 400), "d");
 	Node* e = new Node(Vector2D(800, 0), "e");
 	Node* f = new Node(Vector2D(-400, 0), "f");
+	Node* g = new Node(Vector2D(-400, 400), "g");
+	Node* h = new Node(Vector2D(800, 400), "h");
+	Node* i = new Node(Vector2D(0, -400), "i");
+	Node* j = new Node(Vector2D(400, -400), "j");
 
 	vector<Node*>* route= new vector<Node*>;
 
@@ -43,13 +47,16 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	route->push_back(b);
 	route->push_back(c);
 
-
 	routemap_.addNode(a);
 	routemap_.addNode(b);
 	routemap_.addNode(c);
 	routemap_.addNode(d);
 	routemap_.addNode(e);
 	routemap_.addNode(f);
+	routemap_.addNode(g);
+	routemap_.addNode(h);
+	routemap_.addNode(i);
+	routemap_.addNode(j);
 
 	routemap_.connectNodes(a, b);
 	routemap_.connectNodes(b, c);
@@ -57,15 +64,16 @@ Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
 	routemap_.connectNodes(d, a);
 	routemap_.connectNodes(f, a);
 	routemap_.connectNodes(b, e);
+	routemap_.connectNodes(a, i);
+	routemap_.connectNodes(b, j);
+	routemap_.connectNodes(i, j);
+	routemap_.connectNodes(h, e);
+	routemap_.connectNodes(h, c);
+	routemap_.connectNodes(f, g);
+	routemap_.connectNodes(d, g);
 
-	vector<Node*>procRoute;
-	vector<Node*>currentRoute;
 
-	int minDistance = -1;
-	routemap_.FindRoute(a, e, procRoute, currentRoute, 0, minDistance);
-	procRoute;
-
-	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_, route);
+	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
 	addLogicComponent(patrolBehaviour_);
 	
 }

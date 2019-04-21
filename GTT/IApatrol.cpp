@@ -1,35 +1,35 @@
 #include "IApatrol.h"
 #include "PhysicObject.h"
+#include "Vehicle.h"
 
 IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, vector<Node*>* route)
 {
 	phyO_ = ph;
 	districtMap_ = districtMap;
-	route_ = route;
+	patrolRoute_ = route;
 	currentNode_ = nullptr;
 	lastNode_ = nullptr;
 	destinated_ = false;
 	paused_ = false;
 	patrolSpeed_ = patrolSpeed;
 	patrolProgress_ = 0;
-	patrol_ = !(route_ == nullptr);
+	patrol_ = (patrolRoute_ != nullptr);
 }
 
 void IApatrol::update(GameObject* o, Uint32 deltaTime)
 {
 	if (!paused_) {
 		if (patrol_) {
-			if(arrivedAtDestination(o)) {
+			if (arrivedAtDestination(o)) {
 				if (currentNode_ != nullptr) lastNode_ = currentNode_;
-				currentNode_ = (*route_)[patrolProgress_];
+				currentNode_ = (*patrolRoute_)[patrolProgress_];
 				destination_ = currentNode_->position_;
-				patrolProgress_ = (patrolProgress_ + 1) % (*route_).size();
+				patrolProgress_ = (patrolProgress_ + 1) % (*patrolRoute_).size();
 				destinated_ = true;
 			}
 		}
-		else if(arrivedAtDestination(o))
-			setNextDestination(o); 
-
+		else if (arrivedAtDestination(o))
+			FollowPlayer(o);
 		Go(o);
 	}
 	else phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
@@ -71,7 +71,6 @@ void IApatrol::setNextDestination(GameObject* o)
 		lastNode_ = currentNode_;
 		destination_ = currentNode_->position_;
 		destinated_ = true;
-		//setNextDestination(o);
 	}
 	else {//decide next node
 		if (!currentNode_->isDeadEnd() || lastNode_==currentNode_) {
@@ -93,5 +92,24 @@ void IApatrol::setNextDestination(GameObject* o)
 			destination_ = currentNode_->position_;
 			
 		}
+	}
+}
+
+void IApatrol::FollowPlayer(GameObject * o)
+{
+	if (!followRoute_.empty()&& followProgress_<followRoute_.size()) {
+		if (currentNode_ != nullptr) lastNode_ = currentNode_;
+		currentNode_ = followRoute_[followProgress_];
+		destination_ = currentNode_->position_;
+		followProgress_++;
+		destinated_ = true;
+	}
+	else {
+		if (currentNode_ == nullptr) currentNode_ = districtMap_->getNearestNode(o->getCenter());
+		vector<Node*>route;
+		int minDistance = -1;
+		Node* taxiNode = districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
+		districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
+		followProgress_ = 0;
 	}
 }
