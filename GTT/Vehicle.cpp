@@ -21,13 +21,13 @@ Vehicle::~Vehicle() {
 	delete sprite_; sprite_ = nullptr;
 	delete health_; health_ = nullptr;
 	
-	/*for (int i = 0; i < MAXTURRETS; i++) {
+	for (int i = 0; i < MAXTURRETS; i++) {
 		if (turrets_[i] != nullptr) {
 			delete turrets_[i];
 			turrets_[i] = nullptr;
 		}
 	}
-	delete[] turrets_; */
+	//delete[] turrets_; 
 }
 
 
