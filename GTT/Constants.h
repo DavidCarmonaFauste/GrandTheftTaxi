@@ -195,7 +195,7 @@ const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/spr
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
 //Maps
-const string PATH_LEVEL_1 = "../Assets/maps/taxiMap.tmx";
+const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 
 
 //Reticule
