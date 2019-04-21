@@ -4,15 +4,38 @@
 #include "Observable.h"
 
 class SoundManager: public Observable {
-public:
-	static SoundManager *getInstance();
 
+	//hide copyBuilder and 	assignment operator
+	SoundManager(SoundManager&) = delete;
+	SoundManager& operator=(const SoundManager&) = delete;
+
+	static unique_ptr<SoundManager> instance_; //ptr instance class
+
+public:
+
+	//Builder
+	SoundManager();
+	virtual ~SoundManager();
+
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new SoundManager());
+		}
+	}
+	//get singleton class
+	inline static SoundManager* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
+		
 	//Methods to define how many channels we can use
 	int setAlloctaedChannels(int n);
 
 	// DON'T USE THIS DIRECTLY,
 	// USE THE RESOURCES SHEET INSTEAD !!!
 	bool loadSound(string path, soundId id);
+	bool loadMusic(string path, musicId id);
 
 	// Returns the channel in which the sound will be played
 	int playSound_Ch(int channel, soundId id, int loops); //secundary
@@ -23,15 +46,10 @@ public:
 	void pauseSound(int channel);
 	void resumeSound(int channel);
 
-	//stop and Channel
 	int stopSound(int channel);
-
 	bool isSoundPlaying(int channel);
 	bool soundExists(soundId id);
 	
-	// DON'T USE THIS DIRECTLY,
-	// USE THE RESOURCES SHEET INSTEAD !!!
-	bool loadMusic(string path, musicId id);
 
 	void playMusic(musicId id, int loops);
 	void pauseMusic();
@@ -49,11 +67,7 @@ public:
 
 
 private:
-	static SoundManager *singleton_;
-
-	SoundManager();
-	virtual ~SoundManager();
-
+	
 	map<musicId, Mix_Music*> loadedMusic_;
 	map<soundId, Mix_Chunk*> loadedSounds_;
 

@@ -60,7 +60,7 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 	Vector2D vel = body->GetLinearVelocity();
 
@@ -99,7 +99,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 }
 
 void InputMovement::steeringWheel() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	float turnSpeed = 0;
 	if (backwardPressed_) {
@@ -124,13 +124,13 @@ void InputMovement::steeringWheel() {
 }
 
 Vector2D InputMovement::getLateralVelocity() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D normal = body->GetWorldVector(Vector2D(0, 1));
 	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
 void InputMovement::updateFriction() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	body->SetLinearDamping(targetDamping);
 
@@ -140,7 +140,7 @@ void InputMovement::updateFriction() {
 } 
 
 bool InputMovement::isMoving() {
-	if (abs(Vehicle::GetInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
+	if (abs(Vehicle::getInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
 	else 
 		return false;

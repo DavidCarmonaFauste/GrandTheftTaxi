@@ -1,6 +1,6 @@
 #pragma once
 #include "GameState.h"
-#include "Vehicle.h"
+
 #include "Enemy.h"
 #include "UI.h"
 #include "TileMap.h"
@@ -24,7 +24,9 @@ private:
 	TileMap *tilemap_;
 
 	// Vehicles
-	Enemy* enemy1_;
+	//Enemy* enemy1_;
+
+	//camera logic
 	FollowGameObject* cameraFollow;
 
 	// Systems

@@ -11,7 +11,7 @@ void ChangeWeaponIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Eve
 
 	if (event.type == SDL_KEYDOWN) {
 		if (event.key.keysym.sym == changekey_) {
-			Vehicle::GetInstance()->ChangeTurret();
+			Vehicle::getInstance()->ChangeTurret();
 		}
 	}
 }

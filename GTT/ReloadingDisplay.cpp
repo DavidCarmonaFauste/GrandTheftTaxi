@@ -36,13 +36,13 @@ void ReloadingDisplay::setReloadingPercentage()
 {
 	Texture* tex = bar->getTexture();
 	bar_clip->x = bar_clip->y = 0;
-	bar_clip->w = tex->getWidth() * Vehicle::GetInstance()->getCurrentTurret()->GetReloadPercentage();
+	bar_clip->w = tex->getWidth() * Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage();
 	bar_clip->h = tex->getHeight();
 
-	bar->setSize(barWidth *  Vehicle::GetInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
+	bar->setSize(barWidth *  Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
 	bar->setClipRect(bar_clip);
-	perfReSegment->setSize(barWidth*Vehicle::GetInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
-	perfReSegment->setPos(bar->getRect()->x + barWidth* Vehicle::GetInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
+	perfReSegment->setSize(barWidth*Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
+	perfReSegment->setPos(bar->getRect()->x + barWidth* Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
 }
 
 ReloadingDisplay::~ReloadingDisplay()
@@ -66,5 +66,5 @@ void ReloadingDisplay::render(Uint32 deltaTime)
 
 bool ReloadingDisplay::isReloading()
 {
-	return Vehicle::GetInstance()->getCurrentTurret()->isReloading();
+	return Vehicle::getInstance()->getCurrentTurret()->isReloading();
 }

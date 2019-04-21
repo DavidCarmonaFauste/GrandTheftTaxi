@@ -1,12 +1,18 @@
 #include "ProyectilePool.h"
 
 
-ProyectilePool* ProyectilePool::instance_ = nullptr;
+unique_ptr<ProyectilePool> ProyectilePool::instance_ = nullptr;
 
 ProyectilePool::ProyectilePool()
 {
 	
 }
+
+ProyectilePool::~ProyectilePool()
+{
+}
+
+
 Proyectile * ProyectilePool::getUnusedProyectile()
 {
 	for (auto& proyectile : proyectiles_) {
@@ -16,6 +22,7 @@ Proyectile * ProyectilePool::getUnusedProyectile()
 	}
 	return nullptr;
 }
+
 void ProyectilePool::update(Uint32 time) {
 	for (auto& proyectile : proyectiles_) {
 		if (proyectile.isActive()) {
@@ -23,6 +30,7 @@ void ProyectilePool::update(Uint32 time) {
 		}
 	}
 }
+
 void ProyectilePool::render(Uint32 time) {
 	for (auto& proyectile : proyectiles_)
 	{
@@ -47,6 +55,4 @@ Proyectile * ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, Proyectil
 }
 
 
-ProyectilePool::~ProyectilePool()
-{
-}
+

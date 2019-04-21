@@ -249,7 +249,5 @@ const int VOL_CHANNEL_3 = 40; //aceleration
 const int VOL_CHANNEL_6 = 60; //BackForward
 
 
-
-
 #endif // !constants_define
 

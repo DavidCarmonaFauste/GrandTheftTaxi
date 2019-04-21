@@ -1,7 +1,7 @@
 #include "SoundManager.h"
-#include <functional>
 
-SoundManager* SoundManager::singleton_ = nullptr;
+
+unique_ptr<SoundManager> SoundManager::instance_ = nullptr;
 
 SoundManager::SoundManager() {
 
@@ -33,11 +33,6 @@ SoundManager::~SoundManager() {
 }
 
 
-SoundManager * SoundManager::getInstance() {
-	if (singleton_ == nullptr)
-		singleton_ = new SoundManager();
-	return singleton_;
-}
 
 int SoundManager::setAlloctaedChannels(int n)
 {
@@ -74,7 +69,6 @@ int SoundManager::stopSound(int channel)
 {
 	return Mix_HaltChannel(channel);
 }
-
 
 
 bool SoundManager::isSoundPlaying(int channel) {
@@ -129,6 +123,6 @@ int SoundManager::getMIX_MAX_VOLUME()
 }
 
 void SoundManager::channelDone(int channel) {
-	ChannelStoppedPlaying e = ChannelStoppedPlaying(singleton_, channel);
-	singleton_->broadcastEvent(e);
+	ChannelStoppedPlaying e = ChannelStoppedPlaying(instance_.get(), channel);
+	instance_.get()->broadcastEvent(e);
 }

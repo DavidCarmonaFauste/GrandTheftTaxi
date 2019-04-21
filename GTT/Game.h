@@ -11,8 +11,32 @@ using namespace std;
 typedef unsigned int uint;
 
 class Game {
+
+	//hide copyBuilder and 	assignment operator
+	Game(Game&) = delete;
+	Game& operator=(const Game&) = delete;
+
+	static unique_ptr<Game> instance_; //ptr instance class
+
+
 public:
-	static Game* getInstance();
+
+	//Builder
+	Game();
+	virtual ~Game();
+
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new Game());
+		}
+	}
+	//get singleton class
+	inline static Game* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
+
 
 	void run();
 	bool exitGame();
@@ -41,16 +65,11 @@ public:
 
 	// state setters
 	void setGameEnd () { exit_ = true; }
-	//void setGameStart () { gmStMachine_->setState();}
 
 	void init();
 
 private:
-	static Game* singleton_; //unique instance
-
-	Game();
-	virtual ~Game();
-
+	
 	const int winWidth_ = 1280;
 	const int winHeight_ = 720;
 

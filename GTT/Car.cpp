@@ -4,7 +4,6 @@
 
 Car::Car()
 {
-	//this->setPosition(Vector2D(x, y));
 }
 
 

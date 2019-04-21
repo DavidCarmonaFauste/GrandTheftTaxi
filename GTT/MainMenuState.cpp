@@ -87,7 +87,7 @@ void MainMenuState::start()
 	buttons_["exitButton"]->getButtonAnimacion()->setAnimation(NEW_GAME_BUTTON[defaultAnm].name);
 
 	//Reticule
-	Reticule::GetInstance()->ChangeReticule("gun");
+	Reticule::getInstance()->ChangeReticule("gun");
 
 	//Taxi
 	Taxi_ = new Container();
@@ -122,7 +122,7 @@ void MainMenuState::start()
 	stage_.push_back(mainBackground_);
 	stage_.push_back(buttons_["newGameButton"]);
 	stage_.push_back(buttons_["exitButton"]);
-	stage_.push_back(Reticule::GetInstance());
+	stage_.push_back(Reticule::getInstance());
 	stage_.push_back(Taxi_);
 	stage_.push_back(Title_);
 
