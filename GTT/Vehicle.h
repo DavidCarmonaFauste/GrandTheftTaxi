@@ -12,7 +12,7 @@ class ShootIC;
 
 class Vehicle : public Car
 {
-	static const int MAXTURRETS = 4;
+	
 
 	//hide copyBuilder and 	assignment operator
 	Vehicle(Vehicle &) = delete;
@@ -61,7 +61,7 @@ public:
 
 	private:
 
-	int currentTurret_ = 0;
+	int currentTurret_;
 
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
@@ -69,6 +69,8 @@ public:
 	ControlType* control_;
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
+
+	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
 	TaxiSoundManagerCP* smLC_;

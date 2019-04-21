@@ -194,6 +194,7 @@ const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/franc
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
+//const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
 
 
 //Reticule

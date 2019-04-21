@@ -255,9 +255,13 @@ bool Turret::isAutomatic()
 
 Turret::~Turret()
 {
-	delete followC_;
-	delete shC_;
-	delete SPshC_;
-	delete animC_;
-	delete magazine_;
+	delete followC_; followC_ = nullptr;
+	delete shC_; shC_ = nullptr;
+	delete SPshC_; SPshC_ = nullptr;
+	delete animC_; animC_ = nullptr;
+
+	while (!magazine_->empty()) {
+		magazine_->pop();
+	}
+	magazine_ = nullptr;
 }
