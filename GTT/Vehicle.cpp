@@ -12,17 +12,22 @@
 unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
 Vehicle::Vehicle(){
-	
+	currentTurret_ = 0;
 }
 
 Vehicle::~Vehicle() {
+
 	delete phyO_; phyO_ = nullptr;
 	delete sprite_; sprite_ = nullptr;
 	delete health_; health_ = nullptr;
-	for (int i = 0; i < MAXTURRETS; i++) {
-		delete turrets_[i];
+	
+	/*for (int i = 0; i < MAXTURRETS; i++) {
+		if (turrets_[i] != nullptr) {
+			delete turrets_[i];
+			turrets_[i] = nullptr;
+		}
 	}
-	delete[]turrets_;
+	delete[] turrets_; */
 }
 
 
@@ -44,7 +49,7 @@ TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
 void Vehicle::EquipTurret(Turret * turret)
 {
 	int i = 0;
-	while (i<MAXTURRETS && turrets_[i] != nullptr)
+	while (i < MAXTURRETS && turrets_[i] != nullptr)
 		i++;
 	if (i < MAXTURRETS) {
 		currentTurret_ = i;
@@ -55,6 +60,7 @@ void Vehicle::EquipTurret(Turret * turret)
 	else {
 		cout << "maximo numero de torretas alcanzado" << endl;
 	}
+
 }
 void Vehicle::ChangeTurret()
 {
@@ -133,10 +139,6 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	addInputComponent(new ChangeWeaponIC());
 
 
-	for (int i = 0; i < MAXTURRETS; i++) {
-		turrets_[i] = nullptr;
-	}
-
 	// Movement
 	this->maxSpeed_ = r.velMax;
 	this->maxBackwardSpeed_ = r.velBackwardMax;
@@ -158,4 +160,9 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	this->addLogicComponent(smLC_);
 
 	control_->registerObserver(smLC_);
+
+	//turrets
+	for (int i = 0; i < MAXTURRETS; i++) {
+		turrets_[i] = nullptr;
+	}
 }
