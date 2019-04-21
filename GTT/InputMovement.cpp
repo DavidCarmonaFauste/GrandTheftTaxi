@@ -30,7 +30,13 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, STARTED_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = true;
+		if (event.key.keysym.sym == k_.backwards) { 
+			backwardPressed_ = true; 
+			Event e(this, BACK_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
+
+
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
@@ -41,7 +47,11 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, STOPPED_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = false;
+		if (event.key.keysym.sym == k_.backwards) { 
+			backwardPressed_ = false; 
+			Event e(this, STOPPED_BACK_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
@@ -50,7 +60,7 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 	Vector2D vel = body->GetLinearVelocity();
 
@@ -89,7 +99,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 }
 
 void InputMovement::steeringWheel() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	float turnSpeed = 0;
 	if (backwardPressed_) {
@@ -114,13 +124,13 @@ void InputMovement::steeringWheel() {
 }
 
 Vector2D InputMovement::getLateralVelocity() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D normal = body->GetWorldVector(Vector2D(0, 1));
 	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
 void InputMovement::updateFriction() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	body->SetLinearDamping(targetDamping);
 
@@ -130,7 +140,7 @@ void InputMovement::updateFriction() {
 } 
 
 bool InputMovement::isMoving() {
-	if (abs(Vehicle::GetInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
+	if (abs(Vehicle::getInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
 	else 
 		return false;

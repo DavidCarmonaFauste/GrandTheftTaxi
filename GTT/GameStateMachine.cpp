@@ -8,6 +8,7 @@
 
 GameStateMachine::GameStateMachine() {
 
+	currentState_ = "default";
 }
 
 GameStateMachine::~GameStateMachine() {
@@ -15,8 +16,11 @@ GameStateMachine::~GameStateMachine() {
 }
 
 void GameStateMachine::setState(const string &s) {
-	if (currentState_ != "") STATES_[currentState_]->end();
+	if (currentState_ != "default") 
+		STATES_[currentState_]->end();
+
 	currentState_ = s;
+
 	STATES_[currentState_]->start();
 }
 

@@ -1,12 +1,15 @@
 #include "Turret.h"
-#include "Animation.h"
-#include "ShootComponent.h"
+
 #include "Reticule.h"
-#include "AimComponent.h"
+
 #include "ShootIC.h"
 #include "ReloadInputComponent.h"
 #include "LinearSC.h"
 #include "SpreadSC.h"
+
+#include "Animation.h"
+#include "ShootComponent.h"
+#include "AimComponent.h"
 
 Turret::Turret(WeaponInfo w)
 {
@@ -87,8 +90,8 @@ void Turret::update(Uint32 deltaTime)
 	shotEffect_.update(deltaTime);
 
 	
-	if (Reticule::GetInstance()->GetCurrentSprite() != reticulesprite_)
-		Reticule::GetInstance()->ChangeReticule(reticulesprite_);
+	if (Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
+		Reticule::getInstance()->ChangeReticule(reticulesprite_);
 
 
 	Container::update(deltaTime);
@@ -117,10 +120,10 @@ void Turret::AttachToVehicle(Car * car)
 	addLogicComponent(followC_);
 
 	if (dynamic_cast<Vehicle*>(car_)!=nullptr) {
-		Vehicle::GetInstance()->GetShootIC()->ChangeInputMode(automatic_);
-		addInputComponent(Vehicle::GetInstance()->GetReloadIC());
-		addInputComponent(Vehicle::GetInstance()->GetShootIC());
-		addLogicComponent(Vehicle::GetInstance()->GetShootIC());
+		Vehicle::getInstance()->GetShootIC()->ChangeInputMode(automatic_);
+		addInputComponent(Vehicle::getInstance()->GetReloadIC());
+		addInputComponent(Vehicle::getInstance()->GetShootIC());
+		addLogicComponent(Vehicle::getInstance()->GetShootIC());
 	}
 	
 

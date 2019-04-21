@@ -1,61 +1,19 @@
 #include "Vehicle.h"
-#include "Turret.h"
+
 #include "AimAtCursorAC.h"
-#include "ShootIC.h"
-#include "ReloadInputComponent.h"
 #include "ChangeWeaponIC.h"
 #include "Reticule.h"
 #include "InputMovement.h"
 
-Vehicle* Vehicle::instance_ = nullptr;
+#include "Turret.h"
+#include "ReloadInputComponent.h"
+#include "ShootIC.h"
 
-Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
-	this->setWidth(r.width);
-	this->setHeight(r.height);
+unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
-	// Sprite
-	sprite_ = new Animation();
-	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->playAnimation("idle");
-	this->addRenderComponent(sprite_);
-
-	// Health
-	health_ = new Health(TAXI_HP);
-	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
-	addLogicComponent(health_);
-
-	shIC_ = new ShootIC();
-	reIC_ = new ReloadInputComponent();
-	aimC_ = new AimAtCursorAC();
-	addInputComponent(new ChangeWeaponIC());
-
-
-	for (int i = 0; i < MAXTURRETS; i++) {
-		turrets_[i]=nullptr;
-	}
+Vehicle::Vehicle(){
 	
-	// Movement
-	this->maxSpeed_ = r.velMax;
-	this->maxBackwardSpeed_ = r.velBackwardMax;
-	this->turnSpeed_ = r.turnSpeed;
-	this->acceleration_ = r.acceleration;
-	
-	// Physics
-	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height, position_.x, position_.y);
-	this->addLogicComponent(phyO_);
-	
-	// Control
-	control_ = new InputMovement(k, this);
-	this->addInputComponent(control_);
-	this->addLogicComponent(control_);
-	control_->registerObserver(this);
-	//Sound
-	smLC_ = new TaxiSoundManagerCP(this);
-	this->addLogicComponent(smLC_);
-
-	control_->registerObserver(smLC_);
 }
-
 
 Vehicle::~Vehicle() {
 	delete phyO_; phyO_ = nullptr;
@@ -66,7 +24,6 @@ Vehicle::~Vehicle() {
 	}
 	delete[]turrets_;
 }
-
 
 
 ReloadInputComponent * Vehicle::GetReloadIC()
@@ -92,7 +49,7 @@ void Vehicle::EquipTurret(Turret * turret)
 	if (i < MAXTURRETS) {
 		currentTurret_ = i;
 		turrets_[currentTurret_] = turret;
-		Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
+		Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 		turrets_[currentTurret_]->AttachToVehicle(this);
 	}
 	else {
@@ -106,7 +63,7 @@ void Vehicle::ChangeTurret()
 	while (turrets_[currentTurret_] == nullptr) {
 		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
 	}
-	Reticule::GetInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
+	Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 	turrets_[currentTurret_]->ResetChargeProgress();
 }
@@ -114,7 +71,6 @@ Turret * Vehicle::getCurrentTurret()
 {
 	return turrets_[currentTurret_];
 }
-
 
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
@@ -145,16 +101,61 @@ void Vehicle::render(Uint32 time) {
 }
 
 
-
-
 float32 Vehicle::GetMaxBackwardSpeed()
 {
 	return maxBackwardSpeed_;
 }
-
-
-
 float32 Vehicle::GetAcceleration()
 {
 	return acceleration_;
+}
+
+
+void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
+{
+	this->setWidth(r.width);
+	this->setHeight(r.height);
+
+	// Sprite
+	sprite_ = new Animation();
+	sprite_->loadAnimation(r.idlePath, "default");
+	this->addRenderComponent(sprite_);
+	sprite_->setAnimation("default");
+
+	// Health
+	health_ = new Health(TAXI_HP);
+	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+	addLogicComponent(health_);
+
+	shIC_ = new ShootIC();
+	reIC_ = new ReloadInputComponent();
+	aimC_ = new AimAtCursorAC();
+	addInputComponent(new ChangeWeaponIC());
+
+
+	for (int i = 0; i < MAXTURRETS; i++) {
+		turrets_[i] = nullptr;
+	}
+
+	// Movement
+	this->maxSpeed_ = r.velMax;
+	this->maxBackwardSpeed_ = r.velBackwardMax;
+	this->turnSpeed_ = r.turnSpeed;
+	this->acceleration_ = r.acceleration;
+
+	// Physics
+	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
+	this->addLogicComponent(phyO_);
+
+	// Control
+	control_ = new InputMovement(k, this);
+	this->addInputComponent(control_);
+	this->addLogicComponent(control_);
+	control_->registerObserver(this);
+
+	//Sound
+	smLC_ = new TaxiSoundManagerCP(this);
+	this->addLogicComponent(smLC_);
+
+	control_->registerObserver(smLC_);
 }

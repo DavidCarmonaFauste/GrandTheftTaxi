@@ -1,37 +1,49 @@
-#pragma once
-
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
 
+#pragma once
+
 using namespace std;
 
 class Turret;
-
 class ReloadInputComponent;
 class ShootIC;
 
 class Vehicle : public Car
 {
-public:
-	Vehicle(Vehicle&) = delete;
-	Vehicle& operator=(const Vehicle&) = delete;
+	static const int MAXTURRETS = 4;
 
+	//hide copyBuilder and 	assignment operator
+	Vehicle(Vehicle &) = delete;
+	Vehicle & operator=(const Vehicle &) = delete;
+
+	static unique_ptr<Vehicle > instance_; //ptr instance class
+
+
+public:
+	//builder
+	Vehicle();
 	virtual ~Vehicle();
 
-	//Get
-	
-	float32 GetMaxBackwardSpeed();
-	
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new Vehicle());
+		}
+	}
+	//get singleton class
+	inline static Vehicle* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
+
+	void initAtributtes(VehicleInfo r, KeysScheme k);
+
+
+	float32 GetMaxBackwardSpeed();	
 	float32 GetAcceleration();
 	
-
-	static Vehicle* GetInstance() {
-		if (instance_ == nullptr) {
-			instance_ = new Vehicle(3200, 2432, THECOOLERTAXI, DEFAULT_KEYS);
-		}
-		return instance_;
-	}
 
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
@@ -49,26 +61,16 @@ public:
 
 	private:
 
-	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
-
-	static Vehicle* instance_;
+	int currentTurret_ = 0;
 
 	float32 maxBackwardSpeed_;
-	
 	float32 acceleration_;
 
 	ControlType* control_;
-
-	TaxiSoundManagerCP* smLC_;
-
-	static const int MAXTURRETS = 4;
-
-	
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
-
 	Turret* turrets_[MAXTURRETS];
 
-	int currentTurret_=0;
+	TaxiSoundManagerCP* smLC_;
 	
 };

@@ -5,6 +5,7 @@
 #include "PhysicObject.h"
 #include <Box2D/Box2D.h>
 #include "Animation.h"
+
 #include <vector>
 #include "Health.h"
 #include <cmath> 
@@ -15,7 +16,7 @@ class Car :
 	public Container, public Observable, public Observer
 {
 public:
-	Car(int x, int y);
+	Car();
 	~Car();
 
 	//get

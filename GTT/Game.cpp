@@ -1,9 +1,15 @@
 ﻿#include "Game.h"
+
+//singleton patterns
+#include "Reticule.h"
+#include "Vehicle.h"
+#include "ProyectilePool.h"
+
 #include <iostream>
 
 using namespace std;
 
-Game* Game::singleton_ = nullptr;
+unique_ptr<Game> Game::instance_ = nullptr;
 
 Game::Game() {
 	// Initialization values
@@ -27,7 +33,6 @@ Game::Game() {
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
-	soundManager_ = new SoundManager();
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
@@ -42,7 +47,6 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
-	delete soundManager_; soundManager_ = nullptr;
 
 }
 
@@ -126,7 +130,7 @@ b2World * Game::getWorld()
 
 SoundManager * Game::getSoundManager()
 {
-	return soundManager_;
+	return SoundManager::getInstance();
 }
 
 Camera * Game::getCamera(cameraType cT)
@@ -147,21 +151,18 @@ void Game::init() {
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 	cameras_[UI_CAMERA] = new Camera(1600, 900);
 
+	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
+	SoundManager::getInstance()->initInstance();
+	Reticule::getInstance()->initInstance();
+	Vehicle::getInstance()->initInstance(); //after, in MainState must do initiAtributtes(VehicleInfo r, KeysScheme k);
+	ProyectilePool::getInstance()->initInstance();
+
 	// Create the resources singleton for the first time
 	// and initialize its states
 	gmStMachine_ = new GameStateMachine();
 	gmStMachine_->initStates();
-
-	//initialize SoundManager
-	soundManager_ = new SoundManager();
 }
 
-Game * Game::getInstance() {
-	if (singleton_ == nullptr)
-		singleton_ = new Game();
-
-	return singleton_;
-}
 
 //Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
 void Game::run() {
