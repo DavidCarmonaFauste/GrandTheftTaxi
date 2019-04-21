@@ -141,6 +141,10 @@ void MainMenuState::start()
 	s_->playSound_Ch(Channels_["Start"], TAXI_START, 0);	//vehicle start sound
 }
 
+void MainMenuState::end()
+{
+}
+
 void MainMenuState::update(Uint32 deltaTime) {
 	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(false);

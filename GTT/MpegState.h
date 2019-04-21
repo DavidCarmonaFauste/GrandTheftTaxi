@@ -14,6 +14,7 @@ public:
 	virtual ~MpegState();
 
 	virtual void start() override;
+	virtual void end() override;
 
 	//redefine methods - not necessary  for video decoder player
 	virtual void update(Uint32 deltaTime) {}

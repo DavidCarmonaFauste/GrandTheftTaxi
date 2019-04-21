@@ -14,7 +14,9 @@ public:
 	MainState();
 	virtual ~MainState();
 
-	virtual void start();
+	virtual void start() override;
+	virtual void end() override;
+
 	virtual void update(Uint32 deltaTime);
 
 private:

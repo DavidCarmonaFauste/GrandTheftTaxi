@@ -15,7 +15,8 @@ public:
 	MainMenuState();
 	virtual ~MainMenuState();
 
-	virtual void start();
+	virtual void start() override;
+	virtual void end() override;
 
 	virtual void update (Uint32 deltaTime);
 
