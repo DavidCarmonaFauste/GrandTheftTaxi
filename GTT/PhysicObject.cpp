@@ -1,7 +1,7 @@
 #include "PhysicObject.h"
 
 
-PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, Vector2D origin) {
+PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, Vector2D origin, bool createFixture) {
 	visualSize_ = Vector2D(w, h);
 	origin_ = origin;
 
@@ -13,13 +13,15 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	body_ = Game::getInstance()->getWorld()->CreateBody(&bodyDef_);
 
 	// Fixture definition and instantiation
-	fixtureDef_ = b2FixtureDef();
-	shape_.SetAsBox(w / 2 * PHYSICS_SCALING_FACTOR,
-		h / 2 * PHYSICS_SCALING_FACTOR,
-		origin_, angle);
-	fixtureDef_.shape = &shape_;
-	fixtureDef_.density = 1;
-	body_->CreateFixture(&fixtureDef_);
+	if (createFixture) {
+		fixtureDef_ = b2FixtureDef();
+		shape_.SetAsBox(w / 2 * PHYSICS_SCALING_FACTOR,
+						h / 2 * PHYSICS_SCALING_FACTOR,
+						origin_, angle);
+		fixtureDef_.shape = &shape_;
+		fixtureDef_.density = 1;
+		body_->CreateFixture(&fixtureDef_);
+	}
 }
 
 
