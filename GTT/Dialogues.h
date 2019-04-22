@@ -4,14 +4,14 @@
 class Dialogues
 {
 public:
-	Dialogues(Sprite box,Sprite character,Font* font, string text = "", SDL_Color color = SDL_Color());
+	Dialogues(Font* font, string text, SDL_Color color, Vector2D pos, int, int h);
 	~Dialogues();
 
 	void setText(string txt);
 
+
 private:
 	Text* text_;
-	Sprite box_,character_;
 	
 };
 

@@ -2,11 +2,17 @@
 
 
 
-Dialogues::Dialogues(Sprite box, Sprite character, Font* font, string text, SDL_Color color)
+Dialogues::Dialogues(Font* font, string text, SDL_Color color,Vector2D pos, int w, int h)
 {
-	box_ = box;
-	character_ = character;
+	
 	text_ = new Text(font, text, color);
+	
+	
+
+	
+	text_->render(pos,w,h);
+
+
 }
 
 
