@@ -3,6 +3,8 @@
 #include "SoundManager.h"
 #include "Observer.h"
 
+#include <map>
+
 class Vehicle;
 
 class TaxiSoundManagerCP :
@@ -10,14 +12,36 @@ class TaxiSoundManagerCP :
 {
 public:
 	TaxiSoundManagerCP(Vehicle* v);
+
+	void start();
 	virtual void update(GameObject* o, Uint32 deltaTime);
 	virtual bool receiveEvent(Event& e);
 	virtual ~TaxiSoundManagerCP();
 
-	void PlaySound(soundId id);
+	//void PlaySound(soundId id);
 private:
 	SoundManager* s_;
 	Vehicle* v_;
-	int channel_;
+
+	//Max SDL_Mixer channels: 8
+	map <string, int> Channels_;
+	
+	int ch_2_Vol_; 
+	int ch_3_Vol_;
+	int ch_4_Vol_;
+	int ch_6_Vol_;
+
+	bool ch_3KeyDown;
+	bool ch_3KeyUp;
+	bool ch_5KeyUp;
+	bool ch_6_KeyDown;
+	bool ch_6_KeyUp;
+
+	bool keyBackDown_;
+
+	bool DEBUG_;
+
+	
+
 };
 

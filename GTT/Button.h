@@ -2,30 +2,31 @@
 #include "Container.h"
 #include "Sprite.h"
 #include "Animation.h"
-#include "Constants.h"
+#include "MouseClickIC.h"
 
-
-class MouseClickIC;
-
-// --------- C A L L B A C K S ---------------
-using CallBackOnClick = void ();
 
 
 class Button : public Container {
+
 public:
-	Button(CallBackOnClick cb);
+	Button();
 	virtual ~Button ();
 
-	CallBackOnClick *callback = nullptr;
+	//CallBackOnClick *callback = nullptr;
 	
+	Animation* getButtonAnimation();
 	void setButtonAnimation(Animation* anm);
+
+	MouseClickIC* getMouseClickIC();
 	void setMouseClickIC(MouseClickIC* mCIc);
 	void setClickSound(soundId = (soundId)-1);
 
-	Animation* getButtonAnimacion();
-	bool isMouseClickICEvent();
+	void setIndex(int i);
+	int getIndex();
 
-	const soundId getSound();
+	Animation* getButtonAnimacion();
+
+	const soundId getSoundId();
 
 
 private:
@@ -34,5 +35,7 @@ private:
 	MouseClickIC* mouseClickIC_ = nullptr;
 
 	soundId clickSound_;
+
+	int index_;
 };
 

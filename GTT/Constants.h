@@ -155,8 +155,9 @@ const enum soundId {
 	TAXI_START,	//TAXI MOVEMENT
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
-	TAXI_1,
+	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
+	TAXI_BACK_MOVING_FORWARD,
 	//buttons
 	CLIC_BUTTON_NEWGAME
 };
@@ -164,9 +165,10 @@ const map<soundId, string> SOUND = {
 	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
 	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
-	{TAXI_ACCELERATE_01, "../Assets/sounds/Accelerate01.wav"},
-	{TAXI_1, "../Assets/sounds/Running1.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/Desacel10.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
+	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
+	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
 };
 
@@ -220,6 +222,10 @@ const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/e
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 75, 150, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500};
 const WeaponInfo SNIPER{"../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 25, 150, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0};
 
+//Maps
+const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
+//const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
+
 
 
 //Buttons
@@ -233,6 +239,10 @@ const vector <ButtonInfo> EXIT_BUTTON = { {"../Assets/sprites/buttons/ExitButton
 {"../Assets/sprites/buttons/ExitButton/ExitButton_over.png", "overButton", {1 , 1}, {1000.0, 700.0}} };
 
 const string MAINMENURETICULE = "gun";
+//TAXI SOUND MANAGER
+const int VOL_CHANNEL_2 = 90; //regular engine
+const int VOL_CHANNEL_3 = 40; //aceleration
+const int VOL_CHANNEL_6 = 60; //BackForward
 
 const vector<mainTitleInfo>MAIN_TITLE = { {"../Assets/sprites/MainTitle/default.png", "default", {1, 1}, {0.0, 0.0} }, 
 {"../Assets/sprites/MainTitle/animacion_MainMenu.png", "animation", {5,8}, {0.0, 0.0} }, 

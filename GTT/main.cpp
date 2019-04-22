@@ -12,6 +12,8 @@ using namespace std;
 typedef unsigned int uint;
 
 int main(int argc, char* argv[]) {
+
+	Game::getInstance()->initInstance(); //initInstance() only once
 	Game::getInstance()->run();
 	return 0;
 }

@@ -2,15 +2,12 @@
 #include "Button.h"
 #include "Game.h"
 
-MouseClickIC::MouseClickIC (const vector<ButtonInfo> bType, int key) {
-	mouseClickKey_ = key;
-	clickEvent_ = false;
-	buttonType_ = bType; buttonTypeSize_ = (buttonType_.size() -1);
+MouseClickIC::MouseClickIC(int key) {
+	mouseClickKey_ = key;	
 }
 
 
-MouseClickIC::~MouseClickIC () {
-}
+MouseClickIC::~MouseClickIC () {}
 
 
 void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event) {
@@ -41,49 +38,30 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 
 				//si se produce el evento de input leftMouse
 				if (event.button.button == mouseClickKey_) {
-					//asegura que el vector de struc buttonInfo tiene una componente para la animación 
-					if (buttonTypeSize_ >= (int)clickButton) {
-						button->getButtonAnimacion()->playAnimation(buttonType_[clickButton].name, 24.0f, false);
-						
-						//accede al SoundManager y reproduce el sonido
-						if (button->getSound() != -1) {
-							Game::getInstance()->getSoundManager()->playSound(button->getSound(), 0);
-						}
-						
-					}
-					//notifica al update del Estado que el evento se ha producido. y el estado llama a su callback
-					clickEvent_ = true;
-					button->callback();
+					MouseClickLeft e(this, button->getIndex());
+					broadcastEvent(e);									
 				}
 			}
 		}//SDL_MOUSEBUTTONUP
 
 		else {
-			if (!clickEvent_) {
-				if (event.type == SDL_MOUSEMOTION) {
-					//si el puntero se encuentra dentro del rango del GO
-					if (mouseX > int(objPosition.x) &&
-						mouseX < int(objPosition.x + o->getWidth()) &&
-						mouseY > int(objPosition.y) &&
-						mouseY < int(objPosition.y + o->getHeight())) {
+			if (event.type == SDL_MOUSEMOTION) {
+				//si el puntero se encuentra dentro del rango del GO
+				if (mouseX > int(objPosition.x) &&
+					mouseX < int(objPosition.x + o->getWidth()) &&
+					mouseY > int(objPosition.y) &&
+					mouseY < int(objPosition.y + o->getHeight())) {
 
-						if (buttonTypeSize_ >= (int)overButton) {
-							button->getButtonAnimacion()->setAnimation(buttonType_[overButton].name);
-						}
+					MouseOverObj e(this, button->getIndex());
+					broadcastEvent(e);
 
-					}
-					else {
-						button->getButtonAnimacion()->stopAnimation();
-					}
-				}//SDL_MOUSEMOTION
-			}
+				}
+				else {
+					NotMouseOverObj e(this, button->getIndex());
+					broadcastEvent(e);
+				}
+			}//SDL_MOUSEMOTION
 		}
 	}
 }
 
-
-
-bool MouseClickIC:: isClickEvent()
-{
-	return clickEvent_;
-}

@@ -10,12 +10,22 @@ enum event_type {
 	HEALTH_CHANGED,
 	MONEY_CHANGED,
 	RESPAWNED,
+
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
+	BACK_MOVING_FORWARD,
+	STOPPED_BACK_MOVING_FORWARD,
+
+	CHANNEL_STOPPED_PLAYING,
+
+	EVENTS_LENGTH,
 
 	TRIGGER_EVENT,
 
-	EVENTS_LENGTH
+	EVENTS_LENGTH,
+	CLICK_BUTTON,
+	OVER_OBJECT,
+	NOT_OVER_OBJECT
 };
 
 struct Event {
@@ -62,3 +72,34 @@ struct TriggerEvent : public Event {
 	b2Body* detected_;
 	bool leaving_;
 };
+struct ChannelStoppedPlaying : public Event {
+	ChannelStoppedPlaying(Observable* sender, int channel) : Event(sender, CHANNEL_STOPPED_PLAYING) {
+		channel_ = channel;
+	}
+
+	int channel_;
+};
+
+struct MouseClickLeft : public Event {
+	MouseClickLeft(Observable* sender, int button) : Event(sender, CLICK_BUTTON) {
+		button_ = button;
+	}
+
+	int button_;
+};
+
+struct MouseOverObj : public Event {
+	MouseOverObj(Observable* sender, int objIndex) : Event(sender, OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+struct NotMouseOverObj : public Event {
+	NotMouseOverObj(Observable* sender, int objIndex) : Event(sender, NOT_OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+

@@ -20,7 +20,7 @@ void LinearSC::shoot(ProyectileInfo prType)
 	Vector2D spawndir(sin(turret_->getRotation() / 180.0*M_PI) * 100, -cos(turret_->getRotation() / 180.0*M_PI) * 100);
 	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x, turret_->getCenter().y + spawndir.y);
 
-	ProyectilePool::GetInstance()->addProyectile(spawnpoint,
+	ProyectilePool::getInstance()->addProyectile(spawnpoint,
 		Vector2D(sin((turret_->getRotation()+ innacuracy)/180.0*M_PI), -cos((turret_->getRotation()+ innacuracy)/180.0*M_PI)), prType);
 }
 
