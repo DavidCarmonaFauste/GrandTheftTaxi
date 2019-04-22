@@ -34,6 +34,8 @@ Game::Game() {
 
 	world_ = new b2World(b2Vec2(0, 0));
 
+	world_->SetContactListener(CustomContactListener::getInstance());
+	
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
@@ -57,11 +59,11 @@ void Game::handleEvents(Uint32 deltaTime) {
 	while (SDL_PollEvent(&event) && !exit_) {
 		// Call the handleEvents of the cameras and the state
 		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym == SDLK_ESCAPE) {
+			/*if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
-			}
+			}*/
 			
-			else if (event.key.keysym.sym == SDLK_f) {
+			if (event.key.keysym.sym == SDLK_f) {
 				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
 		}
@@ -73,6 +75,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
+	
 	while (accumulator_ >= step_*1000) {
 		world_->Step(step_, velIterations_, posIterations_);
 		accumulator_ -= step_*1000;
@@ -85,7 +88,6 @@ void Game::update(Uint32 deltaTime)
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
-
 	// Render the cameras and the state
 	for (auto cam : cameras_) cam.second->render(deltaTime);
 	gmStMachine_->get_CurrentState()->render(deltaTime);

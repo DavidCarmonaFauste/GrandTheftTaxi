@@ -1,6 +1,6 @@
 #include "Money.h"
 
-
+Money *Money::singleton_ = nullptr;
 
 Money::Money() {
 	currentMoney_ = minimumMoney_;
@@ -9,6 +9,13 @@ Money::Money() {
 
 Money::~Money() {
 
+}
+
+Money * Money::getInstance() {
+	if (singleton_ == nullptr)
+		singleton_ = new Money();
+
+	return singleton_;
 }
 
 bool Money::receiveEvent(Event & e) {

@@ -1,11 +1,22 @@
 #pragma once
 #include "Car.h"
-class Enemy :
-	public Car
+#include "Trigger.h"
+#include "NodeMap.h"
+#include "IApatrol.h"
+
+class Enemy :public Car
 {
 public:
-	Enemy(VehicleInfo r, KeysScheme k);
+	Enemy(VehicleInfo r);
+	virtual void Damage(double damage);
+	virtual void Die();
+	virtual void update(Uint32 deltaTime);
+	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event);
 	virtual ~Enemy();
-	virtual void render(Uint32 deltatime);
+private:
+	bool bodyReadyToDestroy_;
+	IApatrol* patrolBehaviour_;
+	NodeMap routemap_;
+	int speed_;
 };
 

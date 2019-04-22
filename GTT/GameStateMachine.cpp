@@ -1,6 +1,7 @@
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
 #include "MainState.h"
+#include "ShopState.h"
 #include "MpegState.h"
 #include "Reticule.h"
 
@@ -43,7 +44,7 @@ void GameStateMachine::initStates() {
 	//SE DESCARTA PROVISIONALMENTE LOS ESTADOS QUE USEN FFMPEG lib. 
 	// Mpeg state
 	//STATES_.insert(std::pair<string, GameState*>(NAME_MPEG_STATE, new MpegState(Game::getInstance()->getWindow(), Game::getInstance()->getRenderer())));
-	//asigna valor string al atributo privado de la clase para gestionar el cambio de estado unav vez finalizado la reproducción 
+	//asigna valor string al atributo privado de la clase para gestionar el cambio de estado unav vez finalizado la reproducciï¿½n 
 	//MpegState* intro = static_cast<MpegState*>(STATES_[NAME_MPEG_STATE]);
 	//intro->setVideoId(INTRO_VIDEO);
 		

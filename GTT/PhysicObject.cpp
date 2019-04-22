@@ -24,7 +24,8 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 
 
 PhysicObject::~PhysicObject() {
-	Game::getInstance()->getWorld()->DestroyBody(body_); body_ = nullptr;
+	Game::getInstance()->getWorld()->DestroyBody(body_); 
+	body_ = nullptr;
 }
 
 void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
@@ -58,4 +59,23 @@ const b2Vec2 PhysicObject::getOrigin() {
 
 b2Body * PhysicObject::getBody() {
 	return body_;
+}
+
+void PhysicObject::setSensor(bool sensor) {
+	body_->GetFixtureList()->SetSensor(sensor);
+}
+
+bool PhysicObject::isSensor() {
+	return body_->GetFixtureList()->IsSensor();
+}
+
+// The category bits are all set to 0 by default (no group)
+// The mask bits are all set to 1 by default (collides with everything)
+void PhysicObject::setCollisions(int16 groupIndex, uint16 category, uint16 mask) {
+	b2Filter data;
+	data.groupIndex = groupIndex;
+	data.categoryBits = category;
+	data.maskBits = mask;
+
+	body_->GetFixtureList()->SetFilterData(data);
 }

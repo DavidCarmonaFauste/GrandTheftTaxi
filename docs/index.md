@@ -10,20 +10,15 @@ There should be whitespace between paragraphs.
 
 There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
 
-# ¿Qué es Taxi Revenge?
+# Header 1
 
-Grand Theft Taxi es un juego en vista top-down con estética marcada por una paleta de colores armónica que destaca sobre fondos grises. 
-
-
-
-
+This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
 
 ## Header 2
-Hace una crítica social de algunos conflictos actuales, la lucha de los taxistas por no perder el “monopolio” del servicio de transporte público.
-La trama se desarrolla en un futuro distópico controlado por los VTC, dónde no queda sitio para los taxis y todos los servicios de carácter público y social, son ahora propiedad de una tirana empresa multinacional que tiene sometida a la sociedad, a la que cobra precios desorbitados por sus servicios. 
-Nuestro protagonista es un taxista retirado, con un pasado turbio. Tras haber perdido su empleo y su familia por culpa del monopolio de los VTC, decide levantarse en armas y recuperar lo que le pertenece.
 
-> Y ya de paso, coser a disparos todo VTC con el que se encuentre.
+> This is a blockquote following a header.
+>
+> When something is important enough, you do it even if the odds are not in your favor.
 
 ### Header 3
 

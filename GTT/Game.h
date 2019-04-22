@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "SoundManager.h"
 #include "GameStateMachine.h"
-
+#include "CustomContactListener.h"
 
 using namespace std;
 typedef unsigned int uint;

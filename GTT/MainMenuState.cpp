@@ -60,19 +60,19 @@ void MainMenuState::start()
 	buttons_["exitButton"]->setWidth(EXIT_BUTTON[defaultAnm].width);
 	buttons_["exitButton"]->setHeight(EXIT_BUTTON[defaultAnm].height);
 	buttons_["exitButton"]->setIndex(2);
-	
+
 	//build and set private components
 		//sounds
 	soundId sound = CLIC_BUTTON_NEWGAME;
 	buttons_["newGameButton"]->setClickSound(sound);
 	buttons_["exitButton"]->setClickSound();
-		//renderC - 
+	//renderC - 
 	Animation* newG_Animation = new Animation(); //NEW GAME BUTTON
 			//first animation is the last to insert
 	newG_Animation->loadAnimation(NEW_GAME_BUTTON[clickButton].idlePath, NEW_GAME_BUTTON[clickButton].name, NEW_GAME_BUTTON[clickButton].frAnm.cols, NEW_GAME_BUTTON[clickButton].frAnm.rows);
 	newG_Animation->loadAnimation(NEW_GAME_BUTTON[overButton].idlePath, NEW_GAME_BUTTON[overButton].name, NEW_GAME_BUTTON[overButton].frAnm.cols, NEW_GAME_BUTTON[overButton].frAnm.rows);
 	newG_Animation->loadAnimation(NEW_GAME_BUTTON[defaultAnm].idlePath, NEW_GAME_BUTTON[defaultAnm].name, NEW_GAME_BUTTON[defaultAnm].frAnm.cols, NEW_GAME_BUTTON[defaultAnm].frAnm.rows);
-		//add and set renderC
+	//add and set renderC
 	buttons_["newGameButton"]->addRenderComponent(newG_Animation);
 	buttons_["newGameButton"]->setButtonAnimation(newG_Animation);
 	buttons_["newGameButton"]->getButtonAnimacion()->setAnimation(NEW_GAME_BUTTON[defaultAnm].name);
@@ -204,7 +204,7 @@ bool MainMenuState::receiveEvent(Event & e)
 
 			else if (NotMouseOverObj_.objIndex_ == buttons_["exitButton"]->getIndex())
 				buttons_["exitButton"]->getButtonAnimacion()->stopAnimation();
-		}		
+		}
 		break;
 	}
 
@@ -218,7 +218,7 @@ bool MainMenuState::receiveEvent(Event & e)
 			else if (MouseOverObj_.objIndex_ == buttons_["exitButton"]->getIndex())
 				buttons_["exitButton"]->getButtonAnimacion()->setAnimation(EXIT_BUTTON[overButton].name);
 		}
-		
+
 		break;
 	}
 
@@ -228,6 +228,3 @@ bool MainMenuState::receiveEvent(Event & e)
 	}
 	return true;
 }
-
-
-

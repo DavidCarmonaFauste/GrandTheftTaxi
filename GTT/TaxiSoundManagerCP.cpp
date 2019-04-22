@@ -47,7 +47,7 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 {
 
 	//Stop Sounds Management
-	//el vehículo no sobrepasa la velocidad de 8.4 según conf. por defecto
+	//el vehï¿½culo no sobrepasa la velocidad de 8.4 segï¿½n conf. por defecto
 
 	//if have considerable velocity and Taxi_acelerate is playing
 	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
@@ -202,7 +202,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= 5.5)
 				{
 					s_->playSound_Ch(Channels_["Deceleration"], TAXI_DECELERATE_10, -1);
-					ch_4_Vol_ = ch_3_Vol_; //recoge el valor del estado de aceleración actual
+					ch_4_Vol_ = ch_3_Vol_; //recoge el valor del estado de aceleraciï¿½n actual
 					s_->setVolumeSound(Channels_["Deceleration"], ch_4_Vol_);
 				}
 				//regular engine sound
@@ -252,7 +252,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 			if (ch_5KeyUp) {
 				ch_3KeyDown = false;
 				s_->playSound_Ch(Channels_["Deceleration"], TAXI_DECELERATE_10, -1);
-				ch_4_Vol_ = s_->getMIX_MAX_VOLUME(); //recoge el valor del estado de aceleración actual
+				ch_4_Vol_ = s_->getMIX_MAX_VOLUME(); //recoge el valor del estado de aceleraciï¿½n actual
 				s_->setVolumeSound(Channels_["Deceleration"], ch_4_Vol_);
 				ch_5KeyUp = false;
 			}

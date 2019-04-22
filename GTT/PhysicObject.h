@@ -3,8 +3,7 @@
 #include <Box2D/Box2D.h>
 #include "Game.h"
 
-class PhysicObject :
-	public LogicComponent
+class PhysicObject :public LogicComponent
 {
 public:
 	PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle = 0, Vector2D origin = Vector2D(0.5, 0.5));
@@ -13,6 +12,11 @@ public:
 
 	const b2Vec2 getOrigin();
 	b2Body* getBody();
+
+	void setSensor(bool sensor);
+	bool isSensor();
+
+	void setCollisions(int16 groupIndex = 0, uint16 category = 0x0000, uint16 mask = 0xFFFF);
 
 private:
 	b2Body* body_;

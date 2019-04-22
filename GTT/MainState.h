@@ -6,6 +6,8 @@
 #include "TileMap.h"
 #include "Money.h"
 #include "FollowGameObject.h"
+#include "Respawner.h"
+#include "Shop.h"
 
 class MainState :
 	public GameState
@@ -24,15 +26,12 @@ private:
 	TileMap *tilemap_;
 
 	// Vehicles
-	//Enemy* enemy1_;
+	Enemy* enemy1_;
 
 	//camera logic
 	FollowGameObject* cameraFollow;
 
 	// Systems
-	Money* moneySystem;
-
-	// UI
-	UI* UI_;
+	Respawner* respawner_;
 };
 

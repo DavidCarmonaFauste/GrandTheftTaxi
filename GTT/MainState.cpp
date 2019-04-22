@@ -28,13 +28,13 @@ void MainState::start()
 	
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
-	Vehicle::getInstance()->setPosition(Vector2D(1500, 1000)); 
+	Vehicle::getInstance()->setPosition(Vector2D(0, 0)); 
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
+	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	//Enemies
-	//...
-
+	enemy1_ = new Enemy(ENEMY1);
+	enemy1_->setPosition(Vector2D(-400, 200));
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
@@ -43,12 +43,10 @@ void MainState::start()
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 	
 	// Systems
-	moneySystem = new Money();
 	
 	// UI
-	UI_ = new UI();
-	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI_);
-	moneySystem->registerObserver(UI_);
+	
+	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
 	
 
 	//pushBack GameObj to list
@@ -56,8 +54,8 @@ void MainState::start()
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
-	stage_.push_back(moneySystem);
-	stage_.push_back(UI_);
+	stage_.push_back(UI::getInstance());
+	stage_.push_back(enemy1_);
 
 }
 
