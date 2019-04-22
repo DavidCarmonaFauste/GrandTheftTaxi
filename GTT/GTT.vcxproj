@@ -29,6 +29,7 @@
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
     <ClCompile Include="Dialogues.cpp" />
+    <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -91,6 +92,7 @@
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="Dialogues.h" />
+    <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
@@ -115,6 +117,7 @@
     <ClInclude Include="MpegState.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Phrases.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
