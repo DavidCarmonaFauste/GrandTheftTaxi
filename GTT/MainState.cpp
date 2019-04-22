@@ -24,7 +24,7 @@ MainState::~MainState() {
 void MainState::start()
 {
 	// Tilemap
-	tilemap_ = new TileMap(PATH_LEVEL_1);
+	//tilemap_ = new TileMap(PATH_LEVEL_1);
 	
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
@@ -52,7 +52,7 @@ void MainState::start()
 	
 
 	//pushBack GameObj to list
-	stage_.push_back(tilemap_);
+	//stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());

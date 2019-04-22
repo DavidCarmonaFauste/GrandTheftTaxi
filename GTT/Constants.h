@@ -134,25 +134,29 @@ const map <videoId, string> VIDEO_NEXTSTATE = {
 
 //SOUNDS
 const enum soundId {
-	DEFAULT_SOUND,
-	TAXI_START,	//TAXI MOVEMENT
+	//TAXI MOVEMENT
+	TAXI_START,	
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
 	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
 	TAXI_BACK_MOVING_FORWARD,
 	//buttons
-	CLIC_BUTTON_NEWGAME
+	CLIC_BUTTON_NEWGAME,
+
+	//Shoots
+	TURRET_NAME_SHOOT
 };
 const map<soundId, string> SOUND = {
-	{DEFAULT_SOUND, "../Assets/sounds/default.wav"},
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
 	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
 	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
 	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
-	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"}
+	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
+	{TURRET_NAME_SHOOT, "../Assets/sounds/Turrets/Gun_Shot.wav"},
+
 };
 
 

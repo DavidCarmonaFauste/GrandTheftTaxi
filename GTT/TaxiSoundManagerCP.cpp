@@ -20,6 +20,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	Channels_.insert(std::pair<string, int>("Deceleration", 4));
 	Channels_.insert(std::pair<string, int>("Fast", 5));
 	Channels_.insert(std::pair<string, int>("BackForward", 6));
+	Channels_.insert(std::pair<string, int>("shoot", 7));
 
 
 	ch_3KeyDown = ch_3KeyUp = ch_5KeyUp = ch_6_KeyDown = ch_6_KeyUp = keyBackDown_ = false;
