@@ -11,11 +11,11 @@ Shop::~Shop() {
 
 void Shop::beginCallback(b2Contact * contact) {
 	b2Body* body = phyO_->getBody();
-	b2Body* taxiBody = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* taxiBody = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() == taxiBody)
 		&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() == taxiBody)) {
-		Game::getInstance()->setState(NAME_SHOP_STATE);
+		//Game::getInstance()->setState(NAME_SHOP_STATE);
 	}
 }
 

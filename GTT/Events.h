@@ -22,9 +22,10 @@ enum event_type {
 
 	TRIGGER_EVENT,
 
-	EVENTS_LENGTH,
 	CLICK_BUTTON,
+
 	OVER_OBJECT,
+
 	NOT_OVER_OBJECT
 };
 

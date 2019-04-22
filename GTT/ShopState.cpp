@@ -8,12 +8,12 @@ ShopState::ShopState() {
 	//UI::getInstance()->setAmmoActive(false);
 	stage_.push_back(UI::getInstance());
 
-	refillButton_ = new Button(refillCallback);
-	stage_.push_back(refillButton_);
+	//refillButton_ = new Button(refillCallback);
+	//stage_.push_back(refillButton_);
 
 	Money::getInstance()->setCurrentMoney(100);
 
-	stage_.push_back(Reticule::GetInstance());
+	stage_.push_back(Reticule::getInstance());
 }
 
 ShopState::~ShopState() {
@@ -45,7 +45,7 @@ void ShopState::handleEvents(Uint32 deltaTime, SDL_Event & event) {
 }
 
 void ShopState::refillCallback() {
-	Health *h = Vehicle::GetInstance()->getHealthComponent();
+	Health *h = Vehicle::getInstance()->getHealthComponent();
 	Money *m = Money::getInstance();
 
 	// Exit if HP is at max or there is no money
@@ -53,7 +53,8 @@ void ShopState::refillCallback() {
 		return;
 
 	int money = m->getCurrentMoney();
-	int cost = FUEL_VALUE * (h->getMaxHealth() - h->getHealth());
+//	int cost = FUEL_VALUE * (h->getMaxHealth() - h->getHealth());
+	/*
 	if (money >= cost) {
 		m->setCurrentMoney(m->getCurrentMoney() - cost);
 		h->resetHealth();
@@ -61,6 +62,8 @@ void ShopState::refillCallback() {
 	else {
 		m->setCurrentMoney(0);
 		h->heal(money/FUEL_VALUE);
+		
 	}
+	*/
 }
 

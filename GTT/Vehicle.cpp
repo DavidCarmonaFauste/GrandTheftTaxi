@@ -147,6 +147,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 
 	// Physics
 	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
+	phyO_->setCollisions(0, TAXI_CATEGORY);
 	this->addLogicComponent(phyO_);
 
 	// Control

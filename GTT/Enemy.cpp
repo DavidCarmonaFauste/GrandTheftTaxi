@@ -2,7 +2,7 @@
 #include "Reticule.h"
 
 
-Enemy::Enemy(int x, int y, VehicleInfo r) :Car(x, y) {
+Enemy::Enemy(VehicleInfo r){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 

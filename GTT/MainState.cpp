@@ -24,13 +24,13 @@ MainState::~MainState() {
 void MainState::start()
 {
 	// Tilemap
-	tilemap_ = new TileMap(PATH_LEVEL_1);
+	//tilemap_ = new TileMap(PATH_LEVEL_1);
 	
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
-	Vehicle::getInstance()->setPosition(Vector2D(1500, 1000)); 
+	Vehicle::getInstance()->setPosition(Vector2D(0, 0)); 
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
+	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	//Enemies
 	//...
@@ -43,21 +43,18 @@ void MainState::start()
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 	
 	// Systems
-	moneySystem = new Money();
 	
 	// UI
-	UI_ = new UI();
-	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI_);
-	moneySystem->registerObserver(UI_);
+	
+	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
 	
 
 	//pushBack GameObj to list
-	stage_.push_back(tilemap_);
+	//stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
-	stage_.push_back(moneySystem);
-	stage_.push_back(UI_);
+	stage_.push_back(UI::getInstance());
 
 }
 

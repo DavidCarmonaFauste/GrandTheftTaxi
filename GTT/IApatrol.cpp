@@ -111,7 +111,7 @@ void IApatrol::AssignPlayerRoute(GameObject * o)
 {
 	vector<Node*>route;
 	int minDistance = -1;
-	Node* taxiNode = districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
+	Node* taxiNode = districtMap_->getNearestNode(Vehicle::getInstance()->getCenter());
 	districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
 	followProgress_ = 0;
 }
@@ -136,7 +136,7 @@ void IApatrol::FollowRoute()
 
 bool IApatrol::VehiclePosChanged()
 {
-	return followRoute_.back() != districtMap_->getNearestNode(Vehicle::GetInstance()->getCenter());
+	return followRoute_.back() != districtMap_->getNearestNode(Vehicle::getInstance()->getCenter());
 }
 
 bool IApatrol::OutOfRoute(vector<Node*> route, int progress)

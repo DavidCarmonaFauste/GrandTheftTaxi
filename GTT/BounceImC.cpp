@@ -11,7 +11,7 @@ void BounceImC::Impact(b2Contact* contact)
 {
 	if (o_->getPhysicsObject() != nullptr) {
 		b2Body* body = o_->getPhysicsObject()->getBody();
-		b2Body* taxiBody = Vehicle::GetInstance()->GetPhyO()->getBody();
+		b2Body* taxiBody = Vehicle::getInstance()->GetPhyO()->getBody();
 
 		if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() != taxiBody)
 			&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() != taxiBody)) {
