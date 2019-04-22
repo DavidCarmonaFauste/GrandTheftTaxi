@@ -64,7 +64,8 @@ void IApatrol::Go(GameObject * o)
 
 bool IApatrol::arrivedAtDestination(GameObject* o)
 {
-	return ((direction_.x < 0 && o->getCenter().x <= destination_.x)
+	return (direction_==Vector2D(0,0) 
+		|| (direction_.x < 0 && o->getCenter().x <= destination_.x)
 		|| (direction_.x > 0 && o->getCenter().x >= destination_.x)
 		|| (direction_.y < 0 && o->getCenter().y <= destination_.y)
 		|| (direction_.y > 0 && o->getCenter().y >= destination_.y));

@@ -33,8 +33,8 @@ void MainState::start()
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	//Enemies
-	//...
-
+	enemy1_ = new Enemy(ENEMY1);
+	enemy1_->setPosition(Vector2D(-400, 200));
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
@@ -55,6 +55,7 @@ void MainState::start()
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
 	stage_.push_back(UI::getInstance());
+	stage_.push_back(enemy1_);
 
 }
 
