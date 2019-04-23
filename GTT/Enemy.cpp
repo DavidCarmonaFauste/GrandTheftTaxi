@@ -6,7 +6,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(VehicleInfo r){
+Enemy::Enemy(VehicleInfo r, NodeMap* nmap){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
@@ -28,11 +28,11 @@ Enemy::Enemy(VehicleInfo r){
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
 	phyO_->getBody()->SetUserData(this);
-	//phyO_->getBody()->SetLinearDamping(2.0f);
-	//phyO_->getBody()->SetAngularDamping(2.0f);
 	addLogicComponent(phyO_);
 
 	//IA
+	routemap_ = nmap;
+	/*
 	Node* a = new Node(Vector2D(0, 0), "a");
 	Node* b = new Node(Vector2D(400, 0), "b");
 	Node* c = new Node(Vector2D(400, 400), "c");
@@ -50,32 +50,33 @@ Enemy::Enemy(VehicleInfo r){
 	route->push_back(b);
 	route->push_back(c);
 
-	routemap_.addNode(a);
-	routemap_.addNode(b);
-	routemap_.addNode(c);
-	routemap_.addNode(d);
-	routemap_.addNode(e);
-	routemap_.addNode(f);
-	routemap_.addNode(g);
-	routemap_.addNode(h);
-	routemap_.addNode(i);
-	routemap_.addNode(j);
 
-	routemap_.connectNodes(a, b);
-	routemap_.connectNodes(b, c);
-	routemap_.connectNodes(c, d);
-	routemap_.connectNodes(d, a);
-	routemap_.connectNodes(f, a);
-	routemap_.connectNodes(b, e);
-	routemap_.connectNodes(a, i);
-	routemap_.connectNodes(b, j);
-	routemap_.connectNodes(i, j);
-	routemap_.connectNodes(h, e);
-	routemap_.connectNodes(h, c);
-	routemap_.connectNodes(f, g);
-	routemap_.connectNodes(d, g);
-
-	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
+	routemap_->addNode(a);
+	routemap_->addNode(b);
+	routemap_->addNode(c);
+	routemap_->addNode(d);
+	routemap_->addNode(e);
+	routemap_->addNode(f);
+	routemap_->addNode(g);
+	routemap_->addNode(h);
+	routemap_->addNode(i);
+	routemap_->addNode(j);
+			
+	routemap_->connectNodes(a, b);
+	routemap_->connectNodes(b, c);
+	routemap_->connectNodes(c, d);
+	routemap_->connectNodes(d, a);
+	routemap_->connectNodes(f, a);
+	routemap_->connectNodes(b, e);
+	routemap_->connectNodes(a, i);
+	routemap_->connectNodes(b, j);
+	routemap_->connectNodes(i, j);
+	routemap_->connectNodes(h, e);
+	routemap_->connectNodes(h, c);
+	routemap_->connectNodes(f, g);
+	routemap_->connectNodes(d, g);
+	*/
+	patrolBehaviour_ = new IApatrol(GetPhyO(), routemap_, speed_);
 	addLogicComponent(patrolBehaviour_);
 	
 }

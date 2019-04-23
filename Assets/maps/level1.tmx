@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="2019.02.10" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="241">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="365">
  <tileset firstgid="1" name="buildings" tilewidth="32" tileheight="32" tilecount="255" columns="15">
   <image source="../tilesets/buildingsTilemap.png" width="480" height="544"/>
  </tileset>
@@ -437,7 +437,26 @@
   <object id="239" x="2112" y="2816" width="32" height="192"/>
   <object id="240" x="5408" y="2464" width="192" height="32"/>
  </objectgroup>
- <objectgroup color="#0bec70" id="4" name="Player">
+ <objectgroup color="#0000ff" id="7" name="AINodes">
+  <object id="354" x="2240" y="480">
+   <polygon points="0,0 -64,0 -64,64 0,64"/>
+  </object>
+  <object id="355" x="2816" y="480">
+   <polygon points="0,0 0,64 64,64 64,0"/>
+  </object>
+  <object id="356" x="2816" y="1440">
+   <polygon points="0,0 0,64 64,64 64,0"/>
+  </object>
+  <object id="363" x="2240" y="1440">
+   <polygon points="0,0 0,64 -64,64 -64,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#5500ff" id="8" name="Enemies">
+  <object id="364" x="2432" y="416">
+   <polygon points="0,0 0,64 64,64 64,0"/>
+  </object>
+ </objectgroup>
+ <objectgroup color="#0bec70" id="4" name="Player" visible="0">
   <object id="233" x="2112" y="416" width="128" height="128"/>
  </objectgroup>
 </map>

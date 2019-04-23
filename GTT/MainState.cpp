@@ -9,6 +9,7 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include "Reticule.h"
+#include "NodeMapsManager.h"
 
 
 
@@ -24,7 +25,9 @@ MainState::~MainState() {
 void MainState::start() {
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
-	
+
+	//NodeMaps
+	NodeMapsManager::getInstance()->addNodeMap("test", new NodeMap());
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
@@ -32,16 +35,18 @@ void MainState::start() {
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 	Vehicle::getInstance()->getCurrentTurret()->setTaxiSoundMnr(Vehicle::getInstance()->getTaxiSoundManagerCP());
 
-	//Enemies
-	enemy1_ = new Enemy(ENEMY1);
-	enemy1_->setPosition(Vector2D(-400, 200));
-
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
+	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
+	nmap->connectNodes(nmap->getNodes()[0], nmap->getNodes()[1]);
+
+	//Enemies
+	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("test"));
+	enemy1_->setPosition(Vehicle::getInstance()->getPosition() + Vector2D(100, 0));
 
 	// Camera positioning
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
@@ -69,6 +74,7 @@ void MainState::start() {
 void MainState::end()
 {
 }
+
 
 void MainState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (true);

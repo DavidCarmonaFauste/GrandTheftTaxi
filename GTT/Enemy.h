@@ -8,7 +8,7 @@ class Enemy :public Car
 {
 public:
 	Enemy();
-	Enemy(VehicleInfo r);
+	Enemy(VehicleInfo r, NodeMap* nmap);
 	virtual void Damage(double damage);
 	virtual void Die();
 	virtual void update(Uint32 deltaTime);
@@ -17,7 +17,7 @@ public:
 private:
 	bool bodyReadyToDestroy_;
 	IApatrol* patrolBehaviour_;
-	NodeMap routemap_;
+	NodeMap* routemap_;
 	int speed_;
 };
 

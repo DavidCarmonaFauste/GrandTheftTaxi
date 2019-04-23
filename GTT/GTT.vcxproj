@@ -57,6 +57,7 @@
     <ClCompile Include="MouseClickIC.cpp" />
     <ClCompile Include="MpegState.cpp" />
     <ClCompile Include="NodeMap.cpp" />
+    <ClCompile Include="NodeMapsManager.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="MouseClickIC.h" />
     <ClInclude Include="MpegState.h" />
     <ClInclude Include="NodeMap.h" />
+    <ClInclude Include="NodeMapsManager.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="PhysicObject.h" />
