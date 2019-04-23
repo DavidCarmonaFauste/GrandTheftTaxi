@@ -31,6 +31,7 @@
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="FollowMiddlePoint.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
