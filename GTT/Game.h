@@ -70,11 +70,11 @@ public:
 
 private:
 	
-	const int winWidth_ = 1280;
-	const int winHeight_ = 720;
+	const int winWidth_ = 1920;
+	const int winHeight_ = 1080;
 
-	const int cameraWidth = 1600;
-	const int cameraHeight = 900;
+	const int cameraWidth = 1920;
+	const int cameraHeight = 1080;
 
 	//SDL Elements
 	SDL_Renderer *renderer_;

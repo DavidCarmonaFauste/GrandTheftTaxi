@@ -2,6 +2,10 @@
 #include "Reticule.h"
 
 
+Enemy::Enemy()
+{
+}
+
 Enemy::Enemy(VehicleInfo r){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
