@@ -48,6 +48,7 @@ void TileMap::tmxToScene() {
 bool TileMap::processObject(string layerName, const tmx::Object &object) {
 	if (layerName == "Collisions") return processCollision(object);
 	if (layerName == "Player") return processPlayer(object);
+	if (layerName == "Gas") return processGas(object);
 }
 
 bool TileMap::processCollision(const tmx::Object &object) {
@@ -70,9 +71,9 @@ bool TileMap::processCollision(const tmx::Object &object) {
 }
 
 bool TileMap::processPlayer(const tmx::Object & object) {
-	Vector2D pos = Vector2D(object.getPosition().x * PHYSICS_SCALING_FACTOR,
-							object.getPosition().y * PHYSICS_SCALING_FACTOR);
-	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos, 0);
+	Vector2D pos = Vector2D(object.getPosition().x, object.getPosition().y);
+	Vehicle::getInstance()->setPosition(pos);
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos.Multiply(PHYSICS_SCALING_FACTOR), 0);
 
 	return true;
 }
