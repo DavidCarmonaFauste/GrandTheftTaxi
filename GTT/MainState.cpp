@@ -22,9 +22,6 @@ MainState::~MainState() {
 
 //start is called when GameStateMachine change state
 void MainState::start() {
-	// Tilemap
-	tilemap_ = new TileMap(PATH_LEVEL_1);
-
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 	
@@ -44,7 +41,8 @@ void MainState::start() {
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 	
-	
+	// Tilemap
+	tilemap_ = new TileMap(PATH_LEVEL_1);
 	
 	// Systems
 	//...

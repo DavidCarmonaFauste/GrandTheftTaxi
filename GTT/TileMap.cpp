@@ -1,4 +1,5 @@
 #include "TileMap.h"
+#include "Vehicle.h"
 
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
@@ -37,18 +38,19 @@ void TileMap::tmxToScene() {
 			const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 			const auto& objects = objectLayer.getObjects();
 			for (const auto& object : objects) {
-				processObject(layer->getName(), object);
+				if (processObject(layer->getName(), object)) break;
 			}
 		}
 	}
 	cout << "Info: map load finished\n";
 }
 
-void TileMap::processObject(string layerName, const tmx::Object &object) {
-	if (layerName == "Collisions") processCollision(object);
+bool TileMap::processObject(string layerName, const tmx::Object &object) {
+	if (layerName == "Collisions") return processCollision(object);
+	if (layerName == "Player") return processPlayer(object);
 }
 
-void TileMap::processCollision(const tmx::Object &object) {
+bool TileMap::processCollision(const tmx::Object &object) {
 	b2PolygonShape *shape = new b2PolygonShape();
 	b2FixtureDef fixDef;
 	tmx::FloatRect box = object.getAABB();
@@ -63,6 +65,20 @@ void TileMap::processCollision(const tmx::Object &object) {
 
 	phyO_->setCollisions(TILES_GROUP, TILE_CATEGORY);
 	phyO_->getBody()->GetFixtureList()->SetFriction(ENVIRONMENT_FRICTION);
+
+	return false;
+}
+
+bool TileMap::processPlayer(const tmx::Object & object) {
+	Vector2D pos = Vector2D(object.getPosition().x * PHYSICS_SCALING_FACTOR,
+							object.getPosition().y * PHYSICS_SCALING_FACTOR);
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos, 0);
+
+	return true;
+}
+
+bool TileMap::processGas(const tmx::Object & object) {
+	return false;
 }
 
 

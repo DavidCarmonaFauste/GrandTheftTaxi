@@ -25,8 +25,10 @@ private:
 	void tmxToScene();
 
 	// Helper functions to process each object layer
-	void processObject(string layerName, const tmx::Object &object);
-	void processCollision(const tmx::Object &object);
+	bool processObject(string layerName, const tmx::Object &object);
+	bool processCollision(const tmx::Object &object);
+	bool processPlayer(const tmx::Object &object);
+	bool processGas(const tmx::Object &object);
 
 	tmx::Map* tmxMap_;
 	PhysicObject* phyO_;
