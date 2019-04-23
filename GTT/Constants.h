@@ -112,12 +112,12 @@ const enum COLLISION_CATEGORY {
 //Constants Data
 const float PHYSICS_SCALING_FACTOR = 0.02f;
 const float DFLT_DAMPING = 1.5f;
-const float DFLT_ANG_DAMPING = 2.0f;
-const float HBRK_DAMPING = 0.7f;
+const float DFLT_ANG_DAMPING = 12.0f;
+const float HBRK_DAMPING = 0.5f;
 const float DFLT_LATERAL_VELOCITY = 0.1f;
-const float HBRK_LATERAL_VELOCITY = 1.01f;
-const float HBRK_SPEED_DECAY = 0.0004f;
-const float HBRK_LATERAL_RECOVER = 0.02f;
+const float HBRK_LATERAL_VELOCITY = 1.0f;
+const float HBRK_SPEED_DECAY = 1.2f;
+const float HBRK_LATERAL_RECOVER = 0.2f;
 
 const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
@@ -206,7 +206,7 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
 const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 9.5f, 5.0f, 2.5f, 0.8f };
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 3.0f, 0.8f };
 const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
