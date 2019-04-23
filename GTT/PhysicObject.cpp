@@ -1,9 +1,10 @@
 #include "PhysicObject.h"
 
 
-PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, Vector2D origin, bool createFixture) {
+PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, bool createFixture) {
 	visualSize_ = Vector2D(w, h);
-	origin_ = origin;
+
+	Vector2D halfSize = Vector2D(w / 2 * PHYSICS_SCALING_FACTOR, h / 2 * PHYSICS_SCALING_FACTOR);
 
 	// Body definition and instantiation
 	bodyDef_ = b2BodyDef();
@@ -15,11 +16,10 @@ PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 
 	// Fixture definition and instantiation
 	if (createFixture) {
 		fixtureDef_ = b2FixtureDef();
-		shape_.SetAsBox(w / 2 * PHYSICS_SCALING_FACTOR,
-						h / 2 * PHYSICS_SCALING_FACTOR,
-						origin_, angle);
+		shape_.SetAsBox(halfSize.x, halfSize.y);
 		fixtureDef_.shape = &shape_;
 		fixtureDef_.density = 1;
+		fixtureDef_.friction = DEFAULT_FRICTION;
 		body_->CreateFixture(&fixtureDef_);
 	}
 }
@@ -31,27 +31,16 @@ PhysicObject::~PhysicObject() {
 }
 
 void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
-	Vector2D nextPos = Vector2D(body_->GetPosition().x, body_->GetPosition().y);
-
+	Vector2D nextPos = body_->GetPosition();
 	nextPos.Divide(PHYSICS_SCALING_FACTOR);
 
-
-
-	if (abs(body_->GetLinearVelocity().Length()) < 0.5) {
-
+	if (abs(body_->GetLinearVelocity().Length()) < 0.5)
 		body_->SetLinearVelocity(Vector2D());
 
-	}
-
-
-
-	if (abs(body_->GetAngularVelocity()) < 0.5) {
-
+	if (abs(body_->GetAngularVelocity()) < 0.5)
 		body_->SetAngularVelocity(0);
 
-	}
-	o->setPosition(nextPos - (Vector2D(visualSize_.x * origin_.x, visualSize_.y * origin_.y)));
-
+	o->setPosition(nextPos - (Vector2D(visualSize_.x/2, visualSize_.y/2)));
 	o->setRotation(body_->GetAngle() * 180 / M_PI);
 }
 

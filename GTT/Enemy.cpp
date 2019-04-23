@@ -29,7 +29,6 @@ Enemy::Enemy(VehicleInfo r){
 	addLogicComponent(phyO_);
 
 	//IA
-	
 	Node* a = new Node(Vector2D(0, 0), "a");
 	Node* b = new Node(Vector2D(400, 0), "b");
 	Node* c = new Node(Vector2D(400, 400), "c");
@@ -72,9 +71,8 @@ Enemy::Enemy(VehicleInfo r){
 	routemap_.connectNodes(f, g);
 	routemap_.connectNodes(d, g);
 
-
 	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
-	addLogicComponent(patrolBehaviour_);
+	//addLogicComponent(patrolBehaviour_);
 	
 }
 

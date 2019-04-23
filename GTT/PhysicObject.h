@@ -6,7 +6,7 @@
 class PhysicObject :public LogicComponent
 {
 public:
-	PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle = 0, Vector2D origin = Vector2D(0.5, 0.5), bool createFixture = true);
+	PhysicObject(b2BodyType type, int w, int h, int x, int y, bool createFixture = true);
 	virtual ~PhysicObject();
 	virtual void update(GameObject* o, Uint32 deltaTime);
 

@@ -16,7 +16,7 @@ TileMap::TileMap(string path) {
 	mapSprite_->setAutoSize(false);
 	addRenderComponent(mapSprite_);
 
-	phyO_ = new PhysicObject(b2_staticBody, 0, 0, 0, 0, 0, Vector2D(0, 0), false);
+	phyO_ = new PhysicObject(b2_staticBody, 0, 0, 0, 0, false);
 	tmxToScene();
 }
 
@@ -60,6 +60,9 @@ void TileMap::processCollision(const tmx::Object &object) {
 											 pos.y*PHYSICS_SCALING_FACTOR + size.y), 0);
 	fixDef.shape = shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
+
+	phyO_->setCollisions(TILES_GROUP, TILE_CATEGORY);
+	phyO_->getBody()->GetFixtureList()->SetFriction(ENVIRONMENT_FRICTION);
 }
 
 
