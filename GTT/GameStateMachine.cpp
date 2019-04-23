@@ -39,6 +39,8 @@ void GameStateMachine::initStates() {
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
 	// Main game
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+	// Shop state
+	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
 	
 	
 	//SE DESCARTA PROVISIONALMENTE LOS ESTADOS QUE USEN FFMPEG lib. 

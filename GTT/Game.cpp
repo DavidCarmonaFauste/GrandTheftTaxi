@@ -26,12 +26,16 @@ Game::Game() {
 	// SDL_TTF initialization
 	TTF_Init();
 
+	//mouse can't exit the screen
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
+	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
-
+	
 	world_ = new b2World(b2Vec2(0, 0));
 
 	world_->SetContactListener(CustomContactListener::getInstance());

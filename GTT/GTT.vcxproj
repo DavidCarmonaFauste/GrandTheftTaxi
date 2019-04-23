@@ -31,6 +31,8 @@
     <ClCompile Include="CursorLC.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="ExplosiveImC.h" />
     <ClInclude Include="FollowGameObject.h" />
@@ -161,7 +165,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

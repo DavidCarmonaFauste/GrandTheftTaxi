@@ -27,7 +27,6 @@ void MainState::start() {
 	
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
-	Vehicle::getInstance()->setPosition(Vector2D(100, 100)); 
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
@@ -40,10 +39,16 @@ void MainState::start() {
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
-	
+
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
-	
+
+	// Camera positioning
+	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
+	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth()/2,
+						  Game::getInstance()->getCamera(GAME_CAMERA)->getHeight()/2);
+	Game::getInstance()->getCamera(GAME_CAMERA)->setPosition(cameraPos);
+
 	// Systems
 	//...
 

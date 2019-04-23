@@ -83,7 +83,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 		if (targetLateralVelocity > DFLT_LATERAL_VELOCITY)
 			targetLateralVelocity -= (HBRK_LATERAL_RECOVER * deltaTime / 100);
 		else
-			targetLateralVelocity = DFLT_LATERAL_VELOCITY;
+		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
@@ -105,8 +105,8 @@ void InputMovement::steeringWheel() {
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -2* v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 2* v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -1.6* v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 1.6* v_->GetTurnSpeed();
 		}
 		else {
 			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
