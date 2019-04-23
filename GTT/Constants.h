@@ -117,6 +117,7 @@ const float HBRK_DAMPING = 0.7f;
 const float DFLT_LATERAL_VELOCITY = 0.1f;
 const float HBRK_LATERAL_VELOCITY = 1.01f;
 const float HBRK_SPEED_DECAY = 0.0004f;
+const float HBRK_LATERAL_RECOVER = 0.02f;
 
 const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;

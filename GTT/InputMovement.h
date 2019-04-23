@@ -14,11 +14,11 @@ private:
 	KeysScheme k_;
 	Vehicle* v_;
 	//Input booleans
-	bool forwardPressed_;
-	bool backwardPressed_;
-	bool rightTurnPressed_;
-	bool leftTurnPressed_;
-	bool handBrakePressed_;
+	bool forwardPressed_ = false;
+	bool backwardPressed_ = false;
+	bool rightTurnPressed_ = false;
+	bool leftTurnPressed_ = false;
+	bool handBrakePressed_ = false;
 
 	float targetLateralVelocity = 0;
 	float targetDamping = 1;

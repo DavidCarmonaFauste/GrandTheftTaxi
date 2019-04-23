@@ -4,11 +4,6 @@ InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
 	k_ = k;
 	v_ = v;
-	//Input booleans
-	forwardPressed_ = false;
-	backwardPressed_ = false;
-	rightTurnPressed_ = false;
-	leftTurnPressed_ = false;
 
 	targetDamping = DFLT_DAMPING;
 	targetLateralVelocity = DFLT_LATERAL_VELOCITY;
@@ -35,7 +30,6 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, BACK_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-
 
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
@@ -86,7 +80,10 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	// Handbrake
 	if (!handBrakePressed_) {
 		targetDamping = DFLT_DAMPING;
-		if (targetLateralVelocity > 0)targetLateralVelocity -= (DFLT_LATERAL_VELOCITY * deltaTime / 100);
+		if (targetLateralVelocity > DFLT_LATERAL_VELOCITY)
+			targetLateralVelocity -= (HBRK_LATERAL_RECOVER * deltaTime / 100);
+		else
+			targetLateralVelocity = DFLT_LATERAL_VELOCITY;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {

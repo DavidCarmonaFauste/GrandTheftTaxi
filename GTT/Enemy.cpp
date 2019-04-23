@@ -72,7 +72,7 @@ Enemy::Enemy(VehicleInfo r){
 	routemap_.connectNodes(d, g);
 
 	patrolBehaviour_ = new IApatrol(GetPhyO(), &routemap_, speed_);
-	//addLogicComponent(patrolBehaviour_);
+	addLogicComponent(patrolBehaviour_);
 	
 }
 
