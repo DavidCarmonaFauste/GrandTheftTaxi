@@ -25,9 +25,9 @@ const struct VehicleInfo {
 	string leftTurnPath;
 	int width;
 	int height;
-	float velMax;
-	float velBackwardMax;
-	float turnSpeed;
+	float velMax; //5
+	float velBackwardMax; //6 
+	float turnSpeed; //7
 	float acceleration;
 };
 
@@ -206,7 +206,7 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
 const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 3.0f, 0.8f };
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
@@ -278,6 +278,9 @@ const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Ti
 const int VOL_CHANNEL_2 = 90; //regular engine
 const int VOL_CHANNEL_3 = 40; //aceleration
 const int VOL_CHANNEL_6 = 60; //BackForward
+const double POR_VEL_MIN_ = 0.15;
+const double POR_VEL_MIN_2_ = 0.2;
+const double POR_VEL_MIN_3_ = 0.9;
 
 
 #endif // !constants_define

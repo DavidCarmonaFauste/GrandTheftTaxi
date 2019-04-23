@@ -52,7 +52,7 @@ void Vehicle::EquipTurret(Turret * turret)
 		turrets_[currentTurret_] = turret;
 		Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 		turrets_[currentTurret_]->AttachToVehicle(this);
-		//turrets_[currentTurret_]->registerObserver(smLC_);
+		turrets_[currentTurret_]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
 	}
 	else {
 		cout << "maximo numero de torretas alcanzado" << endl;

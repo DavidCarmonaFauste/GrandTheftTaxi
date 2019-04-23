@@ -147,8 +147,6 @@ void Turret::AttachToVehicle(Car * car)
 		addInputComponent(Vehicle::getInstance()->GetShootIC());
 		addLogicComponent(Vehicle::getInstance()->GetShootIC());
 	}
-	
-
 }
 		
 
