@@ -10,7 +10,7 @@ enum event_type {
 	HEALTH_CHANGED,
 	MONEY_CHANGED,
 	RESPAWNED,
-
+	//Vehicle sound management
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
 	BACK_MOVING_FORWARD,
@@ -21,12 +21,13 @@ enum event_type {
 	EVENTS_LENGTH,
 
 	TRIGGER_EVENT,
-
+	//Buttons management
 	CLICK_BUTTON,
-
 	OVER_OBJECT,
+	NOT_OVER_OBJECT,
 
-	NOT_OVER_OBJECT
+	//Proyectile Sounds management
+	TAXI_SHOOT
 };
 
 struct Event {
@@ -101,6 +102,13 @@ struct NotMouseOverObj : public Event {
 		objIndex_ = objIndex;
 	}
 	int objIndex_;
+};
+
+struct TaxiShootEvent : public Event {
+	TaxiShootEvent(Observable* sender, int shootId) : Event(sender, TAXI_SHOOT) {
+		shootId_ = shootId;
+	}
+	int shootId_;
 };
 
 

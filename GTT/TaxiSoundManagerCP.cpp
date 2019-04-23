@@ -20,7 +20,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	Channels_.insert(std::pair<string, int>("Deceleration", 4));
 	Channels_.insert(std::pair<string, int>("Fast", 5));
 	Channels_.insert(std::pair<string, int>("BackForward", 6));
-	Channels_.insert(std::pair<string, int>("shoot", 7));
+	Channels_.insert(std::pair<string, int>("shoot", 7)); //all shoots
 
 
 	ch_3KeyDown = ch_3KeyUp = ch_5KeyUp = ch_6_KeyDown = ch_6_KeyUp = keyBackDown_ = false;
@@ -280,6 +280,17 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		break;
 	}
 
+				//----------------------------------------------------//
+	case TAXI_SHOOT: {
+		TaxiShootEvent TaxiShootEvent_= static_cast<TaxiShootEvent&>(e);
+		if(TaxiShootEvent_.shootId_ == 1){
+			s_->playSound_Ch(Channels_["Shoot"], TURRET_SHOTGUN_SHOOT, 0);
+		}
+		else if (TaxiShootEvent_.shootId_ == 2) {}
+		else if (TaxiShootEvent_.shootId_ == 3) {}
+
+		break;
+	}
 
 
 	default:

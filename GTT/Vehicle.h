@@ -57,6 +57,8 @@ public:
 	virtual void update(Uint32 time);
 
 	virtual bool receiveEvent(Event& e);
+
+	TaxiSoundManagerCP* getTaxiSoundManagerCP();
 	
 
 	private:

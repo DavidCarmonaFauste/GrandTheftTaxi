@@ -4,6 +4,7 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include <stack>
+#include "TaxiSoundManagerCP.h"
 
 class Animation;
 class ShootComponent;
@@ -34,6 +35,14 @@ public:
 	virtual bool isReloading();
 	virtual bool isAutomatic();
 	virtual ~Turret();
+
+	virtual int getCrrActionShoot();
+
+	void setTaxiSoundMnr(TaxiSoundManagerCP* tx);
+	TaxiSoundManagerCP* getTaxiSoundMnr();
+
+
+
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
 	int maxAmmo_;//capacidad del cargador
@@ -57,13 +66,18 @@ protected:
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Car* car_;//coche al que esta pegada la torreta
+
 	ProyectileInfo normalB;
 	int defaultNormalDMG_;
 	ProyectileInfo specialB;
 	int defaultSpecialDMG_;
+	int crr_ActionShoot_; //sound management in ShootIC
+
 	Container sparkleEffect_;
 	Animation* sparkleanim_;
 	Container shotEffect_;
 	Animation* shotanim_;
+
+	TaxiSoundManagerCP* txSmCp_;
 };
 

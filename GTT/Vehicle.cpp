@@ -99,6 +99,11 @@ bool Vehicle::receiveEvent(Event & e) {
 	return true;
 }
 
+TaxiSoundManagerCP * Vehicle::getTaxiSoundManagerCP()
+{
+	return smLC_;
+}
+
 void Vehicle::render(Uint32 time) {
 	Container::render(time);
 
@@ -127,6 +132,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_->loadAnimation(r.idlePath, "default");
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
+	//sprite_->playAnimation("default");
 
 	// Health
 	health_ = new Health(TAXI_HP);
