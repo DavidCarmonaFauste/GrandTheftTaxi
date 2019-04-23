@@ -99,16 +99,6 @@ int Turret::getCrrActionShoot()
 	return crr_ActionShoot_;
 }
 
-void Turret::setTaxiSoundMnr(TaxiSoundManagerCP * tx)
-{
-	txSmCp_ = tx;
-}
-
-TaxiSoundManagerCP * Turret::getTaxiSoundMnr()
-{
-	return txSmCp_;
-}
-
 
 void Turret::update(Uint32 deltaTime)
 {
@@ -182,6 +172,9 @@ void Turret::Shoot()
 				lastTimeShot_ = SDL_GetTicks();
 			}
 
+			//send msg tye
+			TaxiShootEvent e(this, crr_ActionShoot_); //send msg_type and capture idProyectileShoot
+			broadcastEvent(e);
 			if(!shotanim_->isAnimationPlaying("shot"))
 				shotanim_->playAnimation("shot", 3.0f, false);
 			

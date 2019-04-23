@@ -29,9 +29,9 @@ void MainState::start() {
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->setPosition(Vector2D(100, 100)); 
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::getInstance()->getCurrentTurret()->setTaxiSoundMnr(Vehicle::getInstance()->getTaxiSoundManagerCP());
+	
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-	Vehicle::getInstance()->getCurrentTurret()->setTaxiSoundMnr(Vehicle::getInstance()->getTaxiSoundManagerCP());
+	
 
 	//Enemies
 	enemy1_ = new Enemy(ENEMY1);

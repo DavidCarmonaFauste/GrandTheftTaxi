@@ -20,7 +20,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	Channels_.insert(std::pair<string, int>("Deceleration", 4));
 	Channels_.insert(std::pair<string, int>("Fast", 5));
 	Channels_.insert(std::pair<string, int>("BackForward", 6));
-	Channels_.insert(std::pair<string, int>("shoot", 7)); //all shoots
+	//Channels_.insert(std::pair<string, int>("shoot", 7)); //all shoots
 
 
 	ch_3KeyDown = ch_3KeyUp = ch_5KeyUp = ch_6_KeyDown = ch_6_KeyUp = keyBackDown_ = false;
@@ -46,11 +46,13 @@ void TaxiSoundManagerCP::start()
 void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 {
 
+	cout << "Vel. Max. Aceleration: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
+
 	//Stop Sounds Management
 	//el veh�culo no sobrepasa la velocidad de 8.4 seg�n conf. por defecto
 
 	//if have considerable velocity and Taxi_acelerate is playing
-	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
+	/*if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
 		s_->stopSound(Channels_["Aceleration"]);
 		if (DEBUG_)
 			cout << "Vel. Max. Aceleration: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
@@ -67,14 +69,14 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() <= 2.8 && (s_->isSoundPlaying(Channels_["BackForward"])) && !keyBackDown_) {
 		keyBackDown_ = false;
 		s_->stopSound(Channels_["BackForward"]);
-	}
+	}*/
 
 
 	//----------------------------------------------------//
 
 	//Volume Management
 	//increase the volume of the acceleration until max aceleration velocity
-	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
+	/*if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
 
 		if (ch_3_Vol_ < s_->getMIX_MAX_VOLUME()) {
 			ch_3_Vol_ += 4;
@@ -96,7 +98,7 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 			ch_6_Vol_ += 10;
 			s_->setVolumeSound(Channels_["BackForward"], ch_6_Vol_);
 		}
-	}
+	}*/
 
 }
 
@@ -275,22 +277,22 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				s_->setVolumeSound(Channels_["Regular"], ch_2_Vol_);
 			}
 
-		}
+		}	
 
 		break;
 	}
 
 				//----------------------------------------------------//
-	case TAXI_SHOOT: {
+	/*case TAXI_SHOOT: {
 		TaxiShootEvent TaxiShootEvent_= static_cast<TaxiShootEvent&>(e);
 		if(TaxiShootEvent_.shootId_ == 1){
-			s_->playSound_Ch(Channels_["Shoot"], TURRET_SHOTGUN_SHOOT, 0);
+			s_->playSound_Ch(0, TURRET_SHOTGUN_SHOOT, 0);
 		}
-		else if (TaxiShootEvent_.shootId_ == 2) {}
-		else if (TaxiShootEvent_.shootId_ == 3) {}
+		//else if (TaxiShootEvent_.shootId_ == 2) {}
+		//else if (TaxiShootEvent_.shootId_ == 3) {}
 
 		break;
-	}
+	}*/
 
 
 	default:

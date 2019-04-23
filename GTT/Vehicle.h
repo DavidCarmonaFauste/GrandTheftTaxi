@@ -47,7 +47,6 @@ public:
 
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
-	virtual TaxiSoundManagerCP* GetTxSoundManager();
 	virtual void EquipTurret(Turret* turret);
 	virtual void ChangeTurret();
 	Turret* getCurrentTurret();
@@ -57,8 +56,6 @@ public:
 	virtual void update(Uint32 time);
 
 	virtual bool receiveEvent(Event& e);
-
-	TaxiSoundManagerCP* getTaxiSoundManagerCP();
 	
 
 	private:
