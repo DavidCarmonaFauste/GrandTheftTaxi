@@ -15,7 +15,7 @@ void Shop::beginCallback(b2Contact * contact) {
 
 	if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() == taxiBody)
 		&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() == taxiBody)) {
-		//Game::getInstance()->setState(NAME_SHOP_STATE);
+		Game::getInstance()->setState(NAME_SHOP_STATE);
 	}
 }
 

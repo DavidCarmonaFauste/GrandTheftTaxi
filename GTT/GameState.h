@@ -10,7 +10,6 @@ class GameState
 protected:
 	list<GameObject*> stage_;
 
-
 public:
 
 	GameState(){}
@@ -34,5 +33,9 @@ public:
 	}
 	virtual void render(Uint32 deltaTime) const { for (GameObject* o : stage_) o->render(deltaTime); }
 
+
+	void addGameObject(GameObject *gameObject) {
+		stage_.push_back(gameObject);
+	};
 };
 
