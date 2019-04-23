@@ -7,6 +7,7 @@
 class Enemy :public Car
 {
 public:
+	Enemy();
 	Enemy(VehicleInfo r);
 	virtual void Damage(double damage);
 	virtual void Die();

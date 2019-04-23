@@ -5,7 +5,6 @@ EnemyPool* EnemyPool::instance_ = nullptr;
 
 EnemyPool::EnemyPool()
 {
-
 }
 Enemy * EnemyPool::getUnusedEnemy()
 {
@@ -37,7 +36,7 @@ Enemy * EnemyPool::addEnemy(Vector2D pos, Vector2D vel, ProyectileInfo prType)
 	Enemy* e;
 	e = getUnusedEnemy();
 	if (e != nullptr) {
-		e->ChangeBulletType(prType);
+		//e->ChangeBulletType(prType);
 		/*e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*PHYSICS_SCALING_FACTOR, pos.y*PHYSICS_SCALING_FACTOR), 0);
 		e->GetPhyO()->getBody()->SetLinearVelocity(Vector2D(vel.x * e->GetSpeed(), vel.y* e->GetSpeed()));
 		e->SetBirth(SDL_GetTicks());*/

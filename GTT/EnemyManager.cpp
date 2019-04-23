@@ -13,7 +13,7 @@ EnemyManager::~EnemyManager()
 
 Enemy * EnemyManager::Get_Enemy(int position)
 {
-	//return 	enemyList[position];
+	return 	enemyList.back();
 }
 
 void EnemyManager::Add_Enemy(int x, int y, VehicleInfo r)
