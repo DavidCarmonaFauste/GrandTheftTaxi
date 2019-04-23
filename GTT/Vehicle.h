@@ -3,6 +3,7 @@
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
+#include "DialoguesManager.h"
 
 using namespace std;
 
@@ -60,6 +61,9 @@ public:
 	ControlType* control_;
 
 	TaxiSoundManagerCP* smLC_;
+
+	//Dialogos
+	DialoguesManager* dm_;
 
 	static const int MAXTURRETS = 4;
 

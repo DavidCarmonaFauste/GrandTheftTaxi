@@ -1,5 +1,6 @@
 #pragma once
 #include "InputComponent.h"
+#include "DialoguesManager.h"
 
 class MouseClickIC :
 	public InputComponent {
@@ -16,5 +17,7 @@ private:
 	bool clickEvent_;
 	vector <textureInfo> buttonType_;
 	int buttonTypeSize_;
+
+	DialoguesManager* dm_;
 };
 

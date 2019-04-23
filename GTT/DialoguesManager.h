@@ -5,17 +5,24 @@
 
 class DialoguesManager
 {
+	DialoguesManager* instance = nullptr;
 public:
-	DialoguesManager();
+	DialoguesManager* getInstance();
 	~DialoguesManager();
 	void eventoDisparo(int time);
 	void update(int deltaTime);
+	DialoguesManager();
 
 private:
-	int time = 0;
-	Dialogues* d = nullptr;
+	
+	int time;
+	Dialogues* d;
 	bool english = false;
-	bool displaying = false;
-	int maxTime = 0;
+	bool displaying;
+	int maxTime;
+	Font* font;
+	SDL_Color color;
+	Vector2D pos;
+	int w, h;
 };
 

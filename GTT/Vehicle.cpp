@@ -54,6 +54,10 @@ Vehicle::Vehicle(int x, int y, VehicleInfo r, KeysScheme k):Car(x,y) {
 	this->addLogicComponent(smLC_);
 
 	control_->registerObserver(smLC_);
+
+	dm_ = new DialoguesManager();
+	
+	
 }
 
 
@@ -125,7 +129,7 @@ void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 
 void Vehicle::update(Uint32 time) {	
 	Container::update(time);
-
+	dm_->update(time);
 	if (turrets_[currentTurret_] != nullptr)
 		turrets_[currentTurret_]->update(time);
 }

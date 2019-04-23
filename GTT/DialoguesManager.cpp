@@ -4,8 +4,33 @@
 
 DialoguesManager::DialoguesManager()
 {
+	time = 0;
+	displaying = false;
+	maxTime = 0;
+
+	font = new Font(FONT_LATO, 60);
+	color ={ 12,35,34,1 };
+	pos = Vector2D(200, 200);
+	w = 100;
+	h = 50;
+	string txt = "";
+	d = new Dialogues(font,txt,color,pos,w,h);
 }
 
+
+DialoguesManager * DialoguesManager::getInstance()
+{
+	if (this != nullptr) {
+		if (instance == nullptr) {
+			instance = new DialoguesManager();
+		}
+		return instance;
+	}
+	else {
+		return new DialoguesManager();
+
+	}
+}
 
 DialoguesManager::~DialoguesManager()
 {
@@ -13,20 +38,19 @@ DialoguesManager::~DialoguesManager()
 
 void DialoguesManager::eventoDisparo(int time)
 {
-	Font* font = new Font(FONT_LATO, 60);
-	SDL_Color color =  SDL_Color({ 1,1,1,1 });
-	d = new Dialogues(font,disparo[0].first,color,Vector2D(200,200),100,50);
+	
+	d->setText(disparo[0].first);
 	displaying = true;
-	maxTime = time;
+	maxTime = time; 
 }
 
 void DialoguesManager::update(int deltaTime)
 {
 	if (displaying) {
+		d->render();
 		time += deltaTime;
 		if (time > maxTime) {
-			delete d;
-			d = nullptr;
+			d->setText("");
 			displaying = false;
 			maxTime = 0;
 			time = 0;
