@@ -27,9 +27,14 @@ Turret::Turret(WeaponInfo w)
 	perfRelSeg_ = w.perfRelSeg;
 	chargeTime_ = w.chargeTime;
 	normalB = w.normalB;
+	normalB.idShoot = 1; //iD capture for TaxiShootEvent in ShootIC
 	defaultNormalDMG_ = normalB.damage;
 	specialB = w.specialB;
+	specialB.idShoot = 2; //iD capture for TaxiShootEvent in ShootIC
 	defaultSpecialDMG_ = specialB.damage;
+
+	crr_ActionShoot_ = -1; //default. 
+
 	path_ = w.idlePath;
 	animationpath_ = w.shootPath;
 	reticulesprite_ = w.reticuleSprite;
@@ -76,6 +81,35 @@ Turret::Turret(WeaponInfo w)
 	}
 }
 
+Turret::~Turret()
+{
+	delete followC_; followC_ = nullptr;
+	delete shC_; shC_ = nullptr;
+	delete SPshC_; SPshC_ = nullptr;
+	delete animC_; animC_ = nullptr;
+
+	while (!magazine_->empty()) {
+		magazine_->pop();
+	}
+	magazine_ = nullptr;
+}
+
+int Turret::getCrrActionShoot()
+{
+	return crr_ActionShoot_;
+}
+
+void Turret::setTaxiSoundMnr(TaxiSoundManagerCP * tx)
+{
+	txSmCp_ = tx;
+}
+
+TaxiSoundManagerCP * Turret::getTaxiSoundMnr()
+{
+	return txSmCp_;
+}
+
+
 void Turret::update(Uint32 deltaTime)
 {
 	if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
@@ -85,10 +119,8 @@ void Turret::update(Uint32 deltaTime)
 		}
 	}
 		
-
 	sparkleEffect_.update(deltaTime);
 	shotEffect_.update(deltaTime);
-
 	
 	if (Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
 		Reticule::getInstance()->ChangeReticule(reticulesprite_);
@@ -137,14 +169,16 @@ void Turret::Shoot()
 		int a = SDL_GetTicks() - lastTimeShot_;
 		if (a >= cadence_) {
 			if (charged_) {
+				crr_ActionShoot_ = specialB.idShoot; //asign int for capture in ShootIC and play sound
 				specialB.damage = magazine_->top()*defaultSpecialDMG_;
-				SPshC_->shoot(specialB);
+				SPshC_->shoot(specialB);				
 				lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 				charged_ = false;
 			}
 			else {
+				crr_ActionShoot_ = normalB.idShoot; //asign int for capture in ShootIC and play sound
 				normalB.damage = magazine_->top()*defaultNormalDMG_;
-				shC_->shoot(normalB);
+				shC_->shoot(normalB);	
 				lastTimeShot_ = SDL_GetTicks();
 			}
 
@@ -253,15 +287,4 @@ bool Turret::isAutomatic()
 	return automatic_;
 }
 
-Turret::~Turret()
-{
-	delete followC_; followC_ = nullptr;
-	delete shC_; shC_ = nullptr;
-	delete SPshC_; SPshC_ = nullptr;
-	delete animC_; animC_ = nullptr;
 
-	while (!magazine_->empty()) {
-		magazine_->pop();
-	}
-	magazine_ = nullptr;
-}

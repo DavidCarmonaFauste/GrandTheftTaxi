@@ -45,6 +45,7 @@ const struct ProyectileInfo {
 	double lifeTime;
 	double speed;
 	ImpactMode imp = STANDARD;
+	int idShoot;
 };
 
 const enum FireMode {
@@ -165,7 +166,7 @@ const enum soundId {
 	CLIC_BUTTON_NEWGAME,
 
 	//Shoots
-	TURRET_NAME_SHOOT
+	TURRET_SHOTGUN_SHOOT 
 };
 const map<soundId, string> SOUND = {
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
@@ -175,7 +176,7 @@ const map<soundId, string> SOUND = {
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
 	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
-	{TURRET_NAME_SHOOT, "../Assets/sounds/Turrets/Gun_Shot.wav"},
+	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/Gun_Shot.wav"},
 
 };
 

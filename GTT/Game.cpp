@@ -59,9 +59,9 @@ void Game::handleEvents(Uint32 deltaTime) {
 	while (SDL_PollEvent(&event) && !exit_) {
 		// Call the handleEvents of the cameras and the state
 		if (event.type == SDL_KEYDOWN) {
-			/*if (event.key.keysym.sym == SDLK_ESCAPE) {
+			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
-			}*/
+			}
 			
 			if (event.key.keysym.sym == SDLK_f) {
 				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);

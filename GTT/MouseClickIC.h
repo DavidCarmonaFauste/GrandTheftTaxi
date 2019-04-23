@@ -4,7 +4,6 @@
 class MouseClickIC :
 	public ControlType {
 
-
 public:
 	MouseClickIC(int key = SDL_BUTTON_LEFT);
 	virtual ~MouseClickIC ();
