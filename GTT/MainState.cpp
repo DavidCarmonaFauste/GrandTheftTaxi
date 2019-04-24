@@ -29,9 +29,9 @@ void MainState::start() {
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::getInstance()->getCurrentTurret()->setTaxiSoundMnr(Vehicle::getInstance()->getTaxiSoundManagerCP());
+	
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-	Vehicle::getInstance()->getCurrentTurret()->setTaxiSoundMnr(Vehicle::getInstance()->getTaxiSoundManagerCP());
+	
 
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());

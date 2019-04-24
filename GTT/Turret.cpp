@@ -27,13 +27,14 @@ Turret::Turret(WeaponInfo w)
 	perfRelSeg_ = w.perfRelSeg;
 	chargeTime_ = w.chargeTime;
 	normalB = w.normalB;
-	normalB.idShoot = 1; //iD capture for TaxiShootEvent in ShootIC
+	normalB.idShoot = TURRET_SHOTGUN_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
 	defaultNormalDMG_ = normalB.damage;
+
 	specialB = w.specialB;
-	specialB.idShoot = 2; //iD capture for TaxiShootEvent in ShootIC
+	specialB.idShoot = TURRET_SHOTGUN_SPECIAL_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
 	defaultSpecialDMG_ = specialB.damage;
 
-	crr_ActionShoot_ = -1; //default. 
+	crr_ActionShoot_ = TURRET_DEFAULT_SOUND; //empty bullets. default sound
 
 	path_ = w.idlePath;
 	animationpath_ = w.shootPath;
@@ -99,16 +100,6 @@ int Turret::getCrrActionShoot()
 	return crr_ActionShoot_;
 }
 
-void Turret::setTaxiSoundMnr(TaxiSoundManagerCP * tx)
-{
-	txSmCp_ = tx;
-}
-
-TaxiSoundManagerCP * Turret::getTaxiSoundMnr()
-{
-	return txSmCp_;
-}
-
 
 void Turret::update(Uint32 deltaTime)
 {
@@ -157,8 +148,6 @@ void Turret::AttachToVehicle(Car * car)
 		addInputComponent(Vehicle::getInstance()->GetShootIC());
 		addLogicComponent(Vehicle::getInstance()->GetShootIC());
 	}
-	
-
 }
 		
 
@@ -182,6 +171,9 @@ void Turret::Shoot()
 				lastTimeShot_ = SDL_GetTicks();
 			}
 
+			//send msg tye
+			TaxiShootEvent e(this, crr_ActionShoot_); //send msg_type and capture idProyectileShoot
+			broadcastEvent(e);
 			if(!shotanim_->isAnimationPlaying("shot"))
 				shotanim_->playAnimation("shot", 3.0f, false);
 			
@@ -189,6 +181,11 @@ void Turret::Shoot()
 			animC_->playAnimation("idle", 3.5f, false);
 			ResetChargeProgress();
 		}
+	}
+	else {
+		crr_ActionShoot_ = TURRET_DEFAULT_SOUND;
+		TaxiShootEvent e(this, crr_ActionShoot_); //empty bullets 
+		broadcastEvent(e);
 	}
 }
 

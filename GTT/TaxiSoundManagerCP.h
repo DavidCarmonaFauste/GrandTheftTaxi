@@ -39,9 +39,7 @@ private:
 
 	bool keyBackDown_;
 
-	bool DEBUG_;
-
-	
+	bool DEBUG_;	
 
 };
 

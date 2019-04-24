@@ -4,7 +4,7 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include <stack>
-#include "TaxiSoundManagerCP.h"
+#include "Observable.h"
 
 class Animation;
 class ShootComponent;
@@ -12,7 +12,7 @@ class AimComponent;
 
 
 //clase abstracta, padre de los diferentes tipos de torreta
-class Turret : public Container
+class Turret : public Container, public Observable
 {
 public:
 	Turret(WeaponInfo w);
@@ -38,8 +38,7 @@ public:
 
 	virtual int getCrrActionShoot();
 
-	void setTaxiSoundMnr(TaxiSoundManagerCP* tx);
-	TaxiSoundManagerCP* getTaxiSoundMnr();
+
 
 
 
@@ -78,6 +77,6 @@ protected:
 	Container shotEffect_;
 	Animation* shotanim_;
 
-	TaxiSoundManagerCP* txSmCp_;
+
 };
 

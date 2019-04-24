@@ -25,9 +25,9 @@ const struct VehicleInfo {
 	string leftTurnPath;
 	int width;
 	int height;
-	float velMax;
-	float velBackwardMax;
-	float turnSpeed;
+	float velMax; //5
+	float velBackwardMax; //6 
+	float turnSpeed; //7
 	float acceleration;
 };
 
@@ -160,7 +160,7 @@ const map <videoId, string> VIDEO_NEXTSTATE = {
 //SOUNDS
 const enum soundId {
 	//TAXI MOVEMENT
-	TAXI_START,	
+	TAXI_START,
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
 	TAXI_FASTDRIVE,
@@ -170,7 +170,10 @@ const enum soundId {
 	CLIC_BUTTON_NEWGAME,
 
 	//Shoots
-	TURRET_SHOTGUN_SHOOT 
+	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA UNA VAR currentIdShoot en la constructora de Turret
+	TURRET_SHOTGUN_SHOOT,
+	TURRET_SHOTGUN_SPECIAL_SHOOT
+
 };
 const map<soundId, string> SOUND = {
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
@@ -180,7 +183,9 @@ const map<soundId, string> SOUND = {
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
 	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
-	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/Gun_Shot.wav"},
+	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
+	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
+	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
 
 };
 
@@ -206,7 +211,7 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
 const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 3.0f, 0.8f };
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
@@ -231,15 +236,23 @@ const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 const string MAINMENURETICULE = "gun";
 
 /**************************************/
+//GAME WINDOWS
+const int WIN_WIDTH = 1920;
+const int WIN_HEIGHT = 1080;
+const int CAMERA_WIDHT = 1920;
+const int CAMERA_HEIGHT = 1080;
+
+
+
 //MAIN MENU STATE
 
 //atributos para gestionar propiedades de los estruct. Evitar redundancia
 //background
-const int backGround_widht = 1900; //se está usando el tamaño de la cam. MainMenuState.cpp
-const int backGround_height = 900;
+const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
+const int backGround_height = CAMERA_HEIGHT;
 //Buttons
-const Vector2D NG_Button_position_ = { 700.0, 600.0 };
-const Vector2D EG_Button_position_ = { 700.0, 700.0 };
+const Vector2D NG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
+const Vector2D EG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
 const int Button_Width_ = 250;
 const int Button_Height_ = 150;
 //taxi
@@ -278,6 +291,9 @@ const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Ti
 const int VOL_CHANNEL_2 = 90; //regular engine
 const int VOL_CHANNEL_3 = 40; //aceleration
 const int VOL_CHANNEL_6 = 60; //BackForward
+const double POR_VEL_MIN_ = 0.15;
+const double POR_VEL_MIN_2_ = 0.2;
+const double POR_VEL_MIN_3_ = 0.9;
 
 
 #endif // !constants_define

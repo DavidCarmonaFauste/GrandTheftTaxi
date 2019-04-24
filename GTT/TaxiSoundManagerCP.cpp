@@ -29,8 +29,11 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	ch_3_Vol_ = VOL_CHANNEL_3;
 	ch_6_Vol_ = VOL_CHANNEL_6;
 
+	//double f = v_->GetMaxSpeed() * POR_VEL_MIN_3_;
+	//double t = v_->GetMaxSpeed() * POR_VEL_MIN_2_;
 	//init SoundManager
 	start();
+
 }
 
 void TaxiSoundManagerCP::start()
@@ -47,24 +50,22 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 {
 
 	//Stop Sounds Management
-	//el veh�culo no sobrepasa la velocidad de 8.4 seg�n conf. por defecto
-
 	//if have considerable velocity and Taxi_acelerate is playing
-	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
+	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= v_->GetMaxSpeed() && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
 		s_->stopSound(Channels_["Aceleration"]);
 		if (DEBUG_)
 			cout << "Vel. Max. Aceleration: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
 
 	}
 	//if velocity is slow and deceleration is playing
-	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 1.2 && (s_->isSoundPlaying(Channels_["Deceleration"]))) {
+	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < (v_->GetMaxSpeed() * POR_VEL_MIN_) && (s_->isSoundPlaying(Channels_["Deceleration"]))) {
 		s_->stopSound(Channels_["Deceleration"]);
 
 		if (DEBUG_)
 			cout << "Vel.Min.Aceleration: " << v_->GetPhyO()->getBody()->GetLinearVelocity().Length() << endl;
 	}
 	//is velocity is fast and backForward is playing and forward keyUp is true
-	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() <= 2.8 && (s_->isSoundPlaying(Channels_["BackForward"])) && !keyBackDown_) {
+	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() <= (v_->GetMaxSpeed() * POR_VEL_MIN_2_) && (s_->isSoundPlaying(Channels_["BackForward"])) && !keyBackDown_) {
 		keyBackDown_ = false;
 		s_->stopSound(Channels_["BackForward"]);
 	}
@@ -74,7 +75,7 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 
 	//Volume Management
 	//increase the volume of the acceleration until max aceleration velocity
-	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < 7.0 && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
+	if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() < (v_->GetMaxSpeed() * POR_VEL_MIN_) && (s_->isSoundPlaying(Channels_["Aceleration"]))) {
 
 		if (ch_3_Vol_ < s_->getMIX_MAX_VOLUME()) {
 			ch_3_Vol_ += 4;
@@ -83,7 +84,7 @@ void TaxiSoundManagerCP::update(GameObject * o, Uint32 deltaTime)
 		if (DEBUG_)
 			cout << "Volume of " << Channels_["Aceleration"] << ": " << ch_3_Vol_ << endl;
 	}
-	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > 1.3 && (s_->isSoundPlaying(Channels_["Deceleration"]))) {
+	else if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() > (v_->GetMaxSpeed() * POR_VEL_MIN_2_) && (s_->isSoundPlaying(Channels_["Deceleration"]))) {
 		if (ch_4_Vol_ >= 20) {
 			ch_4_Vol_ -= 6;
 			s_->setVolumeSound(Channels_["Deceleration"], ch_4_Vol_);
@@ -199,7 +200,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		else if (channelEvent.channel_ == 3) {
 			if (ch_3KeyUp) {
 				//deceleration sound
-				if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= 5.5)
+				if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= (v_->GetMaxSpeed() * POR_VEL_MIN_3_))
 				{
 					s_->playSound_Ch(Channels_["Deceleration"], TAXI_DECELERATE_10, -1);
 					ch_4_Vol_ = ch_3_Vol_; //recoge el valor del estado de aceleraci�n actual
@@ -275,7 +276,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				s_->setVolumeSound(Channels_["Regular"], ch_2_Vol_);
 			}
 
-		}
+		}	
 
 		break;
 	}
@@ -283,12 +284,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				//----------------------------------------------------//
 	case TAXI_SHOOT: {
 		TaxiShootEvent TaxiShootEvent_= static_cast<TaxiShootEvent&>(e);
-		if(TaxiShootEvent_.shootId_ == 1){
-			s_->playSound_Ch(Channels_["Shoot"], TURRET_SHOTGUN_SHOOT, 0);
-		}
-		else if (TaxiShootEvent_.shootId_ == 2) {}
-		else if (TaxiShootEvent_.shootId_ == 3) {}
-
+		s_->playSound_Ch(Channels_["shoot"], (soundId)TaxiShootEvent_.shootId_, 0);
 		break;
 	}
 

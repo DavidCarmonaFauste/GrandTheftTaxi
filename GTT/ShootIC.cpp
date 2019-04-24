@@ -16,17 +16,7 @@ void ShootIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & ev
 			held_ = true;
 
 			Turret* t = static_cast<Turret*>(o);
-			if (t != nullptr) {
-				int i;//capture index of observer. only for test
-				if (!this->isRegistered(t->getTaxiSoundMnr(), i)) {
-					this->registerObserver(t->getTaxiSoundMnr());
-				}
-				t->Shoot();
-				if (t->getCrrActionShoot() != -1) {
-					TaxiShootEvent e(this, t->getCrrActionShoot()); //send msg_type and capture idProyectileShoot
-					broadcastEvent(e);
-				}
-			}		
+			t->Shoot();
 		}
 	} 
 	else if (event.type == SDL_MOUSEBUTTONUP) {

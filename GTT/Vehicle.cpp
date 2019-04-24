@@ -27,7 +27,6 @@ Vehicle::~Vehicle() {
 			turrets_[i] = nullptr;
 		}
 	}
-	//delete[] turrets_; 
 }
 
 
@@ -41,10 +40,7 @@ ShootIC * Vehicle::GetShootIC()
 	return shIC_;
 }
 
-TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
-{
-	return smLC_;
-}
+
 
 void Vehicle::EquipTurret(Turret * turret)
 {
@@ -56,6 +52,7 @@ void Vehicle::EquipTurret(Turret * turret)
 		turrets_[currentTurret_] = turret;
 		Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 		turrets_[currentTurret_]->AttachToVehicle(this);
+		turrets_[currentTurret_]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
 	}
 	else {
 		cout << "maximo numero de torretas alcanzado" << endl;
@@ -99,10 +96,6 @@ bool Vehicle::receiveEvent(Event & e) {
 	return true;
 }
 
-TaxiSoundManagerCP * Vehicle::getTaxiSoundManagerCP()
-{
-	return smLC_;
-}
 
 void Vehicle::render(Uint32 time) {
 	Container::render(time);
