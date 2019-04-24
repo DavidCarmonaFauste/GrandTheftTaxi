@@ -15,7 +15,8 @@ Enemy::Enemy(VehicleInfo r){
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->playAnimation("idle");
+	//sprite_->playAnimation("idle");
+	sprite_->setAnimation("idle");
 	this->addRenderComponent(sprite_);
 
 	// Health
