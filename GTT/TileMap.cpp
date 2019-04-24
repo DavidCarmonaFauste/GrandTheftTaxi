@@ -51,7 +51,7 @@ bool TileMap::processObject(string layerName, const tmx::Object &object) {
 	if (layerName == "Collisions") return processCollision(object);
 	if (layerName == "Player") return processPlayer(object);
 	if (layerName == "Gas") return processGas(object);
-	if (layerName == "AINodes") return processNodes(object);
+	else return processNodes(object, layerName);
 }
 
 bool TileMap::processCollision(const tmx::Object &object) {
@@ -88,10 +88,11 @@ bool TileMap::processGas(const tmx::Object & object) {
 	return false;
 }
 
-bool TileMap::processNodes(const tmx::Object & object)
+bool TileMap::processNodes(const tmx::Object & object, string layerName)
 {
-	Node* node = new Node(Vector2D(object.getPosition().x, object.getPosition().y), "n");
-	NodeMapsManager::getInstance()->getNodeMap("test")->addNode(node);
+	if (!NodeMapsManager::getInstance()->NodeMapExists(layerName)) NodeMapsManager::getInstance()->addNodeMap(layerName);
+	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width/2, object.getPosition().y + object.getAABB().height/2));
+	NodeMapsManager::getInstance()->getNodeMap(layerName)->addNode(node, object.getName());
 	return false;
 }
 

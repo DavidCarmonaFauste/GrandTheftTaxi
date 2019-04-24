@@ -2,7 +2,7 @@
 #include "PhysicObject.h"
 #include "Vehicle.h"
 
-IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, vector<Node*>* route)
+IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, vector<Node*> route)
 {
 	phyO_ = ph;
 	districtMap_ = districtMap;
@@ -12,7 +12,7 @@ IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, ve
 	paused_ = false;
 	patrolSpeed_ = patrolSpeed;
 	patrolProgress_ = 0;
-	patrol_ = (patrolRoute_ != nullptr);
+	patrol_ = false;
 }
 
 void IApatrol::update(GameObject* o, Uint32 deltaTime)
@@ -42,9 +42,11 @@ void IApatrol::setPause(bool pause)
 
 void IApatrol::setPatrol(bool patrol)
 {
-	patrol_ = patrol;
-	patrolProgress_ = 0;
-	followProgress_ = 0;
+	if (patrol_ != patrol && !patrolRoute_.empty()) {
+		patrol_ = patrol;
+		patrolProgress_ = 0;
+		followProgress_ = 0;
+	}
 }
 
 
@@ -73,9 +75,11 @@ bool IApatrol::arrivedAtDestination(GameObject* o)
 
 void IApatrol::setNextDestination(Node* n)
 {
-	destination_ = n->position_;
-	if(currentNode_!=nullptr) lastNode_ = currentNode_;
-	currentNode_ = n;
+	if (n != nullptr) {
+		destination_ = n->position_;
+		if (currentNode_ != nullptr) lastNode_ = currentNode_;
+		currentNode_ = n;
+	}
 
 	/*if (currentNode_ == nullptr) {//beggining node
 		currentNode_ = districtMap_->getNearestNode(o->getCenter());
@@ -113,7 +117,7 @@ void IApatrol::AssignPlayerRoute(GameObject * o)
 	vector<Node*>route;
 	int minDistance = -1;
 	Node* taxiNode = districtMap_->getNearestNode(Vehicle::getInstance()->getCenter());
-	districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
+	setPatrol(!districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance));
 	followProgress_ = 0;
 }
 
@@ -131,8 +135,8 @@ void IApatrol::FollowPlayer(GameObject * o)
 
 void IApatrol::FollowRoute()
 {
-	setNextDestination((*patrolRoute_)[patrolProgress_]);
-	patrolProgress_ = (patrolProgress_ + 1) % (*patrolRoute_).size();
+	setNextDestination(patrolRoute_[patrolProgress_]);
+	patrolProgress_ = (patrolProgress_ + 1) % patrolRoute_.size();
 }
 
 bool IApatrol::VehiclePosChanged()

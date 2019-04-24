@@ -6,7 +6,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(VehicleInfo r, NodeMap* nmap){
+Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
@@ -76,9 +76,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap){
 	routemap_->connectNodes(f, g);
 	routemap_->connectNodes(d, g);
 	*/
-	patrolBehaviour_ = new IApatrol(GetPhyO(), routemap_, speed_);
+	patrolBehaviour_ = new IApatrol(GetPhyO(), routemap_, speed_, route);
 	addLogicComponent(patrolBehaviour_);
-	
 }
 
 void Enemy::Damage(double damage)

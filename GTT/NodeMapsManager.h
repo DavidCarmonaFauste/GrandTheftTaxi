@@ -26,7 +26,8 @@ public:
 		return instance_.get();
 	}
 
-	void addNodeMap(string key, NodeMap* nodemap);
+	void addNodeMap(string key, NodeMap* nodemap=new NodeMap());
+	bool NodeMapExists(string key);
 	NodeMap* getNodeMap(string key);
 
 private:

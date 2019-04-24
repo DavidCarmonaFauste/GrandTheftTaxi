@@ -6,15 +6,18 @@ NodeMap::NodeMap()
 {
 }
 
-void NodeMap::addNode(Node* n)
+void NodeMap::addNode(Node* n, string id)
 {
-	if(!nodeExists(n))
-		nodes.push_back(n);
+	if (!nodeExists(id))
+		nodes[id] = n;
 }
 
-void NodeMap::connectNodes(Node * n1, Node * n2)
+
+void NodeMap::connectNodes(string id1, string id2)
 {
-	if (nodeExists(n1) && nodeExists(n2)) {
+	if (nodeExists(id1) && nodeExists(id2)) {
+		Node* n1 = nodes[id1];
+		Node* n2 = nodes[id2];
 		if (n2->position_.x == n1->position_.x) {
 			if (n2->position_.y < n1->position_.y) {
 				n1->connections_[NORTH] = n2;
@@ -41,31 +44,39 @@ void NodeMap::connectNodes(Node * n1, Node * n2)
 }
 
 
-bool NodeMap::nodeExists(Node * node)
+bool NodeMap::nodeExists(string id)
 {
 	for (auto o : nodes) {
-		if (o == node) return true;
+		if (o.first == id) return true;
 	}
 	return false;
 }
 
+bool NodeMap::nodeExists(Node* n)
+{
+	for (auto o : nodes) {
+		if (o.second == n) return true;
+	}
+	return false;
+}
 Node * NodeMap::getNearestNode(Vector2D position)
 {
-	Node* ret=nodes[0];
+	Node* ret=nullptr;
 	int minDistance = -1;
 	int distance = 0;
 	for (auto n : nodes) {
-		distance = (pow(n->position_.x - position.x, 2) + pow(n->position_.y - position.y, 2));
+		distance = (pow(n.second->position_.x - position.x, 2) + pow(n.second->position_.y - position.y, 2));
 		if (minDistance == -1 || distance < minDistance) {
 			minDistance =distance;
-			ret = n;
+			ret = n.second;
 		}
 	}
 	return ret;
 }
 
-void NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)
+bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)
 {
+	if (!nodeExists(destiny)) return false;
 	for (auto c : current->connections_) {
 		if (c != nullptr && !hasNode(currentroute, c)) {
 			distance += getDistance(current, c);
@@ -87,9 +98,11 @@ void NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, ve
 			}
 		}
 	}
+	if (currentroute.empty()) return false;
+	else return true;
 }
 
-vector<Node*> NodeMap::getNodes()
+map<string, Node*> NodeMap::getNodes()
 {
 	return nodes;
 }

@@ -8,7 +8,7 @@ class Enemy :public Car
 {
 public:
 	Enemy();
-	Enemy(VehicleInfo r, NodeMap* nmap);
+	Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route);
 	virtual void Damage(double damage);
 	virtual void Die();
 	virtual void update(Uint32 deltaTime);

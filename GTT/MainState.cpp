@@ -26,8 +26,6 @@ void MainState::start() {
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 
-	//NodeMaps
-	NodeMapsManager::getInstance()->addNodeMap("test", new NodeMap());
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
@@ -42,10 +40,21 @@ void MainState::start() {
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
 	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
-	nmap->connectNodes(nmap->getNodes()[0], nmap->getNodes()[1]);
+	nmap->connectNodes("Node1", "Node2");
+	nmap->connectNodes("Node4", "Node2");
+	nmap->connectNodes("Node1", "Node3");
+	nmap->connectNodes("Node3", "Node4");
 
+	
 	//Enemies
-	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("test"));
+	vector<Node*> route;
+	route.push_back(nmap->getNodes()["Node1"]);
+	route.push_back(nmap->getNodes()["Node3"]);
+	route.push_back(nmap->getNodes()["Node4"]);
+	route.push_back(nmap->getNodes()["Node2"]);
+
+
+	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("test"), route);
 	enemy1_->setPosition(Vehicle::getInstance()->getPosition() + Vector2D(100, 0));
 
 	// Camera positioning
@@ -63,11 +72,11 @@ void MainState::start() {
 	
 	//pushBack GameObj to list
 	stage_.push_back(tilemap_);
-	stage_.push_back(Reticule::getInstance());
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(enemy1_);
-	//stage_.push_back(UI::getInstance());
+	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
+	stage_.push_back(Reticule::getInstance());
 	
 }
 

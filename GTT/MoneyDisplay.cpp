@@ -18,7 +18,7 @@ MoneyDisplay::~MoneyDisplay() {
 
 void MoneyDisplay::setMoney(int money) {
 	textSprite_->setText(to_string(money) + currencyString_);
-	reposition();
+	reposition(); 
 }
 
 void MoneyDisplay::reposition() {

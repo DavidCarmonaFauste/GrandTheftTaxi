@@ -5,8 +5,8 @@
 
 ReloadingDisplay::ReloadingDisplay()
 {
-	setPosition(Vector2D(Game::getInstance()->getWindowWidth()-40, 30));
-	setWidth(200); setHeight(50);
+	setPosition(Vector2D(Game::getInstance()->getCamera(UI_CAMERA)->getWidth()*0.9, Game::getInstance()->getCamera(UI_CAMERA)->getHeight() * 0.1));
+	setWidth(150); setHeight(35);
 
 	background = new Sprite("./../Assets/sprites/ReloadBarBackground.png");
 	background->setCamera(UI_CAMERA);
@@ -54,14 +54,13 @@ ReloadingDisplay::~ReloadingDisplay()
 
 void ReloadingDisplay::update(Uint32 deltaTime)
 {
-	if(active_)
-		setReloadingPercentage();
+	setReloadingPercentage();
 }
 
 void ReloadingDisplay::render(Uint32 deltaTime)
 {
-	if (active_)
-		Container::render(deltaTime);
+	Container::render(deltaTime);
+	
 }
 
 bool ReloadingDisplay::isReloading()

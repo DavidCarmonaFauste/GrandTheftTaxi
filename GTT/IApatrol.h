@@ -9,7 +9,7 @@ class IApatrol :
 	public LogicComponent
 {
 public:
-	IApatrol(PhysicObject* ph, NodeMap* districtMap, int patrolSpeed, vector<Node*>* route=nullptr);
+	IApatrol(PhysicObject* ph, NodeMap* districtMap, int patrolSpeed, vector<Node*> route = vector<Node*>());
 	virtual void update(GameObject* o, Uint32 deltaTime);
 	void setPause(bool pause);
 	void setPatrol(bool patrol);
@@ -25,7 +25,7 @@ private:
 	bool VehiclePosChanged();
 	bool OutOfRoute(vector<Node*> route, int progress);
 	NodeMap* districtMap_;
-	vector<Node*>* patrolRoute_;
+	vector<Node*> patrolRoute_;
 	vector<Node*> followRoute_;
 	int followProgress_;
 	int patrolProgress_;

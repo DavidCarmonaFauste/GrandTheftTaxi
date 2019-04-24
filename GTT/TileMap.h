@@ -29,7 +29,7 @@ private:
 	bool processCollision(const tmx::Object &object);
 	bool processPlayer(const tmx::Object &object);
 	bool processGas(const tmx::Object &object);
-	bool processNodes(const tmx::Object &object);
+	bool processNodes(const tmx::Object &object, string layerName);
 
 	tmx::Map* tmxMap_;
 	PhysicObject* phyO_;

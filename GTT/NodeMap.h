@@ -1,6 +1,8 @@
 #pragma once
 #include "Vector2D.h"
 #include <vector>
+#include <map>
+
 enum Connections {
 	NORTH,
 	SOUTH,
@@ -9,15 +11,13 @@ enum Connections {
 };
 class Node {
 public:
-	Node(Vector2D pos, string id) {
-		id_ = id;
+	Node(Vector2D pos) {
 		position_ = pos;
 		for (int i = 0; i < 4; i++) {
 			connections_[i] = nullptr;
 		}
 	}
 	Vector2D position_;
-	string id_;
 	Node* connections_[4];
 	bool isDeadEnd() {
 		int count = 0;
@@ -34,15 +34,16 @@ class NodeMap
 {
 public:
 	NodeMap();
-	void addNode(Node* n);
-	void connectNodes(Node* n1, Node* n2);
-	bool nodeExists(Node* node);
+	void addNode(Node* n, string id);
+	void connectNodes(string id1, string id2);
+	bool nodeExists(string id);
+	bool nodeExists(Node* n);
 	Node* getNearestNode(Vector2D position);
-	void FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
-	vector<Node*> getNodes();
+	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
+	map<string, Node*> getNodes();
 	virtual ~NodeMap();
 private:
-	vector<Node*>nodes;
+	map<string, Node*>nodes;
 	bool hasNode(vector<Node*>&v, Node* n);
 	int getDistance(Node* a, Node* b);
 };
