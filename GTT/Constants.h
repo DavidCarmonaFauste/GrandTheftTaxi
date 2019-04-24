@@ -236,15 +236,23 @@ const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 const string MAINMENURETICULE = "gun";
 
 /**************************************/
+//GAME WINDOWS
+const int WIN_WIDTH = 1920;
+const int WIN_HEIGHT = 1080;
+const int CAMERA_WIDHT = 1920;
+const int CAMERA_HEIGHT = 1080;
+
+
+
 //MAIN MENU STATE
 
 //atributos para gestionar propiedades de los estruct. Evitar redundancia
 //background
-const int backGround_widht = 1900; //se está usando el tamaño de la cam. MainMenuState.cpp
-const int backGround_height = 900;
+const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
+const int backGround_height = CAMERA_HEIGHT;
 //Buttons
-const Vector2D NG_Button_position_ = { 700.0, 600.0 };
-const Vector2D EG_Button_position_ = { 700.0, 700.0 };
+const Vector2D NG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
+const Vector2D EG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
 const int Button_Width_ = 250;
 const int Button_Height_ = 150;
 //taxi
