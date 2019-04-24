@@ -43,7 +43,8 @@ public:
 	map<string, Node*> getNodes();
 	virtual ~NodeMap();
 private:
-	map<string, Node*>nodes;
+	map<string, Node*>nodes;//contiene todos los nodos del distrito con un identificador
+	map<string, vector<Node*>> patrols;//diccionario de patrullas posibles del distrito
 	bool hasNode(vector<Node*>&v, Node* n);
 	int getDistance(Node* a, Node* b);
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "NodeMap.h"
 #include <map>
+#include <fstream>
 
 using namespace std;
 
@@ -28,9 +29,12 @@ public:
 
 	void addNodeMap(string key, NodeMap* nodemap=new NodeMap());
 	bool NodeMapExists(string key);
+	void ReadNodeMapsInfo();
 	NodeMap* getNodeMap(string key);
 
 private:
-	map<string, NodeMap*>* nodemaps_;
+	map<string, NodeMap*> nodemaps_;
+	fstream nodemapsFile_;
+	void ConnectNodes(string d);
 };
 

@@ -39,12 +39,10 @@ void MainState::start() {
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
-	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
-	nmap->connectNodes("Node1", "Node2");
-	nmap->connectNodes("Node4", "Node2");
-	nmap->connectNodes("Node1", "Node3");
-	nmap->connectNodes("Node3", "Node4");
+	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
 
+
+	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
 	
 	//Enemies
 	vector<Node*> route;
