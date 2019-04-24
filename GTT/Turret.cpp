@@ -27,13 +27,14 @@ Turret::Turret(WeaponInfo w)
 	perfRelSeg_ = w.perfRelSeg;
 	chargeTime_ = w.chargeTime;
 	normalB = w.normalB;
-	normalB.idShoot = 1; //iD capture for TaxiShootEvent in ShootIC
+	normalB.idShoot = TURRET_SHOTGUN_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
 	defaultNormalDMG_ = normalB.damage;
+
 	specialB = w.specialB;
-	specialB.idShoot = 2; //iD capture for TaxiShootEvent in ShootIC
+	specialB.idShoot = TURRET_SHOTGUN_SPECIAL_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
 	defaultSpecialDMG_ = specialB.damage;
 
-	crr_ActionShoot_ = -1; //default. 
+	crr_ActionShoot_ = TURRET_DEFAULT_SOUND; //empty bullets. default sound
 
 	path_ = w.idlePath;
 	animationpath_ = w.shootPath;
@@ -180,6 +181,11 @@ void Turret::Shoot()
 			animC_->playAnimation("idle", 3.5f, false);
 			ResetChargeProgress();
 		}
+	}
+	else {
+		crr_ActionShoot_ = TURRET_DEFAULT_SOUND;
+		TaxiShootEvent e(this, crr_ActionShoot_); //empty bullets 
+		broadcastEvent(e);
 	}
 }
 

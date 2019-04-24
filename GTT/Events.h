@@ -105,8 +105,8 @@ struct NotMouseOverObj : public Event {
 };
 
 struct TaxiShootEvent : public Event {
-	TaxiShootEvent(Observable* sender, int shootId) : Event(sender, TAXI_SHOOT) {
-		shootId_ = shootId;
+	TaxiShootEvent(Observable* sender, int sID) : Event(sender, TAXI_SHOOT) {
+		shootId_ = sID;
 	}
 	int shootId_;
 };

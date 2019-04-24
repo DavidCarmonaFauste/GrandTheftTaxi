@@ -160,7 +160,7 @@ const map <videoId, string> VIDEO_NEXTSTATE = {
 //SOUNDS
 const enum soundId {
 	//TAXI MOVEMENT
-	TAXI_START,	
+	TAXI_START,
 	TAXI_IDLE,
 	TAXI_ACCELERATE_01,
 	TAXI_FASTDRIVE,
@@ -170,7 +170,10 @@ const enum soundId {
 	CLIC_BUTTON_NEWGAME,
 
 	//Shoots
-	TURRET_SHOTGUN_SHOOT 
+	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA UNA VAR currentIdShoot en la constructora de Turret
+	TURRET_SHOTGUN_SHOOT,
+	TURRET_SHOTGUN_SPECIAL_SHOOT
+
 };
 const map<soundId, string> SOUND = {
 	{TAXI_START, "../Assets/sounds/Arranque.wav"},
@@ -180,7 +183,9 @@ const map<soundId, string> SOUND = {
 	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
 	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
-	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/Gun_Shot.wav"},
+	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
+	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
+	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
 
 };
 

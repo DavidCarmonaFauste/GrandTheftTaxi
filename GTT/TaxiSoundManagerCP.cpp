@@ -200,7 +200,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		else if (channelEvent.channel_ == 3) {
 			if (ch_3KeyUp) {
 				//deceleration sound
-				if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= 5.5)
+				if (v_->GetPhyO()->getBody()->GetLinearVelocity().Length() >= (v_->GetMaxSpeed() * POR_VEL_MIN_3_))
 				{
 					s_->playSound_Ch(Channels_["Deceleration"], TAXI_DECELERATE_10, -1);
 					ch_4_Vol_ = ch_3_Vol_; //recoge el valor del estado de aceleraci�n actual
@@ -284,12 +284,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 				//----------------------------------------------------//
 	case TAXI_SHOOT: {
 		TaxiShootEvent TaxiShootEvent_= static_cast<TaxiShootEvent&>(e);
-		if(TaxiShootEvent_.shootId_ == 1){
-			s_->playSound_Ch(0, TURRET_SHOTGUN_SHOOT, 0);
-		}
-		//else if (TaxiShootEvent_.shootId_ == 2) {}
-		//else if (TaxiShootEvent_.shootId_ == 3) {}
-
+		s_->playSound_Ch(Channels_["shoot"], (soundId)TaxiShootEvent_.shootId_, 0);
 		break;
 	}
 
