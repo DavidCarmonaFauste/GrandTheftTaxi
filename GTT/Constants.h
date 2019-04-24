@@ -251,21 +251,21 @@ const int CAMERA_HEIGHT = 1080;
 const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
 const int backGround_height = CAMERA_HEIGHT;
 //Buttons
-const Vector2D NG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
-const Vector2D EG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
-const int Button_Width_ = 250;
-const int Button_Height_ = 150;
+const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 100, (CAMERA_HEIGHT - 350)};
+const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 100, (CAMERA_HEIGHT - 200)};
+const int Button_Width_ = 300;
+const int Button_Height_ = 200;
 //taxi
-const Vector2D Taxi_position_ = { 650, 345 };
-const int Taxi_Width_ = 350;
-const int Taxi_Height_ = 300;
+const Vector2D Taxi_position_ = {(CAMERA_WIDHT / 2) - 150, (CAMERA_HEIGHT / 2) - 100};
+const int Taxi_Width_ = 375;
+const int Taxi_Height_ = 325;
 //Game title
-const Vector2D title_position_ = { 500, 200 };
+const Vector2D title_position_ = {(CAMERA_WIDHT / 2) - 275, (CAMERA_HEIGHT / 2) - 225 };
 const int title_Width_ = 700;
 const int title_Height_ = 200;
 
 //Background
-const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, 1900, 900 };
+const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };
 //Buttons
 	//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
 const vector <textureInfo> NEW_GAME_BUTTON = {
