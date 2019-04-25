@@ -27,11 +27,11 @@ Turret::Turret(WeaponInfo w)
 	perfRelSeg_ = w.perfRelSeg;
 	chargeTime_ = w.chargeTime;
 	normalB = w.normalB;
-	normalB.idShoot = TURRET_SHOTGUN_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
+	normalB.idShoot = w.normalB.idShoot;
 	defaultNormalDMG_ = normalB.damage;
 
 	specialB = w.specialB;
-	specialB.idShoot = TURRET_SHOTGUN_SPECIAL_SHOOT; //sound id for capture in TaxiSoundManager recieve eventType
+	specialB.idShoot = w.specialB.idShoot;
 	defaultSpecialDMG_ = specialB.damage;
 
 	crr_ActionShoot_ = TURRET_DEFAULT_SOUND; //empty bullets. default sound
@@ -51,14 +51,14 @@ Turret::Turret(WeaponInfo w)
 	sparkleEffect_.setWidth(50);
 	sparkleEffect_.setHeight(50);
 	sparkleEffect_.addRenderComponent(sparkleanim_);
-	sparkleanim_->loadAnimation("../Assets/sprites/sparkle_anim.png", "sparkle", 3);
+	sparkleanim_->loadAnimation("../Assets/sprites/Turrets/sparkle_anim.png", "sparkle", 3);
 	sparkleEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
 	shotanim_ = new Animation();
 	shotEffect_.setWidth(50);
 	shotEffect_.setHeight(50);
 	shotEffect_.addRenderComponent(shotanim_);
-	shotanim_->loadAnimation("../Assets/sprites/shot_effect.png", "shot");
+	shotanim_->loadAnimation("../Assets/sprites/Turrets/shot_effect.png", "shot");
 	shotEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
