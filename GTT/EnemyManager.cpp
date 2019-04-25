@@ -1,9 +1,9 @@
 #include "EnemyManager.h"
 
+unique_ptr<EnemyManager> EnemyManager::instance_ = nullptr;
 
 EnemyManager::EnemyManager()
 {
-	numberOfEnemies = 0;
 }
 
 
@@ -11,18 +11,6 @@ EnemyManager::~EnemyManager()
 {
 }
 
-Enemy * EnemyManager::Get_Enemy(int position)
+void EnemyManager::ReadEnemyInfo()
 {
-	return 	enemyList.back();
-}
-
-void EnemyManager::Add_Enemy(int x, int y, VehicleInfo r)
-{
-	//enemyList.insert(new Enemy(x, y, r));
-	numberOfEnemies++;
-}
-
-int EnemyManager::getNumberOfEnemies()
-{
-	return 0;
 }
