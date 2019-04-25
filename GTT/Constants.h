@@ -251,8 +251,8 @@ const int CAMERA_HEIGHT = 1080;
 const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
 const int backGround_height = CAMERA_HEIGHT;
 //Buttons
-const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 100, (CAMERA_HEIGHT - 350)};
-const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 100, (CAMERA_HEIGHT - 200)};
+const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 350)};
+const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 200)};
 const int Button_Width_ = 300;
 const int Button_Height_ = 200;
 //taxi
