@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include "Reticule.h"
+#include "Vehicle.h"
 
 
 Enemy::Enemy()
@@ -33,8 +34,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	addLogicComponent(phyO_);
 
 	//IA
-	routemap_ = nmap;
-	patrolBehaviour_ = new IApatrol(GetPhyO(), routemap_, speed_, route);
+	pursuitRange_ = 32 * 40;
+	patrolBehaviour_ = new IApatrol(GetPhyO(), nmap, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 }
 
@@ -52,69 +53,7 @@ void Enemy::Die()
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
-		/*
-		if (!paused_) {
-			if (destinated_) {
-				if (direction_.x < 0) {
-					if (getCenter().x < destination_.x) {
-						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-						destinated_ = false;
-						return;
-					}
-				}
-				else if (direction_.x > 0) {
-					if (getCenter().x > destination_.x) {
-						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-						destinated_ = false;
-						return;
-					}
-				}
-				else if (direction_.y < 0) {
-					if (getCenter().y < destination_.y) {
-						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-						destinated_ = false;
-						return;
-					}
-				}
-				else if (direction_.y > 0) {
-					if (getCenter().y > destination_.y) {
-						phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-						destinated_ = false;
-						return;
-					}
-				}
-				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
-				direction_.Normalize();
-				float angle = atan2f(-direction_.x, direction_.y);
-				angle += 90.0 / 180.0*M_PI;
-				phyO_->getBody()->SetTransform(phyO_->getBody()->GetPosition(), angle);
-				phyO_->getBody()->SetLinearVelocity(Vector2D(direction_.x * speed_, direction_.y * speed_));
-			}
-			else {
-				destinated_ = true;
-				if (node == nullptr) {
-					node = routemap_.getNodes()[0];
-					destination_ = node->position_;
-				}
-				else {
-					if (node->isConnected()) {
-						double a = rand() % 100;
-						int c = a * 4 / 100.0;
-						while (node->connections_[c] == nullptr) {
-							a = rand() % 100;
-							c = a * 4 / 100.0;
-						}
-						node = node->connections_[c];
-						destination_ = node->position_;
-					}
-					else paused_ = true;
-				}
-				direction_ = Vector2D(destination_.x - getCenter().x, destination_.y - getCenter().y);
-				direction_.Normalize();
-			}
-		}
-		else phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-		*/
+		patrolBehaviour_->setPatrol(!((Vehicle::getInstance()->getCenter() - getCenter()).Length() <= pursuitRange_));
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;

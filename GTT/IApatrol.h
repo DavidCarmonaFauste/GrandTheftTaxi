@@ -16,12 +16,13 @@ public:
 	virtual ~IApatrol();
 
 private:
+	bool alreadyAtDestination(GameObject* o);
 	void Go(GameObject* o);
 	bool arrivedAtDestination(GameObject* o);
 	void setNextDestination(Node* n);
 	void AssignPlayerRoute(GameObject* o);
 	void FollowPlayer(GameObject* o);
-	void FollowRoute();
+	void FollowRoute(GameObject* o);
 	bool VehiclePosChanged();
 	bool OutOfRoute(vector<Node*> route, int progress);
 	NodeMap* districtMap_;

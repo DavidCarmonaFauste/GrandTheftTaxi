@@ -19,5 +19,6 @@ private:
 	IApatrol* patrolBehaviour_;
 	NodeMap* routemap_;
 	int speed_;
+	int pursuitRange_;
 };
 
