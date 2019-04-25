@@ -5,6 +5,7 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include "NodeMapsManager.h"
+#include "EnemyManager.h"
 
 #include <iostream>
 
@@ -164,6 +165,7 @@ void Game::init() {
 	Vehicle::getInstance()->initInstance(); //after, in MainState must do initiAtributtes(VehicleInfo r, KeysScheme k);
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
+	EnemyManager::getInstance()->initInstance();
 
 	// Create the resources singleton for the first time
 	// and initialize its states

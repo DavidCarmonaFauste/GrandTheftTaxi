@@ -447,7 +447,7 @@
   <object id="369" name="Node1" x="3200" y="480" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="8" name="Enemies">
-  <object id="364" name="testEnemy" x="2432" y="416">
+  <object id="364" name="Spawn1" x="2432" y="416">
    <polygon points="0,0 0,64 64,64 64,0"/>
   </object>
  </objectgroup>

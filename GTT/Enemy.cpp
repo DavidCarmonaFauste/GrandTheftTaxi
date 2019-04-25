@@ -6,9 +6,11 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route){
+Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
+
+	position_ = pos;
 
 	bodyReadyToDestroy_ = false;
 
@@ -32,50 +34,6 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route){
 
 	//IA
 	routemap_ = nmap;
-	/*
-	Node* a = new Node(Vector2D(0, 0), "a");
-	Node* b = new Node(Vector2D(400, 0), "b");
-	Node* c = new Node(Vector2D(400, 400), "c");
-	Node* d = new Node(Vector2D(0, 400), "d");
-	Node* e = new Node(Vector2D(800, 0), "e");
-	Node* f = new Node(Vector2D(-400, 0), "f");
-	Node* g = new Node(Vector2D(-400, 400), "g");
-	Node* h = new Node(Vector2D(800, 400), "h");
-	Node* i = new Node(Vector2D(0, -400), "i");
-	Node* j = new Node(Vector2D(400, -400), "j");
-
-	vector<Node*>* route= new vector<Node*>;
-
-	route->push_back(a);
-	route->push_back(b);
-	route->push_back(c);
-
-
-	routemap_->addNode(a);
-	routemap_->addNode(b);
-	routemap_->addNode(c);
-	routemap_->addNode(d);
-	routemap_->addNode(e);
-	routemap_->addNode(f);
-	routemap_->addNode(g);
-	routemap_->addNode(h);
-	routemap_->addNode(i);
-	routemap_->addNode(j);
-			
-	routemap_->connectNodes(a, b);
-	routemap_->connectNodes(b, c);
-	routemap_->connectNodes(c, d);
-	routemap_->connectNodes(d, a);
-	routemap_->connectNodes(f, a);
-	routemap_->connectNodes(b, e);
-	routemap_->connectNodes(a, i);
-	routemap_->connectNodes(b, j);
-	routemap_->connectNodes(i, j);
-	routemap_->connectNodes(h, e);
-	routemap_->connectNodes(h, c);
-	routemap_->connectNodes(f, g);
-	routemap_->connectNodes(d, g);
-	*/
 	patrolBehaviour_ = new IApatrol(GetPhyO(), routemap_, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 }

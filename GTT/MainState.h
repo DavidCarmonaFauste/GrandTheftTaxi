@@ -25,9 +25,6 @@ private:
 	// Tilemap
 	TileMap *tilemap_;
 
-	// Vehicles
-	Enemy* enemy1_;
-
 	//camera logic
 	FollowGameObject* cameraFollow;
 

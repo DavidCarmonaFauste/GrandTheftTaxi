@@ -1,10 +1,15 @@
 #pragma once
 #include <map>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <fstream>
 
 #include "Enemy.h"
 
+
 using namespace std;
-class EnemyManager
+class EnemyManager:public Container
 {
 	EnemyManager(EnemyManager &) = delete;
 	EnemyManager & operator=(const EnemyManager &) = delete;
@@ -26,7 +31,13 @@ public:
 		return instance_.get();
 	}
 	void ReadEnemyInfo();
+	void addSpawn(string id, Vector2D pos);
+
+	virtual void update(Uint32 deltaTime);
+	virtual void render(Uint32 deltaTime);
 private:
 	map<string, Enemy*> enemies_;
+	map<string, Vector2D> spawns_;
+	ifstream enemyInfoFile_;
 };
 

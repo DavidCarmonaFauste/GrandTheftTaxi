@@ -10,6 +10,7 @@
 #include "ProyectilePool.h"
 #include "Reticule.h"
 #include "NodeMapsManager.h"
+#include "EnemyManager.h"
 
 
 
@@ -39,16 +40,9 @@ void MainState::start() {
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
+
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
-
-
-	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
-	
-	//Enemies
-
-	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("District1"), NodeMapsManager::getInstance()->getNodeMap("District1")->getPatrol("Patrol1"));
-	enemy1_->setPosition(Vehicle::getInstance()->getPosition() + Vector2D(100, 0));
-
+	EnemyManager::getInstance()->ReadEnemyInfo();
 	// Camera positioning
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
 	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth()/2,
@@ -65,7 +59,7 @@ void MainState::start() {
 	//pushBack GameObj to list
 	stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
-	stage_.push_back(enemy1_);
+	stage_.push_back(EnemyManager::getInstance());
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());

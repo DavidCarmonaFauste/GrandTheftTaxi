@@ -2,6 +2,7 @@
 #include "Vehicle.h"
 #include "Shop.h"
 #include "NodeMapsManager.h"
+#include "EnemyManager.h"
 
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
@@ -51,6 +52,7 @@ bool TileMap::processObject(string layerName, const tmx::Object &object) {
 	if (layerName == "Collisions") return processCollision(object);
 	if (layerName == "Player") return processPlayer(object);
 	if (layerName == "Gas") return processGas(object);
+	if (layerName == "Enemies") return processSpawns(object);
 	else return processNodes(object, layerName);
 }
 
@@ -93,6 +95,12 @@ bool TileMap::processNodes(const tmx::Object & object, string layerName)
 	if (!NodeMapsManager::getInstance()->NodeMapExists(layerName)) NodeMapsManager::getInstance()->addNodeMap(layerName);
 	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width/2, object.getPosition().y + object.getAABB().height/2));
 	NodeMapsManager::getInstance()->getNodeMap(layerName)->addNode(node, object.getName());
+	return false;
+}
+
+bool TileMap::processSpawns(const tmx::Object & object)
+{
+	EnemyManager::getInstance()->addSpawn(object.getName(), Vector2D(object.getPosition().x + object.getAABB().width / 2, object.getPosition().y + object.getAABB().height / 2));
 	return false;
 }
 
