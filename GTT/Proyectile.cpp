@@ -68,6 +68,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
 	phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | TAXI_CATEGORY) );
+	phyO_->getBody()->GetFixtureList()->SetRestitution(1.0f);
 
 	switch (p.imp) {
 	case STANDARD:
