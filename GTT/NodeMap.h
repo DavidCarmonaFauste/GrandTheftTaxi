@@ -35,12 +35,14 @@ class NodeMap
 public:
 	NodeMap();
 	void addNode(Node* n, string id);
+	void addPatrol(vector<Node*> patrol, string id);
 	void connectNodes(string id1, string id2);
 	bool nodeExists(string id);
 	bool nodeExists(Node* n);
 	Node* getNearestNode(Vector2D position);
 	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	map<string, Node*> getNodes();
+	vector<Node*> getPatrol(string id);
 	virtual ~NodeMap();
 private:
 	map<string, Node*>nodes;//contiene todos los nodos del distrito con un identificador

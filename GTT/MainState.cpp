@@ -45,14 +45,8 @@ void MainState::start() {
 	NodeMap* nmap = NodeMapsManager::getInstance()->getNodeMap("test");
 	
 	//Enemies
-	vector<Node*> route;
-	route.push_back(nmap->getNodes()["Node1"]);
-	route.push_back(nmap->getNodes()["Node3"]);
-	route.push_back(nmap->getNodes()["Node4"]);
-	route.push_back(nmap->getNodes()["Node2"]);
 
-
-	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("test"), route);
+	enemy1_ = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap("District1"), NodeMapsManager::getInstance()->getNodeMap("District1")->getPatrol("Patrol1"));
 	enemy1_->setPosition(Vehicle::getInstance()->getPosition() + Vector2D(100, 0));
 
 	// Camera positioning

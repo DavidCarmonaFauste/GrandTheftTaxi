@@ -1,6 +1,7 @@
 #include "NodeMapsManager.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 
 unique_ptr<NodeMapsManager> NodeMapsManager::instance_ = nullptr;
 
@@ -22,10 +23,40 @@ void NodeMapsManager::ReadNodeMapsInfo()
 {
 	nodemapsFile_.open("../TextFiles/Nodes.txt");
 	if (nodemapsFile_.is_open()) {
+		string line;
 		string district;
-		nodemapsFile_ >> district;
-		for (int i = 0; i < 4; i++) {
-			ConnectNodes(district);
+		while (getline(nodemapsFile_, line)) {
+			istringstream row(line);
+			switch (line[0]) {
+				case'D': {
+					row >> district;
+					break;
+				}
+				case 'N': {
+					string bNode;
+					string connection;
+					row >> bNode;
+					while (row >> connection) {
+						nodemaps_[district]->connectNodes(bNode, connection);
+					}
+					break;
+				}
+				case 'P': {
+					string patrolId;
+					row >> patrolId;
+					string node;
+					vector<Node*>patrol;
+
+					while (row>>node) {
+						patrol.push_back(nodemaps_[district]->getNodes()[node]);
+					}
+					nodemaps_[district]->addPatrol(patrol, patrolId);
+					break;
+				}
+				default:
+					break;
+			}
+			
 		}
 		nodemapsFile_.close();
 	}
@@ -36,16 +67,6 @@ NodeMap * NodeMapsManager::getNodeMap(string key)
 	return nodemaps_[key];
 }
 
-void NodeMapsManager::ConnectNodes(string d)
-{
-	string bNode;
-	string connection;
-	nodemapsFile_ >> bNode;
-	for (int i = 0; i < 4; i++) {
-		nodemapsFile_ >> connection;
-		nodemaps_[d]->connectNodes(bNode, connection);
-	}
-}
 
 NodeMapsManager::NodeMapsManager()
 {

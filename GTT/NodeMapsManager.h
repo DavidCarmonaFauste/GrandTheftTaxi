@@ -35,6 +35,5 @@ public:
 private:
 	map<string, NodeMap*> nodemaps_;
 	fstream nodemapsFile_;
-	void ConnectNodes(string d);
 };
 

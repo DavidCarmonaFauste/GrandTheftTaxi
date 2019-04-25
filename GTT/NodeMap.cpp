@@ -12,6 +12,11 @@ void NodeMap::addNode(Node* n, string id)
 		nodes[id] = n;
 }
 
+void NodeMap::addPatrol(vector<Node*> patrol, string id)
+{
+	patrols[id] = patrol;
+}
+
 
 void NodeMap::connectNodes(string id1, string id2)
 {
@@ -105,6 +110,11 @@ bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, ve
 map<string, Node*> NodeMap::getNodes()
 {
 	return nodes;
+}
+
+vector<Node*> NodeMap::getPatrol(string id)
+{
+	return patrols[id];
 }
 
 
