@@ -11,14 +11,16 @@ enum Connections {
 };
 class Node {
 public:
-	Node(Vector2D pos) {
+	Node(Vector2D pos, string id) {
 		position_ = pos;
+		id_ = id;
 		for (int i = 0; i < 4; i++) {
 			connections_[i] = nullptr;
 		}
 	}
 	Vector2D position_;
 	Node* connections_[4];
+	string id_;
 	bool isDeadEnd() {
 		int count = 0;
 		for (int i = 0; i < 4; i++) {

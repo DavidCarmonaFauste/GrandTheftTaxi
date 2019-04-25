@@ -81,8 +81,10 @@ Node * NodeMap::getNearestNode(Vector2D position)
 
 bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)
 {
-	if (current == destiny) return true;
-	if (!nodeExists(destiny)) return false;
+	if (current == destiny) 
+		return true;
+	if (!nodeExists(destiny)) 
+		return false;
 	for (auto c : current->connections_) {
 		if (c != nullptr && !hasNode(currentroute, c)) {
 			distance += getDistance(current, c);

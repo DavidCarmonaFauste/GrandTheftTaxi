@@ -34,7 +34,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	addLogicComponent(phyO_);
 
 	//IA
-	pursuitRange_ = 32 * 40;
+	pursuitRange_ = 32 * 20;
 	patrolBehaviour_ = new IApatrol(GetPhyO(), nmap, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 }

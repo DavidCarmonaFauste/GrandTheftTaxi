@@ -31,10 +31,10 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 	if(!alreadyAtDestination(o)) 
 		Go(o);
 	
-	else {
-		cout << "atdestination" << endl;
+	else 
 		phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-	}
+	cout << patrol_ << endl;
+	cout << currentNode_->id_ << endl;
 }
 
 void IApatrol::setPause(bool pause)
@@ -45,10 +45,7 @@ void IApatrol::setPause(bool pause)
 void IApatrol::setPatrol(bool patrol)
 {
 	if (patrol_ != patrol && !patrolRoute_.empty()) {
-		patrol_ = patrol;
-		patrolProgress_ = 0;
-		followProgress_ = 0;
-		paused_ = false;
+ 		patrol_ = patrol;
 	}
 }
 
@@ -100,7 +97,7 @@ void IApatrol::AssignPlayerRoute(GameObject * o)
 	vector<Node*>route;
 	int minDistance = -1;
 	Node* taxiNode = districtMap_->getNearestNode(Vehicle::getInstance()->getCenter());
-	setPatrol(!districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance));
+	districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
 	followProgress_ = 0;
 }
 

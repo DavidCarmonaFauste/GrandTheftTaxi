@@ -93,7 +93,7 @@ bool TileMap::processGas(const tmx::Object & object) {
 bool TileMap::processNodes(const tmx::Object & object, string layerName)
 {
 	if (!NodeMapsManager::getInstance()->NodeMapExists(layerName)) NodeMapsManager::getInstance()->addNodeMap(layerName);
-	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width/2, object.getPosition().y + object.getAABB().height/2));
+	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width/2, object.getPosition().y + object.getAABB().height/2), object.getName());
 	NodeMapsManager::getInstance()->getNodeMap(layerName)->addNode(node, object.getName());
 	return false;
 }
