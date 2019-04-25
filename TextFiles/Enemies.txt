@@ -1,3 +1,4 @@
 District1
 Enemy1 Patrol1 Spawn1
+Enemy2 Patrol2 Spawn2
 

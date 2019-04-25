@@ -136,7 +136,7 @@ const enum newGameButtonPaths {
 
 
 //Enemy 1
-const int ENEMY_HP = 500;
+const int ENEMY_HP = 100;
 
 //NAMES
 const string NAME_MAINMENU_STATE = "mainMenuState";
