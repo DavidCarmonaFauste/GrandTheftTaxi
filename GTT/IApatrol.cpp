@@ -115,8 +115,17 @@ void IApatrol::FollowPlayer(GameObject * o)
 
 void IApatrol::FollowRoute(GameObject* o)
 {
-	setNextDestination(patrolRoute_[patrolProgress_]);
-	patrolProgress_ = (patrolProgress_ + 1) % patrolRoute_.size();
+	if (currentNode_->isConnected(patrolRoute_[patrolProgress_])|| currentNode_== patrolRoute_[patrolProgress_]) {
+		setNextDestination(patrolRoute_[patrolProgress_]);
+		patrolProgress_ = (patrolProgress_ + 1) % patrolRoute_.size();
+	}
+	else {
+		vector<Node*> route;
+		vector<Node*> currentroute;
+		int mindistance = -1;
+		districtMap_->FindRoute(currentNode_, patrolRoute_[patrolProgress_], route, currentroute, 0, mindistance);
+		if(!route.empty()) setNextDestination(route[0]);
+	}
 }
 
 bool IApatrol::VehiclePosChanged()

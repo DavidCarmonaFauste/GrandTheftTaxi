@@ -31,6 +31,12 @@ public:
 		}
 		return true;
 	}
+	bool isConnected(Node* n) {
+		for (int i = 0; i < 4; i++) {
+			if (connections_[i] == n) return true;
+		}
+		return false;
+	}
 };
 class NodeMap
 {
