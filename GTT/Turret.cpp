@@ -159,36 +159,38 @@ void Turret::AttachToVehicle(Car * car)
 
 void Turret::Shoot()
 {
-	int a = SDL_GetTicks() - lastTimeShot_;
-	if (a >= cadence_) {
-		if (charged_) {
-			crr_ActionShoot_ = specialB.idShoot; //asign int for capture in ShootIC and play sound
-			specialB.damage = magazine_->top()*defaultSpecialDMG_;
-			SPshC_->shoot(specialB);
-			lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
-			charged_ = false;
-		}
-		else {
-			crr_ActionShoot_ = normalB.idShoot; //asign int for capture in ShootIC and play sound
-			normalB.damage = magazine_->top()*defaultNormalDMG_;
-			shC_->shoot(normalB);
-			lastTimeShot_ = SDL_GetTicks();
-		}
+	if (!magazine_->empty() && !reloading_) {
+		int a = SDL_GetTicks() - lastTimeShot_;
+		if (a >= cadence_) {
+			if (charged_) {
+				crr_ActionShoot_ = specialB.idShoot; //asign int for capture in ShootIC and play sound
+				specialB.damage = magazine_->top()*defaultSpecialDMG_;
+				SPshC_->shoot(specialB);
+				lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
+				charged_ = false;
+			}
+			else {
+				crr_ActionShoot_ = normalB.idShoot; //asign int for capture in ShootIC and play sound
+				normalB.damage = magazine_->top()*defaultNormalDMG_;
+				shC_->shoot(normalB);
+				lastTimeShot_ = SDL_GetTicks();
+			}
 
-		//send msg tye
-		TaxiShootEvent e(this, crr_ActionShoot_); //send msg_type and capture idProyectileShoot
-		broadcastEvent(e);
-		if (!shotanim_->isAnimationPlaying("shot"))
-			shotanim_->playAnimation("shot", 3.0f, false);
+			//send msg tye
+			TaxiShootEvent e(this, crr_ActionShoot_); //send msg_type and capture idProyectileShoot
+			broadcastEvent(e);
+			if (!shotanim_->isAnimationPlaying("shot"))
+				shotanim_->playAnimation("shot", 3.0f, false);
 
-		magazine_->pop();
-		animC_->playAnimation("idle", 3.5f, false);
-		ResetChargeProgress();
+			magazine_->pop();
+			animC_->playAnimation("idle", 3.5f, false);
+			ResetChargeProgress();
+		}
 	}
 	else {
-	crr_ActionShoot_ = TURRET_DEFAULT_SOUND;
-	TaxiShootEvent e(this, crr_ActionShoot_); //empty bullets 
-	broadcastEvent(e);
+		crr_ActionShoot_ = TURRET_DEFAULT_SOUND;
+		TaxiShootEvent e(this, crr_ActionShoot_); //empty bullets 
+		broadcastEvent(e);
 	}
 }
 
@@ -201,7 +203,7 @@ void Turret::AIShoot()
 	}
 	/*if (!shotanim_->isAnimationPlaying("shot"))
 		shotanim_->playAnimation("shot", 3.0f, false);
-		*/
+	*/
 
 	animC_->playAnimation("idle", 3.5f, false);
 	ResetChargeProgress();
