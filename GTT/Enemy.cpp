@@ -18,7 +18,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->playAnimation("idle");
+	//sprite_->playAnimation("idle");
+	sprite_->setAnimation("idle");
 	this->addRenderComponent(sprite_);
 
 	// Health

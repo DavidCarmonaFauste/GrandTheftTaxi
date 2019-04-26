@@ -44,8 +44,8 @@ const struct ProyectileInfo {
 	double damage;
 	double lifeTime;
 	double speed;
-	ImpactMode imp = STANDARD;
 	int idShoot;
+	ImpactMode imp = STANDARD;
 };
 
 const enum FireMode {
@@ -170,9 +170,11 @@ const enum soundId {
 	CLIC_BUTTON_NEWGAME,
 
 	//Shoots
-	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA UNA VAR currentIdShoot en la constructora de Turret
+	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA en las torretas que no tienen asignado id
 	TURRET_SHOTGUN_SHOOT,
-	TURRET_SHOTGUN_SPECIAL_SHOOT
+	TURRET_SHOTGUN_SPECIAL_SHOOT,
+	TURRET_GUN_SHOOT,
+	TURRET_GUN_SPECIAL_SHOOT
 
 };
 const map<soundId, string> SOUND = {
@@ -185,6 +187,8 @@ const map<soundId, string> SOUND = {
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
 	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
 	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
+	{TURRET_GUN_SHOOT, "../Assets/sounds/Turrets/Gun_Normal.wav"},
+	{TURRET_GUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/Gun_Special.wav"},
 	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
 
 };
@@ -215,17 +219,29 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/spr
 const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
 
 //Proyectiles
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/BlueProyectile.png" , 25, 25, 10, 500, 50 };
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/bullet.png" , 50, 50, 20, 500, 25 };
-const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/bullet.png", 40, 40, 10, 500, 100 };
+	//Gun //Falta asignar ruta y sprite Y SONIDO
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
+	//ShotGun
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 50, 50, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
+	//Snipper //Falta asignar ruta y sprite Y SONIDO
+const ProyectileInfo SNIPERBULLET{};
+const ProyectileInfo SPECIAL_SNIPERBULLET{};
+	//MachineGun //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo MACHINEGUNBULLET{};
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE };
+const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
+
+	//... //Falta asignar ruta y sprite Y SONIDO
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE };
+
+
 
 //Weapons
-const WeaponInfo GUN{ "../Assets/sprites/gun.png", "../Assets/sprites/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
-const WeaponInfo SHOTGUN{ "../Assets/sprites/shot_gun.png", "../Assets/sprites/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, GUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/machine_gun.png", "../Assets/sprites/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, GUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
-const WeaponInfo SNIPER{ "../Assets/sprites/sniper.png", "../Assets/sprites/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SHOTGUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
+const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
+const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
+//const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
+//const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
@@ -251,21 +267,21 @@ const int CAMERA_HEIGHT = 1080;
 const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
 const int backGround_height = CAMERA_HEIGHT;
 //Buttons
-const Vector2D NG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
-const Vector2D EG_Button_position_ = { (CAMERA_WIDHT * 0.5), (CAMERA_HEIGHT - (CAMERA_HEIGHT * 0.4)) };
-const int Button_Width_ = 250;
-const int Button_Height_ = 150;
+const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 350)};
+const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 200)};
+const int Button_Width_ = 300;
+const int Button_Height_ = 200;
 //taxi
-const Vector2D Taxi_position_ = { 650, 345 };
-const int Taxi_Width_ = 350;
-const int Taxi_Height_ = 300;
+const Vector2D Taxi_position_ = {(CAMERA_WIDHT / 2) - 150, (CAMERA_HEIGHT / 2) - 100};
+const int Taxi_Width_ = 375;
+const int Taxi_Height_ = 325;
 //Game title
-const Vector2D title_position_ = { 500, 200 };
+const Vector2D title_position_ = {(CAMERA_WIDHT / 2) - 275, (CAMERA_HEIGHT / 2) - 225 };
 const int title_Width_ = 700;
 const int title_Height_ = 200;
 
 //Background
-const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, 1900, 900 };
+const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };
 //Buttons
 	//siempre tienen que ser un vector, como m�nimo con un componente default animation. 
 const vector <textureInfo> NEW_GAME_BUTTON = {

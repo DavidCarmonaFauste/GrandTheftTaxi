@@ -13,8 +13,8 @@ MainMenuState::MainMenuState()
 
 MainMenuState::~MainMenuState()
 {
-	delete Title_anm; Title_anm = nullptr;
-	delete Taxi_anm; Taxi_anm = nullptr;
+	//delete Title_anm; Title_anm = nullptr;
+	//delete Taxi_anm; Taxi_anm = nullptr;
 
 	while (!stage_.empty()) {
 		delete stage_.back();
@@ -26,7 +26,10 @@ MainMenuState::~MainMenuState()
 void MainMenuState::start()
 {
 	s_ = Game::getInstance()->getSoundManager();
-	s_->registerObserver(this);
+	int i; //recoge el valor del index si el elemento está en el vector
+	if (!s_->isRegistered(this, i))
+		s_->registerObserver(this);
+	
 
 
 	Game::getInstance()->getCamera(GAME_CAMERA)->setZoom(1.0, false);
@@ -143,6 +146,8 @@ void MainMenuState::start()
 
 void MainMenuState::end()
 {
+	s_->removeObserver(this);
+	s_ = nullptr;
 }
 
 void MainMenuState::update(Uint32 deltaTime) {
