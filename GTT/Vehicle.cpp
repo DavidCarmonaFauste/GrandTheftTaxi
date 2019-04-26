@@ -87,6 +87,19 @@ void Vehicle::update(Uint32 time) {
 
 	if (turrets_[currentTurret_] != nullptr)
 		turrets_[currentTurret_]->update(time);
+
+	if (alive_ && health_->getHealth() <= 0) {
+		alive_ = false;
+		delInputComponent(control_);
+		delInputComponent(shIC_);
+		delInputComponent(reIC_);
+		delLogicComponent(health_);
+		deathTime_ = SDL_GetTicks();
+	}
+	if (!alive_ && SDL_GetTicks() - deathTime_ >= 500) {
+		Respawn();
+	}
+
 }
 
 bool Vehicle::receiveEvent(Event & e) {
@@ -94,6 +107,25 @@ bool Vehicle::receiveEvent(Event & e) {
 	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 
 	return true;
+}
+
+void Vehicle::SaveSpawnPoint(Vector2D spawn)
+{
+	spawnPosition_ = spawn;
+}
+
+void Vehicle::Respawn()
+{
+	Vehicle::getInstance()->setPosition(spawnPosition_);
+	Vector2D v = spawnPosition_;
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);
+	spawnPosition_ = v;
+	addInputComponent(control_);
+	addInputComponent(shIC_);
+	addInputComponent(reIC_);
+	addLogicComponent(health_);
+	health_->resetHealth();
+	alive_ = true;
 }
 
 
@@ -131,6 +163,8 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	health_ = new Health(TAXI_HP);
 	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
+	alive_ = true;
+
 
 	shIC_ = new ShootIC();
 	reIC_ = new ReloadInputComponent();

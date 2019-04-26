@@ -56,11 +56,15 @@ public:
 	virtual void update(Uint32 time);
 
 	virtual bool receiveEvent(Event& e);
+	virtual void SaveSpawnPoint(Vector2D spawn);
 	
 
 	private:
 
 	int currentTurret_;
+
+
+	void Respawn();
 
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
@@ -69,9 +73,13 @@ public:
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
 
+	Vector2D spawnPosition_;
+
 	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
 	TaxiSoundManagerCP* smLC_;
-	
+	bool alive_;
+	int deathTime_;
+
 };

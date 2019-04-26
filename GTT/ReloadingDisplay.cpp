@@ -34,15 +34,17 @@ ReloadingDisplay::ReloadingDisplay()
 
 void ReloadingDisplay::setReloadingPercentage()
 {
-	Texture* tex = bar->getTexture();
-	bar_clip->x = bar_clip->y = 0;
-	bar_clip->w = tex->getWidth() * Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage();
-	bar_clip->h = tex->getHeight();
+	if (Vehicle::getInstance()->getCurrentTurret() != nullptr) {
+		Texture* tex = bar->getTexture();
+		bar_clip->x = bar_clip->y = 0;
+		bar_clip->w = tex->getWidth() * Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage();
+		bar_clip->h = tex->getHeight();
 
-	bar->setSize(barWidth *  Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
-	bar->setClipRect(bar_clip);
-	perfReSegment->setSize(barWidth*Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
-	perfReSegment->setPos(bar->getRect()->x + barWidth* Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
+		bar->setSize(barWidth *  Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
+		bar->setClipRect(bar_clip);
+		perfReSegment->setSize(barWidth*Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
+		perfReSegment->setPos(bar->getRect()->x + barWidth * Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
+	}
 }
 
 ReloadingDisplay::~ReloadingDisplay()
@@ -65,5 +67,6 @@ void ReloadingDisplay::render(Uint32 deltaTime)
 
 bool ReloadingDisplay::isReloading()
 {
+	if (Vehicle::getInstance()->getCurrentTurret() == nullptr)return false;
 	return Vehicle::getInstance()->getCurrentTurret()->isReloading();
 }

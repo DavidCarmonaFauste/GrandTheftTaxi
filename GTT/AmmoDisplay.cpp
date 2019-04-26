@@ -19,6 +19,7 @@ AmmoDisplay::AmmoDisplay()
 
 void AmmoDisplay::update(Uint32 deltaTime)
 {
+	if(Vehicle::getInstance()->getCurrentTurret()!=nullptr)
 	currentAmmo_->setText(to_string((int)(Vehicle::getInstance()->getCurrentTurret()->GetAmmo())) + " / " + to_string((int)(Vehicle::getInstance()->getCurrentTurret()->GetMaxAmmo())));
 }
 
