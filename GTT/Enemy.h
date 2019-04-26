@@ -4,6 +4,8 @@
 #include "NodeMap.h"
 #include "IApatrol.h"
 
+class Turret;
+
 class Enemy :public Car
 {
 public:
@@ -12,7 +14,11 @@ public:
 	virtual void Damage(double damage);
 	virtual void Die();
 	virtual void update(Uint32 deltaTime);
+	virtual void render(Uint32 deltaTime);
 	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event);
+	virtual int getDistanceFromTaxi();
+	virtual Turret* getTurret();
+	virtual bool taxiOnRange();
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
@@ -20,5 +26,7 @@ private:
 	NodeMap* routemap_;
 	int speed_;
 	int pursuitRange_;
+	Turret* turret_;
+
 };
 

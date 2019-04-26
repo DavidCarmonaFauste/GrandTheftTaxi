@@ -20,6 +20,7 @@ public:
 	virtual void render(Uint32 deltaTime);
 	virtual void AttachToVehicle(Car* car);
 	virtual void Shoot();
+	virtual void AIShoot();
 	virtual void Reload();
 	virtual void PerfectReload();
 	virtual void CancelReload();

@@ -45,7 +45,7 @@ HealthDisplay::~HealthDisplay() {
 // Percentage from 0 to 1
 void HealthDisplay::setHealthPercentage(float healthPercentage) {
 	healthPercentage_ = healthPercentage;
-
+	if (healthPercentage_ < 0) healthPercentage_ = 0;
 	Texture* tex = bar->getTexture();
 	bar_clip->x = bar_clip->y = 0;
 	bar_clip->w = tex->getWidth() * healthPercentage_;

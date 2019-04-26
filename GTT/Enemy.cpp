@@ -1,6 +1,8 @@
 #include "Enemy.h"
 #include "Reticule.h"
 #include "Vehicle.h"
+#include "Turret.h"
+#include "EnemyAim.h"
 
 
 Enemy::Enemy()
@@ -38,6 +40,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	pursuitRange_ = 32 * 20;
 	patrolBehaviour_ = new IApatrol(GetPhyO(), nmap, speed_, route);
 	addLogicComponent(patrolBehaviour_);
+	aimC_ = new EnemyAim();
+
+	turret_ = new Turret(GUN);
+	turret_->AttachToVehicle(this);
 }
 
 void Enemy::Damage(double damage)
@@ -49,6 +55,7 @@ void Enemy::Damage(double damage)
 void Enemy::Die()
 {
 	bodyReadyToDestroy_ = true;
+	turret_->setActive(false);
 }
 
 void Enemy::update(Uint32 deltaTime)
@@ -62,6 +69,18 @@ void Enemy::update(Uint32 deltaTime)
 			setActive(false);
 		}
 		Car::update(deltaTime);
+		if (turret_ != nullptr) {
+			turret_->update(deltaTime);
+		}
+	}
+}
+
+void Enemy::render(Uint32 deltaTime)
+{
+	Car::render(deltaTime);
+
+	if (turret_ != nullptr) {
+		turret_->render(deltaTime);
 	}
 }
 
@@ -72,7 +91,23 @@ void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
 	}
 }
 
+int Enemy::getDistanceFromTaxi()
+{
+	return (Vehicle::getInstance()->getCenter() - getCenter()).Length();
+}
+
+Turret * Enemy::getTurret()
+{
+	return turret_;
+}
+
+bool Enemy::taxiOnRange()
+{
+	return getDistanceFromTaxi()<=pursuitRange_;
+}
+
 
 Enemy::~Enemy()
 {
+	delete turret_;
 }

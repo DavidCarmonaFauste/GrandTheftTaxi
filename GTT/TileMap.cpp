@@ -51,7 +51,7 @@ void TileMap::tmxToScene() {
 bool TileMap::processObject(string layerName, const tmx::Object &object) {
 	if (layerName == "Collisions") return processCollision(object);
 	if (layerName == "Player") return processPlayer(object);
-	if (layerName == "Gas") return processGas(object);
+	//if (layerName == "Gas") return processGas(object);
 	if (layerName == "Enemies") return processSpawns(object);
 	else return processNodes(object, layerName);
 }

@@ -33,8 +33,6 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 	
 	else 
 		phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
-	cout << patrol_ << endl;
-	cout << currentNode_->id_ << endl;
 }
 
 void IApatrol::setPause(bool pause)

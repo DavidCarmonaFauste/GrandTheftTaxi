@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="380">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="394">
  <tileset firstgid="1" name="buildings" tilewidth="32" tileheight="32" tilecount="255" columns="15">
   <image source="../tilesets/buildingsTilemap.png" width="480" height="544"/>
  </tileset>
@@ -429,6 +429,19 @@
   <object id="228" x="2624" y="1344" width="128" height="64"/>
   <object id="229" x="2016" y="3008" width="96" height="192"/>
   <object id="230" x="2048" y="2848" width="64" height="128"/>
+  <object id="380" x="4000" y="3872" width="192" height="32"/>
+  <object id="381" x="5856" y="3552" width="64" height="32"/>
+  <object id="382" x="1216" y="2688" width="352" height="64"/>
+  <object id="383" x="2048" y="2752" width="64" height="64"/>
+  <object id="384" x="4960" y="1888" width="128" height="64"/>
+  <object id="385" x="4352" y="1408" width="224" height="288"/>
+  <object id="386" x="4800" y="1472" width="32" height="32"/>
+  <object id="387" x="4768" y="1536" width="64" height="128"/>
+  <object id="388" x="3008" y="576" width="128" height="128"/>
+  <object id="389" x="2592" y="1376" width="32" height="32"/>
+  <object id="390" x="2080" y="704" width="192" height="32" rotation="90"/>
+  <object id="392" x="2496" y="1824" width="160" height="224"/>
+  <object id="393" x="3360" y="1184" width="256" height="160"/>
  </objectgroup>
  <objectgroup color="#ff0bff" id="5" name="Gas">
   <object id="235" x="2592" y="1408" width="160" height="32"/>

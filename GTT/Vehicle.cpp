@@ -90,10 +90,6 @@ void Vehicle::update(Uint32 time) {
 
 	if (alive_ && health_->getHealth() <= 0) {
 		alive_ = false;
-		delInputComponent(control_);
-		delInputComponent(shIC_);
-		delInputComponent(reIC_);
-		delLogicComponent(health_);
 		deathTime_ = SDL_GetTicks();
 	}
 	if (!alive_ && SDL_GetTicks() - deathTime_ >= 500) {
@@ -120,10 +116,6 @@ void Vehicle::Respawn()
 	Vector2D v = spawnPosition_;
 	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);
 	spawnPosition_ = v;
-	addInputComponent(control_);
-	addInputComponent(shIC_);
-	addInputComponent(reIC_);
-	addLogicComponent(health_);
 	health_->resetHealth();
 	alive_ = true;
 }

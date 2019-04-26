@@ -31,8 +31,10 @@
     <ClCompile Include="CursorLC.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyAim.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
+    <ClCompile Include="EnemyShoot.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -104,8 +106,10 @@
     <ClInclude Include="CursorLC.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyAim.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyPool.h" />
+    <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="ExplosiveImC.h" />
     <ClInclude Include="FollowGameObject.h" />
