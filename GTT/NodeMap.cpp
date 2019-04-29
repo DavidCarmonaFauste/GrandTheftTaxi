@@ -64,19 +64,34 @@ bool NodeMap::nodeExists(Node* n)
 	}
 	return false;
 }
-Node * NodeMap::getNearestNode(Vector2D position)
+Node * NodeMap::getNearestNode(Vector2D position, vector<Node*> unwantednodes)
 {
 	Node* ret=nullptr;
 	int minDistance = -1;
 	int distance = 0;
 	for (auto n : nodes) {
 		distance = (pow(n.second->position_.x - position.x, 2) + pow(n.second->position_.y - position.y, 2));
-		if (minDistance == -1 || distance < minDistance) {
+		if ((minDistance == -1 || distance < minDistance)&& !hasNode(unwantednodes, n.second)) {
 			minDistance =distance;
 			ret = n.second;
 		}
 	}
 	return ret;
+}
+
+Node * NodeMap::getNearestConnectedNode(Vector2D position)
+{
+	vector<Node*> v;
+	Node* node;
+	node = getNearestNode(position);
+	if ((node->position_ - position).Length() <= 32 * 3) return node;
+	Vector2D dirToTarget = (position- node->position_);
+	dirToTarget.Normalize();
+	while (!node->hasConnection(dirToTarget)) {
+		v.push_back(node);
+		node = getNearestNode(position, v);
+	}
+	return node;
 }
 
 bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)

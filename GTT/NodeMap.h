@@ -37,6 +37,20 @@ public:
 		}
 		return false;
 	}
+	bool hasConnection(Vector2D direction) {
+		double x= abs(direction.x);
+		double y = abs(direction.y);
+		Connections dir=NORTH;
+		if (x > y) {
+			if (direction.x > 0) dir = EAST;
+			else dir = WEST;
+		}
+		else {
+			if (direction.y > 0) dir = SOUTH;
+			else dir = NORTH;
+		}
+		return connections_[dir] != nullptr;
+	}
 };
 class NodeMap
 {
@@ -47,7 +61,8 @@ public:
 	void connectNodes(string id1, string id2);
 	bool nodeExists(string id);
 	bool nodeExists(Node* n);
-	Node* getNearestNode(Vector2D position);
+	Node* getNearestNode(Vector2D position, vector<Node*> unwantednodes= vector<Node*>());
+	Node* getNearestConnectedNode(Vector2D position );
 	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	map<string, Node*> getNodes();
 	vector<Node*> getPatrol(string id);

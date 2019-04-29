@@ -94,7 +94,7 @@ void IApatrol::AssignPlayerRoute(GameObject * o)
 {
 	vector<Node*>route;
 	int minDistance = -1;
-	Node* taxiNode = districtMap_->getNearestNode(Vehicle::getInstance()->getCenter());
+	Node* taxiNode = districtMap_->getNearestConnectedNode(Vehicle::getInstance()->getCenter());
 	districtMap_->FindRoute(currentNode_, taxiNode, followRoute_, route, 0, minDistance);
 	followProgress_ = 0;
 }
