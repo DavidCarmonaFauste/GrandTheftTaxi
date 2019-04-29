@@ -511,6 +511,7 @@
    <polygon points="0,0 0,64 64,64 64,0"/>
   </object>
   <object id="378" name="Spawn2" x="2528" y="2592" width="64" height="64"/>
+<object id="447" name="Spawn3" x="2208" y="2656" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0bec70" id="4" name="Player">
   <object id="233" name="PlayerSpawn" x="4032" y="3712" width="128" height="128"/>
