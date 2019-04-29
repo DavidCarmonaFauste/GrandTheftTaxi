@@ -135,6 +135,20 @@ vector<Node*> NodeMap::getPatrol(string id)
 	return patrols[id];
 }
 
+void NodeMap::InBetweenNodes(Vector2D position, Node *& a, Node *& b)
+{
+	Node* x=nullptr;
+	Node* y=nullptr;
+	x = getNearestConnectedNode(position);
+	Vector2D dirToNode = position - x->position_;
+	dirToNode.Normalize();
+	Connections con;
+	if (x->hasConnection(dirToNode, con)) {
+		y = x->connections_[con];
+	}
+
+}
+
 
 NodeMap::~NodeMap()
 {

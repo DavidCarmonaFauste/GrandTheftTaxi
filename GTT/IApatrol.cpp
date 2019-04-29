@@ -13,6 +13,7 @@ IApatrol::IApatrol(PhysicObject * ph, NodeMap * districtMap, int patrolSpeed, ve
 	patrolSpeed_ = patrolSpeed;
 	patrolProgress_ = 0;
 	patrol_ = false;
+	inBetweenNodesFollow_ = false;
 }
 
 void IApatrol::update(GameObject* o, Uint32 deltaTime)
@@ -28,7 +29,7 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 	else 			
 		setNextDestination((districtMap_->getNearestNode(o->getCenter())));
 
-	if(!alreadyAtDestination(o)) 
+	if(!alreadyAtDestination(o))
 		Go(o);
 	
 	else 
@@ -71,6 +72,11 @@ void IApatrol::Go(GameObject * o)
 	phyO_->getBody()->SetLinearVelocity(Vector2D(direction_.x * patrolSpeed_, direction_.y * patrolSpeed_));
 }
 
+void IApatrol::GoInBetweenNodes(GameObject * o)
+{
+
+}
+
 bool IApatrol::arrivedAtDestination(GameObject* o)
 {
 	return (direction_==Vector2D(0,0) 
@@ -104,6 +110,11 @@ void IApatrol::FollowPlayer(GameObject * o)
 	if (followRoute_.empty() ||
 		(!followRoute_.empty() && (VehiclePosChanged() || OutOfRoute(followRoute_, followProgress_)))) {
 		AssignPlayerRoute(o);
+		inBetweenNodesFollow_ = false;
+	}
+	else if (followProgress_ == followRoute_.size() && alreadyAtDestination(o)) {
+		//change to inbetween nodes follow
+		inBetweenNodesFollow_ = true;
 	}
 	else {
 		setNextDestination(followRoute_[followProgress_]);
@@ -133,5 +144,5 @@ bool IApatrol::VehiclePosChanged()
 
 bool IApatrol::OutOfRoute(vector<Node*> route, int progress)
 {
-	return(progress >= route.size() || (progress!=0 && route[progress] != currentNode_));
+	return((progress!=0 && route[progress] != currentNode_));
 }

@@ -18,6 +18,7 @@ public:
 private:
 	bool alreadyAtDestination(GameObject* o);
 	void Go(GameObject* o);
+	void GoInBetweenNodes(GameObject* o);
 	bool arrivedAtDestination(GameObject* o);
 	void setNextDestination(Node* n);
 	void AssignPlayerRoute(GameObject* o);
@@ -25,6 +26,7 @@ private:
 	void FollowRoute(GameObject* o);
 	bool VehiclePosChanged();
 	bool OutOfRoute(vector<Node*> route, int progress);
+	bool inBetweenNodesFollow_;
 	NodeMap* districtMap_;
 	vector<Node*> patrolRoute_;
 	vector<Node*> followRoute_;
