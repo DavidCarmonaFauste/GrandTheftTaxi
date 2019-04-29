@@ -216,7 +216,11 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 //Vehicles
 const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY1{ "../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY2{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY3{ "../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC2-TANK-cobyfy.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 34, 11.5f, 3.5f, 1.0f, 0.6f };
+
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
