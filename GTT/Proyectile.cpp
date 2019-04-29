@@ -39,7 +39,7 @@ void Proyectile::update(Uint32 time)
 	Container::update(time);
 }
 
-void Proyectile::ChangeBulletType(ProyectileInfo p)
+void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 {
 	if (phyO_ != nullptr) {
 		delLogicComponent(phyO_);
@@ -67,7 +67,10 @@ void Proyectile::ChangeBulletType(ProyectileInfo p)
 	animC_->playAnimation("default");
 
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
+	if(!isAnEnemy)
 	phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | TAXI_CATEGORY) );
+	else
+		phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF));
 	phyO_->getBody()->GetFixtureList()->SetRestitution(1.0f);
 
 	switch (p.imp) {
@@ -119,5 +122,10 @@ double Proyectile::GetSpeed()
 void Proyectile::DeactivateBullet()
 {
 	bodyReadyToDestroy_ = true;
+}
+
+bool Proyectile::isAnEnemy()
+{
+	return isAnEnemy_;
 }
 
