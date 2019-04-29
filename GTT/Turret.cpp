@@ -165,14 +165,14 @@ void Turret::Shoot()
 			if (charged_) {
 				crr_ActionShoot_ = specialB.idShoot; //asign int for capture in ShootIC and play sound
 				specialB.damage = magazine_->top()*defaultSpecialDMG_;
-				SPshC_->shoot(specialB);
+				SPshC_->shoot(specialB, false);
 				lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 				charged_ = false;
 			}
 			else {
 				crr_ActionShoot_ = normalB.idShoot; //asign int for capture in ShootIC and play sound
 				normalB.damage = magazine_->top()*defaultNormalDMG_;
-				shC_->shoot(normalB);
+				shC_->shoot(normalB, false);
 				lastTimeShot_ = SDL_GetTicks();
 			}
 
@@ -198,7 +198,7 @@ void Turret::AIShoot()
 {
 	int a = SDL_GetTicks() - lastTimeShot_;
 	if (a >= cadence_) {
-		shC_->shoot(normalB);
+		shC_->shoot(normalB, true);
 		lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 	}
 	/*if (!shotanim_->isAnimationPlaying("shot"))

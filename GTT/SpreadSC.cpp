@@ -7,7 +7,7 @@ SpreadSC::SpreadSC(Turret * turret, double dispersionAngle, int numPellets) :Sho
 	numPellets_ = numPellets;
 }
 
-void SpreadSC::shoot(ProyectileInfo prType)
+void SpreadSC::shoot(ProyectileInfo prType, bool isAnEnemy)
 {
 	double ang = turret_->getRotation() / 180.0 * M_PI - (dispersionAngle_ / 180.0*M_PI / 2);
 
@@ -15,13 +15,13 @@ void SpreadSC::shoot(ProyectileInfo prType)
 	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x , turret_->getCenter().y + spawndir.y);
 
 	ProyectilePool::getInstance()->addProyectile(spawnpoint,
-		Vector2D(sin(ang), -cos(ang)), prType);
+		Vector2D(sin(ang), -cos(ang)), prType, isAnEnemy);
 	double incrang = dispersionAngle_ / 180.0*M_PI / (numPellets_-1);
 	ang += incrang;
 	
 	for (int i = 1; i < numPellets_; i++) {
 		ProyectilePool::getInstance()->addProyectile(spawnpoint,
-			Vector2D((sin(ang)), (-cos(ang))), prType);
+			Vector2D((sin(ang)), (-cos(ang))), prType, isAnEnemy);
 		ang += incrang;
 	}
 }
