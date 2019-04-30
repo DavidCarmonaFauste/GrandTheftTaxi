@@ -1,7 +1,7 @@
 #include "GasMainMenu.h"
 #include "Reticule.h"
 #include "Game.h"
-
+#include "Vehicle.h"
 
 GasMainMenu::GasMainMenu () {
 }
@@ -20,6 +20,16 @@ GasMainMenu::~GasMainMenu () {
 }
 
 void GasMainMenu::start () {
+	taxiPos_ = Vehicle::getInstance ()->getPosition ();
+	
+	int i; //recoge el valor del index si el elemento está en el vector
+	if (!isRegistered(this, i))
+		registerObserver(this);
+
+	int j; //recoge el valor del index si el elemento está en el vector
+	if (!isRegistered(Vehicle::getInstance(), j))
+		registerObserver (Vehicle::getInstance());
+
 	Game::getInstance()->getCamera(GAME_CAMERA)->setZoom(1.0, false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setZoom(1.0, false);
 	
@@ -32,7 +42,7 @@ void GasMainMenu::start () {
 
 	
 	//Container to GameObj list
-	stage_.push_back(background_); // TODO: doesnt render---- FIX!!!
+	stage_.push_back(background_);
 	stage_.push_back(buttons_["fillGasButton"]);
 	stage_.push_back(buttons_["gunShopButton"]);
 	stage_.push_back(buttons_["backButton"]);
@@ -62,10 +72,10 @@ bool GasMainMenu::receiveEvent (Event & e) {
 			cout << "nothing here yet\n";
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
+			LoadTaxiPositionEvent e (this, taxiPos_);
 			Game::getInstance ()->setState (NAME_MAIN_STATE);
-			// TODO: make the taxi appear where it was instead of restarting its position
+			broadcastEvent (e);
 		}
-
 		break;
 	}
 	default:
@@ -75,10 +85,12 @@ bool GasMainMenu::receiveEvent (Event & e) {
 }
 
 void GasMainMenu::setBackground () {
-	//Texture backgroundText_ = Texture (Game::getInstance ()->getRenderer (), GAS_BACKGROUND_INFO.idlePath);
 	backgroundSprite_ = new Sprite (GAS_BACKGROUND_INFO.idlePath, GAS_BACKGROUND_INFO.width, GAS_BACKGROUND_INFO.height);
 	
 	background_ = new Container ();
+
+	background_->setWidth (GAS_BACKGROUND_W);
+	background_->setHeight (GAS_BACKGROUND_H);
 	background_->addRenderComponent (backgroundSprite_);
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Vector2D.h"
 
 class Observable;
 class b2Body;
@@ -27,7 +28,11 @@ enum event_type {
 	NOT_OVER_OBJECT,
 
 	//Proyectile Sounds management
-	TAXI_SHOOT
+	TAXI_SHOOT,
+
+	// Taxi position management (for gas menu)
+	SAVE_TAXI_POS,
+	LOAD_TAXI_POS
 };
 
 struct Event {
@@ -112,3 +117,16 @@ struct TaxiShootEvent : public Event {
 };
 
 
+struct SaveTaxiPositionEvent : public Event {
+	SaveTaxiPositionEvent (Observable* sender, Vector2D pos) : Event (sender, SAVE_TAXI_POS) {
+		position_ = pos;
+	}
+	Vector2D position_;
+};
+
+struct LoadTaxiPositionEvent : public Event {
+	LoadTaxiPositionEvent (Observable* sender, Vector2D pos) : Event (sender, LOAD_TAXI_POS) {
+		position_ = pos;
+	}
+	Vector2D position_;
+};

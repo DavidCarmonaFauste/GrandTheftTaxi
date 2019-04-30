@@ -99,9 +99,23 @@ void Vehicle::update(Uint32 time) {
 }
 
 bool Vehicle::receiveEvent(Event & e) {
-	if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
-	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
-
+	switch (e.type_) {
+	case STARTED_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+		break;
+	case STOPPED_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+		break;
+	case LOAD_TAXI_POS: {
+		LoadTaxiPositionEvent loadTaxiPosEvent =  static_cast<LoadTaxiPositionEvent&>(e);
+		Vehicle::getInstance ()->setPosition (loadTaxiPosEvent.position_);
+		SaveSpawnPoint (loadTaxiPosEvent.position_);
+		break;
+	}
+	default:
+		break;
+	}
+	
 	return true;
 }
 

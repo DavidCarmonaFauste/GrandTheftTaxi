@@ -4,7 +4,7 @@
 #include "Observer.h"
 
 class GasMainMenu :
-	public GameState, public Observer {
+	public GameState, public Observer, public Observable {
 public:
 	GasMainMenu ();
 	virtual ~GasMainMenu ();
@@ -21,6 +21,8 @@ private:
 
 	map<string, Button*> buttons_;
 	Sprite *fillSprite_, *gunSprite_, *backSprite_;
+
+	Vector2D taxiPos_;
 
 	void setBackground ();
 	void setButtons ();
