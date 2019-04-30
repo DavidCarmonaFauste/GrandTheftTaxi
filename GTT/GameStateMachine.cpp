@@ -1,6 +1,7 @@
 #include "GameStateMachine.h"
 #include "MainMenuState.h"
 #include "MainState.h"
+#include "GasMainMenu.h"
 #include "ShopState.h"
 #include "MpegState.h"
 #include "Reticule.h"
@@ -39,6 +40,8 @@ void GameStateMachine::initStates() {
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
 	// Main game
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+	// Gas main menu
+	STATES_.insert (std::pair<string, GameState*> (NAME_GAS_MAIN_STATE, new GasMainMenu ()));
 	// Shop state
 	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
 	

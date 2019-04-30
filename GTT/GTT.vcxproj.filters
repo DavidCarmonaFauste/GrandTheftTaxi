@@ -277,6 +277,9 @@
     <ClCompile Include="EnemyShoot.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="GasMainMenu.cpp">
+      <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -504,6 +507,9 @@
     </ClInclude>
     <ClInclude Include="EnemyShoot.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GasMainMenu.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

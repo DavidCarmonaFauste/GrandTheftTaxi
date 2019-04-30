@@ -14,7 +14,7 @@ void EnemyShoot::update(GameObject* o, Uint32 deltaTime)
 		if (e->taxiOnRange()) {
 			cout << "true" << endl;
 		}
-		else cout << "false" << endl;
+		//else cout << "false" << endl;
 
 		int i = 0;
 

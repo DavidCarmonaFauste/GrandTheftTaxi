@@ -45,6 +45,15 @@ void MainMenuState::start()
 	//build and set private components
 	setComponents ();
 
+	
+	//Container to GameObj list
+	stage_.push_back(mainBackground_);
+	stage_.push_back(buttons_["newGameButton"]);
+	stage_.push_back(buttons_["exitButton"]);
+	stage_.push_back(Reticule::getInstance());
+	stage_.push_back(Taxi_);
+	stage_.push_back(Title_);
+
 	//insert channels in map (max 8)
 	Channels_.insert(std::pair<string, int>("Start", 1));
 	Channels_.insert(std::pair<string, int>("NG", 2));
@@ -235,13 +244,4 @@ void MainMenuState::setComponents () {
 	//add and set renderC
 	Title_->addRenderComponent(Title_anm);
 	Title_anm->setAnimation(MAIN_TITLE_TITLE.name);
-
-
-	//Container to GameObj list
-	stage_.push_back(mainBackground_);
-	stage_.push_back(buttons_["newGameButton"]);
-	stage_.push_back(buttons_["exitButton"]);
-	stage_.push_back(Reticule::getInstance());
-	stage_.push_back(Taxi_);
-	stage_.push_back(Title_);
 }
