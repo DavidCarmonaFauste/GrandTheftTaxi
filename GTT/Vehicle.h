@@ -13,7 +13,7 @@ class ShootIC;
 
 class Vehicle : public Car
 {
-	
+
 
 	//hide copyBuilder and 	assignment operator
 	Vehicle(Vehicle &) = delete;
@@ -42,9 +42,9 @@ public:
 	void initAtributtes(VehicleInfo r, KeysScheme k);
 
 
-	float32 GetMaxBackwardSpeed();	
+	float32 GetMaxBackwardSpeed();
 	float32 GetAcceleration();
-	
+
 
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
@@ -58,9 +58,9 @@ public:
 
 	virtual bool receiveEvent(Event& e);
 	virtual void SaveSpawnPoint(Vector2D spawn);
-	
 
-	private:
+
+private:
 
 	int currentTurret_;
 
@@ -71,15 +71,6 @@ public:
 	float32 acceleration_;
 
 	ControlType* control_;
-
-	TaxiSoundManagerCP* smLC_;
-
-	//Dialogos
-	DialoguesManager* dm_;
-
-	static const int MAXTURRETS = 4;
-
-	
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
 

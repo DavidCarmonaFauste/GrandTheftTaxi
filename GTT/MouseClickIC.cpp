@@ -3,11 +3,11 @@
 #include "Game.h"
 
 MouseClickIC::MouseClickIC(int key) {
-	mouseClickKey_ = key;	
+	mouseClickKey_ = key;
 }
 
 
-MouseClickIC::~MouseClickIC () {}
+MouseClickIC::~MouseClickIC() {}
 
 
 void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event) {
@@ -39,7 +39,7 @@ void MouseClickIC::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event
 				//si se produce el evento de input leftMouse
 				if (event.button.button == mouseClickKey_) {
 					MouseClickLeft e(this, button->getIndex());
-					broadcastEvent(e);									
+					broadcastEvent(e);
 				}
 			}
 		}//SDL_MOUSEBUTTONUP
