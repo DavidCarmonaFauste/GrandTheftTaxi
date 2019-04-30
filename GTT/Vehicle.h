@@ -1,42 +1,53 @@
-#pragma once
-
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
 #include "DialoguesManager.h"
 
+#pragma once
+
 using namespace std;
 
 class Turret;
-
 class ReloadInputComponent;
 class ShootIC;
 
 class Vehicle : public Car
 {
-public:
-	Vehicle(Vehicle&) = delete;
-	Vehicle& operator=(const Vehicle&) = delete;
+	
 
+	//hide copyBuilder and 	assignment operator
+	Vehicle(Vehicle &) = delete;
+	Vehicle & operator=(const Vehicle &) = delete;
+
+	static unique_ptr<Vehicle > instance_; //ptr instance class
+
+
+public:
+	//builder
+	Vehicle();
 	virtual ~Vehicle();
 
-	//Get
-	
-	float32 GetMaxBackwardSpeed();
-	
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new Vehicle());
+		}
+	}
+	//get singleton class
+	inline static Vehicle* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
+
+	void initAtributtes(VehicleInfo r, KeysScheme k);
+
+
+	float32 GetMaxBackwardSpeed();	
 	float32 GetAcceleration();
 	
 
-	static Vehicle* GetInstance() {
-		if (instance_ == nullptr) {
-			instance_ = new Vehicle(3200, 2432, THECOOLERTAXI, DEFAULT_KEYS);
-		}
-		return instance_;
-	}
-
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
-	virtual TaxiSoundManagerCP* GetTxSoundManager();
 	virtual void EquipTurret(Turret* turret);
 	virtual void ChangeTurret();
 	Turret* getCurrentTurret();
@@ -46,16 +57,17 @@ public:
 	virtual void update(Uint32 time);
 
 	virtual bool receiveEvent(Event& e);
+	virtual void SaveSpawnPoint(Vector2D spawn);
 	
 
 	private:
 
-	Vehicle(int x, int y, VehicleInfo r, KeysScheme k);
+	int currentTurret_;
 
-	static Vehicle* instance_;
+
+	void Respawn();
 
 	float32 maxBackwardSpeed_;
-	
 	float32 acceleration_;
 
 	ControlType* control_;
@@ -71,8 +83,13 @@ public:
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
 
+	Vector2D spawnPosition_;
+
+	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
-	int currentTurret_=0;
-	
+	TaxiSoundManagerCP* smLC_;
+	bool alive_;
+	int deathTime_;
+
 };

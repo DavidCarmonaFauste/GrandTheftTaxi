@@ -5,26 +5,41 @@
 
 class ProyectilePool :public GameObject
 {
-public:
+	static const int MAXPROYECTILES = 100;
+
 	ProyectilePool(ProyectilePool&) = delete;
 	ProyectilePool& operator=(const ProyectilePool&) = delete;
 
-	static ProyectilePool* GetInstance() {
-		if (instance_ == nullptr) {
-			instance_ = new ProyectilePool();
+	static unique_ptr<ProyectilePool> instance_; //ptr instance class
+
+
+public:
+	//builder
+	ProyectilePool();
+	virtual ~ProyectilePool();
+
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new ProyectilePool());
 		}
-		return instance_;
 	}
+	//get singleton class
+	inline static ProyectilePool* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
+
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
-	virtual Proyectile* addProyectile(Vector2D pos, Vector2D vel, ProyectileInfo prType);
-	virtual ~ProyectilePool();
-private:
-	ProyectilePool();
-	static const int MAXPROYECTILES = 100;
+	virtual Proyectile* addProyectile(Vector2D pos, Vector2D vel, ProyectileInfo prType, bool isAnEnemy);
+
+	
+
+private:	
 	Proyectile proyectiles_[MAXPROYECTILES];
 	Proyectile* getUnusedProyectile();
-	static ProyectilePool* instance_;
+
 };
 

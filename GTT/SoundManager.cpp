@@ -1,6 +1,11 @@
 #include "SoundManager.h"
 
+
+unique_ptr<SoundManager> SoundManager::instance_ = nullptr;
+
 SoundManager::SoundManager() {
+
+	Mix_ChannelFinished(&SoundManager::channelDone); //dont touch
 
 	// Load the music files from the resources sheet
 	for (auto music : MUSIC) {
@@ -28,6 +33,12 @@ SoundManager::~SoundManager() {
 }
 
 
+
+int SoundManager::setAlloctaedChannels(int n)
+{
+	return Mix_AllocateChannels(n);	
+}
+
 // NO NEED TO USE THIS DIRECTLY,
 // USE THE RESOURCES SHEET INSTEAD !!!
 bool SoundManager::loadSound(string path, soundId id) {
@@ -35,6 +46,11 @@ bool SoundManager::loadSound(string path, soundId id) {
 	return loadedSounds_[id] != nullptr;
 }
 
+//secundary method
+int SoundManager::playSound_Ch(int channel, soundId id, int loops) {
+	return Mix_PlayChannel(channel, loadedSounds_[id], loops);
+}
+//primary method
 int SoundManager::playSound(soundId id, int loops) {
 	return Mix_PlayChannel(-1, loadedSounds_[id], loops);
 }
@@ -46,6 +62,14 @@ void SoundManager::pauseSound(int channel) {
 void SoundManager::resumeSound(int channel) {
 	Mix_Resume(channel);
 }
+
+
+
+int SoundManager::stopSound(int channel)
+{
+	return Mix_HaltChannel(channel);
+}
+
 
 bool SoundManager::isSoundPlaying(int channel) {
 	return Mix_Playing(channel);
@@ -79,4 +103,26 @@ bool SoundManager::isMusicPlaying() {
 
 bool SoundManager::musicExists(musicId id) {
 	return loadedMusic_.find(id) != loadedMusic_.end();
+}
+
+
+void SoundManager::setVolumeSound(int& channel, const int& v)
+{
+	Mix_Volume(channel, v);
+}
+
+int SoundManager::getVolumeSound(int & channel, const int & v)
+{
+	return Mix_Volume(channel, v);
+}
+
+int SoundManager::getMIX_MAX_VOLUME()
+{
+	return MIX_MAX_VOLUME;
+
+}
+
+void SoundManager::channelDone(int channel) {
+	ChannelStoppedPlaying e = ChannelStoppedPlaying(instance_.get(), channel);
+	instance_.get()->broadcastEvent(e);
 }

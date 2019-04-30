@@ -1,40 +1,40 @@
 #pragma once
 #include "GameState.h"
-#include "Vehicle.h"
 #include "Button.h"
+#include "Observer.h"
+#include "SoundManager.h"
 
 
-static void mockCallback () {
-}
-
-static void exitGameCallback () {
-	Game::getInstance ()->setGameEnd ();
-}
-
-static void mainStateCallback () {
-	Game::getInstance()->setState(NAME_MAIN_STATE);
-}
 
 
 class MainMenuState :
-	public GameState
+	public GameState, public Observer
 {
 public:
 
 	MainMenuState();
 	virtual ~MainMenuState();
 
-	virtual void start();
+	virtual void start() override;
+	virtual void end() override;
 
-	virtual void update (Uint32 deltaTime);
-	
+	virtual void update(Uint32 deltaTime);
+
+	virtual bool receiveEvent(Event& e);
+
 
 private:
-	
+
+	SoundManager* s_;
+
+	map<string, int> Channels_;
+
 	//Background
 	Container* mainBackground_ = nullptr;
+
 	//Buttons
 	map<string, Button*> buttons_;
+
 	soundId Sound_NewGameButton_;
 	//taxi
 	Container* Taxi_ = nullptr;
@@ -43,8 +43,7 @@ private:
 	Container* Title_ = nullptr;
 	Animation* Title_anm; //necesary for set in this Update
 
-	//scene management
-	int cont_1;
-	
-};
+	bool DEBUG_;
 
+
+};

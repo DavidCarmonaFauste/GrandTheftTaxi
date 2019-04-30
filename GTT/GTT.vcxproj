@@ -22,15 +22,19 @@
     <ClCompile Include="AimAtCursorAC.cpp" />
     <ClCompile Include="AmmoDisplay.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="BounceImC.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
-    <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="CustomContactListener.cpp" />
+    <ClCompile Include="EnemyAim.cpp" />
+    <ClCompile Include="EnemyPool.cpp" />
+    <ClCompile Include="EnemyShoot.cpp" />
+    <ClCompile Include="ExplosiveImC.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="FollowMiddlePoint.cpp" />
@@ -40,6 +44,8 @@
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
+    <ClCompile Include="IApatrol.cpp" />
+    <ClCompile Include="ImpactComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
     <ClCompile Include="LinearSC.cpp" />
@@ -51,6 +57,8 @@
     <ClCompile Include="MoneyDisplay.cpp" />
     <ClCompile Include="MouseClickIC.cpp" />
     <ClCompile Include="MpegState.cpp" />
+    <ClCompile Include="NodeMap.cpp" />
+    <ClCompile Include="NodeMapsManager.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="Observer.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
@@ -63,6 +71,8 @@
     <ClCompile Include="Reticule.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
+    <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopState.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpreadSC.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -72,6 +82,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Turret.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -83,6 +94,7 @@
     <ClInclude Include="AimComponent.h" />
     <ClInclude Include="AmmoDisplay.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="BounceImC.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
@@ -91,10 +103,13 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
-    <ClInclude Include="Dialogues.h" />
     <ClInclude Include="DialoguesManager.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="CustomContactListener.h" />
+    <ClInclude Include="EnemyAim.h" />
+    <ClInclude Include="EnemyPool.h" />
+    <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="Events.h" />
+    <ClInclude Include="ExplosiveImC.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="FollowMiddlePoint.h" />
@@ -105,6 +120,8 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
+    <ClInclude Include="IApatrol.h" />
+    <ClInclude Include="ImpactComponent.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
     <ClInclude Include="LinearSC.h" />
@@ -115,6 +132,8 @@
     <ClInclude Include="MoneyDisplay.h" />
     <ClInclude Include="MouseClickIC.h" />
     <ClInclude Include="MpegState.h" />
+    <ClInclude Include="NodeMap.h" />
+    <ClInclude Include="NodeMapsManager.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Phrases.h" />
@@ -128,6 +147,8 @@
     <ClInclude Include="Reticule.h" />
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
+    <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopState.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpreadSC.h" />
     <ClInclude Include="Sprite.h" />
@@ -137,6 +158,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Turret.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />

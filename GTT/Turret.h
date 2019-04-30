@@ -4,6 +4,7 @@
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include <stack>
+#include "Observable.h"
 
 class Animation;
 class ShootComponent;
@@ -11,7 +12,7 @@ class AimComponent;
 
 
 //clase abstracta, padre de los diferentes tipos de torreta
-class Turret : public Container
+class Turret : public Container, public Observable
 {
 public:
 	Turret(WeaponInfo w);
@@ -19,6 +20,7 @@ public:
 	virtual void render(Uint32 deltaTime);
 	virtual void AttachToVehicle(Car* car);
 	virtual void Shoot();
+	virtual void AIShoot();
 	virtual void Reload();
 	virtual void PerfectReload();
 	virtual void CancelReload();
@@ -34,6 +36,13 @@ public:
 	virtual bool isReloading();
 	virtual bool isAutomatic();
 	virtual ~Turret();
+
+	virtual int getCrrActionShoot();
+
+
+
+
+
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
 	int maxAmmo_;//capacidad del cargador
@@ -57,13 +66,18 @@ protected:
 	FollowGameObject* followC_;
 	Animation* animC_;
 	Car* car_;//coche al que esta pegada la torreta
+
 	ProyectileInfo normalB;
 	int defaultNormalDMG_;
 	ProyectileInfo specialB;
 	int defaultSpecialDMG_;
+	int crr_ActionShoot_; //sound management in ShootIC
+
 	Container sparkleEffect_;
 	Animation* sparkleanim_;
 	Container shotEffect_;
 	Animation* shotanim_;
+
+
 };
 

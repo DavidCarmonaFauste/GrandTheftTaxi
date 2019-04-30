@@ -1,9 +1,8 @@
 #pragma once
-#include "InputComponent.h"
-#include "LogicComponent.h"
+#include "ControlType.h"
 
 class ShootIC :
-	public InputComponent, public LogicComponent
+	public ControlType
 {
 public:
 	ShootIC(int shootkey=SDL_BUTTON_LEFT);

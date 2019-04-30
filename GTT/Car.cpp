@@ -2,14 +2,17 @@
 #include "AimComponent.h"
 
 
-Car::Car(int x, int y)
+Car::Car()
 {
-	this->setPosition(Vector2D(x, y));
 }
 
 
 Car::~Car()
 {
+	delete health_;
+	delete aimC_;
+	delete phyO_;
+	delete sprite_;
 }
 
 Health * Car::getHealthComponent() {

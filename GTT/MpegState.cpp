@@ -20,6 +20,10 @@ void MpegState::start() {
 	}	
 }
 
+void MpegState::end()
+{
+}
+
 
 void MpegState::setVideoId(videoId videoId) {
 	videoId_ = videoId;

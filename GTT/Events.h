@@ -1,6 +1,7 @@
 #pragma once
 
 class Observable;
+class b2Body;
 
 enum event_type {
 	GAME_START,
@@ -9,10 +10,24 @@ enum event_type {
 	HEALTH_CHANGED,
 	MONEY_CHANGED,
 	RESPAWNED,
+	//Vehicle sound management
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
+	BACK_MOVING_FORWARD,
+	STOPPED_BACK_MOVING_FORWARD,
 
-	EVENTS_LENGTH
+	CHANNEL_STOPPED_PLAYING,
+
+	EVENTS_LENGTH,
+
+	TRIGGER_EVENT,
+	//Buttons management
+	CLICK_BUTTON,
+	OVER_OBJECT,
+	NOT_OVER_OBJECT,
+
+	//Proyectile Sounds management
+	TAXI_SHOOT
 };
 
 struct Event {
@@ -48,3 +63,52 @@ struct MoneyChangedEvent : public Event {
 	int currentMoney_;
 	int previousMoney_;
 };
+
+struct TriggerEvent : public Event {
+	TriggerEvent(Observable* sender, b2Body* detected, bool leaving) :
+		Event(sender, TRIGGER_EVENT) {
+		detected_ = detected;
+		leaving_ = leaving;
+	}
+
+	b2Body* detected_;
+	bool leaving_;
+};
+struct ChannelStoppedPlaying : public Event {
+	ChannelStoppedPlaying(Observable* sender, int channel) : Event(sender, CHANNEL_STOPPED_PLAYING) {
+		channel_ = channel;
+	}
+
+	int channel_;
+};
+
+struct MouseClickLeft : public Event {
+	MouseClickLeft(Observable* sender, int button) : Event(sender, CLICK_BUTTON) {
+		button_ = button;
+	}
+
+	int button_;
+};
+
+struct MouseOverObj : public Event {
+	MouseOverObj(Observable* sender, int objIndex) : Event(sender, OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+struct NotMouseOverObj : public Event {
+	NotMouseOverObj(Observable* sender, int objIndex) : Event(sender, NOT_OVER_OBJECT) {
+		objIndex_ = objIndex;
+	}
+	int objIndex_;
+};
+
+struct TaxiShootEvent : public Event {
+	TaxiShootEvent(Observable* sender, int sID) : Event(sender, TAXI_SHOOT) {
+		shootId_ = sID;
+	}
+	int shootId_;
+};
+
+

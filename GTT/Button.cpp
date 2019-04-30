@@ -1,18 +1,12 @@
 #include "Button.h"
-#include "MouseClickIC.h"
+
 
 
 //spriteSheet
-Button::Button(CallBackOnClick cb)
+Button::Button()
 {
-	callback = cb;
-
-	/*mouseClickIC = new MouseClickIC(buttonType);
-	buttonAnimation_ = new Animation();
-	buttonAnimation_->loadAnimation(buttonType[defaultAnm].idlePath, buttonType[defaultAnm].name, buttonType[defaultAnm].frAnm.cols, buttonType[defaultAnm].frAnm.rows);	
-	addRenderComponent(buttonAnimation_);
-	addInputComponent(mouseClickIC);*/
-
+	mouseClickIC_ = new MouseClickIC();
+	addInputComponent(mouseClickIC_);
 }
 
 
@@ -30,9 +24,19 @@ Animation * Button::getButtonAnimacion()
 	return buttonAnimation_;
 }
 
+Animation * Button::getButtonAnimation()
+{
+	return buttonAnimation_;
+}
+
 void Button::setButtonAnimation(Animation * anm)
 {
 	buttonAnimation_ = anm;
+}
+
+MouseClickIC * Button::getMouseClickIC()
+{
+	return mouseClickIC_;
 }
 
 void Button::setMouseClickIC(MouseClickIC * mCIc)
@@ -45,12 +49,18 @@ void Button::setClickSound(soundId sound)
 	clickSound_ = sound;
 }
 
-bool  Button:: isMouseClickICEvent()
+void Button::setIndex(int i)
 {
-	return mouseClickIC_->isClickEvent();
+	index_ = i;
 }
 
-const soundId Button::getSound()
+int Button::getIndex()
+{
+	return index_;
+}
+
+
+const soundId Button::getSoundId()
 {
 	if (clickSound_ != (int)-1)
 		return clickSound_;

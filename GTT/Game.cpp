@@ -1,9 +1,17 @@
 ﻿#include "Game.h"
+
+//singleton patterns
+#include "Reticule.h"
+#include "Vehicle.h"
+#include "ProyectilePool.h"
+#include "NodeMapsManager.h"
+#include "EnemyManager.h"
+
 #include <iostream>
 
 using namespace std;
 
-Game* Game::singleton_ = nullptr;
+unique_ptr<Game> Game::instance_ = nullptr;
 
 Game::Game() {
 	// Initialization values
@@ -20,15 +28,20 @@ Game::Game() {
 	// SDL_TTF initialization
 	TTF_Init();
 
+	//mouse can't exit the screen
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
+	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
-
+	
 	world_ = new b2World(b2Vec2(0, 0));
-	soundManager_ = new SoundManager();
 
+	world_->SetContactListener(CustomContactListener::getInstance());
+	
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
@@ -42,7 +55,6 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
-	delete soundManager_; soundManager_ = nullptr;
 
 }
 
@@ -57,7 +69,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 				exit_ = true;
 			}
 			
-			else if (event.key.keysym.sym == SDLK_f) {
+			if (event.key.keysym.sym == SDLK_f) {
 				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
 		}
@@ -69,6 +81,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
+	
 	while (accumulator_ >= step_*1000) {
 		world_->Step(step_, velIterations_, posIterations_);
 		accumulator_ -= step_*1000;
@@ -81,7 +94,6 @@ void Game::update(Uint32 deltaTime)
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
-
 	// Render the cameras and the state
 	for (auto cam : cameras_) cam.second->render(deltaTime);
 	gmStMachine_->get_CurrentState()->render(deltaTime);
@@ -126,7 +138,7 @@ b2World * Game::getWorld()
 
 SoundManager * Game::getSoundManager()
 {
-	return soundManager_;
+	return SoundManager::getInstance();
 }
 
 Camera * Game::getCamera(cameraType cT)
@@ -147,21 +159,20 @@ void Game::init() {
 	cameras_[GAME_CAMERA] = new Camera(1600, 900);
 	cameras_[UI_CAMERA] = new Camera(1600, 900);
 
+	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
+	SoundManager::getInstance()->initInstance();
+	Reticule::getInstance()->initInstance();
+	Vehicle::getInstance()->initInstance(); //after, in MainState must do initiAtributtes(VehicleInfo r, KeysScheme k);
+	ProyectilePool::getInstance()->initInstance();
+	NodeMapsManager::getInstance()->initInstance();
+	EnemyManager::getInstance()->initInstance();
+
 	// Create the resources singleton for the first time
 	// and initialize its states
 	gmStMachine_ = new GameStateMachine();
 	gmStMachine_->initStates();
-
-	//initialize SoundManager
-	soundManager_ = new SoundManager();
 }
 
-Game * Game::getInstance() {
-	if (singleton_ == nullptr)
-		singleton_ = new Game();
-
-	return singleton_;
-}
 
 //Run es llamado desde Main y gestiona los update, render y hangleEvents de los estados
 void Game::run() {

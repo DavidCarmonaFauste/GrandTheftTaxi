@@ -4,11 +4,6 @@ InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
 	k_ = k;
 	v_ = v;
-	//Input booleans
-	forwardPressed_ = false;
-	backwardPressed_ = false;
-	rightTurnPressed_ = false;
-	leftTurnPressed_ = false;
 
 	targetDamping = DFLT_DAMPING;
 	targetLateralVelocity = DFLT_LATERAL_VELOCITY;
@@ -30,7 +25,12 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, STARTED_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = true;
+		if (event.key.keysym.sym == k_.backwards) { 
+			backwardPressed_ = true; 
+			Event e(this, BACK_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
+
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
@@ -41,7 +41,11 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, STOPPED_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-		if (event.key.keysym.sym == k_.backwards) backwardPressed_ = false;
+		if (event.key.keysym.sym == k_.backwards) { 
+			backwardPressed_ = false; 
+			Event e(this, STOPPED_BACK_MOVING_FORWARD);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
 		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
@@ -50,7 +54,7 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 
 void InputMovement::update(GameObject * o, Uint32 deltaTime)
 {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D currentDir = Vector2D(cos(body->GetAngle()), sin(body->GetAngle()));
 	Vector2D vel = body->GetLinearVelocity();
 
@@ -76,7 +80,10 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	// Handbrake
 	if (!handBrakePressed_) {
 		targetDamping = DFLT_DAMPING;
-		if (targetLateralVelocity > 0)targetLateralVelocity -= (DFLT_LATERAL_VELOCITY * deltaTime / 100);
+		if (targetLateralVelocity > DFLT_LATERAL_VELOCITY)
+			targetLateralVelocity -= (HBRK_LATERAL_RECOVER * deltaTime / 100);
+		else
+		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
@@ -89,7 +96,7 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 }
 
 void InputMovement::steeringWheel() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	float turnSpeed = 0;
 	if (backwardPressed_) {
@@ -98,8 +105,8 @@ void InputMovement::steeringWheel() {
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -2* v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 2* v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -1.6* v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 1.6* v_->GetTurnSpeed();
 		}
 		else {
 			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
@@ -114,13 +121,13 @@ void InputMovement::steeringWheel() {
 }
 
 Vector2D InputMovement::getLateralVelocity() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 	Vector2D normal = body->GetWorldVector(Vector2D(0, 1));
 	return b2Dot(normal, body->GetLinearVelocity()) * normal;
 }
 
 void InputMovement::updateFriction() {
-	b2Body* body = Vehicle::GetInstance()->GetPhyO()->getBody();
+	b2Body* body = Vehicle::getInstance()->GetPhyO()->getBody();
 
 	body->SetLinearDamping(targetDamping);
 
@@ -130,7 +137,7 @@ void InputMovement::updateFriction() {
 } 
 
 bool InputMovement::isMoving() {
-	if (abs(Vehicle::GetInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
+	if (abs(Vehicle::getInstance()->GetPhyO()->getBody()->GetLinearVelocity().Length()) > 0)
 		return true;
 	else 
 		return false;

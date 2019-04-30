@@ -5,8 +5,8 @@
 
 ReloadingDisplay::ReloadingDisplay()
 {
-	setPosition(Vector2D(Game::getInstance()->getWindowWidth()-40, 30));
-	setWidth(200); setHeight(50);
+	setPosition(Vector2D(Game::getInstance()->getCamera(UI_CAMERA)->getWidth()*0.9, Game::getInstance()->getCamera(UI_CAMERA)->getHeight() * 0.1));
+	setWidth(150); setHeight(35);
 
 	background = new Sprite("./../Assets/sprites/ReloadBarBackground.png");
 	background->setCamera(UI_CAMERA);
@@ -34,15 +34,17 @@ ReloadingDisplay::ReloadingDisplay()
 
 void ReloadingDisplay::setReloadingPercentage()
 {
-	Texture* tex = bar->getTexture();
-	bar_clip->x = bar_clip->y = 0;
-	bar_clip->w = tex->getWidth() * Vehicle::GetInstance()->getCurrentTurret()->GetReloadPercentage();
-	bar_clip->h = tex->getHeight();
+	if (Vehicle::getInstance()->getCurrentTurret() != nullptr) {
+		Texture* tex = bar->getTexture();
+		bar_clip->x = bar_clip->y = 0;
+		bar_clip->w = tex->getWidth() * Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage();
+		bar_clip->h = tex->getHeight();
 
-	bar->setSize(barWidth *  Vehicle::GetInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
-	bar->setClipRect(bar_clip);
-	perfReSegment->setSize(barWidth*Vehicle::GetInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
-	perfReSegment->setPos(bar->getRect()->x + barWidth* Vehicle::GetInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
+		bar->setSize(barWidth *  Vehicle::getInstance()->getCurrentTurret()->GetReloadPercentage(), getHeight());
+		bar->setClipRect(bar_clip);
+		perfReSegment->setSize(barWidth*Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadSeg(), getHeight());
+		perfReSegment->setPos(bar->getRect()->x + barWidth * Vehicle::getInstance()->getCurrentTurret()->GetPerfReloadIni(), getPosition().y);
+	}
 }
 
 ReloadingDisplay::~ReloadingDisplay()
@@ -54,17 +56,17 @@ ReloadingDisplay::~ReloadingDisplay()
 
 void ReloadingDisplay::update(Uint32 deltaTime)
 {
-	if(active_)
-		setReloadingPercentage();
+	setReloadingPercentage();
 }
 
 void ReloadingDisplay::render(Uint32 deltaTime)
 {
-	if (active_)
-		Container::render(deltaTime);
+	Container::render(deltaTime);
+	
 }
 
 bool ReloadingDisplay::isReloading()
 {
-	return Vehicle::GetInstance()->getCurrentTurret()->isReloading();
+	if (Vehicle::getInstance()->getCurrentTurret() == nullptr)return false;
+	return Vehicle::getInstance()->getCurrentTurret()->isReloading();
 }

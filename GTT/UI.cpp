@@ -1,6 +1,8 @@
 
 #include "UI.h"
 
+UI *UI::singleton_ = nullptr;
+
 UI::UI() {
 	UIElements_ = vector<GameObject*>();
 
@@ -26,7 +28,6 @@ UI::UI() {
 	//Reload
 	reloadDisplay_ = new ReloadingDisplay();
 	UIElements_.push_back(reloadDisplay_);
-
 }
 
 
@@ -35,6 +36,13 @@ UI::~UI() {
 		delete e; e = nullptr;
 	}
 	UIElements_.clear();
+}
+
+UI * UI::getInstance() {
+	if (singleton_ == nullptr)
+		singleton_ = new UI();
+
+	return singleton_;
 }
 
 void UI::render(Uint32 deltaTime) {
@@ -68,5 +76,9 @@ bool UI::receiveEvent(Event& e) {
 	}
 
 	return true;
+}
+
+void UI::setAmmoActive(bool active) const {
+	ammoDisplay_->setActive(active);
 }
 
