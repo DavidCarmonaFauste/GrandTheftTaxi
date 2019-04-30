@@ -9,7 +9,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
+Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon){
 	this->setWidth(r.width);
 	this->setHeight(r.height);
 
@@ -39,10 +39,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 	//IA
 	pursuitRange_ = 32 * 40;
 	patrolBehaviour_ = new IApatrol(GetPhyO(), nmap, speed_, route);
-	addLogicComponent(patrolBehaviour_);
+	//addLogicComponent(patrolBehaviour_);
 	aimC_ = new EnemyAim();
 
-	turret_ = new Turret(GUN);
+	turret_ = new Turret(weapon);
 	turret_->AttachToVehicle(this);
 }
 

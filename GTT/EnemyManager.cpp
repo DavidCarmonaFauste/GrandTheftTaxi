@@ -33,19 +33,19 @@ void EnemyManager::ReadEnemyInfo()
 				row >> enemyid >> patrolid >> spawnid >> type;
 				Enemy* e;
 				if (type == "Type1") {
-					e = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
+					e = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], GUN);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type2") {
-					e = new Enemy(ENEMY2, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
+					e = new Enemy(ENEMY2, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid],SHOTGUN);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type3") {
-					e = new Enemy(ENEMY3, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
+					e = new Enemy(ENEMY3, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], GUN);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type4") {
-					e = new Enemy(ENEMYTANK, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
+					e = new Enemy(ENEMYTANK, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], SHOTGUN);
 					enemies_[enemyid] = e;
 				}
 				break;
