@@ -31,4 +31,3 @@ private:
 	// Systems
 	Respawner* respawner_;
 };
-

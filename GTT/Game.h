@@ -64,12 +64,12 @@ public:
 	void setState(string state);
 
 	// state setters
-	void setGameEnd () { exit_ = true; }
+	void setGameEnd() { exit_ = true; }
 
 	void init();
 
 private:
-	
+
 	const int winWidth_ = WIN_WIDTH;
 	const int winHeight_ = WIN_HEIGHT;
 
@@ -95,4 +95,3 @@ private:
 	double step_ = 1.0f / 60.0f;
 	int velIterations_ = 8, posIterations_ = 3;
 };
-

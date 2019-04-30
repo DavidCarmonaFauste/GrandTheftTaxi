@@ -31,8 +31,8 @@ void MainState::start() {
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-	
-	
+
+
 
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
@@ -45,8 +45,8 @@ void MainState::start() {
 	EnemyManager::getInstance()->ReadEnemyInfo();
 	// Camera positioning
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
-	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth()/2,
-						  Game::getInstance()->getCamera(GAME_CAMERA)->getHeight()/2);
+	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth() / 2,
+		Game::getInstance()->getCamera(GAME_CAMERA)->getHeight() / 2);
 	Game::getInstance()->getCamera(GAME_CAMERA)->setPosition(cameraPos);
 
 	// Systems
@@ -55,7 +55,7 @@ void MainState::start() {
 	// UI
 	//...
 	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
-	
+
 	//pushBack GameObj to list
 	stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
@@ -63,7 +63,7 @@ void MainState::start() {
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
-	
+
 }
 
 void MainState::end()
@@ -71,10 +71,10 @@ void MainState::end()
 }
 
 
-void MainState::update (Uint32 deltaTime) {
-	Game::getInstance ()->getCamera (GAME_CAMERA)->setCentered (true);
-	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (true);
+void MainState::update(Uint32 deltaTime) {
+	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(true);
+	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(true);
 
-	GameState::update (deltaTime);
+	GameState::update(deltaTime);
 }
 
