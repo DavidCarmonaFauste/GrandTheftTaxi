@@ -33,7 +33,7 @@ void TileMap::tmxToScene() {
 	// containers
 	const auto& layers = tmxMap_->getLayers();
 	for (const auto& layer : layers) {
-		
+
 		// Process only object layers
 		if (layer->getType() == tmx::Layer::Type::Object) {
 			cout << "Info: loading object layer " + layer->getName() + "\n";
@@ -62,10 +62,10 @@ bool TileMap::processCollision(const tmx::Object &object) {
 	tmx::FloatRect box = object.getAABB();
 	tmx::Vector2f pos = object.getPosition();
 	Vector2D size = Vector2D(box.width / 2 * PHYSICS_SCALING_FACTOR,
-							 box.height / 2 * PHYSICS_SCALING_FACTOR);
+		box.height / 2 * PHYSICS_SCALING_FACTOR);
 
 	shape->SetAsBox(size.x, size.y, Vector2D(pos.x * PHYSICS_SCALING_FACTOR + size.x,
-											 pos.y*PHYSICS_SCALING_FACTOR + size.y), 0);
+		pos.y*PHYSICS_SCALING_FACTOR + size.y), 0);
 	fixDef.shape = shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
 
@@ -94,7 +94,7 @@ bool TileMap::processGas(const tmx::Object & object) {
 bool TileMap::processNodes(const tmx::Object & object, string layerName)
 {
 	if (!NodeMapsManager::getInstance()->NodeMapExists(layerName)) NodeMapsManager::getInstance()->addNodeMap(layerName);
-	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width/2, object.getPosition().y + object.getAABB().height/2), object.getName());
+	Node* node = new Node(Vector2D(object.getPosition().x + object.getAABB().width / 2, object.getPosition().y + object.getAABB().height / 2), object.getName());
 	NodeMapsManager::getInstance()->getNodeMap(layerName)->addNode(node, object.getName());
 	return false;
 }

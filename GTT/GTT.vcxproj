@@ -29,7 +29,10 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+	<ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="EnemyAim.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
@@ -103,7 +106,10 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="Dialogues.h" />
     <ClInclude Include="DialoguesManager.h" />
+    <ClInclude Include="Enemy.h" />
+	<ClInclude Include="EnemyManager.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="EnemyAim.h" />
     <ClInclude Include="EnemyPool.h" />
