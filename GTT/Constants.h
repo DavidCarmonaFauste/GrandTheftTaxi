@@ -266,7 +266,7 @@ const int CAMERA_HEIGHT = 1080;
 //background
 const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
 const int backGround_height = CAMERA_HEIGHT;
-//Buttons
+//Main Menu Buttons
 const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 350)};
 const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 200)};
 const int Button_Width_ = 300;
@@ -302,6 +302,36 @@ const textureInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle
 const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9},  title_position_, title_Width_, title_Height_ };
 /**************************************/
 
+// GAS MENU INFO  ---------------------------
+	// positions
+const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
+const Vector2D BACK_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D PAY_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), 2 * (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
+// TODO: add health bar position??
+	// sizes
+const int VERTICAL_BUTTON_GAS_W = 275;
+const int VERTICAL_BUTTON_GAS_H = 570;
+const int HORIZONTAL_BUTTON_GAS_W = 350;
+const int HORIZONTAL_BUTTON_GAS_H = 200;
+const int SQUARE_BUTTON_GAS_W = 275;
+const int SQUARE_BUTTON_GAS_H = 200;
+const int GAS_BACKGROUND_W = CAMERA_WIDHT;
+const int GAS_BACKGROUND_H = CAMERA_HEIGHT;
+	// paths
+const textureInfo GAS_BACKGROUND_PATH = { "../Assets/sprites/GasMenu/background-gasolinera.png", "default", {1, 1}, {0.0, 0.0}, GAS_BACKGROUND_W, GAS_BACKGROUND_H };
+const textureInfo FILL_GAS_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-fill-gas.png", "default", {1, 1}, FILL_GAS_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
+const textureInfo GUN_SHOP_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-gun-shop.png", "default", {1, 1}, GUN_SHOP_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
+const textureInfo BACK_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-back.png", "default", {1, 1}, BACK_BUTTON_POSITION, HORIZONTAL_BUTTON_GAS_W, HORIZONTAL_BUTTON_GAS_H };
+const textureInfo PAY_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-pay.png", "default", {1, 1}, PAY_BUTTON_POSITION, HORIZONTAL_BUTTON_GAS_W, HORIZONTAL_BUTTON_GAS_H };
+const textureInfo GAS_5_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-5.png", "default", {1, 1}, GAS_5_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+const textureInfo GAS_10_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-10.png", "default", {1, 1}, GAS_10_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+const textureInfo GAS_25_BUTTON_PATH = { "../Assets/sprites/GasMenu/button-25.png", "default", {1, 1}, GAS_25_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+// --------------------------------------------
+
 
 //TAXI SOUND MANAGER
 const int VOL_CHANNEL_2 = 90; //regular engine
@@ -310,6 +340,5 @@ const int VOL_CHANNEL_6 = 60; //BackForward
 const double POR_VEL_MIN_ = 0.15;
 const double POR_VEL_MIN_2_ = 0.2;
 const double POR_VEL_MIN_3_ = 0.9;
-
 
 #endif // !constants_define
