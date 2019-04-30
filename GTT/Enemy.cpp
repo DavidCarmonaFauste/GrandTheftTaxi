@@ -38,7 +38,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos){
 
 	//IA
 	pursuitRange_ = 32 * 40;
-	patrolBehaviour_ = new IApatrol(GetPhyO(), nmap, speed_, route);
+	patrolBehaviour_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
 	addLogicComponent(patrolBehaviour_);
 	aimC_ = new EnemyAim();
 
@@ -61,7 +61,6 @@ void Enemy::Die()
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
-		patrolBehaviour_->setPatrol(!((Vehicle::getInstance()->getCenter() - getCenter()).Length() <= pursuitRange_));
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;

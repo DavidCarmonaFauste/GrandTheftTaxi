@@ -37,7 +37,7 @@ void EnemyManager::ReadEnemyInfo()
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type2") {
-					e = new Enemy(ENEMY2, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
+					e = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid]);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type3") {
