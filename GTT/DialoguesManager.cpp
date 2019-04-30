@@ -1,6 +1,6 @@
 #include "DialoguesManager.h"
 
-
+unique_ptr<DialoguesManager> DialoguesManager::instance = nullptr;
 
 DialoguesManager::DialoguesManager()
 {
@@ -22,9 +22,9 @@ DialoguesManager * DialoguesManager::getInstance()
 {
 	if (this != nullptr) {
 		if (instance == nullptr) {
-			instance = new DialoguesManager();
+			instance.reset(new DialoguesManager());
 		}
-		return instance;
+		return instance.get();
 	}
 	else {
 		return new DialoguesManager();

@@ -2,10 +2,11 @@
 #include "Dialogues.h"
 #include "Phrases.h"
 #include "Constants.h"
+#include <memory>
 
 class DialoguesManager
 {
-	DialoguesManager* instance = nullptr;
+	static unique_ptr<DialoguesManager> instance;
 public:
 	DialoguesManager* getInstance();
 	~DialoguesManager();
