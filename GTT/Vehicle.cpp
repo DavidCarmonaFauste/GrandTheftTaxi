@@ -124,6 +124,9 @@ bool Vehicle::receiveEvent(Event & e) {
 		sprite_->setAnimation("default");
 		break;
 
+	case STOP_BACKFORWARD:
+		sprite_->setAnimation("backStop");
+		break;
 
 	default:	
 		break;
@@ -181,7 +184,8 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
 	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
-	sprite_->loadAnimation(r.rightTurnPath, "rightTurn");
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); //TaxiGTT_back_animation.png
+	sprite_->loadAnimation(r.backTurnPath, "backStop");
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
 
