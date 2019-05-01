@@ -31,8 +31,16 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			broadcastEvent(e);
 		}
 
-		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
-		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
+		if (event.key.keysym.sym == k_.turnRight) { 
+			rightTurnPressed_ = true; 
+			Event e(this, TURN_RIGHT);	
+			broadcastEvent(e);
+		}
+		if (event.key.keysym.sym == k_.turnLeft) { 
+			leftTurnPressed_ = true; 
+			Event e(this, TURN_LEFT);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 	}
 	else if (event.type == SDL_KEYUP) {	
@@ -46,8 +54,15 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			Event e(this, STOPPED_BACK_MOVING_FORWARD);
 			broadcastEvent(e);
 		}
-		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
-		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
+
+		if (event.key.keysym.sym == k_.turnRight || event.key.keysym.sym == k_.turnLeft) {
+			Event e(this, TURN_DEFAULT);
+			broadcastEvent(e);
+			if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
+			if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
+		}
+		//if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
+		//if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
 	}
 }

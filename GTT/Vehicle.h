@@ -60,26 +60,24 @@ public:
 	
 
 	private:
-
-	int currentTurret_;
-
-
 	void Respawn();
 
+	int currentTurret_;  
+	Vector2D spawnPosition_;
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
-
-	ControlType* control_;
-	ReloadInputComponent* reIC_;
-	ShootIC* shIC_;
-
-	Vector2D spawnPosition_;
+	bool alive_;
+	int deathTime_;
 
 	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
+	//components
+	ControlType* control_;
+	ReloadInputComponent* reIC_;
+	ShootIC* shIC_;
+
 	TaxiSoundManagerCP* smLC_;
-	bool alive_;
-	int deathTime_;
+	
 
 };

@@ -99,8 +99,41 @@ void Vehicle::update(Uint32 time) {
 }
 
 bool Vehicle::receiveEvent(Event & e) {
-	if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
-	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+	/*if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);*/
+
+	switch (e.type_)
+	{
+	case STARTED_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+		break;
+
+	case STOPPED_BACK_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+		break;
+
+	case TURN_LEFT:
+		sprite_->setAnimation("leftTurn");
+		break;
+
+	case TURN_RIGHT:
+		sprite_->setAnimation("rightTurn");
+		break;
+
+	case TURN_DEFAULT:
+		sprite_->setAnimation("default");
+		break;
+
+
+	default:	
+		break;
+	}
+
+
+
+
+
+	
 
 	return true;
 }
@@ -147,9 +180,10 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
+	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn");
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
-	//sprite_->playAnimation("default");
 
 	// Health
 	health_ = new Health(TAXI_HP);
