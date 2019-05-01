@@ -271,6 +271,9 @@
     <ClCompile Include="EnemyShoot.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="FuelUpgrade.cpp">
+      <Filter>Archivos de origen\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -492,6 +495,9 @@
     </ClInclude>
     <ClInclude Include="EnemyShoot.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelUpgrade.h">
+      <Filter>Archivos de encabezado\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

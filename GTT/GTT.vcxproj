@@ -40,6 +40,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="FollowMiddlePoint.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="FollowMiddlePoint.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />

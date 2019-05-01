@@ -123,6 +123,7 @@ const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
+const int HP_INCREASE = 100;
 
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
