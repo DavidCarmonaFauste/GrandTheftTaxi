@@ -55,6 +55,6 @@ void GameStateMachine::initStates() {
 
 
 	//DEPURACION
-	setState(NAME_MAINMENU_STATE);
-	//setState(NAME_MAIN_STATE);
+	//setState(NAME_MAINMENU_STATE);
+	setState(NAME_MAIN_STATE);
 }

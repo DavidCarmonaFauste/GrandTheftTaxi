@@ -14,18 +14,22 @@ public:
 	virtual ~IApatrol();
 
 private:
-	void SetDestination(Node* n);
-	bool arrivedAtDestination();
+	void goTo(Node* n);
+	bool arrivedAtNode();
+	bool isPatrolNode(int& a);
+	bool atNextPatrolNode();
+	vector<Node*> AssignRoute(Node* current, Node* destination);
 
 	GameObject* o_;
 	NodeMap* districtMap_;
-	vector<Node*> patrolRoute_;
+	vector<Node*> patrol_;
+	vector<Node*> route_;
 	PhysicObject* phyO_;
-	Node* destination_;
+	Node* nextNode_;
 	int patrolSpeed_;
 	int patrolProgress_;
+	int routeProgress_;
 
-	bool goingToNode_;
-	bool paused_;
+	bool started_ = false;
 };
 
