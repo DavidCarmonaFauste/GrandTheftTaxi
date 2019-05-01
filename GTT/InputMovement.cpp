@@ -26,9 +26,14 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			broadcastEvent(e);
 		}
 		if (event.key.keysym.sym == k_.backwards) { 
-			backwardPressed_ = true; 
+			backwardPressed_ = true;
+			//sound event
 			Event e(this, BACK_MOVING_FORWARD);
 			broadcastEvent(e);
+
+			//animation event
+			Event e_anm(this, STOP_BACKFORWARD);
+			broadcastEvent(e_anm);
 		}
 
 		if (event.key.keysym.sym == k_.turnRight) { 
@@ -51,8 +56,12 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 		}
 		if (event.key.keysym.sym == k_.backwards) { 
 			backwardPressed_ = false; 
+			//sound event
 			Event e(this, STOPPED_BACK_MOVING_FORWARD);
 			broadcastEvent(e);
+			//animation event
+			Event e_anm(this, TURN_DEFAULT);
+			broadcastEvent(e_anm);
 		}
 
 		if (event.key.keysym.sym == k_.turnRight || event.key.keysym.sym == k_.turnLeft) {
@@ -61,8 +70,6 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
 			if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		}
-		//if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
-		//if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
 	}
 }

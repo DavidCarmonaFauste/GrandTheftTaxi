@@ -33,7 +33,8 @@ enum event_type {
 	//Taxi Animations
 	TURN_LEFT,
 	TURN_RIGHT,
-	TURN_DEFAULT
+	TURN_DEFAULT,
+	STOP_BACKFORWARD
 };
 
 struct Event {
