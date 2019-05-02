@@ -32,7 +32,7 @@
     <ClCompile Include="Dialogues.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
-	<ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="EnemyAim.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
@@ -109,7 +109,7 @@
     <ClInclude Include="Dialogues.h" />
     <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
-	<ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="EnemyAim.h" />
     <ClInclude Include="EnemyPool.h" />
@@ -176,7 +176,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
