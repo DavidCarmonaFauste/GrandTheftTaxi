@@ -1,6 +1,7 @@
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
+#include "EnterShopIC.h"
 
 #pragma once
 
@@ -59,10 +60,6 @@ public:
 	virtual bool receiveEvent(Event& e);
 	virtual void SaveSpawnPoint(Vector2D spawn);
 	virtual void SaveShopPosition (Vector2D pos);
-	
-	// TODO: clean ?
-	const int GAS_STATIONS_NUMBER = 5;
-	Vector2D LVL1_GAS_STATION_SPAWNPOINTS[5] = { Vector2D (3333, 700), Vector2D (4670, 1700), Vector2D (5500, 2400), Vector2D (2650, 1500), Vector2D (2200, 2750) };
 
 private:
 	int currentTurret_;
@@ -75,6 +72,7 @@ private:
 	ControlType* control_;
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
+	EnterShopIC* shopIC_;
 
 	Vector2D spawnPosition_;
 	Vector2D shopPosition_;

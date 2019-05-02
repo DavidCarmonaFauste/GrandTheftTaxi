@@ -35,6 +35,7 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
+    <ClCompile Include="EnterShopIC.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="EnemyShoot.h" />
+    <ClInclude Include="EnterShopIC.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="ExplosiveImC.h" />
     <ClInclude Include="FollowGameObject.h" />

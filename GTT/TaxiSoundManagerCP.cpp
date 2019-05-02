@@ -288,6 +288,11 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		break;
 	}
 
+	/*case SAVE_TAXI_POS: {
+		for (auto it = Channels_.begin (); it != Channels_.end (); ++it) {
+			s_->pauseSound ((*it).second);
+		}
+	}*/
 
 	default:
 		break;

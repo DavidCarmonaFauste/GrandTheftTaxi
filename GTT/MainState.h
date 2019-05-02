@@ -30,8 +30,5 @@ private:
 
 	// Systems
 	Respawner* respawner_;
-
-	// TODO: clean?
-	void findClosestShop ();
 };
 

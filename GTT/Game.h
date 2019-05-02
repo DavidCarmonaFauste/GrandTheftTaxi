@@ -61,10 +61,12 @@ public:
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
 	GameStateMachine* getGameStateMachine();
-	void setState(string state);
+	bool getCloseToShop () { return canEnterShop_; }
 
 	// state setters
+	void setState(string state);
 	void setGameEnd () { exit_ = true; }
+	void setCloseToShop (bool close) { canEnterShop_ = close; }
 
 	void init();
 
@@ -89,6 +91,7 @@ private:
 	//states
 	GameStateMachine* gmStMachine_;
 	bool exit_ = false;
+	bool canEnterShop_ = false;
 
 	// Delta time and physics time management
 	double accumulator_;

@@ -113,9 +113,6 @@ bool Vehicle::receiveEvent(Event & e) {
 		LoadTaxiPositionEvent loadTaxiPosEvent =  static_cast<LoadTaxiPositionEvent&>(e);
 		Vehicle::getInstance ()->setPosition (loadTaxiPosEvent.position_);
 		SaveShopPosition (loadTaxiPosEvent.position_);
-		GetPhyO ()->getBody ()->SetAwake (false);
-		//	SetLinearVelocity (b2Vec2 (0.0, 0.0));
-		//acceleration_ = 0.0;
 		break;
 	}
 	default:
@@ -213,6 +210,10 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	this->addInputComponent(control_);
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
+
+	// Shop control
+	shopIC_ = new EnterShopIC ();
+	this->addInputComponent (shopIC_);
 
 	//Sound
 	smLC_ = new TaxiSoundManagerCP(this);

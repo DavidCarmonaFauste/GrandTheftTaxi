@@ -5,7 +5,7 @@
 #include "AmmoDisplay.h"
 #include "FollowMiddlePoint.h"
 
-//singletton
+//singleton
 #include "Vehicle.h"
 #include "ProyectilePool.h"
 #include "Reticule.h"
@@ -38,7 +38,11 @@ void MainState::start() {
 	EnemyManager::getInstance()->ReadEnemyInfo();
 
 	if (posBefore != Vector2D (0.0, 0.0)) {
-		findClosestShop ();
+		//findClosestShop ();
+		Vehicle::getInstance ()->setPosition (posBefore);
+		Vehicle::getInstance ()->SaveSpawnPoint (posBefore);
+		Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(posBefore.Multiply(PHYSICS_SCALING_FACTOR), 0);
+		Vehicle::getInstance ()->SaveShopPosition (Vector2D (0.0, 0.0));
 	}
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
@@ -80,24 +84,6 @@ void MainState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (true);
 
 	GameState::update (deltaTime);
-}
-
-void MainState::findClosestShop () {
-	Vector2D spawnPos = Vehicle::getInstance()->getSpawnPosition();
-	Vector2D pos = Vehicle::getInstance ()->getShopPosition();
-	int i = 0;
-	float error = 500.0f;
-
-	do {
-		spawnPos = Vehicle::getInstance ()->LVL1_GAS_STATION_SPAWNPOINTS[i];
-		++i;
-	} while (i <= Vehicle::getInstance ()->GAS_STATIONS_NUMBER && (abs(spawnPos.x - pos.x) > error) && (abs(spawnPos.y - pos.y) > error));
-
-	Vehicle::getInstance ()->setPosition (spawnPos);
-	Vehicle::getInstance ()->SaveSpawnPoint (spawnPos);
-	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPos.Multiply(PHYSICS_SCALING_FACTOR), 0);
-	Vehicle::getInstance ()->GetPhyO ()->getBody ()->SetAwake (true);
-	Vehicle::getInstance ()->SaveShopPosition (Vector2D (0.0, 0.0));
 }
 
 

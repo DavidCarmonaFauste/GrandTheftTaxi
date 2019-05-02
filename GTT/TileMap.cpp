@@ -77,7 +77,7 @@ bool TileMap::processCollision(const tmx::Object &object) {
 
 bool TileMap::processPlayer(const tmx::Object & object) {
 	Vector2D pos = Vector2D(object.getPosition().x, object.getPosition().y);
-	Vehicle::getInstance()->SaveSpawnPoint(pos);
+	Vehicle::getInstance()->SaveShopPosition(pos);
 	Vehicle::getInstance()->setPosition(pos);
 	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos.Multiply(PHYSICS_SCALING_FACTOR), 0);
 
