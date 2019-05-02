@@ -12,8 +12,6 @@
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
 
-
-
 MainState::MainState(){}
 
 MainState::~MainState() {
