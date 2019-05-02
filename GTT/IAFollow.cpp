@@ -9,7 +9,6 @@ IAFollow::IAFollow(PhysicObject * ph, GameObject * o, NodeMap * districtMap, int
 
 void IAFollow::update(GameObject * o, Uint32 deltaTime)
 {
-	cout << districtMap_->getNearestConnectedNode(o_->getCenter())->id_ << endl;
 	if (getDistanceToTaxi() <= followDistance_) {
 		if (!started_) {
 			goTo(districtMap_->getNearestConnectedNode(o_->getCenter()));
