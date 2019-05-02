@@ -17,6 +17,7 @@ public:
 	GameState* get_CurrentState();
 	void initStates();
 
+	void fromGasMainMenuToMainState ();
 
 protected:
 	string currentState_;
