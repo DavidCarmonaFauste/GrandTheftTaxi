@@ -3,6 +3,7 @@
 #include "Trigger.h"
 #include "NodeMap.h"
 #include "IApatrol.h"
+#include "IAFollow.h"
 
 class Turret;
 
@@ -22,7 +23,7 @@ public:
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
-	IApatrol* patrolBehaviour_;
+	IAMovementBehaviour* patrolBehaviour_;
 	NodeMap* routemap_;
 	int speed_;
 	int pursuitRange_;

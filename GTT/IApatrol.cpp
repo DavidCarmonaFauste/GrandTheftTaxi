@@ -36,7 +36,6 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 			
 			goTo(route_[routeProgress_]);
 			routeProgress_++;
-			cout << patrolProgress_ << endl;
 		}
 	}
 }

@@ -9,8 +9,12 @@ class IAFollow :
 	public IAMovementBehaviour
 {
 public:
-	IAFollow(PhysicObject* ph, GameObject* o, NodeMap* districtMap, int patrolSpeed) :IAMovementBehaviour(ph, o, districtMap, patrolSpeed) {};
+	IAFollow(PhysicObject* ph, GameObject* o, NodeMap* districtMap, int patrolSpeed, double followDistance);
 	virtual void update(GameObject* o, Uint32 deltaTime);
 	virtual ~IAFollow();
+
+private:
+	double followDistance_;
+	double getDistanceToTaxi();
 };
 

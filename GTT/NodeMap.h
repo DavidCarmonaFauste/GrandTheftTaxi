@@ -42,11 +42,11 @@ public:
 		double y = abs(direction.y);
 		Connections dirr=NORTH;
 		if (x > y) {
-			if (direction.x > 0) dir = EAST;
+			if (direction.x > 0) dirr = EAST;
 			else dirr = WEST;
 		}
 		else {
-			if (direction.y > 0) dir = SOUTH;
+			if (direction.y > 0) dirr = SOUTH;
 			else dirr = NORTH;
 		}
 		dir = dirr;
