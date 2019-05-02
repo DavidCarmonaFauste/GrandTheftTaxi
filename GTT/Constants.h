@@ -169,9 +169,10 @@ const enum soundId {
 	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
 	TAXI_BACK_MOVING_FORWARD,
+	//TAXI COLLISIONS
+	TAXI_IMPACT_DAMAGE,
 	//buttons
 	CLIC_BUTTON_NEWGAME,
-
 	//Shoots
 	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA en las torretas que no tienen asignado id
 	TURRET_SHOTGUN_SHOOT,
@@ -179,20 +180,22 @@ const enum soundId {
 	TURRET_GUN_SHOOT,
 	TURRET_GUN_SPECIAL_SHOOT
 
+
 };
 const map<soundId, string> SOUND = {
-	{TAXI_START, "../Assets/sounds/Arranque.wav"},
-	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
-	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
-	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
-	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
+	{TAXI_START, "../Assets/sounds/Taxi/Arranque.wav"},
+	{TAXI_IDLE, "../Assets/sounds/Taxi/Idle.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi/Taxi_Aceleration_03.wav"},
+	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi/Taxi_fastEngineSound.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/Taxi/taxi_decel.wav"},
+	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi/Taxi_frenada.wav"}, 
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
 	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
 	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
 	{TURRET_GUN_SHOOT, "../Assets/sounds/Turrets/Gun_Normal.wav"},
 	{TURRET_GUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/Gun_Special.wav"},
-	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
+	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"},
+	{TAXI_IMPACT_DAMAGE, "../Assets/sounds/Taxi/Taxi_damage.wav"}
 
 };
 
@@ -239,11 +242,11 @@ const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC4-TANK-cobify.png", "../Asset
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 25, 25, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
-const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 20, 20, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo SNIPERBULLET{};
 const ProyectileInfo SPECIAL_SNIPERBULLET{};
@@ -252,7 +255,7 @@ const ProyectileInfo MACHINEGUNBULLET{};
 const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
 
 	//... //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE };
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 20, 20, 10, 5000, 20, BOUNCE };
 
 
 

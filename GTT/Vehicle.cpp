@@ -133,10 +133,10 @@ bool Vehicle::receiveEvent(Event & e) {
 	case IMPACT_DAMAGE:
 		sprite_->playAnimation("hitDamage", 30.0f, false); //play establece anim como currentAnm y al renderizar secciona por frames
 		//como loop es false vuelve a la animación por defecto
+		Event eV(this, IMPACT_DAMAGE);
+		broadcastEvent(eV); //TaxiSoundManager recieved this message
 		break;
 
-	default:	
-		break;
 	}
 
 	return true;
@@ -225,6 +225,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	//Sound
 	smLC_ = new TaxiSoundManagerCP(this);
 	this->addLogicComponent(smLC_);
+	this->registerObserver(smLC_); //taxi es también un observable.  enviará los mensajes correspondientes a su comp TaxiSoundManagerCP
 
 	control_->registerObserver(smLC_);
 
