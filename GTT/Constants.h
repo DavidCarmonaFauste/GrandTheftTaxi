@@ -25,6 +25,7 @@ const struct VehicleInfo {
 	string leftTurnPath;
 	string backTurnPath;
 	string impDamagePath;
+	string diePath;
 	int width;
 	int height;
 	float velMax; //5
@@ -232,20 +233,20 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 	//taxi
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
 "../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
-"../Assets/sprites/Taxi/Taxi_damage_animation_2.png",
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Taxi/Taxi_default.png",
 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 	//enemies
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
-"../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/VTC1-cobify.png",
+const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY2{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
-"../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/VTC2-cobify.png",
+const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY3{ "../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
-"../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/VTC3-cobify.png",
+const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC4-TANK-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
-"../Assets/sprites/VTC4-TANK-cobify.png", "../Assets/sprites/VTC4-TANK-cobify.png",
+const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/VTC4-TANK-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
 
 

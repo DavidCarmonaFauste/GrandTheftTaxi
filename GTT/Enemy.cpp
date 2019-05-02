@@ -21,8 +21,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
-	//sprite_->playAnimation("idle");
+	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 3);
 	sprite_->setAnimation("idle");
+	//sprite_->playAnimation("enemyDie", 24.0f, true);
+
 	this->addRenderComponent(sprite_);
 
 	// Health
@@ -50,13 +52,16 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
-	if (health_->getHealth() <= 0) Die();
+	if (health_->getHealth() <= 0) { 	
+		Die(); 
+	}
 }
 
 void Enemy::Die()
-{
+{	
 	SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
-	//die animation
+	sprite_->playAnimation("enemyDie", 10.0f, false);
+
 	bodyReadyToDestroy_ = true;
 	turret_->setActive(false);
 }
