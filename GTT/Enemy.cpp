@@ -3,6 +3,7 @@
 #include "Vehicle.h"
 #include "Turret.h"
 #include "EnemyAim.h"
+#include "SoundManager.h"
 
 
 Enemy::Enemy()
@@ -54,6 +55,8 @@ void Enemy::Damage(double damage)
 
 void Enemy::Die()
 {
+	SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
+	//die animation
 	bodyReadyToDestroy_ = true;
 	turret_->setActive(false);
 }

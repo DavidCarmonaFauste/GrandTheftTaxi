@@ -178,24 +178,33 @@ const enum soundId {
 	TURRET_SHOTGUN_SHOOT,
 	TURRET_SHOTGUN_SPECIAL_SHOOT,
 	TURRET_GUN_SHOOT,
-	TURRET_GUN_SPECIAL_SHOOT
+	TURRET_GUN_SPECIAL_SHOOT,
+	//Enemies
+	ENEMY_HIT_DAMAGE,
+	ENEMY_DIE
 
 
 };
 const map<soundId, string> SOUND = {
+	//TAXI
 	{TAXI_START, "../Assets/sounds/Taxi/Arranque.wav"},
 	{TAXI_IDLE, "../Assets/sounds/Taxi/Idle.wav"},
 	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi/Taxi_Aceleration_03.wav"},
 	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi/Taxi_fastEngineSound.wav"},
 	{TAXI_DECELERATE_10, "../Assets/sounds/Taxi/taxi_decel.wav"},
 	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi/Taxi_frenada.wav"}, 
+	{TAXI_IMPACT_DAMAGE, "../Assets/sounds/Taxi/Taxi_damage.wav"},
+	//BUTTONS
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
 	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
+	//TURRETS
 	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
 	{TURRET_GUN_SHOOT, "../Assets/sounds/Turrets/Gun_Normal.wav"},
 	{TURRET_GUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/Gun_Special.wav"},
 	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"},
-	{TAXI_IMPACT_DAMAGE, "../Assets/sounds/Taxi/Taxi_damage.wav"}
+	//ENEMIES
+	{ENEMY_HIT_DAMAGE, "../Assets/sounds/Enemy/Enemy_hit_damage.wav"},
+	{ENEMY_DIE, "../Assets/sounds/Enemy/Enemy_die.wav"},
 
 };
 
