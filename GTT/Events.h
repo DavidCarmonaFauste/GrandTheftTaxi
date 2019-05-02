@@ -34,7 +34,8 @@ enum event_type {
 	TURN_LEFT,
 	TURN_RIGHT,
 	TURN_DEFAULT,
-	STOP_BACKFORWARD
+	STOP_BACKFORWARD,
+	IMPACT_DAMAGE
 };
 
 struct Event {

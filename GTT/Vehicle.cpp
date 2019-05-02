@@ -99,8 +99,6 @@ void Vehicle::update(Uint32 time) {
 }
 
 bool Vehicle::receiveEvent(Event & e) {
-	/*if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
-	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);*/
 
 	switch (e.type_)
 	{
@@ -113,30 +111,33 @@ bool Vehicle::receiveEvent(Event & e) {
 		break;
 
 	case TURN_LEFT:
-		sprite_->setAnimation("leftTurn");
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("leftTurn");
 		break;
 
 	case TURN_RIGHT:
-		sprite_->setAnimation("rightTurn");
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("rightTurn");
 		break;
 
 	case TURN_DEFAULT:
-		sprite_->setAnimation("default");
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("default");
 		break;
 
 	case STOP_BACKFORWARD:
-		sprite_->setAnimation("backStop");
+		if(!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("backStop");
+		break;
+
+	case IMPACT_DAMAGE:
+		sprite_->playAnimation("hitDamage", 30.0f, false); //play establece anim como currentAnm y al renderizar secciona por frames
+		//como loop es false vuelve a la animación por defecto
 		break;
 
 	default:	
 		break;
 	}
-
-
-
-
-
-	
 
 	return true;
 }
@@ -184,8 +185,10 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
 	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
-	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); //TaxiGTT_back_animation.png
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); 
 	sprite_->loadAnimation(r.backTurnPath, "backStop");
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
+
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
 

@@ -24,6 +24,7 @@ const struct VehicleInfo {
 	string rightTurnPath;
 	string leftTurnPath;
 	string backTurnPath;
+	string impDamagePath;
 	int width;
 	int height;
 	float velMax; //5
@@ -216,12 +217,24 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
-//const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", "../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png","../Assets/sprites/VTC1-cobify.png", 68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY2{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png","../Assets/sprites/VTC2-cobify.png", 66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY3{ "../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png","../Assets/sprites/VTC3-cobify.png", 68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC4-TANK-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png","../Assets/sprites/VTC4-TANK-cobify.png", 58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
+	//taxi
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
+"../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png",
+64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
+	//enemies
+const VehicleInfo ENEMY1{ "../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
+"../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/VTC1-cobify.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY2{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
+"../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/VTC2-cobify.png",
+66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY3{ "../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
+"../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/VTC3-cobify.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC4-TANK-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png",
+"../Assets/sprites/VTC4-TANK-cobify.png", "../Assets/sprites/VTC4-TANK-cobify.png",
+58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
 
 
 //Proyectiles
@@ -229,7 +242,7 @@ const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC4-TANK-cobify.png", "../Asset
 const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SHOOT };
 const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 50, 50, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 25, 25, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
 const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo SNIPERBULLET{};
