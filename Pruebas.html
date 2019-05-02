@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>  
+      <title> TAXI REVENGE </title>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
+        <style>
+            body
+            {
+                background: url('imagenes/Wall.png');
+                font-family: PaintFont;
+            }
+            .wrapper {
+            display: flex;  
+            flex-flow: row wrap;
+            flex-direction: column;
+            font-weight: bold;
+            text-align: center;
+            }
+
+            .wrapper > * {
+            padding: 10px;
+            flex: 1 100%;
+            }
+
+            .header {
+                background: blanchedalmond;
+                width: 100%;
+                min-width: 10px;
+                max-width: 2200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .footer {
+            background: lightgreen;
+            }
+
+            .main {
+                background: red;
+                display:flexbox;
+                text-align: center;
+                font-size: 200%;
+                font-size-adjust: initial;
+                align-content: center;
+                color: rgba(0, 0, 0, 0.8);
+                width: 90%;
+                min-width: 10px;
+                max-width: 1800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            p.poem
+            {
+               display: flex;
+                position: relative;
+                z-index: 1;
+                float: left;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                top:-230px;
+            }
+            img.poem
+            {
+                display: flex;
+                position: relative;
+                z-index: 0;
+                vertical-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                top:0px;
+            }
+            img.resume
+            {
+                display: flex;
+                position: relative;
+                z-index: 0;
+                width: 700px;
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                top: -350px;
+                max-zoom: 175%;
+
+                transform: rotate(-8deg);
+
+            }
+
+            p.resume
+            {
+                display: flex;
+                position: relative;
+                text-align: justify;
+                z-index: 1;
+                float: left;
+                font-size:  20px;
+                width: 600px;
+                max-width: 100%;
+                
+                margin-top: -250px;
+                left: 50%;
+                top: -230px;
+                transform: translate(-50%, -50%);
+            }
+            .aside-1 {
+            background: gold;
+                display:flexbox;
+                text-align: center;
+                align-content: center;
+                color: rgba(255, 255, 255);
+                width: 90%;
+                min-width: 10px;
+                max-width: 1800px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .aside-2 {
+            
+            background: hotpink;
+            }
+            .aside-3 {
+            background: green;
+            }
+
+            .aside-4 {
+            background: grey;
+            }
+            .aside-5 {
+            background: blue;
+            }
+
+            .aside-6 {
+            background: violet;
+            }
+            @media all and (min-width: 600px) {
+            .aside { flex: 1 0 0; }
+            }
+
+            @media all and (min-width: 800px) {
+            .main    { flex: 3 0px; }
+            .aside-1 { order: 2; } 
+            .main    { order: 1; }
+            .aside-2 { order: 3; }
+            .aside-3 { order: 4; }
+            .aside-4 { order: 5; }
+            .aside-5 { order: 6; }
+            .aside-6 { order: 7; }
+            .footer  { order: 8; }
+            }
+
+            body {
+            padding: 2em; 
+            
+            }
+            img.img_Head
+            {
+                display: flexbox;
+                width: 90%; 
+                min-width: 10px;
+                max-width: 2800px;
+
+                z-index: -1;
+            }
+            img.img_Tittle
+            {
+                display: flexbox;
+                
+                min-width: 10px;
+                max-width: 1200px;
+                z-index: 0;
+            }
+            iframe.TrailerVid
+            {
+                display: flex;
+                position: relative;
+                top: -400px;
+                width: 900px;
+                max-width: 100%;
+                max-height: 50%;
+                margin-left: auto;
+                margin-right: auto;
+                height: 450px;
+            }
+        </style>
+            <div class="wrapper">
+                <header class="header">            
+                    <img src = "imagenes/Head.gif" class="img_Head"></header>
+                <article class="main">
+                    <img src = "imagenes/Post4.png" class="poem">
+                    <p class="poem"> 
+                        Who is the new king? <br>
+                        our Capitalist?<br>
+                        our fake Socialist?<br>
+                        no, is our taxist,<br>
+                        because taxis will fucking win.
+                    </p> 
+
+                </article>
+                <aside class="aside aside-1">
+                    <img src = "imagenes/fondo.png" class="resume">
+                    <p class="resume"> Inspired by classic 2D sandboxs
+                            like GTA, TaxiRevenge is a videogame where you have to destroy all the 
+                            vtc in your neighborhood. You will be an old taxi driver, who, tired of the
+                            economic freedom boom, decides to create his own utopia without
+                            private transport services. </p>
+                            <iframe class="TrailerVid"
+                            src="https://www.youtube.com/embed/cRs2uXXobjw">
+                            </iframe>
+                </aside>
+                <aside class="aside aside-2">            <div class="Features">
+                        <p class="FeaturesI"> Fi_ght! </p>
+                        <img src="imagenes/Post3.png" class="imgBeforeTxt2">
+                        <img src="imagenes/Figth.png" class="imgFigth">
+                        <img src="imagenes/fondo.png" class="imgBeforeTxt4">
+                    </div></aside>
+
+                <aside class="aside aside-3">Aside 1</aside>
+
+                <aside class="aside aside-4">Aside 2</aside>
+
+                <aside class="aside aside-5">Aside 1</aside>
+
+                <aside class="aside aside-6">Aside 2</aside>
+                <footer class="footer">Footer</footer>
+            </div>
+</html>
