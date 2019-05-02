@@ -24,25 +24,29 @@ MainState::~MainState() {
 
 //start is called when GameStateMachine change state
 void MainState::start() {
-	//Reticule
-	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
-
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-	
-	
 
-	//Camera logic
-	cameraFollow = new FollowGameObject(Vehicle::getInstance());
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
+	Vector2D posBefore = Vehicle::getInstance ()->getShopPosition ();
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
 
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
 	EnemyManager::getInstance()->ReadEnemyInfo();
+
+	if (posBefore != Vector2D (0.0, 0.0)) {
+		findClosestShop ();
+	}
+	//Reticule
+	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
+
+	//Camera logic
+	cameraFollow = new FollowGameObject(Vehicle::getInstance());
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
+	
 	// Camera positioning
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
 	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth()/2,
@@ -76,6 +80,24 @@ void MainState::update (Uint32 deltaTime) {
 	Game::getInstance ()->getCamera (UI_CAMERA)->setCentered (true);
 
 	GameState::update (deltaTime);
+}
+
+void MainState::findClosestShop () {
+	Vector2D spawnPos = Vehicle::getInstance()->getSpawnPosition();
+	Vector2D pos = Vehicle::getInstance ()->getShopPosition();
+	int i = 0;
+	float error = 500.0f;
+
+	do {
+		spawnPos = Vehicle::getInstance ()->LVL1_GAS_STATION_SPAWNPOINTS[i];
+		++i;
+	} while (i <= Vehicle::getInstance ()->GAS_STATIONS_NUMBER && (abs(spawnPos.x - pos.x) > error) && (abs(spawnPos.y - pos.y) > error));
+
+	Vehicle::getInstance ()->setPosition (spawnPos);
+	Vehicle::getInstance ()->SaveSpawnPoint (spawnPos);
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPos.Multiply(PHYSICS_SCALING_FACTOR), 0);
+	Vehicle::getInstance ()->GetPhyO ()->getBody ()->SetAwake (true);
+	Vehicle::getInstance ()->SaveShopPosition (Vector2D (0.0, 0.0));
 }
 
 

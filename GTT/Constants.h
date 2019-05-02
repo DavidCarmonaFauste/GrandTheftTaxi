@@ -305,13 +305,13 @@ const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Ti
 
 // GAS MENU INFO  ---------------------------
 	// positions
-const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 2) };
-const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 2) };
-const Vector2D BACK_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 2) };
+const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
+const Vector2D BACK_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
 const Vector2D PAY_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), 2 * (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6), (CAMERA_HEIGHT / 2) };
-const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 2) };
-const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 2) };
+const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
 // TODO: add health bar position??
 	// sizes
 const int VERTICAL_BUTTON_GAS_W = 275;

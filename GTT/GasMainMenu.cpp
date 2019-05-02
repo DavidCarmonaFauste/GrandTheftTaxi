@@ -73,8 +73,8 @@ bool GasMainMenu::receiveEvent (Event & e) {
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
 			LoadTaxiPositionEvent e (this, taxiPos_);
-			Game::getInstance ()->setState (NAME_MAIN_STATE);
 			broadcastEvent (e);
+			Game::getInstance ()->setState (NAME_MAIN_STATE);
 		}
 		break;
 	}

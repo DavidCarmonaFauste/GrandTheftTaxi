@@ -13,6 +13,7 @@ unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
 Vehicle::Vehicle(){
 	currentTurret_ = 0;
+	shopPosition_ = Vector2D (0.0, 0.0);
 }
 
 Vehicle::~Vehicle() {
@@ -59,6 +60,7 @@ void Vehicle::EquipTurret(Turret * turret)
 	}
 
 }
+
 void Vehicle::ChangeTurret()
 {
 	turrets_[currentTurret_]->CancelReload();
@@ -70,6 +72,7 @@ void Vehicle::ChangeTurret()
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 	turrets_[currentTurret_]->ResetChargeProgress();
 }
+
 Turret * Vehicle::getCurrentTurret()
 {
 	return turrets_[currentTurret_];
@@ -109,7 +112,10 @@ bool Vehicle::receiveEvent(Event & e) {
 	case LOAD_TAXI_POS: {
 		LoadTaxiPositionEvent loadTaxiPosEvent =  static_cast<LoadTaxiPositionEvent&>(e);
 		Vehicle::getInstance ()->setPosition (loadTaxiPosEvent.position_);
-		SaveSpawnPoint (loadTaxiPosEvent.position_);
+		SaveShopPosition (loadTaxiPosEvent.position_);
+		GetPhyO ()->getBody ()->SetAwake (false);
+		//	SetLinearVelocity (b2Vec2 (0.0, 0.0));
+		//acceleration_ = 0.0;
 		break;
 	}
 	default:
@@ -122,6 +128,10 @@ bool Vehicle::receiveEvent(Event & e) {
 void Vehicle::SaveSpawnPoint(Vector2D spawn)
 {
 	spawnPosition_ = spawn;
+}
+
+void Vehicle::SaveShopPosition (Vector2D pos) {
+	shopPosition_ = pos;
 }
 
 void Vehicle::Respawn()
@@ -147,9 +157,18 @@ float32 Vehicle::GetMaxBackwardSpeed()
 {
 	return maxBackwardSpeed_;
 }
+
 float32 Vehicle::GetAcceleration()
 {
 	return acceleration_;
+}
+
+Vector2D Vehicle::getShopPosition () {
+	return shopPosition_;
+}
+
+Vector2D Vehicle::getSpawnPosition () {
+	return spawnPosition_;
 }
 
 
