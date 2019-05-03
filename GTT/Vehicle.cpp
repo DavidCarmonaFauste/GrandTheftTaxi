@@ -13,7 +13,6 @@ unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
 Vehicle::Vehicle(){
 	currentTurret_ = 0;
-	shopPosition_ = Vector2D (0.0, 0.0);
 }
 
 Vehicle::~Vehicle() {
@@ -109,12 +108,6 @@ bool Vehicle::receiveEvent(Event & e) {
 	case STOPPED_MOVING_FORWARD:
 		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 		break;
-	case LOAD_TAXI_POS: {
-		LoadTaxiPositionEvent loadTaxiPosEvent =  static_cast<LoadTaxiPositionEvent&>(e);
-		Vehicle::getInstance ()->setPosition (loadTaxiPosEvent.position_);
-		SaveShopPosition (loadTaxiPosEvent.position_);
-		break;
-	}
 	default:
 		break;
 	}
@@ -125,10 +118,6 @@ bool Vehicle::receiveEvent(Event & e) {
 void Vehicle::SaveSpawnPoint(Vector2D spawn)
 {
 	spawnPosition_ = spawn;
-}
-
-void Vehicle::SaveShopPosition (Vector2D pos) {
-	shopPosition_ = pos;
 }
 
 void Vehicle::Respawn()
@@ -158,10 +147,6 @@ float32 Vehicle::GetMaxBackwardSpeed()
 float32 Vehicle::GetAcceleration()
 {
 	return acceleration_;
-}
-
-Vector2D Vehicle::getShopPosition () {
-	return shopPosition_;
 }
 
 Vector2D Vehicle::getSpawnPosition () {

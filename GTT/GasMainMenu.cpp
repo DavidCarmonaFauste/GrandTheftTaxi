@@ -1,7 +1,6 @@
 #include "GasMainMenu.h"
 #include "Reticule.h"
 #include "Game.h"
-#include "Vehicle.h"
 
 GasMainMenu::GasMainMenu () {
 }
@@ -13,6 +12,7 @@ GasMainMenu::~GasMainMenu () {
 		stage_.back() = nullptr;
 		stage_.pop_back();
 	}
+
 	delete backgroundSprite_;
 	delete fillSprite_;
 	delete gunSprite_;
@@ -20,15 +20,9 @@ GasMainMenu::~GasMainMenu () {
 }
 
 void GasMainMenu::start () {
-	taxiPos_ = Vehicle::getInstance ()->getPosition ();
-	
 	int i; //recoge el valor del index si el elemento está en el vector
 	if (!isRegistered(this, i))
 		registerObserver(this);
-
-	int j; //recoge el valor del index si el elemento está en el vector
-	if (!isRegistered(Vehicle::getInstance(), j))
-		registerObserver (Vehicle::getInstance());
 
 	Game::getInstance()->getCamera(GAME_CAMERA)->setZoom(1.0, false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setZoom(1.0, false);
@@ -66,14 +60,12 @@ bool GasMainMenu::receiveEvent (Event & e) {
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 
 		if (MouseClickLeft_.button_ == buttons_["fillGasButton"]->getIndex()) {
-			cout << "fill gas\n";
+			Game::getInstance ()->getGameStateMachine ()->fromGasMainMenuToFillMenu ();
 		}
 		else if (MouseClickLeft_.button_ == buttons_["gunShopButton"]->getIndex ()) {
 			cout << "nothing here yet\n";
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
-			LoadTaxiPositionEvent e (this, taxiPos_);
-			broadcastEvent (e);
 			Game::getInstance ()->getGameStateMachine ()->fromGasMainMenuToMainState ();
 		}
 		break;

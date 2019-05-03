@@ -12,7 +12,7 @@ void EnterShopIC::handleInput (GameObject * o, Uint32 deltaTime, const SDL_Event
 	if (Game::getInstance ()->getCloseToShop ()) {
 		if (event.type == SDL_KEYUP) {
 			if (event.key.keysym.sym == SDLK_g) {
-				Game::getInstance ()->setState (NAME_GAS_MAIN_STATE);
+				Game::getInstance ()->getGameStateMachine ()->fromMainStateToGasMainMenu ();
 			}
 		}
 	}

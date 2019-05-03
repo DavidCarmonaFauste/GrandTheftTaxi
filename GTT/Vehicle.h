@@ -13,8 +13,6 @@ class ShootIC;
 
 class Vehicle : public Car
 {
-	
-
 	//hide copyBuilder and 	assignment operator
 	Vehicle(Vehicle &) = delete;
 	Vehicle & operator=(const Vehicle &) = delete;
@@ -44,7 +42,6 @@ public:
 
 	float32 GetMaxBackwardSpeed();	
 	float32 GetAcceleration();
-	Vector2D getShopPosition ();
 	Vector2D getSpawnPosition ();
 
 	virtual ReloadInputComponent* GetReloadIC();
@@ -59,7 +56,6 @@ public:
 
 	virtual bool receiveEvent(Event& e);
 	virtual void SaveSpawnPoint(Vector2D spawn);
-	virtual void SaveShopPosition (Vector2D pos);
 
 private:
 	int currentTurret_;
@@ -75,7 +71,6 @@ private:
 	EnterShopIC* shopIC_;
 
 	Vector2D spawnPosition_;
-	Vector2D shopPosition_;
 
 	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
@@ -83,6 +78,4 @@ private:
 	TaxiSoundManagerCP* smLC_;
 	bool alive_;
 	int deathTime_;
-
-	
 };

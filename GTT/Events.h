@@ -28,11 +28,7 @@ enum event_type {
 	NOT_OVER_OBJECT,
 
 	//Proyectile Sounds management
-	TAXI_SHOOT,
-
-	// Taxi position management (for gas menu)
-	SAVE_TAXI_POS,
-	LOAD_TAXI_POS
+	TAXI_SHOOT
 };
 
 struct Event {
@@ -116,17 +112,3 @@ struct TaxiShootEvent : public Event {
 	int shootId_;
 };
 
-
-struct SaveTaxiPositionEvent : public Event {
-	SaveTaxiPositionEvent (Observable* sender, Vector2D pos) : Event (sender, SAVE_TAXI_POS) {
-		position_ = pos;
-	}
-	Vector2D position_;
-};
-
-struct LoadTaxiPositionEvent : public Event {
-	LoadTaxiPositionEvent (Observable* sender, Vector2D pos) : Event (sender, LOAD_TAXI_POS) {
-		position_ = pos;
-	}
-	Vector2D position_;
-};

@@ -283,6 +283,9 @@
     <ClCompile Include="EnterShopIC.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="GasFillMenu.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -515,6 +518,9 @@
       <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="EnterShopIC.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GasFillMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

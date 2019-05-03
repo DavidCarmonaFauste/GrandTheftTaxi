@@ -144,6 +144,7 @@ const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MainState";
 const string NAME_MPEG_STATE = "MpegState";
 const string NAME_GAS_MAIN_STATE = "GasMainState";
+const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
 
 

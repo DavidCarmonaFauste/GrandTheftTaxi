@@ -29,21 +29,12 @@ void MainState::start() {
 	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
-	Vector2D posBefore = Vehicle::getInstance ()->getShopPosition ();
-
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
 
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
 	EnemyManager::getInstance()->ReadEnemyInfo();
 
-	if (posBefore != Vector2D (0.0, 0.0)) {
-		//findClosestShop ();
-		Vehicle::getInstance ()->setPosition (posBefore);
-		Vehicle::getInstance ()->SaveSpawnPoint (posBefore);
-		Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(posBefore.Multiply(PHYSICS_SCALING_FACTOR), 0);
-		Vehicle::getInstance ()->SaveShopPosition (Vector2D (0.0, 0.0));
-	}
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 

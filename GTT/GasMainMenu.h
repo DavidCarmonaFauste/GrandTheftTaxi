@@ -22,8 +22,6 @@ private:
 	map<string, Button*> buttons_;
 	Sprite *fillSprite_, *gunSprite_, *backSprite_;
 
-	Vector2D taxiPos_;
-
 	void setBackground ();
 	void setButtons ();
 	void setButtonComponents ();
