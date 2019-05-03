@@ -11,7 +11,7 @@ public:
 	IAMovementBehaviour(PhysicObject* ph, GameObject* o, NodeMap* districtMap, int patrolSpeed);
 	virtual void update(GameObject* o, Uint32 deltaTime)=0;
 	virtual ~IAMovementBehaviour();
-
+	void Restart() { started_ = false; }
 protected:
 	void goTo(Node* n);
 	bool arrivedAtNode();

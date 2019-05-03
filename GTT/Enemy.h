@@ -20,10 +20,11 @@ public:
 	virtual int getDistanceFromTaxi();
 	virtual Turret* getTurret();
 	virtual bool taxiOnRange();
+	IAMovementBehaviour* getIABehaviour();
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
-	IAMovementBehaviour* patrolBehaviour_;
+	IAMovementBehaviour* behaviour_;
 	NodeMap* routemap_;
 	int speed_;
 	int pursuitRange_;

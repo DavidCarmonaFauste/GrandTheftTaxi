@@ -64,6 +64,13 @@ void EnemyManager::addSpawn(string id, Vector2D pos)
 	spawns_[id] = pos;
 }
 
+void EnemyManager::deactivateIA()
+{
+	for (auto e : enemies_) {
+		e.second->getIABehaviour()->Restart();
+	}
+}
+
 void EnemyManager::update(Uint32 deltaTime)
 {
 	for (auto e : enemies_) {

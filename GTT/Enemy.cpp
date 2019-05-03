@@ -41,8 +41,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	//IA
 	pursuitRange_ = 32 * 40;
-	patrolBehaviour_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
-	addLogicComponent(patrolBehaviour_);
+	behaviour_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
+	addLogicComponent(behaviour_);
 	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
@@ -111,6 +111,11 @@ Turret * Enemy::getTurret()
 bool Enemy::taxiOnRange()
 {
 	return getDistanceFromTaxi()<=pursuitRange_;
+}
+
+IAMovementBehaviour * Enemy::getIABehaviour()
+{
+	return behaviour_;
 }
 
 

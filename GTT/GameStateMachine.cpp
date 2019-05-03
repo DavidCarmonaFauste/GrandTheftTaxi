@@ -53,12 +53,13 @@ void GameStateMachine::initStates() {
 
 
 	//DEPURACION
-	//setState(NAME_MAINMENU_STATE);
-	setState(NAME_MAIN_STATE);
+	setState(NAME_MAINMENU_STATE);
+	//setState(NAME_MAIN_STATE);
 }
 
 void GameStateMachine::fromMainStateToGasMainMenu () {
 	if (currentState_ == NAME_MAIN_STATE) {
+		STATES_[currentState_]->end();
 		currentState_ = NAME_GAS_MAIN_STATE;
 
 		if (!gasMainMenuStartedOnce_) {

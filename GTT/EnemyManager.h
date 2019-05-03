@@ -32,6 +32,7 @@ public:
 	}
 	void ReadEnemyInfo();
 	void addSpawn(string id, Vector2D pos);
+	void deactivateIA();
 
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
