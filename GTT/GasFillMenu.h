@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Button.h"
 #include "Observer.h"
+#include "HealthDisplay.h"
 
 class GasFillMenu : public GameState, public Observer, public Observable {
 public:
@@ -20,6 +21,8 @@ private:
 
 	map<string, Button*> buttons_;
 	Sprite *fill_5_Sprite_, *fill_10_Sprite_, *fill_25_Sprite_, *backSprite_;
+
+	HealthDisplay* healthDisplay_;
 
 	void setBackground ();
 	void setButtons ();

@@ -7,16 +7,17 @@ GasMainMenu::GasMainMenu () {
 
 
 GasMainMenu::~GasMainMenu () {
+	delete backgroundSprite_;
+	delete fillSprite_;
+	delete gunSprite_;
+	delete backSprite_;
+
 	while (!stage_.empty()) {
 		delete stage_.back();
 		stage_.back() = nullptr;
 		stage_.pop_back();
 	}
 
-	delete backgroundSprite_;
-	delete fillSprite_;
-	delete gunSprite_;
-	delete backSprite_;
 }
 
 void GasMainMenu::start () {

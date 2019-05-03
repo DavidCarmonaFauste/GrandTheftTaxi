@@ -9,17 +9,17 @@ GasFillMenu::GasFillMenu () {
 
 
 GasFillMenu::~GasFillMenu () {
-	while (!stage_.empty()) {
-		delete stage_.back();
-		stage_.back() = nullptr;
-		stage_.pop_back();
-	}
-
 	delete backgroundSprite_;
 	delete fill_5_Sprite_;
 	delete fill_10_Sprite_;
 	delete fill_25_Sprite_;
 	delete backSprite_;
+
+	while (!stage_.empty()) {
+		delete stage_.back();
+		stage_.back() = nullptr;
+		stage_.pop_back();
+	}
 }
 
 
@@ -38,13 +38,18 @@ void GasFillMenu::start () {
 	setButtons ();
 	setButtonComponents ();
 
-	
+	// health display (not the same object as in the UI as to not have to hide the rest of the UI and reposition the bar every state change)
+	healthDisplay_ = new HealthDisplay();
+	healthDisplay_->reposition (GAS_MENU_HEALTH_BAR_POSITION);
+	healthDisplay_->setHealthPercentage (float (Vehicle::getInstance ()->getHealthComponent ()->getHealth ()) / Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ());
+
 	//Container to GameObj list
 	stage_.push_back(background_);
 	stage_.push_back(buttons_["fill_5_Button"]);
 	stage_.push_back(buttons_["fill_10_Button"]);
 	stage_.push_back(buttons_["fill_25_Button"]);
 	stage_.push_back(buttons_["backButton"]);
+	stage_.push_back (healthDisplay_);
 	stage_.push_back(Reticule::getInstance());
 }
 
@@ -66,19 +71,22 @@ bool GasFillMenu::receiveEvent (Event & e) {
 	{
 	case CLICK_BUTTON: {
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
+		int max = Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ();
 
 		if (MouseClickLeft_.button_ == buttons_["fill_5_Button"]->getIndex()) {
-			cout << "fill 5%\n";
+			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.05));
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_10_Button"]->getIndex ()) {
-			cout << "fill 10%\n";
+			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.1));
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_25_Button"]->getIndex ()) {
-			cout << "fill 25%\n";
+			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.25));
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
 			Game::getInstance ()->getGameStateMachine ()->fromFillMenuToGasMainMenu ();
 		}
+
+		healthDisplay_->setHealthPercentage (Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max));
 		break;
 	}
 	default:
