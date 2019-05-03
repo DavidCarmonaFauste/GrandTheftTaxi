@@ -35,14 +35,18 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
+    <ClCompile Include="EnterShopIC.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
     <ClCompile Include="FollowGameObject.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="FollowMiddlePoint.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
+    <ClCompile Include="GasFillMenu.cpp" />
+    <ClCompile Include="GasMainMenu.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthDisplay.cpp" />
     <ClCompile Include="IAFollow.cpp" />
@@ -59,7 +63,6 @@
     <ClCompile Include="Money.cpp" />
     <ClCompile Include="MoneyDisplay.cpp" />
     <ClCompile Include="MouseClickIC.cpp" />
-    <ClCompile Include="MpegState.cpp" />
     <ClCompile Include="NodeMap.cpp" />
     <ClCompile Include="NodeMapsManager.cpp" />
     <ClCompile Include="Observable.cpp" />
@@ -90,7 +93,6 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AimAtCursorAC.h" />
@@ -112,16 +114,20 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="EnemyShoot.h" />
+    <ClInclude Include="EnterShopIC.h" />
     <ClInclude Include="Events.h" />
     <ClInclude Include="ExplosiveImC.h" />
     <ClInclude Include="FollowGameObject.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="FollowMiddlePoint.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
+    <ClInclude Include="GasFillMenu.h" />
+    <ClInclude Include="GasMainMenu.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthDisplay.h" />
     <ClInclude Include="IAFollow.h" />
@@ -137,7 +143,6 @@
     <ClInclude Include="Money.h" />
     <ClInclude Include="MoneyDisplay.h" />
     <ClInclude Include="MouseClickIC.h" />
-    <ClInclude Include="MpegState.h" />
     <ClInclude Include="NodeMap.h" />
     <ClInclude Include="NodeMapsManager.h" />
     <ClInclude Include="Observable.h" />
@@ -168,14 +173,13 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />
-    <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

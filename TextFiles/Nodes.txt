@@ -57,3 +57,4 @@ Node55 Node54 Node34 Node50
 Patrol1 Node3 Node4 Node5 Node6 Node14 Node15 Node3 Node1 Node5 Node10
 Patrol2 Node7 Node8 Node9 Node10 Node11 Node12 Node13
 Patrol3 Node6 Node14 Node4 Node5 Node6
+Patrol4 Node12 Node11 Node10 Node9 Node13

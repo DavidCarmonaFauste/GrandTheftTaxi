@@ -1,6 +1,7 @@
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
+#include "EnterShopIC.h"
 
 #pragma once
 
@@ -12,8 +13,6 @@ class ShootIC;
 
 class Vehicle : public Car
 {
-	
-
 	//hide copyBuilder and 	assignment operator
 	Vehicle(Vehicle &) = delete;
 	Vehicle & operator=(const Vehicle &) = delete;
@@ -43,7 +42,7 @@ public:
 
 	float32 GetMaxBackwardSpeed();	
 	float32 GetAcceleration();
-	
+	Vector2D getSpawnPosition ();
 
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
@@ -60,26 +59,25 @@ public:
 	
 
 	private:
-
-	int currentTurret_;
-
-
 	void Respawn();
 
+	int currentTurret_;  
+	Vector2D spawnPosition_;
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
-
-	ControlType* control_;
-	ReloadInputComponent* reIC_;
-	ShootIC* shIC_;
-
-	Vector2D spawnPosition_;
+	bool alive_;
+	int deathTime_;
 
 	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
+	//components
+	ControlType* control_;
+	ReloadInputComponent* reIC_;
+	ShootIC* shIC_;
+	EnterShopIC* shopIC_;
+
 	TaxiSoundManagerCP* smLC_;
-	bool alive_;
-	int deathTime_;
+	
 
 };

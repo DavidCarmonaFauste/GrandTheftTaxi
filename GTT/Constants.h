@@ -16,6 +16,7 @@ const struct KeysScheme {
 	SDL_MouseButtonEvent swapWeapon;
 	SDL_Keycode openMap;
 	SDL_Keycode mainMenu;
+	SDL_Keycode enterShop;
 };
 
 const struct VehicleInfo {
@@ -23,6 +24,9 @@ const struct VehicleInfo {
 	string idlePath;
 	string rightTurnPath;
 	string leftTurnPath;
+	string backTurnPath;
+	string impDamagePath;
+	string diePath;
 	int width;
 	int height;
 	float velMax; //5
@@ -123,6 +127,7 @@ const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
+const int HP_INCREASE = 100;
 
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
@@ -142,6 +147,8 @@ const int ENEMY_HP = 100;
 const string NAME_MAINMENU_STATE = "mainMenuState";
 const string NAME_MAIN_STATE = "MainState";
 const string NAME_MPEG_STATE = "MpegState";
+const string NAME_GAS_MAIN_STATE = "GasMainState";
+const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
 
 
@@ -166,30 +173,42 @@ const enum soundId {
 	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
 	TAXI_BACK_MOVING_FORWARD,
+	//TAXI COLLISIONS
+	TAXI_IMPACT_DAMAGE,
 	//buttons
 	CLIC_BUTTON_NEWGAME,
-
 	//Shoots
 	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA en las torretas que no tienen asignado id
 	TURRET_SHOTGUN_SHOOT,
 	TURRET_SHOTGUN_SPECIAL_SHOOT,
 	TURRET_GUN_SHOOT,
-	TURRET_GUN_SPECIAL_SHOOT
+	TURRET_GUN_SPECIAL_SHOOT,
+	//Enemies
+	ENEMY_HIT_DAMAGE,
+	ENEMY_DIE
+
 
 };
 const map<soundId, string> SOUND = {
-	{TAXI_START, "../Assets/sounds/Arranque.wav"},
-	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
-	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
-	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
-	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
+	//TAXI
+	{TAXI_START, "../Assets/sounds/Taxi/Arranque.wav"},
+	{TAXI_IDLE, "../Assets/sounds/Taxi/Idle.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi/Taxi_Aceleration_03.wav"},
+	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi/Taxi_fastEngineSound.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/Taxi/taxi_decel.wav"},
+	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi/Taxi_frenada.wav"}, 
+	{TAXI_IMPACT_DAMAGE, "../Assets/sounds/Taxi/Taxi_damage.wav"},
+	//BUTTONS
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
 	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
+	//TURRETS
 	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
 	{TURRET_GUN_SHOOT, "../Assets/sounds/Turrets/Gun_Normal.wav"},
 	{TURRET_GUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/Gun_Special.wav"},
-	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
+	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"},
+	//ENEMIES
+	{ENEMY_HIT_DAMAGE, "../Assets/sounds/Enemy/Enemy_hit_damage.wav"},
+	{ENEMY_DIE, "../Assets/sounds/Enemy/Enemy_die.wav"},
 
 };
 
@@ -207,28 +226,40 @@ const map<musicId, string> MUSIC = {
 
 
 //KeyBindings
-const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE };
+const KeysScheme DEFAULT_KEYS{ SDLK_w, SDLK_s, SDLK_d, SDLK_a, SDL_BUTTON_LEFT, SDLK_q, SDLK_m, SDLK_ESCAPE, SDLK_g };
 
 //Fonts
 const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
-const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC1-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY2{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMY3{ "../Assets/sprites/VTC3-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
-const VehicleInfo ENEMYTANK{ "../Assets/sprites/VTC2-TANK-cobyfy.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 34, 11.5f, 3.5f, 1.0f, 0.6f };
+	//taxi
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
+"../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Taxi/Taxi_default.png",
+64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
+	//enemies
+const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/VTC4-TANK-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
 
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 50, 50, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
-const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 20, 20, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo SNIPERBULLET{};
 const ProyectileInfo SPECIAL_SNIPERBULLET{};
@@ -237,15 +268,15 @@ const ProyectileInfo MACHINEGUNBULLET{};
 const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
 
 	//... //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE };
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 20, 20, 10, 5000, 20, BOUNCE };
 
 
 
 //Weapons
 const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
 const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
-//const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
-//const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
+const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
@@ -270,7 +301,7 @@ const int CAMERA_HEIGHT = 1080;
 //background
 const int backGround_widht = CAMERA_WIDHT; //se está usando el tamaño de la cam. MainMenuState.cpp
 const int backGround_height = CAMERA_HEIGHT;
-//Buttons
+//Main Menu Buttons
 const Vector2D NG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 350)};
 const Vector2D EG_Button_position_ = { (CAMERA_WIDHT / 2) - 125, (CAMERA_HEIGHT - 200)};
 const int Button_Width_ = 300;
@@ -306,6 +337,36 @@ const textureInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle
 const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9},  title_position_, title_Width_, title_Height_ };
 /**************************************/
 
+// GAS MENU INFO  ---------------------------
+	// positions
+const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
+const Vector2D BACK_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D PAY_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), 2 * (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
+const Vector2D GAS_MENU_HEALTH_BAR_POSITION = { (CAMERA_WIDHT / 6), 3 * (CAMERA_HEIGHT / 4) };
+	// sizes
+const int VERTICAL_BUTTON_GAS_W = 275;
+const int VERTICAL_BUTTON_GAS_H = 570;
+const int HORIZONTAL_BUTTON_GAS_W = 350;
+const int HORIZONTAL_BUTTON_GAS_H = 200;
+const int SQUARE_BUTTON_GAS_W = 275;
+const int SQUARE_BUTTON_GAS_H = 200;
+const int GAS_BACKGROUND_W = CAMERA_WIDHT;
+const int GAS_BACKGROUND_H = CAMERA_HEIGHT;
+	// paths
+const textureInfo GAS_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/background-gasolinera.png", "default", {1, 1}, {0.0, 0.0}, GAS_BACKGROUND_W, GAS_BACKGROUND_H };
+const textureInfo FILL_GAS_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-fill-gas.png", "default", {1, 1}, FILL_GAS_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
+const textureInfo GUN_SHOP_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-gun-shop.png", "default", {1, 1}, GUN_SHOP_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
+const textureInfo BACK_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-back.png", "default", {1, 1}, BACK_BUTTON_POSITION, HORIZONTAL_BUTTON_GAS_W, HORIZONTAL_BUTTON_GAS_H };
+const textureInfo PAY_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-pay.png", "default", {1, 1}, PAY_BUTTON_POSITION, HORIZONTAL_BUTTON_GAS_W, HORIZONTAL_BUTTON_GAS_H };
+const textureInfo GAS_5_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-5.png", "default", {1, 1}, GAS_5_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+const textureInfo GAS_10_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-10.png", "default", {1, 1}, GAS_10_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+const textureInfo GAS_25_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-25.png", "default", {1, 1}, GAS_25_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+// --------------------------------------------
+
 
 //TAXI SOUND MANAGER
 const int VOL_CHANNEL_2 = 90; //regular engine
@@ -314,6 +375,5 @@ const int VOL_CHANNEL_6 = 60; //BackForward
 const double POR_VEL_MIN_ = 0.15;
 const double POR_VEL_MIN_2_ = 0.2;
 const double POR_VEL_MIN_3_ = 0.9;
-
 
 #endif // !constants_define
