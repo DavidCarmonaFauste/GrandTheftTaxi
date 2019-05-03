@@ -11,6 +11,7 @@ enum event_type {
 	HEALTH_CHANGED,
 	MONEY_CHANGED,
 	RESPAWNED,
+
 	//Vehicle sound management
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
@@ -28,7 +29,14 @@ enum event_type {
 	NOT_OVER_OBJECT,
 
 	//Proyectile Sounds management
-	TAXI_SHOOT
+	TAXI_SHOOT,
+
+	//Taxi Animations
+	TURN_LEFT,
+	TURN_RIGHT,
+	TURN_DEFAULT,
+	STOP_BACKFORWARD,
+	IMPACT_DAMAGE
 };
 
 struct Event {
@@ -111,4 +119,7 @@ struct TaxiShootEvent : public Event {
 	}
 	int shootId_;
 };
+
+
+
 

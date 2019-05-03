@@ -101,17 +101,46 @@ void Vehicle::update(Uint32 time) {
 }
 
 bool Vehicle::receiveEvent(Event & e) {
-	switch (e.type_) {
+
+	switch (e.type_)
+	{
 	case STARTED_MOVING_FORWARD:
 		health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
 		break;
-	case STOPPED_MOVING_FORWARD:
+
+	case STOPPED_BACK_MOVING_FORWARD:
 		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 		break;
-	default:
+
+	case TURN_LEFT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("leftTurn");
 		break;
+
+	case TURN_RIGHT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("rightTurn");
+		break;
+
+	case TURN_DEFAULT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("default");
+		break;
+
+	case STOP_BACKFORWARD:
+		if(!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("backStop");
+		break;
+
+	case IMPACT_DAMAGE:
+		sprite_->playAnimation("hitDamage", 30.0f, false); //play establece anim como currentAnm y al renderizar secciona por frames
+		//como loop es false vuelve a la animaci�n por defecto
+		Event eV(this, IMPACT_DAMAGE);
+		broadcastEvent(eV); //TaxiSoundManager recieved this message
+		break;
+
 	}
-	
+
 	return true;
 }
 
@@ -162,9 +191,13 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
+	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); 
+	sprite_->loadAnimation(r.backTurnPath, "backStop");
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
+
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
-	//sprite_->playAnimation("default");
 
 	// Health
 	health_ = new Health(TAXI_HP);
@@ -203,6 +236,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	//Sound
 	smLC_ = new TaxiSoundManagerCP(this);
 	this->addLogicComponent(smLC_);
+	this->registerObserver(smLC_); //taxi es tambi�n un observable.  enviar� los mensajes correspondientes a su comp TaxiSoundManagerCP
 
 	control_->registerObserver(smLC_);
 

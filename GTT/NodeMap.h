@@ -37,19 +37,21 @@ public:
 		}
 		return false;
 	}
-	bool hasConnection(Vector2D direction) {
+	bool hasConnection(Vector2D direction, Connections& dir) {
 		double x= abs(direction.x);
 		double y = abs(direction.y);
-		Connections dir=NORTH;
+		Connections dirr=NORTH;
 		if (x > y) {
 			if (direction.x > 0) dir = EAST;
-			else dir = WEST;
+			else dirr = WEST;
 		}
 		else {
 			if (direction.y > 0) dir = SOUTH;
-			else dir = NORTH;
+			else dirr = NORTH;
 		}
-		return connections_[dir] != nullptr;
+		dir = dirr;
+		return connections_[dirr] != nullptr;
+
 	}
 };
 class NodeMap
@@ -66,6 +68,7 @@ public:
 	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	map<string, Node*> getNodes();
 	vector<Node*> getPatrol(string id);
+	void InBetweenNodes(Vector2D position, Node*& a, Node*& b);
 	virtual ~NodeMap();
 private:
 	map<string, Node*>nodes;//contiene todos los nodos del distrito con un identificador

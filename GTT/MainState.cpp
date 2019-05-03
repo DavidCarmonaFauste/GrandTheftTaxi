@@ -14,7 +14,8 @@
 
 
 
-MainState::MainState() {}
+MainState::MainState(){}
+
 MainState::~MainState() {
 	for (auto o : stage_) {
 		delete o; o = nullptr;
@@ -63,6 +64,7 @@ void MainState::start() {
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
 	
+	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 
 void MainState::end()

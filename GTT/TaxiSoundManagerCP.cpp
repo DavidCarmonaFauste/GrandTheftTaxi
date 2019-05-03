@@ -21,6 +21,7 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	Channels_.insert(std::pair<string, int>("Fast", 5));
 	Channels_.insert(std::pair<string, int>("BackForward", 6));
 	Channels_.insert(std::pair<string, int>("shoot", 7)); //all shoots
+	Channels_.insert(std::pair<string, int>("damage", 0)); //impact Damage
 
 
 	ch_3KeyDown = ch_3KeyUp = ch_5KeyUp = ch_6_KeyDown = ch_6_KeyUp = keyBackDown_ = false;
@@ -29,8 +30,6 @@ TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
 	ch_3_Vol_ = VOL_CHANNEL_3;
 	ch_6_Vol_ = VOL_CHANNEL_6;
 
-	//double f = v_->GetMaxSpeed() * POR_VEL_MIN_3_;
-	//double t = v_->GetMaxSpeed() * POR_VEL_MIN_2_;
 	//init SoundManager
 	start();
 
@@ -105,6 +104,12 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 {
 	switch (e.type_)
 	{
+
+	case IMPACT_DAMAGE:
+		s_->playSound_Ch(Channels_["damage"], TAXI_IMPACT_DAMAGE, 0);
+		break;
+
+
 	case STARTED_MOVING_FORWARD: {
 
 		if (!(s_->isSoundPlaying(Channels_["Aceleration"])))
@@ -175,6 +180,7 @@ bool TaxiSoundManagerCP::receiveEvent(Event & e)
 		keyBackDown_ = false;
 		break;
 	}
+	
 
 
 									  //callback receive from SoundManager when channel is stopped

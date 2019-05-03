@@ -210,12 +210,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Archivos de origen\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="VideoManager.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="MpegState.cpp">
-      <Filter>Archivos de origen\StateMachine</Filter>
-    </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
@@ -449,12 +443,6 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Archivos de encabezado\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="VideoManager.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="MpegState.h">
-      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="AmmoDisplay.h">
       <Filter>Archivos de encabezado\UI</Filter>

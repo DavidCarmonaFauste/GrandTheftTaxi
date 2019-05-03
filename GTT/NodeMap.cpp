@@ -87,7 +87,8 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 	if ((node->position_ - position).Length() <= 32 * 3) return node;
 	Vector2D dirToTarget = (position- node->position_);
 	dirToTarget.Normalize();
-	while (!node->hasConnection(dirToTarget)) {
+	Connections dir;
+	while (!node->hasConnection(dirToTarget, dir)) {
 		v.push_back(node);
 		node = getNearestNode(position, v);
 	}
@@ -133,6 +134,20 @@ map<string, Node*> NodeMap::getNodes()
 vector<Node*> NodeMap::getPatrol(string id)
 {
 	return patrols[id];
+}
+
+void NodeMap::InBetweenNodes(Vector2D position, Node *& a, Node *& b)
+{
+	Node* x=nullptr;
+	Node* y=nullptr;
+	x = getNearestConnectedNode(position);
+	Vector2D dirToNode = position - x->position_;
+	dirToNode.Normalize();
+	Connections con;
+	if (x->hasConnection(dirToNode, con)) {
+		y = x->connections_[con];
+	}
+
 }
 
 

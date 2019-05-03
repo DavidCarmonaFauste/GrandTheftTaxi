@@ -41,6 +41,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="FollowMiddlePoint.cpp" />
     <ClCompile Include="Font.cpp" />
+    <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
@@ -60,7 +61,6 @@
     <ClCompile Include="Money.cpp" />
     <ClCompile Include="MoneyDisplay.cpp" />
     <ClCompile Include="MouseClickIC.cpp" />
-    <ClCompile Include="MpegState.cpp" />
     <ClCompile Include="NodeMap.cpp" />
     <ClCompile Include="NodeMapsManager.cpp" />
     <ClCompile Include="Observable.cpp" />
@@ -91,7 +91,6 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="VideoManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AimAtCursorAC.h" />
@@ -120,6 +119,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="FollowMiddlePoint.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
@@ -139,7 +139,6 @@
     <ClInclude Include="Money.h" />
     <ClInclude Include="MoneyDisplay.h" />
     <ClInclude Include="MouseClickIC.h" />
-    <ClInclude Include="MpegState.h" />
     <ClInclude Include="NodeMap.h" />
     <ClInclude Include="NodeMapsManager.h" />
     <ClInclude Include="Observable.h" />
@@ -170,14 +169,13 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vehicle.h" />
-    <ClInclude Include="VideoManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

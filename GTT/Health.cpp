@@ -56,6 +56,11 @@ void Health::setHealth(int health) {
 	health_ = health;
 }
 
+void Health::increaseMaxHealth()
+{
+	maxHealth_ += HP_INCREASE;
+}
+
 bool Health::receiveEvent(Event& e) {
 	if (e.type_ == RESPAWNED)
 		resetHealth();

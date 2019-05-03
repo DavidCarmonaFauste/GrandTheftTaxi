@@ -11,7 +11,7 @@ public:
 	Proyectile();
 	virtual void SetBirth(double birthTime);
 	virtual void update(Uint32 time);
-	virtual void ChangeBulletType(ProyectileInfo p);
+	virtual void ChangeBulletType(ProyectileInfo p, bool isAnEnemy);
 	virtual void beginCallback(b2Contact *contact) override;
 	virtual void endCallback(b2Contact *contact) override;
 	PhysicObject* GetPhyO();
@@ -19,6 +19,7 @@ public:
 	double GetSpeed();
 	void DeactivateBullet();
 	virtual ~Proyectile() {};
+	bool isAnEnemy();
 
 protected:
 	Animation* animC_=nullptr;
@@ -28,6 +29,7 @@ protected:
 	double birthTime_;//tiempo en el que se activo el objeto
 	double speed_;
 	bool bodyReadyToDestroy_;
+	bool isAnEnemy_;
 
 
 	static b2Filter colFilter;

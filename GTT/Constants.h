@@ -24,6 +24,9 @@ const struct VehicleInfo {
 	string idlePath;
 	string rightTurnPath;
 	string leftTurnPath;
+	string backTurnPath;
+	string impDamagePath;
+	string diePath;
 	int width;
 	int height;
 	float velMax; //5
@@ -124,6 +127,7 @@ const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
+const int HP_INCREASE = 100;
 
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
@@ -169,30 +173,42 @@ const enum soundId {
 	TAXI_FASTDRIVE,
 	TAXI_DECELERATE_10,
 	TAXI_BACK_MOVING_FORWARD,
+	//TAXI COLLISIONS
+	TAXI_IMPACT_DAMAGE,
 	//buttons
 	CLIC_BUTTON_NEWGAME,
-
 	//Shoots
 	TURRET_DEFAULT_SOUND, //DE MOMENTO NO ESTÁ ASIGNADO A NADA, SE INICIALIZA en las torretas que no tienen asignado id
 	TURRET_SHOTGUN_SHOOT,
 	TURRET_SHOTGUN_SPECIAL_SHOOT,
 	TURRET_GUN_SHOOT,
-	TURRET_GUN_SPECIAL_SHOOT
+	TURRET_GUN_SPECIAL_SHOOT,
+	//Enemies
+	ENEMY_HIT_DAMAGE,
+	ENEMY_DIE
+
 
 };
 const map<soundId, string> SOUND = {
-	{TAXI_START, "../Assets/sounds/Arranque.wav"},
-	{TAXI_IDLE, "../Assets/sounds/Idle.wav"},
-	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi_Aceleration_03.wav"},
-	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi_fastEngineSound.wav"},
-	{TAXI_DECELERATE_10, "../Assets/sounds/taxi_decel.wav"},
-	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi_frenada.wav"}, 
+	//TAXI
+	{TAXI_START, "../Assets/sounds/Taxi/Arranque.wav"},
+	{TAXI_IDLE, "../Assets/sounds/Taxi/Idle.wav"},
+	{TAXI_ACCELERATE_01, "../Assets/sounds/Taxi/Taxi_Aceleration_03.wav"},
+	{TAXI_FASTDRIVE, "../Assets/sounds/Taxi/Taxi_fastEngineSound.wav"},
+	{TAXI_DECELERATE_10, "../Assets/sounds/Taxi/taxi_decel.wav"},
+	{TAXI_BACK_MOVING_FORWARD, "../Assets/sounds/Taxi/Taxi_frenada.wav"}, 
+	{TAXI_IMPACT_DAMAGE, "../Assets/sounds/Taxi/Taxi_damage.wav"},
+	//BUTTONS
 	{CLIC_BUTTON_NEWGAME, "../Assets/sounds/Buttons/Click_NewGameButon.wav"},
 	{TURRET_SHOTGUN_SHOOT, "../Assets/sounds/Turrets/ShotGun_Normal_Shoot.wav"},
+	//TURRETS
 	{TURRET_SHOTGUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/ShotGun_Special_Shoot.wav"},
 	{TURRET_GUN_SHOOT, "../Assets/sounds/Turrets/Gun_Normal.wav"},
 	{TURRET_GUN_SPECIAL_SHOOT, "../Assets/sounds/Turrets/Gun_Special.wav"},
-	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"}
+	{TURRET_DEFAULT_SOUND, "../Assets/sounds/Turrets/Turret_emptyBullets_Shoot.wav"},
+	//ENEMIES
+	{ENEMY_HIT_DAMAGE, "../Assets/sounds/Enemy/Enemy_hit_damage.wav"},
+	{ENEMY_DIE, "../Assets/sounds/Enemy/Enemy_die.wav"},
 
 };
 
@@ -217,17 +233,33 @@ const string FONT_LATO = "../Assets/fonts/lato_regular.ttf";
 const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 
 //Vehicles
-const VehicleInfo TAXI{ "../Assets/sprites/taxi.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.4f, 0.8f };
-const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/TaxiGTT.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
-const VehicleInfo ENEMY1{ "../Assets/sprites/VTC2-cobify.png", "../Assets/sprites/default.png", "../Assets/sprites/default.png", 64, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+	//taxi
+const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
+"../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Taxi/Taxi_default.png",
+64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
+	//enemies
+const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/VTC4-TANK-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
+
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 50, 50, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
-const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 25, 25, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 20, 20, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo SNIPERBULLET{};
 const ProyectileInfo SPECIAL_SNIPERBULLET{};
@@ -236,15 +268,15 @@ const ProyectileInfo MACHINEGUNBULLET{};
 const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
 
 	//... //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 50, 50, 10, 5000, 20, BOUNCE };
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 20, 20, 10, 5000, 20, BOUNCE };
 
 
 
 //Weapons
 const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
 const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
-//const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
-//const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
+const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
