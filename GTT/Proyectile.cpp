@@ -72,6 +72,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	else
 		phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF));
 	phyO_->getBody()->GetFixtureList()->SetRestitution(1.0f);
+	isAnEnemy_ = isAnEnemy;
 
 	switch (p.imp) {
 	case STANDARD:

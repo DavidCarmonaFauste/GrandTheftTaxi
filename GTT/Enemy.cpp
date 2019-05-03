@@ -18,6 +18,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	bodyReadyToDestroy_ = false;
 
+
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "idle");
@@ -40,9 +41,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(phyO_);
 
 	//IA
-	pursuitRange_ = 32 * 40;
+	pursuitRange_ = 32 * 10;
 	behaviour_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
-	addLogicComponent(behaviour_);
+	behaviour2_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
+	addLogicComponent(behaviour2_);
 	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
@@ -123,3 +125,4 @@ Enemy::~Enemy()
 {
 	delete turret_;
 }
+
