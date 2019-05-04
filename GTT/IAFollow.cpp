@@ -34,6 +34,7 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 	}
 	else {
 		started_ = false;
+		phyO_->getBody()->SetLinearVelocity(Vector2D());
 	}
 }
 

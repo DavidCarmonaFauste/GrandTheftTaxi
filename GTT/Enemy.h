@@ -24,8 +24,9 @@ public:
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
-	IAMovementBehaviour* behaviour_;
-	IAMovementBehaviour* behaviour2_;
+	bool followmode_;
+	IAMovementBehaviour* patrol_;
+	IAMovementBehaviour* follow_;
 	NodeMap* routemap_;
 	int speed_;
 	int pursuitRange_;

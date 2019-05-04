@@ -25,7 +25,8 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 				routeProgress_ = 0;
 			}
 			else if(patrolProgress_==-1) {
-				route_ = AssignRoute(nextNode_, patrol_[patrolProgress_++]);
+				patrolProgress_++;
+				route_ = AssignRoute(nextNode_, patrol_[patrolProgress_]);
 				routeProgress_ = 0;
 			}
 			else if(atNextPatrolNode()) {
@@ -33,9 +34,11 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 				route_ = AssignRoute(nextNode_, patrol_[patrolProgress_]);
 				routeProgress_ = 0;
 			}
+			if (routeProgress_ < route_.size()) {
+				goTo(route_[routeProgress_]);
+				routeProgress_++;
+			}
 			
-			goTo(route_[routeProgress_]);
-			routeProgress_++;
 		}
 	}
 }

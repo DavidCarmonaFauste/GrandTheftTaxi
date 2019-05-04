@@ -41,10 +41,11 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(phyO_);
 
 	//IA
-	pursuitRange_ = 32 * 10;
-	behaviour_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
-	behaviour2_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
-	addLogicComponent(behaviour2_);
+	pursuitRange_ = 32 * 20;
+	follow_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
+	patrol_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
+	addLogicComponent(patrol_);
+	followmode_ = false;
 	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
@@ -77,6 +78,20 @@ void Enemy::update(Uint32 deltaTime)
 			phyO_ = nullptr;
 			setActive(false);
 		}
+		if (followmode_ != taxiOnRange()) {
+			followmode_ = !followmode_;
+			if (followmode_) {
+				delLogicComponent(patrol_);
+				addLogicComponent(follow_);
+				follow_->Restart();
+			}
+			else {
+				delLogicComponent(follow_);
+				addLogicComponent(patrol_);
+				patrol_->Restart();
+			}
+		}
+		cout << taxiOnRange() << endl;
 		Car::update(deltaTime);
 		if (turret_ != nullptr) {
 			turret_->update(deltaTime);
@@ -117,7 +132,9 @@ bool Enemy::taxiOnRange()
 
 IAMovementBehaviour * Enemy::getIABehaviour()
 {
-	return behaviour_;
+	if (followmode_)
+		return follow_;
+	return patrol_;
 }
 
 
