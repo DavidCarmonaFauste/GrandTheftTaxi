@@ -33,6 +33,7 @@ public:
 	void ReadEnemyInfo();
 	void addSpawn(string id, Vector2D pos);
 	void deactivateIA();
+	bool EnemyAtPos(Vector2D pos, GameObject* enemy=nullptr);
 
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);

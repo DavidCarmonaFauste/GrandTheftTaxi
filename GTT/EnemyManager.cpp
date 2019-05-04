@@ -67,8 +67,19 @@ void EnemyManager::addSpawn(string id, Vector2D pos)
 void EnemyManager::deactivateIA()
 {
 	for (auto e : enemies_) {
-		e.second->getIABehaviour()->Restart();
+		if(e.second!=nullptr)
+			e.second->getIABehaviour()->Restart();
 	}
+}
+
+bool EnemyManager::EnemyAtPos(Vector2D pos, GameObject* enemy)
+{
+	for (auto e : enemies_) {
+		if (e.second != nullptr && e.second!=enemy)
+			if(e.second->getCenter().x<=pos.x+32 && e.second->getCenter().x >=pos.x-32
+				&& e.second->getCenter().y <= pos.y + 32 && e.second->getCenter().y >= pos.y - 32)return true;
+	}
+	return false;
 }
 
 void EnemyManager::update(Uint32 deltaTime)

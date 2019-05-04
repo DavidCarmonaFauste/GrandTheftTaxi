@@ -93,7 +93,6 @@ void Enemy::update(Uint32 deltaTime)
 			}
 		}
 		*/
-		cout << taxiOnRange() << endl;
 		Car::update(deltaTime);
 		if (turret_ != nullptr) {
 			turret_->update(deltaTime);

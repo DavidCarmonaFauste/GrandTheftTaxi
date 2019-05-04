@@ -1,5 +1,6 @@
 #include "IAFollow.h"
 #include "Vehicle.h"
+#include "EnemyManager.h"
 
 IAFollow::IAFollow(PhysicObject * ph, GameObject * o, NodeMap * districtMap, int patrolSpeed, double followDistance) 
 	:IAMovementBehaviour(ph, o, districtMap, patrolSpeed)
@@ -28,6 +29,14 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 				if (!route_.empty() && routeProgress_ < route_.size()) {
 					goTo(route_[routeProgress_]);
 					routeProgress_++;
+				}
+			}
+			else {
+				if (EnemyManager::getInstance()->EnemyAtPos(nextNode_->position_, o_) && (o_->getCenter() - nextNode_->position_).Length() <= 32 * 3) {
+					phyO_->getBody()->SetLinearVelocity(Vector2D());
+				}
+				else {
+					goTo(nextNode_);
 				}
 			}
 		}

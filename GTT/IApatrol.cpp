@@ -1,6 +1,7 @@
 #include "IApatrol.h"
 #include "PhysicObject.h"
 #include "Vehicle.h"
+#include "EnemyManager.h"
 
 IApatrol::IApatrol(PhysicObject * ph, GameObject* o, NodeMap * districtMap, int patrolSpeed, vector<Node*> route): IAMovementBehaviour(ph, o, districtMap, patrolSpeed)
 {
@@ -39,6 +40,14 @@ void IApatrol::update(GameObject* o, Uint32 deltaTime)
 				routeProgress_++;
 			}
 			
+		}
+		else {
+			if (EnemyManager::getInstance()->EnemyAtPos(nextNode_->position_, o_) && (o_->getCenter() - nextNode_->position_).Length() <= 32 * 3) {
+				phyO_->getBody()->SetLinearVelocity(Vector2D());
+			}
+			else {
+				goTo(nextNode_);
+			}
 		}
 	}
 }
