@@ -9,7 +9,7 @@ class IAFollow :
 	public IAMovementBehaviour
 {
 public:
-	IAFollow(PhysicObject* ph, GameObject* o, NodeMap* districtMap, int patrolSpeed, double followDistance);
+	IAFollow(PhysicObject* ph, GameObject* o, NodeMap* districtMap, int patrolSpeed, double followDistance=-1);
 	virtual void update(GameObject* o, Uint32 deltaTime);
 	virtual ~IAFollow();
 

@@ -86,3 +86,12 @@ void EnemyManager::render(Uint32 deltaTime)
 		e.second->render(deltaTime);
 	}
 }
+
+void EnemyManager::input(Uint32 time, const SDL_Event & event)
+{
+	for (auto e : enemies_) {
+		if (e.second != nullptr)
+			e.second->handleInput(time, event);
+	}
+}
+

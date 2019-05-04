@@ -9,7 +9,7 @@ IAFollow::IAFollow(PhysicObject * ph, GameObject * o, NodeMap * districtMap, int
 
 void IAFollow::update(GameObject * o, Uint32 deltaTime)
 {
-	if (getDistanceToTaxi() <= followDistance_) {
+	if (followDistance_ == -1 || getDistanceToTaxi() <= followDistance_) {
 		if (!started_) {
 			goTo(districtMap_->getNearestConnectedNode(o_->getCenter()));
 			if (arrivedAtNode()) {
@@ -36,6 +36,7 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 		started_ = false;
 		phyO_->getBody()->SetLinearVelocity(Vector2D());
 	}
+	
 }
 
 IAFollow::~IAFollow()

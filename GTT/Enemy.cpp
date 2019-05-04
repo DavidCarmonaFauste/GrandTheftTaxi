@@ -42,10 +42,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	//IA
 	pursuitRange_ = 32 * 20;
-	follow_ = new IAFollow(GetPhyO(), this, nmap, speed_, pursuitRange_);
+	follow_ = new IAFollow(GetPhyO(), this, nmap, speed_);
 	patrol_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
-	addLogicComponent(patrol_);
-	followmode_ = false;
+	addLogicComponent(follow_);
+	followmode_ = true;
 	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
@@ -78,6 +78,7 @@ void Enemy::update(Uint32 deltaTime)
 			phyO_ = nullptr;
 			setActive(false);
 		}
+		/*
 		if (followmode_ != taxiOnRange()) {
 			followmode_ = !followmode_;
 			if (followmode_) {
@@ -91,6 +92,7 @@ void Enemy::update(Uint32 deltaTime)
 				patrol_->Restart();
 			}
 		}
+		*/
 		cout << taxiOnRange() << endl;
 		Car::update(deltaTime);
 		if (turret_ != nullptr) {
@@ -112,6 +114,21 @@ void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
 {
 	if (active_) {
 		Car::handleInput(deltaTime, event);
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_p) {
+				followmode_ = !followmode_;
+				if (followmode_) {
+					delLogicComponent(patrol_);
+					addLogicComponent(follow_);
+					follow_->Restart();
+				}
+				else {
+					delLogicComponent(follow_);
+					addLogicComponent(patrol_);
+					patrol_->Restart();
+				}
+			}
+		}
 	}
 }
 
