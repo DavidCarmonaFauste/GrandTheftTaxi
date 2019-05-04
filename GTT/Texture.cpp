@@ -41,19 +41,8 @@ void Texture::close() {
 }
 
 bool Texture::loadFromImg(SDL_Renderer* renderer, string fileName) {
-	SDL_Surface* surface = IMG_Load(fileName.c_str());
-	if (surface != nullptr) {
-		close(); // destroy current texture
-		texture_ = SDL_CreateTextureFromSurface(renderer, surface);
-		if (texture_ != nullptr) {
-			width_ = surface->w;
-			height_ = surface->h;
-		}
-		SDL_FreeSurface(surface);
-	}
-	else {
-		cout << "Couldn't load image: " << fileName << endl;
-	}
+	texture_ = IMG_LoadTexture(renderer, fileName.c_str());
+	SDL_QueryTexture(texture_, NULL, NULL, &width_, &height_);
 	renderer_ = renderer;
 	return texture_ != nullptr;
 }
