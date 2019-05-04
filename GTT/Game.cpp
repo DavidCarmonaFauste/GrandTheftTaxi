@@ -55,7 +55,18 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
+}
 
+void Game::end() {
+	delete gmStMachine_; gmStMachine_ = nullptr;
+	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
+		delete (*it).second; (*it).second = nullptr;
+	}
+
+	SDL_DestroyRenderer(renderer_);
+	SDL_DestroyWindow(window_);
+	Mix_Quit();
+	SDL_Quit();
 }
 
 //los eventos los gestiona la aplicaci�n. Conecta directamente con handleEvents del estado actual. 
@@ -191,10 +202,7 @@ void Game::run() {
 		lastTime = SDL_GetTicks();
 	}
 
-	SDL_DestroyRenderer(renderer_);
-	SDL_DestroyWindow(window_);
-	Mix_Quit();
-	SDL_Quit();
+	end();
 }
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp

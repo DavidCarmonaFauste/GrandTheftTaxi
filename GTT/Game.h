@@ -69,7 +69,8 @@ public:
 	void init();
 
 private:
-	
+	void end();
+
 	const int winWidth_ = WIN_WIDTH;
 	const int winHeight_ = WIN_HEIGHT;
 

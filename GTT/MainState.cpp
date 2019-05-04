@@ -14,12 +14,7 @@
 
 MainState::MainState(){}
 
-MainState::~MainState() {
-	for (auto o : stage_) {
-		delete o; o = nullptr;
-	}
-	stage_.clear();
-}
+MainState::~MainState() {}
 
 //start is called when GameStateMachine change state
 void MainState::start() {
@@ -30,11 +25,8 @@ void MainState::start() {
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-	
-	
 
 	//Camera logic
-	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 
 	// Tilemap
@@ -66,8 +58,7 @@ void MainState::start() {
 	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 
-void MainState::end()
-{
+void MainState::end() {
 }
 
 

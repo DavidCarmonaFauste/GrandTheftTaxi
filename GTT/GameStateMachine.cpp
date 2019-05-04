@@ -12,7 +12,9 @@ GameStateMachine::GameStateMachine() {
 }
 
 GameStateMachine::~GameStateMachine() {
-	
+	for (auto state : STATES_) {
+		delete state.second; state.second = nullptr;
+	}
 }
 
 void GameStateMachine::setState(const string &s) {
@@ -44,7 +46,6 @@ void GameStateMachine::initStates() {
 		
 	//primer estado al ejectuar app
 	//...
-
 
 	//DEPURACION
 	//setState(NAME_MAINMENU_STATE);

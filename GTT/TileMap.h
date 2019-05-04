@@ -35,5 +35,7 @@ private:
 	tmx::Map* tmxMap_;
 	PhysicObject* phyO_;
 	Sprite *mapSprite_;
+
+	int test;
 };
 

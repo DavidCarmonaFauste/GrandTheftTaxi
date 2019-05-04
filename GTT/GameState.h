@@ -13,7 +13,15 @@ protected:
 public:
 
 	GameState(){}
-	~GameState(){}
+	~GameState(){
+		/*
+		for (auto o : stage_) {
+			if (o != nullptr)
+				delete o; o = nullptr;
+		}
+		stage_.clear();
+		*/
+	}
 
 	virtual void start() = 0;
 	virtual void end() = 0;
