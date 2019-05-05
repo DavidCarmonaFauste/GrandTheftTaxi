@@ -2,9 +2,12 @@
 #include "Dialogues.h"
 #include "Phrases.h"
 #include "Constants.h"
+#include "Text.h"
+#include "Container.h"
 #include <memory>
 
-class DialoguesManager
+class DialoguesManager :
+	public Container
 {
 	static unique_ptr<DialoguesManager> instance;
 public:
@@ -17,7 +20,7 @@ public:
 private:
 	
 	int time;
-	Dialogues* d;
+	Text* txt_;
 	bool english = false;
 	bool displaying;
 	int maxTime;
