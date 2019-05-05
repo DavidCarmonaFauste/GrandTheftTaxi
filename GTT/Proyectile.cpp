@@ -70,7 +70,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	if(!isAnEnemy)
 	phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | TAXI_CATEGORY) );
 	else
-		phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF));
+		phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | ENEMY_CATEGORY));
 	phyO_->getBody()->GetFixtureList()->SetRestitution(1.0f);
 	isAnEnemy_ = isAnEnemy;
 

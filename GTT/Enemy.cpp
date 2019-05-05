@@ -33,10 +33,11 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(health_);
 
 	//Movement
-	speed_ = 5;
+	speed_ = 3;
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
+	phyO_->setCollisions(0, ENEMY_CATEGORY);
 	phyO_->getBody()->SetUserData(this);
 	addLogicComponent(phyO_);
 
