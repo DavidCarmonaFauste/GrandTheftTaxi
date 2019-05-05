@@ -50,6 +50,7 @@ UI * UI::getInstance() {
 }
 
 void UI::render(Uint32 deltaTime) {
+	//dialogues_->render(deltaTime);
 	for (auto element : UIElements_) {
 		element->render(deltaTime);
 	}
@@ -57,6 +58,8 @@ void UI::render(Uint32 deltaTime) {
 
 void UI::update(Uint32 deltaTime)
 {
+	dialogues_->update(deltaTime);
+
 	if (reloadDisplay_ != nullptr)
 		reloadDisplay_->setActive(reloadDisplay_->isReloading());
 	for (auto element : UIElements_) {

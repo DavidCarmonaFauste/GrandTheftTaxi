@@ -5,6 +5,7 @@
 #include "Text.h"
 #include "Container.h"
 #include <memory>
+#include <string>
 
 class DialoguesManager :
 	public Container
