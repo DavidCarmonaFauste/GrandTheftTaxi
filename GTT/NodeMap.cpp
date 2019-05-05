@@ -94,6 +94,16 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 	return node;
 }
 
+void NodeMap::getBetweenNodes(Node *& a, Node *& b, Vector2D position)
+{
+	a = getNearestConnectedNode(position);
+	Vector2D dirToTarg = position - a->position_;
+	dirToTarg.Normalize();
+	Connections dir;
+	a->hasConnection(dirToTarg, dir);
+	b = a->connections_[dir];
+}
+
 bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)
 {
 	if (current == destiny) 

@@ -6,13 +6,21 @@ IAFollow::IAFollow(PhysicObject * ph, GameObject * o, NodeMap * districtMap, int
 	:IAMovementBehaviour(ph, o, districtMap, patrolSpeed)
 {
 	followDistance_ = followDistance;
+	edgeFollow_ = false;
 }
 
 void IAFollow::update(GameObject * o, Uint32 deltaTime)
 {
 	if (followDistance_ == -1 || getDistanceToTaxi() <= followDistance_) {
 		if (!started_) {
-			goTo(districtMap_->getNearestConnectedNode(o_->getCenter()));
+			Node* a;
+			Node* b;
+			districtMap_->getBetweenNodes(a, b, o_->getCenter());
+			//go to node that is connected to the enemy and nearest to the target
+			if (b != nullptr && (b->position_ - Vehicle::getInstance()->getCenter()).Length() <= (a->position_ - Vehicle::getInstance()->getCenter()).Length()) 
+				goTo(b);
+			else goTo(a);
+
 			if (arrivedAtNode()) {
 				route_ = AssignRoute(nextNode_, districtMap_->getNearestConnectedNode(Vehicle::getInstance()->getCenter()));
 				routeProgress_ = 0;
@@ -31,13 +39,25 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 					routeProgress_++;
 				}
 			}
-			else {
-				if (EnemyManager::getInstance()->EnemyAtPos(nextNode_->position_, o_) && (o_->getCenter() - nextNode_->position_).Length() <= 32 * 3) {
+			if (TargetOnCurrentEdge()) {
+				edgeFollow_ = true;
+				if(getDistanceToTaxi() < 32 * 4) {
 					phyO_->getBody()->SetLinearVelocity(Vector2D());
 				}
 				else {
-					goTo(nextNode_);
+					Vector2D direction_ = Vehicle::getInstance()->getCenter() - o_->getCenter();
+					direction_.Normalize();
+					if (direction_.x != 0 || direction_.y != 0) {
+						float angle = atan2f(-direction_.x, direction_.y);
+						angle += 90.0 / 180.0*M_PI;
+						phyO_->getBody()->SetTransform(phyO_->getBody()->GetPosition(), angle);
+					}
+					phyO_->getBody()->SetLinearVelocity(Vector2D(direction_.x * speed_, direction_.y * speed_));
 				}
+			}
+			else {
+				if (edgeFollow_) started_ = false;
+				edgeFollow_ = false;
 			}
 		}
 	}
@@ -55,4 +75,20 @@ IAFollow::~IAFollow()
 double IAFollow::getDistanceToTaxi()
 {
 	return (Vehicle::getInstance()->getCenter() - o_->getCenter()).Length();
+}
+
+bool IAFollow::TargetOnCurrentEdge()
+{
+	Node*a;
+	Node*b;
+	Node* A;
+	Node* B;
+	Vector2D taxipos = Vehicle::getInstance()->getCenter();
+	districtMap_->getBetweenNodes(a, b, taxipos);
+	districtMap_->getBetweenNodes(A, B, o_->getCenter());
+
+	
+	return(a == A && b == B || a == B && b == A || (a!=nullptr && (a->position_.x >= o_->getCenter().x - 32 && a->position_.x <= o_->getCenter().x + 32
+		&& a->position_.y >= o_->getCenter().y - 32 && a->position_.y <= o_->getCenter().y + 32)) || (b!=nullptr && (b->position_.x >= o_->getCenter().x - 32 && b->position_.x <= o_->getCenter().x + 32
+			&& b->position_.y >= o_->getCenter().y - 32 && b->position_.y <= o_->getCenter().y + 32)));
 }

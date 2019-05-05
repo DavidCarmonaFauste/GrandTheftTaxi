@@ -78,7 +78,7 @@ void Enemy::update(Uint32 deltaTime)
 			phyO_ = nullptr;
 			setActive(false);
 		}
-		
+		/*
 		if (followmode_ != taxiOnRange()) {
 			followmode_ = !followmode_;
 			if (followmode_) {
@@ -92,7 +92,7 @@ void Enemy::update(Uint32 deltaTime)
 				patrol_->Restart();
 			}
 		}
-		
+		*/
 		Car::update(deltaTime);
 		if (turret_ != nullptr) {
 			turret_->update(deltaTime);

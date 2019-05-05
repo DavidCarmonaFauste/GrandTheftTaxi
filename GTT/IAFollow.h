@@ -16,5 +16,7 @@ public:
 private:
 	double followDistance_;
 	double getDistanceToTaxi();
+	bool TargetOnCurrentEdge();
+	bool edgeFollow_;
 };
 

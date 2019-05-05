@@ -64,7 +64,8 @@ public:
 	bool nodeExists(string id);
 	bool nodeExists(Node* n);
 	Node* getNearestNode(Vector2D position, vector<Node*> unwantednodes= vector<Node*>());
-	Node* getNearestConnectedNode(Vector2D position );
+	Node* getNearestConnectedNode(Vector2D position);
+	void getBetweenNodes(Node*& a, Node*& b, Vector2D position);
 	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	map<string, Node*> getNodes();
 	vector<Node*> getPatrol(string id);
