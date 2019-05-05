@@ -8,6 +8,7 @@
 #include "FollowGameObject.h"
 #include "Respawner.h"
 #include "Shop.h"
+#include "FuelUpgrade.h"
 
 class MainState :
 	public GameState
