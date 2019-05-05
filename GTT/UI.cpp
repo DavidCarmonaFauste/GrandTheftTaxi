@@ -25,6 +25,10 @@ UI::UI() {
 	ammoDisplay_ = new AmmoDisplay();
 	UIElements_.push_back(ammoDisplay_);
 
+	//Dialogues
+	dialogues_ = new DialoguesManager();
+	UIElements_.push_back(dialogues_);
+
 	//Reload
 	reloadDisplay_ = new ReloadingDisplay();
 	UIElements_.push_back(reloadDisplay_);
