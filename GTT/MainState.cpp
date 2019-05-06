@@ -13,7 +13,6 @@
 #include "EnemyManager.h"
 
 
-
 MainState::MainState(){}
 
 MainState::~MainState() {
@@ -27,7 +26,7 @@ MainState::~MainState() {
 void MainState::start() {
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
-	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
+	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	// Tilemap
