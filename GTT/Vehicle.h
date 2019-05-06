@@ -1,6 +1,7 @@
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
+#include "DialoguesManager.h"
 #include "EnterShopIC.h"
 
 #pragma once
@@ -40,7 +41,7 @@ public:
 	void initAtributtes(VehicleInfo r, KeysScheme k);
 
 
-	float32 GetMaxBackwardSpeed();	
+	float32 GetMaxBackwardSpeed();
 	float32 GetAcceleration();
 	Vector2D getSpawnPosition ();
 
@@ -56,7 +57,6 @@ public:
 
 	virtual bool receiveEvent(Event& e);
 	virtual void SaveSpawnPoint(Vector2D spawn);
-	
 
 	private:
 	void Respawn();
