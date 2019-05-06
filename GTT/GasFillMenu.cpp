@@ -38,10 +38,13 @@ void GasFillMenu::start () {
 	setButtons ();
 	setButtonComponents ();
 
-	// health display (not the same object as in the UI as to not have to hide the rest of the UI and reposition the bar every state change)
+	// health display (not the same object as in the UI so there's no need to hide the rest of the UI and reposition the bar every state change)
 	healthDisplay_ = new HealthDisplay();
 	healthDisplay_->reposition (GAS_MENU_HEALTH_BAR_POSITION);
 	healthDisplay_->setHealthPercentage (float (Vehicle::getInstance ()->getHealthComponent ()->getHealth ()) / Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ());
+
+	//Money Display
+	//moneyDisplay_ = new MoneyDisplay();
 
 	//Container to GameObj list
 	stage_.push_back(background_);
