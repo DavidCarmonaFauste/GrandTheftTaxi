@@ -5,7 +5,7 @@
 #include "Text.h"
 #include "Container.h"
 #include <memory>
-#include <string>
+#include <math.h>
 
 class DialoguesManager :
 	public Container
@@ -14,7 +14,7 @@ class DialoguesManager :
 public:
 	DialoguesManager* getInstance();
 	~DialoguesManager();
-	void eventoDisparo(int time);
+	void evento(vector <pair<string, string>> phrases);
 	void update(int deltaTime);
 	DialoguesManager();
 
@@ -22,12 +22,13 @@ private:
 	
 	int time;
 	Text* txt_;
-	bool english = false;
+	bool english = true;
 	bool displaying;
 	int maxTime;
 	Font* font;
 	SDL_Color color;
 	Vector2D pos;
 	int w, h;
+	int timeDialogues = 10000;
 };
 

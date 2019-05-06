@@ -8,9 +8,9 @@ DialoguesManager::DialoguesManager()
 	displaying = false;
 	maxTime = 0;
 	
-	pos = Vector2D(600, 800);
+	pos = Vector2D(500, 800);
 	setPosition(pos);
-	font = new Font(FONT_COOLFONT, 80);
+	font = new Font(FONT_COOLFONT, 60);
 	color = SDL_Color();
 	color.r = 255; color.g = 255; color.b = 255;
 	txt_ = new Text(font, "", color);
@@ -19,9 +19,9 @@ DialoguesManager::DialoguesManager()
 	addRenderComponent(txt_);
 	txt_->setAutoPos(true);
 	txt_->setAutoSize(false);
-	txt_->setSize(200, 80);
+	txt_->setSize(600, 80);
 
-	eventoDisparo(7000);
+	evento(disparo);
 }
 
 
@@ -43,12 +43,15 @@ DialoguesManager::~DialoguesManager()
 {
 }
 
-void DialoguesManager::eventoDisparo(int time)
+void DialoguesManager::evento(vector <pair<string, string>> phrases)
 {
-	
-	txt_->setText(disparo[0].first);
-	displaying = true;
-	maxTime = time; 
+	if (!displaying) {
+		int random = rand() % phrases.size();
+		if (english) txt_->setText(phrases[random].second);
+		else txt_->setText(phrases[random].first); 
+		displaying = true;
+		maxTime = timeDialogues;
+	}
 }
 
 void DialoguesManager::update(int deltaTime)
