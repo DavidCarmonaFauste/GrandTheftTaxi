@@ -57,7 +57,7 @@ void DialoguesManager::update(int deltaTime)
 
 		time += deltaTime;
 		if (time > maxTime) {
-			txt_ = new Text(font, "", color);
+			txt_->setText(" ");
 			displaying = false;
 			maxTime = 0;
 			time = 0;
