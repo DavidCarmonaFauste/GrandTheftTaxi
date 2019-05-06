@@ -8,6 +8,7 @@
 
 Enemy::Enemy()
 {
+	zombie_ = false; alive_ = true;
 }
 
 Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon){
@@ -16,6 +17,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	position_ = pos;
 
+	zombie_ = false; 
+	alive_ = true;
 	bodyReadyToDestroy_ = false;
 
 
@@ -56,16 +59,16 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
-	if (health_->getHealth() <= 0) { 	
-		Die(); 
+	if (health_->getHealth() <= 0) { 
+		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
+		sprite_->playAnimation("enemyDie", 10.0f, false);
+		turret_->setActive(false);
+		zombie_ = true; //lanza el flag para que en el update se desactiven la lógica de patruya
 	}
 }
 
 void Enemy::Die()
 {	
-	SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
-	sprite_->playAnimation("enemyDie", 10.0f, false);
-
 	bodyReadyToDestroy_ = true;
 	turret_->setActive(false);
 }
@@ -73,30 +76,28 @@ void Enemy::Die()
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
+
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;
 			phyO_ = nullptr;
 			setActive(false);
 		}
-		/*
-		if (followmode_ != taxiOnRange()) {
-			followmode_ = !followmode_;
-			if (followmode_) {
-				delLogicComponent(patrol_);
-				addLogicComponent(follow_);
-				follow_->Restart();
-			}
-			else {
-				delLogicComponent(follow_);
-				addLogicComponent(patrol_);
-				patrol_->Restart();
+
+
+		if (!zombie_) {
+			Car::update(deltaTime);
+			if (turret_ != nullptr) {
+				turret_->update(deltaTime);
 			}
 		}
-		*/
-		Car::update(deltaTime);
-		if (turret_ != nullptr) {
-			turret_->update(deltaTime);
+
+		if (!sprite_->isAnimationPlaying("enemyDie") && zombie_) { 
+			alive_ = false; 
+		}
+
+		if (!alive_) {
+			Die();
 		}
 	}
 }

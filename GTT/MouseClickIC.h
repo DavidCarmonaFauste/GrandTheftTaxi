@@ -9,9 +9,9 @@ class MouseClickIC :
 
 public:
 	MouseClickIC(int key = SDL_BUTTON_LEFT);
-	virtual ~MouseClickIC ();
+	virtual ~MouseClickIC();
 
-	//redefnie el método dado que esta clase sólo usa Button para tratar su input
+	//redefnie el mï¿½todo dado que esta clase sï¿½lo usa Button para tratar su input
 	virtual void handleInput(GameObject* o, Uint32 deltaTime, const SDL_Event& event);
 
 	virtual void update(GameObject* o, Uint32 deltaTime){}
@@ -23,4 +23,3 @@ private:
 	Button* b_;
 	int mouseClickKey_;
 };
-
