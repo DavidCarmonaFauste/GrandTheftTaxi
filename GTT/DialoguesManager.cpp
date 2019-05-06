@@ -20,7 +20,7 @@ DialoguesManager::DialoguesManager()
 	txt_->setAutoPos(true);
 	txt_->setAutoSize(false);
 	txt_->setSize(600, 80);
-	evento(disparo);
+	//evento(disparo);
 }
 
 
