@@ -279,12 +279,6 @@
     <ClCompile Include="NodeMapsManager.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Dialogues.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-    <ClCompile Include="DialoguesManager.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="GasMainMenu.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
     </ClCompile>
@@ -296,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="GasFillMenu.cpp">
       <Filter>Archivos de origen\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="DialoguesManager.cpp">
+      <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -527,17 +524,8 @@
     <ClInclude Include="NodeMapsManager.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Dialogues.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="DialoguesManager.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
-    <ClInclude Include="Phrases.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="GasMainMenu.h">
-     <Filter>Archivos de encabezado\StateMachine</Filter>
+      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="GasFillMenu.h">
       <Filter>Archivos de encabezado\StateMachine</Filter>
@@ -547,6 +535,12 @@
     </ClInclude>
     <ClInclude Include="TaxiSoundManagerCP.h">
       <Filter>Archivos de encabezado\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DialoguesManager.h">
+      <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Phrases.h">
+      <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
