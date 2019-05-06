@@ -1,43 +1,30 @@
 #include "DialoguesManager.h"
 
-unique_ptr<DialoguesManager> DialoguesManager::instance = nullptr;
+
 
 DialoguesManager::DialoguesManager()
 {
-	time = 0;
-	displaying = false;
-	maxTime = 0;
+	time_ = 0;
+	displaying_ = false;
+	maxTime_ = 0;
 	
-	pos = Vector2D(500, 800);
-	setPosition(pos);
-	font = new Font(FONT_COOLFONT, 60);
-	color = SDL_Color();
-	color.r = 255; color.g = 255; color.b = 255;
-	txt_ = new Text(font, "", color);
+	pos_ = Vector2D(500, 800);
+	setPosition(pos_);
+	font_ = new Font(FONT_COOLFONT, 60);
+	color_ = SDL_Color();
+	color_.r = 255; color_.g = 255; color_.b = 255;
+	txt_ = new Text(font_, "", color_);
 	
 	txt_->setCamera(UI_CAMERA);
 	addRenderComponent(txt_);
 	txt_->setAutoPos(true);
 	txt_->setAutoSize(false);
 	txt_->setSize(600, 80);
-
 	evento(disparo);
 }
 
 
-DialoguesManager * DialoguesManager::getInstance()
-{
-	if (this != nullptr) {
-		if (instance == nullptr) {
-			instance.reset(new DialoguesManager());
-		}
-		return instance.get();
-	}
-	else {
-		return new DialoguesManager();
 
-	}
-}
 
 DialoguesManager::~DialoguesManager()
 {
@@ -45,26 +32,27 @@ DialoguesManager::~DialoguesManager()
 
 void DialoguesManager::evento(vector <pair<string, string>> phrases)
 {
-	if (!displaying) {
+	if (!displaying_) {
+		
 		int random = rand() % phrases.size();
 		if (english) txt_->setText(phrases[random].second);
 		else txt_->setText(phrases[random].first); 
-		displaying = true;
-		maxTime = timeDialogues;
+		displaying_ = true;
+		maxTime_ = timeDialogues_;
 	}
 }
 
 void DialoguesManager::update(int deltaTime)
 {
-	if (displaying) {
+	if (displaying_) {
 
-		time += deltaTime;
-		if (time > maxTime) {
+		time_ += deltaTime;
+		if (time_ > maxTime_) {
 			txt_->setText(" ");
-			displaying = false;
-			maxTime = 0;
-			time = 0;
+			displaying_ = false;
+			maxTime_ = 0;
+			time_ = 0;
 		}
-		cout << time << endl;
+		cout << time_ << endl;
 	}
 }

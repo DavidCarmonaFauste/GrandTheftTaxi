@@ -5,30 +5,31 @@
 #include "Text.h"
 #include "Container.h"
 #include <memory>
-#include <math.h>
+
+
 
 class DialoguesManager :
 	public Container
 {
-	static unique_ptr<DialoguesManager> instance;
+	
 public:
-	DialoguesManager* getInstance();
+	DialoguesManager();
 	~DialoguesManager();
 	void evento(vector <pair<string, string>> phrases);
 	void update(int deltaTime);
-	DialoguesManager();
+
 
 private:
 	
-	int time;
+	int time_;
 	Text* txt_;
 	bool english = true;
-	bool displaying;
-	int maxTime;
-	Font* font;
-	SDL_Color color;
-	Vector2D pos;
-	int w, h;
-	int timeDialogues = 10000;
+	bool displaying_;
+	int maxTime_;
+	Font* font_;
+	SDL_Color color_;
+	Vector2D pos_;
+	int w_, h_;
+	int timeDialogues_ = 10000;
 };
 
