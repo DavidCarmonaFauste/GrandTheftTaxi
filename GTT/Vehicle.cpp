@@ -9,6 +9,8 @@
 #include "ReloadInputComponent.h"
 #include "ShootIC.h"
 
+#include "EnemyManager.h"
+
 unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
 Vehicle::Vehicle() {
@@ -81,7 +83,8 @@ Turret * Vehicle::getCurrentTurret()
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {
 	Container::handleInput(time, event);
-	if (turrets_[currentTurret_] != nullptr) turrets_[currentTurret_]->handleInput(time, event);
+	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
+	EnemyManager::getInstance()->input(time, event);
 }
 
 void Vehicle::update(Uint32 time) {

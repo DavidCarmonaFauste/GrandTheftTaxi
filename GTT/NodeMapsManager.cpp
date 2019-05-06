@@ -36,6 +36,9 @@ void NodeMapsManager::ReadNodeMapsInfo()
 					string bNode;
 					string connection;
 					row >> bNode;
+					if (bNode == "Node50") {
+						cout << "A";
+					}
 					while (row >> connection) {
 						nodemaps_[district]->connectNodes(bNode, connection);
 					}

@@ -69,6 +69,7 @@ void MainState::start() {
 
 void MainState::end()
 {
+	EnemyManager::getInstance()->deactivateIA();
 }
 
 

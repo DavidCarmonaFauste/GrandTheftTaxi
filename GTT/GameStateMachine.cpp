@@ -59,6 +59,7 @@ void GameStateMachine::initStates() {
 
 void GameStateMachine::fromMainStateToGasMainMenu () {
 	if (currentState_ == NAME_MAIN_STATE) {
+		STATES_[currentState_]->end();
 		currentState_ = NAME_GAS_MAIN_STATE;
 
 		if (!gasMainMenuStartedOnce_) {

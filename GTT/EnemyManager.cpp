@@ -33,7 +33,7 @@ void EnemyManager::ReadEnemyInfo()
 				row >> enemyid >> patrolid >> spawnid >> type;
 				Enemy* e;
 				if (type == "Type1") {
-					e = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], GUN);
+					e = new Enemy(ENEMY1, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], ENEMYGUN);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type2") {
@@ -41,7 +41,7 @@ void EnemyManager::ReadEnemyInfo()
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type3") {
-					e = new Enemy(ENEMY3, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], GUN);
+					e = new Enemy(ENEMY3, NodeMapsManager::getInstance()->getNodeMap(district), NodeMapsManager::getInstance()->getNodeMap(district)->getPatrol(patrolid), spawns_[spawnid], ENEMYGUN);
 					enemies_[enemyid] = e;
 				}
 				else if (type == "Type4") {
@@ -64,6 +64,24 @@ void EnemyManager::addSpawn(string id, Vector2D pos)
 	spawns_[id] = pos;
 }
 
+void EnemyManager::deactivateIA()
+{
+	for (auto e : enemies_) {
+		if(e.second!=nullptr)
+			e.second->getIABehaviour()->Restart();
+	}
+}
+
+bool EnemyManager::EnemyAtPos(Vector2D pos, GameObject* enemy)
+{
+	for (auto e : enemies_) {
+		if (e.second != nullptr && e.second->isActive() && e.second!=enemy)
+			if(e.second->getCenter().x<=pos.x+32 && e.second->getCenter().x >=pos.x-32
+				&& e.second->getCenter().y <= pos.y + 32 && e.second->getCenter().y >= pos.y - 32)return true;
+	}
+	return false;
+}
+
 void EnemyManager::update(Uint32 deltaTime)
 {
 	for (auto e : enemies_) {
@@ -79,3 +97,12 @@ void EnemyManager::render(Uint32 deltaTime)
 		e.second->render(deltaTime);
 	}
 }
+
+void EnemyManager::input(Uint32 time, const SDL_Event & event)
+{
+	for (auto e : enemies_) {
+		if (e.second != nullptr)
+			e.second->handleInput(time, event);
+	}
+}
+
