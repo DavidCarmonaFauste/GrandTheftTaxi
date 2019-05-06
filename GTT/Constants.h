@@ -237,7 +237,7 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 	//taxi
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
 "../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
-"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Taxi/Taxi_default.png",
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",

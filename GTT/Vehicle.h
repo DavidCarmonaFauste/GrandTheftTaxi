@@ -66,6 +66,7 @@ public:
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
 	bool alive_;
+	bool zombie_;
 	int deathTime_;
 
 	static const int MAXTURRETS = 4;
@@ -78,6 +79,4 @@ public:
 	EnterShopIC* shopIC_;
 
 	TaxiSoundManagerCP* smLC_;
-	
-
 };

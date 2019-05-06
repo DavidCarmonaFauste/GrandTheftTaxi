@@ -15,6 +15,8 @@ unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
 Vehicle::Vehicle(){
 	currentTurret_ = 0;
+	zombie_ = false; 
+	//alive_ = true;
 }
 
 Vehicle::~Vehicle() {
@@ -94,6 +96,7 @@ void Vehicle::update(Uint32 time) {
 		turrets_[currentTurret_]->update(time);
 
 	if (alive_ && health_->getHealth() <= 0) {
+		//zombie_ = true; //estable el flag
 		alive_ = false;
 		deathTime_ = SDL_GetTicks();
 	}
