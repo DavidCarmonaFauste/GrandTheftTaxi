@@ -33,6 +33,7 @@ const struct VehicleInfo {
 	float velBackwardMax; //6 
 	float turnSpeed; //7
 	float acceleration;
+	int reward = 0;
 };
 
 const enum ImpactMode {
@@ -242,16 +243,16 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10 };
 const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-66, 28, 13.5f, 3.5f, 1.0f, 0.8f };
+66, 28, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
 const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-68, 32, 13.5f, 3.5f, 1.0f, 0.8f };
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 30 };
 const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/VTC4-TANK-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-58, 32, 11.5f, 3.5f, 1.0f, 0.6f };
+58, 32, 11.5f, 3.5f, 1.0f, 0.6f, 40 };
 
 
 //Proyectiles

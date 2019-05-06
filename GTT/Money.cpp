@@ -1,9 +1,11 @@
 #include "Money.h"
+#include "UI.h"
 
 Money *Money::singleton_ = nullptr;
 
 Money::Money() {
 	currentMoney_ = minimumMoney_;
+	registerObserver(UI::getInstance());
 }
 
 
@@ -27,10 +29,17 @@ void Money::setCurrentMoney(int money) {
 	broadcastEvent(e);
 
 	currentMoney_ = money > minimumMoney_ ? money : minimumMoney_;
+
 }
 
-void Money::setMinMoney(int money) {
-	minimumMoney_ = money;
+void Money::addMoney(int money)
+{
+	if (currentMoney_ + money > minimumMoney_) 
+	{	
+		MoneyChangedEvent e(this, currentMoney_ + money, currentMoney_);
+		broadcastEvent(e);
+		currentMoney_ += money;
+	}
 }
 
 int Money::getCurrentMoney() {

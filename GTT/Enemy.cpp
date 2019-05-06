@@ -4,7 +4,7 @@
 #include "Turret.h"
 #include "EnemyAim.h"
 #include "SoundManager.h"
-
+#include "Money.h"
 
 Enemy::Enemy()
 {
@@ -34,6 +34,9 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	//Movement
 	speed_ = 3;
+
+	//Reward
+	reward_ = r.reward;
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
@@ -65,6 +68,9 @@ void Enemy::Die()
 {	
 	SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 	sprite_->playAnimation("enemyDie", 10.0f, false);
+
+	//Send reward
+	Money::getInstance()->addMoney(reward_);
 
 	bodyReadyToDestroy_ = true;
 	turret_->setActive(false);
