@@ -29,10 +29,11 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
-    <ClCompile Include="CustomContactListener.cpp" />
+    <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyAim.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="CustomContactListener.cpp" />
+    <ClCompile Include="EnemyAim.cpp" />
     <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
     <ClCompile Include="EnterShopIC.cpp" />
@@ -108,10 +109,11 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
-    <ClInclude Include="CustomContactListener.h" />
+    <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyAim.h" />
     <ClInclude Include="EnemyManager.h" />
+    <ClInclude Include="CustomContactListener.h" />
+    <ClInclude Include="EnemyAim.h" />
     <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="EnterShopIC.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="NodeMapsManager.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
+    <ClInclude Include="Phrases.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Proyectile.h" />
     <ClInclude Include="ProyectilePool.h" />
@@ -179,7 +182,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

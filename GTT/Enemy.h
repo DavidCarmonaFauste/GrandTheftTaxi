@@ -25,6 +25,11 @@ public:
 private:
 	bool bodyReadyToDestroy_;
 	bool followmode_;
+
+	//zombie y alive gestionan la animáción previa a la destruccióin del GO. 
+	bool alive_;
+	bool zombie_;
+
 	IAMovementBehaviour* patrol_;
 	IAMovementBehaviour* follow_;
 	NodeMap* routemap_;

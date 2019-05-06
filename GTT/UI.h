@@ -5,6 +5,7 @@
 #include "MoneyDisplay.h"
 #include "ReloadingDisplay.h"
 #include "AmmoDisplay.h"
+#include "DialoguesManager.h"
 
 class UI : public Container, public Observer {
 public:
@@ -30,6 +31,7 @@ private:
 	MoneyDisplay* moneyDisplay_;
 	ReloadingDisplay* reloadDisplay_;
 	AmmoDisplay* ammoDisplay_;
+	DialoguesManager* dialogues_;
 
 	Font* font_;
 	SDL_Color fontColor_;
