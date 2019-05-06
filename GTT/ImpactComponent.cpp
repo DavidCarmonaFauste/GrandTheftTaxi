@@ -2,6 +2,9 @@
 #include "Vehicle.h"
 #include "Enemy.h"
 #include "SoundManager.h"
+#include "GameManager.h"
+
+
 
 ImpactComponent::ImpactComponent(Proyectile * o)
 {
@@ -30,7 +33,7 @@ void ImpactComponent::Impact(b2Contact * contact)
 					if (!o_->isRegistered(Vehicle::getInstance(), i)) { o_->registerObserver(Vehicle::getInstance()); }
 					Event eV(o_, IMPACT_DAMAGE);
 					o_->broadcastEvent(eV);
-
+					GameManager::getInstance()->addHit();
 			}
  				
 			if (!(o_->isAnEnemy() && e != nullptr))

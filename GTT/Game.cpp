@@ -6,6 +6,7 @@
 #include "ProyectilePool.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+//#include "GameManager.h"
 
 #include <iostream>
 
@@ -166,6 +167,9 @@ void Game::init() {
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
 	EnemyManager::getInstance()->initInstance();
+	//GameManager::getInstance()->initInstance();
+	
+
 
 	// Create the resources singleton for the first time
 	// and initialize its states

@@ -43,6 +43,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="GasFillMenu.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
@@ -175,7 +177,7 @@
     <ProjectGuid>{D784815E-B273-455D-8FD0-515349C8CED0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GTT</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
