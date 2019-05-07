@@ -14,7 +14,9 @@
 
 MainState::MainState(){}
 
-MainState::~MainState() {}
+MainState::~MainState() {
+	delete tilemap_; tilemap_ = nullptr;
+}
 
 //start is called when GameStateMachine change state
 void MainState::start() {

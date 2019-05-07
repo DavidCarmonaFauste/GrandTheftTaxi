@@ -15,5 +15,7 @@ int main(int argc, char* argv[]) {
 
 	Game::getInstance()->initInstance(); //initInstance() only once
 	Game::getInstance()->run();
+	Game::destroyInstance();
+
 	return 0;
 }

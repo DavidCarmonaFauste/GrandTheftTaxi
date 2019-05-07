@@ -32,8 +32,8 @@ UI::UI() {
 
 
 UI::~UI() {
-	for (auto e : UIElements_) {
-		delete e; e = nullptr;
+	for (vector<GameObject*>::iterator it = UIElements_.begin(); it != UIElements_.end(); it++) {
+		delete (*it); (*it) = nullptr;
 	}
 	UIElements_.clear();
 }

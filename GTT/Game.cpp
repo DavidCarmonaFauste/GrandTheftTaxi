@@ -23,7 +23,8 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
+	IMG_Init(IMG_INIT_PNG);
+
 	// SDL_Mixer initialization
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		cout << "Error" << Mix_GetError() << endl;

@@ -25,8 +25,9 @@ TileMap::TileMap(string path) {
 }
 
 TileMap::~TileMap() {
-	//delete tmxMap_; tmxMap_ = nullptr;
+	delete tmxMap_; tmxMap_ = nullptr;
 	delete mapSprite_; mapSprite_ = nullptr;
+	delete phyO_; phyO_ = nullptr;
 }
 
 void TileMap::tmxToScene() {

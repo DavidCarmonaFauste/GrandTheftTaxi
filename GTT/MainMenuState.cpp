@@ -12,6 +12,14 @@ MainMenuState::MainMenuState()
 
 
 MainMenuState::~MainMenuState() {
+	delete mainBackground_; mainBackground_ = nullptr;
+	delete Taxi_; Taxi_ = nullptr;
+	delete Title_; Title_ = nullptr;
+
+	for (auto button : buttons_) {
+		delete button.second; button.second = nullptr;
+	}
+	buttons_.clear();
 }
 
 void MainMenuState::start()
