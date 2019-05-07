@@ -21,7 +21,7 @@ Animation::~Animation() {
 
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
-void Animation::loadAnimation(string path, string name, int columns, int rows) {
+bool Animation::loadAnimation(string path, string name, int columns, int rows) {
 
 	if (path != "-1") {
 		Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
@@ -31,10 +31,13 @@ void Animation::loadAnimation(string path, string name, int columns, int rows) {
 		animRect->w = animTexture->getWidth() / columns;
 		animRect->x = animRect->y = 0;
 
-		animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
-
-		//currentAnim = name;
+		if (animRect->w > 0 && animRect->h > 0) {
+			animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+			return true;
+		}
 	}
+
+	return false;
 }
 
 bool Animation::playAnimation(string name, float speed, bool loop) {
