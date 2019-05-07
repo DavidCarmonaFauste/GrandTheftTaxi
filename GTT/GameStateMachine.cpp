@@ -15,6 +15,7 @@ GameStateMachine::~GameStateMachine() {
 	for (auto state : STATES_) {
 		delete state.second; state.second = nullptr;
 	}
+	STATES_.clear();
 }
 
 void GameStateMachine::setState(const string &s) {
@@ -41,7 +42,7 @@ void GameStateMachine::initStates() {
 	// Main game
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
 	// Shop state
-	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
+	//STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
 	
 		
 	//primer estado al ejectuar app

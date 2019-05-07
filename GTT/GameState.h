@@ -14,13 +14,8 @@ public:
 
 	GameState(){}
 	~GameState(){
-		/*
-		for (auto o : stage_) {
-			if (o != nullptr)
-				delete o; o = nullptr;
-		}
+		while (!stage_.empty()) delete stage_.front(), stage_.pop_front();
 		stage_.clear();
-		*/
 	}
 
 	virtual void start() = 0;
