@@ -294,6 +294,9 @@
     <ClCompile Include="DialoguesManager.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
+    <ClCompile Include="DeathState.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputComponent.h">
@@ -541,6 +544,9 @@
     </ClInclude>
     <ClInclude Include="Phrases.h">
       <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathState.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
