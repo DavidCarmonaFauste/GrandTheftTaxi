@@ -8,6 +8,7 @@
 #include "Turret.h"
 #include "ReloadInputComponent.h"
 #include "ShootIC.h"
+#include "GameManager.h"
 
 unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
@@ -151,6 +152,7 @@ void Vehicle::SaveSpawnPoint(Vector2D spawn)
 
 void Vehicle::Respawn()
 {
+	GameManager::getInstance()->calculatePuntuation();
 	Vehicle::getInstance()->setPosition(spawnPosition_);
 	Vector2D v = spawnPosition_;
 	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);

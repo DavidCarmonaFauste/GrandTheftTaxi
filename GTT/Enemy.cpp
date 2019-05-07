@@ -4,6 +4,7 @@
 #include "Turret.h"
 #include "EnemyAim.h"
 #include "SoundManager.h"
+#include "GameManager.h"
 
 
 Enemy::Enemy()
@@ -52,7 +53,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
-	if (health_->getHealth() <= 0) { 	
+	if (health_->getHealth() <= 0) {
+		GameManager::getInstance()->addKill();
 		Die(); 
 	}
 }

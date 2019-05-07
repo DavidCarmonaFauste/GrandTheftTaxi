@@ -20,16 +20,22 @@ public:
 	//get singleton class
 	inline static GameManager* getInstance() {
 		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		if (instance_ == nullptr)
+			initInstance();
 		return instance_.get();
 	}
 	virtual void update(Uint32 deltaTime);
 
 	void addHit() { hits++; };
+	void addKill() { kills++; if (kills == 4) calculatePuntuation(); };
+	void calculatePuntuation();
 
 private:
 	int hits = 0;
+	int kills = 0;
 	int initTime = 0;
 	int time = 0;
+
 
 };
 
