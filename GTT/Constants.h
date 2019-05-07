@@ -347,12 +347,12 @@ const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Ti
 /**************************************/
 
 
-
-// DEATH STATE INFO  ---------------------------
-const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/background-muerte.png", "default", {1, 1}, {0.0, 0.0}, DEATH_BACKGROUND_W, DEATH_BACKGROUND_H };
 // sizes
 const int DEATH_BACKGROUND_W = CAMERA_WIDHT;
 const int DEATH_BACKGROUND_H = CAMERA_HEIGHT;
+// DEATH STATE INFO  ---------------------------
+const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/background-muerte.png", "default", {1, 1}, {0.0, 0.0}, DEATH_BACKGROUND_W, DEATH_BACKGROUND_H };
+
 // --------------------------------------------
 
 
