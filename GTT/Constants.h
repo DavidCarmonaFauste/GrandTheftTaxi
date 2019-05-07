@@ -152,6 +152,7 @@ const string NAME_MPEG_STATE = "MpegState";
 const string NAME_GAS_MAIN_STATE = "GasMainState";
 const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
+const string NAME_DEATH_STATE = "DeathState";
 
 
 
@@ -344,6 +345,17 @@ const textureInfo MAIN_TITLE_TAXI_ANM = { "../Assets/sprites/MainTitle/mainTitle
 //Title animation
 const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Title_animation.png", "animation", {3, 9},  title_position_, title_Width_, title_Height_ };
 /**************************************/
+
+
+
+// DEATH STATE INFO  ---------------------------
+const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/background-muerte.png", "default", {1, 1}, {0.0, 0.0}, DEATH_BACKGROUND_W, DEATH_BACKGROUND_H };
+// sizes
+const int DEATH_BACKGROUND_W = CAMERA_WIDHT;
+const int DEATH_BACKGROUND_H = CAMERA_HEIGHT;
+// --------------------------------------------
+
+
 
 // GAS MENU INFO  ---------------------------
 	// positions

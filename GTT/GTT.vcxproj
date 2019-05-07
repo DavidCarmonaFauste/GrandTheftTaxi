@@ -29,6 +29,7 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
@@ -43,6 +44,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="GasFillMenu.cpp" />
@@ -108,6 +110,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="DeathState.h" />
     <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
