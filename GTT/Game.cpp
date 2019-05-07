@@ -209,8 +209,8 @@ void Game::init() {
 void Game::run() {
 	init();
 
-	double lastTime = SDL_GetTicks();
-	double deltaTime = lastTime;
+	Uint32 lastTime = SDL_GetTicks();
+	Uint32 deltaTime = lastTime;
 
 	while (!exit_) {
 		handleEvents(deltaTime);
