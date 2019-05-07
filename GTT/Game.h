@@ -37,6 +37,11 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 
 	void run();
 	bool exitGame();

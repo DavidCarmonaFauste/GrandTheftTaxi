@@ -7,6 +7,10 @@ class Money : public Container, public Observable, public Observer {
 public:
 	static Money* getInstance();
 
+	inline static void destroyInstance() {
+		delete singleton_; singleton_ = nullptr;
+	}
+
 	virtual bool receiveEvent(Event& e) override;
 
 	void setCurrentMoney(int money);

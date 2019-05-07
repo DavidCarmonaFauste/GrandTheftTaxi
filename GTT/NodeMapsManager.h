@@ -27,6 +27,11 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 	void addNodeMap(string key, NodeMap* nodemap=new NodeMap());
 	bool NodeMapExists(string key);
 	void ReadNodeMapsInfo();

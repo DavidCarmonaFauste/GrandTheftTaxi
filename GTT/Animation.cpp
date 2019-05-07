@@ -134,9 +134,12 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 			}
 		}
 	}
-
+	
 	Texture* animTexture = animations[currentAnim].first;
 	SDL_Rect* animRect = animations[currentAnim].second;
+
+	if (!animationExists(currentAnim) || animTexture == nullptr || animRect == nullptr)
+		return;
 
 	animRect->x = currentFrame % animationColumns * animRect->w;
 	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;

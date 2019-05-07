@@ -14,7 +14,6 @@ public:
 
 	GameState(){}
 	~GameState(){
-		while (!stage_.empty()) delete stage_.front(), stage_.pop_front();
 		stage_.clear();
 	}
 

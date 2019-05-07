@@ -38,6 +38,11 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 	void initAtributtes(VehicleInfo r, KeysScheme k);
 
 

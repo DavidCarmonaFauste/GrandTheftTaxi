@@ -6,6 +6,9 @@
 #include "ProyectilePool.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+#include "Money.h"
+#include "EnemyPool.h"
+#include "UI.h"
 
 #include <iostream>
 
@@ -58,6 +61,18 @@ Game::~Game() {
 }
 
 void Game::end() {
+	// Singleton deletion
+	Vehicle::destroyInstance();
+	Reticule::destroyInstance();
+	CustomContactListener::destroyInstance();
+	ProyectilePool::destroyInstance();
+	SoundManager::destroyInstance();
+	Money::destroyInstance();
+	UI::destroyInstance();
+	EnemyManager::destroyInstance();
+	EnemyPool::destroyInstance();
+	NodeMapsManager::destroyInstance();
+
 	delete gmStMachine_; gmStMachine_ = nullptr;
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
