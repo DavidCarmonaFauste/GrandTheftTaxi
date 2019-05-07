@@ -9,7 +9,8 @@ public:
 	virtual ~MoneyDisplay();
 
 	void setMoney(int money);
-	void reposition();
+	void setSimpleMoney(int money);
+	void reposition(Vector2D v, int increase);
 
 private:
 	Text* textSprite_;

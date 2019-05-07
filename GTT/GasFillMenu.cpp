@@ -2,6 +2,7 @@
 #include "Reticule.h"
 #include "Game.h"
 #include "Vehicle.h"
+#include "Money.h"
 
 
 GasFillMenu::GasFillMenu () {
@@ -39,12 +40,14 @@ void GasFillMenu::start () {
 	setButtonComponents ();
 
 	// health display (not the same object as in the UI so there's no need to hide the rest of the UI and reposition the bar every state change)
-	healthDisplay_ = new HealthDisplay();
+	healthDisplay_ = new HealthDisplay(); 
 	healthDisplay_->reposition (GAS_MENU_HEALTH_BAR_POSITION);
 	healthDisplay_->setHealthPercentage (float (Vehicle::getInstance ()->getHealthComponent ()->getHealth ()) / Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ());
 
 	//Money Display
-	//moneyDisplay_ = new MoneyDisplay();
+	moneyDisplay_ = new MoneyDisplay();
+	moneyDisplay_->reposition(Vector2D(GAS_MENU_HEALTH_BAR_POSITION.x + 650, GAS_MENU_HEALTH_BAR_POSITION.y - 40));
+	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
 
 	//Container to GameObj list
 	stage_.push_back(background_);
@@ -53,6 +56,7 @@ void GasFillMenu::start () {
 	stage_.push_back(buttons_["fill_25_Button"]);
 	stage_.push_back(buttons_["backButton"]);
 	stage_.push_back (healthDisplay_);
+	stage_.push_back(moneyDisplay_);
 	stage_.push_back(Reticule::getInstance());
 }
 
