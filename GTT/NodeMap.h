@@ -42,11 +42,11 @@ public:
 		double y = abs(direction.y);
 		Connections dirr=NORTH;
 		if (x > y) {
-			if (direction.x > 0) dir = EAST;
+			if (direction.x > 0) dirr = EAST;
 			else dirr = WEST;
 		}
 		else {
-			if (direction.y > 0) dir = SOUTH;
+			if (direction.y > 0) dirr = SOUTH;
 			else dirr = NORTH;
 		}
 		dir = dirr;
@@ -64,7 +64,8 @@ public:
 	bool nodeExists(string id);
 	bool nodeExists(Node* n);
 	Node* getNearestNode(Vector2D position, vector<Node*> unwantednodes= vector<Node*>());
-	Node* getNearestConnectedNode(Vector2D position );
+	Node* getNearestConnectedNode(Vector2D position);
+	void getBetweenNodes(Node*& a, Node*& b, Vector2D position);
 	bool FindRoute(Node* current, Node* destiny, vector<Node*>& route, vector<Node*>&currentroute, int distance, int& minDistance);
 	map<string, Node*> getNodes();
 	vector<Node*> getPatrol(string id);

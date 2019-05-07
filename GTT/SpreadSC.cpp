@@ -12,7 +12,7 @@ void SpreadSC::shoot(ProyectileInfo prType, bool isAnEnemy)
 	double ang = turret_->getRotation() / 180.0 * M_PI - (dispersionAngle_ / 180.0*M_PI / 2);
 
 	Vector2D spawndir (sin(turret_->getRotation() / 180.0*M_PI)*100, -cos(turret_->getRotation() / 180.0*M_PI)*100);
-	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x , turret_->getCenter().y + spawndir.y);
+	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x*0.25 , turret_->getCenter().y + spawndir.y*0.25);
 
 	ProyectilePool::getInstance()->addProyectile(spawnpoint,
 		Vector2D(sin(ang), -cos(ang)), prType, isAnEnemy);

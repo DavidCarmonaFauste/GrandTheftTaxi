@@ -10,10 +10,14 @@
 #include "ShootIC.h"
 #include "GameManager.h"
 
+#include "EnemyManager.h"
+
 unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
-Vehicle::Vehicle(){
+Vehicle::Vehicle() {
 	currentTurret_ = 0;
+	zombie_ = false; 
+	//alive_ = true;
 }
 
 Vehicle::~Vehicle() {
@@ -21,7 +25,7 @@ Vehicle::~Vehicle() {
 	delete phyO_; phyO_ = nullptr;
 	delete sprite_; sprite_ = nullptr;
 	delete health_; health_ = nullptr;
-	
+
 	for (int i = 0; i < MAXTURRETS; i++) {
 		if (turrets_[i] != nullptr) {
 			delete turrets_[i];
@@ -64,7 +68,7 @@ void Vehicle::EquipTurret(Turret * turret)
 void Vehicle::ChangeTurret()
 {
 	turrets_[currentTurret_]->CancelReload();
-	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
+	currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
 	while (turrets_[currentTurret_] == nullptr) {
 		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
 	}
@@ -80,18 +84,20 @@ Turret * Vehicle::getCurrentTurret()
 
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
-{	
+{
 	Container::handleInput(time, event);
 	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
+	EnemyManager::getInstance()->input(time, event);
 }
 
-void Vehicle::update(Uint32 time) {	
+void Vehicle::update(Uint32 time) {
 	Container::update(time);
 
 	if (turrets_[currentTurret_] != nullptr)
 		turrets_[currentTurret_]->update(time);
 
 	if (alive_ && health_->getHealth() <= 0) {
+		//zombie_ = true; //estable el flag
 		alive_ = false;
 		deathTime_ = SDL_GetTicks();
 	}

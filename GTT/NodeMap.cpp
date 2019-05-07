@@ -1,6 +1,5 @@
 #include "NodeMap.h"
-
-
+#include <string>
 
 NodeMap::NodeMap()
 {
@@ -44,7 +43,7 @@ void NodeMap::connectNodes(string id1, string id2)
 			}
 		}
 		else
-			cout << "incompatible nodes: " << "n1= (" << n1->position_.x << ", " << n1->position_.y << ") " << "n2= (" << n2->position_.x << ", " << n2->position_.y << ")" << endl;
+			cout << "incompatible nodes: " << n1->id_ << "= (" << n1->position_.x << ", " << n1->position_.y << ") " << n2->id_<< "= (" << n2->position_.x << ", " << n2->position_.y << ")" << endl;
 	}
 }
 
@@ -84,7 +83,7 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 	vector<Node*> v;
 	Node* node;
 	node = getNearestNode(position);
-	if ((node->position_ - position).Length() <= 32 * 3) return node;
+	if ((node->position_ - position).Length() <= 32 * 7) return node;
 	Vector2D dirToTarget = (position- node->position_);
 	dirToTarget.Normalize();
 	Connections dir;
@@ -93,6 +92,16 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 		node = getNearestNode(position, v);
 	}
 	return node;
+}
+
+void NodeMap::getBetweenNodes(Node *& a, Node *& b, Vector2D position)
+{
+	a = getNearestConnectedNode(position);
+	Vector2D dirToTarg = position - a->position_;
+	dirToTarg.Normalize();
+	Connections dir;
+	a->hasConnection(dirToTarg, dir);
+	b = a->connections_[dir];
 }
 
 bool NodeMap::FindRoute(Node * current, Node * destiny, vector<Node*>& route, vector<Node*>& currentroute, int distance, int& minDistance)

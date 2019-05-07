@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="446">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="448">
  <tileset firstgid="1" name="buildings" tilewidth="32" tileheight="32" tilecount="255" columns="15">
   <image source="../tilesets/buildingsTilemap.png" width="480" height="544"/>
  </tileset>
@@ -439,9 +439,9 @@
   <object id="387" x="4768" y="1536" width="64" height="128"/>
   <object id="388" x="3008" y="576" width="128" height="128"/>
   <object id="389" x="2592" y="1376" width="32" height="32"/>
-  <object id="390" x="2080" y="704" width="192" height="32" rotation="90"/>
   <object id="392" x="2496" y="1824" width="160" height="224"/>
   <object id="393" x="3360" y="1184" width="256" height="160"/>
+  <object id="446" x="2048" y="704" width="32" height="192"/>
  </objectgroup>
  <objectgroup color="#ff0bff" id="5" name="Gas">
   <object id="235" x="2592" y="1408" width="160" height="32"/>
@@ -450,8 +450,8 @@
   <object id="239" x="2112" y="2816" width="32" height="192"/>
   <object id="240" x="5408" y="2464" width="192" height="32"/>
  </objectgroup>
- <objectgroup color="#0000ff" id="7" name="District1" visible="0">
-  <object id="365" name="Node20" x="5312" y="2592" width="64" height="64"/>
+ <objectgroup color="#0000ff" id="7" name="District1">
+  <object id="365" name="Node20" x="5312" y="2656" width="64" height="64"/>
   <object id="366" name="Node21" x="5312" y="3040" width="64" height="64"/>
   <object id="368" name="Node22" x="5696" y="3040" width="64" height="64"/>
   <object id="367" name="Node23" x="6112" y="3040" width="64" height="64"/>
@@ -463,7 +463,7 @@
   <object id="375" name="Node29" x="6656" y="2272" width="64" height="64"/>
   <object id="376" name="Node30" x="6656" y="3456" width="64" height="64"/>
   <object id="377" name="Node31" x="5696" y="3456" width="64" height="64"/>
-  <object id="395" name="Node1" x="4032" y="3776" width="64" height="64"/>
+  <object id="395" name="Node1" x="4032" y="3712" width="64" height="64"/>
   <object id="396" name="Node17" x="4032" y="3264" width="64" height="64"/>
   <object id="397" name="Node18" x="4608" y="3264" width="64" height="64"/>
   <object id="398" name="Node19" x="4608" y="2656" width="64" height="64"/>
@@ -476,11 +476,11 @@
   <object id="408" name="Node11" x="544" y="2592" width="64" height="64"/>
   <object id="409" name="Node12" x="544" y="1920" width="64" height="64"/>
   <object id="410" name="Node13" x="1088" y="1920" width="64" height="64"/>
-  <object id="412" name="Node14" x="2848" y="2656" width="64" height="64"/>
+  <object id="412" name="Node14" x="2784" y="2656" width="64" height="64"/>
   <object id="413" name="Node5" x="2208" y="3328" width="64" height="64"/>
   <object id="414" name="Node4" x="2784" y="3328" width="64" height="64"/>
-  <object id="415" name="Node3" x="3424" y="3328" width="64" height="64"/>
-  <object id="416" name="Node2" x="3424" y="3776" width="64" height="64"/>
+  <object id="415" name="Node3" x="3488" y="3328" width="64" height="64"/>
+  <object id="416" name="Node2" x="3488" y="3712" width="64" height="64"/>
   <object id="417" name="Node32" x="4608" y="2144" width="64" height="64"/>
   <object id="418" name="Node33" x="4000" y="2144" width="64" height="64"/>
   <object id="419" name="Node34" x="4000" y="1792" width="64" height="64"/>
@@ -489,17 +489,17 @@
   <object id="422" name="Node37" x="2400" y="2080" width="64" height="64"/>
   <object id="423" name="Node38" x="2400" y="1504" width="64" height="64"/>
   <object id="424" name="Node39" x="2880" y="1504" width="64" height="64"/>
-  <object id="425" name="Node40" x="2880" y="480" width="64" height="64"/>
-  <object id="427" name="Node41" x="2176" y="480" width="64" height="64"/>
-  <object id="428" name="Node42" x="2176" y="1440" width="64" height="64"/>
-  <object id="429" name="Node43" x="3200" y="480" width="64" height="64"/>
-  <object id="430" name="Node44" x="3200" y="736" width="64" height="64"/>
-  <object id="434" name="Node45" x="3712" y="736" width="64" height="64"/>
+  <object id="425" name="Node40" x="2880" y="416" width="64" height="64"/>
+  <object id="427" name="Node41" x="2112" y="416" width="64" height="64"/>
+  <object id="428" name="Node42" x="2112" y="1504" width="64" height="64"/>
+  <object id="429" name="Node43" x="3264" y="416" width="64" height="64"/>
+  <object id="430" name="Node44" x="3264" y="672" width="64" height="64"/>
+  <object id="434" name="Node45" x="3712" y="672" width="64" height="64"/>
   <object id="435" name="Node46" x="3712" y="1440" width="64" height="64"/>
   <object id="437" name="Node47" x="3488" y="1440" width="64" height="64"/>
-  <object id="438" name="Node48" x="4192" y="736" width="64" height="64"/>
-  <object id="439" name="Node49" x="4192" y="960" width="64" height="64"/>
-  <object id="440" name="Node50" x="4608" y="960" width="64" height="64"/>
+  <object id="438" name="Node48" x="4256" y="672" width="64" height="64"/>
+  <object id="439" name="Node49" x="4256" y="896" width="64" height="64"/>
+  <object id="440" name="Node50" x="4608" y="896" width="64" height="64"/>
   <object id="441" name="Node55" x="4608" y="1792" width="64" height="64"/>
   <object id="442" name="Node54" x="5280" y="1792" width="64" height="64"/>
   <object id="443" name="Node53" x="5280" y="1184" width="64" height="64"/>

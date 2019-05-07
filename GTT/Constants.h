@@ -111,6 +111,7 @@ const enum COLLISION_CATEGORY {
 	TILE_CATEGORY = 0x0001,
 	TAXI_CATEGORY = 0x0002,
 	BULLET_CATEGORY = 0X0004,
+	ENEMY_CATEGORY = 0X0008
 };
 
 //Constants Data
@@ -131,6 +132,7 @@ const int HP_INCREASE = 100;
 
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
+
 
 //Buttons //se usa para acceder a la posici�n del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {
@@ -236,7 +238,7 @@ const string FONT_COOLFONT = "../Assets/fonts/04B_30__.ttf";
 	//taxi
 const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../Assets/sprites/Taxi/Taxi_right_animation.png", 
 "../Assets/sprites/Taxi/Taxi_left_animation.png","../Assets/sprites/Taxi/Taxi_back_animation.png", 
-"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Taxi/Taxi_default.png",
+"../Assets/sprites/Taxi/Taxi_damage_animation_2.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
@@ -255,33 +257,33 @@ const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "..
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_GUN_SPECIAL_SHOOT };
+const ProyectileInfo E_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 30, 30, 6, 2000, 20, TURRET_GUN_SHOOT };
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 20, 20, 10, 2000, 20, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 50, 50, 10, 5000, 10, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 20, 20, 20, 500, 25, TURRET_SHOTGUN_SHOOT };
-const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 20, 20, 10, 500, 50, TURRET_SHOTGUN_SPECIAL_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 20, 20, 20, 500, 10, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 20, 20, 20, 500, 10, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
 const ProyectileInfo SNIPERBULLET{};
 const ProyectileInfo SPECIAL_SNIPERBULLET{};
 	//MachineGun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo MACHINEGUNBULLET{};
+const ProyectileInfo MACHINEGUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 15, 15, 15, 1500, 20, TURRET_GUN_SHOOT };
 const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
-
 	//... //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/BlueProyectile.png", 20, 20, 10, 5000, 20, BOUNCE };
-
-
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png", 50, 50, 10, 5000, 20, TURRET_SHOTGUN_SPECIAL_SHOOT, BOUNCE};
 
 //Weapons
+const WeaponInfo ENEMYGUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, E_GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
 const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
 const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, SPECIAL_MACHINEGUNBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
 const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png",2, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 //const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
 
+const int TILE_SIZE = 32;
 
 //Reticule
 const string MAINMENURETICULE = "gun";
@@ -314,6 +316,9 @@ const int Taxi_Height_ = 325;
 const Vector2D title_position_ = {(CAMERA_WIDHT / 2) - 275, (CAMERA_HEIGHT / 2) - 225 };
 const int title_Width_ = 700;
 const int title_Height_ = 200;
+
+//AI
+const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;
 
 //Background
 const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };

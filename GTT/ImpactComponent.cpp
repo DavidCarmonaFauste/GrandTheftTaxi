@@ -20,7 +20,8 @@ void ImpactComponent::Impact(b2Contact * contact)
 			Enemy* e = (Enemy*)contact->GetFixtureA()->GetBody()->GetUserData();
 			if(e==nullptr)
 				e = (Enemy*)contact->GetFixtureB()->GetBody()->GetUserData();
-			if (e != nullptr && o_->isAnEnemy()) {
+			o_;
+			if (e != nullptr && !o_->isAnEnemy()) {
 				e->Damage(o_->GetDamage());
 				SoundManager::getInstance()->playSound_Ch(0, ENEMY_HIT_DAMAGE, 0); //channel 0, because not interrupt other sounds
 			} else

@@ -1,6 +1,3 @@
 District1
 Enemy1 Patrol1 Spawn1 Type1
 Enemy2 Patrol2 Spawn2 Type2
-Enemy3 Patrol3 Spawn3 Type4
-Enemy4 Patrol4 Spawn4 Type3
-

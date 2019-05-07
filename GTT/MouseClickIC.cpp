@@ -3,7 +3,7 @@
 #include "Game.h"
 
 MouseClickIC::MouseClickIC(int key) {
-	mouseClickKey_ = key;	
+	mouseClickKey_ = key;
 }
 
 
