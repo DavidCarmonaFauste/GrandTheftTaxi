@@ -41,7 +41,7 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 			}
 			if (TargetOnCurrentEdge()) {
 				edgeFollow_ = true;
-				if(getDistanceToTaxi() < 32 * 4) {
+				if(getDistanceToTaxi() < FOLLOW_STOP_RANGE) {
 					phyO_->getBody()->SetLinearVelocity(Vector2D());
 				}
 				else {
@@ -88,7 +88,7 @@ bool IAFollow::TargetOnCurrentEdge()
 	districtMap_->getBetweenNodes(A, B, o_->getCenter());
 
 	
-	return(a == A && b == B || a == B && b == A || (a!=nullptr && (a->position_.x >= o_->getCenter().x - 32 && a->position_.x <= o_->getCenter().x + 32
-		&& a->position_.y >= o_->getCenter().y - 32 && a->position_.y <= o_->getCenter().y + 32)) || (b!=nullptr && (b->position_.x >= o_->getCenter().x - 32 && b->position_.x <= o_->getCenter().x + 32
-			&& b->position_.y >= o_->getCenter().y - 32 && b->position_.y <= o_->getCenter().y + 32)));
+	return(a == A && b == B || a == B && b == A || (a!=nullptr && (a->position_.x >= o_->getCenter().x - TILE_SIZE && a->position_.x <= o_->getCenter().x + TILE_SIZE
+		&& a->position_.y >= o_->getCenter().y - TILE_SIZE && a->position_.y <= o_->getCenter().y + TILE_SIZE)) || (b!=nullptr && (b->position_.x >= o_->getCenter().x - TILE_SIZE && b->position_.x <= o_->getCenter().x + TILE_SIZE
+			&& b->position_.y >= o_->getCenter().y - TILE_SIZE && b->position_.y <= o_->getCenter().y + TILE_SIZE)));
 }

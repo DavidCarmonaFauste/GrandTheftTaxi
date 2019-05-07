@@ -133,6 +133,7 @@ const int HP_INCREASE = 100;
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
 
+
 //Buttons //se usa para acceder a la posici�n del array de idPath del struct ButtonInfo
 const enum newGameButtonPaths {
 	defaultAnm,    //la animaci�n por defecto tiene que llamarse defaultAnm para su correcta gesti�n en la clase Animation
@@ -282,6 +283,7 @@ const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/spri
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 //const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
 
+const int TILE_SIZE = 32;
 
 //Reticule
 const string MAINMENURETICULE = "gun";
@@ -314,6 +316,9 @@ const int Taxi_Height_ = 325;
 const Vector2D title_position_ = {(CAMERA_WIDHT / 2) - 275, (CAMERA_HEIGHT / 2) - 225 };
 const int title_Width_ = 700;
 const int title_Height_ = 200;
+
+//AI
+const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;
 
 //Background
 const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };

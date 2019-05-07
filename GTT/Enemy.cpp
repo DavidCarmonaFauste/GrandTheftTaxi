@@ -62,6 +62,8 @@ void Enemy::Damage(double damage)
 	if (health_->getHealth() <= 0) { 
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 		sprite_->playAnimation("enemyDie", 10.0f, false);
+		bodyReadyToDestroy_ = true;
+		turret_->setActive(false);
 		turret_->setActive(false);
 		zombie_ = true; //lanza el flag para que en el update se desactiven la lógica de patruya
 	}
@@ -69,19 +71,16 @@ void Enemy::Damage(double damage)
 
 void Enemy::Die()
 {	
-	bodyReadyToDestroy_ = true;
-	turret_->setActive(false);
+	setActive(false);
 }
 
 void Enemy::update(Uint32 deltaTime)
 {
 	if (active_) {
-
 		if (bodyReadyToDestroy_) {
 			delLogicComponent(phyO_);
 			delete phyO_;
 			phyO_ = nullptr;
-			setActive(false);
 		}
 
 
