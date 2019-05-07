@@ -92,6 +92,21 @@ void Enemy::update(Uint32 deltaTime)
 
 
 		if (!zombie_) {
+			
+				if (followmode_ != taxiOnRange()) {
+					followmode_ = !followmode_;
+					if (followmode_) {
+						delLogicComponent(patrol_);
+						addLogicComponent(follow_);
+						follow_->Restart();
+					}
+					else {
+						delLogicComponent(follow_);
+						addLogicComponent(patrol_);
+						patrol_->Restart();
+					}
+				}
+				
 			Car::update(deltaTime);
 			if (turret_ != nullptr) {
 				turret_->update(deltaTime);

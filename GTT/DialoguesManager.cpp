@@ -20,7 +20,7 @@ DialoguesManager::DialoguesManager()
 	txt_->setAutoPos(true);
 	txt_->setAutoSize(false);
 	txt_->setSize(600, 80);
-	//evento(disparo);
+	//evento(muerte);
 }
 
 
@@ -53,6 +53,5 @@ void DialoguesManager::update(int deltaTime)
 			maxTime_ = 0;
 			time_ = 0;
 		}
-		cout << time_ << endl;
 	}
 }
