@@ -273,7 +273,7 @@ const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
 const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png", 50, 50, 10, 5000, 20, TURRET_SHOTGUN_SPECIAL_SHOOT, BOUNCE};
 
 //Weapons
-const WeaponInfo ENEMYGUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, E_GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
+const WeaponInfo ENEMYGUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, E_GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 20.0, 40.0}, false, 300 };
 const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png",2, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
 const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png",3, "shotgun", 20, 40, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/machine_gun.png", "../Assets/sprites/Turrets/metralleta_anim.png", 2, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
@@ -318,7 +318,10 @@ const int title_Width_ = 700;
 const int title_Height_ = 200;
 
 //AI
-const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;
+const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;//distancia del objetivo a la que la ia se para en modo seguimiento
+
+//Nodes
+const double IN_NODE_RANGE = TILE_SIZE * 7;//rango en el que se determina que una posicion esta encima de un nodo
 
 //Background
 const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };

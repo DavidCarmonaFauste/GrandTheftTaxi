@@ -76,8 +76,8 @@ bool EnemyManager::EnemyAtPos(Vector2D pos, GameObject* enemy)
 {
 	for (auto e : enemies_) {
 		if (e.second != nullptr && e.second->isActive() && e.second!=enemy)
-			if(e.second->getCenter().x<=pos.x+32 && e.second->getCenter().x >=pos.x-32
-				&& e.second->getCenter().y <= pos.y + 32 && e.second->getCenter().y >= pos.y - 32)return true;
+			if(e.second->getCenter().x<=pos.x+TILE_SIZE && e.second->getCenter().x >=pos.x- TILE_SIZE
+				&& e.second->getCenter().y <= pos.y + TILE_SIZE && e.second->getCenter().y >= pos.y - TILE_SIZE)return true;
 	}
 	return false;
 }

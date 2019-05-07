@@ -198,16 +198,15 @@ void Turret::AIShoot()
 {
 	int a = SDL_GetTicks() - lastTimeShot_;
 	if (a >= cadence_) {
+		
 		shC_->shoot(normalB, true);
+		animC_->playAnimation("idle", 3.5f, false);
 		lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
+		if (!shotanim_->isAnimationPlaying("shot"))
+			shotanim_->playAnimation("shot", 3.0f, false);
+	
 	}
-	/*if (!shotanim_->isAnimationPlaying("shot"))
-		shotanim_->playAnimation("shot", 3.0f, false);
-	*/
-
-	animC_->playAnimation("idle", 3.5f, false);
-	ResetChargeProgress();
-	}
+}
 
 	void Turret::Reload()
 	{

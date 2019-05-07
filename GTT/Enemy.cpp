@@ -6,11 +6,6 @@
 #include "SoundManager.h"
 
 
-Enemy::Enemy()
-{
-	zombie_ = false; alive_ = true;
-}
-
 Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon){
 	this->setWidth(r.width);
 	this->setHeight(r.height);

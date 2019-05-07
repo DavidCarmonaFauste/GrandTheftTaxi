@@ -34,7 +34,6 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="EnemyAim.cpp" />
-    <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
     <ClCompile Include="EnterShopIC.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
@@ -114,7 +113,6 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="EnemyAim.h" />
-    <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="EnterShopIC.h" />
     <ClInclude Include="Events.h" />

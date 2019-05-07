@@ -10,7 +10,6 @@ class Turret;
 class Enemy :public Car
 {
 public:
-	Enemy();
 	Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon);
 	virtual void Damage(double damage);
 	virtual void Die();

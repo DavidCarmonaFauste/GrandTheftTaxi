@@ -1,4 +1,5 @@
 #include "NodeMap.h"
+#include "Constants.h"
 #include <string>
 
 NodeMap::NodeMap()
@@ -83,7 +84,7 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 	vector<Node*> v;
 	Node* node;
 	node = getNearestNode(position);
-	if ((node->position_ - position).Length() <= 32 * 7) return node;
+	if ((node->position_ - position).Length() <= IN_NODE_RANGE) return node;
 	Vector2D dirToTarget = (position- node->position_);
 	dirToTarget.Normalize();
 	Connections dir;
