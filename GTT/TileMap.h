@@ -8,7 +8,7 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-class TileMap :	public Container {
+class TileMap : public Container {
 public:
 	TileMap(string path);
 	virtual ~TileMap();
@@ -38,4 +38,5 @@ private:
 
 	int test;
 };
+
 

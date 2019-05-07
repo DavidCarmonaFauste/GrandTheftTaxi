@@ -11,5 +11,6 @@ public:
 private:
 	int maxBounces_;
 	int bounces_;
+	double timelastBounce_;
 };
 

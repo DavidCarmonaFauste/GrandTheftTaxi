@@ -45,5 +45,7 @@ private:
 
 	bool DEBUG_;
 
-
+	void setBackground ();
+	void setButtons ();
+	void setComponents ();
 };

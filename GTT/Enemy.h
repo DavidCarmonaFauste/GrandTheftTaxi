@@ -3,6 +3,7 @@
 #include "Trigger.h"
 #include "NodeMap.h"
 #include "IApatrol.h"
+#include "IAFollow.h"
 
 class Turret;
 
@@ -19,10 +20,18 @@ public:
 	virtual int getDistanceFromTaxi();
 	virtual Turret* getTurret();
 	virtual bool taxiOnRange();
+	IAMovementBehaviour* getIABehaviour();
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
-	IApatrol* patrolBehaviour_;
+	bool followmode_;
+
+	//zombie y alive gestionan la animáción previa a la destruccióin del GO. 
+	bool alive_;
+	bool zombie_;
+
+	IAMovementBehaviour* patrol_;
+	IAMovementBehaviour* follow_;
 	NodeMap* routemap_;
 	int speed_;
 	int pursuitRange_;

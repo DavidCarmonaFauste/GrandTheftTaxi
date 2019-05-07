@@ -22,11 +22,21 @@ int Health::getMaxHealth() {
 }
 
 void Health::damage(int damage) {
-	setHealth(health_ - damage);
+	int finalHealth = health_ - damage;
+	
+	if (finalHealth < 0)
+		finalHealth = 0;
+
+	setHealth(finalHealth);
 }
 
-void Health::heal(int heal) {	
-	setHealth(health_ + heal);
+void Health::heal(int heal) {
+	int finalHealth = health_ + heal;
+	
+	if (finalHealth > maxHealth_)
+		finalHealth = maxHealth_;
+
+	setHealth(finalHealth);
 }
 
 void Health::setDamageOverTime(int damage, int frequency) {

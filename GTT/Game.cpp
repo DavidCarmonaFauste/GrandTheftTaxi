@@ -9,6 +9,7 @@
 #include "Money.h"
 #include "EnemyPool.h"
 #include "UI.h"
+//#include "GameManager.h"
 
 #include <iostream>
 
@@ -41,11 +42,11 @@ Game::Game() {
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
-	
+
 	world_ = new b2World(b2Vec2(0, 0));
 
 	world_->SetContactListener(CustomContactListener::getInstance());
-	
+
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
 		cout << "SDL initialization failed\n";
@@ -95,7 +96,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
 			}
-			
+
 			if (event.key.keysym.sym == SDLK_f) {
 				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
@@ -108,10 +109,10 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
-	
-	while (accumulator_ >= step_*1000) {
+
+	while (accumulator_ >= step_ * 1000) {
 		world_->Step(step_, velIterations_, posIterations_);
-		accumulator_ -= step_*1000;
+		accumulator_ -= step_ * 1000;
 	}
 
 	// Update the cameras and the state
@@ -178,7 +179,7 @@ GameStateMachine * Game::getGameStateMachine()
 	return gmStMachine_;
 }
 
-void Game::setState(string state){
+void Game::setState(string state) {
 	gmStMachine_->setState(state);
 }
 
@@ -193,6 +194,9 @@ void Game::init() {
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
 	EnemyManager::getInstance()->initInstance();
+	//GameManager::getInstance()->initInstance();
+	
+
 
 	// Create the resources singleton for the first time
 	// and initialize its states
@@ -225,5 +229,3 @@ void Game::run() {
 bool Game::exitGame() {
 	return exit_;
 }
-
-

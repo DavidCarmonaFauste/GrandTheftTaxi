@@ -1,6 +1,8 @@
 #include "ControlType.h"
 #include "Car.h"
 #include "TaxiSoundManagerCP.h"
+#include "DialoguesManager.h"
+#include "EnterShopIC.h"
 
 #pragma once
 
@@ -12,8 +14,6 @@ class ShootIC;
 
 class Vehicle : public Car
 {
-	
-
 	//hide copyBuilder and 	assignment operator
 	Vehicle(Vehicle &) = delete;
 	Vehicle & operator=(const Vehicle &) = delete;
@@ -46,9 +46,9 @@ public:
 	void initAtributtes(VehicleInfo r, KeysScheme k);
 
 
-	float32 GetMaxBackwardSpeed();	
+	float32 GetMaxBackwardSpeed();
 	float32 GetAcceleration();
-	
+	Vector2D getSpawnPosition ();
 
 	virtual ReloadInputComponent* GetReloadIC();
 	virtual ShootIC* GetShootIC();
@@ -62,7 +62,6 @@ public:
 
 	virtual bool receiveEvent(Event& e);
 	virtual void SaveSpawnPoint(Vector2D spawn);
-	
 
 	private:
 	void Respawn();
@@ -72,6 +71,7 @@ public:
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
 	bool alive_;
+	bool zombie_;
 	int deathTime_;
 
 	static const int MAXTURRETS = 4;
@@ -81,8 +81,7 @@ public:
 	ControlType* control_;
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
+	EnterShopIC* shopIC_;
 
 	TaxiSoundManagerCP* smLC_;
-	
-
 };
