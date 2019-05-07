@@ -38,7 +38,7 @@ Game::Game() {
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
-	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
+	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
