@@ -30,6 +30,12 @@ public:
 		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
 		return instance_.get();
 	}
+
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 	void ReadEnemyInfo();
 	void addSpawn(string id, Vector2D pos);
 	void deactivateIA();

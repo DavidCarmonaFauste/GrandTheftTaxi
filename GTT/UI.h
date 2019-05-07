@@ -11,6 +11,11 @@ class UI : public Container, public Observer {
 public:
 	static UI* getInstance();
 
+	inline static void destroyInstance() {
+		delete singleton_;
+		singleton_ = nullptr;
+	}
+
 	virtual void render(Uint32 deltaTime) override;
 	virtual void update(Uint32 deltaTime) override;
 	virtual void addUIElement(Container* c);

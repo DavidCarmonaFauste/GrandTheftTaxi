@@ -13,7 +13,9 @@ protected:
 public:
 
 	GameState(){}
-	~GameState(){}
+	~GameState(){
+		stage_.clear();
+	}
 
 	virtual void start() = 0;
 	virtual void end() = 0;

@@ -10,6 +10,9 @@ typedef function<void (b2Contact* contact)> contactCallback;
 class CustomContactListener : public b2ContactListener {
 public:
 	static CustomContactListener* getInstance();
+	inline static void destroyInstance() {
+		delete singleton_; singleton_ = nullptr;
+	}
 
 	// DO NOT CALL, THIS IS ONLY USED BY BOX2D TO FIRE EVENTS
 	virtual void BeginContact(b2Contact* contact) override {

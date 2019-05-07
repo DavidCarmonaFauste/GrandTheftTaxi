@@ -7,12 +7,12 @@
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
 	// and converts it into GameObjects
-	tmxMap_ = new tmx::Map();
-	tmxMap_->load(path);
+	tmxMap_ = tmx::Map();
+	tmxMap_.load(path);
 
 	string imagePath = path.substr(0, path.size() - 3).append("png");
-	int w = tmxMap_->getTileSize().x * tmxMap_->getTileCount().x;
-	int h = tmxMap_->getTileSize().y * tmxMap_->getTileCount().y;
+	int w = tmxMap_.getTileSize().x * tmxMap_.getTileCount().x;
+	int h = tmxMap_.getTileSize().y * tmxMap_.getTileCount().y;
 	setWidth(w); setHeight(h); setPosition(Vector2D(0, 0));
 
 	mapSprite_ = new Sprite(imagePath, w, h, 0, 0);
@@ -25,13 +25,14 @@ TileMap::TileMap(string path) {
 }
 
 TileMap::~TileMap() {
-	delete tmxMap_; tmxMap_ = nullptr;
+	delete mapSprite_; mapSprite_ = nullptr;
+	delete phyO_; phyO_ = nullptr;
 }
 
 void TileMap::tmxToScene() {
 	// Iterate through all object layers and convert them to
 	// containers
-	const auto& layers = tmxMap_->getLayers();
+	const auto& layers = tmxMap_.getLayers();
 	for (const auto& layer : layers) {
 
 		// Process only object layers

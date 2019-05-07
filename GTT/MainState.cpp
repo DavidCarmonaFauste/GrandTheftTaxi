@@ -13,14 +13,10 @@
 #include "EnemyManager.h"
 #include "GameManager.h"
 
-
 MainState::MainState(){}
 
 MainState::~MainState() {
-	for (auto o : stage_) {
-		delete o; o = nullptr;
-	}
-	stage_.clear();
+	delete tilemap_; tilemap_ = nullptr;
 }
 
 //start is called when GameStateMachine change state
@@ -29,6 +25,9 @@ void MainState::start() {
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
+
+	//Camera logic
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
