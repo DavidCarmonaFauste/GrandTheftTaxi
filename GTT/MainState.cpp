@@ -11,6 +11,7 @@
 #include "Reticule.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+#include "GameManager.h"
 
 
 MainState::MainState(){}
@@ -59,6 +60,8 @@ void MainState::start() {
 	stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(EnemyManager::getInstance());
+	stage_.push_back(GameManager::getInstance());
+
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());

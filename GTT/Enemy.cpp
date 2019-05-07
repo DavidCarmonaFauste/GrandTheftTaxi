@@ -4,6 +4,7 @@
 #include "Turret.h"
 #include "EnemyAim.h"
 #include "SoundManager.h"
+#include "GameManager.h"
 
 
 Enemy::Enemy()
@@ -60,12 +61,13 @@ void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
 	if (health_->getHealth() <= 0) { 
+		GameManager::getInstance()->addKill();
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 		sprite_->playAnimation("enemyDie", 10.0f, false);
 		bodyReadyToDestroy_ = true;
 		turret_->setActive(false);
 		turret_->setActive(false);
-		zombie_ = true; //lanza el flag para que en el update se desactiven la lógica de patruya
+		zombie_ = true; //lanza el flag para que en el update se desactiven la lï¿½gica de patruya
 	}
 }
 
