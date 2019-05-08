@@ -1,11 +1,14 @@
 #pragma once
 
+#include <vector>
+#include <map>
+
 #include "Container.h"
 #include "Tile.h"
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
-class TileMap :	public Container {
+class TileMap : public Container {
 public:
 	TileMap(string path);
 	virtual ~TileMap();
@@ -14,21 +17,26 @@ public:
 	virtual void update(Uint32 deltaTime) override;
 	virtual void render(Uint32 deltaTime) override;
 
-	// Set the '(x, y)' tile of the layer 'layer' to the given one
-	void setTile(Tile* tile, int layer, int x, int y);
-
-	// Gets the '(x, y)' tile of the layer 'layer'
-	Tile* getTile(int layer, int x, int y);
-
 private:
-	map<int, Texture*> tilesets_;
-	vector< vector<vector<Tile*>> > layers_; // Layers (vector1) of columns (v2) and rows (v3)
-	SDL_Rect tileDest;
+	SDL_Rect chunk;
 
 	// Reads the already parsed tmx map and
 	// creates the correspondent GameObjects
 	void tmxToScene();
 
-	tmx::Map* tmxMap_;
+	// Helper functions to process each object layer
+	bool processObject(string layerName, const tmx::Object &object);
+	bool processCollision(const tmx::Object &object);
+	bool processPlayer(const tmx::Object &object);
+	bool processGas(const tmx::Object &object);
+	bool processNodes(const tmx::Object &object, string layerName);
+	bool processSpawns(const tmx::Object &object);
+
+	tmx::Map tmxMap_;
+	PhysicObject* phyO_;
+	Sprite *mapSprite_;
+
+	int test;
 };
+
 

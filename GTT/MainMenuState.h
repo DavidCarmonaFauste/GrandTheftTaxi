@@ -18,10 +18,10 @@ public:
 	virtual void start() override;
 	virtual void end() override;
 
-	virtual void update (Uint32 deltaTime);
+	virtual void update(Uint32 deltaTime);
 
 	virtual bool receiveEvent(Event& e);
-	
+
 
 private:
 
@@ -45,6 +45,7 @@ private:
 
 	bool DEBUG_;
 
-	
+	void setBackground ();
+	void setButtons ();
+	void setComponents ();
 };
-

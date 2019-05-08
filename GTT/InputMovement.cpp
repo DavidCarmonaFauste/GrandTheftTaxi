@@ -4,11 +4,6 @@ InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
 	k_ = k;
 	v_ = v;
-	//Input booleans
-	forwardPressed_ = false;
-	backwardPressed_ = false;
-	rightTurnPressed_ = false;
-	leftTurnPressed_ = false;
 
 	targetDamping = DFLT_DAMPING;
 	targetLateralVelocity = DFLT_LATERAL_VELOCITY;
@@ -31,14 +26,26 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 			broadcastEvent(e);
 		}
 		if (event.key.keysym.sym == k_.backwards) { 
-			backwardPressed_ = true; 
+			backwardPressed_ = true;
+			//sound event
 			Event e(this, BACK_MOVING_FORWARD);
 			broadcastEvent(e);
+
+			//animation event
+			Event e_anm(this, STOP_BACKFORWARD);
+			broadcastEvent(e_anm);
 		}
 
-
-		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = true;
-		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = true;
+		if (event.key.keysym.sym == k_.turnRight) { 
+			rightTurnPressed_ = true; 
+			Event e(this, TURN_RIGHT);	
+			broadcastEvent(e);
+		}
+		if (event.key.keysym.sym == k_.turnLeft) { 
+			leftTurnPressed_ = true; 
+			Event e(this, TURN_LEFT);
+			broadcastEvent(e);
+		}
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = true;
 	}
 	else if (event.type == SDL_KEYUP) {	
@@ -49,11 +56,20 @@ void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Even
 		}
 		if (event.key.keysym.sym == k_.backwards) { 
 			backwardPressed_ = false; 
+			//sound event
 			Event e(this, STOPPED_BACK_MOVING_FORWARD);
 			broadcastEvent(e);
+			//animation event
+			Event e_anm(this, TURN_DEFAULT);
+			broadcastEvent(e_anm);
 		}
-		if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
-		if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
+
+		if (event.key.keysym.sym == k_.turnRight || event.key.keysym.sym == k_.turnLeft) {
+			Event e(this, TURN_DEFAULT);
+			broadcastEvent(e);
+			if (event.key.keysym.sym == k_.turnRight) rightTurnPressed_ = false;
+			if (event.key.keysym.sym == k_.turnLeft) leftTurnPressed_ = false;
+		}
 		if (event.key.keysym.sym == SDLK_SPACE) handBrakePressed_ = false;
 	}
 }
@@ -86,7 +102,10 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	// Handbrake
 	if (!handBrakePressed_) {
 		targetDamping = DFLT_DAMPING;
-		if (targetLateralVelocity > 0)targetLateralVelocity -= (DFLT_LATERAL_VELOCITY * deltaTime / 100);
+		if (targetLateralVelocity > DFLT_LATERAL_VELOCITY)
+			targetLateralVelocity -= (HBRK_LATERAL_RECOVER * deltaTime / 100);
+		else
+		targetLateralVelocity = HBRK_LATERAL_VELOCITY;
 		targetMaxSpeed = v_->GetMaxSpeed();
 	}
 	else {
@@ -108,8 +127,8 @@ void InputMovement::steeringWheel() {
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -2* v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 2* v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -1.6* v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 1.6* v_->GetTurnSpeed();
 		}
 		else {
 			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();

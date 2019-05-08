@@ -5,8 +5,11 @@
 
 class Money : public Container, public Observable, public Observer {
 public:
-	Money();
-	virtual ~Money();
+	static Money* getInstance();
+
+	inline static void destroyInstance() {
+		delete singleton_; singleton_ = nullptr;
+	}
 
 	virtual bool receiveEvent(Event& e) override;
 
@@ -18,6 +21,11 @@ public:
 
 
 private:
+	static Money *singleton_;
+
+	Money();
+	virtual ~Money();
+
 	int minimumMoney_ = 0;
 	int currentMoney_;
 };

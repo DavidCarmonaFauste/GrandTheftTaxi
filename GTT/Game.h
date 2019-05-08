@@ -5,7 +5,7 @@
 #include "Camera.h"
 #include "SoundManager.h"
 #include "GameStateMachine.h"
-
+#include "CustomContactListener.h"
 
 using namespace std;
 typedef unsigned int uint;
@@ -37,6 +37,11 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 
 	void run();
 	bool exitGame();
@@ -61,20 +66,23 @@ public:
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
 	GameStateMachine* getGameStateMachine();
-	void setState(string state);
+	bool getCloseToShop () { return canEnterShop_; }
 
 	// state setters
+	void setState(string state);
 	void setGameEnd () { exit_ = true; }
+	void setCloseToShop (bool close) { canEnterShop_ = close; }
 
 	void init();
 
 private:
-	
-	const int winWidth_ = 1280;
-	const int winHeight_ = 720;
+	void end();
 
-	const int cameraWidth = 1600;
-	const int cameraHeight = 900;
+	const int winWidth_ = WIN_WIDTH;
+	const int winHeight_ = WIN_HEIGHT;
+
+	const int cameraWidth = CAMERA_WIDHT;
+	const int cameraHeight = CAMERA_HEIGHT;
 
 	//SDL Elements
 	SDL_Renderer *renderer_;
@@ -89,10 +97,10 @@ private:
 	//states
 	GameStateMachine* gmStMachine_;
 	bool exit_ = false;
+	bool canEnterShop_ = false;
 
 	// Delta time and physics time management
 	double accumulator_;
 	double step_ = 1.0f / 60.0f;
 	int velIterations_ = 8, posIterations_ = 3;
 };
-

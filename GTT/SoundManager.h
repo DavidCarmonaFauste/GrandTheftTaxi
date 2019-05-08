@@ -29,6 +29,11 @@ public:
 		return instance_.get();
 	}
 		
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 	//Methods to define how many channels we can use
 	int setAlloctaedChannels(int n);
 

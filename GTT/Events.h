@@ -1,6 +1,8 @@
 #pragma once
+#include "Vector2D.h"
 
 class Observable;
+class b2Body;
 
 enum event_type {
 	GAME_START,
@@ -10,6 +12,7 @@ enum event_type {
 	MONEY_CHANGED,
 	RESPAWNED,
 
+	//Vehicle sound management
 	STARTED_MOVING_FORWARD,
 	STOPPED_MOVING_FORWARD,
 	BACK_MOVING_FORWARD,
@@ -19,9 +22,21 @@ enum event_type {
 
 	EVENTS_LENGTH,
 
+	TRIGGER_EVENT,
+	//Buttons management
 	CLICK_BUTTON,
 	OVER_OBJECT,
-	NOT_OVER_OBJECT
+	NOT_OVER_OBJECT,
+
+	//Proyectile Sounds management
+	TAXI_SHOOT,
+
+	//Taxi Animations
+	TURN_LEFT,
+	TURN_RIGHT,
+	TURN_DEFAULT,
+	STOP_BACKFORWARD,
+	IMPACT_DAMAGE
 };
 
 struct Event {
@@ -58,6 +73,16 @@ struct MoneyChangedEvent : public Event {
 	int previousMoney_;
 };
 
+struct TriggerEvent : public Event {
+	TriggerEvent(Observable* sender, b2Body* detected, bool leaving) :
+		Event(sender, TRIGGER_EVENT) {
+		detected_ = detected;
+		leaving_ = leaving;
+	}
+
+	b2Body* detected_;
+	bool leaving_;
+};
 struct ChannelStoppedPlaying : public Event {
 	ChannelStoppedPlaying(Observable* sender, int channel) : Event(sender, CHANNEL_STOPPED_PLAYING) {
 		channel_ = channel;
@@ -87,5 +112,14 @@ struct NotMouseOverObj : public Event {
 	}
 	int objIndex_;
 };
+
+struct TaxiShootEvent : public Event {
+	TaxiShootEvent(Observable* sender, int sID) : Event(sender, TAXI_SHOOT) {
+		shootId_ = sID;
+	}
+	int shootId_;
+};
+
+
 
 

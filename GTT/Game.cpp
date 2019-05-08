@@ -4,6 +4,11 @@
 #include "Reticule.h"
 #include "Vehicle.h"
 #include "ProyectilePool.h"
+#include "NodeMapsManager.h"
+#include "EnemyManager.h"
+#include "Money.h"
+#include "UI.h"
+//#include "GameManager.h"
 
 #include <iostream>
 
@@ -18,7 +23,8 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
-	
+	IMG_Init(IMG_INIT_PNG);
+
 	// SDL_Mixer initialization
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
 		cout << "Error" << Mix_GetError() << endl;
@@ -26,13 +32,19 @@ Game::Game() {
 	// SDL_TTF initialization
 	TTF_Init();
 
+	//mouse can't exit the screen
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
+	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
 	//SDL_SetRelativeMouseMode(SDL_TRUE); //This line makes mouse movement in the menu state impossible
 
 	world_ = new b2World(b2Vec2(0, 0));
+
+	world_->SetContactListener(CustomContactListener::getInstance());
 
 	// Check for errors
 	if (window_ == nullptr || renderer_ == nullptr) {
@@ -47,7 +59,29 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
+}
 
+void Game::end() {
+	// Singleton deletion
+	Vehicle::destroyInstance();
+	Reticule::destroyInstance();
+	CustomContactListener::destroyInstance();
+	ProyectilePool::destroyInstance();
+	SoundManager::destroyInstance();
+	Money::destroyInstance();
+	UI::destroyInstance();
+	EnemyManager::destroyInstance();
+	NodeMapsManager::destroyInstance();
+
+	delete gmStMachine_; gmStMachine_ = nullptr;
+	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
+		delete (*it).second; (*it).second = nullptr;
+	}
+
+	SDL_DestroyRenderer(renderer_);
+	SDL_DestroyWindow(window_);
+	Mix_Quit();
+	SDL_Quit();
 }
 
 //los eventos los gestiona la aplicaci�n. Conecta directamente con handleEvents del estado actual. 
@@ -60,8 +94,8 @@ void Game::handleEvents(Uint32 deltaTime) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
 			}
-			
-			else if (event.key.keysym.sym == SDLK_f) {
+
+			if (event.key.keysym.sym == SDLK_f) {
 				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
 			}
 		}
@@ -73,9 +107,10 @@ void Game::handleEvents(Uint32 deltaTime) {
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
-	while (accumulator_ >= step_*1000) {
+
+	while (accumulator_ >= step_ * 1000) {
 		world_->Step(step_, velIterations_, posIterations_);
-		accumulator_ -= step_*1000;
+		accumulator_ -= step_ * 1000;
 	}
 
 	// Update the cameras and the state
@@ -85,7 +120,6 @@ void Game::update(Uint32 deltaTime)
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);
-
 	// Render the cameras and the state
 	for (auto cam : cameras_) cam.second->render(deltaTime);
 	gmStMachine_->get_CurrentState()->render(deltaTime);
@@ -143,7 +177,7 @@ GameStateMachine * Game::getGameStateMachine()
 	return gmStMachine_;
 }
 
-void Game::setState(string state){
+void Game::setState(string state) {
 	gmStMachine_->setState(state);
 }
 
@@ -156,6 +190,11 @@ void Game::init() {
 	Reticule::getInstance()->initInstance();
 	Vehicle::getInstance()->initInstance(); //after, in MainState must do initiAtributtes(VehicleInfo r, KeysScheme k);
 	ProyectilePool::getInstance()->initInstance();
+	NodeMapsManager::getInstance()->initInstance();
+	EnemyManager::getInstance()->initInstance();
+	//GameManager::getInstance()->initInstance();
+	
+
 
 	// Create the resources singleton for the first time
 	// and initialize its states
@@ -168,8 +207,8 @@ void Game::init() {
 void Game::run() {
 	init();
 
-	double lastTime = SDL_GetTicks();
-	double deltaTime = lastTime;
+	Uint32 lastTime = SDL_GetTicks();
+	Uint32 deltaTime = lastTime;
 
 	while (!exit_) {
 		handleEvents(deltaTime);
@@ -181,15 +220,10 @@ void Game::run() {
 		lastTime = SDL_GetTicks();
 	}
 
-	SDL_DestroyRenderer(renderer_);
-	SDL_DestroyWindow(window_);
-	Mix_Quit();
-	SDL_Quit();
+	end();
 }
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp
 bool Game::exitGame() {
 	return exit_;
 }
-
-

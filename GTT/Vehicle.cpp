@@ -8,11 +8,16 @@
 #include "Turret.h"
 #include "ReloadInputComponent.h"
 #include "ShootIC.h"
+#include "GameManager.h"
+
+#include "EnemyManager.h"
 
 unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
-Vehicle::Vehicle(){
+Vehicle::Vehicle() {
 	currentTurret_ = 0;
+	zombie_ = false; 
+	//alive_ = true;
 }
 
 Vehicle::~Vehicle() {
@@ -20,14 +25,13 @@ Vehicle::~Vehicle() {
 	delete phyO_; phyO_ = nullptr;
 	delete sprite_; sprite_ = nullptr;
 	delete health_; health_ = nullptr;
-	
+
 	for (int i = 0; i < MAXTURRETS; i++) {
 		if (turrets_[i] != nullptr) {
 			delete turrets_[i];
 			turrets_[i] = nullptr;
 		}
 	}
-	//delete[] turrets_; 
 }
 
 
@@ -41,10 +45,7 @@ ShootIC * Vehicle::GetShootIC()
 	return shIC_;
 }
 
-TaxiSoundManagerCP * Vehicle::GetTxSoundManager()
-{
-	return smLC_;
-}
+
 
 void Vehicle::EquipTurret(Turret * turret)
 {
@@ -56,16 +57,18 @@ void Vehicle::EquipTurret(Turret * turret)
 		turrets_[currentTurret_] = turret;
 		Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
 		turrets_[currentTurret_]->AttachToVehicle(this);
+		turrets_[currentTurret_]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
 	}
 	else {
 		cout << "maximo numero de torretas alcanzado" << endl;
 	}
 
 }
+
 void Vehicle::ChangeTurret()
 {
 	turrets_[currentTurret_]->CancelReload();
-	currentTurret_ = (currentTurret_ + 1)% MAXTURRETS;
+	currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
 	while (turrets_[currentTurret_] == nullptr) {
 		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
 	}
@@ -73,6 +76,7 @@ void Vehicle::ChangeTurret()
 	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
 	turrets_[currentTurret_]->ResetChargeProgress();
 }
+
 Turret * Vehicle::getCurrentTurret()
 {
 	return turrets_[currentTurret_];
@@ -80,24 +84,89 @@ Turret * Vehicle::getCurrentTurret()
 
 
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
-{	
+{
 	Container::handleInput(time, event);
 	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
+	EnemyManager::getInstance()->input(time, event);
 }
 
-void Vehicle::update(Uint32 time) {	
+void Vehicle::update(Uint32 time) {
 	Container::update(time);
 
 	if (turrets_[currentTurret_] != nullptr)
 		turrets_[currentTurret_]->update(time);
+
+	if (alive_ && health_->getHealth() <= 0) {
+		//zombie_ = true; //estable el flag
+		alive_ = false;
+		deathTime_ = SDL_GetTicks();
+	}
+	if (!alive_ && SDL_GetTicks() - deathTime_ >= 500) {
+		Respawn();
+	}
+
 }
 
 bool Vehicle::receiveEvent(Event & e) {
-	if (e.type_ == STARTED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
-	else if (e.type_ == STOPPED_MOVING_FORWARD) health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+
+	switch (e.type_)
+	{
+	case STARTED_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+		break;
+
+	case STOPPED_BACK_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+		break;
+
+	case TURN_LEFT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("leftTurn");
+		break;
+
+	case TURN_RIGHT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("rightTurn");
+		break;
+
+	case TURN_DEFAULT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("default");
+		break;
+
+	case STOP_BACKFORWARD:
+		if(!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("backStop");
+		break;
+
+	case IMPACT_DAMAGE:
+		sprite_->playAnimation("hitDamage", 30.0f, false); //play establece anim como currentAnm y al renderizar secciona por frames
+		//como loop es false vuelve a la animaci�n por defecto
+		Event eV(this, IMPACT_DAMAGE);
+		broadcastEvent(eV); //TaxiSoundManager recieved this message
+		break;
+
+	}
 
 	return true;
 }
+
+void Vehicle::SaveSpawnPoint(Vector2D spawn)
+{
+	spawnPosition_ = spawn;
+}
+
+void Vehicle::Respawn()
+{
+	GameManager::getInstance()->calculatePuntuation();
+	Vehicle::getInstance()->setPosition(spawnPosition_);
+	Vector2D v = spawnPosition_;
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);
+	spawnPosition_ = v;
+	health_->resetHealth();
+	alive_ = true;
+}
+
 
 void Vehicle::render(Uint32 time) {
 	Container::render(time);
@@ -111,9 +180,14 @@ float32 Vehicle::GetMaxBackwardSpeed()
 {
 	return maxBackwardSpeed_;
 }
+
 float32 Vehicle::GetAcceleration()
 {
 	return acceleration_;
+}
+
+Vector2D Vehicle::getSpawnPosition () {
+	return spawnPosition_;
 }
 
 
@@ -125,6 +199,11 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
+	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); 
+	sprite_->loadAnimation(r.backTurnPath, "backStop");
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
+
 	this->addRenderComponent(sprite_);
 	sprite_->setAnimation("default");
 
@@ -132,6 +211,8 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	health_ = new Health(TAXI_HP);
 	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
+	alive_ = true;
+
 
 	shIC_ = new ShootIC();
 	reIC_ = new ReloadInputComponent();
@@ -147,6 +228,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 
 	// Physics
 	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
+	phyO_->setCollisions(0, TAXI_CATEGORY);
 	this->addLogicComponent(phyO_);
 
 	// Control
@@ -155,9 +237,14 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	this->addLogicComponent(control_);
 	control_->registerObserver(this);
 
+	// Shop control
+	shopIC_ = new EnterShopIC ();
+	this->addInputComponent (shopIC_);
+
 	//Sound
 	smLC_ = new TaxiSoundManagerCP(this);
 	this->addLogicComponent(smLC_);
+	this->registerObserver(smLC_); //taxi es tambi�n un observable.  enviar� los mensajes correspondientes a su comp TaxiSoundManagerCP
 
 	control_->registerObserver(smLC_);
 

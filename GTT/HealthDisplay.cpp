@@ -27,8 +27,8 @@ HealthDisplay::HealthDisplay() {
 	//Percentage of current fuHealth
 	SDL_Color fontColor = SDL_Color();
 	fontColor.r = 255; fontColor.g = 255; fontColor.b = 255;
-	Font* f = new Font(FONT_COOLFONT, 60);
-	fuhealthAmount_ = new Text(f, "", fontColor);
+	f_ = new Font(FONT_COOLFONT, 60);
+	fuhealthAmount_ = new Text(f_, "", fontColor);
 	fuhealthAmount_->setCamera(UI_CAMERA);
 	addRenderComponent(fuhealthAmount_);
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");
@@ -39,13 +39,16 @@ HealthDisplay::HealthDisplay() {
 }
 
 HealthDisplay::~HealthDisplay() {
-
+	delete background;
+	delete bar;
+	delete f_;
+	delete fuhealthAmount_;
 }
 
 // Percentage from 0 to 1
 void HealthDisplay::setHealthPercentage(float healthPercentage) {
 	healthPercentage_ = healthPercentage;
-
+	if (healthPercentage_ < 0) healthPercentage_ = 0;
 	Texture* tex = bar->getTexture();
 	bar_clip->x = bar_clip->y = 0;
 	bar_clip->w = tex->getWidth() * healthPercentage_;
@@ -55,8 +58,17 @@ void HealthDisplay::setHealthPercentage(float healthPercentage) {
 	bar->setClipRect(bar_clip);
 	
 	fuhealthAmount_->setText(to_string((int)(healthPercentage_ * 100)) + " %");
+
 }
+
 
 int HealthDisplay::getHealthPercentage() {
 	return healthPercentage_;
+}
+
+
+void HealthDisplay::reposition (Vector2D newPos) {
+	setPosition (newPos);
+	bar->setPos(position_.x + getWidth()*0.267, position_.y + getHeight()*0.284);
+	fuhealthAmount_->setPos(getPosition().x + 5 + getWidth(), getPosition().y + getHeight() * 0.23);
 }

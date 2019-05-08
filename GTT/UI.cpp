@@ -1,6 +1,8 @@
 
 #include "UI.h"
 
+UI *UI::singleton_ = nullptr;
+
 UI::UI() {
 	UIElements_ = vector<GameObject*>();
 
@@ -23,21 +25,32 @@ UI::UI() {
 	ammoDisplay_ = new AmmoDisplay();
 	UIElements_.push_back(ammoDisplay_);
 
+	//Dialogues
+	dialogues_ = new DialoguesManager();
+	UIElements_.push_back(dialogues_);
+
 	//Reload
 	reloadDisplay_ = new ReloadingDisplay();
 	UIElements_.push_back(reloadDisplay_);
-
 }
 
 
 UI::~UI() {
-	for (auto e : UIElements_) {
-		delete e; e = nullptr;
+	for (vector<GameObject*>::iterator it = UIElements_.begin(); it != UIElements_.end(); it++) {
+		delete (*it); (*it) = nullptr;
 	}
 	UIElements_.clear();
 }
 
+UI * UI::getInstance() {
+	if (singleton_ == nullptr)
+		singleton_ = new UI();
+
+	return singleton_;
+}
+
 void UI::render(Uint32 deltaTime) {
+	//dialogues_->render(deltaTime);
 	for (auto element : UIElements_) {
 		element->render(deltaTime);
 	}
@@ -45,6 +58,8 @@ void UI::render(Uint32 deltaTime) {
 
 void UI::update(Uint32 deltaTime)
 {
+	dialogues_->update(deltaTime);
+
 	if (reloadDisplay_ != nullptr)
 		reloadDisplay_->setActive(reloadDisplay_->isReloading());
 	for (auto element : UIElements_) {
@@ -68,5 +83,9 @@ bool UI::receiveEvent(Event& e) {
 	}
 
 	return true;
+}
+
+void UI::setAmmoActive(bool active) const {
+	ammoDisplay_->setActive(active);
 }
 

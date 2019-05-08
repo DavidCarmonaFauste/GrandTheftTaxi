@@ -5,12 +5,16 @@
 #include "MoneyDisplay.h"
 #include "ReloadingDisplay.h"
 #include "AmmoDisplay.h"
+#include "DialoguesManager.h"
 
-class UI : public Container, public Observer
-{
+class UI : public Container, public Observer {
 public:
-	UI();
-	virtual ~UI();
+	static UI* getInstance();
+
+	inline static void destroyInstance() {
+		delete singleton_;
+		singleton_ = nullptr;
+	}
 
 	virtual void render(Uint32 deltaTime) override;
 	virtual void update(Uint32 deltaTime) override;
@@ -18,13 +22,21 @@ public:
 
 	virtual bool receiveEvent(Event& e) override;
 
+	void setAmmoActive(bool active) const;
+
 private:
+	static UI* singleton_;
+
+	UI();
+	virtual ~UI();
+
 	vector<GameObject*> UIElements_;
 
 	HealthDisplay* healthDisplay_;
 	MoneyDisplay* moneyDisplay_;
 	ReloadingDisplay* reloadDisplay_;
 	AmmoDisplay* ammoDisplay_;
+	DialoguesManager* dialogues_;
 
 	Font* font_;
 	SDL_Color fontColor_;

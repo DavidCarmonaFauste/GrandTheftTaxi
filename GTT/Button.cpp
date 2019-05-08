@@ -6,6 +6,7 @@
 Button::Button()
 {
 	mouseClickIC_ = new MouseClickIC();
+	mouseClickIC_->setButton(this);
 	addInputComponent(mouseClickIC_);
 }
 

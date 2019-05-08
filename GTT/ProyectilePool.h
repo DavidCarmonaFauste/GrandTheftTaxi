@@ -30,10 +30,15 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
-	virtual Proyectile* addProyectile(Vector2D pos, Vector2D vel, ProyectileInfo prType);
+	virtual Proyectile* addProyectile(Vector2D pos, Vector2D vel, ProyectileInfo prType, bool isAnEnemy);
 
 	
 
