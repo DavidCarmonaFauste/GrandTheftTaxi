@@ -65,6 +65,7 @@ void Game::end() {
 	// Singleton deletion
 	Vehicle::destroyInstance();
 	Reticule::destroyInstance();
+	world_->SetContactListener(nullptr);
 	CustomContactListener::destroyInstance();
 	ProyectilePool::destroyInstance();
 	SoundManager::destroyInstance();
