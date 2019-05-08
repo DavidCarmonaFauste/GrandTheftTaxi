@@ -183,8 +183,8 @@ void Game::setState(string state) {
 }
 
 void Game::init() {
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	cameras_[UI_CAMERA] = new Camera(1600, 900);
+	cameras_[GAME_CAMERA] = new Camera(1280, 720);
+	cameras_[UI_CAMERA] = new Camera(1280, 720);
 
 	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
 	SoundManager::getInstance()->initInstance();

@@ -5,6 +5,7 @@
 #include "EnemyAim.h"
 #include "SoundManager.h"
 #include "GameManager.h"
+#include "TaxiSoundManagerCP.h"
 
 
 Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon){
@@ -33,6 +34,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	//Movement
 	speed_ = 3;
+
+	//Sound
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);

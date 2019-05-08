@@ -45,6 +45,7 @@ void MainState::start() {
 		Game::getInstance()->getCamera(GAME_CAMERA)->getHeight() / 2);
 	Game::getInstance()->getCamera(GAME_CAMERA)->setPosition(cameraPos);
 
+
 	// Systems
 	//...
 
@@ -61,7 +62,7 @@ void MainState::start() {
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
-	
+
 	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 

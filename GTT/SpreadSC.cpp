@@ -15,13 +15,14 @@ void SpreadSC::shoot(ProyectileInfo prType, bool isAnEnemy)
 	Vector2D spawnpoint = Vector2D(turret_->getCenter().x + spawndir.x*0.25 , turret_->getCenter().y + spawndir.y*0.25);
 
 	ProyectilePool::getInstance()->addProyectile(spawnpoint,
-		Vector2D(sin(ang), -cos(ang)), prType, isAnEnemy);
+		Vector2D(sin(ang), -cos(ang)), turret_->getRotation()/180.0*M_PI, prType, isAnEnemy);
+
 	double incrang = dispersionAngle_ / 180.0*M_PI / (numPellets_-1);
 	ang += incrang;
 	
 	for (int i = 1; i < numPellets_; i++) {
 		ProyectilePool::getInstance()->addProyectile(spawnpoint,
-			Vector2D((sin(ang)), (-cos(ang))), prType, isAnEnemy);
+			Vector2D((sin(ang)), (-cos(ang))), turret_->getRotation()/180.0*M_PI, prType, isAnEnemy);
 		ang += incrang;
 	}
 }
