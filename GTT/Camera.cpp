@@ -26,6 +26,7 @@ void Camera::renderTexture(Texture * texture, SDL_Rect const & dest, SDL_Rect * 
 		texture->render (dest, angle, clip);
 	}
 	else {
+		// Center the camera rect (in any zoom's been applied)
 		cameraRect_->x = position_.x + (width_/2 - cameraRect_->w / 2);
 		cameraRect_->y = position_.y + (height_/2 - cameraRect_->h / 2);
 
