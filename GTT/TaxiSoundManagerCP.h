@@ -5,13 +5,13 @@
 
 #include <map>
 
-class Vehicle;
+class Car;
 
 class TaxiSoundManagerCP :
 	public LogicComponent, public Observer
 {
 public:
-	TaxiSoundManagerCP(Vehicle* v);
+	TaxiSoundManagerCP(Car* v);
 
 	void start();
 	virtual void update(GameObject* o, Uint32 deltaTime);
@@ -21,7 +21,7 @@ public:
 	//void PlaySound(soundId id);
 private:
 	SoundManager* s_;
-	Vehicle* v_;
+	Car* v_;
 
 	//Max SDL_Mixer channels: 8
 	map <string, int> Channels_;
