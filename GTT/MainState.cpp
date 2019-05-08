@@ -26,9 +26,6 @@ void MainState::start() {
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
-	//Camera logic
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
-
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
 
@@ -41,8 +38,8 @@ void MainState::start() {
 	//Camera logic
 	cameraFollow = new FollowGameObject(Vehicle::getInstance());
 	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
-	
-	// Camera positioning
+
+	// Camera positionin
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
 	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth() / 2,
 		Game::getInstance()->getCamera(GAME_CAMERA)->getHeight() / 2);
