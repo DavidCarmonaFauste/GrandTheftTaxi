@@ -2,6 +2,7 @@
 #include "Reticule.h"
 #include "Game.h"
 #include "Vehicle.h"
+#include "Money.h"
 
 
 GasFillMenu::GasFillMenu () {
@@ -10,10 +11,12 @@ GasFillMenu::GasFillMenu () {
 
 GasFillMenu::~GasFillMenu () {
 	delete backgroundSprite_;
+	delete blackBackgoundSprite_;
 	delete fill_5_Sprite_;
 	delete fill_10_Sprite_;
 	delete fill_25_Sprite_;
 	delete backSprite_;
+	delete paySprite_;
 
 	while (!stage_.empty()) {
 		delete stage_.back();
@@ -38,18 +41,25 @@ void GasFillMenu::start () {
 	setButtons ();
 	setButtonComponents ();
 
-	// health display (not the same object as in the UI as to not have to hide the rest of the UI and reposition the bar every state change)
-	healthDisplay_ = new HealthDisplay();
+	// health display (not the same object as in the UI so there's no need to hide the rest of the UI and reposition the bar every state change)
+	healthDisplay_ = new HealthDisplay(); 
 	healthDisplay_->reposition (GAS_MENU_HEALTH_BAR_POSITION);
 	healthDisplay_->setHealthPercentage (float (Vehicle::getInstance ()->getHealthComponent ()->getHealth ()) / Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ());
 
+	//Money Display
+	moneyDisplay_ = new MoneyDisplay();
+	moneyDisplay_->reposition(Vector2D(GAS_MENU_HEALTH_BAR_POSITION.x + 650, GAS_MENU_HEALTH_BAR_POSITION.y - 22),1.5);
+	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
+
 	//Container to GameObj list
 	stage_.push_back(background_);
+	stage_.push_back(blackBackground_);
 	stage_.push_back(buttons_["fill_5_Button"]);
 	stage_.push_back(buttons_["fill_10_Button"]);
 	stage_.push_back(buttons_["fill_25_Button"]);
 	stage_.push_back(buttons_["backButton"]);
 	stage_.push_back (healthDisplay_);
+	stage_.push_back(moneyDisplay_);
 	stage_.push_back(Reticule::getInstance());
 }
 
@@ -72,20 +82,29 @@ bool GasFillMenu::receiveEvent (Event & e) {
 	case CLICK_BUTTON: {
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 		int max = Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ();
+		int moneyAvailable = Money::getInstance()->getCurrentMoney();
 
 		if (MouseClickLeft_.button_ == buttons_["fill_5_Button"]->getIndex()) {
-			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.05));
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_5){
+				moneySpent_ += PRICE_FOR_5;
+				refilled_ += 5;
+			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_10_Button"]->getIndex ()) {
-			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.1));
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_10) {
+				moneySpent_ += PRICE_FOR_10;
+				refilled_ += 10;
+			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_25_Button"]->getIndex ()) {
-			Vehicle::getInstance ()->getHealthComponent ()->heal (int (max * 0.25));
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_25) {
+				moneySpent_ += PRICE_FOR_25;
+				refilled_ += 25;
+			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
 			Game::getInstance ()->getGameStateMachine ()->fromFillMenuToGasMainMenu ();
 		}
-
 		healthDisplay_->setHealthPercentage (Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max));
 		break;
 	}
@@ -97,13 +116,20 @@ bool GasFillMenu::receiveEvent (Event & e) {
 
 
 void GasFillMenu::setBackground () {
-	backgroundSprite_ = new Sprite (GAS_BACKGROUND_INFO.idlePath, GAS_BACKGROUND_INFO.width, GAS_BACKGROUND_INFO.height);
-	
+	backgroundSprite_ = new Sprite(GAS_BACKGROUND_INFO.idlePath, GAS_BACKGROUND_INFO.width, GAS_BACKGROUND_INFO.height);
 	background_ = new Container ();
 
 	background_->setWidth (GAS_BACKGROUND_W);
 	background_->setHeight (GAS_BACKGROUND_H);
 	background_->addRenderComponent (backgroundSprite_);
+
+	blackBackgoundSprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, BLACK_BACKGROUND_INFO.width, BLACK_BACKGROUND_INFO.height);
+	blackBackground_ = new Container();
+
+	blackBackground_->setWidth(BLACK_BACKGROUND_INFO.width);
+	blackBackground_->setHeight(BLACK_BACKGROUND_INFO.height);
+	blackBackground_->setPosition(BLACK_BACKGROUND_INFO.pos);
+	blackBackground_->addRenderComponent(blackBackgoundSprite_);
 }
 
 

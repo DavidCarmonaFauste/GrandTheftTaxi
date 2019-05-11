@@ -327,8 +327,8 @@ ASALocalRun/
 .mfractor/
 
 #Debug
-bin/GTTDebug.exe
-bin/GTTDebug.ilk
-bin/GTTDebug.pdb
-bin/GTTDebug.lib
-bin/GTTDebug.bsc
+*bin/GTTDebug.exe
+*bin/GTTDebug.ilk
+*bin/GTTDebug.pdb
+*bin/GTTDebug.lib
+*bin/GTTDebug.bsc

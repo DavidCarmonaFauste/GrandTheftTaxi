@@ -1,4 +1,5 @@
 #include "InputMovement.h"
+#include "Money.h"
 
 InputMovement::InputMovement(KeysScheme k, Vehicle* v)
 {
@@ -19,6 +20,11 @@ InputMovement::~InputMovement()
 
 void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event)
 {
+	if (event.type == SDL_KEYDOWN) {
+		if (event.key.keysym.sym == SDLK_l) {
+			Money::getInstance()->addMoney(50);
+		}
+	}
 	if (event.type == SDL_KEYDOWN) {
 		if (event.key.keysym.sym == k_.forward) {
 			forwardPressed_ = true;

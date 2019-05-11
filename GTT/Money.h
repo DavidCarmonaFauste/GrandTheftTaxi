@@ -14,8 +14,7 @@ public:
 	virtual bool receiveEvent(Event& e) override;
 
 	void setCurrentMoney(int money);
-	void setMinMoney(int money);
-
+	void addMoney(int money);
 	int getCurrentMoney();
 	int getMinMoney();
 
