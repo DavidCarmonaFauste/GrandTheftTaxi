@@ -6,6 +6,7 @@
 
 using namespace std;
 
+const int TILE_SIZE = 32;
 //DO NOT EDIT ---------------------------------------------------------------------------------------------------------------
 const struct KeysScheme {
 	SDL_Keycode forward;
@@ -34,6 +35,8 @@ const struct VehicleInfo {
 	float turnSpeed; //7
 	float acceleration;
 	int reward = 0;
+	int pursuitRange = TILE_SIZE * 20;
+	int AIspeed = 4;
 };
 
 const enum ImpactMode {
@@ -290,7 +293,6 @@ const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/spri
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
 //const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
 
-const int TILE_SIZE = 32;
 
 //Reticule
 const string MAINMENURETICULE = "gun";

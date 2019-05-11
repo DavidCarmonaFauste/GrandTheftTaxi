@@ -34,7 +34,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(health_);
 
 	//Movement
-	speed_ = 3;
+	speed_ = r.AIspeed;
 
 	//Reward
 	reward_ = r.reward;
@@ -46,7 +46,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(phyO_);
 
 	//IA
-	pursuitRange_ = 32 * 20;
+	pursuitRange_ = r.pursuitRange;
 	follow_ = new IAFollow(GetPhyO(), this, nmap, speed_);
 	patrol_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
 	addLogicComponent(patrol_);

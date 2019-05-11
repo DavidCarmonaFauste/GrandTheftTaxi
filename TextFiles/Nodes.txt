@@ -58,3 +58,7 @@ Patrol1 Node3 Node4 Node5 Node6 Node14 Node15 Node3 Node1 Node5 Node10
 Patrol2 Node7 Node8 Node9 Node10 Node11 Node12 Node13
 Patrol3 Node6 Node14 Node4 Node5 Node6
 Patrol4 Node12 Node11 Node10 Node9 Node13
+Patrol5 Node21 Node22 Node23 Node24 Node25 Node26 Node27 Node20
+Patrol6 Node30 Node29 Node28 Node24 Node23 Node22 Node31
+Patrol7 Node55 NOde54 Node53 Node52 Node51 Node50 NOde49 Node48 Node45 Node46 Node47 Node35 Node34 Node55
+Patrol8 Node40 Node39 Node38 Node42 Node41
