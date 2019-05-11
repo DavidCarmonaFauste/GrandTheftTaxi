@@ -22,9 +22,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	// Sprite
 	sprite_ = new Animation();
-	sprite_->loadAnimation(r.idlePath, "idle");
+	sprite_->loadAnimation(r.idlePath, "default");
 	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 3);
-	sprite_->setAnimation("idle");
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
+	sprite_->setAnimation("default");
 	//sprite_->playAnimation("enemyDie", 24.0f, true);
 
 	this->addRenderComponent(sprite_);
@@ -51,7 +52,6 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	patrol_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
 	addLogicComponent(patrol_);
 	followmode_ = false;
-	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
 	turret_->AttachToVehicle(this);
@@ -60,6 +60,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
+	sprite_->playAnimation("hitDamage", 30.0f, false);
 	if (health_->getHealth() <= 0) { 
 		GameManager::getInstance()->addKill();
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
@@ -103,6 +104,16 @@ void Enemy::update(Uint32 deltaTime)
 						addLogicComponent(patrol_);
 						patrol_->Restart();
 					}
+				}
+				//Aim
+				if (taxiOnRange()) {
+					double disX = Vehicle::getInstance()->getCenter().x - getCenter().x;
+					double disY = Vehicle::getInstance()->getCenter().y - getCenter().y;
+					double degrees = acos(-disY / (sqrt(pow(disX, 2) + pow(disY, 2))));
+
+					turret_->setRotation(degrees * 180.0 / M_PI);
+					if (disX < 0)
+						turret_->setRotation(-turret_->getRotation());
 				}
 				
 			Car::update(deltaTime);

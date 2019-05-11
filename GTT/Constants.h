@@ -254,9 +254,9 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10 };
-const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
-"../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-66, 28, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
+const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
 const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 30 };
