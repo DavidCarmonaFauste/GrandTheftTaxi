@@ -85,11 +85,11 @@ void InputMovement::update(GameObject * o, Uint32 deltaTime)
 	bool isGoingForward = abs(currentDir.Angle(vel)) < M_PI / 2;
 
 	// Forward and backward acceleration
-	if (forwardPressed_ && body->GetLinearVelocity().Length() < (targetMaxSpeed)) {
+	if (forwardPressed_ && !backwardPressed_ && body->GetLinearVelocity().Length() < (targetMaxSpeed)) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
 		body->ApplyLinearImpulse(impulse, body->GetWorldCenter(), true);
 	}
-	else if (backwardPressed_ && 
+	else if (backwardPressed_ && !forwardPressed_ && !handBrakePressed_ &&
 			 (body->GetLinearVelocity().Length() < v_->GetMaxBackwardSpeed()
 			  || isGoingForward)) {
 		Vector2D impulse = body->GetMass() * v_->GetAcceleration() * currentDir;
@@ -122,17 +122,19 @@ void InputMovement::steeringWheel() {
 
 	float turnSpeed = 0;
 	if (backwardPressed_) {
-		if (leftTurnPressed_) turnSpeed = v_->GetTurnSpeed();
-		else if (rightTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
+		if (!forwardPressed_ && !handBrakePressed_) {
+			if (leftTurnPressed_) turnSpeed = 1.4 * v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 1.4 * -v_->GetTurnSpeed();
+		}
 	}
 	else {
 		if (handBrakePressed_) {
-			if (leftTurnPressed_) turnSpeed = -1.6* v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = 1.6* v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -2* v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 2* v_->GetTurnSpeed();
 		}
 		else {
-			if (leftTurnPressed_) turnSpeed = -v_->GetTurnSpeed();
-			else if (rightTurnPressed_) turnSpeed = v_->GetTurnSpeed();
+			if (leftTurnPressed_) turnSpeed = -1.4 * v_->GetTurnSpeed();
+			else if (rightTurnPressed_) turnSpeed = 1.4 * v_->GetTurnSpeed();
 		}
 	}
 
