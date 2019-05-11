@@ -270,9 +270,6 @@
     <ClCompile Include="EnemyManager.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyPool.cpp">
-      <Filter>Archivos de origen\Core</Filter>
-    </ClCompile>
     <ClCompile Include="NodeMap.cpp">
       <Filter>Archivos de origen\Core</Filter>
     </ClCompile>
@@ -293,6 +290,15 @@
     </ClCompile>
     <ClCompile Include="DialoguesManager.cpp">
       <Filter>Archivos de origen\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathState.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="FuelUpgrade.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,9 +521,6 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyPool.h">
-      <Filter>Archivos de encabezado\Core</Filter>
-    </ClInclude>
     <ClInclude Include="NodeMap.h">
       <Filter>Archivos de encabezado\Core</Filter>
     </ClInclude>
@@ -541,6 +544,15 @@
     </ClInclude>
     <ClInclude Include="Phrases.h">
       <Filter>Archivos de encabezado\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathState.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelUpgrade.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

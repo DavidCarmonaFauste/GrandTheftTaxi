@@ -45,6 +45,7 @@ public:
 
 protected:
 	stack <double>* magazine_;//cargador representado como una pila
+	double animSpeed_;
 	int maxAmmo_;//capacidad del cargador
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador

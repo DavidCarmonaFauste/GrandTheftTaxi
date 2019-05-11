@@ -32,9 +32,11 @@ private:
 	bool processNodes(const tmx::Object &object, string layerName);
 	bool processSpawns(const tmx::Object &object);
 
-	tmx::Map* tmxMap_;
+	tmx::Map tmxMap_;
 	PhysicObject* phyO_;
 	Sprite *mapSprite_;
+
+	int test;
 };
 
 

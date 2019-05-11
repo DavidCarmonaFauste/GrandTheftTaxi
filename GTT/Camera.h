@@ -18,7 +18,6 @@ public:
 
 	// Setters and getters
 	virtual void setPosition(const Vector2D &pos, bool force = false) override;
-	Vector2D getPosition() const override;
 	void setSize(int w, int h, bool resetZoom = false);
 	virtual void setWidth(double width) override;
 	virtual void setHeight(double height) override;

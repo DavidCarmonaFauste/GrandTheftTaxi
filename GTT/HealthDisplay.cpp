@@ -41,7 +41,6 @@ HealthDisplay::HealthDisplay() {
 HealthDisplay::~HealthDisplay() {
 	delete background;
 	delete bar;
-	delete bar_clip;
 	delete f_;
 	delete fuhealthAmount_;
 }

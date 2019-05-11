@@ -5,8 +5,8 @@
 
 ReloadingDisplay::ReloadingDisplay()
 {
-	setPosition(Vector2D(Game::getInstance()->getCamera(UI_CAMERA)->getWidth()*0.9, Game::getInstance()->getCamera(UI_CAMERA)->getHeight() * 0.1));
 	setWidth(150); setHeight(35);
+	setPosition(Vector2D(Game::getInstance()->getCamera(UI_CAMERA)->getWidth() - getWidth(), Game::getInstance()->getCamera(UI_CAMERA)->getHeight() * 0.2));
 
 	background = new Sprite("./../Assets/sprites/ReloadBarBackground.png");
 	background->setCamera(UI_CAMERA);

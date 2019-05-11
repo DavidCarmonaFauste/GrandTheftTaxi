@@ -11,16 +11,15 @@ MainMenuState::MainMenuState()
 }
 
 
-MainMenuState::~MainMenuState()
-{
-	//delete Title_anm; Title_anm = nullptr;
-	//delete Taxi_anm; Taxi_anm = nullptr;
+MainMenuState::~MainMenuState() {
+	delete mainBackground_; mainBackground_ = nullptr;
+	delete Taxi_; Taxi_ = nullptr;
+	delete Title_; Title_ = nullptr;
 
-	while (!stage_.empty()) {
-		delete stage_.back();
-		stage_.back() = nullptr;
-		stage_.pop_back();
+	for (auto button : buttons_) {
+		delete button.second; button.second = nullptr;
 	}
+	buttons_.clear();
 }
 
 void MainMenuState::start()

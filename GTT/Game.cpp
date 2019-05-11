@@ -6,6 +6,9 @@
 #include "ProyectilePool.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+#include "Money.h"
+#include "UI.h"
+//#include "GameManager.h"
 
 #include <iostream>
 
@@ -20,6 +23,7 @@ Game::Game() {
 
 	// SDL initialization
 	SDL_Init(SDL_INIT_EVERYTHING);
+	IMG_Init(IMG_INIT_PNG);
 
 	// SDL_Mixer initialization
 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
@@ -55,7 +59,30 @@ Game::~Game() {
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
+}
 
+void Game::end() {
+	// Singleton deletion
+	world_->SetContactListener(nullptr);
+	Vehicle::destroyInstance();
+	Reticule::destroyInstance();
+	CustomContactListener::destroyInstance();
+	ProyectilePool::destroyInstance();
+	SoundManager::destroyInstance();
+	Money::destroyInstance();
+	UI::destroyInstance();
+	EnemyManager::destroyInstance();
+	NodeMapsManager::destroyInstance();
+
+	delete gmStMachine_; gmStMachine_ = nullptr;
+	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
+		delete (*it).second; (*it).second = nullptr;
+	}
+
+	SDL_DestroyRenderer(renderer_);
+	SDL_DestroyWindow(window_);
+	Mix_Quit();
+	SDL_Quit();
 }
 
 //los eventos los gestiona la aplicaci�n. Conecta directamente con handleEvents del estado actual. 
@@ -156,8 +183,8 @@ void Game::setState(string state) {
 }
 
 void Game::init() {
-	cameras_[GAME_CAMERA] = new Camera(1600, 900);
-	cameras_[UI_CAMERA] = new Camera(1600, 900);
+	cameras_[GAME_CAMERA] = new Camera(1280, 720);
+	cameras_[UI_CAMERA] = new Camera(1280, 720);
 
 	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
 	SoundManager::getInstance()->initInstance();
@@ -166,6 +193,9 @@ void Game::init() {
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
 	EnemyManager::getInstance()->initInstance();
+	//GameManager::getInstance()->initInstance();
+	
+
 
 	// Create the resources singleton for the first time
 	// and initialize its states
@@ -178,8 +208,8 @@ void Game::init() {
 void Game::run() {
 	init();
 
-	double lastTime = SDL_GetTicks();
-	double deltaTime = lastTime;
+	Uint32 lastTime = SDL_GetTicks();
+	Uint32 deltaTime = lastTime;
 
 	while (!exit_) {
 		handleEvents(deltaTime);
@@ -191,10 +221,7 @@ void Game::run() {
 		lastTime = SDL_GetTicks();
 	}
 
-	SDL_DestroyRenderer(renderer_);
-	SDL_DestroyWindow(window_);
-	Mix_Quit();
-	SDL_Quit();
+	end();
 }
 
 //exitGame devuelve el valor del atributo, determina la ruptura del bucle en Main.cpp

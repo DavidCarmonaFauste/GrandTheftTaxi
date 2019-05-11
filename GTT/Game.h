@@ -37,6 +37,11 @@ public:
 		return instance_.get();
 	}
 
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
 
 	void run();
 	bool exitGame();
@@ -71,6 +76,7 @@ public:
 	void init();
 
 private:
+	void end();
 
 	const int winWidth_ = WIN_WIDTH;
 	const int winHeight_ = WIN_HEIGHT;

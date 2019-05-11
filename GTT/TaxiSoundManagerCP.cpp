@@ -1,10 +1,10 @@
 #include "TaxiSoundManagerCP.h"
 #include "Game.h"
 #include "SoundManager.h"
-#include "Vehicle.h"
+#include "Car.h"
 
 
-TaxiSoundManagerCP::TaxiSoundManagerCP(Vehicle * v)
+TaxiSoundManagerCP::TaxiSoundManagerCP(Car * v)
 {
 	//ptr and registrer observer
 	v_ = v;

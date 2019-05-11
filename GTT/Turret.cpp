@@ -22,6 +22,7 @@ Turret::Turret(WeaponInfo w)
 	reloading_ = false;
 	charged_ = false;
 
+	animSpeed_ = w.animSpeed_;
 	maxAmmo_ = w.maxAmmo;
 	cadence_ = w.cadence;
 	reloadTime_ = w.reloadTime;
@@ -53,14 +54,14 @@ Turret::Turret(WeaponInfo w)
 	sparkleEffect_.setWidth(50);
 	sparkleEffect_.setHeight(50);
 	sparkleEffect_.addRenderComponent(sparkleanim_);
-	sparkleanim_->loadAnimation("../Assets/sprites/Turrets/sparkle_anim.png", "sparkle", 3);
+	sparkleanim_->loadAnimation(w.sparklePath, "sparkle", w.sparkleanimframes);
 	sparkleEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
 	shotanim_ = new Animation();
 	shotEffect_.setWidth(50);
 	shotEffect_.setHeight(50);
 	shotEffect_.addRenderComponent(shotanim_);
-	shotanim_->loadAnimation("../Assets/sprites/Turrets/shot_effect.png", "shot");
+	shotanim_->loadAnimation(w.shoteffectPath, "shot", w.shotanimframes);
 	shotEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
 
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
@@ -115,7 +116,7 @@ void Turret::update(Uint32 deltaTime)
 	sparkleEffect_.update(deltaTime);
 	shotEffect_.update(deltaTime);
 
-	if (Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
+	if (car_==Vehicle::getInstance() && Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
 		Reticule::getInstance()->ChangeReticule(reticulesprite_);
 
 
@@ -183,7 +184,7 @@ void Turret::Shoot()
 				shotanim_->playAnimation("shot", 3.0f, false);
 
 			magazine_->pop();
-			animC_->playAnimation("idle", 3.5f, false);
+			animC_->playAnimation("idle", animSpeed_, false);
 			ResetChargeProgress();
 		}
 	}
@@ -198,16 +199,17 @@ void Turret::AIShoot()
 {
 	int a = SDL_GetTicks() - lastTimeShot_;
 	if (a >= cadence_) {
+		
 		shC_->shoot(normalB, true);
+		animC_->playAnimation("idle", animSpeed_, false);
+		TaxiShootEvent e(this, normalB.idShoot);
+		broadcastEvent(e);
 		lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
+		if (!shotanim_->isAnimationPlaying("shot"))
+			shotanim_->playAnimation("shot", 3.0f, false);
+	
 	}
-	/*if (!shotanim_->isAnimationPlaying("shot"))
-		shotanim_->playAnimation("shot", 3.0f, false);
-	*/
-
-	animC_->playAnimation("idle", 3.5f, false);
-	ResetChargeProgress();
-	}
+}
 
 	void Turret::Reload()
 	{

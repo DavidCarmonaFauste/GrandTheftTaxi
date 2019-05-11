@@ -29,12 +29,12 @@
     <ClCompile Include="ChangeWeaponIC.cpp" />
     <ClCompile Include="ControlType.cpp" />
     <ClCompile Include="CursorLC.cpp" />
+    <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="EnemyAim.cpp" />
-    <ClCompile Include="EnemyPool.cpp" />
     <ClCompile Include="EnemyShoot.cpp" />
     <ClCompile Include="EnterShopIC.cpp" />
     <ClCompile Include="ExplosiveImC.cpp" />
@@ -44,6 +44,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FuelUpgrade.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="GasFillMenu.cpp" />
@@ -109,12 +110,12 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="ControlType.h" />
     <ClInclude Include="CursorLC.h" />
+    <ClInclude Include="DeathState.h" />
     <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="EnemyAim.h" />
-    <ClInclude Include="EnemyPool.h" />
     <ClInclude Include="EnemyShoot.h" />
     <ClInclude Include="EnterShopIC.h" />
     <ClInclude Include="Events.h" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FuelUpgrade.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameStateMachine.h" />
@@ -276,6 +278,9 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -303,7 +308,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
