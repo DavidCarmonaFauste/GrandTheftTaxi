@@ -19,7 +19,6 @@ MoneyDisplay::~MoneyDisplay() {
 void MoneyDisplay::setMoney(int money) {
 	textSprite_->setText(to_string(money) + currencyString_);
 	Vector2D pos;		
-	cout << "Text length: " << textSprite_->getText().length() << endl;
 	pos.x = (textSprite_->getCamera()->getWidth() - (1 * textSprite_->getText().length()) - textSprite_->getFont()->getSize() / 2);
 	pos.y = (textSprite_->getFont()->getSize()*0.5);
 	reposition(pos,1);
@@ -31,7 +30,7 @@ void MoneyDisplay::setSimpleMoney(int money)
 }
 
 
-void MoneyDisplay::reposition(Vector2D v, int increase) {
+void MoneyDisplay::reposition(Vector2D v, double increase) {
 	// Recalculate width and height
 	setWidth((textSprite_->getFont()->getSize() / 2 * textSprite_->getText().length())*increase);
 	setHeight((textSprite_->getFont()->getSize())*increase);

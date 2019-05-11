@@ -340,14 +340,15 @@ const textureInfo MAIN_TITLE_TITLE = { "../Assets/sprites/MainTitle/MainTitle_Ti
 
 // GAS MENU INFO  ---------------------------
 	// positions
-const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
-const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
-const Vector2D BACK_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), (CAMERA_HEIGHT / 3) };
+const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 6) };
+const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 1.8), (CAMERA_HEIGHT / 6) };
+const Vector2D BACK_BUTTON_POSITION = { (CAMERA_WIDHT / 9), (CAMERA_HEIGHT / 1.5) };
 const Vector2D PAY_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), 2 * (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6), (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2), (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_MENU_HEALTH_BAR_POSITION = { (CAMERA_WIDHT / 6), 3 * (CAMERA_HEIGHT / 4) };
+const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6) -100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3) -100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2) -100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_MENU_HEALTH_BAR_POSITION = { (CAMERA_WIDHT / 6) , (CAMERA_HEIGHT / 2) };
+
 	// sizes
 const int VERTICAL_BUTTON_GAS_W = 275;
 const int VERTICAL_BUTTON_GAS_H = 570;
@@ -357,7 +358,12 @@ const int SQUARE_BUTTON_GAS_W = 275;
 const int SQUARE_BUTTON_GAS_H = 200;
 const int GAS_BACKGROUND_W = CAMERA_WIDHT;
 const int GAS_BACKGROUND_H = CAMERA_HEIGHT;
+const int BLACK_BACKGROUND_H = 200;
+const int BLACK_BACKGROUND_W = 850;
+	//pos that uses sizes info
+const Vector2D BLACK_BACKGROUND_POS = { GAS_MENU_HEALTH_BAR_POSITION.x - 100, (CAMERA_HEIGHT / 2) - BLACK_BACKGROUND_H / 3 };
 	// paths
+const textureInfo BLACK_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/simple-black.png", "default", {1, 1},BLACK_BACKGROUND_POS , BLACK_BACKGROUND_W, BLACK_BACKGROUND_H };
 const textureInfo GAS_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/background-gasolinera.png", "default", {1, 1}, {0.0, 0.0}, GAS_BACKGROUND_W, GAS_BACKGROUND_H };
 const textureInfo FILL_GAS_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-fill-gas.png", "default", {1, 1}, FILL_GAS_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
 const textureInfo GUN_SHOP_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-gun-shop.png", "default", {1, 1}, GUN_SHOP_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
@@ -366,6 +372,13 @@ const textureInfo PAY_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-pay.png"
 const textureInfo GAS_5_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-5.png", "default", {1, 1}, GAS_5_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
 const textureInfo GAS_10_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-10.png", "default", {1, 1}, GAS_10_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
 const textureInfo GAS_25_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-25.png", "default", {1, 1}, GAS_25_BUTTON_POSITION, SQUARE_BUTTON_GAS_W, SQUARE_BUTTON_GAS_H };
+
+//Prices
+const int PRICE_FOR_5 = 5;
+const int PRICE_FOR_10 = 7;
+const int PRICE_FOR_25 = 20;
+
+
 // --------------------------------------------
 
 

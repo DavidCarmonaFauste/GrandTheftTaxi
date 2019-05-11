@@ -10,7 +10,7 @@ public:
 
 	void setMoney(int money);
 	void setSimpleMoney(int money);
-	void reposition(Vector2D v, int increase);
+	void reposition(Vector2D v, double increase);
 
 private:
 	Text* textSprite_;
