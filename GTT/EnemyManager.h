@@ -41,6 +41,8 @@ public:
 	void deactivateIA();
 	bool EnemyAtPos(Vector2D pos, GameObject* enemy=nullptr);
 
+	int GetEnemyCount();
+
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
 	virtual void input(Uint32 time, const SDL_Event & event);

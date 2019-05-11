@@ -82,6 +82,11 @@ bool EnemyManager::EnemyAtPos(Vector2D pos, GameObject* enemy)
 	return false;
 }
 
+int EnemyManager::GetEnemyCount()
+{
+	return enemies_.size();
+}
+
 void EnemyManager::update(Uint32 deltaTime)
 {
 	for (auto e : enemies_) {

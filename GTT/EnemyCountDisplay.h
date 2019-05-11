@@ -1,18 +1,16 @@
 #pragma once
 #include "Container.h"
 #include "Text.h"
-#include "Vehicle.h"
 
-class AmmoDisplay :
+class EnemyCountDisplay :
 	public Container
 {
 public:
-	AmmoDisplay();
+	EnemyCountDisplay();
 	virtual void update(Uint32 deltaTime);
-	virtual ~AmmoDisplay();
+	virtual ~EnemyCountDisplay();
 
 private:
-	Text* currentAmmo_;
-	Sprite* background_;
+	Text* enemyCount_;
 };
 
