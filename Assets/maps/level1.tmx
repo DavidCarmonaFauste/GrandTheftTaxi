@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="448">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="225" height="150" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="452">
  <tileset firstgid="1" name="buildings" tilewidth="32" tileheight="32" tilecount="255" columns="15">
   <image source="../tilesets/buildingsTilemap.png" width="480" height="544"/>
  </tileset>
@@ -511,9 +511,12 @@
    <polygon points="0,0 0,64 64,64 64,0"/>
   </object>
   <object id="378" name="Spawn2" x="2528" y="2592" width="64" height="64"/>
-<object id="447" name="Spawn3" x="2208" y="2656" width="64" height="64"/>
-<object id="448" name="Spawn4" x="544" y="1920" width="64" height="64"/>
-
+  <object id="447" name="Spawn3" x="2208" y="2656" width="64" height="64"/>
+  <object id="448" name="Spawn4" x="544" y="1920" width="64" height="64"/>
+  <object id="448" name="Spawn5" x="5248" y="2816" width="64" height="64"/>
+  <object id="449" name="Spawn6" x="6240" y="3392" width="64" height="64"/>
+  <object id="450" name="Spawn7" x="4608" y="1568" width="64" height="64"/>
+  <object id="451" name="Spawn7" x="2656" y="480" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0bec70" id="4" name="Player">
   <object id="233" name="PlayerSpawn" x="4032" y="3712" width="128" height="128"/>

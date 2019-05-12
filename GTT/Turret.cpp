@@ -141,8 +141,8 @@ void Turret::AttachToVehicle(Car * car)
 	car_ = car;
 
 	followC_ = new FollowGameObject(car_);
-
-	addLogicComponent(car_->GetAimComponent());
+	if(car_->GetAimComponent()!=nullptr)
+		addLogicComponent(car_->GetAimComponent());
 	addLogicComponent(followC_);
 
 	if (dynamic_cast<Vehicle*>(car_) != nullptr) {
