@@ -12,6 +12,7 @@ GasFillMenu::GasFillMenu () {
 GasFillMenu::~GasFillMenu () {
 	delete backgroundSprite_;
 	delete blackBackgoundSprite_;
+	delete blackBackgroundToPaySprite_;
 	delete fill_5_Sprite_;
 	delete fill_10_Sprite_;
 	delete fill_25_Sprite_;
@@ -50,6 +51,10 @@ void GasFillMenu::start () {
 	moneyDisplay_ = new MoneyDisplay();
 	moneyDisplay_->reposition(Vector2D(GAS_MENU_HEALTH_BAR_POSITION.x + 650, GAS_MENU_HEALTH_BAR_POSITION.y - 22),1.5);
 
+	//To Pay Display
+	toPayDisplay_ = new MoneyDisplay();
+	toPayDisplay_->reposition(TOPAY_DISPLAY_POS,1);
+
 	//Container to GameObj list
 	stage_.push_back(background_);
 	stage_.push_back(blackBackground_);
@@ -59,6 +64,7 @@ void GasFillMenu::start () {
 	stage_.push_back(buttons_["backButton"]);
 	stage_.push_back (healthDisplay_);
 	stage_.push_back(moneyDisplay_);
+	stage_.push_back(toPayDisplay_);
 	stage_.push_back(Reticule::getInstance());
 }
 
@@ -120,6 +126,7 @@ bool GasFillMenu::receiveEvent (Event & e) {
 
 
 void GasFillMenu::setBackground () {
+	//Global background
 	backgroundSprite_ = new Sprite(GAS_BACKGROUND_INFO.idlePath, GAS_BACKGROUND_INFO.width, GAS_BACKGROUND_INFO.height);
 	background_ = new Container ();
 
@@ -127,6 +134,7 @@ void GasFillMenu::setBackground () {
 	background_->setHeight (GAS_BACKGROUND_H);
 	background_->addRenderComponent (backgroundSprite_);
 
+	//Gas amount background
 	blackBackgoundSprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, BLACK_BACKGROUND_INFO.width, BLACK_BACKGROUND_INFO.height);
 	blackBackground_ = new Container();
 
@@ -134,6 +142,15 @@ void GasFillMenu::setBackground () {
 	blackBackground_->setHeight(BLACK_BACKGROUND_INFO.height);
 	blackBackground_->setPosition(BLACK_BACKGROUND_INFO.pos);
 	blackBackground_->addRenderComponent(blackBackgoundSprite_);
+
+	//To pay display background
+	blackBackgroundToPaySprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, BLACK_BACKGROUND_INFO.width, BLACK_BACKGROUND_INFO.height);
+	blackBackgroundToPay_ = new Container();
+
+	blackBackgroundToPay_->setWidth(TOPAY_BACKGROUND_INFO.width);
+	blackBackgroundToPay_->setHeight(TOPAY_BACKGROUND_INFO.height);
+	blackBackgroundToPay_->setPosition(TOPAY_BACKGROUND_INFO.pos);
+	blackBackgroundToPay_->addRenderComponent(blackBackgroundToPaySprite_);
 }
 
 

@@ -18,14 +18,14 @@ public:
 	virtual bool receiveEvent(Event& e);
 
 private:
-	Container *background_, *blackBackground_;
-	Sprite *backgroundSprite_, *blackBackgoundSprite_;
+	Container *background_, *blackBackground_, *blackBackgroundToPay_;
+	Sprite *backgroundSprite_, *blackBackgoundSprite_, *blackBackgroundToPaySprite_;
 
 	map<string, Button*> buttons_;
 	Sprite *fill_5_Sprite_, *fill_10_Sprite_, *fill_25_Sprite_, *backSprite_, *paySprite_;
 
 	HealthDisplay* healthDisplay_;
-	MoneyDisplay* moneyDisplay_;
+	MoneyDisplay* moneyDisplay_, *toPayDisplay_;
 
 	int moneySpent_ = 0;
 	int refilled_ = 0;
