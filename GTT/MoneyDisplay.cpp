@@ -27,6 +27,8 @@ void MoneyDisplay::setMoney(int money) {
 void MoneyDisplay::setSimpleMoney(int money)
 {
 	textSprite_->setText(to_string(money) + currencyString_);
+	setWidth((textSprite_->getFont()->getSize() / 2 * textSprite_->getText().length()));
+	setPosition(Vector2D(getPosition().x - textSprite_->getText().length(), getPosition().y));
 }
 
 

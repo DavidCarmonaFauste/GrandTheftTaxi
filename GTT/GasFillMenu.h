@@ -12,6 +12,7 @@ public:
 
 	virtual void start() override;
 	virtual void end() override;
+	virtual void updateState();
 
 	virtual void update(Uint32 deltaTime);
 	virtual bool receiveEvent(Event& e);

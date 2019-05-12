@@ -49,7 +49,6 @@ void GasFillMenu::start () {
 	//Money Display
 	moneyDisplay_ = new MoneyDisplay();
 	moneyDisplay_->reposition(Vector2D(GAS_MENU_HEALTH_BAR_POSITION.x + 650, GAS_MENU_HEALTH_BAR_POSITION.y - 22),1.5);
-	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
 
 	//Container to GameObj list
 	stage_.push_back(background_);
@@ -65,6 +64,11 @@ void GasFillMenu::start () {
 
 
 void GasFillMenu::end () {
+}
+
+void GasFillMenu::updateState()
+{
+	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
 }
 
 
