@@ -23,8 +23,8 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	// Sprite
 	sprite_ = new Animation();
 	sprite_->loadAnimation(r.idlePath, "default");
-	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 3);
-	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
+	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 2);
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 3); //las filas y columnas tienen que pasar por const Globales
 	sprite_->setAnimation("default");
 	//sprite_->playAnimation("enemyDie", 24.0f, true);
 
@@ -66,6 +66,8 @@ void Enemy::Damage(double damage)
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 		//Send reward
 		Money::getInstance()->addMoney(reward_);
+		//Heal Player
+		Vehicle::getInstance()->getHealthComponent()->heal(Vehicle::getInstance()->getHealthComponent()->getMaxHealth()*0.2);
 
 		sprite_->playAnimation("enemyDie", 10.0f, false);
 		bodyReadyToDestroy_ = true;
