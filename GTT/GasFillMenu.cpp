@@ -49,15 +49,26 @@ void GasFillMenu::start () {
 
 	//Money Display
 	moneyDisplay_ = new MoneyDisplay();
-	moneyDisplay_->reposition(Vector2D(GAS_MENU_HEALTH_BAR_POSITION.x + 650, GAS_MENU_HEALTH_BAR_POSITION.y - 22),1.5);
+	moneyDisplay_->reposition(Vector2D(BLACK_BACKGROUND_POS.x + BLACK_BACKGROUND_W * 0.85 , BLACK_BACKGROUND_POS.y + BLACK_BACKGROUND_H / 2 - moneyDisplay_->getHeight() / 1.5),1.5);
 
 	//To Pay Display
 	toPayDisplay_ = new MoneyDisplay();
-	toPayDisplay_->reposition(TOPAY_DISPLAY_POS,1);
-
+	toPayDisplay_->reposition(TOPAY_DISPLAY_POS,1.4);
+	toPayDisplay_->setSimpleMoney(0);
+	//To pay string
+	toPayText_ = new Container();
+	toPayString_ = new Text(new Font(FONT_COOLFONT, 50), "To Pay:", SDL_Color({ 255, 255, 255 }));
+	toPayString_->setCamera(UI_CAMERA);
+	toPayText_->setWidth(toPayString_->getFont()->getSize()*toPayString_->getText().length());
+	toPayText_->setHeight(toPayString_->getFont()->getSize());
+	toPayText_->setPosition(Vector2D(TOPAY_DISPLAY_POS.x - toPayString_->getFont()->getSize()*toPayString_->getText().length() / 1.5, TOPAY_DISPLAY_POS.y - toPayText_->getHeight() - 25));
+	toPayText_->addRenderComponent(toPayString_);
+	
 	//Container to GameObj list
 	stage_.push_back(background_);
 	stage_.push_back(blackBackground_);
+	stage_.push_back(blackBackgroundToPay_);
+	stage_.push_back(toPayText_);
 	stage_.push_back(buttons_["fill_5_Button"]);
 	stage_.push_back(buttons_["fill_10_Button"]);
 	stage_.push_back(buttons_["fill_25_Button"]);
@@ -75,6 +86,8 @@ void GasFillMenu::end () {
 void GasFillMenu::updateState()
 {
 	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
+	healthDisplay_->setHealthPercentage(float(Vehicle::getInstance()->getHealthComponent()->getHealth()) / Vehicle::getInstance()->getHealthComponent()->getMaxHealth());
+	moneySpent_ = 0;
 }
 
 
@@ -97,25 +110,27 @@ bool GasFillMenu::receiveEvent (Event & e) {
 		if (MouseClickLeft_.button_ == buttons_["fill_5_Button"]->getIndex()) {
 			if (moneyAvailable - moneySpent_ > PRICE_FOR_5){
 				moneySpent_ += PRICE_FOR_5;
-				refilled_ += 5;
+				refilled_ = 0.05;
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_10_Button"]->getIndex ()) {
 			if (moneyAvailable - moneySpent_ > PRICE_FOR_10) {
 				moneySpent_ += PRICE_FOR_10;
-				refilled_ += 10;
+				refilled_ = 0.10;
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_25_Button"]->getIndex ()) {
 			if (moneyAvailable - moneySpent_ > PRICE_FOR_25) {
 				moneySpent_ += PRICE_FOR_25;
-				refilled_ += 25;
+				refilled_ = 0.25;
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
 			Game::getInstance ()->getGameStateMachine ()->fromFillMenuToGasMainMenu ();
 		}
+		Vehicle::getInstance()->getHealthComponent()->heal(int(max * refilled_));
 		healthDisplay_->setHealthPercentage (Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max));
+		toPayDisplay_->setSimpleMoney(moneySpent_);
 		break;
 	}
 	default:
@@ -125,14 +140,14 @@ bool GasFillMenu::receiveEvent (Event & e) {
 }
 
 
-void GasFillMenu::setBackground () {
+void GasFillMenu::setBackground() {
 	//Global background
 	backgroundSprite_ = new Sprite(GAS_BACKGROUND_INFO.idlePath, GAS_BACKGROUND_INFO.width, GAS_BACKGROUND_INFO.height);
-	background_ = new Container ();
+	background_ = new Container();
 
-	background_->setWidth (GAS_BACKGROUND_W);
-	background_->setHeight (GAS_BACKGROUND_H);
-	background_->addRenderComponent (backgroundSprite_);
+	background_->setWidth(GAS_BACKGROUND_W);
+	background_->setHeight(GAS_BACKGROUND_H);
+	background_->addRenderComponent(backgroundSprite_);
 
 	//Gas amount background
 	blackBackgoundSprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, BLACK_BACKGROUND_INFO.width, BLACK_BACKGROUND_INFO.height);
@@ -143,8 +158,8 @@ void GasFillMenu::setBackground () {
 	blackBackground_->setPosition(BLACK_BACKGROUND_INFO.pos);
 	blackBackground_->addRenderComponent(blackBackgoundSprite_);
 
-	//To pay display background
-	blackBackgroundToPaySprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, BLACK_BACKGROUND_INFO.width, BLACK_BACKGROUND_INFO.height);
+	//To pay background
+	blackBackgroundToPaySprite_ = new Sprite(BLACK_BACKGROUND_INFO.idlePath, TOPAY_BACKGROUND_INFO.width, TOPAY_BACKGROUND_INFO.height);
 	blackBackgroundToPay_ = new Container();
 
 	blackBackgroundToPay_->setWidth(TOPAY_BACKGROUND_INFO.width);

@@ -18,7 +18,7 @@ public:
 	virtual bool receiveEvent(Event& e);
 
 private:
-	Container *background_, *blackBackground_, *blackBackgroundToPay_;
+	Container *background_, *blackBackground_, *blackBackgroundToPay_, *toPayText_;
 	Sprite *backgroundSprite_, *blackBackgoundSprite_, *blackBackgroundToPaySprite_;
 
 	map<string, Button*> buttons_;
@@ -27,8 +27,10 @@ private:
 	HealthDisplay* healthDisplay_;
 	MoneyDisplay* moneyDisplay_, *toPayDisplay_;
 
+	Text* toPayString_;
+
 	int moneySpent_ = 0;
-	int refilled_ = 0;
+	float refilled_ = 0;
 
 	void setBackground ();
 	void setButtons ();
