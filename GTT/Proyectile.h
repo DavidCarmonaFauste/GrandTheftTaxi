@@ -11,6 +11,7 @@ public:
 	Proyectile();
 	virtual void SetBirth(double birthTime);
 	virtual void update(Uint32 time);
+	virtual void render(Uint32 time);
 	virtual void ChangeBulletType(ProyectileInfo p, bool isAnEnemy);
 	virtual void beginCallback(b2Contact *contact) override;
 	virtual void endCallback(b2Contact *contact) override;
@@ -29,6 +30,7 @@ protected:
 	double birthTime_;//tiempo en el que se activo el objeto
 	double speed_;
 	bool bodyReadyToDestroy_;
+	bool zombie_;
 	bool isAnEnemy_;
 
 
