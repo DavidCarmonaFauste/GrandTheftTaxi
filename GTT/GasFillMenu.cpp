@@ -17,12 +17,6 @@ GasFillMenu::~GasFillMenu () {
 	delete fill_25_Sprite_;
 	delete backSprite_;
 	delete paySprite_;
-
-	while (!stage_.empty()) {
-		delete stage_.back();
-		stage_.back() = nullptr;
-		stage_.pop_back();
-	}
 }
 
 

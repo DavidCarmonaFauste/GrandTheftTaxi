@@ -11,6 +11,7 @@
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
 #include "GameManager.h"
+#include "ShopManager.h"
 
 MainState::MainState(){}
 
@@ -27,10 +28,10 @@ void MainState::start() {
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	// Tilemap
-	//tilemap_ = new TileMap(PATH_LEVEL_1);
+	tilemap_ = new TileMap(PATH_LEVEL_1);
 
-	//NodeMapsManager::getInstance()->ReadNodeMapsInfo();
-	//EnemyManager::getInstance()->ReadEnemyInfo();
+	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
+	EnemyManager::getInstance()->ReadEnemyInfo();
 
 	//Reticule
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
@@ -54,10 +55,11 @@ void MainState::start() {
 	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
 
 	//pushBack GameObj to list
-	//stage_.push_back(tilemap_);
+	stage_.push_back(tilemap_);
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(EnemyManager::getInstance());
 	stage_.push_back(GameManager::getInstance());
+	stage_.push_back(ShopManager::getInstance());
 
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());

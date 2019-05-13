@@ -30,7 +30,7 @@ private:
 	map<string, int> Channels_;
 
 	//Background
-	Container* mainBackground_ = nullptr;
+	Container* mainBackground_;
 
 	//Buttons
 	map<string, Button*> buttons_;

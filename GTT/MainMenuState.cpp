@@ -14,7 +14,9 @@ MainMenuState::MainMenuState()
 MainMenuState::~MainMenuState() {
 	delete mainBackground_; mainBackground_ = nullptr;
 	delete Taxi_; Taxi_ = nullptr;
+	delete Taxi_anm; Taxi_anm = nullptr;
 	delete Title_; Title_ = nullptr;
+	delete Title_anm; Title_anm = nullptr;
 
 	for (auto button : buttons_) {
 		delete button.second; button.second = nullptr;
