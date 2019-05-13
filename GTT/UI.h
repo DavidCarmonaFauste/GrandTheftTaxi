@@ -6,6 +6,7 @@
 #include "ReloadingDisplay.h"
 #include "AmmoDisplay.h"
 #include "DialoguesManager.h"
+#include "EnemyCountDisplay.h"
 
 class UI : public Container, public Observer {
 public:
@@ -37,6 +38,7 @@ private:
 	ReloadingDisplay* reloadDisplay_;
 	AmmoDisplay* ammoDisplay_;
 	DialoguesManager* dialogues_;
+	EnemyCountDisplay* enemyCount_;
 
 	Font* font_;
 	SDL_Color fontColor_;

@@ -65,6 +65,8 @@ void MainState::start() {
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
 
+	GameManager::getInstance()->setEnemyCount(EnemyManager::getInstance()->GetEnemyCount());
+
 	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 

@@ -300,7 +300,7 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="ShopManager.cpp">
+    <ClCompile Include="EnemyCountDisplay.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -557,7 +557,7 @@
     <ClInclude Include="GameManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="ShopManager.h">
+    <ClInclude Include="EnemyCountDisplay.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,6 +32,10 @@ UI::UI() {
 	//Reload
 	reloadDisplay_ = new ReloadingDisplay();
 	UIElements_.push_back(reloadDisplay_);
+
+	// Enemy count
+	enemyCount_ = new EnemyCountDisplay();
+	UIElements_.push_back(enemyCount_);
 }
 
 

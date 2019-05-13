@@ -68,8 +68,9 @@ void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
 	sprite_->playAnimation("hitDamage", 30.0f, false);
-	if (health_->getHealth() <= 0) { 
+	if (health_->getHealth() <= 0 && !bodyReadyToDestroy_) { 
 		GameManager::getInstance()->addKill();
+		GameManager::getInstance()->decreaseEnemyCount();
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 		//Send reward
 		Money::getInstance()->addMoney(reward_);

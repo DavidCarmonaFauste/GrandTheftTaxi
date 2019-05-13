@@ -14,5 +14,6 @@ public:
 private:
 	Text* currentAmmo_;
 	Font* font_;
+	Sprite* background_;
 };
 

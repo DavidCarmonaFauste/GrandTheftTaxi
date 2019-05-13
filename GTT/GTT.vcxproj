@@ -32,6 +32,7 @@
     <ClCompile Include="DeathState.cpp" />
     <ClCompile Include="DialoguesManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyCountDisplay.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="CustomContactListener.cpp" />
     <ClCompile Include="EnemyAim.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="DeathState.h" />
     <ClInclude Include="DialoguesManager.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyCountDisplay.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="CustomContactListener.h" />
     <ClInclude Include="EnemyAim.h" />
