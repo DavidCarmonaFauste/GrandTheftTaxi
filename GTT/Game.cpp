@@ -79,6 +79,8 @@ void Game::end() {
 		delete (*it).second; (*it).second = nullptr;
 	}
 
+	delete world_; world_ = nullptr;
+
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
 	Mix_Quit();

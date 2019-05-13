@@ -44,7 +44,7 @@ public:
 
 
 protected:
-	stack <double>* magazine_;//cargador representado como una pila
+	vector<double> magazine_;//cargador representado como una pila
 	double animSpeed_;
 	int maxAmmo_;//capacidad del cargador
 	int cadence_;//cadencia de disparo
@@ -74,6 +74,7 @@ protected:
 	int defaultSpecialDMG_;
 	int crr_ActionShoot_; //sound management in ShootIC
 
+	FollowGameObject *followObject_;
 	Container sparkleEffect_;
 	Animation* sparkleanim_;
 	Container shotEffect_;
