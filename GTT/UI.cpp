@@ -40,6 +40,8 @@ UI::~UI() {
 		delete (*it); (*it) = nullptr;
 	}
 	UIElements_.clear();
+
+	delete font_; font_ = nullptr;
 }
 
 UI * UI::getInstance() {

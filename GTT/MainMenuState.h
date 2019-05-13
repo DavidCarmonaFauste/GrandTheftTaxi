@@ -37,10 +37,10 @@ private:
 
 	soundId Sound_NewGameButton_;
 	//taxi
-	Container* Taxi_ = nullptr;
+	Container* Taxi_;
 	Animation* Taxi_anm; //necesary for set in this Update
 	//title
-	Container* Title_ = nullptr;
+	Container* Title_;
 	Animation* Title_anm; //necesary for set in this Update
 
 	bool DEBUG_;

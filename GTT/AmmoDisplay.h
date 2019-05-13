@@ -13,5 +13,6 @@ public:
 
 private:
 	Text* currentAmmo_;
+	Font* font_;
 };
 

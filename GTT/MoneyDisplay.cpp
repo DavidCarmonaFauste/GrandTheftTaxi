@@ -13,7 +13,7 @@ MoneyDisplay::MoneyDisplay(Font* font, SDL_Color fontColor, int currentMoney) {
 
 
 MoneyDisplay::~MoneyDisplay() {
-
+	delete textSprite_; textSprite_ = nullptr;
 }
 
 void MoneyDisplay::setMoney(int money) {
