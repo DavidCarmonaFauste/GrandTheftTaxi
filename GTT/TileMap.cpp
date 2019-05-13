@@ -27,6 +27,7 @@ TileMap::TileMap(string path) {
 TileMap::~TileMap() {
 	delete mapSprite_; mapSprite_ = nullptr;
 	delete phyO_; phyO_ = nullptr;
+	tmxMap_.~Map();
 }
 
 void TileMap::tmxToScene() {
@@ -58,16 +59,16 @@ bool TileMap::processObject(string layerName, const tmx::Object &object) {
 }
 
 bool TileMap::processCollision(const tmx::Object &object) {
-	b2PolygonShape *shape = new b2PolygonShape();
+	b2PolygonShape shape = b2PolygonShape();
 	b2FixtureDef fixDef;
 	tmx::FloatRect box = object.getAABB();
 	tmx::Vector2f pos = object.getPosition();
 	Vector2D size = Vector2D(box.width / 2 * PHYSICS_SCALING_FACTOR,
 		box.height / 2 * PHYSICS_SCALING_FACTOR);
 
-	shape->SetAsBox(size.x, size.y, Vector2D(pos.x * PHYSICS_SCALING_FACTOR + size.x,
+	shape.SetAsBox(size.x, size.y, Vector2D(pos.x * PHYSICS_SCALING_FACTOR + size.x,
 		pos.y*PHYSICS_SCALING_FACTOR + size.y), 0);
-	fixDef.shape = shape;
+	fixDef.shape = &shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
 
 	phyO_->setCollisions(TILES_GROUP, TILE_CATEGORY);

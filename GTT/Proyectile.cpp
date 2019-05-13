@@ -20,8 +20,9 @@ Proyectile::Proyectile():Trigger(0,0,0,0)
 }
 
 Proyectile::~Proyectile(){
-	delete animC_; animC_ = nullptr;
-	delete impC_; impC_ = nullptr;
+	if (phyO_ != nullptr) delete phyO_, phyO_ = nullptr;
+	if (animC_ != nullptr) delete animC_, animC_ = nullptr;
+	if (impC_ != nullptr) delete impC_, impC_ = nullptr;
 }
 
 void Proyectile::SetBirth(double birthTime)
@@ -61,6 +62,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	}
 	if (animC_ != nullptr) {
 		delRenderComponent(animC_);
+		delete animC_;
 		animC_ = nullptr;
 	}
 	if (impC_ != nullptr) {
@@ -76,7 +78,6 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	lifeTime_ = p.lifeTime;
 	damage_ = p.damage;
 
-	if (animC_ != nullptr) delete animC_, animC_ = nullptr;
 	animC_ = new Animation();
 
 	addRenderComponent(animC_);
@@ -84,7 +85,6 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	animC_->loadAnimation("../Assets/sprites/Turrets/EnemyGun/e_gun_bullet_destruction.png", "collision", 6);
 	animC_->playAnimation("default");
 
-	if (phyO_ != nullptr) delete phyO_, phyO_ = nullptr;
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
 
 	if(!isAnEnemy)
