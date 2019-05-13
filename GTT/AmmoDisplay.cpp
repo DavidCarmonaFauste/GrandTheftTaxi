@@ -40,4 +40,5 @@ void AmmoDisplay::update(Uint32 deltaTime)
 AmmoDisplay::~AmmoDisplay() {
 	delete font_; font_ = nullptr;
 	delete currentAmmo_; currentAmmo_ = nullptr;
+	delete background_; background_ = nullptr;
 }

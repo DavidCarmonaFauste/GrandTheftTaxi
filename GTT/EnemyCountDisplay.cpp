@@ -10,9 +10,9 @@ EnemyCountDisplay::EnemyCountDisplay()
 	setPosition(Vector2D((Game::getInstance()->getCamera(UI_CAMERA)->getWidth() / 2) - 100, 35));
 	SDL_Color fontColor = SDL_Color();
 	fontColor.r = 255; fontColor.g = 255; fontColor.b = 255;
-	Font* f = new Font(FONT_LATO, 80);
+	font_ = new Font(FONT_LATO, 80);
 
-	enemyCount_ = new Text(f, "", fontColor);
+	enemyCount_ = new Text(font_, "", fontColor);
 	enemyCount_->setCamera(UI_CAMERA);
 	addRenderComponent(enemyCount_);
 
@@ -27,6 +27,7 @@ void EnemyCountDisplay::update(Uint32 deltaTime)
 }
 
 
-EnemyCountDisplay::~EnemyCountDisplay()
-{
+EnemyCountDisplay::~EnemyCountDisplay() {
+	delete enemyCount_; enemyCount_ = nullptr;
+	delete font_; font_ = nullptr;
 }

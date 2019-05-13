@@ -12,5 +12,6 @@ public:
 
 private:
 	Text* enemyCount_;
+	Font* font_;
 };
 

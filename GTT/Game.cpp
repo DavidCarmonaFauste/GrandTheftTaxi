@@ -198,6 +198,7 @@ void Game::init() {
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
 	EnemyManager::getInstance()->initInstance();
+	Money::getInstance();
 	//GameManager::getInstance()->initInstance();
 	
 
