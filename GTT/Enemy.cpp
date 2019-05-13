@@ -58,9 +58,6 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 }
 
 Enemy::~Enemy() {
-	delete sprite_; sprite_ = nullptr;
-	delete health_; health_ = nullptr;
-	delete phyO_; phyO_ = nullptr;
 	delete follow_; follow_ = nullptr;
 	delete patrol_; patrol_ = nullptr;
 	delete turret_; turret_ = nullptr;

@@ -5,7 +5,7 @@
 #include "UI.h"
 #include "TileMap.h"
 #include "Money.h"
-#include "FollowGameObject.h"
+#include "FollowMiddlePoint.h"
 #include "Respawner.h"
 #include "Shop.h"
 #include "FuelUpgrade.h"
@@ -27,7 +27,7 @@ private:
 	TileMap *tilemap_;
 
 	//camera logic
-	FollowGameObject* cameraFollow;
+	FollowMiddlePoint* cameraFollow_;
 
 	// Systems
 	Respawner* respawner_;
