@@ -57,6 +57,16 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	turret_->AttachToVehicle(this);
 }
 
+Enemy::~Enemy() {
+	delete sprite_; sprite_ = nullptr;
+	delete health_; health_ = nullptr;
+	delete phyO_; phyO_ = nullptr;
+	delete follow_; follow_ = nullptr;
+	delete patrol_; patrol_ = nullptr;
+	delete turret_; turret_ = nullptr;
+}
+
+
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
@@ -186,10 +196,3 @@ IAMovementBehaviour * Enemy::getIABehaviour()
 		return follow_;
 	return patrol_;
 }
-
-
-Enemy::~Enemy()
-{
-	delete turret_;
-}
-

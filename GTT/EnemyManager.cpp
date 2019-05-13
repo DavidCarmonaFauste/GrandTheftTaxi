@@ -3,13 +3,16 @@
 
 unique_ptr<EnemyManager> EnemyManager::instance_ = nullptr;
 
-EnemyManager::EnemyManager()
-{
+EnemyManager::EnemyManager() {
 }
 
 
-EnemyManager::~EnemyManager()
-{
+EnemyManager::~EnemyManager() {
+	for (std::map<string, Enemy*>::iterator it = enemies_.begin(); it != enemies_.end(); it++) {
+		delete it->second;
+		it->second = nullptr;
+	}
+	enemies_.clear();
 }
 
 void EnemyManager::ReadEnemyInfo()
