@@ -14,6 +14,7 @@ Proyectile::Proyectile():Trigger(0,0,0,0)
 	phyO_ = nullptr;
 
 	bodyReadyToDestroy_ = false;
+	zombie_ = false;
 	setActive(false);
 	colFilter.groupIndex = BULLETS_GROUP;
 }
@@ -30,13 +31,21 @@ void Proyectile::update(Uint32 time)
 	if (SDL_GetTicks() - birthTime_ >= lifeTime_) {
 		DeactivateBullet();
 	}
-	if (bodyReadyToDestroy_) {
+	if (bodyReadyToDestroy_ && !zombie_) {
 		delLogicComponent(phyO_);
 		delete phyO_;
 		phyO_ = nullptr;
-		active_ = false;
+		zombie_ = true;
+		animC_->playAnimation("collision", 10.0f, false);
 	}
+	if (zombie_ && !animC_->isAnimationPlaying("collision"))
+		setActive(false);
 	Container::update(time);
+}
+
+void Proyectile::render(Uint32 time)
+{
+	Trigger::render(time);
 }
 
 void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
@@ -56,6 +65,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	}
 
 	bodyReadyToDestroy_ = false;
+	zombie_ = false;
 	width_ = p.width;
 	height_ = p.height;
 	speed_ = p.speed;
@@ -64,6 +74,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	animC_ = new Animation();
 	addRenderComponent(animC_);
 	animC_->loadAnimation(p.idlePath, "default");
+	animC_->loadAnimation("../Assets/sprites/Turrets/EnemyGun/e_gun_bullet_destruction.png", "collision", 6);
 	animC_->playAnimation("default");
 
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
