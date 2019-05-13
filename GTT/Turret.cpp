@@ -11,8 +11,6 @@
 #include "ShootComponent.h"
 #include "AimComponent.h"
 
-#include "EnemyShoot.h"
-
 Turret::Turret(WeaponInfo w)
 {
 	animC_ = new Animation();
@@ -95,6 +93,7 @@ Turret::~Turret()
 	delete shotanim_; shotanim_ = nullptr;
 	delete sparkleanim_; sparkleanim_ = nullptr;
 	delete followObject_; followObject_ = nullptr;
+	if (enemyShoot_ != nullptr) delete enemyShoot_, enemyShoot_ = nullptr;
 }
 
 int Turret::getCrrActionShoot()
@@ -151,7 +150,8 @@ void Turret::AttachToVehicle(Car * car)
 		addLogicComponent(Vehicle::getInstance()->GetShootIC());
 	}
 	else {
-		car_->addLogicComponent(new EnemyShoot());
+		enemyShoot_ = new EnemyShoot();
+		car_->addLogicComponent(enemyShoot_);
 	}
 }
 

@@ -5,6 +5,7 @@
 #include "ProyectilePool.h"
 #include <stack>
 #include "Observable.h"
+#include "EnemyShoot.h"
 
 class Animation;
 class ShootComponent;
@@ -79,7 +80,7 @@ protected:
 	Animation* sparkleanim_;
 	Container shotEffect_;
 	Animation* shotanim_;
-
+	EnemyShoot *enemyShoot_;
 
 };
 
