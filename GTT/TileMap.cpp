@@ -1,8 +1,8 @@
 #include "TileMap.h"
 #include "Vehicle.h"
-#include "Shop.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+#include "ShopManager.h"
 
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
@@ -87,7 +87,7 @@ bool TileMap::processPlayer(const tmx::Object & object) {
 
 bool TileMap::processGas(const tmx::Object & object) {
 	Shop *shop = new Shop(object.getAABB().width, object.getAABB().height, object.getPosition().x, object.getPosition().y);
-	Game::getInstance()->getGameStateMachine()->get_CurrentState()->addGameObject(shop);
+	ShopManager::getInstance()->addShop(shop);
 
 	return false;
 }

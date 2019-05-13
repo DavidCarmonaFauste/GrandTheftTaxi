@@ -80,6 +80,7 @@
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
     <ClCompile Include="Shop.cpp" />
+    <ClCompile Include="ShopManager.cpp" />
     <ClCompile Include="ShopState.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpreadSC.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
     <ClInclude Include="Shop.h" />
+    <ClInclude Include="ShopManager.h" />
     <ClInclude Include="ShopState.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpreadSC.h" />
