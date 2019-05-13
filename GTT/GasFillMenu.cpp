@@ -10,6 +10,8 @@ GasFillMenu::GasFillMenu () {
 
 
 GasFillMenu::~GasFillMenu () {
+	delete background_; background_ = nullptr;
+	delete blackBackground_; blackBackground_ = nullptr;
 	delete backgroundSprite_;
 	delete blackBackgoundSprite_;
 	delete fill_5_Sprite_;
@@ -17,6 +19,13 @@ GasFillMenu::~GasFillMenu () {
 	delete fill_25_Sprite_;
 	delete backSprite_;
 	delete paySprite_;
+	delete healthDisplay_; healthDisplay_ = nullptr;
+	delete moneyDisplay_; moneyDisplay_ = nullptr;
+
+	for (auto button : buttons_) {
+		delete button.second; button.second = nullptr;
+	}
+	buttons_.clear();
 }
 
 
