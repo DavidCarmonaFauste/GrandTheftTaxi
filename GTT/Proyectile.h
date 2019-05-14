@@ -9,6 +9,8 @@ class ImpactComponent;
 class Proyectile : public Trigger {
 public:
 	Proyectile();
+	virtual ~Proyectile();
+
 	virtual void SetBirth(double birthTime);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
@@ -19,7 +21,6 @@ public:
 	double GetDamage();
 	double GetSpeed();
 	void DeactivateBullet();
-	virtual ~Proyectile() {};
 	bool isAnEnemy();
 
 protected:

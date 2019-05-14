@@ -13,7 +13,7 @@ protected:
 public:
 
 	GameState(){}
-	~GameState(){
+	virtual ~GameState(){
 		stage_.clear();
 	}
 

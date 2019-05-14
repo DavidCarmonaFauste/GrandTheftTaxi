@@ -10,6 +10,8 @@ GasFillMenu::GasFillMenu () {
 
 
 GasFillMenu::~GasFillMenu () {
+	delete background_; background_ = nullptr;
+	delete blackBackground_; blackBackground_ = nullptr;
 	delete backgroundSprite_;
 	delete blackBackgoundSprite_;
 	delete blackBackgroundToPaySprite_;
@@ -18,17 +20,18 @@ GasFillMenu::~GasFillMenu () {
 	delete fill_25_Sprite_;
 	delete backSprite_;
 	delete paySprite_;
+	delete healthDisplay_; healthDisplay_ = nullptr;
+	delete moneyDisplay_; moneyDisplay_ = nullptr;
 
-	while (!stage_.empty()) {
-		delete stage_.back();
-		stage_.back() = nullptr;
-		stage_.pop_back();
+	for (auto button : buttons_) {
+		delete button.second; button.second = nullptr;
 	}
+	buttons_.clear();
 }
 
 
 void GasFillMenu::start () {
-	int i; //recoge el valor del index si el elemento está en el vector
+	int i; //recoge el valor del index si el elemento estï¿½ en el vector
 	if (!isRegistered(this, i))
 		registerObserver(this);
 

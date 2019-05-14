@@ -17,7 +17,7 @@ class Car :
 {
 public:
 	Car();
-	~Car();
+	virtual ~Car();
 
 	//get
 	PhysicObject* GetPhyO();

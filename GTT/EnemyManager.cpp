@@ -3,13 +3,16 @@
 
 unique_ptr<EnemyManager> EnemyManager::instance_ = nullptr;
 
-EnemyManager::EnemyManager()
-{
+EnemyManager::EnemyManager() {
 }
 
 
-EnemyManager::~EnemyManager()
-{
+EnemyManager::~EnemyManager() {
+	for (std::map<string, Enemy*>::iterator it = enemies_.begin(); it != enemies_.end(); it++) {
+		delete it->second;
+		it->second = nullptr;
+	}
+	enemies_.clear();
 }
 
 void EnemyManager::ReadEnemyInfo()
@@ -80,6 +83,11 @@ bool EnemyManager::EnemyAtPos(Vector2D pos, GameObject* enemy)
 				&& e.second->getCenter().y <= pos.y + TILE_SIZE && e.second->getCenter().y >= pos.y - TILE_SIZE)return true;
 	}
 	return false;
+}
+
+int EnemyManager::GetEnemyCount()
+{
+	return enemies_.size();
 }
 
 void EnemyManager::update(Uint32 deltaTime)

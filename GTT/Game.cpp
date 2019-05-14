@@ -8,6 +8,7 @@
 #include "EnemyManager.h"
 #include "Money.h"
 #include "UI.h"
+#include "ShopManager.h"
 //#include "GameManager.h"
 
 #include <iostream>
@@ -73,11 +74,14 @@ void Game::end() {
 	UI::destroyInstance();
 	EnemyManager::destroyInstance();
 	NodeMapsManager::destroyInstance();
+	ShopManager::destroyInstance();
 
 	delete gmStMachine_; gmStMachine_ = nullptr;
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
+
+	delete world_; world_ = nullptr;
 
 	SDL_DestroyRenderer(renderer_);
 	SDL_DestroyWindow(window_);
@@ -189,10 +193,12 @@ void Game::init() {
 	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
 	SoundManager::getInstance()->initInstance();
 	Reticule::getInstance()->initInstance();
+	ShopManager::getInstance()->initInstance();
 	Vehicle::getInstance()->initInstance(); //after, in MainState must do initiAtributtes(VehicleInfo r, KeysScheme k);
 	ProyectilePool::getInstance()->initInstance();
 	NodeMapsManager::getInstance()->initInstance();
 	EnemyManager::getInstance()->initInstance();
+	Money::getInstance();
 	//GameManager::getInstance()->initInstance();
 	
 

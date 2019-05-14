@@ -26,8 +26,9 @@ DialoguesManager::DialoguesManager()
 
 
 
-DialoguesManager::~DialoguesManager()
-{
+DialoguesManager::~DialoguesManager() {
+	delete txt_; txt_ = nullptr;
+	delete font_; font_ = nullptr;
 }
 
 void DialoguesManager::evento(vector <pair<string, string>> phrases)

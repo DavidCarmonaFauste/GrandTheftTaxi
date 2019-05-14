@@ -16,7 +16,6 @@ Trigger::Trigger(int w, int h, int x, int y) {
 
 
 Trigger::~Trigger() {
-	Container::~Container();
 	delete phyO_; phyO_ = nullptr;
 }
 

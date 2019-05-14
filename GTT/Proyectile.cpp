@@ -19,6 +19,11 @@ Proyectile::Proyectile():Trigger(0,0,0,0)
 	colFilter.groupIndex = BULLETS_GROUP;
 }
 
+Proyectile::~Proyectile(){
+	if (phyO_ != nullptr) delete phyO_, phyO_ = nullptr;
+	if (animC_ != nullptr) delete animC_, animC_ = nullptr;
+	if (impC_ != nullptr) delete impC_, impC_ = nullptr;
+}
 
 void Proyectile::SetBirth(double birthTime)
 {
@@ -57,6 +62,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	}
 	if (animC_ != nullptr) {
 		delRenderComponent(animC_);
+		delete animC_;
 		animC_ = nullptr;
 	}
 	if (impC_ != nullptr) {
@@ -71,13 +77,16 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 	speed_ = p.speed;
 	lifeTime_ = p.lifeTime;
 	damage_ = p.damage;
+
 	animC_ = new Animation();
+
 	addRenderComponent(animC_);
 	animC_->loadAnimation(p.idlePath, "default");
 	animC_->loadAnimation("../Assets/sprites/Turrets/EnemyGun/e_gun_bullet_destruction.png", "collision", 6);
 	animC_->playAnimation("default");
 
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);
+
 	if(!isAnEnemy)
 	phyO_->setCollisions(BULLETS_GROUP, BULLET_CATEGORY, ~(~0xFFFF | TAXI_CATEGORY) );
 	else

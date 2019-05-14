@@ -9,10 +9,10 @@ Car::Car()
 
 Car::~Car()
 {
-	delete health_;
-	delete aimC_;
-	delete phyO_;
-	delete sprite_;
+	delete health_; health_ = nullptr;
+	delete aimC_; aimC_ = nullptr;
+	delete phyO_; phyO_ = nullptr;
+	delete sprite_; sprite_ = nullptr;
 }
 
 Health * Car::getHealthComponent() {

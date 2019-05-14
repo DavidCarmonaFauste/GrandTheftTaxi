@@ -1,8 +1,8 @@
 #include "TileMap.h"
 #include "Vehicle.h"
-#include "Shop.h"
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
+#include "ShopManager.h"
 
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
@@ -58,16 +58,16 @@ bool TileMap::processObject(string layerName, const tmx::Object &object) {
 }
 
 bool TileMap::processCollision(const tmx::Object &object) {
-	b2PolygonShape *shape = new b2PolygonShape();
+	b2PolygonShape shape = b2PolygonShape();
 	b2FixtureDef fixDef;
 	tmx::FloatRect box = object.getAABB();
 	tmx::Vector2f pos = object.getPosition();
 	Vector2D size = Vector2D(box.width / 2 * PHYSICS_SCALING_FACTOR,
 		box.height / 2 * PHYSICS_SCALING_FACTOR);
 
-	shape->SetAsBox(size.x, size.y, Vector2D(pos.x * PHYSICS_SCALING_FACTOR + size.x,
+	shape.SetAsBox(size.x, size.y, Vector2D(pos.x * PHYSICS_SCALING_FACTOR + size.x,
 		pos.y*PHYSICS_SCALING_FACTOR + size.y), 0);
-	fixDef.shape = shape;
+	fixDef.shape = &shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
 
 	phyO_->setCollisions(TILES_GROUP, TILE_CATEGORY);
@@ -87,7 +87,7 @@ bool TileMap::processPlayer(const tmx::Object & object) {
 
 bool TileMap::processGas(const tmx::Object & object) {
 	Shop *shop = new Shop(object.getAABB().width, object.getAABB().height, object.getPosition().x, object.getPosition().y);
-	Game::getInstance()->getGameStateMachine()->get_CurrentState()->addGameObject(shop);
+	ShopManager::getInstance()->addShop(shop);
 
 	return false;
 }

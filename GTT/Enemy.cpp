@@ -57,12 +57,20 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	turret_->AttachToVehicle(this);
 }
 
+Enemy::~Enemy() {
+	delete follow_; follow_ = nullptr;
+	delete patrol_; patrol_ = nullptr;
+	delete turret_; turret_ = nullptr;
+}
+
+
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
 	sprite_->playAnimation("hitDamage", 30.0f, false);
-	if (health_->getHealth() <= 0) { 
+	if (health_->getHealth() <= 0 && !bodyReadyToDestroy_) { 
 		GameManager::getInstance()->addKill();
+		GameManager::getInstance()->decreaseEnemyCount();
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
 		//Send reward
 		Money::getInstance()->addMoney(reward_);
@@ -186,10 +194,3 @@ IAMovementBehaviour * Enemy::getIABehaviour()
 		return follow_;
 	return patrol_;
 }
-
-
-Enemy::~Enemy()
-{
-	delete turret_;
-}
-
