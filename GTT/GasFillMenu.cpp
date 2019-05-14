@@ -73,6 +73,7 @@ void GasFillMenu::start () {
 	stage_.push_back(buttons_["fill_10_Button"]);
 	stage_.push_back(buttons_["fill_25_Button"]);
 	stage_.push_back(buttons_["backButton"]);
+	stage_.push_back(buttons_["payButton"]);
 	stage_.push_back (healthDisplay_);
 	stage_.push_back(moneyDisplay_);
 	stage_.push_back(toPayDisplay_);
@@ -88,6 +89,7 @@ void GasFillMenu::updateState()
 	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
 	healthDisplay_->setHealthPercentage(float(Vehicle::getInstance()->getHealthComponent()->getHealth()) / Vehicle::getInstance()->getHealthComponent()->getMaxHealth());
 	moneySpent_ = 0;
+	refilled_ = 0;
 }
 
 
@@ -103,34 +105,48 @@ bool GasFillMenu::receiveEvent (Event & e) {
 	switch (e.type_)
 	{
 	case CLICK_BUTTON: {
+		cout << "Health: " << Vehicle::getInstance()->getHealthComponent()->getHealth() << endl;
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 		int max = Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ();
 		int moneyAvailable = Money::getInstance()->getCurrentMoney();
 
 		if (MouseClickLeft_.button_ == buttons_["fill_5_Button"]->getIndex()) {
-			if (moneyAvailable - moneySpent_ > PRICE_FOR_5){
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_5 && Vehicle::getInstance()->getHealthComponent()->getHealth() + (max * 0.05) <= max){
 				moneySpent_ += PRICE_FOR_5;
-				refilled_ = 0.05;
+				refilled_ += 0.05;
+				Vehicle::getInstance()->getHealthComponent()->heal(int(max * 0.05));
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_10_Button"]->getIndex ()) {
-			if (moneyAvailable - moneySpent_ > PRICE_FOR_10) {
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_10 && Vehicle::getInstance()->getHealthComponent()->getHealth() + (max * 0.10) <= max) {
 				moneySpent_ += PRICE_FOR_10;
-				refilled_ = 0.10;
+				refilled_ += 0.10;
+				Vehicle::getInstance()->getHealthComponent()->heal(int(max * 0.10));
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["fill_25_Button"]->getIndex ()) {
-			if (moneyAvailable - moneySpent_ > PRICE_FOR_25) {
+			if (moneyAvailable - moneySpent_ > PRICE_FOR_25 && Vehicle::getInstance()->getHealthComponent()->getHealth() + (max * 0.25) <= max) {
 				moneySpent_ += PRICE_FOR_25;
-				refilled_ = 0.25;
+				refilled_ += 0.25;
+				Vehicle::getInstance()->getHealthComponent()->heal(int(max * 0.25));
 			}
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
+			if (refilled_ != 0)
+				Vehicle::getInstance()->getHealthComponent()->heal(-int(max * refilled_));
+			updateState();
 			Game::getInstance ()->getGameStateMachine ()->fromFillMenuToGasMainMenu ();
 		}
-		Vehicle::getInstance()->getHealthComponent()->heal(int(max * refilled_));
-		healthDisplay_->setHealthPercentage (Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max));
+
+		else if (MouseClickLeft_.button_ == buttons_["payButton"]->getIndex())
+		{
+			Money::getInstance()->addMoney(-moneySpent_);
+			updateState();
+		}
+
+		healthDisplay_->setHealthPercentage ((Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max)));
 		toPayDisplay_->setSimpleMoney(moneySpent_);
+		cout << "Health after: " << Vehicle::getInstance()->getHealthComponent()->getHealth() << endl;
 		break;
 	}
 	default:
@@ -179,6 +195,9 @@ void GasFillMenu::setButtons () {
 	buttons_["fill_25_Button"]->getMouseClickIC()->registerObserver(this);
 	buttons_["backButton"] = new Button();
 	buttons_["backButton"]->getMouseClickIC()->registerObserver(this);
+	buttons_["payButton"] = new Button();
+	buttons_["payButton"]->getMouseClickIC()->registerObserver(this);
+
 
 	// set
 	buttons_["fill_5_Button"]->setPosition(GAS_5_BUTTON_POSITION);
@@ -200,6 +219,11 @@ void GasFillMenu::setButtons () {
 	buttons_["backButton"]->setWidth(BACK_BUTTON_INFO.width);
 	buttons_["backButton"]->setHeight(BACK_BUTTON_INFO.height);
 	buttons_["backButton"]->setIndex(4);
+
+	buttons_["payButton"]->setPosition(PAY_BUTTON_POSITION);
+	buttons_["payButton"]->setWidth(PAY_BUTTON_INFO.width);
+	buttons_["payButton"]->setHeight(PAY_BUTTON_INFO.height);
+	buttons_["payButton"]->setIndex(5);
 }
 
 
@@ -208,9 +232,11 @@ void GasFillMenu::setButtonComponents () {
 	fill_10_Sprite_ = new Sprite (GAS_10_BUTTON_INFO.idlePath, GAS_10_BUTTON_INFO.width, GAS_10_BUTTON_INFO.height, GAS_10_BUTTON_POSITION.x, GAS_10_BUTTON_POSITION.y);
 	fill_25_Sprite_ = new Sprite (GAS_25_BUTTON_INFO.idlePath, GAS_25_BUTTON_INFO.width, GAS_25_BUTTON_INFO.height, GAS_25_BUTTON_POSITION.x, GAS_25_BUTTON_POSITION.y);
 	backSprite_ = new Sprite (BACK_BUTTON_INFO.idlePath, BACK_BUTTON_INFO.width, BACK_BUTTON_INFO.height, BACK_BUTTON_POSITION.x, BACK_BUTTON_POSITION.y);
+	paySprite_ = new Sprite(PAY_BUTTON_INFO.idlePath, PAY_BUTTON_INFO.width, PAY_BUTTON_INFO.height, PAY_BUTTON_POSITION.x, PAY_BUTTON_POSITION.y);
 
 	buttons_["fill_5_Button"]->addRenderComponent (fill_5_Sprite_);
 	buttons_["fill_10_Button"]->addRenderComponent (fill_10_Sprite_);
 	buttons_["fill_25_Button"]->addRenderComponent (fill_25_Sprite_);
 	buttons_["backButton"]->addRenderComponent (backSprite_);
+	buttons_["payButton"]->addRenderComponent(paySprite_);
 }
