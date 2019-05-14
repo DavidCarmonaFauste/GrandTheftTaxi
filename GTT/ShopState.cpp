@@ -10,9 +10,6 @@ ShopState::ShopState() {
 
 	//refillButton_ = new Button(refillCallback);
 	//stage_.push_back(refillButton_);
-
-	Money::getInstance()->setCurrentMoney(100);
-
 	stage_.push_back(Reticule::getInstance());
 }
 

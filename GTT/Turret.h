@@ -5,6 +5,7 @@
 #include "ProyectilePool.h"
 #include <stack>
 #include "Observable.h"
+#include "EnemyShoot.h"
 
 class Animation;
 class ShootComponent;
@@ -44,7 +45,8 @@ public:
 
 
 protected:
-	stack <double>* magazine_;//cargador representado como una pila
+	vector<double> magazine_;//cargador representado como una pila
+	double animSpeed_;
 	int maxAmmo_;//capacidad del cargador
 	int cadence_;//cadencia de disparo
 	int reloadTime_;//tiempo de recarga al vaciar el cargador
@@ -73,11 +75,12 @@ protected:
 	int defaultSpecialDMG_;
 	int crr_ActionShoot_; //sound management in ShootIC
 
+	FollowGameObject *followObject_;
 	Container sparkleEffect_;
 	Animation* sparkleanim_;
 	Container shotEffect_;
 	Animation* shotanim_;
-
+	EnemyShoot *enemyShoot_;
 
 };
 

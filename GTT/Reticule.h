@@ -39,8 +39,7 @@ public:
 
 	virtual void ChangeReticule(string ret);
 	virtual string GetCurrentSprite();
-	virtual void update(Uint32 time);
-
+	virtual void render(Uint32 deltaTime);
 
 private:	
 	map<string, string> animations_;

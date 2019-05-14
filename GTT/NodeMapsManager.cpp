@@ -65,17 +65,19 @@ void NodeMapsManager::ReadNodeMapsInfo()
 	}
 }
 
-NodeMap * NodeMapsManager::getNodeMap(string key)
-{
+NodeMap * NodeMapsManager::getNodeMap(string key) {
 	return nodemaps_[key];
 }
 
 
-NodeMapsManager::NodeMapsManager()
-{
+NodeMapsManager::NodeMapsManager() {
 }
 
 
-NodeMapsManager::~NodeMapsManager()
-{
+NodeMapsManager::~NodeMapsManager() {
+	for (std::map<string, NodeMap*>::iterator it = nodemaps_.begin(); it != nodemaps_.end(); it++) {
+		delete it->second;
+		it->second = nullptr;
+	}
+	nodemaps_.clear();
 }

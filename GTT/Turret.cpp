@@ -11,8 +11,6 @@
 #include "ShootComponent.h"
 #include "AimComponent.h"
 
-#include "EnemyShoot.h"
-
 Turret::Turret(WeaponInfo w)
 {
 	animC_ = new Animation();
@@ -22,6 +20,7 @@ Turret::Turret(WeaponInfo w)
 	reloading_ = false;
 	charged_ = false;
 
+	animSpeed_ = w.animSpeed_;
 	maxAmmo_ = w.maxAmmo;
 	cadence_ = w.cadence;
 	reloadTime_ = w.reloadTime;
@@ -45,23 +44,24 @@ Turret::Turret(WeaponInfo w)
 	width_ = w.width;
 	automatic_ = w.automatic;
 	chargedShotDelay_ = w.chargedShotDelay;
-	magazine_ = new stack<double>[maxAmmo_];
+
 	for (int i = 0; i < maxAmmo_; i++) {
-		magazine_->push(1.0);
+		magazine_.push_back(1.0);
 	}
 	sparkleanim_ = new Animation();
 	sparkleEffect_.setWidth(50);
 	sparkleEffect_.setHeight(50);
 	sparkleEffect_.addRenderComponent(sparkleanim_);
-	sparkleanim_->loadAnimation("../Assets/sprites/Turrets/sparkle_anim.png", "sparkle", 3);
-	sparkleEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
+	sparkleanim_->loadAnimation(w.sparklePath, "sparkle", w.sparkleanimframes);
+	followObject_ = new FollowGameObject(this, MIDDLETOP);
+	sparkleEffect_.addLogicComponent(followObject_);
 
 	shotanim_ = new Animation();
 	shotEffect_.setWidth(50);
 	shotEffect_.setHeight(50);
 	shotEffect_.addRenderComponent(shotanim_);
-	shotanim_->loadAnimation("../Assets/sprites/Turrets/shot_effect.png", "shot");
-	shotEffect_.addLogicComponent(new FollowGameObject(this, MIDDLETOP));
+	shotanim_->loadAnimation(w.shoteffectPath, "shot", w.shotanimframes);
+	shotEffect_.addLogicComponent(followObject_);
 
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);
 	animC_->loadAnimation(path_, "default");
@@ -90,11 +90,10 @@ Turret::~Turret()
 	delete shC_; shC_ = nullptr;
 	delete SPshC_; SPshC_ = nullptr;
 	delete animC_; animC_ = nullptr;
-
-	while (!magazine_->empty()) {
-		magazine_->pop();
-	}
-	magazine_ = nullptr;
+	delete shotanim_; shotanim_ = nullptr;
+	delete sparkleanim_; sparkleanim_ = nullptr;
+	delete followObject_; followObject_ = nullptr;
+	if (enemyShoot_ != nullptr) delete enemyShoot_, enemyShoot_ = nullptr;
 }
 
 int Turret::getCrrActionShoot()
@@ -106,7 +105,7 @@ int Turret::getCrrActionShoot()
 void Turret::update(Uint32 deltaTime)
 {
 	if (SDL_GetTicks() - chargeprogress_ >= chargeTime_) {
-		if (!charged_ && !magazine_->empty()) {
+		if (!charged_ && !magazine_.empty()) {
 			sparkleanim_->playAnimation("sparkle", 6.0f, false);
 			charged_ = true;
 		}
@@ -115,7 +114,7 @@ void Turret::update(Uint32 deltaTime)
 	sparkleEffect_.update(deltaTime);
 	shotEffect_.update(deltaTime);
 
-	if (Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
+	if (car_==Vehicle::getInstance() && Reticule::getInstance()->GetCurrentSprite() != reticulesprite_)
 		Reticule::getInstance()->ChangeReticule(reticulesprite_);
 
 
@@ -140,8 +139,8 @@ void Turret::AttachToVehicle(Car * car)
 	car_ = car;
 
 	followC_ = new FollowGameObject(car_);
-
-	addLogicComponent(car_->GetAimComponent());
+	if(car_->GetAimComponent()!=nullptr)
+		addLogicComponent(car_->GetAimComponent());
 	addLogicComponent(followC_);
 
 	if (dynamic_cast<Vehicle*>(car_) != nullptr) {
@@ -151,7 +150,8 @@ void Turret::AttachToVehicle(Car * car)
 		addLogicComponent(Vehicle::getInstance()->GetShootIC());
 	}
 	else {
-		car_->addLogicComponent(new EnemyShoot());
+		enemyShoot_ = new EnemyShoot();
+		car_->addLogicComponent(enemyShoot_);
 	}
 }
 
@@ -159,19 +159,19 @@ void Turret::AttachToVehicle(Car * car)
 
 void Turret::Shoot()
 {
-	if (!magazine_->empty() && !reloading_) {
+	if (!magazine_.empty() && !reloading_) {
 		int a = SDL_GetTicks() - lastTimeShot_;
 		if (a >= cadence_) {
 			if (charged_) {
 				crr_ActionShoot_ = specialB.idShoot; //asign int for capture in ShootIC and play sound
-				specialB.damage = magazine_->top()*defaultSpecialDMG_;
+				specialB.damage = magazine_.back()*defaultSpecialDMG_;
 				SPshC_->shoot(specialB, false);
 				lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 				charged_ = false;
 			}
 			else {
 				crr_ActionShoot_ = normalB.idShoot; //asign int for capture in ShootIC and play sound
-				normalB.damage = magazine_->top()*defaultNormalDMG_;
+				normalB.damage = magazine_.back()*defaultNormalDMG_;
 				shC_->shoot(normalB, false);
 				lastTimeShot_ = SDL_GetTicks();
 			}
@@ -182,8 +182,8 @@ void Turret::Shoot()
 			if (!shotanim_->isAnimationPlaying("shot"))
 				shotanim_->playAnimation("shot", 3.0f, false);
 
-			magazine_->pop();
-			animC_->playAnimation("idle", 3.5f, false);
+			magazine_.pop_back();
+			animC_->playAnimation("idle", animSpeed_, false);
 			ResetChargeProgress();
 		}
 	}
@@ -200,7 +200,9 @@ void Turret::AIShoot()
 	if (a >= cadence_) {
 		
 		shC_->shoot(normalB, true);
-		animC_->playAnimation("idle", 3.5f, false);
+		animC_->playAnimation("idle", animSpeed_, false);
+		TaxiShootEvent e(this, normalB.idShoot);
+		broadcastEvent(e);
 		lastTimeShot_ = SDL_GetTicks() + chargedShotDelay_;
 		if (!shotanim_->isAnimationPlaying("shot"))
 			shotanim_->playAnimation("shot", 3.0f, false);
@@ -211,8 +213,8 @@ void Turret::AIShoot()
 	void Turret::Reload()
 	{
 		if (SDL_GetTicks() - reloadpressedTime_ >= reloadTime_) {
-			while (magazine_->size() != maxAmmo_) {
-				magazine_->push(1.0);
+			while (magazine_.size() != maxAmmo_) {
+				magazine_.push_back(1.0);
 			}
 			reloading_ = false;
 		}
@@ -220,8 +222,8 @@ void Turret::AIShoot()
 
 	void Turret::PerfectReload()
 	{
-		while (magazine_->size() != maxAmmo_) {
-			magazine_->push(2.0);
+		while (magazine_.size() != maxAmmo_) {
+			magazine_.push_back(2.0);
 		}
 		reloading_ = false;
 	}
@@ -235,7 +237,7 @@ void Turret::AIShoot()
 
 	void Turret::InitiateReload()
 	{
-		if (!reloading_ && magazine_->size() != maxAmmo_) {
+		if (!reloading_ && magazine_.size() != maxAmmo_) {
 			reloading_ = true;
 			reloadpressedTime_ = SDL_GetTicks();
 		}
@@ -256,7 +258,7 @@ void Turret::AIShoot()
 
 	int Turret::GetAmmo()
 	{
-		return magazine_->size();
+		return magazine_.size();
 	}
 
 	int Turret::GetMaxAmmo()

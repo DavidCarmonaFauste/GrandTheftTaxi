@@ -35,6 +35,6 @@ private:
 	int speed_;
 	int pursuitRange_;
 	Turret* turret_;
-
+	int reward_;
 };
 

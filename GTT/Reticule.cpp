@@ -43,7 +43,8 @@ string Reticule::GetCurrentSprite()
 	return animC_->getCurrentAnimation();
 }
 
-void Reticule::update(Uint32 time)
+void Reticule::render(Uint32 deltaTime)
 {
-	Container::update(time);
+	Container::render(deltaTime);
 }
+

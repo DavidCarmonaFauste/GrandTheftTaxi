@@ -27,14 +27,18 @@ public:
 	virtual void update(Uint32 deltaTime);
 
 	void addHit() { hits++; };
-	void addKill() { kills++; if (kills == 4) calculatePuntuation(); };
+	void addKill() { kills++; if (kills == 4) calculatePuntuation();};
 	void calculatePuntuation();
+	void setEnemyCount(int enemies) { enemyCount = enemies; };
+	void decreaseEnemyCount() { enemyCount--; };
+	int getEnemyCount() { return enemyCount; };
 
 private:
 	int hits = 0;
 	int kills = 0;
 	int initTime = 0;
 	int time = 0;
+	int enemyCount = 0;
 
 
 };

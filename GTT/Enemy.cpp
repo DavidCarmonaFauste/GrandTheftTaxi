@@ -5,6 +5,8 @@
 #include "EnemyAim.h"
 #include "SoundManager.h"
 #include "GameManager.h"
+#include "TaxiSoundManagerCP.h"
+#include "Money.h"
 
 
 Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, WeaponInfo weapon){
@@ -20,9 +22,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 
 	// Sprite
 	sprite_ = new Animation();
-	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 3);
-	sprite_->setAnimation("idle");
+	sprite_->loadAnimation(r.idlePath, "default");
+	sprite_->loadAnimation(r.diePath, "enemyDie", 4, 2);
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 3); //las filas y columnas tienen que pasar por const Globales
+	sprite_->setAnimation("default");
 	//sprite_->playAnimation("enemyDie", 24.0f, true);
 
 	this->addRenderComponent(sprite_);
@@ -32,7 +35,10 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(health_);
 
 	//Movement
-	speed_ = 3;
+	speed_ = r.AIspeed;
+
+	//Reward
+	reward_ = r.reward;
 
 	// Physics
 	phyO_ = new PhysicObject(b2_kinematicBody, width_, height_, position_.x, position_.y);
@@ -41,23 +47,36 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	addLogicComponent(phyO_);
 
 	//IA
-	pursuitRange_ = 32 * 20;
+	pursuitRange_ = r.pursuitRange;
 	follow_ = new IAFollow(GetPhyO(), this, nmap, speed_);
 	patrol_ = new IApatrol(GetPhyO(), this, nmap, speed_, route);
 	addLogicComponent(patrol_);
 	followmode_ = false;
-	aimC_ = new EnemyAim();
 
 	turret_ = new Turret(weapon);
 	turret_->AttachToVehicle(this);
 }
 
+Enemy::~Enemy() {
+	delete follow_; follow_ = nullptr;
+	delete patrol_; patrol_ = nullptr;
+	delete turret_; turret_ = nullptr;
+}
+
+
 void Enemy::Damage(double damage)
 {
 	health_->damage(damage);
-	if (health_->getHealth() <= 0) { 
+	sprite_->playAnimation("hitDamage", 30.0f, false);
+	if (health_->getHealth() <= 0 && !bodyReadyToDestroy_) { 
 		GameManager::getInstance()->addKill();
+		GameManager::getInstance()->decreaseEnemyCount();
 		SoundManager::getInstance()->playSound_Ch(0, ENEMY_DIE, 0); //channel 0 for not interrupt other sounds
+		//Send reward
+		Money::getInstance()->addMoney(reward_);
+		//Heal Player
+		Vehicle::getInstance()->getHealthComponent()->heal(Vehicle::getInstance()->getHealthComponent()->getMaxHealth()*0.2);
+
 		sprite_->playAnimation("enemyDie", 10.0f, false);
 		bodyReadyToDestroy_ = true;
 		turret_->setActive(false);
@@ -95,6 +114,16 @@ void Enemy::update(Uint32 deltaTime)
 						addLogicComponent(patrol_);
 						patrol_->Restart();
 					}
+				}
+				//Aim
+				if (taxiOnRange()) {
+					double disX = Vehicle::getInstance()->getCenter().x - getCenter().x;
+					double disY = Vehicle::getInstance()->getCenter().y - getCenter().y;
+					double degrees = acos(-disY / (sqrt(pow(disX, 2) + pow(disY, 2))));
+
+					turret_->setRotation(degrees * 180.0 / M_PI);
+					if (disX < 0)
+						turret_->setRotation(-turret_->getRotation());
 				}
 				
 			Car::update(deltaTime);
@@ -165,10 +194,3 @@ IAMovementBehaviour * Enemy::getIABehaviour()
 		return follow_;
 	return patrol_;
 }
-
-
-Enemy::~Enemy()
-{
-	delete turret_;
-}
-

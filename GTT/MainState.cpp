@@ -3,7 +3,6 @@
 #include "Turret.h"
 #include "ReloadingDisplay.h"
 #include "AmmoDisplay.h"
-#include "FollowMiddlePoint.h"
 
 //singleton
 #include "Vehicle.h"
@@ -12,11 +11,13 @@
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
 #include "GameManager.h"
+#include "ShopManager.h"
 
 MainState::MainState(){}
 
 MainState::~MainState() {
 	delete tilemap_; tilemap_ = nullptr;
+	delete cameraFollow_; cameraFollow_ = nullptr;
 }
 
 //start is called when GameStateMachine change state
@@ -25,9 +26,6 @@ void MainState::start() {
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
-
-	//Camera logic
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
@@ -39,14 +37,15 @@ void MainState::start() {
 	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
 
 	//Camera logic
-	cameraFollow = new FollowGameObject(Vehicle::getInstance());
-	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25));
-	
-	// Camera positioning
+	cameraFollow_ = new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25);
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow_);
+
+	// Camera positionin
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
 	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth() / 2,
 		Game::getInstance()->getCamera(GAME_CAMERA)->getHeight() / 2);
 	Game::getInstance()->getCamera(GAME_CAMERA)->setPosition(cameraPos);
+
 
 	// Systems
 	//...
@@ -60,11 +59,14 @@ void MainState::start() {
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(EnemyManager::getInstance());
 	stage_.push_back(GameManager::getInstance());
+	stage_.push_back(ShopManager::getInstance());
 
 	stage_.push_back(UI::getInstance());
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
-	
+
+	GameManager::getInstance()->setEnemyCount(EnemyManager::getInstance()->GetEnemyCount());
+
 	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 

@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "Observer.h"
 #include "HealthDisplay.h"
+#include "MoneyDisplay.h"
 
 class GasFillMenu : public GameState, public Observer, public Observable {
 public:
@@ -16,13 +17,17 @@ public:
 	virtual bool receiveEvent(Event& e);
 
 private:
-	Container *background_;
-	Sprite *backgroundSprite_;
+	Container *background_, *blackBackground_;
+	Sprite *backgroundSprite_, *blackBackgoundSprite_;
 
 	map<string, Button*> buttons_;
-	Sprite *fill_5_Sprite_, *fill_10_Sprite_, *fill_25_Sprite_, *backSprite_;
+	Sprite *fill_5_Sprite_, *fill_10_Sprite_, *fill_25_Sprite_, *backSprite_, *paySprite_;
 
 	HealthDisplay* healthDisplay_;
+	MoneyDisplay* moneyDisplay_;
+
+	int moneySpent_ = 0;
+	int refilled_ = 0;
 
 	void setBackground ();
 	void setButtons ();
