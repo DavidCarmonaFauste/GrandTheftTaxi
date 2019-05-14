@@ -19,6 +19,7 @@ public:
 
 	virtual void start() = 0;
 	virtual void end() = 0;
+	virtual void updateState() {};
 
 	virtual void update(Uint32 deltaTime) { for (GameObject* o : stage_) o->update(deltaTime); }
 
