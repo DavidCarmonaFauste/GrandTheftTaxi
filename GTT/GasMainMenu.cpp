@@ -8,16 +8,15 @@ GasMainMenu::GasMainMenu () {
 
 GasMainMenu::~GasMainMenu () {
 	delete backgroundSprite_;
+	delete background_;
 	delete fillSprite_;
 	delete gunSprite_;
 	delete backSprite_;
 
-	while (!stage_.empty()) {
-		delete stage_.back();
-		stage_.back() = nullptr;
-		stage_.pop_back();
+	for (auto button : buttons_) {
+		delete button.second; button.second = nullptr;
 	}
-
+	buttons_.clear();
 }
 
 void GasMainMenu::start () {

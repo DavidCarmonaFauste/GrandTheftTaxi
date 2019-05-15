@@ -41,10 +41,11 @@ void Texture::close() {
 }
 
 bool Texture::loadFromImg(SDL_Renderer* renderer, string fileName) {
+	const char *file = fileName.c_str ();
 	texture_ = IMG_LoadTexture(renderer, fileName.c_str());
 	SDL_QueryTexture(texture_, NULL, NULL, &width_, &height_);
 	renderer_ = renderer;
-	return texture_ != nullptr;
+	return texture_ != NULL;
 }
 
 bool Texture::loadFromText(SDL_Renderer* renderer, string text, Font& font,

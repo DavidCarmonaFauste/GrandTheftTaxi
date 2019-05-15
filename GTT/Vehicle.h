@@ -3,6 +3,7 @@
 #include "TaxiSoundManagerCP.h"
 #include "DialoguesManager.h"
 #include "EnterShopIC.h"
+#include "ChangeWeaponIC.h"
 
 #pragma once
 
@@ -82,6 +83,7 @@ public:
 	ReloadInputComponent* reIC_;
 	ShootIC* shIC_;
 	EnterShopIC* shopIC_;
+	ChangeWeaponIC *changeWeaponIC_;
 
 	TaxiSoundManagerCP* smLC_;
 };

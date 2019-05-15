@@ -86,6 +86,9 @@ void GameStateMachine::fromGasMainMenuToFillMenu () {
 			STATES_[currentState_]->start ();
 			gasFillMenuStartedOnce_ = true;
 		}
+
+		if (gasFillMenuStartedOnce_)
+			STATES_[NAME_GAS_FILL_STATE]->updateState();
 	}
 }
 

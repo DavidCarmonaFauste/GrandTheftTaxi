@@ -1,7 +1,6 @@
 #include "Vehicle.h"
 
 #include "AimAtCursorAC.h"
-#include "ChangeWeaponIC.h"
 #include "Reticule.h"
 #include "InputMovement.h"
 
@@ -21,10 +20,12 @@ Vehicle::Vehicle() {
 }
 
 Vehicle::~Vehicle() {
-
-	delete phyO_; phyO_ = nullptr;
-	delete sprite_; sprite_ = nullptr;
-	delete health_; health_ = nullptr;
+	delete shIC_; shIC_ = nullptr;
+	delete control_; control_ = nullptr;
+	delete shopIC_; shopIC_ = nullptr;
+	delete smLC_; smLC_ = nullptr;
+	delete reIC_; reIC_ = nullptr;
+	delete changeWeaponIC_; changeWeaponIC_ = nullptr;
 
 	for (int i = 0; i < MAXTURRETS; i++) {
 		if (turrets_[i] != nullptr) {
@@ -217,7 +218,8 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	shIC_ = new ShootIC();
 	reIC_ = new ReloadInputComponent();
 	aimC_ = new AimAtCursorAC();
-	addInputComponent(new ChangeWeaponIC());
+	changeWeaponIC_ = new ChangeWeaponIC();
+	addInputComponent(changeWeaponIC_);
 
 
 	// Movement

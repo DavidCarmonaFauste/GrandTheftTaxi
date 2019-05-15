@@ -8,8 +8,8 @@ ProyectilePool::ProyectilePool()
 	
 }
 
-ProyectilePool::~ProyectilePool()
-{
+ProyectilePool::~ProyectilePool() {
+
 }
 
 

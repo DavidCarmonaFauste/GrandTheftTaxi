@@ -161,8 +161,13 @@ void NodeMap::InBetweenNodes(Vector2D position, Node *& a, Node *& b)
 }
 
 
-NodeMap::~NodeMap()
-{
+NodeMap::~NodeMap() {
+	for (std::map<std::string, Node*>::iterator it = nodes.begin(); it != nodes.end(); it++){
+		delete it->second;
+		it->second = nullptr;
+	}
+	nodes.clear();
+	patrols.clear();
 }
 
 bool NodeMap::hasNode(vector<Node*>& v, Node* n)

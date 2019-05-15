@@ -138,6 +138,7 @@ const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
 const int HP_INCREASE = 100;
+const int KILL_HEAL = 30;
 
 const float ENVIRONMENT_FRICTION = 0.1f;
 const float DEFAULT_FRICTION = 0.2f;
@@ -252,11 +253,11 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../
 64, 32, 6.0f, 3.0f, 1.5f, 0.8f };
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
-"../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
+"../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify_damage.png","../Assets/sprites/Enemy/enemy_die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10 };
-const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
-"../Assets/sprites/Enemy/VTC2-cobify.png", "../Assets/sprites/Enemy/VTC2-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-66, 28, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
+const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
+"../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/VTC_Furgoneta_damage.png","../Assets/sprites/Enemy/enemy_die.png",
+70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
 const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 30 };
@@ -299,8 +300,8 @@ const string MAINMENURETICULE = "gun";
 
 /**************************************/
 //GAME WINDOWS
-const int WIN_WIDTH = 1920;
-const int WIN_HEIGHT = 1080;
+static int WIN_WIDTH = 1920;
+static int WIN_HEIGHT = 1080;
 const int CAMERA_WIDHT = 1920;
 const int CAMERA_HEIGHT = 1080;
 
@@ -366,16 +367,6 @@ const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/backgr
 
 
 // GAS MENU INFO  ---------------------------
-	// positions
-const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 6) };
-const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 1.8), (CAMERA_HEIGHT / 6) };
-const Vector2D BACK_BUTTON_POSITION = { (CAMERA_WIDHT / 9), (CAMERA_HEIGHT / 1.5) };
-const Vector2D PAY_BUTTON_POSITION = { 3 * (CAMERA_WIDHT / 4), 2 * (CAMERA_HEIGHT / 3) };
-const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6) -100, (CAMERA_HEIGHT / 5) };
-const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3) -100, (CAMERA_HEIGHT / 5) };
-const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2) -100, (CAMERA_HEIGHT / 5) };
-const Vector2D GAS_MENU_HEALTH_BAR_POSITION = { (CAMERA_WIDHT / 6) , (CAMERA_HEIGHT / 2) };
-
 	// sizes
 const int VERTICAL_BUTTON_GAS_W = 275;
 const int VERTICAL_BUTTON_GAS_H = 570;
@@ -387,10 +378,25 @@ const int GAS_BACKGROUND_W = CAMERA_WIDHT;
 const int GAS_BACKGROUND_H = CAMERA_HEIGHT;
 const int BLACK_BACKGROUND_H = 200;
 const int BLACK_BACKGROUND_W = 850;
-	//pos that uses sizes info
+const int TOPAY_BACKGROUND_H = 300;
+const int TOPAY_BACKGROUND_W = 450;
+
+// positions
+const Vector2D FILL_GAS_BUTTON_POSITION = { (CAMERA_WIDHT / 3), (CAMERA_HEIGHT / 6) };
+const Vector2D GUN_SHOP_BUTTON_POSITION = { (CAMERA_WIDHT / 1.8), (CAMERA_HEIGHT / 6) };
+const Vector2D BACK_BUTTON_POSITION = { (CAMERA_WIDHT / 9), (CAMERA_HEIGHT / 1.5) };
+const Vector2D GAS_5_BUTTON_POSITION = { (CAMERA_WIDHT / 6) - 100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_10_BUTTON_POSITION = { (CAMERA_WIDHT / 3) - 100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_25_BUTTON_POSITION = { (CAMERA_WIDHT / 2) - 100, (CAMERA_HEIGHT / 5) };
+const Vector2D GAS_MENU_HEALTH_BAR_POSITION = { (CAMERA_WIDHT / 6) , (CAMERA_HEIGHT / 2) };
 const Vector2D BLACK_BACKGROUND_POS = { GAS_MENU_HEALTH_BAR_POSITION.x - 100, (CAMERA_HEIGHT / 2) - BLACK_BACKGROUND_H / 3 };
+const Vector2D TOPAY_BACKGROUND_POS = { (CAMERA_WIDHT / 1.6), (CAMERA_HEIGHT / 5)};
+const Vector2D TOPAY_DISPLAY_POS = { (TOPAY_BACKGROUND_POS.x + (float32)(TOPAY_BACKGROUND_W / 1.5)) , (TOPAY_BACKGROUND_POS.y + (float32)(TOPAY_BACKGROUND_H / 2))};
+const Vector2D PAY_BUTTON_POSITION = { (CAMERA_WIDHT / 1.5), (CAMERA_HEIGHT / 1.5) };
+
 	// paths
 const textureInfo BLACK_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/simple-black.png", "default", {1, 1},BLACK_BACKGROUND_POS , BLACK_BACKGROUND_W, BLACK_BACKGROUND_H };
+const textureInfo TOPAY_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/simple-black.png", "default", {1, 1},TOPAY_BACKGROUND_POS , TOPAY_BACKGROUND_W, TOPAY_BACKGROUND_H };
 const textureInfo GAS_BACKGROUND_INFO = { "../Assets/sprites/GasMenu/background-gasolinera.png", "default", {1, 1}, {0.0, 0.0}, GAS_BACKGROUND_W, GAS_BACKGROUND_H };
 const textureInfo FILL_GAS_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-fill-gas.png", "default", {1, 1}, FILL_GAS_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
 const textureInfo GUN_SHOP_BUTTON_INFO = { "../Assets/sprites/GasMenu/button-gun-shop.png", "default", {1, 1}, GUN_SHOP_BUTTON_POSITION, VERTICAL_BUTTON_GAS_W, VERTICAL_BUTTON_GAS_H };
