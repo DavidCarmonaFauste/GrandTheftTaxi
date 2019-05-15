@@ -300,8 +300,8 @@ const string MAINMENURETICULE = "gun";
 
 /**************************************/
 //GAME WINDOWS
-const int WIN_WIDTH = 1920;
-const int WIN_HEIGHT = 1080;
+static int WIN_WIDTH = 1920;
+static int WIN_HEIGHT = 1080;
 const int CAMERA_WIDHT = 1920;
 const int CAMERA_HEIGHT = 1080;
 

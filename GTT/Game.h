@@ -78,8 +78,8 @@ public:
 private:
 	void end();
 
-	const int winWidth_ = WIN_WIDTH;
-	const int winHeight_ = WIN_HEIGHT;
+	int winWidth_ = WIN_WIDTH;
+	int winHeight_ = WIN_HEIGHT;
 
 	const int cameraWidth = CAMERA_WIDHT;
 	const int cameraHeight = CAMERA_HEIGHT;

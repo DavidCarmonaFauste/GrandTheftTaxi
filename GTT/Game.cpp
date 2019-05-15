@@ -11,6 +11,7 @@
 #include "ShopManager.h"
 //#include "GameManager.h"
 
+
 #include <iostream>
 
 using namespace std;
@@ -37,7 +38,7 @@ Game::Game() {
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
-		winWidth_, winHeight_, SDL_WINDOW_SHOWN);
+		winWidth_, winHeight_, SDL_WINDOW_SHOWN || SDL_WINDOW_RESIZABLE);
 	renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_RenderSetLogicalSize(renderer_, cameraWidth, cameraHeight);
 	SDL_SetRenderDrawColor(renderer_, 10, 105, 165, 1);
@@ -189,6 +190,20 @@ void Game::setState(string state) {
 void Game::init() {
 	cameras_[GAME_CAMERA] = new Camera(1280, 720);
 	cameras_[UI_CAMERA] = new Camera(1280, 720);
+
+	SDL_DisplayMode dM;
+	if (SDL_GetDesktopDisplayMode (0, &dM) != 0) {
+		SDL_Log ("SDL_GetDesktopDisplayMode failed: %s", SDL_GetError ());
+		return;
+	}
+	else {
+		WIN_HEIGHT = dM.h;
+		winHeight_ = WIN_HEIGHT;
+		WIN_WIDTH = dM.w;
+		winWidth_ = WIN_WIDTH;
+		SDL_SetWindowSize (window_, winWidth_, winHeight_);
+	}
+	
 
 	//Init Singleton Patterns - //initInstance() only just once. after always use getInstance();
 	SoundManager::getInstance()->initInstance();
