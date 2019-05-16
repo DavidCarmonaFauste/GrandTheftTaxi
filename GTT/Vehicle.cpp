@@ -208,7 +208,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_->setAnimation("default");
 
 	// Health
-	health_ = new Health(TAXI_HP);
+	health_ = new Health(r.HP);
 	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
 	alive_ = true;

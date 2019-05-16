@@ -31,7 +31,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	this->addRenderComponent(sprite_);
 
 	// Health
-	health_ = new Health(ENEMY_HP);
+	health_ = new Health(r.HP);
 	addLogicComponent(health_);
 
 	//Movement

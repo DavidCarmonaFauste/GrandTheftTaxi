@@ -37,6 +37,7 @@ const struct VehicleInfo {
 	int reward = 0;
 	int pursuitRange = TILE_SIZE * 20;
 	int AIspeed = 4;
+	int HP = 1000;
 };
 
 const enum ImpactMode {
@@ -135,7 +136,6 @@ const float HBRK_LATERAL_VELOCITY = 1.0f;
 const float HBRK_SPEED_DECAY = 1.2f;
 const float HBRK_LATERAL_RECOVER = 0.2f;
 
-const int TAXI_HP = 1000;
 const int DMG_OVER_TIME = 5;
 const int DMG_OVER_TIME_MOVING = 8;
 const int DMG_FREQUENCY = 1000;
@@ -153,9 +153,6 @@ const enum newGameButtonPaths {
 	clickButton
 };
 
-
-//Enemy 1
-const int ENEMY_HP = 100;
 
 //NAMES
 const string NAME_MAINMENU_STATE = "mainMenuState";
@@ -256,10 +253,10 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify_damage.png","../Assets/sprites/Enemy/enemy_die.png",
-68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10 };
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10, TILE_SIZE*20, 5, 300 };
 const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/VTC_Furgoneta_damage.png","../Assets/sprites/Enemy/enemy_die.png",
-70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 20 };
+70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 20, TILE_SIZE * 20, 3, 800 };
 const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
 68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 30 };
