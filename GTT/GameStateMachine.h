@@ -18,6 +18,7 @@ public:
 	GameState* get_CurrentState();
 	void initStates();
 
+	void fromMainStateToLevel2 ();
 	void fromMainStateToGasMainMenu ();
 
 	void fromGasMainMenuToMainState ();

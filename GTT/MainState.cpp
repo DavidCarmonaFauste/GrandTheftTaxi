@@ -84,9 +84,11 @@ void MainState::end()
 
 void MainState::update(Uint32 deltaTime) {
 	//TODO: fix!! ----------------------------------------------------------------------------------
-	//if (GameManager::getInstance()->getEnemyCount () == 0)
-	//	loadTilemap ();
-	//
+	if (GameManager::getInstance ()->getEnemyCount () == 0) {
+		roadBlocker_->removeBlocker ();
+		
+	}
+	
 	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(true);
 	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(true);
 

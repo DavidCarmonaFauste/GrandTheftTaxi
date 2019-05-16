@@ -63,6 +63,19 @@ void GameStateMachine::initStates() {
 	setState(NAME_MAIN_STATE);
 }
 
+void GameStateMachine::fromMainStateToLevel2 () {
+	if (currentState_ == NAME_MAIN_STATE) {
+		STATES_[currentState_]->end();
+
+		currentState_ = NAME_LEVEL_2_STATE;
+
+		if (!gasMainMenuStartedOnce_) {
+			STATES_[currentState_]->start ();
+			gasMainMenuStartedOnce_ = true;
+		}
+	}
+}
+
 void GameStateMachine::fromMainStateToGasMainMenu () {
 	if (currentState_ == NAME_MAIN_STATE) {
 		STATES_[currentState_]->end();

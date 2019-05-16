@@ -8,6 +8,7 @@ public:
 	RoadBlocker ();
 	virtual ~RoadBlocker ();
 
+	void removeBlocker ();
 private:
 	PhysicObject* phyO_ = nullptr;
 	Sprite *sprite_ = nullptr;

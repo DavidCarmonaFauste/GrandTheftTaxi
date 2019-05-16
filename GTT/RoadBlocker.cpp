@@ -1,8 +1,5 @@
 #include "RoadBlocker.h"
 
-//TODO: add die() method and call it when there are no more enemies on level1
-
-
 RoadBlocker::RoadBlocker () {
 	setPosition (ROAD_BLOCKER_POS);
 	setHeight (ROAD_BLOCKER_HEIGHT);
@@ -22,4 +19,10 @@ RoadBlocker::RoadBlocker () {
 
 
 RoadBlocker::~RoadBlocker () {
+}
+
+
+void RoadBlocker::removeBlocker () {
+	setActive (false);
+	phyO_->getBody ()->SetActive (false);
 }
