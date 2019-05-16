@@ -47,6 +47,8 @@ const enum ImpactMode {
 
 const struct ProyectileInfo {
 	string idlePath;
+	string destructionPath;
+	int destranimframes;
 	int width;
 	int height;
 	double damage;
@@ -86,8 +88,8 @@ const struct WeaponInfo {
 	ShootMode shootMode2;
 	bool automatic;
 	int chargedShotDelay;
-	string shoteffectPath= "../Assets/sprites/Turrets/shot_effect.png";
-	int shotanimframes = 1;
+	string muzzleflashPath;
+	int muzzanimframes;
 	string sparklePath = "../Assets/sprites/Turrets/sparkle_anim.png";
 	int sparkleanimframes = 3;
 };
@@ -268,27 +270,27 @@ const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "..
 
 //Proyectiles
 	//Gun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo E_GUNBULLET{ "../Assets/sprites/Turrets/EnemyGun/E_Gun_Bullet.png", 15, 30, 6, 2000, 10, TURRET_GUN_SHOOT };
-const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 10, 20, 10, 2000, 20, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png" , 50, 50, 10, 5000, 10, TURRET_GUN_SPECIAL_SHOOT };
+const ProyectileInfo E_GUNBULLET{ "../Assets/sprites/Turrets/EnemyGun/E_Gun_Bullet.png","../Assets/sprites/Turrets/EnemyGun/e_gun_bullet_destruction.png", 6, 15, 30, 6, 2000, 10, TURRET_GUN_SHOOT };
+const ProyectileInfo GUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png", "../Assets/sprites/Turrets/Gun/gun_bullet_destruction.png", 6, 10, 20, 10, 2000, 20, TURRET_GUN_SHOOT };
+const ProyectileInfo SPECIAL_GUNBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png","../Assets/sprites/Turrets/Gun/gun_bullet_destruction.png", 6, 50, 50, 10, 5000, 10, TURRET_GUN_SPECIAL_SHOOT };
 	//ShotGun
-const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png" , 15, 30, 20, 500, 10, TURRET_SHOTGUN_SHOOT };
-const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png" , 15, 15, 20, 500, 10, TURRET_SHOTGUN_SPECIAL_SHOOT };
+const ProyectileInfo E_SHOTGUNBULLET{ "../Assets/sprites/Turrets/EnemyShotGun/ShotGun_bullet.png", "../Assets/sprites/Turrets/EnemyShotGun/shotgun_bullet_destruction.png", 6, 15, 30, 20, 500, 10, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/ShotGun_bullet.png", "../Assets/sprites/Turrets/ShotGun/shotgun_bullet_destruction.png", 6, 15, 30, 20, 500, 10, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SEPECIAL_SHOTGUNBULLET{ "../Assets/sprites/Turrets/ShotGun/Special_ShotGun_Bullet.png","../Assets/sprites/Turrets/ShotGun/shotgun_bullet_destruction.png", 6, 15, 15, 20, 500, 10, TURRET_SHOTGUN_SPECIAL_SHOOT };
 	//Snipper //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo SNIPERBULLET{};
-const ProyectileInfo SPECIAL_SNIPERBULLET{};
+const ProyectileInfo SNIPERBULLET{ "../Assets/sprites/Turrets/Sniper/Sniper_Bullet.png", "../Assets/sprites/Turrets/Sniper/sniper_bullet_destruction.png", 6, 15, 30, 20, 500, 50, TURRET_SHOTGUN_SHOOT };
+const ProyectileInfo SPECIAL_SNIPERBULLET{ "../Assets/sprites/Turrets/Sniper/Special_SniperGun_Bullet.png", "../Assets/sprites/Turrets/Sniper/sniper_bullet_destruction.png", 6, 30, 30, 20, 500, 10, TURRET_SHOTGUN_SHOOT };
 	//MachineGun //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo MACHINEGUNBULLET{ "../Assets/sprites/Turrets/Gun/Gun_Bullet.png" , 15, 15, 15, 1500, 20, TURRET_GUN_SHOOT };
-const ProyectileInfo SPECIAL_MACHINEGUNBULLET{};
-	//... //Falta asignar ruta y sprite Y SONIDO
-const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/Gun/Special_Gun_Bullet.png", 50, 50, 10, 5000, 20, TURRET_SHOTGUN_SPECIAL_SHOOT, BOUNCE};
+const ProyectileInfo MACHINEGUNBULLET{ "../Assets/sprites/Turrets/MachineGun/MachineGun_Bullet.png","../Assets/sprites/Turrets/MachineGun/machinegun_bullet_destruction.png", 6, 15, 15, 15, 1500, 20, TURRET_GUN_SHOOT };
+const ProyectileInfo BOUNCEBULLET{ "../Assets/sprites/Turrets/MachineGun/Special_MachineGun_Bullet.png","../Assets/sprites/Turrets/MachineGun/machinegun_bullet_destruction.png", 6, 50, 50, 10, 5000, 20, TURRET_SHOTGUN_SPECIAL_SHOOT, BOUNCE };
+//... //Falta asignar ruta y sprite Y SONIDO
 
 //Weapons
-const WeaponInfo ENEMYGUN{ "../Assets/sprites/Turrets/EnemyGun/e_gun.png", "../Assets/sprites/Turrets/EnemyGun/e_pistola_anim.png", 2, 3.5, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, E_GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 20.0, 70.0}, {LINEAR, 0.0, 0.0}, false, 300, "../Assets/sprites/Turrets/shot_effect_enemy.png"};
-const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png", 2, 3.5, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300 };
-const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png", 5, 6.0, "shotgun", 20, 55, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100 };
-const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/MachineGun/machine_gun.png", "../Assets/sprites/Turrets/MachineGun/metralleta_anim.png", 2, 3.5, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500 };
-const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/sprites/Turrets/francotirador_anim.png", 2, 3.5, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0 };
+const WeaponInfo ENEMYGUN{ "../Assets/sprites/Turrets/EnemyGun/e_gun.png", "../Assets/sprites/Turrets/EnemyGun/e_pistola_anim.png", 2, 3.5, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, E_GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 20.0, 70.0}, {LINEAR, 0.0, 0.0}, false, 300, "../Assets/sprites/Turrets/EnemyGun/shot_effect.png", 1};
+const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprites/Turrets/Gun/pistola_anim.png", 2, 3.5, "gun", 25, 50, 10, 300, 1500, 0.45, 0.1, 1000, GUNBULLET, SPECIAL_GUNBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 300, "../Assets/sprites/Turrets/Gun/shot_effect.png", 1 };
+const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png", 5, 6.0, "shotgun", 20, 55, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100, "../Assets/sprites/Turrets/ShotGun/shot_effect.png", 1 };
+const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/MachineGun/machine_gun.png", "../Assets/sprites/Turrets/MachineGun/metralleta_anim.png", 3, 3.5, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500, "../Assets/sprites/Turrets/MachineGun/shot_effect.png", 1 };
+const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/Sniper/sniper.png", "../Assets/sprites/Turrets/Sniper/francotirador_anim.png", 2, 3.5, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0, "../Assets/sprites/Turrets/Sniper/shot_effect.png", 1 };
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
