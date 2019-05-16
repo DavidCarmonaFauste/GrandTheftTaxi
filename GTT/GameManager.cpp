@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Game.h"
 
 unique_ptr<GameManager> GameManager::instance_ = nullptr;
 
@@ -23,5 +24,6 @@ void GameManager::calculatePuntuation()
 {
 	int p = (((kills * 100000) / (hits)) / time )* 100;
 	cout<<" * Score: ____" << p << "____"<< endl;
+	Game::getInstance()->getGameStateMachine()->fromMainStateToGameOverMenu();
 }
 

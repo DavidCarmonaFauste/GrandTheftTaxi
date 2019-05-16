@@ -161,7 +161,7 @@ const string NAME_MPEG_STATE = "MpegState";
 const string NAME_GAS_MAIN_STATE = "GasMainState";
 const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
-const string NAME_DEATH_STATE = "DeathState";
+const string NAME_GAMEOVER_STATE = "GameOverState";
 
 
 

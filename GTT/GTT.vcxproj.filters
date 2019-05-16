@@ -291,9 +291,6 @@
     <ClCompile Include="DialoguesManager.cpp">
       <Filter>Archivos de origen\UI</Filter>
     </ClCompile>
-    <ClCompile Include="DeathState.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="FuelUpgrade.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
@@ -304,6 +301,9 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="ShopManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverMenu.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -551,9 +551,6 @@
     <ClInclude Include="Phrases.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
-    <ClInclude Include="DeathState.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="FuelUpgrade.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -564,6 +561,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="ShopManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

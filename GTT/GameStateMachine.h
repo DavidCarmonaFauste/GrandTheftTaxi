@@ -25,6 +25,11 @@ public:
 
 	void fromFillMenuToGasMainMenu ();
 
+	void fromGameOverMenuToMainMenu();
+	void fromMainStateToGameOverMenu();
+
+
+
 protected:
 	string currentState_;
 

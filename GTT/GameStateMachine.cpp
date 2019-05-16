@@ -5,6 +5,7 @@
 #include "GasFillMenu.h"
 #include "ShopState.h"
 #include "Reticule.h"
+#include "GameOverMenu.h"
 
 
 
@@ -49,6 +50,9 @@ void GameStateMachine::initStates() {
 	STATES_.insert (std::pair<string, GameState*> (NAME_GAS_FILL_STATE, new GasFillMenu ()));
 	// Shop state
 	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
+	// GameOver state
+	STATES_.insert(std::pair<string, GameState*>(NAME_GAMEOVER_STATE, new GameOverMenu()));
+
 	
 		
 	//primer estado al ejectuar app
@@ -90,6 +94,18 @@ void GameStateMachine::fromGasMainMenuToFillMenu () {
 		if (gasFillMenuStartedOnce_)
 			STATES_[NAME_GAS_FILL_STATE]->updateState();
 	}
+}
+
+void GameStateMachine::fromGameOverMenuToMainMenu()
+{
+	if (currentState_ == NAME_GAMEOVER_STATE)
+		currentState_ = NAME_MAINMENU_STATE;
+
+}
+void GameStateMachine::fromMainStateToGameOverMenu()
+{
+	if (currentState_ == NAME_MAIN_STATE) 
+		currentState_ = NAME_GAMEOVER_STATE;
 }
 
 void GameStateMachine::fromFillMenuToGasMainMenu () {

@@ -39,7 +39,5 @@ private:
 	int initTime = 0;
 	int time = 0;
 	int enemyCount = 0;
-
-
 };
 
