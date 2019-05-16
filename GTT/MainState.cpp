@@ -23,7 +23,7 @@ MainState::~MainState() {
 // called to initialize
 void MainState::start() {
 	// Taxi	
-	Vector2D pos = Vehicle::getInstance ()->getLevel1SpawnPoint ();
+	Vector2D pos = Vehicle::getInstance ()->getLevel1OpenSpawnPoint ();
 	Vehicle::getInstance()->saveSpawnPoint(pos);
 	Vehicle::getInstance()->setPosition(pos);
 	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos.Multiply(PHYSICS_SCALING_FACTOR), 0);
@@ -57,8 +57,12 @@ void MainState::start() {
 	//...
 	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
 
+	// Barrier
+	roadBlocker_ = new RoadBlocker ();
+
 	//pushBack GameObj to list
 	stage_.push_back(tilemap_);
+	stage_.push_back (roadBlocker_);
 	stage_.push_back(Vehicle::getInstance());
 	stage_.push_back(EnemyManager::getInstance());
 	stage_.push_back(GameManager::getInstance());
@@ -97,7 +101,7 @@ void MainState::loadTilemap () {
 		//EnemyManager::getInstance()->ReadEnemyInfo();
 	}
 	else 
-		tilemap_ = new TileMap(PATH_LEVEL_1);
+		tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
 }
 
 

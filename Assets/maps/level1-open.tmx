@@ -569,6 +569,6 @@
   <object id="563" name="Spawn8" x="3328" y="1760" width="64" height="64"/>
  </objectgroup>
  <objectgroup color="#0bec70" id="7" name="Player1Open">
-  <object id="233" name="PlayerSpawn" x="2240" y="1568" width="128" height="128"/>
+  <object id="233" name="PlayerSpawn" x="2560" y="1248" width="128" height="128"/>
  </objectgroup>
 </map>

@@ -370,6 +370,14 @@ const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/backgr
 
 
 
+// Road Blocker -------------------------------
+const Vector2D ROAD_BLOCKER_POS = Vector2D (2432, 1632);
+const int ROAD_BLOCKER_WIDTH = 96;
+const int ROAD_BLOCKER_HEIGHT = 192;
+const textureInfo ROAD_BLOCKER_INFO = { "../Assets/sprites/barrier.png", "default", {1, 1}, ROAD_BLOCKER_POS, ROAD_BLOCKER_WIDTH, ROAD_BLOCKER_HEIGHT };
+
+
+
 // GAS MENU INFO  ---------------------------
 	// sizes
 const int VERTICAL_BUTTON_GAS_W = 275;

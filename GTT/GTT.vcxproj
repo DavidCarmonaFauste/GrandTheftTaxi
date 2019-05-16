@@ -81,6 +81,7 @@
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Respawner.cpp" />
     <ClCompile Include="Reticule.cpp" />
+    <ClCompile Include="RoadBlocker.cpp" />
     <ClCompile Include="ShootComponent.cpp" />
     <ClCompile Include="ShootIC.cpp" />
     <ClCompile Include="Shop.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Respawner.h" />
     <ClInclude Include="Reticule.h" />
+    <ClInclude Include="RoadBlocker.h" />
     <ClInclude Include="ShootComponent.h" />
     <ClInclude Include="ShootIC.h" />
     <ClInclude Include="Shop.h" />

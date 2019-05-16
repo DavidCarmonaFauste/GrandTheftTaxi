@@ -9,6 +9,7 @@
 #include "Respawner.h"
 #include "Shop.h"
 #include "FuelUpgrade.h"
+#include "RoadBlocker.h"
 
 class MainState :
 	public GameState
@@ -33,4 +34,6 @@ private:
 
 	// Systems
 	Respawner* respawner_;
+
+	RoadBlocker* roadBlocker_;
 };
