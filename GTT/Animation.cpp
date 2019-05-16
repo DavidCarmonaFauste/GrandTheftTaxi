@@ -6,12 +6,13 @@ Animation::Animation() {
 	destRect = new SDL_Rect();
 	destRect->w = destRect->h = 100;
 	destRect->x = destRect->y = 0;
+
 }
 
 Animation::~Animation() {
-	for (std::map<string, pair<Texture*, SDL_Rect*>>::iterator it = animations.begin(); it != animations.end(); it++) {
-		delete it->second.first; it->second.first = nullptr;
-		delete it->second.second; it->second.second = nullptr;
+	for (auto animation:animations) {
+		delete animation.second.first;
+		delete animation.second.second;
 	}
 	animations.clear();
 
@@ -20,15 +21,23 @@ Animation::~Animation() {
 
 // Animation frames are played in order from left to right,
 // top to bottom, with the given speed
-void Animation::loadAnimation(string path, string name, int columns, int rows) {
-	Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
+bool Animation::loadAnimation(string path, string name, int columns, int rows) {
 
-	SDL_Rect* animRect = new SDL_Rect();
-	animRect->h = animTexture->getHeight() / rows;
-	animRect->w = animTexture->getWidth() / columns;
-	animRect->x = animRect->y = 0;
+	if (path != "-1") {
+		Texture* animTexture = new Texture(Game::getInstance()->getRenderer(), path);
 
-	animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+		SDL_Rect* animRect = new SDL_Rect();
+		animRect->h = animTexture->getHeight() / rows;
+		animRect->w = animTexture->getWidth() / columns;
+		animRect->x = animRect->y = 0;
+
+		if (animRect->w > 0 && animRect->h > 0) {
+			animations[name] = pair<Texture*, SDL_Rect*>(animTexture, animRect);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 bool Animation::playAnimation(string name, float speed, bool loop) {
@@ -50,12 +59,18 @@ bool Animation::playAnimation(string name, float speed, bool loop) {
 
 bool Animation::isAnyAnimationPlaying() {
 	return currentAnim != "default";
+
 }
 
 // Checks whether the given animation is currently
 // playing
 bool Animation::isAnimationPlaying(string name) {
 	return currentAnim == name;
+}
+
+string Animation::getCurrentAnimation()
+{
+	return currentAnim;
 }
 
 
@@ -84,7 +99,7 @@ bool Animation::resumeAnimation()
 
 void Animation::render(GameObject * o, Uint32 deltaTime) {
 	// Rendering
-	if (currentAnim != "") {
+	if (currentAnim != "-1") {
 		renderAnimation(o, deltaTime);
 	}
 }
@@ -112,19 +127,25 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 			if (animationLoop)
 				resetAnimationValues();
 			else {
-				playAnimation("default");
+				if (!playAnimation("default")) {
+					currentAnim = "-1";
+					return;
+				}
 			}
 		}
 	}
-
+	
 	Texture* animTexture = animations[currentAnim].first;
 	SDL_Rect* animRect = animations[currentAnim].second;
+
+	if (!animationExists(currentAnim) || animTexture == nullptr || animRect == nullptr)
+		return;
 
 	animRect->x = currentFrame % animationColumns * animRect->w;
 	animRect->y = trunc(currentFrame / animationColumns) * animRect->h;
 
-	destRect->x = o->getPosition().getX();
-	destRect->y = o->getPosition().getY();
+	destRect->x = o->getPosition().x;
+	destRect->y = o->getPosition().y;
 	destRect->w = o->getWidth();
 	destRect->h = o->getHeight();
 	
@@ -132,6 +153,7 @@ void Animation::renderAnimation(GameObject* o, Uint32 deltaTime) {
 
 	if (isAnyAnimationPlaying() && !paused) elapsedTime += deltaTime;
 }
+
 
 void Animation::resetAnimationValues() {
 	paused = false;
@@ -141,4 +163,9 @@ void Animation::resetAnimationValues() {
 
 void Animation::setCamera(cameraType cam) {
 	cam_ = cam;
+}
+
+void Animation::setAnimation(string s)
+{
+	currentAnim = s;
 }

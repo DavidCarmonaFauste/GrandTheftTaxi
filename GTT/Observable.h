@@ -18,8 +18,10 @@ public:
 	bool isRegistered(Observer* o, int &index);
 	void cleanObservers();
 
+	void broadcastEvent(Event& e);
+
 protected:
-	void broadcastEvent(Event *e);
+	//void broadcastEvent(Event& e);
 
 private:
 	vector<Observer*> observers;

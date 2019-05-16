@@ -1,9 +1,6 @@
 #pragma once
 #include "GameState.h"
-#include "Resources.h"
-
 #include <stack>
-
 
 using namespace std;
 
@@ -13,14 +10,26 @@ public:
 	GameStateMachine();
 	~GameStateMachine();
 
+	// use for one-way only state changes (ex. main menu to main state)
 	void setState(const string &s);
+	map <string, GameState*> STATES_;
 
 	string get_CurrentStateName() const;
-	GameState* get_CurrentState() const;
+	GameState* get_CurrentState();
+	void initStates();
 
+	void fromMainStateToGasMainMenu ();
+
+	void fromGasMainMenuToMainState ();
+	void fromGasMainMenuToFillMenu ();
+
+	void fromFillMenuToGasMainMenu ();
 
 protected:
 	string currentState_;
 
+private:
+	bool gasMainMenuStartedOnce_ = false;
+	bool gasFillMenuStartedOnce_ = false;
 };
 

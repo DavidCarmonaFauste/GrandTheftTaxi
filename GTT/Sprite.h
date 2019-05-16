@@ -3,8 +3,6 @@
 #include "Texture.h"
 #include "RenderComponent.h"
 #include "Camera.h"
-#include <vector>
-#include <map>
 
 using namespace std;
 
@@ -22,6 +20,7 @@ public:
 	virtual ~Sprite();
 
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
+	void render(Vector2D pos,int w, int h);  //render alternativo
 
 	void setCamera(cameraType cam);
 	cameraType getCameraType();

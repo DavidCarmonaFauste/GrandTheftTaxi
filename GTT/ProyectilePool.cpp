@@ -1,47 +1,58 @@
 #include "ProyectilePool.h"
 
-ProyectilePool* ProyectilePool::instance_ = nullptr;
+
+unique_ptr<ProyectilePool> ProyectilePool::instance_ = nullptr;
 
 ProyectilePool::ProyectilePool()
 {
-	for (int i = 0; i < MAX_PROYECTILES; i++) {
-		proyectiles_[i].setActive(false);
+	
+}
+
+ProyectilePool::~ProyectilePool() {
+
+}
+
+
+Proyectile * ProyectilePool::getUnusedProyectile()
+{
+	for (auto& proyectile : proyectiles_) {
+		if (!proyectile.isActive()) {
+			return &proyectile;
+		}
+	}
+	return nullptr;
+}
+
+void ProyectilePool::update(Uint32 time) {
+	for (auto& proyectile : proyectiles_) {
+		if (proyectile.isActive()) {
+			proyectile.update(time);
+		}
 	}
 }
-void ProyectilePool::update(Uint32 time) {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
-		if (proyectiles_[i].isActive()) {
-			proyectiles_[i].update(time);
-		}
-}
+
 void ProyectilePool::render(Uint32 time) {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
-		if (proyectiles_[i].isActive()) {
-			proyectiles_[i].render(time);
+	for (auto& proyectile : proyectiles_)
+	{
+		if (proyectile.isActive()) {
+			proyectile.render(time);
 		}
+	}
 }
-Proyectile* ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, proyectileType type, double lifeTime, double damage) {
-	Proyectile* e = getUnusedProyectile();
+
+Proyectile * ProyectilePool::addProyectile(Vector2D pos, Vector2D vel, float angle, ProyectileInfo prType,  bool isAnEnemy)
+{
+	Proyectile* e;
+	e = getUnusedProyectile();
 	if (e != nullptr) {
-		e->setVelocity(vel);
-		e->setPosition(Vector2D(pos.getX()-e->getWidth()/2, pos.getY()-e->getHeight()/2));
-		e->SetDamage(damage);
-		e->SetLifeTime(lifeTime);
-		e->SetAnimation(type);
+		e->ChangeBulletType(prType, isAnEnemy);
+		e->GetPhyO()->getBody()->SetTransform(Vector2D(pos.x*PHYSICS_SCALING_FACTOR, pos.y*PHYSICS_SCALING_FACTOR), angle);
+		e->GetPhyO()->getBody()->SetLinearVelocity(Vector2D(vel.x * e->GetSpeed(), vel.y* e->GetSpeed()));
+		e->SetBirth(SDL_GetTicks());
 		e->setActive(true);
 	}
 	return e;
 }
 
-Proyectile* ProyectilePool::getUnusedProyectile() {
-	for (int i = 0; i < MAX_PROYECTILES; i++)
-		if (!proyectiles_[i].isActive()) {
-			return &proyectiles_[i];
-		}
 
-	return nullptr;
-}
 
-ProyectilePool::~ProyectilePool()
-{
-}

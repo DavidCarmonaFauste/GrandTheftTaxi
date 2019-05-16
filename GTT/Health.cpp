@@ -10,7 +10,7 @@ Health::~Health() {
 }
 
 void Health::update(GameObject * o, Uint32 deltaTime) {
-
+	damageOverTime(deltaTime);
 }
 
 int Health::getHealth() {
@@ -22,28 +22,59 @@ int Health::getMaxHealth() {
 }
 
 void Health::damage(int damage) {
-	setHealth(health_ - damage);
+	int finalHealth = health_ - damage;
+	
+	if (finalHealth < 0)
+		finalHealth = 0;
+
+	setHealth(finalHealth);
 }
 
-void Health::heal(int heal) {	
-	setHealth(health_ + heal);
+void Health::heal(int heal) {
+	int finalHealth = health_ + heal;
+	
+	if (finalHealth > maxHealth_)
+		finalHealth = maxHealth_;
+
+	setHealth(finalHealth);
+}
+
+void Health::setDamageOverTime(int damage, int frequency) {
+	damageOverTimeValue_ = damage;
+	damageFrequency_ = frequency;
 }
 
 void Health::resetHealth() {
-	health_ = maxHealth_;
+	setHealth(maxHealth_);
 }
 
 void Health::setHealth(int health) {
 	// Send an event about the health change
 	HealthChangedEvent e(this, health, health_, maxHealth_);
-	broadcastEvent(&e);
+	broadcastEvent(e);
 
 	health_ = health;
 }
 
-bool Health::receiveEvent(Event * e) {
-	if (e->type_ == RESPAWNED)
+void Health::increaseMaxHealth()
+{
+	maxHealth_ += HP_INCREASE;
+}
+
+bool Health::receiveEvent(Event& e) {
+	if (e.type_ == RESPAWNED)
 		resetHealth();
 
 	return true;
+}
+
+void Health::damageOverTime(Uint32 deltaTime) {
+	if (damageFrequency_ <= 0 && damageOverTimeValue_ == 0)
+		return;
+
+	damageTimer_ += deltaTime;
+	while (damageTimer_ >= damageFrequency_) {
+		damage(damageOverTimeValue_);
+		damageTimer_ -= damageFrequency_;
+	}
 }

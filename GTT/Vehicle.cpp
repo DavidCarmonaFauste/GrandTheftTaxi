@@ -1,272 +1,257 @@
 #include "Vehicle.h"
-#include "Turret.h"
-#include "NaturalMove.h"
+
 #include "AimAtCursorAC.h"
+#include "Reticule.h"
+#include "InputMovement.h"
 
-#define PI 3.14159265359
+#include "Turret.h"
+#include "ReloadInputComponent.h"
+#include "ShootIC.h"
+#include "GameManager.h"
 
-Vehicle::Vehicle(Resources::VehicleId id) {
-	Resources::VehicleInfo& r = Resources::getInstance()->vehicles_[id];
+#include "EnemyManager.h"
 
-	this->setWidth(r.width);
-	this->setHeight(r.height);
+unique_ptr<Vehicle> Vehicle::instance_ = nullptr;
 
-	setPosition(Vector2D(100, 0));
-
-	// Physics
-	/*
-	phyO_ = new PhysicObject (b2_dynamicBody , r.width, r.height,
-							  position_.getX(), position_.getY());
-	this->addLogicComponent(phyO_);
-	*/
-
-	// Sprite
-	sprite_ = new Animation();
-	sprite_->loadAnimation(r.idlePath, "idle");
-	sprite_->playAnimation("idle");
-	this->addRenderComponent(sprite_);
-
-	// Health
-	health_ = new Health(100);
-	addLogicComponent(health_);
-
-	aimC_ = new AimAtCursorAC();
+Vehicle::Vehicle() {
+	currentTurret_ = 0;
+	zombie_ = false; 
+	//alive_ = true;
 }
-
 
 Vehicle::~Vehicle() {
-	delete phyO_; phyO_ = nullptr;
-	delete sprite_; sprite_ = nullptr;
-	delete currentTurret_; currentTurret_ = nullptr;
-	delete health_; health_ = nullptr;
+	delete shIC_; shIC_ = nullptr;
+	delete control_; control_ = nullptr;
+	delete shopIC_; shopIC_ = nullptr;
+	delete smLC_; smLC_ = nullptr;
+	delete reIC_; reIC_ = nullptr;
+	delete changeWeaponIC_; changeWeaponIC_ = nullptr;
+
+	for (int i = 0; i < MAXTURRETS; i++) {
+		if (turrets_[i] != nullptr) {
+			delete turrets_[i];
+			turrets_[i] = nullptr;
+		}
+	}
 }
 
-Health * Vehicle::getHealthComponent() {
-	return health_;
-}
 
-AimComponent * Vehicle::GetAimComponent()
+ReloadInputComponent * Vehicle::GetReloadIC()
 {
-	return aimC_;
+	return reIC_;
 }
 
-void Vehicle::Shoot()
+ShootIC * Vehicle::GetShootIC()
 {
-	currentTurret_->Shoot();
+	return shIC_;
 }
 
-void Vehicle::Reload()
-{
-	currentTurret_->InitiateReload();
-}
+
 
 void Vehicle::EquipTurret(Turret * turret)
 {
-	currentTurret_ = turret;
-	currentTurret_->AttachToVehicle(this);
+	int i = 0;
+	while (i < MAXTURRETS && turrets_[i] != nullptr)
+		i++;
+	if (i < MAXTURRETS) {
+		currentTurret_ = i;
+		turrets_[currentTurret_] = turret;
+		Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
+		turrets_[currentTurret_]->AttachToVehicle(this);
+		turrets_[currentTurret_]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
+	}
+	else {
+		cout << "maximo numero de torretas alcanzado" << endl;
+	}
+
 }
+
+void Vehicle::ChangeTurret()
+{
+	turrets_[currentTurret_]->CancelReload();
+	currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
+	while (turrets_[currentTurret_] == nullptr) {
+		currentTurret_ = (currentTurret_ + 1) % MAXTURRETS;
+	}
+	Reticule::getInstance()->ChangeReticule(turrets_[currentTurret_]->GetReticule());
+	shIC_->ChangeInputMode(turrets_[currentTurret_]->isAutomatic());
+	turrets_[currentTurret_]->ResetChargeProgress();
+}
+
+Turret * Vehicle::getCurrentTurret()
+{
+	return turrets_[currentTurret_];
+}
+
+
 void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {
-	if (event.type == SDL_KEYDOWN) {
-
-		if (event.key.keysym.sym == SDLK_w) upPressed = true;
-
-		if (event.key.keysym.sym == SDLK_s) downPressed = true;
-
-		if (event.key.keysym.sym == SDLK_d) rightPressed = true;
-
-		if (event.key.keysym.sym == SDLK_a) leftPressed = true;
-
-		if (event.key.keysym.sym == SDLK_SPACE) spacePressed = true;
-
-	}
-
-	else if (event.type == SDL_KEYUP) {
-
-		if (event.key.keysym.sym == SDLK_w) upPressed = false;
-
-		if (event.key.keysym.sym == SDLK_s) downPressed = false;
-
-		if (event.key.keysym.sym == SDLK_d) rightPressed = false;
-
-		if (event.key.keysym.sym == SDLK_a) leftPressed = false;
-
-		if (event.key.keysym.sym == SDLK_SPACE) spacePressed = false;
-
-	}
-	if(currentTurret_!=nullptr) currentTurret_->handleInput(time, event);
 	Container::handleInput(time, event);
+	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
+	EnemyManager::getInstance()->input(time, event);
 }
 
 void Vehicle::update(Uint32 time) {
-	velocity_.normalize();
-
-	if (downPressed) {
-
-		if (speed_ > velMaxMarchaAtras_) speed_ = speed_ - aceleracion_;
-
-	}
-
-	if (rightPressed) {
-
-		if (isMoving_()) steeringWheel('R');
-
-		if (spacePressed) handBrake_ = true;
-
-	}
-
-	if (leftPressed) {
-
-		if (isMoving_()) steeringWheel('L');
-
-		if (spacePressed) handBrake_ = true;
-
-	}
-
-	if (!spacePressed) {
-
-		handBrake_ = false;
-
-		double rotationRadiant = (rotation_ * PI) / 180.0;
-
-		if (rotation_ <= 180) velocity_.setX(abs(sin(rotationRadiant) * 2));
-
-		else velocity_.setX(-abs(sin(rotationRadiant) * 2));
-
-		if (rotation_ >= 90 && rotation_ <= 270)velocity_.setY(abs(cos(rotationRadiant) * 2));
-
-		else velocity_.setY(-abs(cos(rotationRadiant) * 2));
-
-	}
-
-	if (!handBrake_)
-
-		position_ = position_ + velocity_ * speed_;
-
-	else
-
-		position_ = position_ + velocity_ * speed_ / 1.5;
-
-
-
-	// when exiting from one side appear in the other	/////////////////////////////////////////////////////////////////////////////////////// DELETE!
-
-	if (position_.getX() >= 1280) {
-
-		position_.setX(1 - width_);
-
-	}
-
-	else if (position_.getX() + width_ <= 0) {
-
-		position_.setX(1280);
-
-	}
-
-	if (position_.getY() >= 720) {
-
-		position_.setY(1 - height_);
-
-	}
-
-	else if (position_.getY() + height_ <= 0) {
-
-		position_.setY(720);
-
-	}
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// DELETE!
-
-				//Aceleration//
-
-	if (!upPressed)
-
-		frictionalForce();
-
-	else if (speed_ < velMax_)
-
-		speed_ = speed_ + aceleracion_;
-
-
-
-	if (abs(speed_) < min_Velocity) {
-
-		speed_ = 0;
-
-	}
-	if (currentTurret_ != nullptr)
-		currentTurret_->update(time);
-
 	Container::update(time);
+
+	if (turrets_[currentTurret_] != nullptr)
+		turrets_[currentTurret_]->update(time);
+
+	if (alive_ && health_->getHealth() <= 0) {
+		//zombie_ = true; //estable el flag
+		alive_ = false;
+		deathTime_ = SDL_GetTicks();
+	}
+	if (!alive_ && SDL_GetTicks() - deathTime_ >= 500) {
+		Respawn();
+	}
+
 }
+
+bool Vehicle::receiveEvent(Event & e) {
+
+	switch (e.type_)
+	{
+	case STARTED_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME_MOVING, DMG_FREQUENCY);
+		break;
+
+	case STOPPED_BACK_MOVING_FORWARD:
+		health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+		break;
+
+	case TURN_LEFT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("leftTurn");
+		break;
+
+	case TURN_RIGHT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("rightTurn");
+		break;
+
+	case TURN_DEFAULT:
+		if (!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("default");
+		break;
+
+	case STOP_BACKFORWARD:
+		if(!sprite_->isAnimationPlaying("hitDamage"))
+			sprite_->setAnimation("backStop");
+		break;
+
+	case IMPACT_DAMAGE:
+		sprite_->playAnimation("hitDamage", 30.0f, false); //play establece anim como currentAnm y al renderizar secciona por frames
+		//como loop es false vuelve a la animaci�n por defecto
+		Event eV(this, IMPACT_DAMAGE);
+		broadcastEvent(eV); //TaxiSoundManager recieved this message
+		break;
+
+	}
+
+	return true;
+}
+
+void Vehicle::SaveSpawnPoint(Vector2D spawn)
+{
+	spawnPosition_ = spawn;
+}
+
+void Vehicle::Respawn()
+{
+	GameManager::getInstance()->calculatePuntuation();
+	Vehicle::getInstance()->setPosition(spawnPosition_);
+	Vector2D v = spawnPosition_;
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);
+	spawnPosition_ = v;
+	health_->resetHealth();
+	alive_ = true;
+}
+
 
 void Vehicle::render(Uint32 time) {
 	Container::render(time);
 
-	if (currentTurret_ != nullptr)
-		currentTurret_->render(time);
+	if (turrets_[currentTurret_] != nullptr)
+		turrets_[currentTurret_]->render(time);
 }
 
 
-bool Vehicle::isMoving_()
+float32 Vehicle::GetMaxBackwardSpeed()
 {
-	return abs(speed_) > 0.2;
+	return maxBackwardSpeed_;
 }
 
-void Vehicle::frictionalForce()
+float32 Vehicle::GetAcceleration()
 {
-	if (speed_ > 0)
-
-	{
-
-		speed_ = speed_ - constanteRozamiento_;
-
-	}
-
-	else if (speed_ < 0)
-
-	{
-
-		speed_ = speed_ + constanteRozamiento_;
-
-	}
+	return acceleration_;
 }
 
-void Vehicle::steeringWheel(char d)
+Vector2D Vehicle::getSpawnPosition () {
+	return spawnPosition_;
+}
+
+
+void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 {
-	if (d == 'R') {
+	this->setWidth(r.width);
+	this->setHeight(r.height);
 
-		rotation_ = ((int)rotation_ + 360 + velGiro_) % 360;
+	// Sprite
+	sprite_ = new Animation();
+	sprite_->loadAnimation(r.idlePath, "default");
+	sprite_->loadAnimation(r.leftTurnPath, "leftTurn");
+	sprite_->loadAnimation(r.rightTurnPath, "rightTurn"); 
+	sprite_->loadAnimation(r.backTurnPath, "backStop");
+	sprite_->loadAnimation(r.impDamagePath, "hitDamage", 4, 3); //las filas y columnas tienen que pasar por const Globales
 
-		if (handBrake_) velocity_ = velocity_.rotate((velGiro_ - drift_));
+	this->addRenderComponent(sprite_);
+	sprite_->setAnimation("default");
 
-		else velocity_ = velocity_.rotate(velGiro_);
+	// Health
+	health_ = new Health(TAXI_HP);
+	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
+	addLogicComponent(health_);
+	alive_ = true;
 
-	}
 
-	else if (d == 'L') {
+	shIC_ = new ShootIC();
+	reIC_ = new ReloadInputComponent();
+	aimC_ = new AimAtCursorAC();
+	changeWeaponIC_ = new ChangeWeaponIC();
+	addInputComponent(changeWeaponIC_);
 
-		rotation_ = ((int)rotation_ + 360 - velGiro_) % 360;
 
-		if (handBrake_) velocity_ = velocity_.rotate(-(velGiro_ - drift_));
+	// Movement
+	this->maxSpeed_ = r.velMax;
+	this->maxBackwardSpeed_ = r.velBackwardMax;
+	this->turnSpeed_ = r.turnSpeed;
+	this->acceleration_ = r.acceleration;
 
-		else velocity_ = velocity_.rotate(-velGiro_);
+	// Physics
+	phyO_ = new PhysicObject(b2_dynamicBody, r.width, r.height, position_.x, position_.y);
+	phyO_->setCollisions(0, TAXI_CATEGORY);
+	this->addLogicComponent(phyO_);
 
+	// Control
+	control_ = new InputMovement(k, this);
+	this->addInputComponent(control_);
+	this->addLogicComponent(control_);
+	control_->registerObserver(this);
+
+	// Shop control
+	shopIC_ = new EnterShopIC ();
+	this->addInputComponent (shopIC_);
+
+	//Sound
+	smLC_ = new TaxiSoundManagerCP(this);
+	this->addLogicComponent(smLC_);
+	this->registerObserver(smLC_); //taxi es tambi�n un observable.  enviar� los mensajes correspondientes a su comp TaxiSoundManagerCP
+
+	control_->registerObserver(smLC_);
+
+	//turrets
+	for (int i = 0; i < MAXTURRETS; i++) {
+		turrets_[i] = nullptr;
 	}
 }
-
-void Vehicle::setPosition(const Vector2D & pos, bool force) {
-	GameObject::setPosition(pos);
-
-	if (force) {
-		b2Vec2 nextPos = b2Vec2(pos.getX(), pos.getY()) + 
-						 b2Vec2(phyO_->getOrigin().x * width_,
-							   phyO_->getOrigin().y * height_);
-
-		nextPos = b2Vec2(nextPos.x * Resources::getInstance()->physicsScalingFactor,
-						 nextPos.y * Resources::getInstance()->physicsScalingFactor);
-
-		phyO_->getBody()->SetTransform(nextPos, phyO_->getBody()->GetAngle());
-	}
-}
-

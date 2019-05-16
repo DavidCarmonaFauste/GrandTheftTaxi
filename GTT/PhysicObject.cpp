@@ -1,50 +1,47 @@
 #include "PhysicObject.h"
 
 
-PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, float32 angle, b2Vec2 origin) {
+PhysicObject::PhysicObject(b2BodyType type, int w, int h, int x, int y, bool createFixture) {
 	visualSize_ = Vector2D(w, h);
-	origin_ = origin;
+
+	Vector2D halfSize = Vector2D(w / 2 * PHYSICS_SCALING_FACTOR, h / 2 * PHYSICS_SCALING_FACTOR);
 
 	// Body definition and instantiation
 	bodyDef_ = b2BodyDef();
-	bodyDef_.position.Set(x * Resources::getInstance()->physicsScalingFactor + (w / 2 * Resources::getInstance()->physicsScalingFactor),
-		y * Resources::getInstance()->physicsScalingFactor + (h / 2 * Resources::getInstance()->physicsScalingFactor));
+	bodyDef_.position.Set(x * PHYSICS_SCALING_FACTOR + (w / 2 * PHYSICS_SCALING_FACTOR),
+		y * PHYSICS_SCALING_FACTOR + (h / 2 * PHYSICS_SCALING_FACTOR));
 	bodyDef_.type = type;
 	body_ = Game::getInstance()->getWorld()->CreateBody(&bodyDef_);
 
 	// Fixture definition and instantiation
-	fixtureDef_ = b2FixtureDef();
-	shape_.SetAsBox(w / 2 * Resources::getInstance()->physicsScalingFactor,
-		h / 2 * Resources::getInstance()->physicsScalingFactor,
-		origin_, angle);
-	fixtureDef_.shape = &shape_;
-	fixtureDef_.density = 1;
-	body_->CreateFixture(&fixtureDef_);
-
+	if (createFixture) {
+		fixtureDef_ = b2FixtureDef();
+		shape_.SetAsBox(halfSize.x, halfSize.y);
+		fixtureDef_.shape = &shape_;
+		fixtureDef_.density = 1;
+		fixtureDef_.friction = DEFAULT_FRICTION;
+		body_->CreateFixture(&fixtureDef_);
+	}
 }
 
 
 PhysicObject::~PhysicObject() {
-	Game::getInstance()->getWorld()->DestroyBody(body_); body_ = nullptr;
+	Game::getInstance()->getWorld()->DestroyBody(body_); 
+	body_ = nullptr;
 }
 
 void PhysicObject::update(GameObject * o, Uint32 deltaTime) {
-	Vector2D nextPos = Vector2D(body_->GetPosition().x,
-		body_->GetPosition().y) / Resources::getInstance()->physicsScalingFactor;
+	Vector2D nextPos = body_->GetPosition();
+	nextPos.Divide(PHYSICS_SCALING_FACTOR);
 
+	if (abs(body_->GetLinearVelocity().Length()) < 0.5)
+		body_->SetLinearVelocity(Vector2D());
 
-	// Set the GameObject position to the physics position
-	// Subtract the visual size multiplied by the origin to
-	// fix the difference between coordinate system origins
-	// (those being the top left corner for SDL and the origin
-	// defined by the user for the box2D shape).
-	o->setPosition(nextPos - (Vector2D(visualSize_.getX() * origin_.x,
-		visualSize_.getY() * origin_.y)));
+	if (abs(body_->GetAngularVelocity()) < 0.5)
+		body_->SetAngularVelocity(0);
 
-
+	o->setPosition(nextPos - (Vector2D(visualSize_.x/2, visualSize_.y/2)));
 	o->setRotation(body_->GetAngle() * 180 / M_PI);
-	o->setVelocity(Vector2D(body_->GetLinearVelocity().x, body_->GetLinearVelocity().y)
-		/ Resources::getInstance()->physicsScalingFactor);
 }
 
 const b2Vec2 PhysicObject::getOrigin() {
@@ -53,4 +50,23 @@ const b2Vec2 PhysicObject::getOrigin() {
 
 b2Body * PhysicObject::getBody() {
 	return body_;
+}
+
+void PhysicObject::setSensor(bool sensor) {
+	body_->GetFixtureList()->SetSensor(sensor);
+}
+
+bool PhysicObject::isSensor() {
+	return body_->GetFixtureList()->IsSensor();
+}
+
+// The category bits are all set to 0 by default (no group)
+// The mask bits are all set to 1 by default (collides with everything)
+void PhysicObject::setCollisions(int16 groupIndex, uint16 category, uint16 mask) {
+	b2Filter data;
+	data.groupIndex = groupIndex;
+	data.categoryBits = category;
+	data.maskBits = mask;
+
+	body_->GetFixtureList()->SetFilterData(data);
 }

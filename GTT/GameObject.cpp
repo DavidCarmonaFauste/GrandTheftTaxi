@@ -9,8 +9,6 @@ GameObject::GameObject() :
 	width_(),
 	height_(),
 	position_(),
-	velocity_(),
-	acceleration_(0, 0),
 	rotation_(0.0)
 {
 }
@@ -18,16 +16,6 @@ GameObject::GameObject() :
 
 GameObject::~GameObject() {
 }
-
-//game_(game),
-/*Game * GameObject::getGame() const
-{
-	return game_;
-}*/
-
-/*void GameObject::setGame(Game* game) {
-	game_ = game;
-}*/
 
 bool GameObject::isActive() const {
 	return active_;
@@ -62,28 +50,13 @@ Vector2D GameObject::getPosition() const {
 }
 
 void GameObject::setPosition(const Vector2D &pos, bool force) {
-	position_.set(pos);
+	position_ = pos;
 }
 
-Vector2D GameObject::getVelocity() const {
-	return velocity_;
-}
-
-void GameObject::setVelocity(const Vector2D &vel) {
-	velocity_.set(vel);
-}
-
-Vector2D GameObject::getAcceleration() const {
-	return acceleration_;
-}
 
 void GameObject::scale(double s) {
 	width_ *= s;
 	height_ *= s;
-}
-
-void GameObject::setAcceleration(const Vector2D &vel) {
-	acceleration_.set(vel);
 }
 
 double GameObject::getRotation() const {
@@ -99,6 +72,6 @@ void GameObject::init() {
 
 Vector2D GameObject::getCenter()
 {
-	Vector2D c = Vector2D(position_.getX() + width_ / 2, position_.getY() + height_ / 2);
+	Vector2D c = Vector2D(position_.x + width_ / 2, position_.y + height_ / 2);
 	return c;
 }

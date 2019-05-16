@@ -1,30 +1,86 @@
 #include "MainState.h"
 
-MainState::MainState() {
-	// Tilemap
-	tilemap_ = new TileMap("./../Assets/maps/test.tmx");
-	stage_.push_back(tilemap_);
+#include "Turret.h"
+#include "ReloadingDisplay.h"
+#include "AmmoDisplay.h"
 
-	// Vehicles
-	taxi_ = new Vehicle(Resources::getInstance()->Taxi);
-	stage_.push_back(taxi_);
+//singleton
+#include "Vehicle.h"
+#include "ProyectilePool.h"
+#include "Reticule.h"
+#include "NodeMapsManager.h"
+#include "EnemyManager.h"
+#include "GameManager.h"
+#include "ShopManager.h"
 
-	// Systems
-	moneySystem = new Money();
-	stage_.push_back(moneySystem);
-
-	// UI
-	UI_ = new UI();
-	taxi_->getHealthComponent()->registerObserver(UI_);
-	moneySystem->registerObserver(UI_);
-	stage_.push_back(UI_);
-}
-
+MainState::MainState(){}
 
 MainState::~MainState() {
-	for (auto o : stage_) {
-		delete o; o = nullptr;
-	}
-	stage_.clear();
+	delete tilemap_; tilemap_ = nullptr;
+	delete cameraFollow_; cameraFollow_ = nullptr;
 }
+
+//start is called when GameStateMachine change state
+void MainState::start() {
+	// Taxi	
+	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
+	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
+	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
+
+	// Tilemap
+	tilemap_ = new TileMap(PATH_LEVEL_1);
+
+	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
+	EnemyManager::getInstance()->ReadEnemyInfo();
+
+	//Reticule
+	Reticule::getInstance()->setPosition(Vehicle::getInstance()->getPosition());
+
+	//Camera logic
+	cameraFollow_ = new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25);
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow_);
+
+	// Camera positionin
+	Vector2D cameraPos = Vehicle::getInstance()->getPosition();
+	cameraPos -= Vector2D(Game::getInstance()->getCamera(GAME_CAMERA)->getWidth() / 2,
+		Game::getInstance()->getCamera(GAME_CAMERA)->getHeight() / 2);
+	Game::getInstance()->getCamera(GAME_CAMERA)->setPosition(cameraPos);
+
+
+	// Systems
+	//...
+
+	// UI
+	//...
+	Vehicle::getInstance()->getHealthComponent()->registerObserver(UI::getInstance());
+
+	//pushBack GameObj to list
+	stage_.push_back(tilemap_);
+	stage_.push_back(Vehicle::getInstance());
+	stage_.push_back(EnemyManager::getInstance());
+	stage_.push_back(GameManager::getInstance());
+	stage_.push_back(ShopManager::getInstance());
+
+	stage_.push_back(UI::getInstance());
+	stage_.push_back(ProyectilePool::getInstance());
+	stage_.push_back(Reticule::getInstance());
+
+	GameManager::getInstance()->setEnemyCount(EnemyManager::getInstance()->GetEnemyCount());
+
+	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
+}
+
+void MainState::end()
+{
+	EnemyManager::getInstance()->deactivateIA();
+}
+
+
+void MainState::update(Uint32 deltaTime) {
+	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(true);
+	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(true);
+
+	GameState::update(deltaTime);
+}
+
 

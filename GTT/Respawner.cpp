@@ -1,6 +1,4 @@
 #include "Respawner.h"
-#include <map>
-
 
 Respawner::Respawner(Health *healthToObserve) {
 	healthToObserve->registerObserver(this);
@@ -9,9 +7,8 @@ Respawner::Respawner(Health *healthToObserve) {
 
 
 Respawner::~Respawner() {
-	std::map<string, GameObject*>::iterator it;
-	for (it = respawnPoints_.begin(); it != respawnPoints_.end(); it++) {
-		delete it->second;
+	for (auto respawnPoint : respawnPoints_) {
+		delete respawnPoint.second;
 	}
 	respawnPoints_.clear();
 }
@@ -24,7 +21,7 @@ void Respawner::update(GameObject * o, Uint32 deltaTime) {
 		respawnReady_ = false;
 
 		Event e(this, RESPAWNED);
-		broadcastEvent(&e);
+		broadcastEvent(e);
 	}
 }
 
@@ -73,9 +70,9 @@ GameObject * Respawner::getRespawnPoint(string name) {
 		return nullptr;
 }
 
-bool Respawner::receiveEvent(Event * e) {
-	if (e->type_ == HEALTH_CHANGED) {
-		HealthChangedEvent* healthEvent = static_cast<HealthChangedEvent*>(e);
+bool Respawner::receiveEvent(Event& e) {
+	if (e.type_ == HEALTH_CHANGED) {
+		HealthChangedEvent* healthEvent = static_cast<HealthChangedEvent*>(&e);
 
 		if (healthEvent->currentHealth_ <= 0) {
 			respawn();
@@ -86,14 +83,12 @@ bool Respawner::receiveEvent(Event * e) {
 }
 
 string Respawner::searchNearestRespawn() {
-	map<string, GameObject*>::iterator it;
 	string closestGameObject = "";
 
-	for (it = respawnPoints_.begin(); it != respawnPoints_.end(); it++) {
-		if (closestGameObject == "" ||
-			(*it).second->getPosition().magnitude() < respawnPoints_[closestGameObject]->getPosition().magnitude())
+	for (auto respawnPoint:respawnPoints_) {
+		if (closestGameObject == "" || respawnPoint.second->getPosition().Length() < respawnPoints_[closestGameObject]->getPosition().Length())
 
-			closestGameObject = (*it).first;
+			closestGameObject = respawnPoint.first;
 	}
 
 	return closestGameObject;

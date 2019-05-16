@@ -17,18 +17,20 @@ public:
 		SDL_Rect* clip = nullptr, double angle = 0);
 
 	// Setters and getters
-	void setPos(int x, int y, bool center = false);
-	Vector2D getPos();
+	virtual void setPosition(const Vector2D &pos, bool force = false) override;
 	void setSize(int w, int h, bool resetZoom = false);
 	virtual void setWidth(double width) override;
 	virtual void setHeight(double height) override;
 
 	void setZoom(float zoom, bool center = true);
+	void setCentered (bool center);
 	float getZoom();
+	bool getCentered ();
 
 private:
 	SDL_Rect* cameraRect_;
 
 	float zoom_;
+	bool centered = true;
 };
 

@@ -4,19 +4,22 @@
 #include <SDL.h>
 #include "GameObject.h"
 
-
-
 class GameState
 {
 
 protected:
 	list<GameObject*> stage_;
 
-
 public:
 
 	GameState(){}
-	~GameState(){}
+	virtual ~GameState(){
+		stage_.clear();
+	}
+
+	virtual void start() = 0;
+	virtual void end() = 0;
+	virtual void updateState() {};
 
 	virtual void update(Uint32 deltaTime) { for (GameObject* o : stage_) o->update(deltaTime); }
 
@@ -33,5 +36,9 @@ public:
 	}
 	virtual void render(Uint32 deltaTime) const { for (GameObject* o : stage_) o->render(deltaTime); }
 
+
+	void addGameObject(GameObject *gameObject) {
+		stage_.push_back(gameObject);
+	};
 };
 

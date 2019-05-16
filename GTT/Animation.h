@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <map>
 #include "Texture.h"
 #include "RenderComponent.h"
 #include "CameraType.h"
@@ -16,11 +15,13 @@ public:
 	virtual ~Animation();
 
 	// Animation
-	void loadAnimation(string path, string name, int columns = 1, int rows = 1);
+	bool loadAnimation(string path, string name = "-1", int columns = 1, int rows = 1);
 	bool animationExists(string name);
 
 	bool isAnyAnimationPlaying();
 	bool isAnimationPlaying(string name);
+
+	string getCurrentAnimation();
 
 	bool playAnimation(string name, float speed = true, bool loop = true);
 	bool stopAnimation();
@@ -28,15 +29,21 @@ public:
 	bool resumeAnimation();
 
 	virtual void render(GameObject* o, Uint32 deltaTime) override;
-
+	
 	void setCamera(cameraType cam);
 
+	void setAnimation(string s);
+
+
+
 private:
+
+
 	cameraType cam_ = GAME_CAMERA;
 	SDL_Rect* destRect;
 
 	map<string, pair<Texture*, SDL_Rect*>> animations;
-	string currentAnim = "";
+	string currentAnim = "-1";
 	int currentFrame = 0;
 	double elapsedTime = 0;
 	int animationRows = 1, animationColumns = 1;
@@ -48,4 +55,5 @@ private:
 
 	void renderAnimation(GameObject *o, Uint32 deltaTime);
 	void resetAnimationValues();
+
 };

@@ -1,59 +1,89 @@
+#include "ControlType.h"
+#include "Car.h"
+#include "TaxiSoundManagerCP.h"
+#include "DialoguesManager.h"
+#include "EnterShopIC.h"
+#include "ChangeWeaponIC.h"
+
 #pragma once
-#include "Container.h"
-#include "PhysicObject.h"
-#include <Box2D/Box2D.h>
-#include "Animation.h"
-#include "Resources.h"
-#include <vector>
-#include "Health.h"
-#include <math.h> 
 
 using namespace std;
 
 class Turret;
-class AimComponent;
+class ReloadInputComponent;
+class ShootIC;
 
-class Vehicle :
-	public Container, public Observable
+class Vehicle : public Car
 {
+	//hide copyBuilder and 	assignment operator
+	Vehicle(Vehicle &) = delete;
+	Vehicle & operator=(const Vehicle &) = delete;
+
+	static unique_ptr<Vehicle > instance_; //ptr instance class
+
+
 public:
-	Vehicle( Resources::VehicleId id);
+	//builder
+	Vehicle();
 	virtual ~Vehicle();
 
-	Health* getHealthComponent();
+	//init singleton class
+	inline static void initInstance() {
+		if (instance_.get() == nullptr) {
+			instance_.reset(new Vehicle());
+		}
+	}
+	//get singleton class
+	inline static Vehicle* getInstance() {
+		//SDL_assert(instance_.get() != nullptr); //lanza una mensaje con la primera llamada a getInstance, porque devuelve null
+		return instance_.get();
+	}
 
-	virtual AimComponent* GetAimComponent();
-	virtual void Shoot();
-	virtual void Reload();
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
+
+	void initAtributtes(VehicleInfo r, KeysScheme k);
+
+
+	float32 GetMaxBackwardSpeed();
+	float32 GetAcceleration();
+	Vector2D getSpawnPosition ();
+
+	virtual ReloadInputComponent* GetReloadIC();
+	virtual ShootIC* GetShootIC();
 	virtual void EquipTurret(Turret* turret);
-	virtual void setPosition(const Vector2D &pos, bool force = false) override;
+	virtual void ChangeTurret();
+	Turret* getCurrentTurret();
+
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
-	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
+	virtual void update(Uint32 time);
 
-protected:
-	PhysicObject* phyO_;
-	Animation* sprite_;
-	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
-	double velMax_ = 4;
-	double velMaxMarchaAtras_ = -2.5;
-	double aceleracion_ = 0.1;
-	double constanteRozamiento_ = 0.02;
-	int velGiro_ = 3;
-	bool handBrake_ = false;
-	double drift_ = 2;
-	double min_Velocity = 0.01;
-	bool throttle_ = false;
-	bool upPressed = false;
-	bool downPressed = false;
-	bool rightPressed = false;
-	bool leftPressed = false;
-	bool spacePressed = false;
-	double speed_;
-	bool isMoving_();
-	void frictionalForce();
-	void steeringWheel(char d);
+	virtual bool receiveEvent(Event& e);
+	virtual void SaveSpawnPoint(Vector2D spawn);
 
-	Turret* currentTurret_;
-	Health* health_;
+	private:
+	void Respawn();
+
+	int currentTurret_;  
+	Vector2D spawnPosition_;
+	float32 maxBackwardSpeed_;
+	float32 acceleration_;
+	bool alive_;
+	bool zombie_;
+	int deathTime_;
+
+	static const int MAXTURRETS = 4;
+	Turret* turrets_[MAXTURRETS];
+
+	//components
+	ControlType* control_;
+	ReloadInputComponent* reIC_;
+	ShootIC* shIC_;
+	EnterShopIC* shopIC_;
+	ChangeWeaponIC *changeWeaponIC_;
+
+	TaxiSoundManagerCP* smLC_;
 };

@@ -3,7 +3,6 @@
 #include "Health.h"
 #include "GameObject.h"
 #include "Observer.h"
-#include <map>
 
 class Respawner : public LogicComponent,
 	public Observer,
@@ -34,7 +33,7 @@ public:
 	bool hasRespawnPoint(string name);
 	GameObject* getRespawnPoint(string name);
 
-	virtual bool receiveEvent(Event *e) override;
+	virtual bool receiveEvent(Event &e) override;
 
 private:
 	map<string, GameObject*> respawnPoints_;

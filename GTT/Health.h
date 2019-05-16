@@ -16,6 +16,7 @@ public:
 	int getMaxHealth();
 	void damage(int damage);
 	void heal(int heal);
+	void setDamageOverTime(int damage, int frequency);
 
 	// Sets the current health to the maximum health
 	void resetHealth();
@@ -24,10 +25,19 @@ public:
 	// 'heal()' or 'damage()'?
 	void setHealth(int health);
 
-	virtual bool receiveEvent(Event *e) override;
+	void increaseMaxHealth();
+
+	virtual bool receiveEvent(Event &e) override;
 
 private:
 	int maxHealth_;
 	int health_;
+
+	// Damage over time attributes (all in ms)
+	int damageOverTimeValue_ = 0;
+	Uint32 damageFrequency_ = 0;
+	Uint32 damageTimer_ = 0;
+
+	void damageOverTime(Uint32 deltaTime);
 };
 
