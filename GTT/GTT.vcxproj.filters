@@ -551,9 +551,6 @@
     <ClInclude Include="Phrases.h">
       <Filter>Archivos de encabezado\UI</Filter>
     </ClInclude>
-    <ClInclude Include="DeathState.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="FuelUpgrade.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -565,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="ShopManager.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathState.h">
+      <Filter>Archivos de encabezado\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -415,6 +415,18 @@ const int PRICE_FOR_25 = 20;
 // --------------------------------------------
 
 
+//SHOP INFO -----------------------------------
+
+	//Sizes
+	const int WEAPONS_BACKGROUNDS_W = 400;
+	const int WEAPONS_BACKGROUNDS_H = 100;
+
+	//Positions
+	const Vector2D ARMORY_TEXT_POSITION = { (CAMERA_WIDHT / 9) ,(CAMERA_HEIGHT / 8) };
+	//Paths
+
+//---------------------------------------------
+
 //TAXI SOUND MANAGER
 const int VOL_CHANNEL_2 = 90; //regular engine
 const int VOL_CHANNEL_3 = 40; //aceleration
