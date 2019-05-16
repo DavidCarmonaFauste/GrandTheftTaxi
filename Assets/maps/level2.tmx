@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="150" height="175" tilewidth="32" tileheight="32" nextobjectid="198">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="150" height="175" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="233">
  <tileset firstgid="1" name="zone2" tilewidth="32" tileheight="32" tilecount="168" columns="14">
   <image source="../tilesets/zone2.png" width="448" height="384"/>
  </tileset>
@@ -15,7 +15,7 @@
  <tileset firstgid="700" name="borders" tilewidth="32" tileheight="32" tilecount="143" columns="11">
   <image source="../tilesets/borders.png" width="352" height="416"/>
  </tileset>
- <layer name="Tile Layer 1" width="150" height="175">
+ <layer id="1" name="Tile Layer 1" width="150" height="175">
   <data encoding="csv">
 712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,749,712,712,712,712,712,712,712,712,712,836,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,834,712,712,712,712,712,712,712,712,712,712,749,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,
 712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,836,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,720,834,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,712,
@@ -194,7 +194,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup color="#a40000" name="Collisions" visible="0">
+ <objectgroup color="#a40000" id="2" name="Collisions" visible="0">
   <object id="1" x="3840" y="1056" width="672" height="64"/>
   <object id="2" x="3456" y="1056" width="384" height="32"/>
   <object id="3" x="3072" y="864" width="384" height="192"/>
@@ -361,8 +361,50 @@
   <object id="194" x="3360" y="1088" width="32" height="32"/>
   <object id="195" x="3328" y="1280" width="512" height="64"/>
  </objectgroup>
- <objectgroup color="#c4a000" name="Gas" visible="0">
+ <objectgroup color="#c4a000" id="3" name="Gas" visible="0">
   <object id="196" x="1760" y="1184" width="32" height="160"/>
   <object id="197" x="2528" y="2752" width="192" height="32"/>
+ </objectgroup>
+ <objectgroup color="#00007f" id="4" name="District2">
+  <object id="198" name="Node1" x="2944" y="1152" width="64" height="64"/>
+  <object id="199" name="Node2" x="2944" y="928" width="64" height="64"/>
+  <object id="200" name="Node3" x="1824" y="928" width="64" height="64"/>
+  <object id="201" name="Node4" x="1056" y="928" width="64" height="64"/>
+  <object id="202" name="Node5" x="1056" y="1952" width="64" height="64"/>
+  <object id="203" name="Node6" x="1440" y="1952" width="64" height="64"/>
+  <object id="204" name="Node7" x="1440" y="1472" width="64" height="64"/>
+  <object id="205" name="Node8" x="1824" y="1472" width="64" height="64"/>
+  <object id="206" name="Node9" x="1824" y="1728" width="64" height="64"/>
+  <object id="207" name="Node10" x="2240" y="1728" width="64" height="64"/>
+  <object id="208" name="Node11" x="2944" y="1728" width="64" height="64"/>
+  <object id="209" name="Node12" x="3424" y="1728" width="64" height="64"/>
+  <object id="210" name="Node13" x="3424" y="2528" width="64" height="64"/>
+  <object id="211" name="Node14" x="2944" y="2528" width="64" height="64"/>
+  <object id="212" name="Node15" x="2944" y="2816" width="64" height="64"/>
+  <object id="214" name="Node16" x="2400" y="2816" width="64" height="64"/>
+  <object id="215" name="Node17" x="2240" y="2816" width="64" height="64"/>
+  <object id="216" name="Node18" x="2240" y="2592" width="64" height="64"/>
+  <object id="217" name="Node19" x="1312" y="2592" width="64" height="64"/>
+  <object id="218" name="Node20" x="800" y="2592" width="64" height="64"/>
+  <object id="219" name="Node21" x="800" y="1952" width="64" height="64"/>
+  <object id="220" name="Node22" x="1312" y="3424" width="64" height="64"/>
+  <object id="221" name="Node23" x="960" y="3424" width="64" height="64"/>
+  <object id="222" name="Node24" x="960" y="4064" width="64" height="64"/>
+  <object id="223" name="Node25" x="1952" y="4064" width="64" height="64"/>
+  <object id="224" name="Node26" x="1952" y="3424" width="64" height="64"/>
+  <object id="225" name="Node27" x="2400" y="3424" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#00aa00" id="6" name="Player2">
+  <object id="226" name="PlayerSpawn" x="3392" y="1152" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#55007f" id="7" name="Enemies">
+  <object id="227" name="Spawn1" x="1824" y="4064" width="64" height="64"/>
+  <object id="228" name="Spawn2" x="800" y="2464" width="64" height="64"/>
+  <object id="229" name="Spawn3" x="2240" y="1888" width="64" height="64"/>
+  <object id="230" name="Spawn4" x="1728" y="1472" width="64" height="64"/>
+  <object id="231" name="Spawn5" x="1184" y="928" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup color="#ff5500" id="8" name="Bridge">
+  <object id="232" x="3968" y="1120" width="32" height="128"/>
  </objectgroup>
 </map>

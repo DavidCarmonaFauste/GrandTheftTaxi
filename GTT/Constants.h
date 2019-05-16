@@ -113,6 +113,9 @@ const struct textureInfo {
 // PHYSICS
 const enum COLLISION_GROUP {
 	TILES_GROUP = -1,
+	TILES_GROUP_LVL_1 = 1,
+	TILES_GROUP_LVL_1_OPEN = 10,
+	TILES_GROUP_LVL_2 = 2,
 	BULLETS_GROUP = -2,
 };
 
@@ -163,7 +166,7 @@ const string NAME_GAS_MAIN_STATE = "GasMainState";
 const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
 const string NAME_DEATH_STATE = "DeathState";
-
+const string NAME_LEVEL_2_STATE = "Level2State";
 
 
 //VIDEOS
@@ -292,7 +295,8 @@ const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/sniper.png", "../Assets/spri
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
-//const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
+const string PATH_LEVEL_1_OPEN = "../Assets/maps/level1-open.tmx";
+const string PATH_LEVEL_2 = "../Assets/maps/level2.tmx";
 
 
 //Reticule

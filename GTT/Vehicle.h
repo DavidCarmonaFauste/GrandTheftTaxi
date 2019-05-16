@@ -62,13 +62,24 @@ public:
 	virtual void update(Uint32 time);
 
 	virtual bool receiveEvent(Event& e);
-	virtual void SaveSpawnPoint(Vector2D spawn);
+	virtual void saveSpawnPoint(Vector2D spawn);
 
-	private:
+	void setLevel1SpawnPoint (Vector2D spawn) { level1SpawnPosition_ = spawn; }
+	void setLevel1OpenSpawnPoint (Vector2D spawn) { level1OpenSpawnPosition_ = spawn; }
+	void setLevel2SpawnPoint (Vector2D spawn) { level2SpawnPosition_ = spawn; }
+	Vector2D getLevel1SpawnPoint () { return level1SpawnPosition_; }
+	Vector2D getLevel1OpenSpawnPoint () { return level1OpenSpawnPosition_; }
+	Vector2D getLevel2SpawnPoint () { return level2SpawnPosition_; }
+
+private:
 	void Respawn();
 
-	int currentTurret_;  
 	Vector2D spawnPosition_;
+	Vector2D level1SpawnPosition_;
+	Vector2D level1OpenSpawnPosition_;
+	Vector2D level2SpawnPosition_;
+
+	int currentTurret_;  
 	float32 maxBackwardSpeed_;
 	float32 acceleration_;
 	bool alive_;

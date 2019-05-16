@@ -30,6 +30,7 @@ void NodeMapsManager::ReadNodeMapsInfo()
 			switch (line[0]) {
 				case'D': {
 					row >> district;
+					if (!NodeMapExists(district)) addNodeMap(district);
 					break;
 				}
 				case 'N': {

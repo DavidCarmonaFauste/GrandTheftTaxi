@@ -32,7 +32,7 @@ public:
 protected:
 	float32 maxSpeed_;
 	float32 turnSpeed_;
-	PhysicObject* phyO_;
+	PhysicObject* phyO_ = nullptr;
 	Animation* sprite_;
 	AimComponent* aimC_;//forma de apuntar con la torreta (depende de si es Jugador o IA)
 	Health* health_;

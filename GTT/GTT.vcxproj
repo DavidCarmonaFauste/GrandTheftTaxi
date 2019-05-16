@@ -23,6 +23,8 @@
     <ClCompile Include="AmmoDisplay.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BounceImC.cpp" />
+    <ClCompile Include="Bridge.cpp" />
+    <ClCompile Include="BridgeManager.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Car.cpp" />
@@ -58,6 +60,7 @@
     <ClCompile Include="ImpactComponent.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputMovement.cpp" />
+    <ClCompile Include="Level2State.cpp" />
     <ClCompile Include="LinearSC.cpp" />
     <ClCompile Include="LogicComponent.cpp" />
     <ClCompile Include="main.cpp" />
@@ -104,6 +107,8 @@
     <ClInclude Include="AmmoDisplay.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BounceImC.h" />
+    <ClInclude Include="Bridge.h" />
+    <ClInclude Include="BridgeManager.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraType.h" />
@@ -143,6 +148,7 @@
     <ClInclude Include="ImpactComponent.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputMovement.h" />
+    <ClInclude Include="Level2State.h" />
     <ClInclude Include="LinearSC.h" />
     <ClInclude Include="LogicComponent.h" />
     <ClInclude Include="MainMenuState.h" />

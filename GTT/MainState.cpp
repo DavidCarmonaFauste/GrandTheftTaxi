@@ -20,17 +20,20 @@ MainState::~MainState() {
 	delete cameraFollow_; cameraFollow_ = nullptr;
 }
 
-//start is called when GameStateMachine change state
+// called to initialize
 void MainState::start() {
 	// Taxi	
-	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
+	Vector2D pos = Vehicle::getInstance ()->getLevel1SpawnPoint ();
+	Vehicle::getInstance()->saveSpawnPoint(pos);
+	Vehicle::getInstance()->setPosition(pos);
+	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos.Multiply(PHYSICS_SCALING_FACTOR), 0);
+
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
-	// Tilemap
-	tilemap_ = new TileMap(PATH_LEVEL_1);
-
+	// Enemies
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
+	EnemyManager::getInstance ()->setLevel ('1');
 	EnemyManager::getInstance()->ReadEnemyInfo();
 
 	//Reticule
@@ -65,8 +68,7 @@ void MainState::start() {
 	stage_.push_back(ProyectilePool::getInstance());
 	stage_.push_back(Reticule::getInstance());
 
-	GameManager::getInstance()->setEnemyCount(EnemyManager::getInstance()->GetEnemyCount());
-
+	GameManager::getInstance()->setEnemyCount(EnemyManager::getInstance()->getLevel1Enemies());
 	// stage_.push_back(new FuelUpgrade(100, 100, Vehicle::getInstance()->getPosition().x -200, Vehicle::getInstance()->getPosition().y));
 }
 
@@ -77,10 +79,25 @@ void MainState::end()
 
 
 void MainState::update(Uint32 deltaTime) {
+	//TODO: fix!! ----------------------------------------------------------------------------------
+	//if (GameManager::getInstance()->getEnemyCount () == 0)
+	//	loadTilemap ();
+	//
 	Game::getInstance()->getCamera(GAME_CAMERA)->setCentered(true);
 	Game::getInstance()->getCamera(UI_CAMERA)->setCentered(true);
 
 	GameState::update(deltaTime);
+}
+
+void MainState::loadTilemap () {
+	if (tilemap_ != nullptr) {
+		delete tilemap_;
+		tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
+		//NodeMapsManager::getInstance()->ReadNodeMapsInfo();
+		//EnemyManager::getInstance()->ReadEnemyInfo();
+	}
+	else 
+		tilemap_ = new TileMap(PATH_LEVEL_1);
 }
 
 

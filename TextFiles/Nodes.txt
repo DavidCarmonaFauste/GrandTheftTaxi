@@ -62,3 +62,39 @@ Patrol5 Node21 Node22 Node23 Node24 Node25 Node26 Node27 Node20
 Patrol6 Node30 Node29 Node28 Node24 Node23 Node22 Node31
 Patrol7 Node55 NOde54 Node53 Node52 Node51 Node50 NOde49 Node48 Node45 Node46 Node47 Node35 Node34 Node55
 Patrol8 Node40 Node39 Node38 Node42 Node41
+
+District2
+Node1 Node2 Node11
+Node2 Node1 Node3 
+Node3 Node4 Node2 Node8 
+Node4 Node3 Node5
+Node5 Node6 Node4 Node21
+Node6 Node5 Node7
+Node7 Node8 Node6 
+Node8 Node9 Node7 Node3
+Node9 Node8 Node10
+Node10 Node9 Node11 Node18
+Node11 Node10 Node12 Node1
+Node12 Node11 Node13
+Node13 Node12 Node14
+Node14 Node11 Node15
+Node15 Node14 Node16
+Node16 Node15 Node17
+Node17 Node16 Node18
+Node18 Node17 Node19 Node10
+Node19 Node20 Node18 Node22
+Node20 Node21 Node19
+Node21 Node5 Node20
+Node22 Node19 Node23 Node26
+Node23 Node22 Node24
+Node24 Node25 Node23
+Node25 Node24 Node26
+Node26 Node25 Node27 Node 22
+Node27 Node16 Node26
+
+
+Patrol1 Node25 Node26 Node27 Node16 Node17 Node18 Node19 Node22 Node23 Node24
+Patrol2 Node20 Node19 Node18 Node10 Node9 Node8 Node7 Node6 Node5 Node21
+Patrol3 Node10 Node11 Node12 Node13 Node14 Node15 Node16 Node17 Node18
+Patrol4 Node8 Node9 Node10 Node11 Node1 Node2 Node3
+Patrol5 Node4 Node5 Node6 Node7 Node8 Node3

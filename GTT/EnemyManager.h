@@ -41,14 +41,23 @@ public:
 	void deactivateIA();
 	bool EnemyAtPos(Vector2D pos, GameObject* enemy=nullptr);
 
-	int GetEnemyCount();
-
+	int getEnemyCount();
+	int getTotalEnemies () const { return totalEnemies_; }
+	int getLevel1Enemies () const { return enemiesLvl1_; }
+	int getLevel2Enemies () const { return enemiesLvl2_; }
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
 	virtual void input(Uint32 time, const SDL_Event & event);
+
+	void setLevel (char c) { level_ = c; }
 private:
 	map<string, Enemy*> enemies_;
 	map<string, Vector2D> spawns_;
 	ifstream enemyInfoFile_;
+
+	char level_;
+	int enemiesLvl1_ = 0;
+	int enemiesLvl2_ = 0;
+	int totalEnemies_ = 0;
 };
 

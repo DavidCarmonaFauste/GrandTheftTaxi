@@ -4,6 +4,7 @@
 #include "GasMainMenu.h"
 #include "GasFillMenu.h"
 #include "ShopState.h"
+#include "Level2State.h"
 #include "Reticule.h"
 
 
@@ -43,14 +44,17 @@ void GameStateMachine::initStates() {
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAINMENU_STATE, new MainMenuState()));
 	// Main game
 	STATES_.insert(std::pair<string, GameState*>(NAME_MAIN_STATE, new MainState()));
+	STATES_[NAME_MAIN_STATE]->loadTilemap ();
 	// Gas main menu
 	STATES_.insert (std::pair<string, GameState*> (NAME_GAS_MAIN_STATE, new GasMainMenu ()));
 	// Gas fill menu
 	STATES_.insert (std::pair<string, GameState*> (NAME_GAS_FILL_STATE, new GasFillMenu ()));
 	// Shop state
 	STATES_.insert(std::pair<string, GameState*>(NAME_SHOP_STATE, new ShopState()));
-	
-		
+	// Level 2 state
+	STATES_.insert (std::pair<string, GameState*> (NAME_LEVEL_2_STATE, new Level2State ()));
+	STATES_[NAME_LEVEL_2_STATE]->loadTilemap ();
+
 	//primer estado al ejectuar app
 	//...
 

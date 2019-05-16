@@ -22,9 +22,11 @@ public:
 
 	virtual void update(Uint32 deltaTime);
 
+	virtual void loadTilemap ();
+
 private:
 	// Tilemap
-	TileMap *tilemap_;
+	TileMap *tilemap_ = nullptr;
 
 	//camera logic
 	FollowMiddlePoint* cameraFollow_;
