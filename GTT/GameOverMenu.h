@@ -4,7 +4,6 @@
 #include "Button.h"
 #include "Text.h"
 
-
 class GameOverMenu :
 	public GameState, public Observer, public Observable{
 public:
@@ -17,15 +16,15 @@ public:
 
 	virtual void update(Uint32 deltaTime);
 	virtual bool receiveEvent(Event& e);
-	
 private:
 	Container *background_, *blackBackground_;
 	Sprite *backgroundSprite_, *blackBackgoundSprite_;
-	Text* score_ = nullptr;
-	Font* font_;
 
 	map<string, Button*> buttons_;
 	Sprite *backSprite_;
+
+	Container *scoreText_;
+	Text *scoreString_;
 
 	void setBackground();
 	void setButtons();

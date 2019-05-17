@@ -49,5 +49,7 @@ private:
 	map<string, Enemy*> enemies_;
 	map<string, Vector2D> spawns_;
 	ifstream enemyInfoFile_;
+
+	bool readOnce_ = false;
 };
 
