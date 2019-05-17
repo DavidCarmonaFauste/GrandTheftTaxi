@@ -116,9 +116,6 @@ const struct textureInfo {
 // PHYSICS
 const enum COLLISION_GROUP {
 	TILES_GROUP = -1,
-	TILES_GROUP_LVL_1 = 1,
-	TILES_GROUP_LVL_1_OPEN = 10,
-	TILES_GROUP_LVL_2 = 2,
 	BULLETS_GROUP = -2,
 };
 
@@ -126,9 +123,7 @@ const enum COLLISION_CATEGORY {
 	TILE_CATEGORY = 0x0001,
 	TAXI_CATEGORY = 0x0002,
 	BULLET_CATEGORY = 0X0004,
-	ENEMY_CATEGORY = 0X0008,
-	LEVEL_1_CATEGORY = 0X0010,
-	LEVEL_2_CATEGORY = 0X0020
+	ENEMY_CATEGORY = 0X0008
 };
 
 //Constants Data
@@ -167,7 +162,7 @@ const string NAME_GAS_MAIN_STATE = "GasMainState";
 const string NAME_GAS_FILL_STATE = "GasFillState";
 const string NAME_SHOP_STATE = "ShopState";
 const string NAME_DEATH_STATE = "DeathState";
-const string NAME_LEVEL_2_STATE = "Level2State";
+
 
 
 //VIDEOS
@@ -297,8 +292,7 @@ const int MAXTURRETS = 2;
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
-const string PATH_LEVEL_1_OPEN = "../Assets/maps/level1-open.tmx";
-const string PATH_LEVEL_2 = "../Assets/maps/level2.tmx";
+//const string PATH_LEVEL_1 = "../Assets/maps/test.tmx";
 
 
 //Reticule
@@ -337,7 +331,7 @@ const int title_Height_ = 200;
 const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;//distancia del objetivo a la que la ia se para en modo seguimiento
 
 //Nodes
-const double IN_NODE_RANGE = TILE_SIZE;//rango en el que se determina que una posicion esta encima de un nodo
+const double IN_NODE_RANGE = TILE_SIZE * 7;//rango en el que se determina que una posicion esta encima de un nodo
 
 //Background
 const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };
@@ -369,14 +363,6 @@ const int DEATH_BACKGROUND_H = CAMERA_HEIGHT;
 const textureInfo DEATH_BACKGROUND_INFO = { "../Assets/sprites/DeathState/background-muerte.png", "default", {1, 1}, {0.0, 0.0}, DEATH_BACKGROUND_W, DEATH_BACKGROUND_H };
 
 // --------------------------------------------
-
-
-
-// Road Blocker -------------------------------
-const Vector2D ROAD_BLOCKER_POS = Vector2D (2432, 1632);
-const int ROAD_BLOCKER_WIDTH = 96;
-const int ROAD_BLOCKER_HEIGHT = 192;
-const textureInfo ROAD_BLOCKER_INFO = { "../Assets/sprites/barrier.png", "default", {1, 1}, ROAD_BLOCKER_POS, ROAD_BLOCKER_WIDTH, ROAD_BLOCKER_HEIGHT };
 
 
 

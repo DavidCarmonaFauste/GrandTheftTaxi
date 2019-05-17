@@ -18,10 +18,7 @@ public:
 	GameState* get_CurrentState();
 	void initStates();
 
-	void fromMainStateToLevel2 ();
 	void fromMainStateToGasMainMenu ();
-
-	void fromLevel2ToMainState ();
 
 	void fromGasMainMenuToMainState ();
 	void fromGasMainMenuToFillMenu ();
@@ -34,7 +31,6 @@ protected:
 private:
 	bool gasMainMenuStartedOnce_ = false;
 	bool gasFillMenuStartedOnce_ = false;
-	bool level2StartedOnce_ = false;
 	bool ShopMenuStartedOnce_ = false;
 
 };
