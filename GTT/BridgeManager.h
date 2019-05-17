@@ -10,7 +10,7 @@ class BridgeManager : public Container {
 	static unique_ptr<BridgeManager> instance_; //ptr instance class
 public:
 	virtual ~BridgeManager ();
-	void setBridge (Bridge* bridge);
+	void setBridge (Bridge* bridge, char level);
 
 	//init singleton class
 	inline static void initInstance() {
@@ -31,6 +31,7 @@ public:
 
 private:
 	BridgeManager ();
-	Bridge *bridge_ = nullptr;
+	Bridge *bridge1_ = nullptr;
+	Bridge *bridge2_ = nullptr;
 };
 

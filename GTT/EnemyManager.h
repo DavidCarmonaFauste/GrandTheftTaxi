@@ -56,6 +56,7 @@ private:
 	ifstream enemyInfoFile_;
 
 	char level_;
+	bool readOnce_ = false;
 	int enemiesLvl1_ = 0;
 	int enemiesLvl2_ = 0;
 	int totalEnemies_ = 0;

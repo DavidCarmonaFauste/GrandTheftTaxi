@@ -31,6 +31,8 @@ void MainState::start() {
 	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
+	tilemap_->setSleep (false);
+
 	// Enemies
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
 	EnemyManager::getInstance ()->setLevel ('1');
@@ -79,6 +81,7 @@ void MainState::start() {
 void MainState::end()
 {
 	EnemyManager::getInstance()->deactivateIA();
+	tilemap_->setSleep (true);
 }
 
 
@@ -96,14 +99,7 @@ void MainState::update(Uint32 deltaTime) {
 }
 
 void MainState::loadTilemap () {
-	if (tilemap_ != nullptr) {
-		delete tilemap_;
-		tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
-		//NodeMapsManager::getInstance()->ReadNodeMapsInfo();
-		//EnemyManager::getInstance()->ReadEnemyInfo();
-	}
-	else 
-		tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
+	tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
 }
 
 

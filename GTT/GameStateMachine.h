@@ -32,5 +32,6 @@ protected:
 private:
 	bool gasMainMenuStartedOnce_ = false;
 	bool gasFillMenuStartedOnce_ = false;
+	bool level2StartedOnce_ = false;
 };
 

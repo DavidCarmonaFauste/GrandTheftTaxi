@@ -397,7 +397,7 @@
   <object id="452" x="5184" y="2304" width="32" height="192"/>
   <object id="453" x="3744" y="1632" width="160" height="32"/>
  </objectgroup>
- <objectgroup color="#a40000" id="4" name="CollisionsOpen" visible="0">
+ <objectgroup color="#a40000" id="4" name="CollisionsOpen">
   <object id="454" x="3552" y="1184" width="256" height="32"/>
   <object id="455" x="3808" y="1216" width="1056" height="256"/>
   <object id="456" x="4864" y="1472" width="800" height="224"/>
@@ -492,8 +492,8 @@
   <object id="556" x="3424" y="1600" width="192" height="832"/>
   <object id="565" x="1600" y="1504" width="896" height="32"/>
   <object id="566" x="2080" y="1536" width="64" height="32"/>
-  <object id="567" x="1536" y="1536" width="256" height="32"/>
-  <object id="568" x="1536" y="1696" width="288" height="32"/>
+  <object id="567" x="1632" y="1536" width="160" height="32"/>
+  <object id="568" x="1632" y="1696" width="192" height="32"/>
   <object id="569" x="1824" y="1728" width="672" height="32"/>
   <object id="570" x="2496" y="1728" width="32" height="320"/>
  </objectgroup>
@@ -553,7 +553,7 @@
   <object id="444" name="Node51" x="5568" y="1792" width="64" height="64"/>
   <object id="445" name="Node52" x="5568" y="2016" width="64" height="64"/>
  </objectgroup>
- <objectgroup color="#ff5500" id="10" name="Bridge" visible="0">
+ <objectgroup color="#ff5500" id="10" name="Bridge1">
   <object id="564" x="1600" y="1568" width="32" height="128"/>
  </objectgroup>
  <objectgroup color="#5500ff" id="6" name="Enemies">

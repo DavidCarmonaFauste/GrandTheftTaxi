@@ -23,6 +23,8 @@ TileMap::TileMap(string path) {
 
 	phyO_ = new PhysicObject(b2_staticBody, 0, 0, 0, 0, false);
 	tmxToScene();
+
+	setSleep (true);
 }
 
 TileMap::~TileMap() {
@@ -59,9 +61,12 @@ bool TileMap::processObject(string layerName, const tmx::Object &object) {
 	if (layerName == "Player1Open") return processPlayer (object, 'o');
 	if (layerName == "Player2") return processPlayer (object, '2');
 
+	if (layerName == "Bridge1") return processBridge (object, '1');
+	if (layerName == "Bridge2") return processBridge (object, '2');
+
 	if (layerName == "Gas") return processGas(object);
 	if (layerName == "Enemies") return processSpawns(object);
-	if (layerName == "Bridge") return processBridge (object);
+	
 	else return processNodes(object, layerName);
 }
 
@@ -78,9 +83,12 @@ bool TileMap::processCollision(const tmx::Object &object, char level) {
 	fixDef.shape = &shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
 
-	if (level == '1')		phyO_->setCollisions(TILES_GROUP_LVL_1, TILE_CATEGORY);
-	else if (level == 'o')	phyO_->setCollisions(TILES_GROUP_LVL_1_OPEN, TILE_CATEGORY);
-	else if (level == '2')	phyO_->setCollisions(TILES_GROUP_LVL_2, TILE_CATEGORY);
+	if (level == '1')		
+		phyO_->setCollisions(TILES_GROUP_LVL_1, TILE_CATEGORY);
+	else if (level == 'o')	
+		phyO_->setCollisions(TILES_GROUP_LVL_1_OPEN, LEVEL_1_CATEGORY);
+	else if (level == '2')	
+		phyO_->setCollisions(TILES_GROUP_LVL_2, LEVEL_2_CATEGORY);
 	
 	phyO_->getBody()->GetFixtureList()->SetFriction(ENVIRONMENT_FRICTION);
 
@@ -122,10 +130,11 @@ bool TileMap::processSpawns(const tmx::Object & object)
 	return false;
 }
 
-bool TileMap::processBridge (const tmx::Object & object) {
+bool TileMap::processBridge (const tmx::Object & object, char level) {
 	Bridge *bridge = new Bridge (object.getAABB ().width, object.getAABB ().height, object.getPosition ().x, object.getPosition ().y);
-	BridgeManager::getInstance ()->setBridge (bridge);
 	
+	BridgeManager::getInstance ()->setBridge (bridge, level);
+
 	return false;
 }
 
@@ -141,5 +150,10 @@ void TileMap::update(Uint32 deltaTime) {
 
 void TileMap::render(Uint32 deltaTime) {
 	Container::render(deltaTime);
+}
+
+void TileMap::setSleep (bool flag) {
+	active_ = !flag;
+	phyO_->getBody ()->SetActive (!flag);
 }
 

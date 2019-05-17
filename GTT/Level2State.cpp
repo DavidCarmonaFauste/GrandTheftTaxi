@@ -32,6 +32,8 @@ void Level2State::start () {
 	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
 
 	// Tilemap
+	tilemap_->setSleep (false);
+
 	NodeMapsManager::getInstance()->ReadNodeMapsInfo();
 	EnemyManager::getInstance ()->setLevel ('2');
 	EnemyManager::getInstance()->ReadEnemyInfo();

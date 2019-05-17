@@ -69,9 +69,9 @@ void GameStateMachine::fromMainStateToLevel2 () {
 
 		currentState_ = NAME_LEVEL_2_STATE;
 
-		if (!gasMainMenuStartedOnce_) {
+		if (!level2StartedOnce_) {
 			STATES_[currentState_]->start ();
-			gasMainMenuStartedOnce_ = true;
+			level2StartedOnce_ = true;
 		}
 	}
 }

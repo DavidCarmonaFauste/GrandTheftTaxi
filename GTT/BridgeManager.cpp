@@ -7,12 +7,13 @@ BridgeManager::BridgeManager () {
 
 
 BridgeManager::~BridgeManager () {
-	delete bridge_;
+	delete bridge1_;
+	delete bridge2_;
 }
 
-void BridgeManager::setBridge (Bridge * bridge) {
-	if (bridge_ != nullptr)
-		delete bridge_;
-
-	bridge_ = bridge;
+void BridgeManager::setBridge (Bridge * bridge, char level) {
+	if (level == '1')
+		bridge1_ = bridge;
+	else
+		bridge2_ = bridge;
 }
