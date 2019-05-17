@@ -24,6 +24,7 @@ public:
 	virtual void update(Uint32 deltaTime);
 
 	virtual void loadTilemap ();
+	void awakeMap () { tilemap_->setSleep (false); }
 
 private:
 	// Tilemap

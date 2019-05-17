@@ -21,6 +21,8 @@ public:
 	void fromMainStateToLevel2 ();
 	void fromMainStateToGasMainMenu ();
 
+	void fromLevel2ToMainState ();
+
 	void fromGasMainMenuToMainState ();
 	void fromGasMainMenuToFillMenu ();
 	void fromGasMainMenuToShopMenu();

@@ -16,7 +16,13 @@ void Bridge::beginCallback (b2Contact * contact) {
 	if ((contact->GetFixtureA()->GetBody() == body || contact->GetFixtureA()->GetBody() == taxiBody)
 			&& (contact->GetFixtureB()->GetBody() == body || contact->GetFixtureB()->GetBody() == taxiBody)) {
 		contact->SetEnabled (true);
-		Game::getInstance ()->getGameStateMachine ()->fromMainStateToLevel2 ();
+
+		if (Game::getInstance ()->getGameStateMachine ()->get_CurrentStateName () == NAME_MAIN_STATE) {
+			Game::getInstance ()->getGameStateMachine ()->fromMainStateToLevel2 ();
+		}
+		else {
+			Game::getInstance ()->getGameStateMachine ()->fromLevel2ToMainState ();
+		}
 	}
 }
 

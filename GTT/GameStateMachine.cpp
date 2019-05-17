@@ -73,6 +73,10 @@ void GameStateMachine::fromMainStateToLevel2 () {
 			STATES_[currentState_]->start ();
 			level2StartedOnce_ = true;
 		}
+		else {
+			static_cast<Level2State*> (STATES_[currentState_])->awakeMap ();
+		}
+		Vehicle::getInstance ()->saveSpawnPoint (Vehicle::getInstance ()->getLevel2SpawnPoint ());
 	}
 }
 
@@ -88,10 +92,20 @@ void GameStateMachine::fromMainStateToGasMainMenu () {
 	}
 }
 
+void GameStateMachine::fromLevel2ToMainState () {
+	if (currentState_ == NAME_LEVEL_2_STATE) {
+		STATES_[currentState_]->end();
+		currentState_ = NAME_MAIN_STATE;
+		static_cast<MainState*> (STATES_[currentState_])->awakeMap ();
+		Vehicle::getInstance ()->saveSpawnPoint (Vehicle::getInstance ()->getLevel1OpenSpawnPoint ());
+	}
+}
+
 void GameStateMachine::fromGasMainMenuToMainState () {
 	if (currentState_ == NAME_GAS_MAIN_STATE) {
 		STATES_[currentState_]->end();
 		currentState_ = NAME_MAIN_STATE;
+		static_cast<MainState*> (STATES_[currentState_])->awakeMap ();
 	}
 }
 
