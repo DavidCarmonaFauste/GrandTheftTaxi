@@ -65,7 +65,6 @@ void MainMenuState::start()
 	buttons_["exitButton"]->setActive(false);
 	//Play Sound start
 	s_->playMusic(MAIN_THEME_MUSIC, -1); //MainTitle Theme
-	s_->playSound_Ch(Channels_["Start"], TAXI_START, 0);	//vehicle start sound
 }
 
 void MainMenuState::end()
