@@ -63,7 +63,8 @@ bool GasMainMenu::receiveEvent (Event & e) {
 			Game::getInstance ()->getGameStateMachine ()->fromGasMainMenuToFillMenu ();
 		}
 		else if (MouseClickLeft_.button_ == buttons_["gunShopButton"]->getIndex ()) {
-			cout << "nothing here yet\n";
+
+			Game::getInstance()->getGameStateMachine()->fromGasMainMenuToShopMenu();
 		}
 		else if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex ()) {
 			Game::getInstance ()->getGameStateMachine ()->fromGasMainMenuToMainState ();

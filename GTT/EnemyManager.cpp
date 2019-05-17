@@ -103,6 +103,7 @@ void EnemyManager::update(Uint32 deltaTime)
 {
 	for (auto e : enemies_) {
 		if (e.second != nullptr) {
+
 			if (level_ == '1' && e.first[5] == '1') //enemy ids for level 1 all start with a 1, a 2 for lvl 2
 				e.second->update(deltaTime);
 			else if (level_ == '2' && e.first[5] == '2')
@@ -122,6 +123,7 @@ void EnemyManager::render(Uint32 deltaTime)
 		}
 	}
 }
+
 
 void EnemyManager::input(Uint32 time, const SDL_Event & event)
 {

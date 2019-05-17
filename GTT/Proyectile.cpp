@@ -82,7 +82,7 @@ void Proyectile::ChangeBulletType(ProyectileInfo p, bool isAnEnemy)
 
 	addRenderComponent(animC_);
 	animC_->loadAnimation(p.idlePath, "default");
-	animC_->loadAnimation("../Assets/sprites/Turrets/EnemyGun/e_gun_bullet_destruction.png", "collision", 6);
+	animC_->loadAnimation(p.destructionPath, "collision", p.destranimframes);
 	animC_->playAnimation("default");
 
 	phyO_ = new PhysicObject(b2_dynamicBody, width_, height_, position_.x, position_.y);

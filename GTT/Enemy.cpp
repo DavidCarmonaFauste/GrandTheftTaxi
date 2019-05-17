@@ -31,7 +31,7 @@ Enemy::Enemy(VehicleInfo r, NodeMap* nmap, vector<Node*> route, Vector2D pos, We
 	this->addRenderComponent(sprite_);
 
 	// Health
-	health_ = new Health(ENEMY_HP);
+	health_ = new Health(r.HP);
 	addLogicComponent(health_);
 
 	//Movement
@@ -75,7 +75,7 @@ void Enemy::Damage(double damage)
 		//Send reward
 		Money::getInstance()->addMoney(reward_);
 		//Heal Player
-		Vehicle::getInstance()->getHealthComponent()->heal(Vehicle::getInstance()->getHealthComponent()->getMaxHealth()*0.2);
+		Vehicle::getInstance()->getHealthComponent()->heal(health_->getMaxHealth()*0.5);
 
 		sprite_->playAnimation("enemyDie", 10.0f, false);
 		bodyReadyToDestroy_ = true;
@@ -148,28 +148,6 @@ void Enemy::render(Uint32 deltaTime)
 
 	if (turret_ != nullptr) {
 		turret_->render(deltaTime);
-	}
-}
-
-void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
-{
-	if (active_) {
-		Car::handleInput(deltaTime, event);
-		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym == SDLK_p) {
-				followmode_ = !followmode_;
-				if (followmode_) {
-					delLogicComponent(patrol_);
-					addLogicComponent(follow_);
-					follow_->Restart();
-				}
-				else {
-					delLogicComponent(follow_);
-					addLogicComponent(patrol_);
-					patrol_->Restart();
-				}
-			}
-		}
 	}
 }
 

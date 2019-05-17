@@ -23,7 +23,7 @@ public:
 
 	void fromGasMainMenuToMainState ();
 	void fromGasMainMenuToFillMenu ();
-
+	void fromGasMainMenuToShopMenu();
 	void fromFillMenuToGasMainMenu ();
 
 protected:
@@ -33,5 +33,7 @@ private:
 	bool gasMainMenuStartedOnce_ = false;
 	bool gasFillMenuStartedOnce_ = false;
 	bool level2StartedOnce_ = false;
+	bool ShopMenuStartedOnce_ = false;
+
 };
 

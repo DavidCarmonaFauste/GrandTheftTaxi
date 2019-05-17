@@ -49,7 +49,6 @@ void TileMap::tmxToScene() {
 			}
 		}
 	}
-	cout << "Info: map load finished\n";
 }
 
 bool TileMap::processObject(string layerName, const tmx::Object &object) {

@@ -50,6 +50,7 @@ public:
 	virtual void input(Uint32 time, const SDL_Event & event);
 
 	void setLevel (char c) { level_ = c; }
+
 private:
 	map<string, Enemy*> enemies_;
 	map<string, Vector2D> spawns_;

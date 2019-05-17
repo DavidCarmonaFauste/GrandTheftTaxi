@@ -103,14 +103,28 @@ void GameStateMachine::fromGasMainMenuToFillMenu () {
 			STATES_[currentState_]->start ();
 			gasFillMenuStartedOnce_ = true;
 		}
-
 		if (gasFillMenuStartedOnce_)
 			STATES_[NAME_GAS_FILL_STATE]->updateState();
 	}
 }
 
+void GameStateMachine::fromGasMainMenuToShopMenu()
+{
+	if (currentState_ == NAME_GAS_MAIN_STATE) {
+		currentState_ = NAME_SHOP_STATE;
+
+		if (!ShopMenuStartedOnce_) {
+			STATES_[currentState_]->start();
+			ShopMenuStartedOnce_ = true;
+		}
+
+		if (ShopMenuStartedOnce_)
+			STATES_[NAME_SHOP_STATE]->updateState();
+	}
+}
+
 void GameStateMachine::fromFillMenuToGasMainMenu () {
-	if (currentState_ == NAME_GAS_FILL_STATE) {
+	if (currentState_ == NAME_GAS_FILL_STATE || currentState_ == NAME_SHOP_STATE) {
 		currentState_ = NAME_GAS_MAIN_STATE;
 	}
 }

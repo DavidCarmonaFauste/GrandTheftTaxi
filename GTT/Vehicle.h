@@ -86,7 +86,6 @@ private:
 	bool zombie_;
 	int deathTime_;
 
-	static const int MAXTURRETS = 4;
 	Turret* turrets_[MAXTURRETS];
 
 	//components

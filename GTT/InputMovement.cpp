@@ -20,11 +20,9 @@ InputMovement::~InputMovement()
 
 void InputMovement::handleInput(GameObject * o, Uint32 deltaTime, const SDL_Event & event)
 {
-	if (event.type == SDL_KEYDOWN) {
-		if (event.key.keysym.sym == SDLK_l) {
-			Money::getInstance()->addMoney(50);
-		}
-	}
+	if (event.type == SDL_KEYDOWN)
+		if (event.key.keysym.sym == SDLK_l)
+			Money::getInstance()->addMoney(100);
 	if (event.type == SDL_KEYDOWN) {
 		if (event.key.keysym.sym == k_.forward) {
 			forwardPressed_ = true;

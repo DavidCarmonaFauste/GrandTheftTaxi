@@ -108,7 +108,6 @@ bool GasFillMenu::receiveEvent (Event & e) {
 	switch (e.type_)
 	{
 	case CLICK_BUTTON: {
-		cout << "Health: " << Vehicle::getInstance()->getHealthComponent()->getHealth() << endl;
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 		int max = Vehicle::getInstance ()->getHealthComponent ()->getMaxHealth ();
 		int moneyAvailable = Money::getInstance()->getCurrentMoney();
@@ -149,7 +148,6 @@ bool GasFillMenu::receiveEvent (Event & e) {
 
 		healthDisplay_->setHealthPercentage ((Vehicle::getInstance ()->getHealthComponent ()->getHealth () / float (max)));
 		toPayDisplay_->setSimpleMoney(moneySpent_);
-		cout << "Health after: " << Vehicle::getInstance()->getHealthComponent()->getHealth() << endl;
 		break;
 	}
 	default:

@@ -50,7 +50,12 @@ ShootIC * Vehicle::GetShootIC()
 
 void Vehicle::EquipTurret(Turret * turret)
 {
-	int i = 0;
+	turrets_[1] = turrets_[0];
+	turrets_[0] = turret;
+	turrets_[0]->AttachToVehicle(this);
+	turrets_[0]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
+
+	/*int i = 0;
 	while (i < MAXTURRETS && turrets_[i] != nullptr)
 		i++;
 	if (i < MAXTURRETS) {
@@ -61,8 +66,10 @@ void Vehicle::EquipTurret(Turret * turret)
 		turrets_[currentTurret_]->registerObserver(smLC_); //register for capture events_Type in TaxiSoundManagerCP
 	}
 	else {
-		cout << "maximo numero de torretas alcanzado" << endl;
-	}
+		delete turrets_[0];
+		turrets_[0] = nullptr;
+		EquipTurret(turret);
+	}*/
 
 }
 
@@ -88,7 +95,6 @@ void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {
 	Container::handleInput(time, event);
 	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
-	EnemyManager::getInstance()->input(time, event);
 }
 
 void Vehicle::update(Uint32 time) {
@@ -209,7 +215,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_->setAnimation("default");
 
 	// Health
-	health_ = new Health(TAXI_HP);
+	health_ = new Health(r.HP);
 	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
 	alive_ = true;
