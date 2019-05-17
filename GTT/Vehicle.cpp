@@ -95,7 +95,6 @@ void Vehicle::handleInput(Uint32 time, const SDL_Event & event)
 {
 	Container::handleInput(time, event);
 	if(turrets_[currentTurret_]!=nullptr) turrets_[currentTurret_]->handleInput(time, event);
-	EnemyManager::getInstance()->input(time, event);
 }
 
 void Vehicle::update(Uint32 time) {
@@ -216,7 +215,7 @@ void Vehicle::initAtributtes(VehicleInfo r, KeysScheme k)
 	sprite_->setAnimation("default");
 
 	// Health
-	health_ = new Health(TAXI_HP);
+	health_ = new Health(r.HP);
 	health_->setDamageOverTime(DMG_OVER_TIME, DMG_FREQUENCY);
 	addLogicComponent(health_);
 	alive_ = true;

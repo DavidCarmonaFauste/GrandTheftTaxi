@@ -60,7 +60,7 @@ Turret::Turret(WeaponInfo w)
 	shotEffect_.setWidth(50);
 	shotEffect_.setHeight(50);
 	shotEffect_.addRenderComponent(shotanim_);
-	shotanim_->loadAnimation(w.shoteffectPath, "shot", w.shotanimframes);
+	shotanim_->loadAnimation(w.muzzleflashPath, "shot", w.muzzanimframes);
 	shotEffect_.addLogicComponent(followObject_);
 
 	animC_->loadAnimation(animationpath_, "idle", w.animationFrames, 1);

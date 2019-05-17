@@ -45,7 +45,6 @@ public:
 
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
-	virtual void input(Uint32 time, const SDL_Event & event);
 private:
 	map<string, Enemy*> enemies_;
 	map<string, Vector2D> spawns_;
