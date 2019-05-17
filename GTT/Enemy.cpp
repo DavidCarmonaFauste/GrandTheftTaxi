@@ -151,28 +151,6 @@ void Enemy::render(Uint32 deltaTime)
 	}
 }
 
-void Enemy::handleInput(Uint32 deltaTime, const SDL_Event & event)
-{
-	if (active_) {
-		Car::handleInput(deltaTime, event);
-		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym == SDLK_p) {
-				followmode_ = !followmode_;
-				if (followmode_) {
-					delLogicComponent(patrol_);
-					addLogicComponent(follow_);
-					follow_->Restart();
-				}
-				else {
-					delLogicComponent(follow_);
-					addLogicComponent(patrol_);
-					patrol_->Restart();
-				}
-			}
-		}
-	}
-}
-
 int Enemy::getDistanceFromTaxi()
 {
 	return (Vehicle::getInstance()->getCenter() - getCenter()).Length();

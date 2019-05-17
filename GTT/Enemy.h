@@ -15,7 +15,6 @@ public:
 	virtual void Die();
 	virtual void update(Uint32 deltaTime);
 	virtual void render(Uint32 deltaTime);
-	virtual void handleInput(Uint32 deltaTime, const SDL_Event& event);
 	virtual int getDistanceFromTaxi();
 	virtual Turret* getTurret();
 	virtual bool taxiOnRange();

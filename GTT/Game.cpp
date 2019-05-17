@@ -99,11 +99,7 @@ void Game::handleEvents(Uint32 deltaTime) {
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_ESCAPE) {
 				exit_ = true;
-			}
-
-			if (event.key.keysym.sym == SDLK_f) {
-				SDL_SetWindowFullscreen(window_, SDL_WINDOW_FULLSCREEN);
-			}
+			}			
 		}
 		for (auto cam : cameras_) cam.second->handleInput(deltaTime, event);
 		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
