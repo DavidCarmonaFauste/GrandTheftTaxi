@@ -18,16 +18,19 @@ MainState::MainState(){}
 MainState::~MainState() {
 	delete tilemap_; tilemap_ = nullptr;
 	delete cameraFollow_; cameraFollow_ = nullptr;
-	delete loadScreen; loadScreen = nullptr;
+	delete loadScreen_; loadScreen_ = nullptr;
 }
 
 // called to initialize
 void MainState::start() {
 	// Load screen
-	SDL_RenderClear(Game::getInstance()->getRenderer());
-	loadScreen = new Sprite(MAIN_TITLE.idlePath);
-	loadScreen->render(Vector2D(0, 0), MAIN_TITLE.width, MAIN_TITLE.height);
-	SDL_RenderPresent(Game::getInstance()->getRenderer());
+	if (useLoadScreen_) {
+		SDL_RenderClear(Game::getInstance()->getRenderer());
+		loadScreen_ = new Sprite(MAIN_TITLE.idlePath);
+		loadScreen_->render(Vector2D(0, 0), MAIN_TITLE.width, MAIN_TITLE.height);
+		SDL_RenderPresent(Game::getInstance()->getRenderer());
+		useLoadScreen_ = false;
+	}
 
 	// Taxi	
 	Vector2D pos = Vehicle::getInstance ()->getLevel1OpenSpawnPoint ();
@@ -107,6 +110,10 @@ void MainState::update(Uint32 deltaTime) {
 
 void MainState::loadTilemap () {
 	tilemap_ = new TileMap(PATH_LEVEL_1_OPEN);
+}
+
+void MainState::setLoadScreenActive(bool active) {
+	useLoadScreen_ = active;
 }
 
 

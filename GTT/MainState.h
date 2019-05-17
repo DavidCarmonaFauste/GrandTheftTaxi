@@ -26,6 +26,8 @@ public:
 	virtual void loadTilemap ();
 	void awakeMap () { tilemap_->setSleep (false); }
 
+	void setLoadScreenActive(bool active);
+
 private:
 	// Tilemap
 	TileMap *tilemap_ = nullptr;
@@ -38,5 +40,6 @@ private:
 
 	RoadBlocker* roadBlocker_;
 
-	Sprite *loadScreen;
+	Sprite *loadScreen_;
+	bool useLoadScreen_ = true;
 };
