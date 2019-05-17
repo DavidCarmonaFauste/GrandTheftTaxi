@@ -57,17 +57,9 @@ void MainMenuState::start()
 
 	//insert channels in map (max 8)
 	Channels_.insert(std::pair<string, int>("Start", 1));
-	Channels_.insert(std::pair<string, int>("NG", 2));
 
-
-	//scene management
-	//desactive containers before finish sound
-	Title_->setActive(false);
-	buttons_["newGameButton"]->setActive(false);
-	buttons_["exitButton"]->setActive(false);
 	//Play Sound start
 	s_->playMusic(MAIN_THEME_MUSIC, -1); //MainTitle Theme
-	s_->playSound_Ch(Channels_["Start"], TAXI_START, 0);	//vehicle start sound
 }
 
 void MainMenuState::end()
@@ -87,38 +79,15 @@ bool MainMenuState::receiveEvent(Event & e)
 {
 	switch (e.type_)
 	{
-	case CHANNEL_STOPPED_PLAYING:
-	{
-		ChannelStoppedPlaying channelEvent = static_cast<ChannelStoppedPlaying&>(e);
-		if (DEBUG_)
-			cout << "Channel " << channelEvent.channel_ << " stopped playing." << endl;
-
-		if (channelEvent.channel_ == Channels_["Start"]) {
-			//taxi lights
-			Taxi_anm->setAnimation(MAIN_TITLE_TAXI_ANM.name);
-			//Title active
-			Title_->setActive(true);
-			Title_anm->playAnimation(MAIN_TITLE_TITLE.name, 9.0);
-			//buttons active
-			buttons_["newGameButton"]->setActive(true);
-			buttons_["exitButton"]->setActive(true);
-		}
-		//START NEW GAME
-		else if (channelEvent.channel_ == Channels_["NG"]) {
-			s_->pauseMusic();
-			Game::getInstance()->setState(NAME_MAIN_STATE);
-		}
-		break;
-	}
 
 	case CLICK_BUTTON: {
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 
 		if (MouseClickLeft_.button_ == buttons_["newGameButton"]->getIndex()) {
 			buttons_["newGameButton"]->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON[clickButton].name, 24.0f, true);
-			if (buttons_["newGameButton"]->getSoundId() != -1) {
-				s_->playSound_Ch(Channels_["NG"], buttons_["newGameButton"]->getSoundId(), 0);
-			}
+			s_->pauseMusic();
+			s_->stopSound(Channels_["Start"]);
+			Game::getInstance()->setState(NAME_MAIN_STATE);
 		}
 
 		else if (MouseClickLeft_.button_ == buttons_["exitButton"]->getIndex())
@@ -129,13 +98,11 @@ bool MainMenuState::receiveEvent(Event & e)
 	case NOT_OVER_OBJECT: {
 		NotMouseOverObj NotMouseOverObj_ = static_cast<NotMouseOverObj&>(e);
 
-		if (!s_->isSoundPlaying(Channels_["NG"])) {
 			if (NotMouseOverObj_.objIndex_ == buttons_["newGameButton"]->getIndex())
 				buttons_["newGameButton"]->getButtonAnimacion()->stopAnimation();
 
 			else if (NotMouseOverObj_.objIndex_ == buttons_["exitButton"]->getIndex())
-				buttons_["exitButton"]->getButtonAnimacion()->stopAnimation();
-		}
+				buttons_["exitButton"]->getButtonAnimacion()->stopAnimation();		
 		break;
 	}
 
