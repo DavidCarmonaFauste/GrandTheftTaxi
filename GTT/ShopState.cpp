@@ -262,10 +262,10 @@ void ShopState::setButtonComponents()
 {
 	//Create Sprite
 	backSprite_ = new Sprite(BACK_BUTTON_INFO.idlePath, BACK_BUTTON_INFO.width, BACK_BUTTON_INFO.height, BACK_BUTTON_POSITION.x, BACK_BUTTON_POSITION.y);
-	weapon1ButtonSprite_ = new Sprite(BACK_BUTTON_INFO.idlePath, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
-	weapon2ButtonSprite_ = new Sprite(BACK_BUTTON_INFO.idlePath, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
-	weapon3ButtonSprite_ = new Sprite(BACK_BUTTON_INFO.idlePath, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
-	weapon4ButtonSprite_ = new Sprite(BACK_BUTTON_INFO.idlePath, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
+	weapon1ButtonSprite_ = new Sprite(BUY_BUTTON_PATH, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
+	weapon2ButtonSprite_ = new Sprite(BUY_BUTTON_PATH, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
+	weapon3ButtonSprite_ = new Sprite(BUY_BUTTON_PATH, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
+	weapon4ButtonSprite_ = new Sprite(BUY_BUTTON_PATH, WEAPON_BUTTON_W, WEAPON_BUTTON_H, 0, 0);
 
 	//Add rendercomponent
 	buttons_["backButton"]->addRenderComponent(backSprite_);
@@ -386,7 +386,7 @@ void ShopState::startIcons()
 
 
 	//Owned Icons (Equip)
-	weapon1OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon1Button"]->getWidth(), buttons_["weapon1Button"]->getHeight());
+	weapon1OwnedS_ = new Sprite(EQUIP_BUTTON_PATH, buttons_["weapon1Button"]->getWidth(), buttons_["weapon1Button"]->getHeight());
 	weapon1Owned_ = new Container();
 
 	weapon1Owned_->setWidth(buttons_["weapon1Button"]->getWidth());
@@ -395,7 +395,7 @@ void ShopState::startIcons()
 	weapon1Owned_->setPosition(buttons_["weapon1Button"]->getPosition());
 	weapon1Owned_->setActive(true);
 
-	weapon2OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon2Button"]->getWidth(), buttons_["weapon2Button"]->getHeight());
+	weapon2OwnedS_ = new Sprite(EQUIP_BUTTON_PATH, buttons_["weapon2Button"]->getWidth(), buttons_["weapon2Button"]->getHeight());
 	weapon2Owned_ = new Container();
 
 	weapon2Owned_->setWidth(buttons_["weapon2Button"]->getWidth());
@@ -404,7 +404,7 @@ void ShopState::startIcons()
 	weapon2Owned_->setPosition(buttons_["weapon2Button"]->getPosition());
 	weapon2Owned_->setActive(false);
 
-	weapon3OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon3Button"]->getWidth(), buttons_["weapon3Button"]->getHeight());
+	weapon3OwnedS_ = new Sprite(EQUIP_BUTTON_PATH, buttons_["weapon3Button"]->getWidth(), buttons_["weapon3Button"]->getHeight());
 	weapon3Owned_ = new Container();
 
 	weapon3Owned_->setWidth(buttons_["weapon3Button"]->getWidth());
@@ -413,7 +413,7 @@ void ShopState::startIcons()
 	weapon3Owned_->setPosition(buttons_["weapon3Button"]->getPosition());
 	weapon3Owned_->setActive(false);
 
-	weapon4OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon4Button"]->getWidth(), buttons_["weapon4Button"]->getHeight());
+	weapon4OwnedS_ = new Sprite(EQUIP_BUTTON_PATH, buttons_["weapon4Button"]->getWidth(), buttons_["weapon4Button"]->getHeight());
 	weapon4Owned_ = new Container();
 
 	weapon4Owned_->setWidth(buttons_["weapon4Button"]->getWidth());
@@ -425,7 +425,6 @@ void ShopState::startIcons()
 
 void ShopState::selected(int weapon)
 {
-	bool allowed = false;
 	if (weapon == 1) 
 		if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= SHOTGUN_PRICE_INT)
 		{
@@ -433,7 +432,6 @@ void ShopState::selected(int weapon)
 			owned_[weapon] = true;
 			weapon2Owned_->setActive(true);
 			shotgunText_->setText("Shotgun - Owned");
-			allowed = true;
 		}
 
 	if (weapon == 2)
@@ -443,20 +441,17 @@ void ShopState::selected(int weapon)
 			owned_[weapon] = true;
 			weapon3Owned_->setActive(true);
 			rifleText_->setText("Sniper - Owned");
-			allowed = true;
+
 		}
 	if (weapon == 3)
-		if (!owned_[weapon])
-			if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= MACHINEGUN_PRICE_INT)
-			{
+		if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= MACHINEGUN_PRICE_INT)
+		{
 				Money::getInstance()->addMoney(-MACHINEGUN_PRICE_INT);
-			owned_[weapon] = true;
-			weapon4Owned_->setActive(true);
-			machinegunText_->setText("Machinegun - Owned");
-			allowed = true;
-
-			}
-	if (allowed)
+				owned_[weapon] = true;
+				weapon4Owned_->setActive(true);
+				machinegunText_->setText("Machinegun - Owned");
+		}
+	if (owned_[weapon]) 
 	{
 		if (equipped_[0] != -1)
 			inventoryWeapons_[equipped_[0]]->setActive(false);
@@ -487,7 +482,8 @@ void ShopState::selected(int weapon)
 			if (equipped_[1] != equipped_[0] && equipped_[1] != -1)
 				equip(equipped_[0]);
 		}
-	}		
+	}
+		
 	updateState();
 }
 

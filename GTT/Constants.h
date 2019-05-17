@@ -437,6 +437,8 @@ const int PRICE_FOR_25 = 20;
 	const Vector2D INV2_POSITION = { (INV1_POSITION.x + INV_W + 50)  ,(CAMERA_HEIGHT / 3.5) };
 
 	//Paths
+	const string BUY_BUTTON_PATH = "../Assets/sprites/buttons/button-buy.png";
+	const string EQUIP_BUTTON_PATH = "../Assets/sprites/buttons/button-equip.png";
 
 	//Prices
 	const string SHOTGUN_PRICE = "50";
