@@ -418,12 +418,32 @@ const int PRICE_FOR_25 = 20;
 //SHOP INFO -----------------------------------
 
 	//Sizes
-	const int WEAPONS_BACKGROUNDS_W = 400;
-	const int WEAPONS_BACKGROUNDS_H = 100;
+	const int WEAPONS_BACKGROUNDS_W = 450;
+	const int WEAPONS_BACKGROUNDS_H = 90;
+	const int WEAPON_BUTTON_W = 100;
+	const int WEAPON_BUTTON_H = 85;
+	
+	const int ICON_H = WEAPONS_BACKGROUNDS_H - 4;
+	const int ICON_W = ICON_H;
+
+	const int INV_W = 240;
+	const int INV_H = 220;
 
 	//Positions
-	const Vector2D ARMORY_TEXT_POSITION = { (CAMERA_WIDHT / 9) ,(CAMERA_HEIGHT / 8) };
+	const Vector2D ARMORY_TEXT_POSITION = { (CAMERA_WIDHT / 6.5) ,(CAMERA_HEIGHT / 8) };
+	const Vector2D INVENTORY_TEXT_POSITION = { (CAMERA_WIDHT / 1.6) ,(CAMERA_HEIGHT / 8) };
+	const Vector2D FIRST_WEAPON_BCK = { (CAMERA_WIDHT / 7) ,(CAMERA_HEIGHT / 4.8)};
+	const Vector2D INV1_POSITION = { (CAMERA_WIDHT / 1.65) ,(CAMERA_HEIGHT / 3.5) };
+	const Vector2D INV2_POSITION = { (INV1_POSITION.x + INV_W + 50)  ,(CAMERA_HEIGHT / 3.5) };
+
 	//Paths
+
+	//Prices
+	const string SHOTGUN_PRICE = "50";
+	const string RIFLE_PRICE = "50";
+	const string MACHINEGUN_PRICE = "50";
+
+	
 
 //---------------------------------------------
 

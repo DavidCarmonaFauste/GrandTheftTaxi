@@ -18,21 +18,26 @@ public:
 	virtual bool receiveEvent(Event& e);
 
 private:
-
+		//Buttons
 	map<string, Button*> buttons_;
+	Sprite *weapon1ButtonSprite_, *weapon2ButtonSprite_, *weapon3ButtonSprite_, *weapon4ButtonSprite_;
 
-	Container *background_, *bckPistol_, *bckShotgun_, *bckRifle_, *bckMachinegun_;
-	Sprite *backgroundSprite_, *bckPistolSprite_, *bckShotgunSprite_, *bckRifleSprite_, *bckMachinegunSprite_;
+		//Backgrounds
+	Container *background_, *bckPistol_, *bckShotgun_, *bckRifle_, *bckMachinegun_, *weapon1_, *weapon2_;
+	Sprite *backSprite_, *backgroundSprite_, *bckPistolSprite_, *bckShotgunSprite_, *bckRifleSprite_, *bckMachinegunSprite_, *weapon1Sprite_, *weapon2Sprite_;
+	
+		//Texts
+	Container *armory_, *inventory_, *pistolT_, *shotgunT_, *rifleT_, *machinegunT_;
+	Text *armoryText_, *inventoryText_, *shotgunText_, *pistolText_, *rifleText_, *machinegunText_;
 
-	Sprite *backSprite_;
-
-	Container *armory_, *inventory_;
-	Text *armoryText_, *inventoryText_;
+		//Icons
+	Container *pistol_, *shotgun_, *rifle_, *machinegun_;
+	Sprite *pistolSprite_, *shotgunSprite_, *rifleSprite_, *machinegunSprite_;
 
 	void setButtons();
 	void setBackground();
 	void setButtonComponents();
-
 	void startTexts();
+	void startIcons();
 };
 
