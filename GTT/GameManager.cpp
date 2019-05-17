@@ -22,8 +22,8 @@ void GameManager::update(Uint32 deltaTime)
 
 void GameManager::calculatePuntuation()
 {
-	int p = (((kills * 100000) / (hits)) / time )* 100;
-	cout<<" * Score: ____" << p << "____"<< endl;
+	score_ = (((kills * 100000) / (hits)) / time )* 100;
+	cout<<" * Score: ____" << score_ << "____"<< endl;
 	Game::getInstance()->getGameStateMachine()->fromMainStateToGameOverMenu();
 }
 

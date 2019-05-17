@@ -1,7 +1,7 @@
 #include "GameOverMenu.h"
 #include "Reticule.h"
 #include "Game.h"
-
+#include "GameManager.h"
 
 GameOverMenu::GameOverMenu()
 {
@@ -15,6 +15,8 @@ GameOverMenu::~GameOverMenu()
 	delete backgroundSprite_;
 	delete blackBackgoundSprite_;
 	delete backSprite_;
+	delete score_; score_ = nullptr;
+	delete font_; font_ = nullptr;
 
 	for (auto button : buttons_) {
 		delete button.second; button.second = nullptr;
@@ -44,6 +46,21 @@ void GameOverMenu::start() {
 	//stage_.push_back(blackBackground_);
 	stage_.push_back(buttons_["backButton"]);
 	stage_.push_back(Reticule::getInstance());
+
+	SDL_Color fontColor = SDL_Color();
+	fontColor.r = 255; fontColor.g = 255; fontColor.b = 255;
+	font_ = new Font(FONT_LATO, 80);
+
+	score_ = new Text(font_, "", fontColor);
+	score_->setCamera(UI_CAMERA);
+	//addRenderComponent(enemyCount_);
+
+	score_->setAutoSize(false);
+
+	score_->setSize(200, 40);
+
+	score_->setText(to_string((int) "SCORE: " + (int)Game::getInstance()->getGameManager()->getScore()));
+
 }
 
 

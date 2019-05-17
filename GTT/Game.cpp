@@ -9,7 +9,6 @@
 #include "Money.h"
 #include "UI.h"
 #include "ShopManager.h"
-#include "GameManager.h"
 
 
 #include <iostream>
@@ -58,6 +57,8 @@ Game::Game() {
 Game::~Game() {
 	//se debe borrar en orden de: último a primero de creación
 	delete gmStMachine_; gmStMachine_ = nullptr;
+	delete gameManager_; gameManager_ = nullptr;
+
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
@@ -76,8 +77,12 @@ void Game::end() {
 	EnemyManager::destroyInstance();
 	NodeMapsManager::destroyInstance();
 	ShopManager::destroyInstance();
+	GameManager::destroyInstance();
+
 
 	delete gmStMachine_; gmStMachine_ = nullptr;
+	delete gameManager_; gameManager_ = nullptr;
+
 	for (auto it = cameras_.begin(); it != cameras_.end(); it++) {
 		delete (*it).second; (*it).second = nullptr;
 	}
@@ -180,6 +185,11 @@ b2World * Game::getWorld()
 SoundManager * Game::getSoundManager()
 {
 	return SoundManager::getInstance();
+}
+
+GameManager * Game::getGameManager()
+{
+	return GameManager::getInstance();
 }
 
 Camera * Game::getCamera(cameraType cT)

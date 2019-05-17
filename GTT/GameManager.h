@@ -25,6 +25,11 @@ public:
 			initInstance();
 		return instance_.get();
 	}
+
+	inline static void destroyInstance() {
+		instance_.reset();
+		instance_.release();
+	}
 	virtual void update(Uint32 deltaTime);
 
 	void addHit() { hits++; };
@@ -37,12 +42,16 @@ public:
 	void setGameOver (bool flag) { gameOver_ = flag; }
 	bool getGameOverFlag () { return gameOver_; }
 
+	int getScore() { return score_; }
+
 private:
 	int hits = 0;
 	int kills = 0;
 	int initTime = 0;
 	int time = 0;
 	int enemyCount = 0;
+
+	int score_ = 0;
 
 	bool gameOver_ = false;
 };

@@ -6,6 +6,7 @@
 #include "SoundManager.h"
 #include "GameStateMachine.h"
 #include "CustomContactListener.h"
+#include "GameManager.h"
 
 using namespace std;
 typedef unsigned int uint;
@@ -66,6 +67,7 @@ public:
 	SoundManager* getSoundManager();
 	Camera* getCamera(cameraType cT);
 	GameStateMachine* getGameStateMachine();
+	GameManager* getGameManager();
 	bool getCloseToShop () { return canEnterShop_; }
 
 	// state setters
@@ -96,6 +98,7 @@ private:
 
 	//states
 	GameStateMachine* gmStMachine_;
+	GameManager* gameManager_ = nullptr;
 	bool exit_ = false;
 	bool canEnterShop_ = false;
 
