@@ -93,8 +93,9 @@ int EnemyManager::GetEnemyCount()
 void EnemyManager::update(Uint32 deltaTime)
 {
 	for (auto e : enemies_) {
-		if(e.second != nullptr)
-		e.second->update(deltaTime);
+		if (e.second != nullptr) {
+			e.second->update(deltaTime);
+		}
 	}
 }
 

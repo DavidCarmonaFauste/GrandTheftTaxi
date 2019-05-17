@@ -19,6 +19,9 @@ public:
 	virtual Turret* getTurret();
 	virtual bool taxiOnRange();
 	IAMovementBehaviour* getIABehaviour();
+	bool isFollowing() {
+		return followmode_;
+	};
 	virtual ~Enemy();
 private:
 	bool bodyReadyToDestroy_;
