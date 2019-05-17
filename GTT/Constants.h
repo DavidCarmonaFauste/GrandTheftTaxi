@@ -331,7 +331,7 @@ const int title_Height_ = 200;
 const double FOLLOW_STOP_RANGE = TILE_SIZE * 4;//distancia del objetivo a la que la ia se para en modo seguimiento
 
 //Nodes
-const double IN_NODE_RANGE = TILE_SIZE * 7;//rango en el que se determina que una posicion esta encima de un nodo
+const double IN_NODE_RANGE = TILE_SIZE;//rango en el que se determina que una posicion esta encima de un nodo
 
 //Background
 const textureInfo MAIN_TITLE = { "../Assets/sprites/MainTitle/animacion_MainMenu.png", "default", {1, 1}, {0.0, 0.0}, CAMERA_WIDHT, CAMERA_HEIGHT };

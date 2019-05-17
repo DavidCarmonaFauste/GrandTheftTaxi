@@ -35,7 +35,7 @@ Game::Game() {
 	TTF_Init();
 
 	//mouse can't exit the screen
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	SDL_SetRelativeMouseMode(SDL_FALSE);
 
 	window_ = SDL_CreateWindow("Grand Theft Taxi", winX_, winY_,
 		winWidth_, winHeight_, SDL_WINDOW_SHOWN || SDL_WINDOW_RESIZABLE);

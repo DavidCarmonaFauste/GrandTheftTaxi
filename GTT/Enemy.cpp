@@ -139,6 +139,7 @@ void Enemy::update(Uint32 deltaTime)
 		if (!alive_) {
 			Die();
 		}
+
 	}
 }
 

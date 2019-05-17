@@ -40,7 +40,10 @@ public:
 	bool hasConnection(Vector2D direction, Connections& dir) {
 		double x= abs(direction.x);
 		double y = abs(direction.y);
+		
 		Connections dirr=NORTH;
+		dir = dirr;
+		if (abs(direction.x - direction.y) < 0.4) return false;
 		if (x > y) {
 			if (direction.x > 0) dirr = EAST;
 			else dirr = WEST;

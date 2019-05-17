@@ -17,9 +17,12 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 			Node* b;
 			districtMap_->getBetweenNodes(a, b, o_->getCenter());
 			//go to node that is connected to the enemy and nearest to the target
-			if (b != nullptr && (b->position_ - Vehicle::getInstance()->getCenter()).Length() <= (a->position_ - Vehicle::getInstance()->getCenter()).Length()) 
+			if (b != nullptr && (b->position_ - Vehicle::getInstance()->getCenter()).Length() <= (a->position_ - Vehicle::getInstance()->getCenter()).Length()) {
 				goTo(b);
-			else goTo(a);
+			}
+			else {
+				goTo(a);
+			}
 
 			if (arrivedAtNode()) {
 				route_ = AssignRoute(nextNode_, districtMap_->getNearestConnectedNode(Vehicle::getInstance()->getCenter()));
@@ -29,6 +32,7 @@ void IAFollow::update(GameObject * o, Uint32 deltaTime)
 		}
 		else {
 			if (arrivedAtNode()) {
+				
 				phyO_->getBody()->SetLinearVelocity(Vector2D(0, 0));
 				if (route_.empty() || route_.back() != districtMap_->getNearestConnectedNode(Vehicle::getInstance()->getCenter())) {
 					route_ = AssignRoute(nextNode_, districtMap_->getNearestConnectedNode(Vehicle::getInstance()->getCenter()));
