@@ -1,5 +1,6 @@
 #pragma once
 #include "Container.h"
+#include "Game.h"
 class GameManager :
 	public Container
 {
@@ -33,11 +34,16 @@ public:
 	void decreaseEnemyCount() { enemyCount--; };
 	int getEnemyCount() { return enemyCount; };
 
+	void setGameOver (bool flag) { gameOver_ = flag; }
+	bool getGameOverFlag () { return gameOver_; }
+
 private:
 	int hits = 0;
 	int kills = 0;
 	int initTime = 0;
 	int time = 0;
 	int enemyCount = 0;
+
+	bool gameOver_ = false;
 };
 

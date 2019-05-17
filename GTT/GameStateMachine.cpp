@@ -61,6 +61,7 @@ void GameStateMachine::initStates() {
 	//DEPURACION
 	//setState(NAME_MAINMENU_STATE);
 	setState(NAME_MAIN_STATE);
+	//setState (NAME_GAMEOVER_STATE);
 }
 
 void GameStateMachine::fromMainStateToGasMainMenu () {
@@ -98,14 +99,26 @@ void GameStateMachine::fromGasMainMenuToFillMenu () {
 
 void GameStateMachine::fromGameOverMenuToMainMenu()
 {
-	if (currentState_ == NAME_GAMEOVER_STATE)
-		currentState_ = NAME_MAINMENU_STATE;
+	if (currentState_ == NAME_GAMEOVER_STATE) {
+		currentState_ = NAME_MAIN_STATE;
 
+		delete STATES_[currentState_];
+		STATES_[currentState_] = new MainState ();
+		Vehicle::getInstance ()->getHealthComponent ()->resetHealth ();
+		STATES_[currentState_]->start ();
+	}
 }
 void GameStateMachine::fromMainStateToGameOverMenu()
 {
-	if (currentState_ == NAME_MAIN_STATE) 
+	if (currentState_ == NAME_MAIN_STATE) {
+		//STATES_[currentState_]->end();
 		currentState_ = NAME_GAMEOVER_STATE;
+
+		if (!gameOverMenuStartedOnce_) {
+			STATES_[currentState_]->start ();
+			gameOverMenuStartedOnce_ = true;
+		}
+	}
 }
 
 void GameStateMachine::fromFillMenuToGasMainMenu () {

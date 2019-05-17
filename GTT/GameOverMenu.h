@@ -8,6 +8,7 @@ class GameOverMenu :
 public:
 	GameOverMenu();
 	virtual ~GameOverMenu();
+
 	virtual void start() override;
 	virtual void end() override;
 	virtual void updateState();

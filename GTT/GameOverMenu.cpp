@@ -1,7 +1,6 @@
 #include "GameOverMenu.h"
 #include "Reticule.h"
 #include "Game.h"
-#include "GameManager.h"
 
 
 GameOverMenu::GameOverMenu()
@@ -22,6 +21,8 @@ GameOverMenu::~GameOverMenu()
 	}
 	buttons_.clear();
 }
+
+
 void GameOverMenu::start() {
 	int i; //recoge el valor del index si el elemento est? en el vector
 	if (!isRegistered(this, i))
@@ -40,7 +41,7 @@ void GameOverMenu::start() {
 
 	//Container to GameObj list
 	stage_.push_back(background_);
-	stage_.push_back(blackBackground_);
+	//stage_.push_back(blackBackground_);
 	stage_.push_back(buttons_["backButton"]);
 	stage_.push_back(Reticule::getInstance());
 }
@@ -71,7 +72,7 @@ bool GameOverMenu::receiveEvent(Event & e) {
 	if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex()) {
 			
 			//updateState();
-			Game::getInstance()->getGameStateMachine()->fromFillMenuToGasMainMenu();
+			Game::getInstance()->getGameStateMachine()->fromGameOverMenuToMainMenu();
 		}
 		break;
 	}
@@ -89,6 +90,7 @@ void GameOverMenu::setBackground() {
 
 	background_->setWidth(GAS_BACKGROUND_W);
 	background_->setHeight(GAS_BACKGROUND_H);
+	background_->setPosition (Vector2D (0, 0));
 	background_->addRenderComponent(backgroundSprite_);
 }
 
@@ -102,7 +104,7 @@ void GameOverMenu::setButtons() {
 	buttons_["backButton"]->setPosition(BACK_BUTTON_POSITION);
 	buttons_["backButton"]->setWidth(BACK_BUTTON_INFO.width);
 	buttons_["backButton"]->setHeight(BACK_BUTTON_INFO.height);
-	buttons_["backButton"]->setIndex(4);
+	buttons_["backButton"]->setIndex(1);
 
 }
 

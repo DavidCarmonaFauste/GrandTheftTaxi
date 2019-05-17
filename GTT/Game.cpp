@@ -9,7 +9,7 @@
 #include "Money.h"
 #include "UI.h"
 #include "ShopManager.h"
-//#include "GameManager.h"
+#include "GameManager.h"
 
 
 #include <iostream>
@@ -109,7 +109,14 @@ void Game::handleEvents(Uint32 deltaTime) {
 		gmStMachine_->get_CurrentState()->handleEvents(deltaTime, event);
 		if (event.type == SDL_QUIT) exit_ = true; //exit_ comunica con main a trav�s del m�todo exitGame
 	}
+
+	if (GameManager::getInstance()->getGameOverFlag ()) {
+		GameManager::getInstance ()->setGameOver (false);
+		GameManager::getInstance()->calculatePuntuation();
+	}
 }
+
+
 void Game::update(Uint32 deltaTime)
 {
 	accumulator_ += deltaTime;
@@ -123,6 +130,8 @@ void Game::update(Uint32 deltaTime)
 	gmStMachine_->get_CurrentState()->update(deltaTime);
 	for (auto cam : cameras_) cam.second->update(deltaTime);
 }
+
+
 void Game::render(Uint32 deltaTime)
 {
 	SDL_RenderClear(renderer_);

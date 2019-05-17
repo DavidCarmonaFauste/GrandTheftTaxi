@@ -36,5 +36,6 @@ protected:
 private:
 	bool gasMainMenuStartedOnce_ = false;
 	bool gasFillMenuStartedOnce_ = false;
+	bool gameOverMenuStartedOnce_ = false;
 };
 

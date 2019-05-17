@@ -102,7 +102,9 @@ void Vehicle::update(Uint32 time) {
 		deathTime_ = SDL_GetTicks();
 	}
 	if (!alive_ && SDL_GetTicks() - deathTime_ >= 500) {
-		Respawn();
+		//Respawn();
+		//GameManager::getInstance()->calculatePuntuation();
+		GameManager::getInstance()->setGameOver(true);
 	}
 
 }
@@ -158,7 +160,7 @@ void Vehicle::SaveSpawnPoint(Vector2D spawn)
 
 void Vehicle::Respawn()
 {
-	GameManager::getInstance()->calculatePuntuation();
+	
 	Vehicle::getInstance()->setPosition(spawnPosition_);
 	Vector2D v = spawnPosition_;
 	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(spawnPosition_.Multiply(PHYSICS_SCALING_FACTOR), 0);
