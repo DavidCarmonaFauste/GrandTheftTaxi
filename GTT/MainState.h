@@ -37,4 +37,6 @@ private:
 	Respawner* respawner_;
 
 	RoadBlocker* roadBlocker_;
+
+	Sprite *loadScreen;
 };
