@@ -26,6 +26,10 @@ MainMenuState::~MainMenuState() {
 
 void MainMenuState::start()
 {
+	//inicialiacion id sonidos - se usa para gestionar el SoundManager desde MouseClickIC
+	Sound_NewGameButton_ = CLIC_BUTTON_NEWGAME;
+	DEBUG_ = false;
+
 	s_ = Game::getInstance()->getSoundManager();
 	int i; //recoge el valor del index si el elemento está en el vector
 	if (!s_->isRegistered(this, i))
@@ -61,7 +65,7 @@ void MainMenuState::start()
 
 
 	//scene management
-	//desactive containers before finish sound
+	//deactivate containers before sound finishes
 	Title_->setActive(false);
 	buttons_["newGameButton"]->setActive(false);
 	buttons_["exitButton"]->setActive(false);
@@ -106,7 +110,8 @@ bool MainMenuState::receiveEvent(Event & e)
 		//START NEW GAME
 		else if (channelEvent.channel_ == Channels_["NG"]) {
 			s_->pauseMusic();
-			Game::getInstance()->setState(NAME_MAIN_STATE);
+			//Game::getInstance()->setState(NAME_MAIN_STATE);
+			Game::getInstance ()->getGameStateMachine ()->fromMainMenuToMainState ();
 		}
 		break;
 	}
@@ -119,6 +124,7 @@ bool MainMenuState::receiveEvent(Event & e)
 			if (buttons_["newGameButton"]->getSoundId() != -1) {
 				s_->playSound_Ch(Channels_["NG"], buttons_["newGameButton"]->getSoundId(), 0);
 			}
+			Game::getInstance ()->getGameStateMachine ()->fromMainMenuToMainState ();
 		}
 
 		else if (MouseClickLeft_.button_ == buttons_["exitButton"]->getIndex())

@@ -39,8 +39,8 @@ void MainState::start() {
 	//Camera logic
 	cameraFollow_ = new FollowMiddlePoint(Vehicle::getInstance(), Reticule::getInstance(), GAME_CAMERA, UI_CAMERA, 0.7, 0.25);
 	
-	if (!Game::getInstance()->getCameraFollowAddedOnce())
-		Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow_);
+	/*if (!Game::getInstance()->getCameraFollowAddedOnce())*/
+	Game::getInstance()->getCamera(GAME_CAMERA)->addLogicComponent(cameraFollow_);
 
 	// Camera positionin
 	Vector2D cameraPos = Vehicle::getInstance()->getPosition();

@@ -6,7 +6,7 @@
 #include "ShopState.h"
 #include "Reticule.h"
 #include "GameOverMenu.h"
-
+#include "GameManager.h"
 
 
 GameStateMachine::GameStateMachine() {
@@ -59,8 +59,8 @@ void GameStateMachine::initStates() {
 	//...
 
 	//DEPURACION
-	//setState(NAME_MAINMENU_STATE);
-	setState(NAME_MAIN_STATE);
+	setState(NAME_MAINMENU_STATE);
+	//setState(NAME_MAIN_STATE);
 	//setState (NAME_GAMEOVER_STATE);
 }
 
@@ -100,12 +100,11 @@ void GameStateMachine::fromGasMainMenuToFillMenu () {
 void GameStateMachine::fromGameOverMenuToMainMenu()
 {
 	if (currentState_ == NAME_GAMEOVER_STATE) {
-		currentState_ = NAME_MAIN_STATE;
-
-		delete STATES_[currentState_];
-		STATES_[currentState_] = new MainState ();
 		Vehicle::getInstance ()->getHealthComponent ()->resetHealth ();
-		STATES_[currentState_]->start ();
+		GameManager::getInstance ()->setGameOver (false);
+		currentState_ = NAME_MAINMENU_STATE;
+
+		//STATES_[currentState_]->start ();
 	}
 }
 void GameStateMachine::fromMainStateToGameOverMenu()
@@ -118,6 +117,20 @@ void GameStateMachine::fromMainStateToGameOverMenu()
 			STATES_[currentState_]->start ();
 			gameOverMenuStartedOnce_ = true;
 		}
+	}
+}
+
+void GameStateMachine::fromMainMenuToMainState () {
+	if (currentState_ == NAME_MAINMENU_STATE) {
+		currentState_ = NAME_MAIN_STATE;
+
+		delete STATES_[currentState_];
+		STATES_[currentState_] = new MainState ();
+		STATES_[currentState_]->start ();
+		/*if (!mainStateStartedOnce_) {
+			mainStateStartedOnce_ = true;
+			STATES_[currentState_]->start ();
+		}*/
 	}
 }
 

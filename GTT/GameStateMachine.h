@@ -28,7 +28,7 @@ public:
 	void fromGameOverMenuToMainMenu();
 	void fromMainStateToGameOverMenu();
 
-
+	void fromMainMenuToMainState ();
 
 protected:
 	string currentState_;
@@ -37,5 +37,6 @@ private:
 	bool gasMainMenuStartedOnce_ = false;
 	bool gasFillMenuStartedOnce_ = false;
 	bool gameOverMenuStartedOnce_ = false;
+	bool mainStateStartedOnce_ = false;
 };
 
