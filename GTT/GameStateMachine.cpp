@@ -53,7 +53,7 @@ void GameStateMachine::initStates() {
 		
 	//primer estado al ejectuar app
 	//setState(NAME_MAINMENU_STATE);
-	setState(NAME_MAINMENU_STATE);
+	setState(NAME_MAIN_STATE);
 }
 
 void GameStateMachine::fromMainStateToGasMainMenu () {
