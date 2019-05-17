@@ -40,5 +40,7 @@ public:
 private:
 	map<string, NodeMap*> nodemaps_;
 	fstream nodemapsFile_;
+
+	bool readOnce_ = false;
 };
 

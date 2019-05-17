@@ -81,7 +81,7 @@ void Enemy::Damage(double damage)
 		bodyReadyToDestroy_ = true;
 		turret_->setActive(false);
 		turret_->setActive(false);
-		zombie_ = true; //lanza el flag para que en el update se desactiven la l�gica de patruya
+		zombie_ = true; //lanza el flag para que en el update se desactive la l�gica de patrulla
 	}
 }
 

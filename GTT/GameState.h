@@ -40,5 +40,7 @@ public:
 	void addGameObject(GameObject *gameObject) {
 		stage_.push_back(gameObject);
 	};
+
+	virtual void loadTilemap () {};
 };
 

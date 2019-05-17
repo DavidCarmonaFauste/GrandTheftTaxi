@@ -3,6 +3,7 @@
 #include "NodeMapsManager.h"
 #include "EnemyManager.h"
 #include "ShopManager.h"
+#include "BridgeManager.h"
 
 TileMap::TileMap(string path) {
 	// Loads the tmx map from the given path
@@ -22,6 +23,8 @@ TileMap::TileMap(string path) {
 
 	phyO_ = new PhysicObject(b2_staticBody, 0, 0, 0, 0, false);
 	tmxToScene();
+
+	setSleep (true);
 }
 
 TileMap::~TileMap() {
@@ -49,14 +52,24 @@ void TileMap::tmxToScene() {
 }
 
 bool TileMap::processObject(string layerName, const tmx::Object &object) {
-	if (layerName == "Collisions") return processCollision(object);
-	if (layerName == "Player") return processPlayer(object);
+	if (layerName == "Collisions1") return processCollision(object, '1');
+	if (layerName == "CollisionsOpen") return processCollision(object, 'o');
+	if (layerName == "Collisions2") return processCollision(object, '2');
+
+	if (layerName == "Player1") return processPlayer(object, '1');
+	if (layerName == "Player1Open") return processPlayer (object, 'o');
+	if (layerName == "Player2") return processPlayer (object, '2');
+
+	if (layerName == "Bridge1") return processBridge (object, '1');
+	if (layerName == "Bridge2") return processBridge (object, '2');
+
 	if (layerName == "Gas") return processGas(object);
 	if (layerName == "Enemies") return processSpawns(object);
+	
 	else return processNodes(object, layerName);
 }
 
-bool TileMap::processCollision(const tmx::Object &object) {
+bool TileMap::processCollision(const tmx::Object &object, char level) {
 	b2PolygonShape shape = b2PolygonShape();
 	b2FixtureDef fixDef;
 	tmx::FloatRect box = object.getAABB();
@@ -69,17 +82,28 @@ bool TileMap::processCollision(const tmx::Object &object) {
 	fixDef.shape = &shape;
 	phyO_->getBody()->CreateFixture(&fixDef);
 
-	phyO_->setCollisions(TILES_GROUP, TILE_CATEGORY);
+	if (level == '1')		
+		phyO_->setCollisions(TILES_GROUP_LVL_1, TILE_CATEGORY);
+	else if (level == 'o')	
+		phyO_->setCollisions(TILES_GROUP_LVL_1_OPEN, LEVEL_1_CATEGORY);
+	else if (level == '2')	
+		phyO_->setCollisions(TILES_GROUP_LVL_2, LEVEL_2_CATEGORY);
+	
 	phyO_->getBody()->GetFixtureList()->SetFriction(ENVIRONMENT_FRICTION);
 
 	return false;
 }
 
-bool TileMap::processPlayer(const tmx::Object & object) {
+bool TileMap::processPlayer(const tmx::Object & object, char level) {
+	if (Vehicle::getInstance ()->GetPhyO () == nullptr) {
+		Vehicle::getInstance ()->initAtributtes (THECOOLERTAXI, DEFAULT_KEYS);
+	}
+
 	Vector2D pos = Vector2D(object.getPosition().x, object.getPosition().y);
-	Vehicle::getInstance()->SaveSpawnPoint(pos);
-	Vehicle::getInstance()->setPosition(pos);
-	Vehicle::getInstance()->GetPhyO()->getBody()->SetTransform(pos.Multiply(PHYSICS_SCALING_FACTOR), 0);
+	
+	if (level == '1')		Vehicle::getInstance ()->setLevel1SpawnPoint (pos);
+	else if (level == 'o')	Vehicle::getInstance ()->setLevel1OpenSpawnPoint (pos);
+	else if (level == '2')	Vehicle::getInstance ()->setLevel2SpawnPoint (pos);
 
 	return true;
 }
@@ -105,6 +129,14 @@ bool TileMap::processSpawns(const tmx::Object & object)
 	return false;
 }
 
+bool TileMap::processBridge (const tmx::Object & object, char level) {
+	Bridge *bridge = new Bridge (object.getAABB ().width, object.getAABB ().height, object.getPosition ().x, object.getPosition ().y);
+	
+	BridgeManager::getInstance ()->setBridge (bridge, level);
+
+	return false;
+}
+
 
 void TileMap::handleInput(Uint32 deltaTime, const SDL_Event & event) {
 	Container::handleInput(deltaTime, event);
@@ -117,5 +149,10 @@ void TileMap::update(Uint32 deltaTime) {
 
 void TileMap::render(Uint32 deltaTime) {
 	Container::render(deltaTime);
+}
+
+void TileMap::setSleep (bool flag) {
+	active_ = !flag;
+	phyO_->getBody ()->SetActive (!flag);
 }
 

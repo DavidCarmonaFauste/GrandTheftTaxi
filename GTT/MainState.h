@@ -9,6 +9,7 @@
 #include "Respawner.h"
 #include "Shop.h"
 #include "FuelUpgrade.h"
+#include "RoadBlocker.h"
 
 class MainState :
 	public GameState
@@ -22,13 +23,18 @@ public:
 
 	virtual void update(Uint32 deltaTime);
 
+	virtual void loadTilemap ();
+	void awakeMap () { tilemap_->setSleep (false); }
+
 private:
 	// Tilemap
-	TileMap *tilemap_;
+	TileMap *tilemap_ = nullptr;
 
 	//camera logic
 	FollowMiddlePoint* cameraFollow_;
 
 	// Systems
 	Respawner* respawner_;
+
+	RoadBlocker* roadBlocker_;
 };

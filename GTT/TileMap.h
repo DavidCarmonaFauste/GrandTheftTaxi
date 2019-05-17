@@ -17,6 +17,8 @@ public:
 	virtual void update(Uint32 deltaTime) override;
 	virtual void render(Uint32 deltaTime) override;
 
+	void setSleep (bool flag);
+
 private:
 	SDL_Rect chunk;
 
@@ -26,11 +28,12 @@ private:
 
 	// Helper functions to process each object layer
 	bool processObject(string layerName, const tmx::Object &object);
-	bool processCollision(const tmx::Object &object);
-	bool processPlayer(const tmx::Object &object);
+	bool processCollision(const tmx::Object &object, char level);
+	bool processPlayer(const tmx::Object &object, char level);
 	bool processGas(const tmx::Object &object);
 	bool processNodes(const tmx::Object &object, string layerName);
 	bool processSpawns(const tmx::Object &object);
+	bool processBridge (const tmx::Object &object, char level);
 
 	tmx::Map tmxMap_;
 	PhysicObject* phyO_;

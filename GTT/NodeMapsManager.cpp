@@ -21,15 +21,17 @@ bool NodeMapsManager::NodeMapExists(string key)
 
 void NodeMapsManager::ReadNodeMapsInfo()
 {
-	nodemapsFile_.open("../TextFiles/Nodes.txt");
-	if (nodemapsFile_.is_open()) {
-		string line;
-		string district;
-		while (getline(nodemapsFile_, line)) {
-			istringstream row(line);
-			switch (line[0]) {
+	if (!readOnce_) {
+		nodemapsFile_.open ("../TextFiles/Nodes.txt");
+		if (nodemapsFile_.is_open ()) {
+			string line;
+			string district;
+			while (getline (nodemapsFile_, line)) {
+				istringstream row (line);
+				switch (line[0]) {
 				case'D': {
 					row >> district;
+					if (!NodeMapExists (district)) addNodeMap (district);
 					break;
 				}
 				case 'N': {
@@ -40,7 +42,7 @@ void NodeMapsManager::ReadNodeMapsInfo()
 						cout << "A";
 					}
 					while (row >> connection) {
-						nodemaps_[district]->connectNodes(bNode, connection);
+						nodemaps_[district]->connectNodes (bNode, connection);
 					}
 					break;
 				}
@@ -50,18 +52,20 @@ void NodeMapsManager::ReadNodeMapsInfo()
 					string node;
 					vector<Node*>patrol;
 
-					while (row>>node) {
-						patrol.push_back(nodemaps_[district]->getNodes()[node]);
+					while (row >> node) {
+						patrol.push_back (nodemaps_[district]->getNodes ()[node]);
 					}
-					nodemaps_[district]->addPatrol(patrol, patrolId);
+					nodemaps_[district]->addPatrol (patrol, patrolId);
 					break;
 				}
 				default:
 					break;
+				}
+
 			}
-			
+			nodemapsFile_.close ();
 		}
-		nodemapsFile_.close();
+		readOnce_ = true;
 	}
 }
 

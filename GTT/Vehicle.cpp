@@ -158,7 +158,7 @@ bool Vehicle::receiveEvent(Event & e) {
 	return true;
 }
 
-void Vehicle::SaveSpawnPoint(Vector2D spawn)
+void Vehicle::saveSpawnPoint(Vector2D spawn)
 {
 	spawnPosition_ = spawn;
 }
