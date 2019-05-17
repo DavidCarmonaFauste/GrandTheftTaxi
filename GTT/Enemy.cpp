@@ -75,7 +75,7 @@ void Enemy::Damage(double damage)
 		//Send reward
 		Money::getInstance()->addMoney(reward_);
 		//Heal Player
-		Vehicle::getInstance()->getHealthComponent()->heal(Vehicle::getInstance()->getHealthComponent()->getMaxHealth()*0.2);
+		Vehicle::getInstance()->getHealthComponent()->heal(health_->getMaxHealth()*0.5);
 
 		sprite_->playAnimation("enemyDie", 10.0f, false);
 		bodyReadyToDestroy_ = true;
