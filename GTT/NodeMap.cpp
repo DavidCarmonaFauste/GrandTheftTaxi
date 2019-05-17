@@ -91,6 +91,8 @@ Node * NodeMap::getNearestConnectedNode(Vector2D position)
 	while (!node->hasConnection(dirToTarget, dir)) {
 		v.push_back(node);
 		node = getNearestNode(position, v);
+		dirToTarget = (position - node->position_);
+		dirToTarget.Normalize();
 	}
 	return node;
 }
