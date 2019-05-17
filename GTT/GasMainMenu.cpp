@@ -63,7 +63,6 @@ bool GasMainMenu::receiveEvent (Event & e) {
 			Game::getInstance ()->getGameStateMachine ()->fromGasMainMenuToFillMenu ();
 		}
 		else if (MouseClickLeft_.button_ == buttons_["gunShopButton"]->getIndex ()) {
-			cout << "clicked" << endl;
 
 			Game::getInstance()->getGameStateMachine()->fromGasMainMenuToShopMenu();
 		}

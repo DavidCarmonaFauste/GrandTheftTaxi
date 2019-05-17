@@ -98,6 +98,9 @@ void GameStateMachine::fromGasMainMenuToShopMenu()
 			STATES_[currentState_]->start();
 			ShopMenuStartedOnce_ = true;
 		}
+
+		if (ShopMenuStartedOnce_)
+			STATES_[NAME_SHOP_STATE]->updateState();
 	}
 }
 

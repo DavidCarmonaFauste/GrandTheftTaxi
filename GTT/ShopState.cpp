@@ -2,6 +2,9 @@
 #include "Reticule.h"
 #include "Game.h"
 #include <string.h>
+#include "Vehicle.h"
+#include "Turret.h"
+#include "Money.h"
 
 ShopState::ShopState() {
 }
@@ -23,6 +26,11 @@ ShopState::~ShopState() {
 	delete machinegunSprite_;
 	delete weapon1Sprite_;
 	delete weapon2Sprite_;
+	delete weapon1OwnedS_;
+	delete weapon2OwnedS_;
+	delete weapon3OwnedS_;
+	delete weapon4OwnedS_;
+
 
 	for (auto button : buttons_) {
 		delete button.second; button.second = nullptr;
@@ -38,12 +46,21 @@ void ShopState::start() {
 	Game::getInstance()->getCamera(GAME_CAMERA)->setZoom(1.0, false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setZoom(1.0, false);
 
+	//Initialize owned
+	for (size_t i = 0; i < 3; i++)	owned_[i] = false;
+		
+	owned_[0] = true;
+
 	setBackground();
 	setButtons();
 	setButtonComponents();
 	startTexts();
 	startIcons();
 
+	//Money Display
+	moneyDisplay_ = new MoneyDisplay(new Font(FONT_LATO, 60), SDL_Color({ 225, 160, 0 }));
+	moneyDisplay_->reposition(Vector2D(CAMERA_WIDHT / 1.3, CAMERA_HEIGHT / 1.5), 1.5);
+	
 	//Container to GameObj list
 	stage_.push_back(background_);				//Backgrounds
 	stage_.push_back(bckPistol_);
@@ -64,16 +81,25 @@ void ShopState::start() {
 	stage_.push_back(shotgun_);
 	stage_.push_back(rifle_);
 	stage_.push_back(machinegun_);
+	stage_.push_back(moneyDisplay_);
+
+	stage_.push_back(weapon1Owned_);				//Owned
+	stage_.push_back(weapon2Owned_);
+	stage_.push_back(weapon3Owned_);
+	stage_.push_back(weapon4Owned_);
 
 
-	stage_.push_back(armory_);			//Texts
+	stage_.push_back(armory_);						//Texts
 	stage_.push_back(inventory_);
 	stage_.push_back(pistolT_);
 	stage_.push_back(shotgunT_);
 	stage_.push_back(rifleT_);
 	stage_.push_back(machinegunT_);
 
-
+	stage_.push_back(pistolI_);					//Inventory weapons
+	stage_.push_back(shotgunI_);
+	stage_.push_back(rifleI_);
+	stage_.push_back(machinegunI_);
 
 	stage_.push_back(Reticule::getInstance());
 }
@@ -88,6 +114,11 @@ void ShopState::update(Uint32 deltaTime) {
 	GameState::update(deltaTime);
 }
 
+void ShopState::updateState()
+{
+	moneyDisplay_->setSimpleMoney(Money::getInstance()->getCurrentMoney());
+}
+
 bool ShopState::receiveEvent(Event & e)
 {
 	switch (e.type_)
@@ -96,6 +127,27 @@ bool ShopState::receiveEvent(Event & e)
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 		if (MouseClickLeft_.button_ == buttons_["backButton"]->getIndex())
 			Game::getInstance()->getGameStateMachine()->fromFillMenuToGasMainMenu();
+
+		else if (MouseClickLeft_.button_ == buttons_["weapon1Button"]->getIndex())
+		{
+			
+			selected(0);
+		}
+
+		else if (MouseClickLeft_.button_ == buttons_["weapon2Button"]->getIndex())
+		{
+				selected(1);
+		}
+
+		else if (MouseClickLeft_.button_ == buttons_["weapon3Button"]->getIndex())
+		{
+			selected(2);
+		}
+
+		else if (MouseClickLeft_.button_ == buttons_["weapon4Button"]->getIndex())
+		{
+			selected(3);
+		}
 	}
 	default:
 		break;
@@ -246,7 +298,7 @@ void ShopState::startTexts()
 
 	//Weapon names
 	pistolT_ = new Container();
-	pistolText_ = new Text(new Font(FONT_LATO, 30), "Pistol - FREE" , SDL_Color({ 255, 255, 255 }));
+	pistolText_ = new Text(new Font(FONT_LATO, 30), "Pistol - Owned" , SDL_Color({ 255, 255, 255 }));
 	pistolText_->setCamera(UI_CAMERA);
 	pistolT_->setWidth(pistolText_->getFont()->getSize()*pistolText_->getText().length() / 2);
 	pistolT_->setHeight(pistolText_->getFont()->getSize());
@@ -270,7 +322,7 @@ void ShopState::startTexts()
 	rifleT_->addRenderComponent(rifleText_);
 
 	machinegunT_ = new Container();
-	machinegunText_ = new Text(new Font(FONT_LATO, 30), "Machinegun - " + MACHINEGUN_PRICE, SDL_Color({ 255, 255, 255 }));
+	machinegunText_ = new Text(new Font(FONT_LATO, 28), "Machinegun - " + MACHINEGUN_PRICE, SDL_Color({ 255, 255, 255 }));
 	machinegunText_->setCamera(UI_CAMERA);
 	machinegunT_->setWidth(machinegunText_->getFont()->getSize()*machinegunText_->getText().length() / 1.8);
 	machinegunT_->setHeight(machinegunText_->getFont()->getSize());
@@ -280,6 +332,7 @@ void ShopState::startTexts()
 
 void ShopState::startIcons()
 {
+	//Weapon Icons
 	pistolSprite_ = new Sprite(GUN.idlePath, ICON_W, ICON_H);
 	pistol_ = new Container();
 
@@ -316,5 +369,146 @@ void ShopState::startIcons()
 	machinegun_->setPosition(Vector2D(FIRST_WEAPON_BCK.x + WEAPONS_BACKGROUNDS_W * 0.10, FIRST_WEAPON_BCK.y + 375 - machinegun_->getHeight() / 3.7));
 	machinegun_->setRotation(90);
 
+	//Weapons in inventory
+	pistolI_ = new Container(*pistol_);
+	pistolI_->setPosition(Vector2D(INV1_POSITION.x + (INV_W - pistolI_->getWidth())/2 ,INV1_POSITION.y + (INV_H - pistolI_->getHeight()) / 2));
+	shotgunI_ = new Container(*shotgun_);
+	shotgunI_->setActive(false);
+	rifleI_ = new Container(*rifle_);
+	rifleI_->setActive(false);
+	machinegunI_ = new Container(*machinegun_);
+	machinegunI_->setActive(false);
+	//Add to array
+	inventoryWeapons_[0] = pistolI_;
+	inventoryWeapons_[1] = shotgunI_;
+	inventoryWeapons_[2] = rifleI_;
+	inventoryWeapons_[3] = machinegunI_;
+
+
+	//Owned Icons (Equip)
+	weapon1OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon1Button"]->getWidth(), buttons_["weapon1Button"]->getHeight());
+	weapon1Owned_ = new Container();
+
+	weapon1Owned_->setWidth(buttons_["weapon1Button"]->getWidth());
+	weapon1Owned_->setHeight(buttons_["weapon1Button"]->getHeight());
+	weapon1Owned_->addRenderComponent(weapon1OwnedS_);
+	weapon1Owned_->setPosition(buttons_["weapon1Button"]->getPosition());
+	weapon1Owned_->setActive(true);
+
+	weapon2OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon2Button"]->getWidth(), buttons_["weapon2Button"]->getHeight());
+	weapon2Owned_ = new Container();
+
+	weapon2Owned_->setWidth(buttons_["weapon2Button"]->getWidth());
+	weapon2Owned_->setHeight(buttons_["weapon2Button"]->getHeight());
+	weapon2Owned_->addRenderComponent(weapon2OwnedS_);
+	weapon2Owned_->setPosition(buttons_["weapon2Button"]->getPosition());
+	weapon2Owned_->setActive(false);
+
+	weapon3OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon3Button"]->getWidth(), buttons_["weapon3Button"]->getHeight());
+	weapon3Owned_ = new Container();
+
+	weapon3Owned_->setWidth(buttons_["weapon3Button"]->getWidth());
+	weapon3Owned_->setHeight(buttons_["weapon3Button"]->getHeight());
+	weapon3Owned_->addRenderComponent(weapon3OwnedS_);
+	weapon3Owned_->setPosition(buttons_["weapon3Button"]->getPosition());
+	weapon3Owned_->setActive(false);
+
+	weapon4OwnedS_ = new Sprite(PAY_BUTTON_INFO.idlePath, buttons_["weapon4Button"]->getWidth(), buttons_["weapon4Button"]->getHeight());
+	weapon4Owned_ = new Container();
+
+	weapon4Owned_->setWidth(buttons_["weapon4Button"]->getWidth());
+	weapon4Owned_->setHeight(buttons_["weapon4Button"]->getHeight());
+	weapon4Owned_->addRenderComponent(weapon4OwnedS_);
+	weapon4Owned_->setPosition(buttons_["weapon4Button"]->getPosition());
+	weapon4Owned_->setActive(false);
+}
+
+void ShopState::selected(int weapon)
+{
+	bool allowed = false;
+	if (weapon == 1) 
+		if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= SHOTGUN_PRICE_INT)
+		{
+			Money::getInstance()->addMoney(-SHOTGUN_PRICE_INT);
+			owned_[weapon] = true;
+			weapon2Owned_->setActive(true);
+			shotgunText_->setText("Shotgun - Owned");
+			allowed = true;
+		}
+
+	if (weapon == 2)
+		if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= RIFLE_PRICE_INT)
+		{
+			Money::getInstance()->addMoney(-RIFLE_PRICE_INT);
+			owned_[weapon] = true;
+			weapon3Owned_->setActive(true);
+			rifleText_->setText("Sniper - Owned");
+			allowed = true;
+		}
+	if (weapon == 3)
+		if (!owned_[weapon])
+			if (!owned_[weapon] && Money::getInstance()->getCurrentMoney() >= MACHINEGUN_PRICE_INT)
+			{
+				Money::getInstance()->addMoney(-MACHINEGUN_PRICE_INT);
+			owned_[weapon] = true;
+			weapon4Owned_->setActive(true);
+			machinegunText_->setText("Machinegun - Owned");
+			allowed = true;
+
+			}
+	if (allowed)
+	{
+		if (equipped_[0] != -1)
+			inventoryWeapons_[equipped_[0]]->setActive(false);
+		if (equipped_[1] != -1)
+			inventoryWeapons_[equipped_[1]]->setActive(false);
+
+		if (equipped_[0] != weapon && equipped_[1] != weapon)
+		{
+			equipped_[1] = equipped_[0];
+			equipped_[0] = weapon;
+
+		}
+
+		if (equipped_[1] != -1)
+		{
+			if (!inventoryWeapons_[equipped_[1]]->isActive())
+				inventoryWeapons_[equipped_[1]]->setActive(true);
+			inventoryWeapons_[equipped_[1]]->setPosition(Vector2D(INV2_POSITION.x + (INV_W - pistolI_->getWidth()) / 2, INV2_POSITION.y + (INV_H - pistolI_->getHeight()) / 2));
+			if (equipped_[1] != equipped_[0] && equipped_[0] != -1)
+				equip(equipped_[1]);
+		}
+
+		if (equipped_[0] != -1)
+		{
+			if (!inventoryWeapons_[equipped_[0]]->isActive())
+				inventoryWeapons_[equipped_[0]]->setActive(true);
+			inventoryWeapons_[equipped_[0]]->setPosition(Vector2D(INV1_POSITION.x + (INV_W - pistolI_->getWidth()) / 2, INV1_POSITION.y + (INV_H - pistolI_->getHeight()) / 2));
+			if (equipped_[1] != equipped_[0] && equipped_[1] != -1)
+				equip(equipped_[0]);
+		}
+	}		
+	updateState();
+}
+
+void ShopState::equip(int turret)
+{
+	switch (turret)
+	{
+	case 0:
+		Vehicle::getInstance()->EquipTurret(new Turret(GUN));
+		break;
+	case 1:
+		Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
+		break;
+	case 2:
+		Vehicle::getInstance()->EquipTurret(new Turret(SNIPER));
+		break;
+	case 3:
+		Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
+		break;
+	default:
+		break;
+	}
 }
 

@@ -24,8 +24,7 @@ MainState::~MainState() {
 void MainState::start() {
 	// Taxi	
 	Vehicle::getInstance()->initAtributtes(THECOOLERTAXI, DEFAULT_KEYS);
-	Vehicle::getInstance()->EquipTurret(new Turret(MACHINEGUN));
-	Vehicle::getInstance()->EquipTurret(new Turret(SHOTGUN));
+	Vehicle::getInstance()->EquipTurret(new Turret(GUN));
 
 	// Tilemap
 	tilemap_ = new TileMap(PATH_LEVEL_1);
