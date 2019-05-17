@@ -253,16 +253,16 @@ const VehicleInfo THECOOLERTAXI{ "../Assets/sprites/Taxi/Taxi_default.png", "../
 	//enemies
 const VehicleInfo ENEMY1{ "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC1-cobify.png", "../Assets/sprites/Enemy/VTC1-cobify_damage.png","../Assets/sprites/Enemy/enemy_die.png",
-68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 10, TILE_SIZE*23, 5, 300 };
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 25, TILE_SIZE*23, 5, 300 };
 const VehicleInfo ENEMY2{ "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC_Furgoneta.png", "../Assets/sprites/Enemy/VTC_Furgoneta_damage.png","../Assets/sprites/Enemy/enemy_die.png",
-70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 20, TILE_SIZE * 23, 3, 800 };
+70, 36, 13.5f, 3.5f, 1.0f, 0.8f, 30, TILE_SIZE * 23, 3, 800 };
 const VehicleInfo ENEMY3{ "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC3-cobify.png", "../Assets/sprites/Enemy/VTC3-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 30 };
+68, 32, 13.5f, 3.5f, 1.0f, 0.8f, 40 };
 const VehicleInfo ENEMYTANK{ "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/default.png", "../Assets/sprites/Enemy/default.png",
 "../Assets/sprites/Enemy/VTC4-TANK-cobify.png", "../Assets/sprites/Enemy/VTC4-TANK-cobify.png","../Assets/sprites/Enemy/VTC1-cobify_Die.png",
-58, 32, 11.5f, 3.5f, 1.0f, 0.6f, 40 };
+58, 32, 11.5f, 3.5f, 1.0f, 0.6f, 50 };
 
 
 //Proyectiles
@@ -441,12 +441,12 @@ const int PRICE_FOR_25 = 20;
 	const string EQUIP_BUTTON_PATH = "../Assets/sprites/buttons/button-equip.png";
 
 	//Prices
-	const string SHOTGUN_PRICE = "50";
-	const string RIFLE_PRICE = "100";
-	const string MACHINEGUN_PRICE = "125";
-	const int SHOTGUN_PRICE_INT = 50;
-	const int RIFLE_PRICE_INT = 100;
-	const int MACHINEGUN_PRICE_INT = 125;
+	const string SHOTGUN_PRICE = "25";
+	const string RIFLE_PRICE = "50";
+	const string MACHINEGUN_PRICE = "75";
+	const int SHOTGUN_PRICE_INT = 25;
+	const int RIFLE_PRICE_INT = 50;
+	const int MACHINEGUN_PRICE_INT = 75;
 
 	
 
