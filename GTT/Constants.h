@@ -288,6 +288,7 @@ const WeaponInfo GUN{ "../Assets/sprites/Turrets/Gun/gun.png", "../Assets/sprite
 const WeaponInfo SHOTGUN{ "../Assets/sprites/Turrets/ShotGun/shot_gun.png", "../Assets/sprites/Turrets/ShotGun/escopeta_anim.png", 5, 6.0, "shotgun", 20, 55, 6, 800, 4000, 0.6, 0.2, 2000, SHOTGUNBULLET, SEPECIAL_SHOTGUNBULLET, {SPREAD, 30.0, 3}, {SPREAD, 60.0, 6}, false, 100, "../Assets/sprites/Turrets/ShotGun/shot_effect.png", 1 };
 const WeaponInfo MACHINEGUN{ "../Assets/sprites/Turrets/MachineGun/machine_gun.png", "../Assets/sprites/Turrets/MachineGun/metralleta_anim.png", 3, 3.5, "machinegun", 25, 50, 25, 50, 3000, 0.6, 0.2, 2000, MACHINEGUNBULLET, BOUNCEBULLET,{LINEAR, 20.0, 30}, {LINEAR, 0, 0}, true, 500, "../Assets/sprites/Turrets/MachineGun/shot_effect.png", 1 };
 const WeaponInfo SNIPER{ "../Assets/sprites/Turrets/Sniper/sniper.png", "../Assets/sprites/Turrets/Sniper/francotirador_anim.png", 2, 3.5, "sniper", 10, 70, 4, 1000, 2000, 0.3, 0.2, 5000, SNIPERBULLET, SPECIAL_SNIPERBULLET, {LINEAR, 0, 0}, {LINEAR, 0, 0}, false, 0, "../Assets/sprites/Turrets/Sniper/shot_effect.png", 1 };
+const int MAXTURRETS = 2;
 
 //Maps
 const string PATH_LEVEL_1 = "../Assets/maps/level1.tmx";
@@ -413,6 +414,41 @@ const int PRICE_FOR_25 = 20;
 
 // --------------------------------------------
 
+
+//SHOP INFO -----------------------------------
+
+	//Sizes
+	const int WEAPONS_BACKGROUNDS_W = 450;
+	const int WEAPONS_BACKGROUNDS_H = 90;
+	const int WEAPON_BUTTON_W = 100;
+	const int WEAPON_BUTTON_H = 85;
+	
+	const int ICON_H = WEAPONS_BACKGROUNDS_H - 4;
+	const int ICON_W = ICON_H;
+
+	const int INV_W = 240;
+	const int INV_H = 220;
+
+	//Positions
+	const Vector2D ARMORY_TEXT_POSITION = { (CAMERA_WIDHT / 6.5) ,(CAMERA_HEIGHT / 8) };
+	const Vector2D INVENTORY_TEXT_POSITION = { (CAMERA_WIDHT / 1.6) ,(CAMERA_HEIGHT / 8) };
+	const Vector2D FIRST_WEAPON_BCK = { (CAMERA_WIDHT / 7) ,(CAMERA_HEIGHT / 4.8)};
+	const Vector2D INV1_POSITION = { (CAMERA_WIDHT / 1.65) ,(CAMERA_HEIGHT / 3.5) };
+	const Vector2D INV2_POSITION = { (INV1_POSITION.x + INV_W + 50)  ,(CAMERA_HEIGHT / 3.5) };
+
+	//Paths
+
+	//Prices
+	const string SHOTGUN_PRICE = "50";
+	const string RIFLE_PRICE = "100";
+	const string MACHINEGUN_PRICE = "125";
+	const int SHOTGUN_PRICE_INT = 50;
+	const int RIFLE_PRICE_INT = 100;
+	const int MACHINEGUN_PRICE_INT = 125;
+
+	
+
+//---------------------------------------------
 
 //TAXI SOUND MANAGER
 const int VOL_CHANNEL_2 = 90; //regular engine

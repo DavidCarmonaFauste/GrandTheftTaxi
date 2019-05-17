@@ -24,10 +24,10 @@ private:
 	map<string, Button*> buttons_;
 	Sprite *fill_5_Sprite_, *fill_10_Sprite_, *fill_25_Sprite_, *backSprite_, *paySprite_;
 
-	HealthDisplay* healthDisplay_;
-	MoneyDisplay* moneyDisplay_, *toPayDisplay_;
+	HealthDisplay *healthDisplay_;
+	MoneyDisplay *moneyDisplay_, *toPayDisplay_;
 
-	Text* toPayString_;
+	Text *toPayString_;
 
 	int moneySpent_ = 0;
 	float refilled_ = 0;
