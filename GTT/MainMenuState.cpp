@@ -36,7 +36,6 @@ void MainMenuState::start()
 	Game::getInstance()->getCamera(GAME_CAMERA)->setZoom(1.0, false);
 	Game::getInstance()->getCamera(UI_CAMERA)->setZoom(1.0, false);
 
-
 	//MAIN MENU TITLE
 	setBackground ();
 
@@ -46,7 +45,7 @@ void MainMenuState::start()
 	//build and set private components
 	setComponents ();
 
-	
+
 	//Container to GameObj list
 	stage_.push_back(mainBackground_);
 	stage_.push_back(buttons_["newGameButton"]);
@@ -57,7 +56,6 @@ void MainMenuState::start()
 
 	//insert channels in map (max 8)
 	Channels_.insert(std::pair<string, int>("Start", 1));
-	Channels_.insert(std::pair<string, int>("NG", 2));
 
 
 	//scene management
@@ -85,13 +83,12 @@ void MainMenuState::update(Uint32 deltaTime) {
 
 bool MainMenuState::receiveEvent(Event & e)
 {
+
 	switch (e.type_)
 	{
 	case CHANNEL_STOPPED_PLAYING:
 	{
 		ChannelStoppedPlaying channelEvent = static_cast<ChannelStoppedPlaying&>(e);
-		if (DEBUG_)
-			cout << "Channel " << channelEvent.channel_ << " stopped playing." << endl;
 
 		if (channelEvent.channel_ == Channels_["Start"]) {
 			//taxi lights
@@ -103,11 +100,6 @@ bool MainMenuState::receiveEvent(Event & e)
 			buttons_["newGameButton"]->setActive(true);
 			buttons_["exitButton"]->setActive(true);
 		}
-		//START NEW GAME
-		else if (channelEvent.channel_ == Channels_["NG"]) {
-			s_->pauseMusic();
-			Game::getInstance()->setState(NAME_MAIN_STATE);
-		}
 		break;
 	}
 
@@ -115,18 +107,19 @@ bool MainMenuState::receiveEvent(Event & e)
 		MouseClickLeft  MouseClickLeft_ = static_cast<MouseClickLeft&>(e);
 
 		if (MouseClickLeft_.button_ == buttons_["newGameButton"]->getIndex()) {
-			buttons_["newGameButton"]->getButtonAnimacion()->playAnimation(NEW_GAME_BUTTON[clickButton].name, 24.0f, true);
-			if (buttons_["newGameButton"]->getSoundId() != -1) {
-				s_->playSound_Ch(Channels_["NG"], buttons_["newGameButton"]->getSoundId(), 0);
-			}
+			s_->pauseMusic();
+			s_->stopSound(Channels_["Start"]);
+			Game::getInstance()->setState(NAME_MAIN_STATE);
 		}
 
 		else if (MouseClickLeft_.button_ == buttons_["exitButton"]->getIndex())
 			Game::getInstance()->setGameEnd();
 
 		break;
+
 	}
 	case NOT_OVER_OBJECT: {
+
 		NotMouseOverObj NotMouseOverObj_ = static_cast<NotMouseOverObj&>(e);
 
 		if (!s_->isSoundPlaying(Channels_["NG"])) {
@@ -157,6 +150,7 @@ bool MainMenuState::receiveEvent(Event & e)
 	default:
 		break;
 	}
+
 	return true;
 }
 
